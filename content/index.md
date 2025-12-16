@@ -36,7 +36,7 @@ Laioutr is a Composable Frontend Management Platform in the Cloud that consists 
 
 ::u-page-section
 #title
-Shipped with many features
+Shipped with many beloved features
 
 #features
   :::u-page-feature
