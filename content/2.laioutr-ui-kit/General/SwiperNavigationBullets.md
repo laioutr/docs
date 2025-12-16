@@ -1,0 +1,12 @@
+---
+title: Swiper Navigation with Bullets
+description: A swiper navigation bullets component
+---
+
+::component-code{:name="LuiSwiperNavigationBullets" storyId="molecules-swiper-swipernavigationbullets--swiper-navigation-bullets"}
+::
+
+## API Reference
+
+::component-meta{:name="LuiSwiperNavigationBullets"}
+::

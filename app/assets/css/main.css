@@ -1,0 +1,10 @@
+@import './twoslash.css';
+
+@theme static {
+  --font-sans: 'Lexend', sans-serif;
+}
+
+:root {
+  --default-font-family: 'Lexend', sans-serif;
+  --ui-container: 90rem;
+}
