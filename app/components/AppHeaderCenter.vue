@@ -1,8 +1,27 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '#ui/types';
+import type { ContentNavigationItem } from '@nuxt/content';
+
+const findFirstPagePath = (item: ContentNavigationItem): string | undefined => {
+  if (item.page === false) return item.children?.map(findFirstPagePath).find(Boolean);
+  return item.path;
+};
+
+const route = useRoute();
+const navigation = inject<Ref<ContentNavigationItem[]>>('navigation');
+const navigationItems = computed((): NavigationMenuItem[] => {
+  const firstRoutePart = route.path.replace(/^\//, '').split('/')[0];
+  return (
+    navigation?.value.map((item) => ({
+      label: item.title,
+      to: findFirstPagePath(item),
+      active: item.path.replaceAll('/', '') === firstRoutePart,
+    })) ?? []
+  );
+});
 
 const desktopLinks: NavigationMenuItem[] = [
-  { label: 'Laioutr UI', to: '/developer-guide/overview' },
+  { label: 'Developer Guide', to: '/developer-guide/overview' },
   {
     label: 'Orchestr',
     to: '/orchestr/introduction',
@@ -74,5 +93,5 @@ const desktopLinks: NavigationMenuItem[] = [
 </script>
 
 <template>
-  <UNavigationMenu :items="desktopLinks" variant="link" />
+  <UNavigationMenu :items="navigationItems" variant="link" />
 </template>

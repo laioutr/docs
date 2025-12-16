@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   extends: ['docus'],
-  modules: ['nuxt-studio'],
+  modules: ['nuxt-studio', '@vueuse/nuxt'],
   css: ['~/assets/css/main.css'],
 
   studio: {

@@ -5,6 +5,8 @@
     "build": "nuxt build"
   },
   "dependencies": {
+    "@nuxt/content": "3.9.0",
+    "@vueuse/nuxt": "14.1.0",
     "better-sqlite3": "^12.2.0",
     "docus": "latest",
     "mermaid": "^11.12.2",
@@ -16,6 +18,7 @@
     "@laioutr/prettier-config": "^1.1.0",
     "eslint": "^9.39.2",
     "prettier": "^3.7.4",
-    "prettier-plugin-tailwindcss": "^0.7.2"
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "vue": "3.5.25"
   }
 }
