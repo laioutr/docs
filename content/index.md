@@ -27,7 +27,7 @@ Laioutr is a Composable Frontend Management Platform in the Cloud that consists 
   color: neutral
   icon: simple-icons-github
   size: xl
-  to: https://github.com/nuxt-content/docus
+  to: https://github.com/laioutr
   variant: outline
   ---
   Visit us on GitHub
