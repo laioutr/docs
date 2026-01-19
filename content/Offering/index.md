@@ -12,7 +12,7 @@ Discover the full range of capabilities that Laioutr has to offer! Explore every
 
   Get an overview of our composable frontend. Here, we unpack the multitude of benefits, the scope, and release lifecycle information associated with our solution.
 
-  [Explore Products](/offering/products)
+  [Explore Products](/offering)
   :::
 
   :::card
@@ -28,7 +28,7 @@ Discover the full range of capabilities that Laioutr has to offer! Explore every
 
   We’re here to support every step of your composable journey! Find here an overview of our Customer Support.
 
-  [Explore Customer Support](/offering/customer-support/standard-customer-support)
+  [Explore Customer Support](/offering)
   :::
 
   :::card
@@ -40,10 +40,18 @@ Discover the full range of capabilities that Laioutr has to offer! Explore every
   :::
 
   :::card
+  **Professional Services**
+
+  Begin your Laioutr journey, outline your unique solution and boost time to value with expert guidance.
+
+  [Explore Training](/offering)
+  :::
+
+  :::card
   **Compliance**
 
   Discover comprehensive details about our hosting services and compliance tailored for Composable Frontends.
 
-  [Explore Compliance](/offering)
+  [Explore Compliance](/offering/compliance/fair-usage-policy)
   :::
 ::
