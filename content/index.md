@@ -33,3 +33,8 @@ Laioutr is a Composable Frontend Management Platform in the Cloud that consists 
   Visit us on GitHub
   :::
 ::
+
+::u-page-hero
+#title
+Explore the Docs
+::
