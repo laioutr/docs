@@ -20,7 +20,7 @@ Discover the full range of capabilities that Laioutr has to offer! Explore every
 
   Explore the details of our Service Level Agreements (SLAs) for Laioutr Frontend.
 
-  [Explore SLAs](/offering/service-level-agreements/standard-service-level-agreement-composable-frontend)
+  [Explore SLAs](/offering/service-level-agreements/standard-service-level-agreement)
   :::
 
   :::card
