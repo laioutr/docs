@@ -28,7 +28,7 @@ Discover the full range of capabilities that Laioutr has to offer! Explore every
 
   We’re here to support every step of your composable journey! Find here an overview of our Customer Support.
 
-  [Explore Customer Support](/offering)
+  [Explore Customer Support](/offering/customer-support/standard-customer-support)
   :::
 
   :::card
