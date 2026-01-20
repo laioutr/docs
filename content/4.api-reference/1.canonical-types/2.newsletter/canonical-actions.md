@@ -1,9 +1,0 @@
----
-title: Canonical Actions
-description: Actions available for implementation and usage
----
-
-Canonical actions can be imported from the `@laioutr-core/canonical-types` package. They represent actions that are common in an ecommerce application and may have different implementations depending on the app.
-
-::action-meta{name="newsletter/subscribe"}
-::
