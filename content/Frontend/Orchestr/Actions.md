@@ -80,7 +80,6 @@ Middleware is a way to intercept and modify the input, output or context of an a
 
 See [Middleware](middleware) for more information.
 
-
 ### Error Handling
 
 If executing an action on the server fails, an error should be thrown. You can either just throw a generic `Error` object or use one of the error-classes from the `@laioutr-core/orchestr/*` package.
@@ -98,7 +97,6 @@ export default defineActionHandler(CartAddItemsAction, async ({ input }) => {
 For custom actions, you can also create your own error-classes using the [`ebec`](https://github.com/tada5hi/ebec/tree/master/packages/ebec) or supplementary [`@ebec/http`](https://github.com/tada5hi/ebec/tree/master/packages/http) package.
 
 ::code-group
-
 ```typescript [ActionHandler.ts] twoslash
 import { defineActionHandlerMock as defineActionHandler } from '@laioutr-core/orchestr/types';
 

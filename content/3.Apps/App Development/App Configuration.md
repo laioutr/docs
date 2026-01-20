@@ -1,7 +1,8 @@
 ---
 title: App Configuration
-description: Configuring your custom app
 ---
+
+##
 
 Laioutr uses Nuxt's regular mechanisms for configuration-data. However with Laioutr projects being configured through the `laioutrrc.json` file instead of a `nuxt.config.ts` file, there are some differences:
 
@@ -88,6 +89,7 @@ The Nuxt documentation itself is a great resource for more information about the
 – [How Nuxt Works? Runtime Context vs. Build Context](https://nuxt.com/docs/3.x/guide/going-further/internals#runtime-context-vs-build-context)
 
 > Your runtime config will be serialized before being passed to Nitro. This means that anything that cannot be serialized and then deserialized (such as functions, Sets, Maps, and so on), should not be set in your nuxt.config.
+>
 > - On client-side, only keys in runtimeConfig.public and runtimeConfig.app (which is used by Nuxt internally) are available, and the object is both writable and reactive.
 > - On server-side, the entire runtime config is available, but it is read-only to avoid context sharing.
 

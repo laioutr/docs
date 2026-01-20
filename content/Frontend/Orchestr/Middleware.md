@@ -1,5 +1,6 @@
 ---
 title: Middleware
+description: Middleware is a way to intercept and modify the input, output or context of an action. It is a way to add additional functionality to an action without having to modify the action-handler.
 ---
 
 Middleware is a way to intercept and modify the input, output or context of an action. It is a way to add additional functionality to an action without having to modify the action-handler.
