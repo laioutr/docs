@@ -1,11 +1,13 @@
 ---
 title: Data Model
-description: Understanding the basics of Laioutr's data model
 ---
+
+##
 
 Data in Laioutr is organized into normalized entities. You can think of entities as rows in a database table. Each entity has a unique id and a type. Entities can have components, which are like columns in a database table. Besides that entities can have links to other entities.
 
 Structuring entities into separate components which hold data about the entity is important for two reasons:
+
 1. **Granularity**: Request only the data you need in the frontend.
 2. **Composition**: Load data from multiple sources and combine it into a single entity.
 
@@ -31,7 +33,6 @@ erDiagram
     }
 ```
 
-
 ### Entity Components
 
 A entity can have zero or more components. Each component has a unique name and a schema. The schema is a zod type that describes the data that the component will contain.
@@ -55,5 +56,3 @@ To achieve this, you can request only the components you need. So if your produc
 Most of the time, your data about a product probably comes from a single source like your shop-system, e.g. Shopify or Adobe Commerce. But sometimes you might need to combine data from multiple sources.
 
 For example, you might want to display a product-tile with the product-name, price and image from your shop-system, but the description from a PIM system like Akeneo. Or your product-prices should always be loaded from your ERP system, while the rest of the product-data comes from your shop-system.
-
-The separation of entity-data into different components allows for this kind of composition.
