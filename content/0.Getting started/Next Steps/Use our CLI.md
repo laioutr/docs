@@ -1,5 +1,5 @@
 ---
-title: CLI
+title: Use our CLI
 ---
 
 ## Installation
@@ -10,7 +10,7 @@ You can install the Laioutr CLI globally with the following command:
 pnpm install -g @laioutr/cli@latest
 ```
 
-Of course you do not _have_ to install the CLI globally. You can also use it locally by running `npx @laioutr/cli@latest <command>`.
+Of course you do not *have* to install the CLI globally. You can also use it locally by running `npx @laioutr/cli@latest <command>`.
 
 ## Usage
 
@@ -28,10 +28,14 @@ The project secret is the secret key of the project. You can find it in the cock
 
 ## Commands
 
-### `laioutr rc fetch -p <project> -s <projectSecret> [filename]`
+```bash
+laioutr rc fetch -p <project> -s <projectSecret> [filename]
+```
 
 Fetches the laioutrrc.json of a project from the cockpit api. If no filename is provided, it will default to `laioutrrc.json` in the current working directory.
 
-### `laioutr rc update [filename]`
+```bash
+laioutr rc update [filename]
+```
 
 Updates an existing laioutrrc.json file with the latest from the cockpit api. If no filename is provided, it will default to `laioutrrc.json` in the current working directory.
