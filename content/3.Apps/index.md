@@ -1,0 +1,25 @@
+---
+title: Overview
+---
+
+## Apps in Laioutr
+
+Apps are the modular building blocks that extend and customize your Laioutr frontend. They allow you to connect external systems, add business capabilities, and enhance your digital experience without hard-wiring functionality into the core platform.
+
+Each app encapsulates a specific responsibility, for example commerce, content, search, analytics, personalization, or compliance. Instead of tightly coupling these concerns to your frontend, Laioutr keeps them decoupled, configurable, and replaceable. This ensures long-term flexibility and protects your frontend from vendor lock-in.
+
+## How the App Approach Works
+
+Apps are selected and activated at the project level. Once enabled, they integrate seamlessly into your frontend through well-defined interfaces:
+
+- Configuration over code, Apps are configured centrally and made available to the frontend without requiring custom glue code for every use case.
+- Unified access, Data and functionality provided by apps are exposed in a consistent way, regardless of the underlying service or provider.
+- Composable by design, Multiple apps can be combined within a single project, allowing teams to build tailored solutions that match business needs.
+
+Apps can provide data sources, UI extensions, logic, or integrations that are consumed directly in Laioutr Studio and the frontend runtime.
+
+## Why Apps Matter
+
+The app approach allows teams to evolve their digital stack independently of the frontend itself. Business teams can introduce new capabilities faster, while technical teams maintain architectural clarity and control.
+
+In short, apps turn Laioutr into an extensible platform, one that grows with your business, adapts to changing requirements and enables continuous improvement without rebuilding your frontend.
