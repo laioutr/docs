@@ -1,0 +1,27 @@
+---
+title: Create Organization and Project
+---
+
+##
+
+The first step in working with Laioutr is setting a user account within our Cockpit. After that, you need to setup your organization and very first project. An organization represents your company or team and acts as the top-level container for all users, projects, and configurations.
+
+Within an organization, you create one or more projects. A project typically reflects a specific digital experience or brand. This structure allows you to clearly separate responsibilities, environments, and access levels.
+
+Once your organization and projects are in place, you can invite team members and assign roles. Roles define what each user can see and manage, from business-focused tasks like content, layouts, and campaigns to more technical responsibilities such as configuration and apps. This ensures clear ownership, secure access, and smooth collaboration across business and technical teams from day one.
+
+## Step by Step Guide to your first project
+
+::steps{level="4"}
+#### Create your personal account
+
+Visit <http://cockpit.laioutr.cloud> and register yourself for an account.
+
+#### Create your first organization
+
+Within the registration process you're asked for your organization details. In general, your personal account can be a member of unlimited organizations.
+
+#### Start a fresh new project
+
+Within this new organization, you can create your first project.
+::

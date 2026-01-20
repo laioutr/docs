@@ -1,0 +1,27 @@
+---
+title: First Project Configuration
+---
+
+##
+
+After creating a project, the next step is to configure it for your first frontend. This initial setup defines the foundation of your digital experience and ensures that your project is ready for efficient collaboration and future growth.
+
+::steps{level="4"}
+#### Choose a Theme
+
+Select the theme that will serve as the visual and structural baseline for your project. Themes define the core layout, design system, and component structure, giving your frontend a consistent starting point that can be customized over time.
+
+#### Select Apps
+
+Choose the apps you want to use within your project. Apps extend your frontend with additional capabilities such as commerce integrations, content sources, analytics, personalization, or other business-critical services.
+
+#### Choose a Hosting Environment
+
+Decide where your frontend will be hosted. By default, projects are deployed on Laioutr Cloud, which is optimized for performance, scalability, and global delivery. Depending on your setup, alternative hosting environments can also be selected.
+
+#### Start Frontend Configuration in Studio
+
+Once the basics are defined, you can begin configuring your frontend in Laioutr Studio. Here, teams can compose pages, arrange components, adjust layouts, and refine the user experience, all within a controlled and collaborative environment.
+::
+
+This initial configuration ensures that your project is set up with the right structure, tools, and infrastructure to support both business goals and technical requirements from the very beginning.
