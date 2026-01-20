@@ -3,8 +3,6 @@ title: Architecture
 description: Laioutr lets non-developers build and manage their e-commerce frontend using a visual editor called Studio. The output of the Studio is an website that can be hosted or run locally.
 ---
 
-Laioutr lets non-developers build and manage their e-commerce frontend using a visual editor called Studio. The output of the Studio is an website that can be hosted or run locally.
-
 ## Storefront Application
 
 A Laioutr project is a Nuxt 3 application which runs in combination with Laioutr's core modules. On top of that, the installed apps add all the necessary UI components, logic and integrations to the storefront application.

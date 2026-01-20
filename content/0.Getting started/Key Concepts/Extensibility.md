@@ -1,5 +1,34 @@
 ---
-title: Extensibility file
+title: Extensibility
+description: Laioutr frontends are designed to be flexible and extensible meaning you can start with a solid, managed foundation and then adapt or expand it to meet your unique business and technical needs. Whether you need to add integrations, tailor visuals, or create custom user experiences, Laioutr provides clear extension paths that work with the architecture rather than around it.
 ---
 
-# Extensibility file
+## Apps: Modular Extensions for Capabilities
+
+Apps are the primary way to extend the capabilities of your frontend. They encapsulate specific features or integrations, like commerce backends, search, personalization, analytics, content sources, or third-party services and make them available to your project without deep custom development.
+
+- Composable and replaceable: Apps can be added, configured, extended, or swapped as your business evolves.
+- Integration points: Once installed, apps fetch APIs and data that your frontend can consume in a consistent, unified way.
+- Custom app development: Developers can create new apps or extend existing ones to address specialized use cases or industry-specific requirements, fostering innovation without sacrificing maintainability.
+
+This modular approach lets you build frontends that stay adaptable over time, with minimal coupling between your core UI and underlying services.
+
+## Theming with Design System & Design Tokens
+
+Laioutr supports robust theming through a shared design system built on design tokens, reusable definitions for colors, typography, spacing, shadow, and other UI attributes.
+
+- Design tokens standardize styles across every component in your frontend, ensuring visual consistency at scale.
+- Theming flexibility: Tokens can be extended or overridden to match brand guidelines, visual campaigns, or market-specific requirements, without rewriting component internals.
+- Developer + designer workflow: Designers can define tokens in Figma, and developers can apply them in code and configuration, keeping design and implementation aligned.
+
+By building your custom theme on top of the existing Laioutr design system, you maintain consistency with the core UI library while expressing your unique brand identity.
+
+## Creating New Frontend Components
+
+While Laioutr UI provides a large set of ready-to-use components, there are many scenarios where you may need custom components — whether to support unique interactions, enterprise workflows, or specialized UI elements.
+
+- Component extension: Developers can build new Vue-based components that integrate seamlessly with the Laioutr frontend ecosystem.
+- Hooking into data and apps: Custom components can leverage the Unified Data Layer and app-provided APIs to fetch, manipulate, and render data specific to your business logic.
+- Reusable patterns: Once created, components can be reused across pages and projects, increasing consistency and reducing duplication.
+
+This approach ensures that your frontend can evolve incrementally, you only build what you need, without losing the benefits of a managed platform.

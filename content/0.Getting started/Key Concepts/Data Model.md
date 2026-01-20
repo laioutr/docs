@@ -1,10 +1,7 @@
 ---
 title: Data Model
+description: Data in Laioutr is organized into normalized entities. You can think of entities as rows in a database table. Each entity has a unique id and a type. Entities can have components, which are like columns in a database table. Besides that entities can have links to other entities.
 ---
-
-##
-
-Data in Laioutr is organized into normalized entities. You can think of entities as rows in a database table. Each entity has a unique id and a type. Entities can have components, which are like columns in a database table. Besides that entities can have links to other entities.
 
 Structuring entities into separate components which hold data about the entity is important for two reasons:
 
