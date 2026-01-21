@@ -1,17 +1,19 @@
 {
-  "name": "docus-starter",
+  "name": "@laioutr/docs",
   "scripts": {
-    "dev": "nuxt dev",
-    "build": "nuxt build"
+    "build": "nuxt build",
+    "dev": "nuxt dev"
   },
   "dependencies": {
     "@nuxt/content": "3.9.0",
     "@vueuse/nuxt": "14.1.0",
     "better-sqlite3": "^12.2.0",
+    "didyoumean2": "^7.0.4",
     "docus": "latest",
     "mermaid": "^11.12.2",
     "nuxt": "^4.1.2",
-    "nuxt-studio": "1.0.0-beta.0"
+    "nuxt-component-meta": "^0.15.0",
+    "nuxt-studio": "1.1.1"
   },
   "devDependencies": {
     "@laioutr/eslint-config": "^1.8.8",
