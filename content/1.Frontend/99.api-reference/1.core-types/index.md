@@ -1,6 +1,6 @@
 ---
-title: API Reference
-description: "@laioutr-core/canonical-types"
+title: Core API
+description: "@laioutr-core/core-types"
 ---
 
 Please note, that many types are duplicated because they are exported as Zod schemas as well as inferred types.
