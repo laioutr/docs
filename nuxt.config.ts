@@ -21,4 +21,12 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  nitro: {
+    // Exclude component-meta.mjs from server build
+    // These files contain JSON-like data with JS code strings that Rollup can't parse
+    rollupConfig: {
+      external: ['@laioutr-core/ui-component-meta'],
+    },
+  },
 });
