@@ -1,9 +1,9 @@
 ---
-title: Header
+title: Shop Header
 description: A section header component
 ---
 
-::component-code{:name="SectionHeader" story-id="sections-header--fixed"}
+::component-code{:name="SectionHeader" story-id="organisms-shop-header--header"}
 ::
 
 ## API Reference
