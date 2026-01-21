@@ -5,6 +5,7 @@
 .nitro
 .cache
 dist
+.claude/*.local.*
 
 # Node dependencies
 node_modules

@@ -1,7 +1,7 @@
 {
   "name": "@laioutr/docs",
   "scripts": {
-    "build": "pnpm run setup && nuxt build",
+    "build": "nuxt build",
     "dev": "nuxt dev",
     "setup": "infisical run -- npx --yes npmrc-replace-env"
   },
