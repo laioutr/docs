@@ -1,10 +1,13 @@
 {
   "name": "@laioutr/docs",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev"
+    "build": "pnpm run setup && nuxt build",
+    "dev": "nuxt dev",
+    "setup": "infisical run -- npx --yes npmrc-replace-env"
   },
   "dependencies": {
+    "@laioutr-core/core-types": "^0.27.1",
+    "@laioutr-core/ui-component-meta": "^1.28.2",
     "@nuxt/content": "3.9.0",
     "@vueuse/nuxt": "14.1.0",
     "better-sqlite3": "^12.2.0",

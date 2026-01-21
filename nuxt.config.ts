@@ -3,6 +3,10 @@ export default defineNuxtConfig({
   modules: ['nuxt-studio', '@vueuse/nuxt'],
   css: ['~/assets/css/main.css'],
 
+  site: {
+    name: 'Laioutr Docs',
+  },
+
   studio: {
     repository: {
       provider: 'github',
