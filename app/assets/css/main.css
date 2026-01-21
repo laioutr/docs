@@ -8,3 +8,17 @@
   --default-font-family: 'Lexend', sans-serif;
   --ui-container: 90rem;
 }
+
+.mermaid-pre {
+  --mermaid-pre-bg-color: #f4f0f4;
+  background: radial-gradient(var(--mermaid-pre-bg-color) 1px, transparent 1px);
+  background-size: 16px 16px;
+
+  .dark & {
+    --mermaid-pre-bg-color: #393439;
+  }
+
+  .mermaid svg {
+    margin: 0 auto;
+  }
+}

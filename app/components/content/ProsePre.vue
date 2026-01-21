@@ -32,7 +32,7 @@ const isMermaid = ref<boolean>(props.language === 'mermaid');
 </script>
 
 <template>
-  <Pre v-if="isMermaid" v-bind="props">
+  <Pre v-if="isMermaid" v-bind="props" class="mermaid-pre">
     <Mermaid>
       {{ code }}
     </Mermaid>
