@@ -8,4 +8,5 @@ Orchestr queries are the core building blocks for fetching data from external da
 ## Core Concepts
 
 ```mermaid
+flowchart
 ```

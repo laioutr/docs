@@ -1,5 +1,6 @@
 ---
-title: 5.Checkout root file
+title: Checkout root file
+links: []
 ---
 
-# 5.Checkout root file
+# Checkout root file

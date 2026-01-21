@@ -57,7 +57,7 @@ export default defineAppConfig({
         },
         {
           icon: 'i-lucide-gem',
-          label: 'Purchase a License',
+          label: 'Try Laioutr',
           to: 'https://www.laioutr.com/pricing',
           target: '_blank',
         },
