@@ -7,6 +7,17 @@ export default defineNuxtConfig({
     name: 'Laioutr Docs',
   },
 
+  llms: {
+    domain: 'https://docs.laioutr.io',
+    title: 'Laioutr Docs',
+  },
+
+  ogImage: {
+    defaults: {
+      component: 'Laioutr',
+    },
+  },
+
   studio: {
     repository: {
       provider: 'github',
@@ -18,6 +29,18 @@ export default defineNuxtConfig({
       github: {
         clientId: process.env.DOCS_GITHUB_CLIENT_ID,
         clientSecret: process.env.DOCS_GITHUB_CLIENT_SECRET,
+      },
+    },
+  },
+
+  content: {
+    build: {
+      markdown: {
+        highlight: {
+          // Force enable syntax-highlighting for HighlightInlineType component.
+          // See https://github.com/nuxt-content/mdc/issues/449
+          noApiRoute: false,
+        } as any,
       },
     },
   },

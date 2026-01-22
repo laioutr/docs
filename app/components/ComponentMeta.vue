@@ -2,6 +2,7 @@
 import ComponentProps from './ComponentProps.vue';
 import componentMeta, { type NuxtComponentMetaNames } from '@laioutr-core/ui-component-meta';
 import type { ComponentData } from 'nuxt-component-meta';
+import { useDidYouMean } from '../composables/useDidYouMean';
 
 const props = defineProps<{
   name: string;
@@ -9,14 +10,12 @@ const props = defineProps<{
 
 const component = componentMeta[props.name as NuxtComponentMetaNames] as ComponentData | undefined;
 
-const { data: didYouMeanThing } = await useAsyncData(`didYouMean-${props.name}`, async () => {
-  if (component) {
-    return null;
-  }
-  const didYouMean = await import('didyoumean2').then((m) => m.default);
-  const similar = didYouMean(props.name, Object.keys(componentMeta));
-  return similar;
-});
+const didYouMeanThing = useDidYouMean(
+  props.name,
+  '',
+  computed(() => !!component),
+  Object.keys(componentMeta)
+);
 </script>
 
 <template>

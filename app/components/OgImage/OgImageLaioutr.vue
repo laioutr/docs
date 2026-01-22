@@ -36,9 +36,7 @@ const description = computed(() => (props.description || '').slice(0, 200));
     </svg>
 
     <div class="pl-[100px]">
-      <p v-if="headline" class="mb-4 text-[24px] font-semibold text-[#00DC82] uppercase">
-        {{ headline }}
-      </p>
+      <p v-if="headline" class="mb-4 text-[24px] font-semibold text-[#00DC82] uppercase">{{ headline }}</p>
       <h1 v-if="title" class="m-0 mb-4 flex items-center text-[75px] font-semibold text-white">
         <span>{{ title }}</span>
       </h1>

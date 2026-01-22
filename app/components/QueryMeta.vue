@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import JsonSchemaFields from './JsonSchemaFields.vue';
 import reflected from '@laioutr-core/canonical-types/reflection';
+import { useDidYouMean } from '../composables/useDidYouMean';
 import { tokenToExportName } from '../lib/tokens/tokenToExportName';
 import { ProseBadge, ProseCode, ProseH3, ProseH4, ProseP } from '#components';
 
@@ -10,17 +11,12 @@ const props = defineProps<{
 
 const query = computed(() => reflected.queries.find((query) => query.name === props.name));
 
-const { data: didYouMeanThing } = await useAsyncData(`didYouMean-query-${props.name}`, async () => {
-  if (query) {
-    return null;
-  }
-  const didYouMean = await import('didyoumean2').then((m) => m.default);
-  const similar = didYouMean(
-    props.name,
-    reflected.queries.map((query) => query.name)
-  );
-  return similar;
-});
+const didYouMeanThing = useDidYouMean(
+  props.name,
+  'query',
+  query,
+  computed(() => reflected.queries.map((query) => query.name))
+);
 </script>
 
 <template>

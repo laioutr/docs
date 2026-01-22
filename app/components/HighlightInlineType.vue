@@ -23,11 +23,10 @@ const type = computed(() => {
   return type;
 });
 
-const { data: ast } = await useAsyncData(`highlight-inline-code-${hash(type.value).slice(0, 10)}`, () =>
-  parseMarkdown(`\`${type.value}\`{lang="ts-type"}`)
-);
+const cacheKey = computed(() => hash(type.value).slice(0, 10));
+const value = computed(() => `\`${type.value}\`{lang="ts-type"}`);
 </script>
 
 <template>
-  <MDCRenderer v-if="ast" :body="ast.body" :data="ast.data" />
+  <MDC :cache-key="cacheKey" :value="value" />
 </template>
