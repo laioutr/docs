@@ -18,7 +18,6 @@ To ensure a smooth setup and keep your workspace organized, we recommend the fol
 4. **Publish Specialized Libraries:** Open the SHOP, CMS, and Inpage Navigation files one by one and publish them.
 
 ::tip
-#default
 **Note on Library Connections:** If the specialized libraries do not automatically recognize your newly published Core Kit (e.g., variables appear missing or unlinked), you can manually re-establish the connection using Figma's Swap library function:
 
 - Open the Assets tab (Alt + 2) within the specialized file (e.g., SHOP Components).
@@ -46,7 +45,11 @@ Everything specifically related to product presentation and online shopping, suc
 
 ### CMS Components
 
-Content-driven elements such as banners, text-image sections, hero modules, and editorial blocks.Inpage NavigationA dedicated collection of navigation components for linking categories and content with various visual styles.
+Content-driven elements such as banners, text-image sections, hero modules, and editorial blocks.
+
+### Inpage Navigation
+
+A dedicated collection of navigation components for linking categories and content with various visual styles.
 
 ## Total Control with Figma Variables
 
