@@ -51,6 +51,7 @@ The core brand/functional color.
 ::
 
 ::card
+#default
 High-contrast shades for readability.
 
 #title
@@ -84,11 +85,10 @@ High-contrast shades for readability.
   :::
 
   :::card
+  Specific White and Black Alpha (transparency) scales for modals and overlays.
+
   #title
   Overlays
-
-  #default
-  Specific White and Black Alpha (transparency) scales for modals and overlays.
   :::
 ::
 
