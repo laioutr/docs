@@ -22,20 +22,75 @@ Our color system is built on a scale of 12 steps, ensuring consistency across di
 
 To maintain a harmonious UI, we follow a standardized numbering logic for all color scales:
 
-1. 1 - 3 Pale Backgrounds: Subtle tints for section backgrounds or card fills.
-2. 3 - 5 Interactive Elements: Backgrounds for buttons, toggles, and hover states.
-3. 6 - 8 Borders & Separators: Lines, strokes, and UI dividers.
-4. 9 - 10 Solid Colors: The core brand/functional color.
-5. 11 - 12 Accessible Text: High-contrast shades for readability.
+::card
+Subtle tints for section backgrounds or card fills.
+
+#title
+**1 – 3 Pale Backgrounds**
+::
+
+::card
+Backgrounds for buttons, toggles, and hover states.
+
+#title
+3 - 5 Interactive Elements
+::
+
+::card
+Lines, strokes, and UI dividers.
+
+#title
+6 - 8 Borders & Separators
+::
+
+::card
+The core brand/functional color.
+
+#title
+9 - 10 Solid Colors
+::
+
+::card
+High-contrast shades for readability.
+
+#title
+11 - 12 Accessible Text
+::
 
 **Note:** Standard White is strictly defined as #FFFFFF across the entire system.
 
 ## Color Groups
 
-- Greys: Neutral scales where step 12 represents main black. Designed for white text overlays at step 9.
-- Normal Colors: Standard theme colors designed for white text overlays at step 9. Ideal for primary accents, Success, or Error states.
-- Bright Colors: High-vibrancy/Neon colors designed for black text overlays at step 9
-- Overlays: Specific White and Black Alpha (transparency) scales for modals and overlays.
+::card-group
+  :::card
+  Neutral scales where step 12 represents main black. Designed for **white text** overlays at **step 9**.
+
+  #title
+  Greys
+  :::
+
+  :::card
+  Standard theme colors designed for **white text** overlays at **step 9**. Ideal for primary accents, Success, or Error states.
+
+  #title
+  Normal Colors
+  :::
+
+  :::card
+  High-vibrancy/Neon colors designed for black text overlays at step 9
+
+  #title
+  Bright Colors
+  :::
+
+  :::card
+  #title
+  Overlays
+
+  #default
+  Specific White and Black Alpha (transparency) scales for modals and overlays.
+  :::
+::
 
 **Dark Mode:** Every color group includes a built-in dark mode equivalent that triggers automatically when the mode is switched.
 
