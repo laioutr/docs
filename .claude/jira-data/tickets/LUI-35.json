@@ -33,7 +33,7 @@
     ]
   },
   "implemented": true,
-  "documentationPath": "content/3.laioutr-ui/2.ui-kit-general/CategoryNodeFlag.md",
+  "documentationPath": "content/3.laioutr-ui/08.ui-kit-indicators/CategoryNodeFlag.md",
   "parentEpic": {
     "key": "LUI-34",
     "title": "Inpage Navigation"
@@ -49,6 +49,10 @@
     "LAIOUTR-41"
   ],
   "longDescription": "## Purpose\n\nThe CategoryNodeFlag component enables store owners to visually highlight category navigation elements with promotional badges, drawing shopper attention to featured or time-sensitive categories.\n\n## Use Cases\n\n- Display promotional text badges like \"Sale\", \"New\", or percentage discounts on category preview components\n- Choose from preset flag styles (Sale, New, Promo) or use custom icon content\n- Position flags at configurable corners of category nodes using radius settings\n- Apply brand-consistent colors automatically derived from the theme palette\n- Support localized flag text for international storefronts\n\n## Design Rationale\n\nFlags are implemented as a separate molecule component to ensure reusability across all category node variants (Basic, Compact, Big). The theming system controls size, corner radius, padding, and colors to maintain visual consistency across the storefront while allowing customization per brand identity.",
-  "keywords": ["promotional badge", "category flag", "sale tag"],
+  "keywords": [
+    "promotional badge",
+    "category flag",
+    "sale tag"
+  ],
   "shortDescription": "The CategoryNodeFlag component enables store owners to draw attention to featured or time-sensitive categories with visual badges. It supports four semantic variants (promo, sale, new, icon) with theming controls for size, corner radius, padding, and colors. Implemented as a separate molecule, it can be reused across all category node variants (Basic, Compact, Big). The flexible content slot accepts localized text or emoji icons for international storefronts."
 }

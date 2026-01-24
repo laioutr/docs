@@ -1,8 +1,12 @@
 ---
 title: Text
-description: A multi-line text input component for entering longer form text content.
+description: A multi-line text input for entering longer form content.
 jiraIssueId: LUI-137
 ---
+
+## Overview
+
+The Textarea component provides a multi-line text input field for entering longer content such as descriptions, comments, or messages. It supports configurable rows for initial height, auto-resize behavior to expand with content, and character count limits. Commonly used in forms requiring free-text input like product reviews, contact messages, or address fields requiring multiple lines.
 
 ## Usage
 

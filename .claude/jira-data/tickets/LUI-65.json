@@ -67,7 +67,7 @@
     ]
   },
   "implemented": false,
-  "documentationPath": "content/3.laioutr-ui/7.ui-app/store-navigation/MobileMenu.md",
+  "documentationPath": "content/3.laioutr-ui/09.ui-app-navigation/MobileMenu.md",
   "parentEpic": {
     "key": "LUI-58",
     "title": "Shop Navigation"
@@ -83,6 +83,10 @@
     "LAIOUTR-43"
   ],
   "longDescription": "## Purpose\n\nThe MegaMenuMobile component provides mobile shoppers with a touch-optimized, full-screen navigation experience. It presents the store's category structure in a visually scannable compact grid format within an off-canvas sheet overlay.\n\n## Use Cases\n\n- **Category Browsing**: Users tap category nodes in a compact grid to explore the first navigation level. Selecting a category transitions to a child menu showing subcategories.\n- **Account Access**: A sticky header with login button provides quick access to user account functionality relocated from the desktop header.\n- **Promotional Content**: Free content slots accept CMS-managed content like CTA banners or additional category grids, enabling marketing placement within the menu.\n- **Site Preferences**: Language/locale switching and dark mode toggle (moved from desktop top bar) are accessible within the mobile menu.\n\n## Design Rationale\n\nThe component splits into three sub-components: MegaMenuMobile (wrapper with sheet and login), RootMenu (main category grid), and ChildMenu (subcategory view). The off-canvas sheet uses a max-width of 400px with responsive padding for smaller screens. Content slots remain empty when unfilled to avoid visual clutter.",
-  "keywords": ["mobile menu", "off-canvas navigation", "hamburger menu"],
+  "keywords": [
+    "mobile menu",
+    "off-canvas navigation",
+    "hamburger menu"
+  ],
   "shortDescription": "The MegaMenuMobile component provides mobile shoppers with a touch-optimized, full-screen navigation experience. It presents the store's category structure in a compact grid format within an off-canvas sheet overlay. The component splits into three parts: MegaMenuMobile (wrapper with sheet and login), RootMenu (main category grid), and ChildMenu (subcategory view). Content slots accept CMS-managed content like CTA banners. Language and dark mode controls are relocated from the desktop top bar."
 }

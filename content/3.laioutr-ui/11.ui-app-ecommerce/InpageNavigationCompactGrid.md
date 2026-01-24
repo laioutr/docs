@@ -1,8 +1,14 @@
 ---
 title: Inpage Navigation Compact Grid
-description: A compact grid layout for displaying category nodes with multiple design variants, commonly used on product listing pages for subcategory navigation.
+description: Space-efficient grid layout for compact category nodes on listing pages.
 jiraIssueId: LUI-43
 ---
+
+## Overview
+
+The InpageNavigationCompactGrid component provides a space-efficient grid layout for compact category nodes, ideal for product listing pages where viewport space is limited. Node variants (default, solid, outline) apply consistently across all grid items for visual coherence. Alignment options (left, center, auto) accommodate different design aesthetics. Color mode propagation ensures consistent theming while promotional flags highlight time-sensitive or featured categories.
+
+## Usage
 
 ::component-code
 ---
@@ -18,8 +24,8 @@ story-id: organisms-inpagenavigationcompactgrid--inpage-navigation-compact-grid
 items:
   - "Multiple node variants: default, solid, and outline"
   - "Multiple color modes: on-light, on-dark, on-bright"
-  - "Three alignment options: left, center, and auto spacing"
   - "Optional headline, subline, and show more link"
+  - "Support for promotional flags on category nodes"
 ---
 ::
 

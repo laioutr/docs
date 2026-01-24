@@ -1,6 +1,6 @@
 ---
 title: Product Card
-description: A versatile product tile component for displaying product information in grids and sliders, with support for images, pricing, color swatches, and add-to-cart functionality.
+description: Versatile product tile for grids and sliders with pricing and cart.
 jiraIssueId: LUI-53
 links:
   - label: Figma
@@ -8,6 +8,10 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11271-205258&t=t5p6T6f67QhRVCAN-4
     target: _blank
 ---
+
+## Overview
+
+The ProductTile component serves as the primary building block for product listings across category pages, search results, and promotional sliders. It maintains consistent height regardless of content variations for grid alignment. Focus order follows accessibility best practices. The tile emits events rather than handling cart logic internally for flexible commerce backend integration. Internationalized price formatting uses the $money helper for proper locale handling.
 
 ## Usage
 
@@ -28,10 +32,10 @@ story-id: organisms-producttilebasic--full-featured
 ::features
 ---
 items:
-  - "Flexible content options: brand, title, description, pricing, and flags"
+  - "Flexible content: brand, title, pricing, flags, swatches"
   - "Multiple image aspect ratios (1:1 or 3:4)"
-  - "Color swatch integration with configurable positioning"
-  - "Interactive states with proper focus order for accessibility"
+  - "Sale pricing with strikethrough original price"
+  - "Add-to-cart button with customizable icon variant"
 ---
 ::
 

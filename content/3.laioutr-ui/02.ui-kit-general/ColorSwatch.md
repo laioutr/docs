@@ -1,6 +1,6 @@
 ---
 title: Color Swatch
-description: Color swatch components for displaying product color variants on product tiles, supporting single or multi-color swatches with interactive states.
+description: Color swatch components for displaying product color variants on tiles.
 jiraIssueId: LUI-51
 links:
   - label: Figma
@@ -9,9 +9,9 @@ links:
     target: _blank
 ---
 
-## Features
+## Overview
 
-- Our Color Swatch can be used for single and multiple colors.
+The ColorSwatch component provides compact visual representation of product color options, enabling customers to browse variants without leaving product listings. Implemented as a single HTML element for optimal performance, it uses CSS linear-gradients to display multi-color swatches. Maximum of 4 visible swatches prevents visual clutter while the '+n' overflow indicator communicates additional options. Interactive states including hover tooltips improve color name discoverability.
 
 ## Usage
 
@@ -50,8 +50,8 @@ title: Color Swatch Multiple Colors
 items:
   - "Displays up to two colors per swatch using linear-gradient"
   - "Shows color name tooltip on hover"
-  - "Active state indicator for selected variant"
-  - "Overflow handling with '+n' indicator for more than 4 variants"
+  - "Overflow handling with '+n' indicator for 5+ variants"
+  - "Accessible with proper ARIA labels"
 ---
 ::
 

@@ -51,7 +51,7 @@
     ]
   },
   "implemented": true,
-  "documentationPath": "content/3.laioutr-ui/7.ui-app/reviews/QuoteCard.md",
+  "documentationPath": "content/3.laioutr-ui/13.ui-app-reviews/QuoteCard.md",
   "parentEpic": {
     "key": "LUI-23",
     "title": "Testimonial Components"
@@ -77,6 +77,10 @@
     "LAIOUTR-31"
   ],
   "longDescription": "## Purpose\n\nThe Quote Card component displays simple customer quotes and reviews in a compact, visually appealing format. It provides an accessible alternative to the Persona Quote when profile pictures are unavailable or when a simpler presentation is preferred.\n\n## Use Cases\n\n- Display customer reviews in a slider carousel on product or landing pages\n- Present testimonials in a grid layout for comparison across multiple reviewers\n- Embed individual quotes within content sections to support marketing claims\n- Showcase star ratings alongside customer feedback to reinforce product quality\n\n## Design Rationale\n\nThe component offers multiple visual styles to integrate seamlessly with different page designs and brand aesthetics. Optional elements (avatar, logo, rating, additional info) allow content administrators to create engaging testimonials even when not all customer details are available. The standardized logo sizing ensures consistent presentation across testimonials from various sources.",
-  "keywords": ["testimonial card", "customer review", "star rating"],
+  "keywords": [
+    "testimonial card",
+    "customer review",
+    "star rating"
+  ],
   "shortDescription": "The Quote Card component presents customer testimonials in a compact, visually appealing format ideal for sliders, grids, or inline content. It offers five visual style variants to match different page designs. Optional elements include star ratings (with themed colors matching the card style), author avatars, and company logos with standardized sizing constraints. Content can be left or center aligned. Use this when profile pictures are unavailable or when a simpler presentation than the Persona Quote is preferred."
 }

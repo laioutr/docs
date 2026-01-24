@@ -1,6 +1,6 @@
 ---
 title: Link Tile Big
-description: A large category node component for in-page navigation with multiple image formats (square, landscape, portrait), text positioning options, and optional gradient overlays.
+description: Large-format category node with multiple aspect ratios, text overlay options, and gradient overlays for prominent in-page navigation.
 jiraIssueId: LUI-45
 links:
   - label: Figma
@@ -8,6 +8,10 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=10798-228528&t=Ar5LTHJDEX3yaImj-4
     target: _blank
 ---
+
+## Overview
+
+Ideal for hero-style category navigation on homepages and entry pages. Supports promotional badges like "Sale" or "New" with themed flag positioning. Full interaction states (default, hover, pressed, focus) provide clear feedback. Gradient opacity is adjustable to balance image visibility with text readability, and the component uses LuiImageContrastOverlay for dark image variants.
 
 ## Usage
 
@@ -24,9 +28,9 @@ story-id: ui-kit-linktilebig--portrait
 ::features
 ---
 items:
-  - "Three image format variants (square, landscape, portrait)"
-  - "Text positioning (on image or below)"
-  - "Optional gradient overlay for dark images"
+  - "Three image aspect ratios: square (1:1), landscape, and portrait"
+  - "Text positioning options: on image or below image"
+  - "Optional gradient overlay for improved text readability on dark images"
   - "Customizable background color per node"
 ---
 ::

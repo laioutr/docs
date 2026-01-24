@@ -1,6 +1,6 @@
 ---
 title: Desktop Side By Side Menu
-description: A desktop navigation menu that slides in from the left, displaying hierarchical category navigation with smooth transitions between levels.
+description: A desktop navigation menu that slides in from the left as an off-canvas panel, displaying hierarchical category navigation with smooth slide-in transitions between levels.
 jiraIssueId: LUI-96
 links:
   - label: Figma
@@ -8,6 +8,10 @@ links:
     to: https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=24-7307&t=6wm3tnzO3UwBzAin-4
     target: _blank
 ---
+
+## Overview
+
+The Desktop Side by Side Menu provides desktop users with an intuitive, mobile-inspired navigation experience for browsing product categories. The side-by-side sliding pattern brings familiar mobile app navigation to desktop, providing a consistent mental model across devices. Smooth 300ms animations create a polished feel while maintaining performance. The off-canvas approach keeps the main content visible with an overlay, allowing users to maintain context during navigation.
 
 ## Usage
 

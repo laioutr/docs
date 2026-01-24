@@ -55,7 +55,7 @@
     ]
   },
   "implemented": true,
-  "documentationPath": "content/3.laioutr-ui/7.ui-app/category-previews/InpageNavigationCompactGrid.md",
+  "documentationPath": "content/3.laioutr-ui/11.ui-app-ecommerce/InpageNavigationCompactGrid.md",
   "parentEpic": {
     "key": "LUI-34",
     "title": "Inpage Navigation"
@@ -71,6 +71,10 @@
     "LAIOUTR-41"
   ],
   "longDescription": "## Purpose\n\nThe InpageNavigationCompactGrid component provides a space-efficient grid layout for displaying compact category nodes, ideal for product listing pages and areas where viewport real estate is limited. It maintains full functionality while minimizing visual footprint.\n\n## Use Cases\n\n- Display subcategory navigation grids on product listing pages\n- Create compact category overviews in sidebar sections\n- Highlight sale categories with dedicated styling and promotional flags\n- Add contextual headings and sublines to describe navigation sections\n- Include show more links to direct users to complete category listings\n\n## Design Rationale\n\nThe compact grid combines the space efficiency of compact nodes with flexible layout options. Node variants (default, solid, outline) are applied consistently across all grid items for visual coherence. The alignment options accommodate different design aesthetics while promotional flag support enables highlighting time-sensitive or featured categories. Color mode propagation to child nodes ensures consistent theming.",
-  "keywords": ["compact grid", "subcategory navigation", "listing page"],
+  "keywords": [
+    "compact grid",
+    "subcategory navigation",
+    "listing page"
+  ],
   "shortDescription": "The InpageNavigationCompactGrid component provides a space-efficient grid layout for compact category nodes, ideal for product listing pages where viewport space is limited. Node variants (default, solid, outline) apply consistently across all grid items for visual coherence. Alignment options (left, center, auto) accommodate different design aesthetics. Color mode propagation ensures consistent theming while promotional flags highlight time-sensitive or featured categories."
 }

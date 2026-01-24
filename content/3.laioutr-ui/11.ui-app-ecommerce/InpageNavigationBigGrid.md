@@ -1,8 +1,12 @@
 ---
 title: Inpage Navigation Big Grid
-description: A grid layout component for displaying large category nodes in-page navigation with optional headings and multiple alignment options.
+description: High-impact grid layout for large category nodes with independent node color modes and multiple format variants.
 jiraIssueId: LUI-46
 ---
+
+## Overview
+
+Ideal for hero sections and prominent homepage placements. Unlike other navigation grids, does not propagate colorMode to child nodes - each CategoryNodeBig determines its own color mode based on image contrast requirements. Supports promotional badges to highlight sale or new categories. Alignment options apply consistently to both section headings and grid layout for visual coherence.
 
 ## Usage
 
@@ -18,10 +22,10 @@ story-id: organisms-inpagenavigationbiggrid--grid-centered-squared
 ::features
 ---
 items:
-  - "Multiple node format variants (square, landscape, portrait)"
-  - "Optional header and subline"
-  - "Left or center alignment"
-  - "Color mode support (on-light, on-dark, on-bright)"
+  - "Multiple node format variants: square, landscape, and portrait"
+  - "Optional header and subline for section context"
+  - "Left or center alignment for headlines and nodes"
+  - "Independent color mode per node based on image contrast"
 ---
 ::
 

@@ -1,6 +1,6 @@
 ---
 title: Dropdown Menu
-description: A reusable select dropdown component that mimics native select behavior while using a custom dropdown UI with an active selection indicator.
+description: Reusable select dropdown component for product sorting with custom dropdown UI and active selection indicator.
 jiraIssueId: LUI-81
 links:
   - label: Figma
@@ -9,6 +9,12 @@ links:
     target: _blank
 ---
 
+## Overview
+
+Acts like a native select element but uses the custom dropdown component for enhanced styling. Opens via the Sort button on filter bar. Only one option can be selected at a time with immediate product order update. Similar to Nuxt UI select component pattern. Uses LuiDropdownMenu internally.
+
+## Usage
+
 :component-code{name="DropdownMenu" story-id="ui-kit-dropdownmenu--has-indicator"}
 
 ## Features
@@ -16,9 +22,10 @@ links:
 ::features
 ---
 items:
-  - "Single selection with active indicator"
-  - "Dropdown menu with option list"
+  - "Single selection with visual active indicator"
   - "v-model support for two-way binding"
+  - "Dropdown menu with customizable option list"
+  - "Keyboard navigation with arrow keys and Enter"
 ---
 ::
 

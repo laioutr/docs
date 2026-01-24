@@ -1,6 +1,6 @@
 ---
 title: Switch
-description: A billing cycle switch component that toggles between monthly and annual pricing, updating all pricing cards simultaneously and showing potential savings.
+description: A billing cycle toggle switch for switching between monthly and annual pricing with savings display.
 jiraIssueId: LUI-4
 links:
   - label: Figma
@@ -9,10 +9,9 @@ links:
     target: _blank
 ---
 
-## Features
+## Overview
 
-- Available in different sizes
-- Available in all relevant states
+Enables users to compare monthly versus annual pricing options easily. Toggle the entire pricing page between billing views. Display strikethrough prices when annual billing shows discounts. Persists billing preference in localStorage so it remains selected during navigation. Communicates savings visually to encourage annual subscription commitments.
 
 ## Usage
 
@@ -87,9 +86,10 @@ title: Switch Checked Disabled
 ::features
 ---
 items:
-  - "Toggle between monthly and annual billing"
-  - "Persisted preference via localStorage"
-  - "Synchronized update of all pricing cards"
+  - "Toggle between monthly and annual billing cycles"
+  - "Display savings percentage or amount for annual billing"
+  - "Synchronized update of all pricing cards when toggled"
+  - "Persisted preference via localStorage using useStorage"
 ---
 ::
 

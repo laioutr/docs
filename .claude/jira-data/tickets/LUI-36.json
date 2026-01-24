@@ -49,7 +49,7 @@
     ]
   },
   "implemented": false,
-  "documentationPath": "content/3.laioutr-ui/4.ui-kit-content/LinkTileBasic.md",
+  "documentationPath": "content/3.laioutr-ui/05.ui-kit-content/LinkTileBasic.md",
   "parentEpic": {
     "key": "LUI-34",
     "title": "Inpage Navigation"
@@ -65,6 +65,10 @@
     "LAIOUTR-41"
   ],
   "longDescription": "## Purpose\n\nThe CategoryNodeBasic component serves as the foundational building block for promoting categories and making them visible to customers outside the main navigation menu. This is especially important on mobile devices where the main menu is hidden behind a hamburger icon.\n\n## Use Cases\n\n- Display category previews in grid or slider layouts on entry pages\n- Highlight sale categories with dedicated color variants\n- Add promotional badges (Sale, New, Custom) via the flag prop\n- Create \"see more\" links to supercategory or listing pages\n- Customize background colors to match product imagery or brand colors\n\n## Design Rationale\n\nThe basic variant is a proven classic used successfully across many online stores. The component uses a 1:1 square image ratio for visual consistency and supports themed styling to ensure brand coherence. Flag corner positioning is determined by the node variant to maintain visual harmony across different contexts.",
-  "keywords": ["category tile", "link tile", "navigation node"],
+  "keywords": [
+    "category tile",
+    "link tile",
+    "navigation node"
+  ],
   "shortDescription": "The CategoryNodeBasic component serves as the foundational building block for category promotion outside the main navigation. This is especially important on mobile where the main menu is hidden behind a hamburger. It uses a 1:1 square image ratio with customizable background colors. Flag corner positioning is determined by the node variant to maintain visual harmony. The see-more variant allows linking to supercategory or listing pages with either category IDs or custom URLs."
 }

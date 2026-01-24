@@ -1,12 +1,12 @@
 ---
 title: Scrollbar
-description: A scrollbar component that indicates slider progress and position, supporting both horizontal and vertical orientations with light and dark color modes.
+description: Visual progress indicator for sliders showing content visibility and scroll position with Swiper integration.
 jiraIssueId: LUI-39
 ---
 
-## Features
+## Overview
 
-- Available for Horizontal and Vertical
+Split into Atom (rendering) and Molecule (Swiper integration) components for reusability. Bar width calculated proportionally based on visible items versus total items. Uses CSS transforms for smooth, performant position updates. Emits onChange event for external scroll control.
 
 ## Usage
 
@@ -43,10 +43,10 @@ title: Scrollbar Vertical
 ::features
 ---
 items:
-  - "Horizontal and vertical orientations"
-  - "Light and dark color modes"
-  - "Progress indicator showing visible content portion"
-  - "Integration with Swiper for slider control"
+  - "Horizontal and vertical orientations with light and dark color modes"
+  - "Dynamic progress indicator proportional to visible content"
+  - "Swiper integration via dedicated SwiperScrollbar molecule component"
+  - "Accessible 24px minimum clickable touch target area"
 ---
 ::
 

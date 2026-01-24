@@ -1,6 +1,6 @@
 ---
 title: Pricing Table
-description: A comprehensive feature comparison table that helps customers compare subscription plans side-by-side with categorized features, sticky headers, and difference filtering.
+description: A feature comparison table for side-by-side plan comparison with sticky headers and differences filtering.
 jiraIssueId: LUI-5
 links:
   - label: Figma
@@ -8,6 +8,12 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4230-79346&t=N1ryeUXidyl6cq2O-4
     target: _blank
 ---
+
+## Overview
+
+Provides a detailed, structured comparison of all features across subscription plans. Present all plan features organized into logical categories with section headers and icons. Link feature names to detailed documentation or anchor points. Highlight premium values with rainbow text styling. CTA buttons in headers provide convenient subscription access from anywhere in the table.
+
+## Usage
 
 ::component-code
 ---
@@ -21,10 +27,10 @@ story-id: organisms-pricingtable--default
 ::features
 ---
 items:
-  - "Clear feature availability indicators with checkmarks and x-marks"
-  - "Sticky header with plan names and CTA buttons for easy subscription"
-  - "Toggle to show only differences between plans"
-  - "Mobile-responsive design with plan selector"
+  - "Clear feature availability indicators using checkmarks and x-marks"
+  - "Sticky header row with plan names and CTA buttons"
+  - "Toggle to show only feature differences between plans"
+  - "Categorized feature sections with icons and anchor links"
 ---
 ::
 

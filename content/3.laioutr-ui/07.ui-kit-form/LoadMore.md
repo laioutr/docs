@@ -1,8 +1,12 @@
 ---
 title: Load More
-description: A pagination component for product listing pages that combines lazy loading with a 'Load More' button and progress indicator.
+description: Pagination component combining infinite scroll with Load More button.
 jiraIssueId: LUI-70
 ---
+
+## Overview
+
+The LoadMore component implements a hybrid pagination strategy for product listing pages. Automatic lazy loading continues until reaching 80 products, then pauses for explicit user action via the Load More button. This prevents runaway data loading on large catalogs while maintaining smooth browsing. The progress indicator helps users understand their position within the product set, and the component gracefully hides itself when all products are displayed.
 
 ## Usage
 
@@ -18,9 +22,9 @@ story-id: ui-kit-loadmore--default
 ::features
 ---
 items:
-  - "Lazy loading with configurable batch sizes"
-  - "Progress bar showing loaded vs total products"
-  - "Back to top smooth scrolling"
+  - "Hybrid lazy loading with configurable batch sizes"
+  - "Visual progress bar showing loaded vs total count"
+  - "Smooth back-to-top scrolling functionality"
   - "Auto-hide when all products are loaded"
 ---
 ::

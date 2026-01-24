@@ -1,8 +1,14 @@
 ---
 title: Logo Slider
-description: A logo presentation Studio section for displaying brand logos as a wall grid or slider with customizable styling.
+description: Logo presentation section displaying brand logos as grid or slider.
 jiraIssueId: LUI-215
 ---
+
+## Overview
+
+The Logo Presentation section displays partner, brand, or certification logos in either a static grid or animated slider format. Logos can be arranged in one or two rows with configurable alignment. Each logo item supports a title, optional link, uploaded image, and individual background color override. The slider mode includes navigation controls and optional scrollbar. Commonly used to showcase partnerships, media mentions, certifications, or payment providers.
+
+## Usage
 
 :component-code{name="SectionLogoSlider" story-id="ui-blocks-logoslider--single-row-navigation-top"}
 
@@ -13,8 +19,8 @@ jiraIssueId: LUI-215
 items:
   - "Grid or slider display modes"
   - "Single or double row layouts"
-  - "Per-logo customization with title, link, and background override"
-  - "Multiple alignment and navigation position options"
+  - "Per-logo customization with background override"
+  - "Multiple alignment and navigation options"
 ---
 ::
 

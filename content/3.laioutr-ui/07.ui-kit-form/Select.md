@@ -1,13 +1,19 @@
 ---
 title: Select
-description: An advanced variant selection component for products with many options, using an off-canvas sheet to display variants grouped by color with thumbnails and pricing.
-jiraIssueId: LUI-88
+description: A dropdown select component for choosing a single option from a list.
+jiraIssueId: LUI-134
 links:
   - label: Figma
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-223391&t=wABQtnJ0GubOC0US-4
     target: _blank
 ---
+
+## Overview
+
+The Select component provides a dropdown interface for choosing a single option from a predefined list. It renders a trigger button that opens a floating options panel with keyboard navigation support. Built with proper ARIA semantics, it's suitable for form fields where users must select exactly one value from a known set of options, such as country selection, sorting preferences, or category filters.
+
+## Usage
 
 ::component-code
 ---
@@ -27,18 +33,6 @@ story-id: ui-kit-select--sort
   ]"
 />
 ```
-::
-
-## Features
-
-::features
----
-items:
-  - "Off-canvas sheet with grouped variant display"
-  - "Variant thumbnails with price, stock info, and savings badges"
-  - "Color swatch grouping with expandable sections"
-  - "Radio group selection with real-time product updates"
----
 ::
 
 ## API Reference

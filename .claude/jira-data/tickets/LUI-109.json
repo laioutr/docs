@@ -42,7 +42,7 @@
     ]
   },
   "implemented": false,
-  "documentationPath": "content/3.laioutr-ui/7.ui-app/store-navigation/SearchOverlayInput.md",
+  "documentationPath": "content/3.laioutr-ui/09.ui-app-navigation/SearchOverlayInput.md",
   "parentEpic": {
     "key": "LUI-108",
     "title": "Search"

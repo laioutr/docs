@@ -55,7 +55,7 @@
     ]
   },
   "implemented": true,
-  "documentationPath": "content/3.laioutr-ui/5.ui-kit-form/LoadMore.md",
+  "documentationPath": "content/3.laioutr-ui/07.ui-kit-form/LoadMore.md",
   "parentEpic": {
     "key": "LUI-68",
     "title": "Product Listing Page"
@@ -71,6 +71,10 @@
     "LAIOUTR-46"
   ],
   "longDescription": "## Purpose\n\nThe LoadMore component implements a hybrid pagination strategy for product listing pages, combining automatic lazy loading with manual load triggers. This approach balances performance optimization with user control, preventing excessive automatic loading while keeping the browsing experience fluid.\n\n## Use Cases\n\n- Display initial product batch (10-32 items) with automatic lazy loading of subsequent batches\n- Show a \"Load More\" button after 80 products to give users control over additional loading\n- Provide visual feedback through a progress bar indicating browsing progress\n- Enable smooth scroll-to-top navigation after loading many products\n\n## Design Rationale\n\nThe component uses a threshold-based loading pattern: automatic lazy loading continues until reaching 80 products, then pauses for explicit user action. This prevents runaway data loading on large catalogs while maintaining smooth browsing for typical category sizes. The progress indicator helps users understand their position within the full product set, and the component gracefully hides itself when all products are displayed.",
-  "keywords": ["infinite scroll", "pagination", "lazy loading"],
+  "keywords": [
+    "infinite scroll",
+    "pagination",
+    "lazy loading"
+  ],
   "shortDescription": "The LoadMore component implements a hybrid pagination strategy for product listing pages. Automatic lazy loading continues until reaching 80 products, then pauses for explicit user action via the Load More button. This prevents runaway data loading on large catalogs while maintaining smooth browsing. The progress indicator helps users understand their position within the product set, and the component gracefully hides itself when all products are displayed."
 }

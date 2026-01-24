@@ -1,6 +1,6 @@
 ---
 title: Personal Quote with Text and Image
-description: An eye-catching testimonial component featuring large profile pictures with quotes, person details, and company information, supporting both slider and single quote modes.
+description: A testimonial component showcasing customer experiences with large profile pictures, quote text, personal details, and company branding.
 jiraIssueId: LUI-24
 links:
   - label: Figma
@@ -8,6 +8,12 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=7368-32242&t=WmdxQg1pxxyigx8X-4
     target: _blank
 ---
+
+## Overview
+
+Enables website visitors to see authentic testimonials from satisfied customers, building trust and helping them make informed decisions. Particularly effective when visual content is available, as the design centers around prominent profile pictures. Can display multiple slides with navigation or individual stories in single quote mode. Works in multi-column layouts with automatic size adjustment. Features testimonials from various industries with optional company logos and job titles. Gracefully handles missing optional elements like logos.
+
+## Usage
 
 ::component-code
 ---
@@ -21,10 +27,10 @@ story-id: molecules-personaquote--default
 ::features
 ---
 items:
-  - "Three profile picture styles: speech bubble, round, and square"
-  - "Multiple background themes: light, dark, and bright with matching text colors"
+  - "Three profile picture styles: speech bubble, round, and square with responsive corner radius"
+  - "Multiple background themes: light, dark, and bright with coordinated colors"
   - "Animated slide transitions with number counter navigation"
-  - "Responsive layout that adjusts for single or multiple testimonials"
+  - "Responsive layout supporting both slider and single quote display"
 ---
 ::
 

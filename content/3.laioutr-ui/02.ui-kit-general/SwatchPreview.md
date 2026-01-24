@@ -1,8 +1,12 @@
 ---
 title: Swatch Preview
-description: A utility component for rendering swatch previews including single colors, multiple colors, gradients, or thumbnails for product variants.
+description: Utility component for rendering swatch previews including colors, gradients, and thumbnails.
 jiraIssueId: LUI-121
 ---
+
+## Overview
+
+SwatchPreview is a foundational atom component that renders visual representations of product variant attributes without any decorative styling. It handles multiple swatch types: single colors, multi-color combinations, CSS gradients rendered at a diagonal angle, and thumbnail images at 1:1 aspect ratio. The component intentionally omits borders and border-radius, delegating visual treatment to consuming parent components for maximum reusability across different UI contexts including buybox variant selectors, product cards, and filter interfaces.
 
 ## Usage
 
@@ -19,9 +23,10 @@ story-id: ui-kit-swatchpreview--swatch-colors
 ::features
 ---
 items:
-  - "Supports single color, multiple colors, gradient, and image thumbnail swatches"
-  - "Renders gradients at bottom-left to top-right angle"
-  - "1:1 aspect ratio for image swatches"
+  - "Single color and multi-color swatch rendering"
+  - "Gradient display at bottom-left to top-right angle"
+  - "Image thumbnails with 1:1 aspect ratio"
+  - "Flexible sizing controlled by parent CSS"
 ---
 ::
 

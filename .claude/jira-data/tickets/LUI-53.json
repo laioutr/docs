@@ -100,7 +100,7 @@
     ]
   },
   "implemented": false,
-  "documentationPath": "content/3.laioutr-ui/7.ui-app/product-previews/ProductCard.md",
+  "documentationPath": "content/3.laioutr-ui/11.ui-app-ecommerce/ProductCard.md",
   "parentEpic": {
     "key": "LUI-50",
     "title": "Product Tiles Basic"
@@ -116,6 +116,10 @@
     "LAIOUTR-39"
   ],
   "longDescription": "## Purpose\n\nThe ProductTile component serves as the primary building block for product listings, providing a consistent and flexible way to showcase products across category pages, search results, and promotional sliders.\n\n## Use Cases\n\n- Display products in grid layouts on category and search result pages\n- Present featured products in homepage sliders and carousels\n- Show sale items with original and discounted prices clearly indicated\n- Enable quick add-to-cart functionality directly from product listings\n- Support brand-focused merchandising with linked brand names\n- Accommodate products with multiple color variants via integrated swatches\n\n## Design Rationale\n\nThe component maintains consistent height regardless of content variations, ensuring visual alignment in grid layouts. Focus order follows accessibility best practices: image link, brand link (if present), title link, color swatches, then add-to-cart button. The tile emits events rather than handling cart logic internally, enabling flexible integration with various commerce backends. Internationalized price formatting uses the $money helper for proper locale handling.",
-  "keywords": ["product card", "product listing", "e-commerce tile"],
+  "keywords": [
+    "product card",
+    "product listing",
+    "e-commerce tile"
+  ],
   "shortDescription": "The ProductTile component serves as the primary building block for product listings across category pages, search results, and promotional sliders. It maintains consistent height regardless of content variations for grid alignment. Focus order follows accessibility best practices. The tile emits events rather than handling cart logic internally for flexible commerce backend integration. Internationalized price formatting uses the $money helper for proper locale handling."
 }

@@ -105,7 +105,7 @@
     ]
   },
   "implemented": true,
-  "documentationPath": "content/3.laioutr-ui/2.ui-kit-general/ColorSwatch.md",
+  "documentationPath": "content/3.laioutr-ui/02.ui-kit-general/ColorSwatch.md",
   "parentEpic": {
     "key": "LUI-50",
     "title": "Product Tiles Basic"
@@ -121,6 +121,10 @@
     "LAIOUTR-39"
   ],
   "longDescription": "## Purpose\n\nThe ColorSwatch component provides a compact visual representation of product color options, enabling customers to quickly browse available variants without leaving the product listing view.\n\n## Use Cases\n\n- Display single-color product variants as clickable swatches\n- Show multi-color or patterned variants using linear gradients\n- Indicate the currently selected color variant with an active state\n- Handle overflow gracefully when products have many color options (5+)\n- Support dark background contexts for varied page designs\n\n## Design Rationale\n\nThe component is implemented as a single HTML element for optimal performance and rendering efficiency. Using CSS linear-gradients enables multi-color display without additional markup. The maximum of 4 visible swatches with overflow indicator prevents visual clutter while still communicating variant availability. Interactive states including hover tooltips improve discoverability of color names.",
-  "keywords": ["color swatch", "variant selector", "product colors"],
+  "keywords": [
+    "color swatch",
+    "variant selector",
+    "product colors"
+  ],
   "shortDescription": "The ColorSwatch component provides compact visual representation of product color options, enabling customers to browse variants without leaving product listings. Implemented as a single HTML element for optimal performance, it uses CSS linear-gradients to display multi-color swatches. Maximum of 4 visible swatches prevents visual clutter while the '+n' overflow indicator communicates additional options. Interactive states including hover tooltips improve color name discoverability."
 }

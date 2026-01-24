@@ -1,6 +1,6 @@
 ---
 title: Mobile Menu
-description: A mobile off-canvas navigation menu displaying store categories as a compact grid, with support for hierarchical navigation and customizable content slots.
+description: Mobile off-canvas navigation with category grid and hierarchical menus.
 jiraIssueId: LUI-65
 links:
   - label: Figma
@@ -8,6 +8,12 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=2899-10340&t=mlUfKppRhGmTxkMG-4
     target: _blank
 ---
+
+## Overview
+
+The MegaMenuMobile component provides mobile shoppers with a touch-optimized, full-screen navigation experience. It presents the store's category structure in a compact grid format within an off-canvas sheet overlay. The component splits into three parts: MegaMenuMobile (wrapper with sheet and login), RootMenu (main category grid), and ChildMenu (subcategory view). Content slots accept CMS-managed content like CTA banners. Language and dark mode controls are relocated from the desktop top bar.
+
+## Usage
 
 ::component-code
 ---
@@ -21,10 +27,10 @@ story-id: ui-blocks-header--sticky&globals=viewport:xs
 ::features
 ---
 items:
-  - "Category grid layout with compact nodes"
+  - "Category grid layout using compact node components"
   - "Hierarchical navigation between root and child menus"
-  - "User login integration in sticky header"
-  - "Customizable content slots with CMS blocks"
+  - "User login button in sticky header"
+  - "Free content slots for CTA banners or additional nodes"
 ---
 ::
 

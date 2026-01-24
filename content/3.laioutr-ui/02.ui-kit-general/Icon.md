@@ -1,6 +1,6 @@
 ---
 title: Icon
-description: Enhanced icon system with size-optimized variants for better recognizability across different contexts, supporting small, medium, and large sizes.
+description: Size-optimized icon variants with automatic resolution ensuring recognizability at small, medium, and large sizes.
 jiraIssueId: LUI-41
 links:
   - label: Figma
@@ -9,10 +9,9 @@ links:
     target: _blank
 ---
 
-## Features
+## Overview
 
-- Icons for all E-Commerce related use cases freely to use available
-- Actions, Communication, Arrows, Media, Shopping, Logos, Misc and Essentials
+Addresses icon clarity issues when standard 24px icons are scaled down. Icon.vue resolves names by replacing icon set prefixes with extension folder paths and appending size suffixes. SVGs stored in packages/ui/src/runtime/assets/icons with -s, -m, -l suffixes. Backward compatible with existing icon usage when size prop is unset or medium.
 
 ## Usage
 
@@ -35,9 +34,10 @@ title: Icons
 ::features
 ---
 items:
-  - "Size-optimized icon variants for better visibility"
+  - "Custom-designed icon variants optimized for each display size"
   - "Three size options: small (16px), medium (20px), and large (32px)"
   - "Automatic size suffix resolution in Icon component"
+  - "Support for hugeicons and solar icon sets with extension folders"
 ---
 ::
 

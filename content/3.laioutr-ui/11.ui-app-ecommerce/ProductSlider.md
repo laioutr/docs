@@ -1,13 +1,17 @@
 ---
 title: Product Slider
-description: A promotional CMS block combining a CTA banner with a product slider to highlight categories or brands.
-jiraIssueId: LUI-57
+description: Practical product slider section for presenting collections with navigation and scrollbar options.
+jiraIssueId: LUI-200
 links:
   - label: Figma
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=12175-374053&t=kWl7opPn708GdN7H-4
     target: _blank
 ---
+
+## Overview
+
+The Product Slider Studio section presents product collections in a horizontally scrollable format. Navigation controls can be positioned at the top or bottom, with an optional scrollbar for additional browsing feedback. A content header area supports headings, sublines, and a single call-to-action button. Product tiles are fully configurable for the information displayed. The slider works well for cross-sells, related products, or category highlights throughout the store.
 
 ## Usage
 
@@ -28,9 +32,10 @@ story-id: organisms-productslider--default
 ::features
 ---
 items:
-  - "Side-by-side layout with CTA banner and product slider"
-  - "Responsive design: banner is 30% width on desktop, full width on mobile"
-  - "Customizable background colors and product tile display options"
+  - "Flexible navigation positioning (Top or Bottom)"
+  - "Content area with heading, subline, and button"
+  - "Comprehensive product tile customization"
+  - "Full width or boxed layout with spacing controls"
 ---
 ::
 

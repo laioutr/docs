@@ -1,8 +1,12 @@
 ---
 title: Review Section
-description: A product review section with rating summaries, sorting, filtering, and review management capabilities for customer feedback.
+description: Product review section with rating summaries, sorting, filtering, and review management.
 jiraIssueId: LUI-153
 ---
+
+## Overview
+
+The Review Section provides a comprehensive area for displaying and managing customer reviews on product detail pages. Users can browse reviews with sorting and filtering by star rating using interactive progress bar charts that double as filter buttons. The 'Write a Review' button triggers a submission modal. For merchants, the component supports moderation workflows including customer service responses and pre-publication approval to maintain review quality.
 
 ## Usage
 
@@ -19,8 +23,8 @@ story-id: organisms-reviewsection--default
 ---
 items:
   - "Multiple star style options (Accent, Primary, Yellow, Black)"
-  - "Sorting options (Newest, Oldest, Rating high to low, Rating low to high)"
-  - "Star rating filters (All, 5-1 stars) with clickable progress bars"
+  - "Sorting options (Newest, Oldest, Rating high/low)"
+  - "Star rating filters with clickable progress bars"
   - "Review modal and management with publishing approval"
 ---
 ::

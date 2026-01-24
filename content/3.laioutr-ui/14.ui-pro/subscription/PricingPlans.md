@@ -1,6 +1,6 @@
 ---
 title: Pricing Plans
-description: A responsive pricing grid component that displays subscription plan cards in a clear layout for comparing different tiers, with swiper carousel functionality on mobile devices.
+description: A responsive pricing grid arranging plan cards side-by-side on desktop with mobile swipe carousel.
 jiraIssueId: LUI-3
 links:
   - label: Figma
@@ -8,6 +8,12 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4085-62868&t=U5zoMMsDXxVv1RWo-4
     target: _blank
 ---
+
+## Overview
+
+Provides a responsive container for displaying multiple subscription plans in an easily comparable format. Display three or more pricing tiers in a horizontal grid on desktop for easy side-by-side comparison. On mobile, present cards as a swipeable slider with engaging coverflow animation effects. Synchronizes with billing cycle switches to update all cards simultaneously.
+
+## Usage
 
 ::component-code
 ---
@@ -22,10 +28,10 @@ story-id: molecules-pricing-pricinggrid--pricing-grid
 ::features
 ---
 items:
-  - "Display multiple pricing tiers with prices, billing periods, and key features"
-  - "Strikethrough pricing for monthly/annual billing comparison"
-  - "CTA buttons for each pricing plan"
-  - "Mobile swiper carousel with navigation bullets and coverflow effect"
+  - "Side-by-side grid layout for comparing multiple pricing tiers"
+  - "Mobile swipe carousel with coverflow animation effects"
+  - "Navigation bullets for slide indication and direct navigation"
+  - "Responsive breakpoint handling between grid and slider modes"
 ---
 ::
 

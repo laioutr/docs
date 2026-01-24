@@ -1,6 +1,6 @@
 ---
 title: Sheet
-description: A slide-in cart drawer for viewing and managing cart items, applying discounts, tracking free shipping progress, and proceeding to checkout.
+description: Slide-in cart drawer for managing items, discounts, and checkout without leaving the page.
 jiraIssueId: LUI-104
 links:
   - label: Figma
@@ -8,6 +8,10 @@ links:
     to: https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=271-42424&t=fmtTWu3hMKpEVBUe-4
     target: _blank
 ---
+
+## Overview
+
+The Cart Sheet provides shoppers a non-disruptive way to review and modify their cart contents through a slide-in overlay triggered by cart interactions. It consolidates essential cart management features including real-time quantity adjustments with optimistic updates, coupon code application via an expandable accordion, and a dynamic free shipping progress indicator. The component displays a complete cost breakdown with localized currency formatting and prominently shows accepted payment methods, enabling confident purchase decisions without navigating away from the current browsing context.
 
 ## Usage
 
@@ -36,8 +40,8 @@ links:
 ---
 items:
   - "Line item display with quantity selector and remove action"
-  - "Coupon code accordion with apply functionality"
   - "Free shipping progress bar with success state"
+  - "Coupon code accordion with apply functionality"
   - "Payment method logos and checkout button"
 ---
 ::

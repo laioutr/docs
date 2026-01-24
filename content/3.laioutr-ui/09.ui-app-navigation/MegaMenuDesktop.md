@@ -1,6 +1,6 @@
 ---
 title: Mega Menu Desktop
-description: A desktop mega menu component displaying second and third navigation levels in a flyout with masonry column layout for subcategories and content slots.
+description: Desktop mega menu flyout displaying second/third navigation levels in multi-column masonry layout with promotional content slots.
 jiraIssueId: LUI-66
 links:
   - label: Figma
@@ -8,6 +8,10 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13944-50374&t=4gWdGg1GDlnYog3D-4
     target: _blank
 ---
+
+## Overview
+
+Uses @yeger/vue-masonry-wall for efficient category distribution. Layout rules adapt based on column count: 4 columns allow 2 content tiles, 3 columns allow 1 or 3 tiles with masonry, and 2 columns allow 3 tiles. Category headers are clickable links, with main categories represented as See all links. Includes slot for promotional content on the right side with configurable row/column layout.
 
 ## Usage
 
@@ -23,10 +27,10 @@ story-id: organisms-megamenudesktop--four-columns-two-grid
 ::features
 ---
 items:
-  - "Multi-column masonry layout for categories (up to 5 columns)"
-  - "Content slots for banners or category nodes (up to 3)"
-  - "Smooth transitions for multilevel navigation"
-  - "Row or column content layout options"
+  - "Multi-column masonry layout supporting up to 5 category columns"
+  - "Promotional content slots (up to 3) with row or column layout options"
+  - "Smooth transitions for multilevel subcategory navigation"
+  - "Light and dark color mode support"
 ---
 ::
 

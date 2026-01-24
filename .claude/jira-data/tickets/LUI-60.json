@@ -51,7 +51,7 @@
     ]
   },
   "implemented": false,
-  "documentationPath": "content/3.laioutr-ui/7.ui-app/store-navigation/TopBar.md",
+  "documentationPath": "content/3.laioutr-ui/09.ui-app-navigation/TopBar.md",
   "parentEpic": {
     "key": "LUI-58",
     "title": "Shop Navigation"
@@ -91,6 +91,10 @@
     "LAIOUTR-43"
   ],
   "longDescription": "## Purpose\n\nThe TopBar component provides international online shoppers with quick access to essential site-wide controls positioned prominently above the main header. It enables seamless locale switching and theme preferences without disrupting the shopping experience.\n\n## Use Cases\n\n- **Locale Switching**: Users switch between supported languages and regions, with their selection persisted via cookies or local storage. Currency, language, and region-specific settings update accordingly.\n- **Dark Mode Preference**: Shoppers toggle between light and dark modes, with preferences saved for future visits.\n- **Quick Access Links**: Store operators configure up to 3 external links per locale (e.g., Help, Stores, Blog) for auxiliary navigation.\n\n## Design Rationale\n\nThe component is optional and can be disabled for single-locale stores or when controls are preferred in the footer. Two visual styles (default and black) accommodate different header designs. On mobile devices, these functions relocate to the off-canvas menu, keeping the mobile header compact. The component uses useI18n() for locale management and integrates with existing language switch and dark mode components.",
-  "keywords": ["top bar", "locale switcher", "dark mode toggle"],
+  "keywords": [
+    "top bar",
+    "locale switcher",
+    "dark mode toggle"
+  ],
   "shortDescription": "The TopBar component provides international shoppers with quick access to essential site-wide controls above the main header. It enables locale switching with currency and language updates, plus dark mode toggling with persistent preferences. Two visual styles (default and black) accommodate different header designs. On mobile devices, these functions relocate to the off-canvas menu for a compact mobile header. Optional for single-locale stores."
 }

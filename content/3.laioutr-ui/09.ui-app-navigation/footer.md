@@ -1,6 +1,6 @@
 ---
 title: Footer
-description: A simple footer component with responsive design that displays content in columns on desktop and accordion tabs on mobile devices. It supports contact information, icon buttons, and customizable menu sections.
+description: Responsive footer with desktop columns and mobile accordion tabs.
 jiraIssueId: LUI-221
 links:
   - label: Figma
@@ -8,6 +8,12 @@ links:
     to: https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=985-108133&t=lxa1EnPQ6WmLk1ee-4
     target: _blank
 ---
+
+## Overview
+
+The Footer section provides a fully-featured site footer that adapts between desktop column layout and mobile accordion for optimal space usage. It includes areas for logo, contact information (email, phone, address), and multiple menu sections. The bottom row accommodates social icon buttons, an email signup input, and copyright text. Menu items support different popover content than standard buttons. Column count and alignment are independently configurable for desktop views.
+
+## Usage
 
 :component-code{name="SectionFooter" story-id="ui-blocks-footer--four-columns"}
 
@@ -17,9 +23,9 @@ links:
 ---
 items:
   - "Responsive layout with desktop columns and mobile accordion"
-  - "Full width or boxed style options"
   - "Integrated contact information display (email, phone, address)"
-  - "Bottom row with icon buttons, email input, and copyright text"
+  - "Bottom row with icon buttons, email input, and copyright"
+  - "Configurable menu sections with title links"
 ---
 ::
 

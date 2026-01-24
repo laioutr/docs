@@ -19,7 +19,7 @@
     ]
   },
   "implemented": true,
-  "documentationPath": "content/3.laioutr-ui/2.ui-kit-general/SwatchPreview.md",
+  "documentationPath": "content/3.laioutr-ui/02.ui-kit-general/SwatchPreview.md",
   "parentEpic": {
     "key": "LUI-84",
     "title": "Product Detail Page"

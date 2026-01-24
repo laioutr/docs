@@ -90,7 +90,7 @@
     ]
   },
   "implemented": false,
-  "documentationPath": "content/3.laioutr-ui/7.ui-app/store-navigation/DesktopSideBySideMenu.md",
+  "documentationPath": "content/3.laioutr-ui/09.ui-app-navigation/DesktopSideBySideMenu.md",
   "parentEpic": {
     "key": "LUI-58",
     "title": "Shop Navigation"
