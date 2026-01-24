@@ -1,3 +1,0 @@
----
-title: Vercel Speed Insights
----

@@ -11,7 +11,7 @@ seo:
 Laioutr Documentation
 
 #description
-Laioutr is a Composable Frontend Management Platform in the Cloud that consists of several features to help you create performant, scalable, and customizable eCommerce storefronts. From our UI Library, Themes, Customer Facing Apps, our Frontend Builder and Hosting, we provide your business the tools to build the ideal headless commerce experience - the way it should be.
+Laioutr is a Composable Frontend Management Platform in the Cloud that consists of several features to help you create performant, scalable, and customizable eCommerce storefronts. From our UI Library, Themes, Customer Facing Apps, our Frontend Builder and Hosting, we provide your business the tools to build the ideal headless commerce experience — the way it should be.
 
 #links
   :::u-button
