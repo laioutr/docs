@@ -1,0 +1,48 @@
+{
+  "key": "LUI-222",
+  "title": "Studio / Sections / Container",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Banner Container |\n| --- | --- |\n| **Description** | A container that can hold one or more banners. |\n| **Options** | Style: Full width boxed Margin: None S M L Padding: None S M L Background Color: None Theme Presets Custom Columns: Mobile (amount) Desktop (amount) Alignement |\n| **Proposed Colors for Color Popove**r | Accent 9 Accent 3 Grey 3 Primary 9 Primary 3 Allways Black Allways white |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Proposed Colors for Color Popover",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/11.ui-app-ecommerce/CardsContainer.md",
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "sourceEpic": null,
+  "sourceIdeas": [],
+  "summary": "Container section for holding banners with responsive column layouts.",
+  "features": [
+    "Responsive column configuration (mobile and desktop)",
+    "Full width or boxed layout options",
+    "Customizable background color with theme presets",
+    "Configurable alignment and spacing"
+  ],
+  "keywords": ["banner container", "layout grid", "content wrapper"],
+  "shortDescription": "The Container section serves as a flexible wrapper for organizing banners and content blocks into responsive grid layouts. It allows independent column configuration for mobile and desktop breakpoints, enabling designs like single-column mobile with multi-column desktop. Background colors support theme presets or custom values for visual separation. Alignment controls position content within the container. Use this section when you need precise control over how multiple banners or blocks arrange across screen sizes."
+}

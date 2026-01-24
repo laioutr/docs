@@ -1,0 +1,36 @@
+{
+  "key": "LUI-81",
+  "title": "Sorting dropdown",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "If the user clicks on the \"Sort\" button, a dropdown menu opens with which he can influence the sorting of the products on the list.\n\nUses [**dropdown menu**](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=606-17197&t=reqgsA9rbH2D4nWh-4) **with indicator** \n\n* the indicator marks the active sorting option\n* only one option can be selected\n\nPlease look at component props in figma.\n\n## Techincal details\n\nby <custom data-type=\"mention\" data-id=\"id-0\">@bassem mohamed</custom> and <custom data-type=\"mention\" data-id=\"id-1\">@Sebastian Langer</custom> \n\nCreate a re-usable SelectDropdown component which acts like a <select> element but uses the dropdown component. E.g.\n\n```\n<script setup lang=\"ts\">\nconst items = ref([\n  {\n    label: 'Backlog',\n    value: 'backlog'\n  },\n  {\n    label: 'Todo',\n    value: 'todo'\n  },\n  {\n    label: 'In Progress',\n    value: 'in_progress'\n  },\n  {\n    label: 'Done',\n    value: 'done'\n  }\n])\nconst value = ref('backlog')\n</script>\n\n<template>\n  <LuiSelectDropdown v-model=\"value\" :items=\"items\" />\n</template>\n```\n\nCreate a story displaying the component.\n\nSee similar component from nuxt ui:\n\n<custom data-type=\"smartlink\" data-id=\"id-2\">https://ui.nuxt.com/components/select</custom> ",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=606-17197&t=reqgsA9rbH2D4nWh-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/02.ui-kit-general/DropdownMenu.md",
+  "parentEpic": {
+    "key": "LUI-74",
+    "title": "PLP - Filter & Sorting"
+  },
+  "summary": "Reusable select dropdown component for product sorting with custom dropdown UI and active selection indicator.",
+  "features": [
+    "Single selection with visual active indicator",
+    "v-model support for two-way binding",
+    "Dropdown menu with customizable option list",
+    "Keyboard navigation with arrow keys and Enter"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-60"
+  ],
+  "longDescription": "## Purpose\n\nThe Sorting Dropdown component enables users to organize product results on the listing page by selecting from available sorting options such as price, popularity, newest arrivals, or relevance. It provides a familiar select-like interaction pattern with enhanced visual styling.\n\n## Use Cases\n\n- Open sorting dropdown via the \"Sort\" button on the filter bar\n- Display available sorting options with clear labels\n- Indicate the currently active sorting option with a visual marker\n- Allow single selection that immediately updates the product order\n- Support keyboard-driven selection for accessibility\n\n## Design Rationale\n\nThe component wraps standard dropdown menu functionality in a select-like API, making it easy to integrate with form state management via v-model. The active indicator provides clear feedback about the current sort state. The design follows the established dropdown menu patterns while being purpose-built for the sorting use case on product listing pages.",
+  "shortDescription": "Acts like a native select element but uses the custom dropdown component for enhanced styling. Opens via the Sort button on filter bar. Only one option can be selected at a time with immediate product order update. Similar to Nuxt UI select component pattern. Uses LuiDropdownMenu internally.",
+  "keywords": [
+    "LuiSelectDropdown",
+    "sort menu",
+    "product ordering"
+  ]
+}

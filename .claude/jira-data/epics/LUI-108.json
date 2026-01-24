@@ -1,0 +1,19 @@
+{
+  "key": "LUI-108",
+  "title": "Search",
+  "issueType": "Epic",
+  "status": "Done",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "childTickets": [
+    "LUI-109",
+    "LUI-120"
+  ],
+  "created": "2025-06-24T10:23:36.666+0200",
+  "updated": "2025-08-27T15:36:51.887+0200",
+  "linkedIdeas": [
+    "LAIOUTR-61"
+  ],
+  "enrichedData": {}
+}

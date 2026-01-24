@@ -1,0 +1,60 @@
+{
+  "key": "LUI-218",
+  "title": "Studio / Sections / Image and Content",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Image and Content (**before:** Image Text) |\n| --- | --- |\n| **Description** | Combine large images or videos with any content. Of course responsive. |\n| **Media** | Image or Video: single or responsive sizing option |\n| **Style Options** | Style: Full width boxed Sectionn background color: None Theme Presets Custom Box background color: None Theme Presets Custom Proportions: 50/50 60/40 70/30 Content position: Left Right Content alignment: Left Center Right Margin: None S M L Section height: Iinput (Pixel)  |\n| **Proposed Colors for  section background color** | Accent 3 Accent 9 Grey 3 Grey 12 Primary 3 Primary 9 |\n| **Proposed Colors for  box background color** | White Accent 3 Grey 3 Primary 3 |\n\nWhen the user adds the section, it must not be empty. Instead, we use a placeholder image for mobile and desktop, and an empty message is displayed in the content area.\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=f467524d-f2a0-41b5-b07e-c39093570bd3&&collection=&height=256&occurrenceKey=null&width=656&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Media",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Style Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Proposed Colors for  section background color",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Proposed Colors for  box background color",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/10.ui-app-marketing/ContentWithImageAndText.md",
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "sourceEpic": null,
+  "sourceIdeas": [],
+  "summary": "Responsive section combining large images or videos with content in flexible proportions.",
+  "features": [
+    "Image or video media support with responsive sizing",
+    "Flexible proportions (50/50, 60/40, 70/30)",
+    "Content position (left/right) and alignment options",
+    "Separate section and box background color customization"
+  ],
+  "keywords": ["image text", "media content", "split layout"],
+  "shortDescription": "The Image and Content section creates visually engaging layouts by pairing large media with text or other content blocks. Media can be single images or videos with responsive sizing options for different breakpoints. The section offers three proportion ratios (50/50, 60/40, 70/30) with content positioned left or right of the media. Both the outer section and inner content box have independent background color controls. When added, placeholder content helps users visualize the layout before adding real assets."
+}

@@ -1,0 +1,184 @@
+{
+  "key": "LUI-104",
+  "title": "Create Cart Sheet",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "This component is initially based on the Shopify standard.\n\n## 🧑‍💼 User Story\n\n**As an online shopper**,  \nI want to view and manage my cart in an on-page overlay or side drawer (cart sheet)  \nSo that I can quickly:\n\n* see which items I've added (including variant, quantity, stock status)\n* apply discount codes\n* understand potential savings (discount, free-shipping threshold)\n* estimate shipping costs or tax\n* checkout securely using my preferred payment method  \n  without leaving the current page\n\n---\n\n## Product Requirements \n\n| Cart Sheet Entry & Appearance **Trigger** via clicking cart icon or \"Add to cart\" button. Slides in from side / bottom with visually clear backdrop. Responsive design  | [mobile dummy](https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=271-42424&t=fmtTWu3hMKpEVBUe-4) [desktop dummy](https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=271-42425&t=fmtTWu3hMKpEVBUe-4) |\n| --- | --- |\n| Cart Item  **Line item list** with: thumbnail, product title + variant details, unit price, subtotal. [mobile](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=466-308896&t=5foJt3MFeIhYmV77-4) / [desktop](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=520-225833&t=5foJt3MFeIhYmV77-4) **Quantity selector** (+/– or input) that updates cart in real time (with debounce loading states). **Remove item** control (trash icon or \"Remove\" link). **Quantity discount flag**   | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=bae34803-53f3-4594-a9bf-d57211670e01&&collection=&height=994&occurrenceKey=null&width=468&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| Discounts & Free‑Shipping Progress **Discount code field** with \"Apply\" button; show updated totals upon success or failure. [mobile](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=466-313581&t=5foJt3MFeIhYmV77-4) / [desktop](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=520-223983&t=5foJt3MFeIhYmV77-4) [**Free‑shipping progress bar**:](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=466-313684&t=5foJt3MFeIhYmV77-4) e.g. \"$15 away from free shipping\" -> dynamically updates with cart changes (customarily standard in latest release). with success state / message when free shipping limit is reached | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=771cc981-d431-4723-86d3-dea7f1b394e6&&collection=&height=413&occurrenceKey=null&width=476&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=94f8bf38-64d2-4b8a-b716-d8f39b061761&&collection=&height=182&occurrenceKey=null&width=449&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| Totals & Cost Breakdown Show **subtotal**, **total discounts**, estimated shipping, estimated tax, and final total. **Currency support** with localization to shopper's locale. [see dummies here](https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=261-61060) | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=e7ca242e-1246-4029-9030-04571db54b2b&&collection=&height=123&occurrenceKey=null&width=444&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| Checkout & Payment Options Prominent \"Proceed to checkout\" button linking to checkout flow (or one‑page checkout). Display **accepted payment methods** (Apple Pay, Google Pay, PayPal, credit cards) as logos, matching store setup  Ensure **secure checkout compliance**: SSL + PCI Level 1. | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=9d711395-e0da-4ca7-90bf-1e61e3ea0b50&&collection=&height=138&occurrenceKey=null&width=451&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| Performance & UX **Optimistic updates** for quantity and discount code actions, with loading spinner where needed. Fall back gracefully to server-rendered refresh  **Accessibility**: ARIA roles, proper focus management, keyboard navigation. |  |\n| Custom Fields & Scaling Ability to capture **cart attributes** (e.g. special instructions via `cart.attributes`)  Possibility to support metafields or custom cart messaging. |  |\n| . Checkout Sheet Compatibility (Mobile SDKs) Ensure compatibility with Shopify's **Checkout Sheet Kits** (React Native / Android), preserving branding, UI extensions, and payment flows  |  |\n\n### Acceptance criteria:\n\nbutton to open the cart with following criteria :\n\n* cart with free delivery inprogress\n* cart with free delivery completed \n* empty cart \n* cart with coupon added \n\n### **Technical Details:**\n\n_**organisms/Cart/CartListItem**_\n\n```\ninterface CartListItemProps {\n  productId: string;\n  href: string;\n  image: Media;\n  flags?: { text: string; variant: 'promo' | 'sale' | 'new' }[];\n  brand?: string;\n  brandHref?: string;\n  title: string;\n  subtitle?: string;\n  price: Money;\n  strikethroughPrice?: Money;\n  unitPrice?: Money;\n  measurementUnit?: string;\n  quantityPicker : QuantityPickerProps;\n  discounts? : DiscountFlagProps;\n} \n```\n\n* create new atom `DiscountFlag`\n* emit quantity value to the parent\n* use `LuiText` , `LuiQuantityPicker` , `LuiProductFlag` , `LuiMedia`\n\n‌\n\n_**molecule/CouponCodeInput**_\n\n```\ninterface CouponCodeInputProps {\n    modelValue?: string;\n}\n```\n\n* use `LuiInputGroup` , `LuiInput` , `LuiInputGroupButton` , LuiButton\n* use `const inputValue = defineModel<string>('modelValue');`\n* use `form` tag\n\n‌\n\n_**organism/CouponCodeAccordion**_\n\n```\ninterface CouponCodeAccordionProps {\n  CouponCode? : string\n}\n```\n\n* use `RxAccordionRoot` , `RxAccordionHeader` , `RxAccordionHeader` , `RxAccordionTrigger`, `RxAccordionContent` from Reka UI \n* use `LuiCouponCodeInput` , `LuiIcon`\n* add smooth transition when opening and closing the accordion\n\n‌\n\n_**molecule/FreeDeliveryProgress**_\n\n```\ninterface FreeDeliveryProgress {\n  totalPrice : number;\n  maxPrice : number;\n}\n```\n\n* if the total price equals the maxprice the user will have free delivery and a success message wil be displayed\n* create `ProgressBar` atom component \n* use `LuiText` , `LuiAmountBill` , `LuiProgressBar` , `LuiIcon`\n\n‌\n\n_**organism/Cart/CartSummaryBox**_\n\n```\ninterface CartSummaryBox {\n  subtotalPrice? : Money;\n  CouponCode? : string;\n  discount? : Money;\n  DeliveryPrice? : Money;\n  totalPrice? : Money;\n  isFreeDelivery : boolean\n}\n```\n\n* use `LuiText` , `LuiIcon` , `LuiDiscountFlag` , `LuiButton`\n* use emitter when removing the coupon code  \n\n‌\n\n_**organism/Cart/CartSheet**_\n\n```\ninterface CartSheetProps{\n  isOpen : boolean;\n  productsList : CartListItemProps[];\n  couponCode : string;\n  subtotalPrice? : Money;\n  discount? : Money;\n  DeliveryPrice? : Money;\n  totalPrice? : Money;\n  PaymentLogos : Media[];\n}\n```\n\n* integrate all the components together \n* all the logic of pricing will be added here \n* use `LuiSheet`\n\n_**organism/Cart/CartEmptyState**_",
+  "figmaLinks": [
+    "https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=271-42424&t=fmtTWu3hMKpEVBUe-4",
+    "https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=271-42425&t=fmtTWu3hMKpEVBUe-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=466-308896&t=5foJt3MFeIhYmV77-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=520-225833&t=5foJt3MFeIhYmV77-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=466-313581&t=5foJt3MFeIhYmV77-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=520-223983&t=5foJt3MFeIhYmV77-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=466-313684&t=5foJt3MFeIhYmV77-4",
+    "https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=261-61060"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "productId",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "image",
+        "type": "Media",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "flags",
+        "type": "{ text: string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "variant",
+        "type": "'promo' | 'sale' | 'new'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "modelValue",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "CouponCode",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "totalPrice",
+        "type": "number",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "maxPrice",
+        "type": "number",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "subtotalPrice",
+        "type": "Money",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "CouponCode",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "discount",
+        "type": "Money",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "DeliveryPrice",
+        "type": "Money",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "totalPrice",
+        "type": "Money",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "isFreeDelivery",
+        "type": "boolean",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "isOpen",
+        "type": "boolean",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "productsList",
+        "type": "CartListItemProps[]",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "couponCode",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "subtotalPrice",
+        "type": "Money",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "discount",
+        "type": "Money",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "DeliveryPrice",
+        "type": "Money",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "totalPrice",
+        "type": "Money",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "PaymentLogos",
+        "type": "Media[]",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/6.ui-kit-surfaces/Sheet.md",
+  "parentEpic": {
+    "key": "LUI-103",
+    "title": "Cart Sheet"
+  },
+  "summary": "Slide-in cart drawer for managing items, discounts, and checkout without leaving the page.",
+  "features": [
+    "Line item display with quantity selector and remove action",
+    "Free shipping progress bar with success state",
+    "Coupon code accordion with apply functionality",
+    "Payment method logos and checkout button"
+  ],
+  "keywords": [
+    "mini cart",
+    "side drawer",
+    "cart overlay"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-58"
+  ],
+  "shortDescription": "The Cart Sheet provides shoppers a non-disruptive way to review and modify their cart contents through a slide-in overlay triggered by cart interactions. It consolidates essential cart management features including real-time quantity adjustments with optimistic updates, coupon code application via an expandable accordion, and a dynamic free shipping progress indicator. The component displays a complete cost breakdown with localized currency formatting and prominently shows accepted payment methods, enabling confident purchase decisions without navigating away from the current browsing context."
+}

@@ -1,0 +1,88 @@
+{
+  "key": "LUI-65",
+  "title": "Mobile Mega Menu - Category Nodes Compact",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "For more information and connections, please view the Idea Ticket or Epic\n\n## **Requirements** \n\nby <custom data-type=\"mention\" data-id=\"id-0\">@Carolin Jütz</custom> \n\n| **Mobile mega menu - category nodes compact** |  |\n| --- | --- |\n| This mobile menu represents the first navigation level of the store as a category node compact grid. Please note the **annotations in Figma** off canvas sheet similar to the [laioutr mobile menu sheet](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=2899-10340&t=mlUfKppRhGmTxkMG-4), but without the glass effect sticky mobile menu header with [user login button](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13499-44572&t=mlUfKppRhGmTxkMG-4) [category node grid compact](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=10173-31111&t=mlUfKppRhGmTxkMG-4) free content slot with title can have any content that is available in the studio recommended content: category nodes grid compact or big CTA banner integrated or basic the sheet can have more than one content slot if it's not filled, display nothing functional links as [mobile menu list small](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=2834-41400&t=mlUfKppRhGmTxkMG-4) (which are on desktop in the top bar) language / locale selection and dark mode switch | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=06a9cc02-0924-4107-8291-560928aa8dfd&&collection=&height=875&occurrenceKey=null&width=415&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=ad433f92-cc0f-45e9-be5a-1347000a8f88&&collection=&height=923&occurrenceKey=null&width=415&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) <custom data-type=\"smartlink\" data-id=\"id-1\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13499-44571&t=mlUfKppRhGmTxkMG-4</custom>  |\n| for off canvas menu responsive behaviour, [see phone browser mockups](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13605-34532&t=mlUfKppRhGmTxkMG-4) sm to md canvas max-width: 400px please pay special attention to the changed padding for small (initial) screens | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=a089a3d6-9f4f-42e9-9992-b66a490b6bc5&&collection=&height=1224&occurrenceKey=null&width=1582&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n\n---\n\nby <custom data-type=\"mention\" data-id=\"id-2\">@bassem mohamed</custom> \n\n## Technical Requirements\n\nMake sure to read annotations in Figma!\n\n### organism/MegaMenuMobile/MegaMenuMobile.vue\n\n```\ninterface MegaMenuMobileProps {\n  isOpen: boolean;\n  isUserLoggedIn: boolean;\n}\n```\n\n### Notes : \n\n* this is the wrapper component, rendering the default sheet and the \"Login\" button.\n* It's responsible for rendering either the RootMenu or ChildMenu depending on the navigation state\n* use LuiButton , RootMenu , ChildMenu , Luisheet \n\n### organism/MegaMenuMobile/RootMenu.vue\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=d2f3da06-ffbe-452c-8998-17b3f9527730&&collection=&height=749&occurrenceKey=null&width=347&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n```\ninterface MobileMenuItem extends CategoryNodeCompactProps {\n  id: string;\n  subItems : mobileMenuItem[];\n}\n\ninterface RootMenuProps {\n  colorMode : 'on-light' | 'on-dark';\n  headline : string;\n  href? : string;\n  contentHeadline? : string;\n  navigationLinks? : mobileMenuListProps;\n  items : MobileMenuItem[];\n}\n```\n\n### **Notes:**\n\n* do not implement the header this is for content only\n* add content slot below category nodes\n* check Caro's guidelines on figma\n* use `LuiText` , `LuiIcon` , `LuiMobileMenuitem` , `LuiInpageNavigationCompactGrid` , `LuiLanguageSwitcher` , `LuiDarkModeSwitch`, `LuiMobileMenuList`\n\n### organism/MegaMenuMobile/ChildMenu.vue\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=edfd73ea-dea3-489d-b9a2-e386c054599b&&collection=&height=873&occurrenceKey=null&width=343&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n* Add content slot for below the category nodes\n\n### Storybook stories\n\nAdd a storybook-story similar [to this one](https://storybook.laioutr.cloud/?path=/story/molecules-sheet--default&globals=viewport:s). Clicking a button opens the mobile menu. Clicking a category-node in the RootMenu changes the content to ChildMenu.",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=2899-10340&t=mlUfKppRhGmTxkMG-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13499-44572&t=mlUfKppRhGmTxkMG-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=2834-41400&t=mlUfKppRhGmTxkMG-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13499-44571&t=mlUfKppRhGmTxkMG-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13605-34532&t=mlUfKppRhGmTxkMG-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "isOpen",
+        "type": "boolean",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "isUserLoggedIn",
+        "type": "boolean",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "colorMode",
+        "type": "'on-light' | 'on-dark'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "headline",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "contentHeadline",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "navigationLinks",
+        "type": "mobileMenuListProps",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "items",
+        "type": "MobileMenuItem[]",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/7.ui-app/store-navigation/MobileMenu.md",
+  "parentEpic": {
+    "key": "LUI-58",
+    "title": "Shop Navigation"
+  },
+  "summary": "Mobile off-canvas navigation with category grid and hierarchical menus.",
+  "features": [
+    "Category grid layout using compact node components",
+    "Hierarchical navigation between root and child menus",
+    "User login button in sticky header",
+    "Free content slots for CTA banners or additional nodes"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-43"
+  ],
+  "longDescription": "## Purpose\n\nThe MegaMenuMobile component provides mobile shoppers with a touch-optimized, full-screen navigation experience. It presents the store's category structure in a visually scannable compact grid format within an off-canvas sheet overlay.\n\n## Use Cases\n\n- **Category Browsing**: Users tap category nodes in a compact grid to explore the first navigation level. Selecting a category transitions to a child menu showing subcategories.\n- **Account Access**: A sticky header with login button provides quick access to user account functionality relocated from the desktop header.\n- **Promotional Content**: Free content slots accept CMS-managed content like CTA banners or additional category grids, enabling marketing placement within the menu.\n- **Site Preferences**: Language/locale switching and dark mode toggle (moved from desktop top bar) are accessible within the mobile menu.\n\n## Design Rationale\n\nThe component splits into three sub-components: MegaMenuMobile (wrapper with sheet and login), RootMenu (main category grid), and ChildMenu (subcategory view). The off-canvas sheet uses a max-width of 400px with responsive padding for smaller screens. Content slots remain empty when unfilled to avoid visual clutter.",
+  "keywords": ["mobile menu", "off-canvas navigation", "hamburger menu"],
+  "shortDescription": "The MegaMenuMobile component provides mobile shoppers with a touch-optimized, full-screen navigation experience. It presents the store's category structure in a compact grid format within an off-canvas sheet overlay. The component splits into three parts: MegaMenuMobile (wrapper with sheet and login), RootMenu (main category grid), and ChildMenu (subcategory view). Content slots accept CMS-managed content like CTA banners. Language and dark mode controls are relocated from the desktop top bar."
+}

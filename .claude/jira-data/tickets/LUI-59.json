@@ -1,0 +1,58 @@
+{
+  "key": "LUI-59",
+  "title": "Searchbar",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\n**As** a user shopping in an online store,  \n**I want** to quickly search for products using a search bar in the site's main navigation,  \n**so that** I can easily find what I'm looking for without needing to browse through categories manually.\n\n‌\n\n---\n\nFor more information and context, please read the Idea Ticket or Epic\n\n| Prominently placed, auto-suggests products and categories. Responsive behavior for mobile and desktop. Themed componente, [view examples here](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13084-116873&t=6xBvZNXlqO6bv1Wx-4) |    |\n| --- | --- |\n\n## There is no design for an active search yet, as this also depends on the integrated search provider.\n\n### **Acceptance Criteria:**\n\n **by** <custom data-type=\"mention\" data-id=\"id-1\">@Carolin Jütz</custom> \n\n1. **Accessibility**\n\n    * The search bar is visible and easily accessible on all screen sizes (desktop, tablet, mobile).\n    * It can be accessed via keyboard navigation and supports screen readers.\n    * Note that there is no difference between the input being focused and it being active. The figma-designs are not correct in that regard.\n    \n2. **Autocomplete & Suggestions**\n\n    * As I type, the search bar provides real-time suggestions for:\n    \n        * Product names\n        * Categories\n        * Brands\n        \n    * Suggestions should be localized based on selected language/locale.\n    \n3. **Search Results**\n\n    * Pressing \"Enter\" or clicking a search suggestion leads to a results page with filters and sorting options.\n    * If no results are found, display a helpful message and alternative suggestions.\n    \n4. **Localization**\n\n    * The search understands and responds to queries in the selected language/locale.\n    * Units, currency, and spellings adapt based on region.\n    \n5. **Performance**\n\n    * Results and suggestions load in under 300ms for a smooth user experience.\n    * Mobile-optimized behavior: collapsible or full-screen search UI on small devices.\n    \n6. **Clear Button**\n\n    1. Clicking the clear-button on the right deletes the whole input-text\n    2. The clear-button is only visible if:\n    \n        1. The input is focused\n        2. The input has a value\n        \n    3. If the clear-button is visible but the input has no value, the clear-button is disabled\n    \n\n---\n\n### Technical Specifiaction:\n\n**by** <custom data-type=\"mention\" data-id=\"id-2\">@Sebastian Langer</custom> \n\nIn this ticket, please add a new prop for the Input component:\n\n* variant: `subtle | outline`, defaults to outline\n\nOutline is the regularand currently implemented style (see [https://storybook.laioutr.cloud/?path=/story/molecules-input--text-input](https://storybook.laioutr.cloud/?path=/story/molecules-input--text-input)) Subtle is a new style for the input-box, which changes.\n\nCreate a new storybook story for this variant\n\nThen create a new component:\n\n**molecule/SearchInput**\n\nSimilar to PasswordInput this component is a wrapper around InputGroup and Input containing the correct icons and button-logic as seen in figma and described in this ticket.\n\nThis component does not yet contain any dropdown for search-results or logic for submission.\n\nCreate a storybook story for this component.\n\n<custom data-type=\"mention\" data-id=\"id-3\">@Moatasem Shaltout</custom> add a new prop `disabled` to the InputGroupButton",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13084-116873&t=6xBvZNXlqO6bv1Wx-4"
+  ],
+  "userStory": "As a a user shopping in an online store, I want to quickly search for products using a search bar in the site, so that I can easily find what I",
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Units",
+        "type": null,
+        "default": null,
+        "description": "currency, and spellings adapt based on region."
+      },
+      {
+        "name": "variant",
+        "type": null,
+        "default": null,
+        "description": "`subtle | outline`, defaults to outline"
+      },
+      {
+        "name": "box",
+        "type": null,
+        "default": null,
+        "description": "which changes."
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/07.ui-kit-form/InputSearch.md",
+  "parentEpic": {
+    "key": "LUI-58",
+    "title": "Shop Navigation"
+  },
+  "summary": "A search input component for site navigation enabling real-time product discovery with auto-suggestions across all devices.",
+  "features": [
+    "Real-time autocomplete suggestions with localization support",
+    "Accessible via keyboard navigation and screen readers",
+    "Subtle and outline style variants for flexible theming",
+    "Clear button with contextual visibility and disabled state"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-43"
+  ],
+  "longDescription": "## Purpose\n\nThe SearchInput component provides international online shoppers with a fast, accessible search interface prominently placed in the site's main navigation. It enables users to quickly find products without manually browsing category hierarchies.\n\n## Use Cases\n\n- **Product Discovery**: Users type queries and receive real-time suggestions for products, categories, and brands, all localized to their selected language and region.\n- **Mobile Shopping**: On smaller devices, the search adapts with collapsible or full-screen behavior for optimal touch interaction.\n- **Keyboard Navigation**: Power users can navigate suggestions and submit searches entirely via keyboard, with full screen reader support.\n\n## Design Rationale\n\nThe component wraps InputGroup and Input with pre-configured search icon and clear button logic. Two visual variants (subtle and outline) allow integration into different header designs. The 300ms performance target ensures suggestions feel instantaneous, supporting the seamless browsing experience central to the shop navigation system.",
+  "keywords": [
+    "autocomplete",
+    "typeahead",
+    "header search"
+  ],
+  "shortDescription": "Provides international online shoppers with a fast, accessible search interface prominently placed in the site's main navigation. Users type queries and receive real-time suggestions for products, categories, and brands localized to their selected language and region. On mobile, the search adapts with collapsible or full-screen behavior for optimal touch interaction. Wraps InputGroup and Input with pre-configured search icon and clear button logic for seamless integration into header designs."
+}

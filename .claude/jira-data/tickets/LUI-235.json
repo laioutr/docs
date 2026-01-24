@@ -1,0 +1,23 @@
+{
+  "key": "LUI-235",
+  "title": "Studio / Blocks / Buy Box / Variant Selection",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "Please note the annotations in Figma\n\nmore examples, dummy and design in the <custom data-type=\"smartlink\" data-id=\"id-0\">https://laioutr.atlassian.net/browse/LUI-167</custom> Jira Ticket",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Variant selection block for Buy Box enabling product option choices.",
+  "features": [],
+  "keywords": [
+    "variant selector",
+    "product options",
+    "buy box"
+  ],
+  "shortDescription": "The Variant Selection block provides the interface for customers to choose product variants within the Buy Box. It handles options like size, color, material, or any custom attributes configured for the product. Design specifications and interaction patterns are detailed in the linked LUI-167 ticket covering the configurator implementation. This block integrates with the product data source to display available variants and their availability status."
+}

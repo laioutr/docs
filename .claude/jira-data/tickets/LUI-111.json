@@ -1,0 +1,34 @@
+{
+  "key": "LUI-111",
+  "title": "Global Promotion Banner",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-110",
+    "title": "Promotion Banner"
+  },
+  "summary": "Site-wide promotion banner for displaying offers with one-click coupon activation and clipboard copy functionality.",
+  "features": [
+    "One-click coupon application to cart with success confirmation",
+    "Copy coupon code to clipboard as alternative activation",
+    "Scheduled promotion display with start and end dates",
+    "Analytics hooks for tracking impressions, clicks, and activations"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-42"
+  ],
+  "longDescription": "## Purpose\n\nThe Global Promotion Banner component enables shoppers to easily discover and apply promotional coupons directly from a prominent site-wide banner, eliminating friction in the discount discovery and activation process.\n\n## Use Cases\n\n- Display a promotional banner only when an active coupon exists for the current context\n- Show promotional details including icon, discount percentage, and marketing message\n- Allow shoppers to apply coupons to their cart with a single click and receive confirmation\n- Provide clipboard copy functionality for shoppers who prefer manual code entry\n- Schedule promotions to automatically appear and disappear based on campaign dates\n- Customize messaging with full localization support for international storefronts\n- Track promotional effectiveness through analytics event hooks\n\n## Design Rationale\n\nThe component prioritizes conversion by reducing the steps required to apply discounts. Automatic theme adaptation ensures visual consistency across different store designs, while A/B testing hooks enable data-driven optimization of promotional strategies.",
+  "shortDescription": "Enables shoppers to discover and apply promotional coupons directly from a prominent banner. Displays only when an active coupon exists for the current context. Shows promotional icon, discount percentage, and customizable marketing message with localization support. Features automatic theme color adaptation for visual consistency. Supports A/B testing configuration for data-driven optimization of promotional strategies.",
+  "keywords": [
+    "coupon banner",
+    "promo code",
+    "conversion optimization"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "key": "LUI-131",
+  "title": "Listbox",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "A listbox component for selecting options from a scrollable list.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The Listbox component presents options in a scrollable list format with full keyboard navigation support. Unlike dropdown selects, it remains visible and supports both single and multiple selection modes. Built with proper ARIA listbox semantics, it's suitable for filter interfaces, settings panels, or any context where users need to see and select from a persistent list of options."
+}

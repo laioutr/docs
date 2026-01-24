@@ -1,0 +1,66 @@
+{
+  "key": "LUI-109",
+  "title": "Search Overlay",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "### <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\n**As a** shopper on a Shopify store, **I want** to easily find products using a search bar that is visually clear, responsive, and provides relevant results, **so that** I can quickly locate items without browsing through multiple pages.\n\n---\n\n| **Requirement** | **Description** |  | **Links** |\n| --- | --- | --- | --- |\n| Search Input Field / search bar | A prominent search bar in the header, available on all pages. | <custom data-type=\"emoji\" data-id=\"id-1\">:check_mark:</custom>  | <custom data-type=\"smartlink\" data-id=\"id-2\">https://laioutr.atlassian.net/browse/LUI-59?atlOrigin=eyJpIjoiOWI0ZWU3YTY2MDcyNGJmOWI2MTAzZDdiYTI5NjlkOWYiLCJwIjoiaiJ9</custom>  |\n| Submit Action | Hitting \"Enter\" should submit the search querry → results are displayed on [search results page](https://laioutr.atlassian.net/browse/LUI-120?atlOrigin=eyJpIjoiODY4MGQ4NmFhMzkzNDhmOGIzOTk0MjNiZjBmNDg1ZGIiLCJwIjoiaiJ9) |   | <custom data-type=\"smartlink\" data-id=\"id-3\">https://laioutr.atlassian.net/browse/LUI-120?atlOrigin=eyJpIjoiODY4MGQ4NmFhMzkzNDhmOGIzOTk0MjNiZjBmNDg1ZGIiLCJwIjoiaiJ9</custom>  |\n| Autofocus | On click/tap, search input should autofocus for immediate typing. |  |  |\n| Mobile Responsiveness | On mobile, the search should expand into full-width |  |  |\n| Clear Button | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=bf8be3a8-840a-459d-a3b2-432a8847c6b7&&collection=&height=33&occurrenceKey=null&width=38&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  inside the search field to clear the search query. | <custom data-type=\"emoji\" data-id=\"id-4\">:check_mark:</custom>  | <custom data-type=\"smartlink\" data-id=\"id-5\">https://laioutr.atlassian.net/browse/LUI-59?atlOrigin=eyJpIjoiOWI0ZWU3YTY2MDcyNGJmOWI2MTAzZDdiYTI5NjlkOWYiLCJwIjoiaiJ9</custom> |\n| Animations  | Smooth open/close animation for mobile  and desktop overlay  |  | [dummy mobile](https://www.figma.com/proto/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=641-133307&p=f&viewport=410%2C309%2C0.25&t=AlJlxEZtYt22EMFY-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=641%3A138550&show-proto-sidebar=1) [dummy desktop](https://www.figma.com/proto/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=641-133307&p=f&viewport=410%2C309%2C0.25&t=AlJlxEZtYt22EMFY-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=641%3A138700&show-proto-sidebar=1) |\n| Empty state | Display friendly message (s) |  | [mobile](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=19748-28630&t=GpJWuQwltmceUlSh-4) [desktop](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=19777-1140&t=GpJWuQwltmceUlSh-4) |\n| Search suggestions | for Ambiendo MVP → via Google Retail API |  |  |\n| Performance | Instant response on input; no noticeable delay on interaction. |  |  |\n| Accessibility | Follows WCAG 2.1; includes ARIA labels, keyboard navigation support. |  |  |\n\nCreate a storybook story with a small fake search. Pass the following array-items to the suggestion-prop only if their text contains the current search-value:\n\n```\nconst searchSuggestions: SearchSuggestion[] = [\n  { text: \"pad kissenhülle\", href: \"/\" },\n  { text: \"apelt kissenhüllen\", href: \"/\" },\n  { text: \"kissenhülle 50x50\", href: \"/\" },\n  { text: \"kissenhülle 40x40\", href: \"/\" },\n  { text: \"joop kissenhülle\", href: \"/\" },\n  { text: \"pad kissenhülle 50x50\", href: \"/\" },\n  { text: \"pad kissenhülle 30x50\", href: \"/\" },\n  { text: \"kissenhülle\", href: \"/\" },\n  { text: \"bettwäsche baumwolle\", href: \"/\" },\n  { text: \"gardinen blickdicht\", href: \"/\" },\n  { text: \"tischdecke rund\", href: \"/\" },\n  { text: \"handtücher set\", href: \"/\" },\n  { text: \"wohnzimmer teppich\", href: \"/\" },\n  { text: \"badvorleger grau\", href: \"/\" },\n  { text: \"sofakissen 45x45\", href: \"/\" },\n  { text: \"deckenleuchte led\", href: \"/\" },\n  { text: \"vorhänge lang\", href: \"/\" },\n  { text: \"kuscheldecke beige\", href: \"/\" },\n  { text: \"tagesdecke 220x240\", href: \"/\" },\n  { text: \"bettlaken jersey\", href: \"/\" },\n  { text: \"wandspiegel rund\", href: \"/\" },\n  { text: \"vase keramik weiß\", href: \"/\" },\n  { text: \"beistelltisch holz\", href: \"/\" },\n  { text: \"regal metall\", href: \"/\" },\n  { text: \"geschirrtücher set\", href: \"/\" },\n  { text: \"duftkerzen lavendel\", href: \"/\" },\n  { text: \"körbe aus seegras\", href: \"/\" },\n  { text: \"bilderrahmen schwarz\", href: \"/\" },\n  { text: \"duschvorhang weiß\", href: \"/\" },\n  { text: \"hängelampe esszimmer\", href: \"/\" },\n  { text: \"bettgestell 180x200\", href: \"/\" },\n  { text: \"esstisch ausziehbar\", href: \"/\" },\n  { text: \"flanell bettwäsche\", href: \"/\" },\n  { text: \"sofa 3-sitzer\", href: \"/\" },\n  { text: \"fernsehschrank holz\", href: \"/\" },\n  { text: \"küchenläufer modern\", href: \"/\" },\n  { text: \"kissenbezug samt\", href: \"/\" },\n  { text: \"schreibtisch weiß\", href: \"/\" },\n  { text: \"nachttisch mit schublade\", href: \"/\" },\n  { text: \"kerzenhalter gold\", href: \"/\" },\n  { text: \"badematte set\", href: \"/\" },\n  { text: \"pflanzenständer holz\", href: \"/\" },\n  { text: \"hängesessel indoor\", href: \"/\" },\n  { text: \"futon matratze\", href: \"/\" },\n  { text: \"rollo blickdicht\", href: \"/\" },\n  { text: \"garderobe wandmontage\", href: \"/\" },\n  { text: \"deckenventilator mit licht\", href: \"/\" },\n  { text: \"balkonmöbel set\", href: \"/\" },\n  { text: \"sitzbank flur\", href: \"/\" },\n  { text: \"kaminholzkorb\", href: \"/\" },\n  { text: \"raumduft diffuser\", href: \"/\" },\n  { text: \"küchenhandtücher baumwolle\", href: \"/\" },\n  { text: \"abfalleimer küche\", href: \"/\" },\n  { text: \"wanduhr modern\", href: \"/\" },\n  { text: \"servierwagen holz\", href: \"/\" },\n  { text: \"hängeregal küche\", href: \"/\" },\n  { text: \"kleiderständer metall\", href: \"/\" },\n  { text: \"trinkgläser set\", href: \"/\" }\n];\n```\n\n### Technical details\n\n**molecule/SearchOverlayInput/SearchOverlayInputSuggestion**\n\n```\ninterface SearchSuggestion {\n  text: string; // contains the text to be displayed\n  href: string; // href-attr for <a> \n}  \n\ninterface SearchOverlayInputSuggestionProps {\n  match: string; // sub-string of \"text\"-prop. \n}\n```\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=84d1860a-eea8-4b0b-81ee-903dd1c1bc9b&&collection=&height=134&occurrenceKey=null&width=408&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\nPrint the substring of \"text\" that matches \"match\" in bold. E.g. text is \"pad kissenhülle 30x50\" and \"match\" is \"kissenhü\", print \"pad <b>kissenhü</b>lle 30x50\"\n\n**molecule/SearchOverlayInput/SearchOverlayInput**\n\n```\ninterface SearchOverlayInputProps {\n  suggestions: SearchSuggestion[];\n}\n```\n\nUse reka Combobox <custom data-type=\"smartlink\" data-id=\"id-6\">https://reka-ui.com/docs/components/combobox</custom>. On mobile, set [ComboboxContent.position](https://reka-ui.com/docs/components/combobox#content) to \"inline\", on desktop to \"popper\"\n\nThe data is loaded externally, not by the SearchOverlayInput itself.",
+  "figmaLinks": [
+    "https://www.figma.com/proto/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=641-133307&p=f&viewport=410%2C309%2C0.25&t=AlJlxEZtYt22EMFY-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=641%3A138550&show-proto-sidebar=1",
+    "https://www.figma.com/proto/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=641-133307&p=f&viewport=410%2C309%2C0.25&t=AlJlxEZtYt22EMFY-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=641%3A138700&show-proto-sidebar=1",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=19748-28630&t=GpJWuQwltmceUlSh-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=19777-1140&t=GpJWuQwltmceUlSh-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "text",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "match",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "suggestions",
+        "type": "SearchSuggestion[]",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/7.ui-app/store-navigation/SearchOverlayInput.md",
+  "parentEpic": {
+    "key": "LUI-108",
+    "title": "Search"
+  },
+  "summary": "Responsive search overlay with real-time autocomplete suggestions and smooth animations.",
+  "features": [
+    "Real-time autocomplete suggestions with match highlighting",
+    "Smooth open/close animations for mobile and desktop",
+    "Full-width expansion on mobile devices",
+    "WCAG 2.1 compliant with keyboard navigation"
+  ],
+  "keywords": [
+    "typeahead",
+    "instant search",
+    "combobox"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-61"
+  ],
+  "shortDescription": "The Search Overlay Input enables rapid product discovery through a responsive autocomplete interface available from the site header. Built on Reka UI's Combobox primitive, it adapts its suggestion display between inline positioning on mobile and popper positioning on desktop viewports. Matching text within suggestions is highlighted in bold to help users quickly identify relevant results. The component accepts externally-loaded suggestion data, enabling integration with various search backends including Google Retail API, while maintaining instant responsiveness through client-side filtering."
+}

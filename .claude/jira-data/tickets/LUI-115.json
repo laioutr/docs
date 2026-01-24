@@ -1,0 +1,95 @@
+{
+  "key": "LUI-115",
+  "title": "Blog Overview Page",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "### <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User story\n\n**As** an online store visitor, **I want** to view a neatly organized overview of all blog posts, **so that** I can quickly browse through content, discover topics of interest, and engage more with the brand.\n\n---\n\n| **Page Layout and Structure** Has H1 title and an optional subline The blog overview page must display a grid or list of blog posts. Each blog post preview should include: Featured image (ratio can be chosen by the user and is determined by the blog post featured image) Blog post title Excerpt (summary or first \\~100 words) Link to full blog post (`Read More`) There must be the option to display a featured post above the grid Layout options: Grid layout (3 columns) for desktops Stacked layout for mobile viewports (responsive design) content slot after pagination | [basic template](https://www.figma.com/design/iOpGWO38HkhnTYkEeEq8Oz/Laioutr-Basic?node-id=44-112670&t=bEXX3iWukUFWihvM-4) [AMBIENDO page layout](https://www.figma.com/design/gDN7wlDFp5mwXQfRDhotzR/Ambiendo---sunny?node-id=106-21835&t=CXICWc7vpUCFE48F-4)    |\n| --- | --- |\n| **Pagination or Infinite Scroll** Support for: Pagination  **or** Infinite scroll (load more posts on scroll) | <custom data-type=\"smartlink\" data-id=\"id-1\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=20068-1706</custom>  ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=976d259a-63f6-4015-812e-345a893d3afd&&collection=&height=90&occurrenceKey=null&width=170&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **SEO & Accessibility** Use semantic HTML (`<article>`, `<h2>`, `<time>`, etc.) for each post preview. Page should be optimized with appropriate meta tags, structured data for blog posts. Alt text for all featured images. Use ARIA labels for navigation and filter elements. |  |\n| **CMS Integration** Blog posts should be dynamically pulled from Shopify's built-in blog engine. Support for multiple blogs (Shopify supports more than one blog per store). Admin should be able to assign featured images, tags, excerpts via the Shopify admin. |  |\n\n### **Acceptance Criteria:**\n\n* example like figma with CMS image block and pagination\n* example like figma with CMS image block and infinite scroll \n\n### **Technical Details:**\n\n_**molecules/PageHeader**_\n\n```\ninterface PageHeaderProps {\n  title : string;\n  subline? : string;\n}\n```\n\n* use `Text` component\n\n_**pages/BlogOverviewPage**_\n\n```\ninterface SearchResultsPageProps{\n  header : ShopHeaderProps;\n  breadcrumbs : BreadcrumbsProps;\n  pageHeader : pageHeaderProps\n  footer : footerProps;\n  newsLetterRegisteration: NewsLetterRegisterationProps\n  featuredPost? : SectionCmsImageTextProps;\n  pagination : {\n    currentIndex;\n    total;\n  }\n  blogs: CardProps;\n}\n```\n\n* use ecommerce-container \n* use `useScroll` from vue use to handle `infiniteScroll`\n* seperate the pagination from swiper into a molecule with event handlers with next and prev so you can use in both here and with swiper it will be implemented in `LightBoxModal` ticket \n* create wrapper component for the paginations arrow  \n* use `ShopHeader` , `Breadcrumb` , `PageHeader` , `CmsImageText` , `Cards` , `PaginationArrows` , `Footer` , `Newsletterregisteration`\n\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/iOpGWO38HkhnTYkEeEq8Oz/Laioutr-Basic?node-id=44-112670&t=bEXX3iWukUFWihvM-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=20068-1706"
+  ],
+  "userStory": "As a an online store visitor, I want to view a neatly organized overview of all blog posts,, so that I can quickly browse through content, discover topics of interest, and engage more with the brand",
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "subline",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "header",
+        "type": "ShopHeaderProps",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "breadcrumbs",
+        "type": "BreadcrumbsProps",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "pageHeader",
+        "type": "pageHeaderProps",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "footer",
+        "type": "footerProps",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "newsLetterRegisteration",
+        "type": "NewsLetterRegisterationProps",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "featuredPost",
+        "type": "SectionCmsImageTextProps",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "pagination",
+        "type": "{",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-113",
+    "title": "Page templates"
+  },
+  "summary": "Blog overview page template for browsing posts with responsive grid layout and pagination or infinite scroll.",
+  "features": [
+    "Responsive grid layout with 3 columns on desktop and stacked on mobile",
+    "Optional featured post section displayed above the main grid",
+    "Configurable pagination or infinite scroll navigation",
+    "Dynamic integration with Shopify blog engine supporting multiple blogs"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-63"
+  ],
+  "longDescription": "## Purpose\n\nThe Blog Overview Page template provides a central hub for store visitors to discover and browse blog content, improving brand engagement and supporting customer conversion through content marketing.\n\n## Use Cases\n\n- Display a curated overview of all blog posts with customizable H1 title and optional subline\n- Highlight a featured post above the main content grid to draw attention to important articles\n- Present blog post previews in a responsive 3-column grid (desktop) or stacked layout (mobile)\n- Enable seamless content navigation through pagination or infinite scroll options\n- Integrate dynamically with Shopify's blog engine, supporting stores with multiple blogs\n\n## Design Rationale\n\nThe template uses semantic HTML elements (`<article>`, `<h2>`, `<time>`) for each post preview to ensure accessibility and SEO optimization. The flexible layout system adapts to different screen sizes while maintaining visual hierarchy, and the content slot after pagination allows for newsletter signups or promotional banners.",
+  "shortDescription": "Central hub for store visitors to discover and browse blog content. Post previews include featured image (configurable ratio), title, excerpt (~100 words), and read more link. Uses semantic HTML elements (article, h2, time) for accessibility and SEO optimization. Content slot after pagination allows for newsletter signups or promotional banners. Admins assign featured images, tags, and excerpts via Shopify admin.",
+  "keywords": [
+    "blog listing",
+    "content hub",
+    "article index"
+  ]
+}

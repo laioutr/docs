@@ -1,0 +1,21 @@
+{
+  "key": "LUI-228",
+  "title": "check Sections with https://validator.w3.org/nu/",
+  "issueType": "Task",
+  "status": "To Do",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "sourceEpic": null,
+  "sourceIdeas": [],
+  "summary": "QA task to validate sections using W3C HTML validator.",
+  "features": [],
+  "keywords": ["W3C validation", "HTML standards", "accessibility"],
+  "shortDescription": "This quality assurance task involves running all Studio sections through the W3C Nu HTML Checker (validator.w3.org/nu) to identify and fix HTML standards violations. Proper HTML validation ensures better browser compatibility, improved accessibility for screen readers, and adherence to web standards. Issues commonly detected include invalid nesting, missing attributes, and deprecated elements."
+}

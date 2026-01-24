@@ -1,0 +1,31 @@
+{
+  "key": "LUI-6",
+  "title": "Pricing Integration",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "See linked Ideas page and Design. Ticket is blocked by implementation of its components.\n\nStorybook-story has been created, implementing the figma-design\n\n## Technical details\n\n### Block/PricingBlock\n\nThis component does not receive any props. It uses the previously implemented components to render:\n\n* payment switch\n* compare details button (anchor link to the feature-table)\n* pricing grid\n* feature-table\n\nThe headline/subline of the page is to be ignored, as well as the \"Get started with a Trial Version\" banner.",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-1",
+    "title": "Pricing Page"
+  },
+  "summary": "Complete pricing page block with billing switch, grid, and feature table.",
+  "features": [
+    "Integrated billing cycle switch for monthly/annual toggle",
+    "Pricing grid displaying all subscription plan cards",
+    "Feature comparison table with detailed plan differences",
+    "Coordinated state management across components"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-23",
+    "LAIOUTR-24"
+  ],
+  "longDescription": "## Purpose\n\nThe PricingBlock component serves as the primary container for the complete pricing page experience. It orchestrates all pricing-related components into a single, cohesive section that presents subscription options transparently and helps convert visitors into customers.\n\n## Use Cases\n\n- Display the complete pricing page with billing toggle, plan cards, and feature table in a unified layout\n- Synchronize billing cycle selection across pricing cards and the feature comparison table\n- Provide easy navigation between the pricing overview and detailed feature comparison via anchor links\n- Present all subscription options clearly without hidden costs to build customer trust\n\n## Design Rationale\n\nA good pricing page makes it easier to win new customers by presenting plans, features, and costs in a simple, transparent manner. Integrating all pricing components into a single block ensures consistent behavior and styling. The anchor link to the feature table allows users to quickly access detailed comparisons without cluttering the initial view. Content management is simplified by centralizing pricing presentation in one composable block.",
+  "keywords": ["pricing page", "subscription plans", "feature comparison"],
+  "shortDescription": "The PricingBlock component serves as the primary container for the complete pricing page experience, orchestrating all pricing-related components into a unified section. It presents subscription options transparently to help convert visitors into customers. The anchor link to the feature table allows quick access to detailed comparisons without cluttering the initial view. Content management is simplified by centralizing pricing presentation in one composable block."
+}

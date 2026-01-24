@@ -1,0 +1,21 @@
+{
+  "key": "LUI-125",
+  "title": "Calendar",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "A calendar component for date selection and display.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The Calendar component provides a visual month grid interface for date selection and display. It supports navigation between months and years, date range selection, and locale-aware formatting. Commonly used within date picker inputs or standalone for scheduling and booking interfaces in e-commerce contexts like delivery date selection."
+}

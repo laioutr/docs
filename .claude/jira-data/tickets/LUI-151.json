@@ -1,0 +1,33 @@
+{
+  "key": "LUI-151",
+  "title": "Add Star Rating to product tile",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "| **What** | **Example** |\n| --- | --- |\n| Create [Rating Summary Small](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=21921-3294&t=XbBHhj7SkvMeAf2h-4) Has different Variants to choose from: Accent (default) Primary Yellow Black Wihte Always Black Always White Uses [Star Rating Component S](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=7409-41037&t=XbBHhj7SkvMeAf2h-4) but with 4px gap between stars for mobile and desktop Make it possible to have Ratingds like 4.5/5, 3.8/5 etc. use half filled Star for .1 to .6 values use filled star for 0.7 to 0.9 values Displaying the rating numbers is a boolean option | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=f8a35943-794f-4932-bd4f-77a836923e57&&collection=&height=267&occurrenceKey=null&width=144&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| Add the Raing Summary to [Product Tiles](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=63-27444&t=qkXNCDvf4wSyHkx3-4) User can choose which variant of Rating Summary Small should be displayed on product tiles User can decide if the rating summary should be displayed and if the numbers should be displayed | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=d4e05542-0bbb-4010-a422-8970d2010e15&&collection=&height=469&occurrenceKey=null&width=786&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=21921-3294&t=XbBHhj7SkvMeAf2h-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=7409-41037&t=XbBHhj7SkvMeAf2h-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=63-27444&t=qkXNCDvf4wSyHkx3-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": null,
+  "summary": "Star rating component for product tiles with customizable color variants and fractional ratings.",
+  "features": [
+    "Multiple color variants (Accent, Primary, Yellow, Black, White)",
+    "Support for fractional ratings with half-filled stars",
+    "Optional rating number display",
+    "Customizable star styling for product tiles"
+  ],
+  "keywords": [
+    "star rating",
+    "product reviews",
+    "rating summary"
+  ],
+  "shortDescription": "The Rating Summary Small component adds visual review indicators to product tiles in category pages and carousels. Designed for compact spaces, it displays star ratings with intelligent fractional handling—values 0.1-0.6 show half-filled stars while 0.7-0.9 rounds to full stars. The 4px star gap ensures readability on both mobile and desktop. Merchants can toggle the numeric rating display and select color variants that match their brand or ensure contrast on different tile backgrounds.",
+  "sourceEpic": null,
+  "sourceIdeas": []
+}

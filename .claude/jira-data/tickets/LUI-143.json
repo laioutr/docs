@@ -1,0 +1,21 @@
+{
+  "key": "LUI-143",
+  "title": "Collapsible",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": "An interactive component which expands/collapses a panel.",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "Interactive component for expanding and collapsing content panels.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The Collapsible component provides a simple expand/collapse mechanism for showing and hiding content. Unlike Accordion which manages multiple collapsible sections with mutual exclusivity, Collapsible is a single standalone component ideal for progressive disclosure patterns. Common use cases include showing additional details, revealing form sections, or hiding secondary content until needed. Typically composed of a trigger element and a content panel with smooth animated transitions."
+}

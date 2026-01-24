@@ -1,0 +1,35 @@
+{
+  "key": "LUI-152",
+  "title": "Add Star Rating to Buy Box",
+  "issueType": "Story",
+  "status": "Ready for Development",
+  "labels": [],
+  "description": "| Create [Rating Summary](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=21942-10468&t=XbBHhj7SkvMeAf2h-4) with [Reviews button](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=21942-10356&t=XbBHhj7SkvMeAf2h-4) Reviews Button links to Review Section User can choose which star color variant they want to display or whether no stars should be displayed Sizes:  Small Medium Alignment: Left Center  Right Variant: Horizontal Vertical | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=679b86ce-7edd-4399-afea-371024f7883f&&collection=&height=344&occurrenceKey=null&width=231&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=54d87fb8-e0f7-4a7d-a567-eb8efd9d0f56&&collection=&height=949&occurrenceKey=null&width=586&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| --- | --- |\n| Add Rating Summary to [Product Info](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-224206&t=qkXNCDvf4wSyHkx3-4) in [Buybox](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=98-245816&t=qkXNCDvf4wSyHkx3-4): [default variant](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=21942-10467&t=XbBHhj7SkvMeAf2h-4) is horizontal small left aligned boolean property: Display y/n the user can choose the summary variant and star style variant | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=71cbfb50-35d7-4235-a701-b57825d6ad84&&collection=&height=304&occurrenceKey=null&width=441&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=21942-10468&t=XbBHhj7SkvMeAf2h-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=21942-10356&t=XbBHhj7SkvMeAf2h-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-224206&t=qkXNCDvf4wSyHkx3-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=98-245816&t=qkXNCDvf4wSyHkx3-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=21942-10467&t=XbBHhj7SkvMeAf2h-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": null,
+  "summary": "Rating summary component for Buy Box with reviews button linking to the review section.",
+  "features": [
+    "Multiple size options (Small, Medium)",
+    "Flexible alignment (Left, Center, Right)",
+    "Layout variants (Horizontal, Vertical)",
+    "Reviews button with link to review section"
+  ],
+  "keywords": [
+    "buy box rating",
+    "review link",
+    "PDP reviews"
+  ],
+  "shortDescription": "The Rating Summary component integrates into the product Buy Box to display aggregate review data with social proof. It includes a clickable reviews button that scrolls users to the full review section. The default configuration is horizontal, small, and left-aligned, matching typical Buy Box layouts. Merchants can hide the component entirely or customize both the layout variant and star styling to fit their product page design.",
+  "sourceEpic": null,
+  "sourceIdeas": []
+}

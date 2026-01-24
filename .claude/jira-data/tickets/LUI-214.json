@@ -1,0 +1,54 @@
+{
+  "key": "LUI-214",
+  "title": "Studio / Sections / Newsletter Registration",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Newsletter Registration |\n| --- | --- |\n| **Description** | A full-width section for subscribing to a newsletter. Looks particularly good in the footer area. |\n| **Content Options** | Heading Subline Email input field: Placeholder text Button Legal text Image |\n| **Status Mesages** | Loading: Text Success: Text Show emojis y/n Error: Text Show icon y/n Icon select Button (just text) Neutral Text Show icon y/n Icon select Button (just text) |\n| **Design options** | Section background color: None Theme Presets (default) Custom Text color: Default On light background On dark background On bright background Margin: None S M L Padding: None S M L |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Content Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Status Mesages",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Design options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/10.ui-app-marketing/NewsletterRegistration.md",
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "sourceEpic": null,
+  "sourceIdeas": [],
+  "summary": "Full-width newsletter subscription section with status messages and image support.",
+  "features": [
+    "Customizable status messages for all states",
+    "Optional emoji and icon display in messages",
+    "Image support for visual enhancement",
+    "Flexible background and text color options"
+  ],
+  "keywords": ["newsletter signup", "email subscription", "lead capture"],
+  "shortDescription": "The Newsletter Registration section provides a dedicated area for email list signups, typically placed in footer regions. It includes heading, subline, email input with custom placeholder, submit button, and legal text for GDPR compliance. Status messages for loading, success, error, and neutral states are fully customizable with optional emojis or icons. An accompanying image can enhance visual appeal. Background colors and text adapt to various theme contexts."
+}

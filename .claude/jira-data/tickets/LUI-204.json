@@ -1,0 +1,39 @@
+{
+  "key": "LUI-204",
+  "title": "Studio / Blocks / Coupon Box",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Coupon Box |\n| --- | --- |\n| **Description** | Show your customers exciting discount promotions wherever you want. |\n| **Options**  | Variant: With icon Icon y/n Select Icon With discount field Discount Background default custom Text color default custom Text: Input Button: Variant Apply button ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=0f249522-f58a-47ed-9616-855f1cf9d287&&collection=&height=168&occurrenceKey=null&width=267&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) Copy code button ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=b971df3f-f4fe-4262-9f7c-5f95ce0263de&&collection=&height=84&occurrenceKey=null&width=257&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) Styling: Background default custom Text color default custom Icon color default custom |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Coupon box block for displaying discount promotions with apply or copy-code actions.",
+  "features": [
+    "Multiple variants (with icon, with discount field)",
+    "Apply button or copy code button options",
+    "Customizable background, text, and icon colors"
+  ],
+  "keywords": ["coupon display", "promo code", "discount banner"],
+  "shortDescription": "The Coupon Box Studio block promotes discount codes anywhere on the site. Two variants are available: one with an icon for visual emphasis, another with a discount input field for direct application. Action buttons support either applying the coupon automatically or copying the code to clipboard for checkout. Full color customization ensures the promotion stands out while matching brand guidelines. Place on homepage banners, product pages, or cart sidebars."
+}

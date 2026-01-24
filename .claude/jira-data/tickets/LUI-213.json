@@ -1,0 +1,62 @@
+{
+  "key": "LUI-213",
+  "title": "Studio / Sections / Basic Header",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Basic Header (**before**: Page Hader) |\n| --- | --- |\n| **Description** | A compact header with an extra button and a beautiful glass effect. Perfect if you need a small navigation bar. |\n| **Options** | Menu data source (dynamic data source) selection When a data source has been selected, no menu items are displayed in the left sidebar, as these come from a different source. Behaviour Is sticky y/n Display: Lanugage selct y/n Mode switcher y/n |\n| **Logo** | Logo upload |\n| **Content** | Call to Action Button default: no button 'add button' button Mobile Menu Content: Social Links ([Sticky menu footer](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=2899-19061&t=AiMYvAzmiJ7e3Ir5-4)): Background Color Text Color Text Icon Buttons |\n| **Design options** | Text color: Dark Light Background: Transparent Solid (depending on text color: if text is dark, bg is white etc.) Background option: Glass background on scroll (y/n) Padding: None S M L |\n\n## Menu \n\n| **Options** | Title (displayed in header) Title link (optional) Sale design y/n |\n| --- | --- |\n| **Menu items** | can have submenu  ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=da527997-2a34-4642-886c-5ad5acc6126d&&collection=&height=314&occurrenceKey=null&width=285&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=1dfb03c0-73c9-40c1-b691-8f1d2206bb62&&collection=&height=339&occurrenceKey=null&width=267&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  Menu and items are also displayed in the left sidebar as layers:  ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=400faffa-7eda-4721-92f8-3b8824e24d92&&collection=&height=341&occurrenceKey=null&width=313&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=2899-19061&t=AiMYvAzmiJ7e3Ir5-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Logo",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Content",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Design options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/09.ui-app-navigation/BasicHeader.md",
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "sourceEpic": null,
+  "sourceIdeas": [],
+  "summary": "Compact header with glass effect, sticky option, and CTA button.",
+  "features": [
+    "Glass background effect on scroll",
+    "Sticky behavior option",
+    "Dynamic menu data source integration",
+    "Mobile menu with social links footer"
+  ],
+  "keywords": ["basic header", "glass header", "minimal navigation"],
+  "shortDescription": "The Basic Header provides a compact navigation option for simpler sites or landing pages. Its signature feature is the frosted glass background effect that activates on scroll, creating visual depth while maintaining readability. The header can be sticky to remain visible during scrolling. It includes logo, menu items, optional CTA button, language selector, and dark mode toggle. The mobile menu supports a customizable footer with social links and styled buttons."
+}

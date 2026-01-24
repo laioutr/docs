@@ -1,0 +1,137 @@
+{
+  "key": "LUI-76",
+  "title": "Filter off Canvas",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> **User Story**\n\n**As a** user shopping online,  \n**I want** to open a filter panel that slides in from the side of the screen,  \n**So that** I can easily refine product results without leaving the product listing page.\n\n---\n\n### Requirements\n\nby <custom data-type=\"mention\" data-id=\"id-1\">@Carolin Jütz</custom> \n\nPlease note the annotations in Figma, because they have direct information about the design and behavior\n\n| **Triggering the Sheet** Opens when the user clicks the **\"All Filters\"** button. Closes when the user clicks the **close button**, clicks outside the panel, or presses **Esc**. |  |\n| --- | --- |\n| The sheet should slide in from the right (or left, depending on language direction) over the current page. It should occupy a comfortable width (e.g., 80% on mobile, 400px on desktop). On mobile, it should feel like a native sheet or modal experience. when the user scrolls in the off canvas, don't scroll the whole page. Keep scrolling position on page |  |\n| Includes common filtering categories (e.g., price range, color, size, brand). Filter options are presented with appropriate input types |  |\n| **Apply & Clear Actions** **Apply button** applies selected filters and closes the sheet. **Clear all** link/button resets all filters in the panel. **Dynamic Feedback** Shows the number of products matching the current filter selection  Filtering can never result in Zero products!Since only those options are displayed that also provide a result | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=8165ef51-cb8e-46ec-b17d-7d653ff55116&&collection=&height=123&occurrenceKey=null&width=367&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **Color filters** are displayed in a grid as [color tiles](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15055-191628&t=JdNx9y5r0PDJX6eC-4) default sorting: descending from the highest number of products have states default, hover, pressed, focus selected yes/no each tile has a color chip, a color name and the amount of products with this color | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=3f843817-35f2-4c87-b170-750589b60024&&collection=&height=331&occurrenceKey=null&width=292&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=126f0bd6-f7c4-408a-90c8-4cadc1085aeb&&collection=&height=623&occurrenceKey=null&width=347&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| [Off Canvas Components](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15117-193163&t=JdNx9y5r0PDJX6eC-4) [filter-accordion-item](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15055-191971&t=JdNx9y5r0PDJX6eC-4) is similar to internal accordion item but different paddings and styling icon on the left is optional has active filters true/false is open true/false has states default, hover, pressed focus [filter-switch-item](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15055-193139&t=JdNx9y5r0PDJX6eC-4) same layout as accrodion closed item, but not to open. Has a [switch](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=3613-64801&t=JdNx9y5r0PDJX6eC-4) button instead [Checkbox list item](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15117-194382&t=JdNx9y5r0PDJX6eC-4) contains [amount pill](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15117-194362&t=JdNx9y5r0PDJX6eC-4) (themed) | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=2090a302-441d-4680-bc8c-6b27cad3aab6&&collection=&height=344&occurrenceKey=null&width=758&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=338422a8-b569-4b65-8d73-2bfe100949bd&&collection=&height=71&occurrenceKey=null&width=358&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=74782679-42af-44a0-8a59-12d36f4b7de9&&collection=&height=47&occurrenceKey=null&width=344&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **Brand Filter Selection** if there are more than 10 Selection options: display search bar this enhances UX if there are a lot of options, especially for brands, as many users have favorite brands the search should be simple dynamic text search, eliminating options while typing Example: The user types a \"G\" and only the brands with \"G\" are displayed, etc. | [Watch in Figma ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15117-193990&m=dev)<custom data-type=\"emoji\" data-id=\"id-2\">:link:</custom>[ ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15117-193990&m=dev) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=4acbcbcf-bd1a-469d-bd02-0e9cc08d46b5&&collection=&height=559&occurrenceKey=null&width=671&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n\n### Accessability:\n\n#### **Keyboard Accessibility:**\n\n* Users must be able to open and close the filter sheet using keyboard (Tab, Enter, and Esc).\n* All focusable elements within the sheet should be reachable in a logical tab order.\n\n#### **Focus Management:**\n\n* When opened, focus should move to the first interactive element inside the sheet.\n* When closed, focus should return to the \"All Filters\" button.\n\n#### **ARIA and Semantic Markup:**\n\n* Use `role=\"dialog\"` or `role=\"region\"` and label it with `aria-label` or `aria-labelledby` (e.g., \"Filter Options\").\n* If dynamic content (like product count) is shown inside the sheet, it should be marked with `aria-live=\"polite\"`.\n* Apply `aria-expanded` and `aria-controls` to the \"All Filters\" button to reflect state changes.\n\n#### **Screen Reader Considerations:**\n\n* Filters must be properly grouped using `fieldset` and `legend` or ARIA landmarks.\n* Input elements must have associated labels (e.g., visually hidden labels for sliders).\n* Announce when the sheet opens and closes via ARIA alerts or proper role usage.\n\n#### **Visual Indicators:**\n\n* Provide clear visual focus states for all interactive elements.\n* Ensure contrast ratios meet WCAG guidelines (4.5:1 minimum for text and interactive UI elements).\n\n---\n\nStorybook stories have been created:\n\n* Button opens a filter-sheet,\n\n---\n\n## Technical Definition\n\nby <custom data-type=\"mention\" data-id=\"id-3\">@Sebastian Langer</custom> \n\n_**organism/FilterSheet/FilterSheet**_\n\n```\ninterface FilterSheetProps {\n  filters: AvailableFilter[];\n}\n  \ninterface AvailableFilterBase {\n  id: string;\n  label: string;\n  wellKnownName?: string;\n  type: 'boolean' | 'list';\n}\n\ninterface AvailableFilterBoolean extends AvailableFilterBase {\n  type: 'boolean';\n}\n\n/** Supertype of SwatchListItemProps and CheckboxListItemProps */\ninterface AvailableFilterListValue {\n  id: string;\n  label: string;\n  count?: number;\n  swatch?: Swatch;\n}\n\ninterface AvailableFilterList extends AvailableFilterBase {\n  type: 'list';\n  presentation: 'checkbox' | 'swatch'; // decides whether to show checkbox-list or list of color swatches\n  values: AvailableFilterListValue[];\n}\n  \ntype AvailableFilter = AvailableFilterBoolean | AvailableFilterList;\n\nexport type SelectedFilterList = string[]; // list of selected filter-option ids (AvailableFilterListValue['id'])\nexport type SelectedFilterBoolean = boolean;\n\nexport interface SelectedFilters {\n  [filterId: string]: SelectedFilterList | SelectedFilterBoolean;\n}\n```\n\nRenders a Sheet with Header, Content and Actions in Footer. Use RxAccordionRoot for all accordion-items.\n\nHas model, created with `defineModel<SelectedFilters>('selected')` which is a list of active item-ids.\n\nUses the components from <custom data-type=\"smartlink\" data-id=\"id-4\">https://laioutr.atlassian.net/browse/LUI-77</custom> <custom data-type=\"smartlink\" data-id=\"id-5\">https://laioutr.atlassian.net/browse/LUI-78</custom> <custom data-type=\"smartlink\" data-id=\"id-6\">https://laioutr.atlassian.net/browse/LUI-79</custom> <custom data-type=\"smartlink\" data-id=\"id-7\">https://laioutr.atlassian.net/browse/LUI-80</custom> ",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15055-191628&t=JdNx9y5r0PDJX6eC-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15117-193163&t=JdNx9y5r0PDJX6eC-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15055-191971&t=JdNx9y5r0PDJX6eC-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15055-193139&t=JdNx9y5r0PDJX6eC-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=3613-64801&t=JdNx9y5r0PDJX6eC-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15117-194382&t=JdNx9y5r0PDJX6eC-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15117-194362&t=JdNx9y5r0PDJX6eC-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15117-193990&m=dev"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "filters",
+        "type": "AvailableFilter[]",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "wellKnownName",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "type",
+        "type": "'boolean' | 'list'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "count",
+        "type": "number",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "swatch",
+        "type": "Swatch",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "filterId",
+        "type": "string]: SelectedFilterList | SelectedFilterBoolean",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-74",
+    "title": "PLP - Filter & Sorting"
+  },
+  "subTasks": [
+    {
+      "key": "LUI-77",
+      "title": "Create filter accordion item",
+      "description": "### Is used in the Off Canvas Sheet for filtering product lists\n\n---\n\n* is similar to internal accordion item but different paddings and styling\n* icon on the left is optional\n* has active filters true/false\n\n    * active filters are displayed in a new line inside the closed accordion item, with the option to delete the filters:  \n    \n        ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=15a89e4f-4108-4f0c-8159-cd6ced245b38&&collection=&height=77&occurrenceKey=null&width=352&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n    * if there are more filters applied, break line, no truncation\n    * clicking \"delete\", removes all filters in this group\n    * when the accordion tab is open, hide the \"active filters\" line, as the selected filters are now visible in the content:\n    \n\n| **closed** | **open** |\n| --- | --- |\n| ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=a688b0aa-9903-4cb4-949f-1d5d7bf56b69&&collection=&height=61&occurrenceKey=null&width=345&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=d76dc695-7f31-43a5-875f-ef7492e711e4&&collection=&height=635&occurrenceKey=null&width=368&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n\n* is open true/false\n* has states\n\n    * default, hover, pressed focus\n    \n\n---\n\nSee example in use in the off canvas sheet: [click here ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15139-115934&m=dev)<custom data-type=\"emoji\" data-id=\"id-0\">:link:</custom>[ ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15139-115934&m=dev)\n\n## Technical Definition\n\nby <custom data-type=\"mention\" data-id=\"id-1\">@Sebastian Langer</custom> \n\n_**organism/FilterSheet/FilterSheetAccordionItem**_\n\n```\ninterface FilterSheetAccordionItemProps {\n  icon?: string;\n  title: string;\n  activeValue: string; // Rendered below title. If set, show delete-button\n}\n```\n\nDefault slot for content (will be used for CheckboxList or SwatchList)\n\nUse RxAccordionItem, RxAccordionHeader, RxAccordionTrigger, RxAccordionContent from <custom data-type=\"smartlink\" data-id=\"id-2\">https://reka-ui.com/docs/components/accordion#accordion</custom> ",
+      "figmaLinks": [
+        "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15139-115934&m=dev"
+      ]
+    },
+    {
+      "key": "LUI-78",
+      "title": "Create filter switch item",
+      "description": "Is used in the Filter Off Canvas Sheet to toggle a single filter like \"only show products in stock\"\n\n---\n\n* same layout as accrodion closed item, but not to open. Has a [switch](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=3613-64801&t=JdNx9y5r0PDJX6eC-4) button instead\n\n## Technical Definition\n\nby <custom data-type=\"mention\" data-id=\"id-0\">@Sebastian Langer</custom> \n\n_**organism/FilterSheet/FilterSheetSwitchItem**_\n\n```\ninterface FilterSheetSwitchItemProps {\n  id: string; // filter-id\n  label: string;\n}\n```\n\nHas model created with `defineModel<boolean>(\"checked\")`",
+      "figmaLinks": [
+        "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=3613-64801&t=JdNx9y5r0PDJX6eC-4"
+      ]
+    },
+    {
+      "key": "LUI-79",
+      "title": "Create color tile filter",
+      "description": "* each tile has a color chip, a color name and the amount of products with this color\n* have states\n\n    * default, hover, pressed, focus\n    \n\n| selected yes/no checkmark color: black/white important, so the mark is visible on bright/light colors and on darker colors good UX would be if the matching checkmark color could be applied with an automatic contrast check with the chip bg color to be WCAG compliant (please let me know if this is possible) | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=d2c92708-690d-48c7-aef9-b5d2e0904049&&collection=&height=120&occurrenceKey=null&width=181&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| --- | --- |\n| is themed color chip border-radius:   \nvar(--filters-color-tile-border-radius); | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=ff9cf892-2f26-4225-b98a-3b03defaa420&&collection=&height=266&occurrenceKey=null&width=211&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n\nUsage example in Off Canvas Sheet: [click here ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15117-193643&m=dev)<custom data-type=\"emoji\" data-id=\"id-0\">:link:</custom>[ ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15117-193643&m=dev)\n\n## Technical Definition\n\nby <custom data-type=\"mention\" data-id=\"id-1\">@Sebastian Langer</custom> \n\n_**organism/FilterSheet/FilterSheetSwatchListItem**_\n\n```\ninterface FilterSheetSwatchListItemProps {\n  id: string; // filter-value id\n  label: string;\n  count?: number;\n  swatch?: Swatch;\n}\n```\n\nUse LuiSwatchPreview from <custom data-type=\"smartlink\" data-id=\"id-2\">https://laioutr.atlassian.net/browse/LUI-121</custom> \n\n_**organism/FilterSheet/FilterSheetSwatchList**_\n\n```\ninterface FilterSheetSwatchListProps {\n  id: string; // filter-id\n  items: FilterSheetSwatchListItemProps[];\n}\n```\n\nRenders the array of FilterSheetSwatchListItem\n\nHas model, created with `defineModel<string[]>('checked')` which is a list of active item-ids.",
+      "figmaLinks": [
+        "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15117-193643&m=dev"
+      ]
+    },
+    {
+      "key": "LUI-80",
+      "title": "Create checkbox list with amount pill",
+      "description": "* contains [amount pill](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15117-194362&t=JdNx9y5r0PDJX6eC-4) (themed)\n\n    * amount pill uses theme variables: \n    \n        ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=52f733bf-876d-43a4-a17b-1a368710df0d&&collection=&height=148&occurrenceKey=null&width=327&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n    \n        border-radius: var(--filters-amount-pill-border-radius);  \n        background: var(--filters-amount-pill-bg-color);  \n        color: var(--filters-amount-pill-txt-color);\n\n    \n    \n* displays selection options with the amount of products that match the attribute\n\nExample:\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=2784a6d3-450f-4497-9e79-10dcd12beba9&&collection=&height=118&occurrenceKey=null&width=345&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n* has states\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=d55180a3-d7f1-4aa0-bc8b-317ad2e57f79&&collection=&height=422&occurrenceKey=null&width=359&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n## Technical Definition\n\nby <custom data-type=\"mention\" data-id=\"id-0\">@Sebastian Langer</custom> \n\n_**atoms/AmountPill**_\n\n```\ninterface AmountPillProps {\n  amount : number\n}\n```\n\n_**organism/FilterSheet/FilterSheetCheckboxListItem**_\n\n```\ninterface FilterSheetCheckboxListItemProps {\n  id: string; // filter-value id\n  label: string;\n  count?: number;\n}\n```\n\nHas model created with `defineModel<boolean>(\"checked\")`\n\n_**organism/FilterSheet/FilterSheetCheckboxList**_\n\n```\ninterface FilterSheetCheckboxList {\n  id: string; // filter-id\n  items: FilterSheetCheckboxListItemProps[];\n}\n```\n\nUse LuiSearchbar if more than 10 elements are in the list. Use LuiAmountPill from <custom data-type=\"smartlink\" data-id=\"id-1\">https://laioutr.atlassian.net/browse/LUI-88</custom> \n\nHas model, created with `defineModel<string[]>('checked')` which is a list of active item-ids.",
+      "figmaLinks": [
+        "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15117-194362&t=JdNx9y5r0PDJX6eC-4"
+      ]
+    }
+  ],
+  "summary": "Slide-in filter sheet with accordions, swatches, and checkbox lists.",
+  "features": [
+    "Accordion-based filter groups with active filter summary",
+    "Color filter tiles as visual swatches with counts",
+    "Checkbox lists with amount pills for quantities",
+    "Dynamic search bar for options with 10+ items"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-60"
+  ],
+  "longDescription": "## Purpose\n\nThe Filter Off-Canvas Sheet provides a comprehensive, full-featured filtering interface that slides in from the side of the screen, allowing users to refine product results through multiple filter types without navigating away from the product listing page.\n\n## Use Cases\n\n- Open filter panel via \"All filters\" button with ESC key or outside click to close\n- Display color filters as visual tile grids with color chip, name, and product count\n- Use accordion items for collapsible filter groups showing active selections when collapsed\n- Provide switch toggles for boolean filters like \"in stock only\"\n- Show checkbox lists with amount pills for multi-select attribute filters\n- Display matching product count before applying filters for informed decision-making\n- Support search within filter options when more than 10 choices exist\n\n## Design Rationale\n\nThe off-canvas pattern keeps the main content visible while providing ample space for complex filtering. Filter groups use accordions to manage information density, with active filters summarized in collapsed headers. The component prevents zero-result scenarios by only showing options that yield results. Accessibility is ensured through role=\"dialog\" semantics, proper focus trapping, and aria-live regions for dynamic content updates.",
+  "keywords": ["filter sheet", "off-canvas filters", "faceted navigation"],
+  "shortDescription": "The Filter Off-Canvas Sheet provides a comprehensive filtering interface that slides in from the side. Filter groups use accordions with active filters summarized in collapsed headers. The component prevents zero-result scenarios by only showing options that yield results. Accessibility is ensured through role=\"dialog\" semantics, proper focus trapping, and aria-live regions. Supports RTL languages with directional slide-in behavior."
+}

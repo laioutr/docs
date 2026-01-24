@@ -1,0 +1,52 @@
+{
+  "key": "LUI-232",
+  "title": "Studio / Sections / Testimonial - Persona Quote",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Testimonial - Persona Quote (**before**: Persona Quote) |\n| --- | --- |\n| **Description** | A striking testimonial block with a large profile picture that can also display multiple testimonials as slides. |\n| **Options** | Display: Hide Logos y/n |\n| **Design options** | Style: full width boxed Section Background: None (default) custom Card Background: None Theme presets (default) custom Text color: On light background On dark background On bright background [Image Style:](https://www.figma.com/design/fU79c88OUWKPwScoPQ0Yag/laioutr-CMS?node-id=8-91386&t=Jrv2rLSlTUcbWqdM-4) Circle Square Speech bubble (default) Margin: None S M L Padding: None S M L |\n\n## Testimonial \n\n| **Options** | Testimonial Name  Position Company Quote text Profile picture Company logo |\n| --- | --- |\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/fU79c88OUWKPwScoPQ0Yag/laioutr-CMS?node-id=8-91386&t=Jrv2rLSlTUcbWqdM-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Design options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Striking testimonial section with large profile pictures and slider support.",
+  "features": [
+    "Multiple image styles (circle, square, speech bubble)",
+    "Optional company logo display",
+    "Customizable section and card background colors",
+    "Full width or boxed layout options"
+  ],
+  "keywords": [
+    "testimonial",
+    "persona quote",
+    "customer story"
+  ],
+  "shortDescription": "The Testimonial Persona Quote section creates impactful social proof displays using large profile pictures alongside customer quotes. It supports single or multiple testimonials in a slider format. Each testimonial includes name, position, company, quote text, profile picture, and optional company logo. The distinctive image styles (circle, square, speech bubble) add visual variety. This section works best when featuring key customers, partners, or influencers whose faces and stories build trust."
+}

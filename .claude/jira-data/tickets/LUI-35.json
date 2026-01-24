@@ -1,0 +1,54 @@
+{
+  "key": "LUI-35",
+  "title": "Category Node Flags",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "Please read the Epic and Idea Ticket for more context and information.\n\n### Category node flags are used on category nodes to mark certain highlights or promotions.\n\n* Flags can be added manually\n* ~~System can automatically assign flags based on predefined rules~~ (will be implemented in the future with rule-engine)\n* Storybook stories have been created:\n\n    * promo flag with %\n    * sale flag with \"sale\"\n    * new flag with \"new\"\n    * icon flag with 🔥 (use noto emoji icon)\n    \n\n|  |  |\n| --- | --- |\n| Have multiple **themed** variants mobile/desktop promotion sale new icon | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=e16be4f2-d4b4-4c4c-8068-142b41b4b898&&collection=&height=256&occurrenceKey=null&width=218&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) <custom data-type=\"smartlink\" data-id=\"id-0\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=8737-34626&t=WGKlkG3l0TsCUryI-4</custom>  |\n| The theme also controls  size  corner radius padding colors | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=62d941f1-013c-4875-b233-55a5ae1dfd2d&&collection=&height=639&occurrenceKey=null&width=502&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n\n---\n\n## Technical details\n\n### molecule/CategoryNodeFlag\n\nSome props:\n\n* variant: promo, sale, new, icon\n* radius: equal, unequal\n* size: small, big\n\nA slot for content.",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=8737-34626&t=WGKlkG3l0TsCUryI-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "variant",
+        "type": null,
+        "default": null,
+        "description": "promo, sale, new, icon"
+      },
+      {
+        "name": "radius",
+        "type": null,
+        "default": null,
+        "description": "equal, unequal"
+      },
+      {
+        "name": "size",
+        "type": null,
+        "default": null,
+        "description": "small, big"
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/2.ui-kit-general/CategoryNodeFlag.md",
+  "parentEpic": {
+    "key": "LUI-34",
+    "title": "Inpage Navigation"
+  },
+  "summary": "Promotional badge component for category navigation with themed variants.",
+  "features": [
+    "Multiple themed variants: promo, sale, new, and icon",
+    "Configurable corner radius and size options",
+    "Brand-consistent colors from theme palette",
+    "Flexible content slot for custom text or icons"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-41"
+  ],
+  "longDescription": "## Purpose\n\nThe CategoryNodeFlag component enables store owners to visually highlight category navigation elements with promotional badges, drawing shopper attention to featured or time-sensitive categories.\n\n## Use Cases\n\n- Display promotional text badges like \"Sale\", \"New\", or percentage discounts on category preview components\n- Choose from preset flag styles (Sale, New, Promo) or use custom icon content\n- Position flags at configurable corners of category nodes using radius settings\n- Apply brand-consistent colors automatically derived from the theme palette\n- Support localized flag text for international storefronts\n\n## Design Rationale\n\nFlags are implemented as a separate molecule component to ensure reusability across all category node variants (Basic, Compact, Big). The theming system controls size, corner radius, padding, and colors to maintain visual consistency across the storefront while allowing customization per brand identity.",
+  "keywords": ["promotional badge", "category flag", "sale tag"],
+  "shortDescription": "The CategoryNodeFlag component enables store owners to draw attention to featured or time-sensitive categories with visual badges. It supports four semantic variants (promo, sale, new, icon) with theming controls for size, corner radius, padding, and colors. Implemented as a separate molecule, it can be reused across all category node variants (Basic, Compact, Big). The flexible content slot accepts localized text or emoji icons for international storefronts."
+}

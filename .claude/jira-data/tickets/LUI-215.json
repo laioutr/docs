@@ -1,0 +1,42 @@
+{
+  "key": "LUI-215",
+  "title": "Studio / Sections / Logo Presentation",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Logo Presentation (**before**: Logo Slider) |\n| --- | --- |\n| **Description** | An easy way to present logos as a wall or slider. |\n| **Design options** | Style: Full width boxed Section background color: None Theme Presets Custom Text color: On light background On dark background On bright background Text size: Small Medium Large Logo Styling: Background color: grey 3 proposed colors: accent 3 primary 3 white black Display as: Grid Slider Navigation position top bottom Show scrollbar (y/n) Rows: 1 2 Alignment: Left Center Right Auto Margin: None S M L Padding: None S M L |\n\n## Logo Block\n\n| **Name** | Logo (**before**: Item (Slides)) |\n| --- | --- |\n| **Options** | Title input Link Input or select Logo Image upload (one size for all breackpoints) background color (override global settings for this item) |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Design options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/10.ui-app-marketing/LogoSlider.md",
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "sourceEpic": null,
+  "sourceIdeas": [],
+  "summary": "Logo presentation section displaying brand logos as grid or slider.",
+  "features": [
+    "Grid or slider display modes",
+    "Single or double row layouts",
+    "Per-logo customization with background override",
+    "Multiple alignment and navigation options"
+  ],
+  "keywords": ["logo wall", "brand logos", "partner showcase"],
+  "shortDescription": "The Logo Presentation section displays partner, brand, or certification logos in either a static grid or animated slider format. Logos can be arranged in one or two rows with configurable alignment. Each logo item supports a title, optional link, uploaded image, and individual background color override. The slider mode includes navigation controls and optional scrollbar. Commonly used to showcase partnerships, media mentions, certifications, or payment providers."
+}

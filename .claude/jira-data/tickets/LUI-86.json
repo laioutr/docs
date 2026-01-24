@@ -1,0 +1,41 @@
+{
+  "key": "LUI-86",
+  "title": "PDP / Product Image Gallery",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> **User Story:**\n\n**As a** user browsing a product detail page,  \n**I want** to view high-quality images of the product and easily navigate between them,  \n**so that** I can evaluate the product visually before making a purchase decision.\n\n‌\n\n---\n\n### **Functional Requirements**\n\n* Support a minimum of 1-n images per product.\n* Image types supported: JPEG, PNG, WebP.\n* Responsive scaling of images with optimization for loading speed (lazy loading recommended).\n* Support for videos or 360° views as additional media items (optional).\n* Fallback behavior if images fail to load (e.g., \"Image unavailable\" message).\n* Gallery image background color is choosable\n\n### **Non-Functional Requirements**\n\n* **Performance**: Gallery should load and become interactive in under 1 second.\n* **Responsiveness**: Must work seamlessly across all modern browsers and screen sizes.\n* **Accessibility**: Fully WCAG 2.1 AA compliant.\n* **Localization**: Support left-to-right and right-to-left languages.\n* **Analytics**: Track image interactions (e.g., clicks, swipes, zooms).\n\n| **Mobile** <custom data-type=\"smartlink\" data-id=\"id-1\">https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=134-218700&t=wABQtnJ0GubOC0US-4</custom>  |  |\n| --- | --- |\n| **Layout & Navigation:** Display a single image at a time with swipeable or tappable interaction. It is possible for the customer to decide how an image should be displayed in the Gallery. Either as a **full width image or with padding**. No thumbnails to save screen space. [Slider navigation numbers](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=7368-16086&t=FEQ6vrNodsWoLM08-4) (pagination indicators) to indicate position in carousel and for navigation if there is only one image, hide navigation and indicator Fullscreen modal option when tapping on the image or glass icon button The lightbox/fullscreen modal contains swipeable thumbnails | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=0777bbd6-5fc8-4e7d-be4b-2db9589e5d94&&collection=&height=417&occurrenceKey=null&width=875&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **Interaction Requirements:** Swipe left/right to switch images. Tap arrows with accessible touch targets Tap to zoom or open a fullscreen view with pinch-to-zoom support. |  |\n| **WCAG Accessibility (2.1 AA):** Swipe gestures must have button/alternative controls (e.g., next/previous buttons). Aria-live region to announce image changes. Provide descriptive alt text for each image. Indicators must be focusable and have ARIA labels (e.g., `aria-label=\"View image 2 of 5\"`). All controls must be reachable via keyboard navigation and screen reader-friendly. |  |\n\n| **Desktop** <custom data-type=\"smartlink\" data-id=\"id-2\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=17128-152185&t=BOliaBnue2cyHxsi-4</custom>   |  |\n| --- | --- |\n| **Layout & Navigation:** Main image area prominently displays the currently selected product image. [Thumbnails](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=134-218405&t=wABQtnJ0GubOC0US-4) of all product images are displayed vertically next to the main image. Clicking or focusing on a thumbnail updates the main image. Hover preview on thumbnail loads preview in the main image area | [Thumbnail Component ](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=134-218424&t=wABQtnJ0GubOC0US-4)<custom data-type=\"emoji\" data-id=\"id-3\">:link:</custom>[ ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=17128-58349&t=BOliaBnue2cyHxsi-4) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=0f39a723-dcbc-4881-bbb2-3b18aaa56d32&&collection=&height=991&occurrenceKey=null&width=1132&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **Interaction Requirements:** Arrows (next/previous) to navigate through the image carousel. Keyboard navigation: Arrow keys to switch images. Tab and Enter/Space to focus/select thumbnails. Zoom functionality on main image, click to zoom   click on zoom button open full screen zoom modal/lightbox with thumbnails | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=45218883-36bd-4bb9-be3d-14f05539d230&&collection=&height=172&occurrenceKey=null&width=973&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **WCAG Accessibility (2.1 AA):** Thumbnails must be focusable. Alt text for all images. Arrows must be keyboard operable and have descriptive ARIA labels (e.g., `aria-label=\"Next image\"`). Focus indicators must be visible. Support screen reader announcements (e.g., \"Image 3 of 6: Red sneakers front view\") |  |\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=134-218700&t=wABQtnJ0GubOC0US-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=7368-16086&t=FEQ6vrNodsWoLM08-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=17128-152185&t=BOliaBnue2cyHxsi-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=134-218405&t=wABQtnJ0GubOC0US-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=134-218424&t=wABQtnJ0GubOC0US-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=17128-58349&t=BOliaBnue2cyHxsi-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-84",
+    "title": "Product Detail Page"
+  },
+  "summary": "A responsive product image gallery for detail pages with thumbnail navigation, zoom functionality, and fullscreen lightbox support.",
+  "features": [
+    "Swipeable carousel on mobile with pagination indicators",
+    "Vertical thumbnail strip on desktop",
+    "Click-to-zoom and fullscreen modal",
+    "WCAG 2.1 AA compliant with keyboard navigation"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-48"
+  ],
+  "longDescription": "## Purpose\n\nThe Product Image Gallery enables customers to view comprehensive product imagery through high-quality images with intuitive navigation. It serves as a critical component for informed purchasing decisions by allowing detailed visual product evaluation.\n\n## Use Cases\n\n- Navigating through multiple product images in a gallery with thumbnail navigation\n- Viewing images in a fullscreen lightbox with zoom and pan functionality\n- Swiping through images on mobile with touch-friendly pagination indicators\n- Hovering over thumbnails on desktop for quick image preview\n\n## Design Rationale\n\nThe gallery implements distinct interaction patterns for mobile and desktop to optimize the user experience on each platform. Mobile uses a swipeable carousel without thumbnails to maximize screen space, while desktop provides a vertical thumbnail strip for quick navigation. Performance is prioritized through lazy loading and optimized image delivery. Full WCAG 2.1 AA compliance ensures accessibility for all users through keyboard navigation and screen reader support.",
+  "keywords": [
+    "image carousel",
+    "product photos",
+    "thumbnail strip"
+  ],
+  "shortDescription": "The Product Image Gallery enables customers to view comprehensive product imagery through high-quality images with intuitive navigation. Mobile uses a swipeable carousel without thumbnails to maximize screen space, while desktop provides a vertical thumbnail strip for quick navigation. Performance is prioritized through lazy loading and optimized image delivery. Hovering over thumbnails on desktop provides quick image preview, and tapping images opens a fullscreen lightbox with pinch-to-zoom support."
+}

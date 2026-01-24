@@ -1,0 +1,35 @@
+{
+  "key": "LUI-17",
+  "title": "CTA Banners",
+  "issueType": "Epic",
+  "status": "Done",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "childTickets": [
+    "LUI-18",
+    "LUI-20",
+    "LUI-21",
+    "LUI-22"
+  ],
+  "created": "2025-03-06T15:05:00.664+0100",
+  "updated": "2025-05-05T10:46:37.749+0200",
+  "linkedIdeas": [
+    "LAIOUTR-32"
+  ],
+  "enrichedData": {},
+  "summary": "A collection of customizable CTA banner variants (Basic, Integrated, Showcase) for promoting products, services, or events.",
+  "features": [
+    "Three layout variants: Basic, Integrated, and Showcase with boxed and full-width options",
+    "Desktop and mobile background images with focus point positioning and gradient overlays",
+    "Multiple size options with independent content alignment for desktop and mobile viewports",
+    "Showcase variant with separate foreground/background images and light/dark theme options"
+  ],
+  "longDescription": "## Purpose\n\nThe CTA Banners epic delivers a comprehensive set of customizable banner components designed to effectively promote products, services, or events. These versatile promotional tools drive user action through engaging visuals and clear calls-to-action across multiple layout variants.\n\n## Use Cases\n\n- **Product promotions**: Highlight featured products or seasonal offers with compelling imagery and action buttons\n- **Service announcements**: Promote new services or special packages with descriptive banners\n- **Event marketing**: Drive event registrations or webinar sign-ups with dedicated promotional banners\n- **Newsletter signups**: Encourage email subscriptions with integrated CTA banners\n- **Product showcases**: Use the Showcase variant with foreground/background images for product-focused promotions\n\n## Design Rationale\n\nThe multi-variant approach (Basic, Integrated, Showcase) provides flexibility for different promotional contexts. Separate mobile and desktop configurations with focus point positioning ensure optimal visual presentation across devices. The theme system with light/dark options and custom text color overrides maintains brand consistency while ensuring readability across different background treatments.",
+  "shortDescription": "Customizable titles and sublines with CTA buttons in configurable styles and sizes. Transparent gradient or color overlays with adjustable opacity ensure content legibility. Fixed aspect ratio options (1:1, 4:3 portrait) available for mobile with flexible content positioning. Optional caption flags can be added to any banner variant. Custom text color overrides maintain readability across different backgrounds.",
+  "keywords": [
+    "promotional banner",
+    "call-to-action",
+    "marketing banner"
+  ]
+}

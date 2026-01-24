@@ -1,0 +1,21 @@
+{
+  "key": "LUI-134",
+  "title": "Select",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": "![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=05176a50-7076-4eed-a48f-4c494fc94ac8&&collection=&height=1206&occurrenceKey=null&width=1512&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/07.ui-kit-form/Select.md",
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "A dropdown select component for choosing a single option from a list.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The Select component provides a dropdown interface for choosing a single option from a predefined list. It renders a trigger button that opens a floating options panel with keyboard navigation support. Built with proper ARIA semantics, it's suitable for form fields where users must select exactly one value from a known set of options, such as country selection, sorting preferences, or category filters."
+}

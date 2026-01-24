@@ -1,0 +1,30 @@
+{
+  "key": "LUI-99",
+  "title": "Create Package Laioutr UI Kit",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-98",
+    "title": "Prepare Products within separated Packages, UI Kit, Laioutr UI and Laioutr UI Pro"
+  },
+  "summary": "Create the Laioutr UI Kit package containing foundational UI components as part of separated product packages.",
+  "features": [
+    "Foundational UI components package",
+    "Standalone installation support",
+    "Base components for other packages"
+  ],
+  "longDescription": "## Purpose\n\nThe Laioutr UI Kit package provides the foundational layer of UI components that serve as building blocks for the broader Laioutr component ecosystem. It establishes a consistent base of primitives and basic components that can be used independently or as dependencies for higher-level packages.\n\n## Use Cases\n\n- Installing basic UI primitives for custom implementations\n- Providing dependency components for Laioutr UI and Laioutr UI Pro\n- Building custom storefronts with foundational elements\n\n## Design Rationale\n\nSeparating the UI Kit into its own package enables more flexible deployment options and clearer dependency management. Teams can install only the components they need, reducing bundle sizes for projects that do not require the full component suite. This modular architecture supports both simple implementations using just the kit and comprehensive solutions using the full stack.",
+  "shortDescription": "Establishes a consistent base of primitives and basic components that can be used independently or as dependencies for higher-level packages. Teams can install only needed components, reducing bundle sizes. Supports both simple implementations using just the kit and comprehensive full-stack solutions.",
+  "keywords": [
+    "npm package",
+    "UI primitives",
+    "modular architecture"
+  ]
+}

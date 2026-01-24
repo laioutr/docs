@@ -1,0 +1,48 @@
+{
+  "key": "LUI-205",
+  "title": "Studio / Blocks / Buy Box / Variant Information",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "Currently, this still describes multi-variant selection, but it is designed so that you can choose between different options later. For example, standard color chips for color variants, etc.\n\n<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Variant Information |\n| --- | --- |\n| **Description** | Decide how your product variants should be displayed for selection. |\n| **Options**  | Data Source selection Display (y/n): Variant summary Thumbnail Rounded corners y/n Background default (grey 3) none custom |\n| **Off canvas variant selection** | Display Group by [Color (default)](https://storybook.laioutr.cloud/?path=/story/molecules-multiplevariantselection--group-by-color&globals=viewport:md) Show color swatches y/n Hide sold-out variants y/n [Size (best suited if sizes like S,M,L … are important)](https://storybook.laioutr.cloud/?path=/story/molecules-multiplevariantselection--group-by-size&globals=viewport:md) Variant buttons Stock & Delivery information y/n Data Source ([per default the stock & delivery block](https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=1247-140208&t=lyLXOO9i864GgV9v-4)) Show icons y/n Price y/n Base price y/n Discount flag on sale prices y/n Flag color default (sale) custom (proposed colors: accent 9, primary 9, always black) Text input with color popover and dynamic data source option |\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=1247-140208&t=lyLXOO9i864GgV9v-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Off canvas variant selection",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Variant information block for Buy Box controlling how product variants are displayed.",
+  "features": [
+    "Group by color or size display options",
+    "Off-canvas variant selection with color swatches",
+    "Stock and delivery information integration",
+    "Customizable discount flag and pricing display"
+  ],
+  "keywords": ["variant selector", "product options", "size selector"],
+  "shortDescription": "The Variant Information block controls how product variants appear in the Buy Box. Merchants choose between grouping by color (with optional swatches) or by size for apparel scenarios. The off-canvas selection panel shows thumbnails, pricing, stock status, and discount flags for each variant. Options include hiding sold-out items and displaying base pricing for unit comparison. This flexibility accommodates simple single-attribute products to complex multi-variant configurations."
+}

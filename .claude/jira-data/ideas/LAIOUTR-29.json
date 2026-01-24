@@ -1,0 +1,36 @@
+{
+  "key": "LAIOUTR-29",
+  "title": "Logo Slider",
+  "issueType": "Idea",
+  "status": "Done",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\n**As a** marketing manager\n\n**I want** to display partner/client logos in a horizontal row that automatically converts to a slider when there are many logos\n\n**So that** I can showcase all our partnerships without taking up too much vertical space on the page\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-1\">:gorilla:</custom> Goal\n\nTrust building\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-2\">:brain:</custom> Assumptions\n\n* A logo slider can increase perceived credibility and trust by showcasing multiple reputable partners/clients\n* Visitors are more likely to convert when they see familiar brands associated with the company\n* The dynamic nature of a slider can improve engagement compared to static logo displays\n* Space efficiency allows showcasing more partnerships without compromising the overall page design\n* Regular updates to the logo slider can demonstrate company growth and ongoing success in partnerships\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-3\">:clipboard:</custom> Requirements\n\n* Component displays logos in a single horizontal row by default\n\n    * The user can decide that no navigation is displayed and instead a grid with max. 6 logos is displayed  \n      Our recommendation if you want to display less than 7 logos on mobile\n    * The user can choose whether the slider is displayed with one or two rows on mobile\n    \n* Logos are evenly spaced and aligned\n* When the number of logos exceeds the available space:\n\n    * Component transforms into a horizontal slider\n    * Navigation arrows appear \n    \n* Logos maintain consistent size and quality across different screen sizes\n* Component is responsive and works on mobile devices\n* The logos can be swiped horizontal\n* Click on the buttons to jump to the next view\n\n    * always by as many elements as were initially visible (if #1 and #2 were visible, jump to #3 and #4)\n    * Smooth animation\n    \n* The Component can have optional caption, headline and subline from the [text component](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=138-2184&t=aKLeYlPey6V2HKjp-4).\n\n    * The user can choose Text Size Variant: S, M, L\n    * User can decide to show no text\n    \n* Please note that suitable alt texts must be stored for logos (accessibility)\n* Support for various image formats (PNG, SVG, etc.)\n* Accessibility compliance for navigation elements\n\n**Component Properties:**\n\n| Orientation | left, center |\n| --- | --- |\n| Has navigation | yes, no |\n| Rows (mobile) | 1, 2, 3 |\n| Has Text | true, false |\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-4\">:paintbrush:</custom> Design\n\n[Dummy: Mobile 1 row slider ](https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4763-129516&p=f&viewport=-1330%2C691%2C0.5&t=aKLeYlPey6V2HKjp-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=4864%3A5694&show-proto-sidebar=1)<custom data-type=\"emoji\" data-id=\"id-5\">:link:</custom>[ ](https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4763-129516&p=f&viewport=-1330%2C691%2C0.5&t=aKLeYlPey6V2HKjp-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=4864%3A5694&show-proto-sidebar=1)\n\n[Dummy: Mobile 2 rows slider ](https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4763-129516&p=f&viewport=-1330%2C691%2C0.5&t=aKLeYlPey6V2HKjp-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=4886%3A20791&show-proto-sidebar=1)<custom data-type=\"emoji\" data-id=\"id-6\">:link:</custom>[ ](https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4763-129516&p=f&viewport=-1330%2C691%2C0.5&t=aKLeYlPey6V2HKjp-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=4886%3A20791&show-proto-sidebar=1)\n\n[https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4763-129516](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4763-129516)    ",
+  "linkedLuiTickets": [
+    "LUI-12"
+  ],
+  "created": "2025-02-20T10:13:09.977+0100",
+  "updated": "2025-06-11T21:55:52.682+0200",
+  "enrichedData": {
+    "purpose": "Enables marketing managers to display partner and client logos in a space-efficient horizontal layout that automatically converts to a slider when there are many logos, showcasing partnerships without consuming excessive vertical space.",
+    "goals": [
+      "Trust building"
+    ],
+    "designRationale": [
+      "A logo slider can increase perceived credibility and trust by showcasing multiple reputable partners/clients",
+      "Visitors are more likely to convert when they see familiar brands associated with the company",
+      "The dynamic nature of a slider can improve engagement compared to static logo displays",
+      "Space efficiency allows showcasing more partnerships without compromising the overall page design",
+      "Regular updates to the logo slider can demonstrate company growth and ongoing success in partnerships"
+    ],
+    "useCases": [
+      "Display logos in a single horizontal row with even spacing and alignment",
+      "Automatically transform into a slider with navigation arrows when logos exceed available space",
+      "Configure the component to show a static grid with up to 6 logos instead of a slider",
+      "Choose between one, two, or three rows on mobile devices",
+      "Swipe logos horizontally with smooth animations",
+      "Add optional caption, headline, and subline with selectable text size variants",
+      "Store alt texts for logos to ensure accessibility compliance",
+      "Support various image formats including PNG and SVG"
+    ]
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "key": "LUI-60",
+  "title": "Top Bar",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "For more context and information, please read epic or idea ticket\n\ntop bar has **no mobile** variant, as the functions are displayed in the offcanvas menu on mobile devices.\n\n‌\n\n| **Top Bar** |  |\n| --- | --- |\n| [Top Bar](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13096-120401&t=mlUfKppRhGmTxkMG-4) is optional and can be switched off by the user _(for example if you only have 1 locale, or later if you prefer to have the toggles in the store footer)_ User can choose between default style and black style is a part of the global shop header and always positioned above the main head | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=d16355dd-eb32-4020-b568-e062843394eb&&collection=&height=115&occurrenceKey=null&width=1309&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) [https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13096-120401&t=6xBvZNXlqO6bv1Wx-4](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13096-120401&t=6xBvZNXlqO6bv1Wx-4) |\n| **Internal Topbar Link** **Optional External/Informational Links** Support for up to 3 additional links (e.g., \"Help\", \"Stores\", \"Blog\"). Configurable per locale. two text color variants defeult always white | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=6c7bbcfb-971f-47bf-ba08-0fff2419d91d&&collection=&height=365&occurrenceKey=null&width=401&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) [https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13096-117549&t=6xBvZNXlqO6bv1Wx-4](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13096-117549&t=6xBvZNXlqO6bv1Wx-4) |\n| **Language/Locale Selector** Users can switch between supported languages and regions. Selection changes site language, currency, and region-specific settings. Persist user preference via cookies or local storage. If there is just one locale, hide language switch | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=e65913ab-745d-44de-8972-a5d54b57ff75&&collection=&height=115&occurrenceKey=null&width=1309&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=6b3102cb-932d-4188-a316-a9182690779a&&collection=&height=193&occurrenceKey=null&width=239&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) [https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13096-119429&t=6xBvZNXlqO6bv1Wx-4](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13096-119429&t=6xBvZNXlqO6bv1Wx-4) Is based on:  [language switch](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1048-21&t=6xBvZNXlqO6bv1Wx-4) <custom data-type=\"emoji\" data-id=\"id-0\">:link:</custom>  |\n| **Dark Mode Toggle** Can be hidden if the user doesn't want the toggle Switch between light and dark mode. Mode preference is saved and reapplied on future visits. | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=c74afb72-ab00-4131-8eb1-f1e4f9cbff81&&collection=&height=524&occurrenceKey=null&width=272&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) [https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13096-119613&t=6xBvZNXlqO6bv1Wx-4](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13096-119613&t=6xBvZNXlqO6bv1Wx-4) Is based on:  [dark mode switch button ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=2812-28092&t=6xBvZNXlqO6bv1Wx-4)<custom data-type=\"emoji\" data-id=\"id-1\">:link:</custom>[ ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=2812-28092&t=6xBvZNXlqO6bv1Wx-4) |\n\n## Technical details\n\n### molecule/TopBar\n\nSome props:\n\n* showDarkModeToggle: bool\n* showLocaleSelector: bool\n* informationLinks: array of link-text and link-href (color is determined by the top-bar style)\n* style: default, black\n\nUse `useI18n()` to determine available locales and switch locales",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13096-120401&t=mlUfKppRhGmTxkMG-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13096-120401&t=6xBvZNXlqO6bv1Wx-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13096-117549&t=6xBvZNXlqO6bv1Wx-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13096-119429&t=6xBvZNXlqO6bv1Wx-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1048-21&t=6xBvZNXlqO6bv1Wx-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13096-119613&t=6xBvZNXlqO6bv1Wx-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=2812-28092&t=6xBvZNXlqO6bv1Wx-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "variant",
+        "type": null,
+        "default": null,
+        "description": "as the functions are displayed in the offcanvas menu on mobile devices."
+      },
+      {
+        "name": "showDarkModeToggle",
+        "type": null,
+        "default": null,
+        "description": "bool"
+      },
+      {
+        "name": "showLocaleSelector",
+        "type": null,
+        "default": null,
+        "description": "bool"
+      },
+      {
+        "name": "informationLinks",
+        "type": null,
+        "default": null,
+        "description": "array of link-text and link-href (color is determined by the top-bar style)"
+      },
+      {
+        "name": "style",
+        "type": null,
+        "default": null,
+        "description": "default, black"
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/7.ui-app/store-navigation/TopBar.md",
+  "parentEpic": {
+    "key": "LUI-58",
+    "title": "Shop Navigation"
+  },
+  "subTasks": [
+    {
+      "key": "LUI-61",
+      "title": "create internal top bar link",
+      "description": "**Internal Topbar Link**\n\n* **Optional External/Informational Links**\n\n    * Support for up to 3 additional links (e.g., \"Help\", \"Stores\", \"Blog\").\n    * Configurable per locale.\n    * two text color variants\n    \n        * defeult\n        * always white\n        \n    \n\n",
+      "figmaLinks": []
+    },
+    {
+      "key": "LUI-62",
+      "title": "create top bar language switch",
+      "description": "**Language/Locale Selector**\n\n* Users can switch between supported languages and regions.\n* Selection changes site language, currency, and region-specific settings.\n* Persist user preference via cookies or local storage.\n* If there is just one locale, hide language switch\n\nis a variant of: [language switch](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1048-21&t=6xBvZNXlqO6bv1Wx-4) <custom data-type=\"emoji\" data-id=\"id-0\">:link:</custom> ",
+      "figmaLinks": [
+        "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1048-21&t=6xBvZNXlqO6bv1Wx-4"
+      ]
+    },
+    {
+      "key": "LUI-63",
+      "title": "create top bar dark mode switch",
+      "description": "**Dark Mode Toggle**\n\n* Can be hidden if the user doesn't want the toggle\n* Switch between light and dark mode.\n* has a default style _(on grey background)_ and a white style _(on black background)_\n* each style has a special dark mode variant _(as with the original dark mode switch)_\n* Mode preference is saved and reapplied on future visits.\n\nis a variant of: <custom data-type=\"smartlink\" data-id=\"id-0\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=2812-28092&t=6xBvZNXlqO6bv1Wx-4</custom> ",
+      "figmaLinks": [
+        "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=2812-28092&t=6xBvZNXlqO6bv1Wx-4"
+      ]
+    }
+  ],
+  "summary": "Optional top bar above header with locale switching and dark mode toggle.",
+  "features": [
+    "Language/locale selector with cookie persistence",
+    "Dark mode toggle with saved preference",
+    "Up to 3 configurable informational links per locale",
+    "Desktop-only with mobile functions in off-canvas menu"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-43"
+  ],
+  "longDescription": "## Purpose\n\nThe TopBar component provides international online shoppers with quick access to essential site-wide controls positioned prominently above the main header. It enables seamless locale switching and theme preferences without disrupting the shopping experience.\n\n## Use Cases\n\n- **Locale Switching**: Users switch between supported languages and regions, with their selection persisted via cookies or local storage. Currency, language, and region-specific settings update accordingly.\n- **Dark Mode Preference**: Shoppers toggle between light and dark modes, with preferences saved for future visits.\n- **Quick Access Links**: Store operators configure up to 3 external links per locale (e.g., Help, Stores, Blog) for auxiliary navigation.\n\n## Design Rationale\n\nThe component is optional and can be disabled for single-locale stores or when controls are preferred in the footer. Two visual styles (default and black) accommodate different header designs. On mobile devices, these functions relocate to the off-canvas menu, keeping the mobile header compact. The component uses useI18n() for locale management and integrates with existing language switch and dark mode components.",
+  "keywords": ["top bar", "locale switcher", "dark mode toggle"],
+  "shortDescription": "The TopBar component provides international shoppers with quick access to essential site-wide controls above the main header. It enables locale switching with currency and language updates, plus dark mode toggling with persistent preferences. Two visual styles (default and black) accommodate different header designs. On mobile devices, these functions relocate to the off-canvas menu for a compact mobile header. Optional for single-locale stores."
+}

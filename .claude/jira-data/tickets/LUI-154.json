@@ -1,0 +1,25 @@
+{
+  "key": "LUI-154",
+  "title": "Rating / Write a review dialog",
+  "issueType": "Story",
+  "status": "Dev QA",
+  "labels": [],
+  "description": "The content of the modal can also be used to place it on a page.\n\n| Variant: Default (form) make placeholder texts and labels editable in studio! Login message if it is required to be loged in texts and icon can be edited in studio Success after sending the review texts and icon can be edited in studio |  |\n| --- | --- |\n| Display options: Display Product Info y/n With Short summary y/n Choose rating variant Chose button styles  |  |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/13.ui-app-reviews/rating.md",
+  "parentEpic": null,
+  "summary": "Review submission dialog for writing and submitting product reviews with customizable states.",
+  "features": [
+    "Editable placeholder texts and labels via studio",
+    "Login message for authentication requirements",
+    "Customizable success confirmation state",
+    "Optional product information and short summary display"
+  ],
+  "keywords": ["review form", "write review", "feedback modal"],
+  "shortDescription": "The Write a Review dialog provides a form interface for customers to submit product reviews. Available as both a modal overlay and embeddable page component. All text content—labels, placeholders, login prompts, and success messages—is editable through the studio for full localization. Merchants can configure whether to show product context within the form and choose rating variant styles. The component handles authenticated and guest submission flows with appropriate messaging.",
+  "sourceEpic": null,
+  "sourceIdeas": []
+}

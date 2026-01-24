@@ -1,0 +1,126 @@
+{
+  "key": "LUI-51",
+  "title": "Product Tile Color Swatches",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "For further information and context, please read idea page\n\n| [Color swatches](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11078-216549) display color variants as swatches swatches can have up to two colors has \"active\" state for displayed variant has interactive states on hover or press: show tool tip with color name on clicking the color variant swatch (that is not active), change product date to the correct variant (e.g. image, product info, price…) have correct ARIA labels if there are more then 4 color variants: display \"+ n\" \"n\" is the amount of additional color variants swatches have theming variables: color swatch | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=60b0e393-ec28-48dd-ae38-232bfe120fe3&&collection=&height=37&occurrenceKey=null&width=143&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| --- | --- |\n\nStorybook stories:\n\n* ColorSwatch, single color\n* ColorSwatch, multiple colors\n* ColorSwatch, multiple colors, selected\n* ColorSwatch, on-dark, multiple colors (use dark background for story)\n* ColorSwatch, on-dark, multiple colors, selected (use dark background for story)\n* –\n* ProductTileSwatches, 3 colors, first selected\n* ProductTileSwatches, 4 colors, second selected\n* ProductTileSwatches, 5 colors, third selected\n* ProductTileSwatches, 12 colors, sixth selected, on-dark (use dark background for story)\n\n## Technical details\n\n### atom/ColorSwatch/ColorSwatch.vue\n\nThis is a single color-element only.\n\nSome props:\n\n* href: link, used with NuxtLink. Optional. If none is given, element is rendered as button.\n* colorMode: on-dark, on-light\n* isSelected: bool, highlights the element as selected\n* colors: array of css-color strings (display a maximum of two colors)\n\nI'd appreciate it, if you could implement this with just a single html element. To display multiple colors, use linear-gradient\n\n### organism/ProductTile/ProductTileSwatches.vue\n\nRender a list of colors. Maximum of 4.\n\nSome props:\n\n* swatches: array of swatch (a swatch is an array of colors to be passed to LuiColorSwatch)\n* selectedIndex: number\n\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11078-216549"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "ColorSwatch",
+        "type": null,
+        "default": null,
+        "description": "single color"
+      },
+      {
+        "name": "ColorSwatch",
+        "type": null,
+        "default": null,
+        "description": "multiple colors"
+      },
+      {
+        "name": "ColorSwatch",
+        "type": null,
+        "default": null,
+        "description": "multiple colors, selected"
+      },
+      {
+        "name": "ColorSwatch",
+        "type": null,
+        "default": null,
+        "description": "on-dark, multiple colors (use dark background for story)"
+      },
+      {
+        "name": "ColorSwatch",
+        "type": null,
+        "default": null,
+        "description": "on-dark, multiple colors, selected (use dark background for story)"
+      },
+      {
+        "name": "ProductTileSwatches",
+        "type": null,
+        "default": null,
+        "description": "3 colors, first selected"
+      },
+      {
+        "name": "ProductTileSwatches",
+        "type": null,
+        "default": null,
+        "description": "4 colors, second selected"
+      },
+      {
+        "name": "ProductTileSwatches",
+        "type": null,
+        "default": null,
+        "description": "5 colors, third selected"
+      },
+      {
+        "name": "ProductTileSwatches",
+        "type": null,
+        "default": null,
+        "description": "12 colors, sixth selected, on-dark (use dark background for story)"
+      },
+      {
+        "name": "href",
+        "type": null,
+        "default": null,
+        "description": "link, used with NuxtLink. Optional. If none is given, element is rendered as button."
+      },
+      {
+        "name": "colorMode",
+        "type": null,
+        "default": null,
+        "description": "on-dark, on-light"
+      },
+      {
+        "name": "isSelected",
+        "type": null,
+        "default": null,
+        "description": "bool, highlights the element as selected"
+      },
+      {
+        "name": "colors",
+        "type": null,
+        "default": null,
+        "description": "array of css-color strings (display a maximum of two colors)"
+      },
+      {
+        "name": "swatches",
+        "type": null,
+        "default": null,
+        "description": "array of swatch (a swatch is an array of colors to be passed to LuiColorSwatch)"
+      },
+      {
+        "name": "selectedIndex",
+        "type": null,
+        "default": null,
+        "description": "number"
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/2.ui-kit-general/ColorSwatch.md",
+  "parentEpic": {
+    "key": "LUI-50",
+    "title": "Product Tiles Basic"
+  },
+  "summary": "Color swatch components for displaying product color variants on tiles.",
+  "features": [
+    "Displays up to two colors per swatch using linear-gradient",
+    "Shows color name tooltip on hover",
+    "Overflow handling with '+n' indicator for 5+ variants",
+    "Accessible with proper ARIA labels"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-39"
+  ],
+  "longDescription": "## Purpose\n\nThe ColorSwatch component provides a compact visual representation of product color options, enabling customers to quickly browse available variants without leaving the product listing view.\n\n## Use Cases\n\n- Display single-color product variants as clickable swatches\n- Show multi-color or patterned variants using linear gradients\n- Indicate the currently selected color variant with an active state\n- Handle overflow gracefully when products have many color options (5+)\n- Support dark background contexts for varied page designs\n\n## Design Rationale\n\nThe component is implemented as a single HTML element for optimal performance and rendering efficiency. Using CSS linear-gradients enables multi-color display without additional markup. The maximum of 4 visible swatches with overflow indicator prevents visual clutter while still communicating variant availability. Interactive states including hover tooltips improve discoverability of color names.",
+  "keywords": ["color swatch", "variant selector", "product colors"],
+  "shortDescription": "The ColorSwatch component provides compact visual representation of product color options, enabling customers to browse variants without leaving product listings. Implemented as a single HTML element for optimal performance, it uses CSS linear-gradients to display multi-color swatches. Maximum of 4 visible swatches prevents visual clutter while the '+n' overflow indicator communicates additional options. Interactive states including hover tooltips improve color name discoverability."
+}

@@ -1,0 +1,19 @@
+{
+  "key": "LUI-110",
+  "title": "Promotion Banner",
+  "issueType": "Epic",
+  "status": "To Do",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "childTickets": [
+    "LUI-111",
+    "LUI-112"
+  ],
+  "created": "2025-06-24T10:24:52.276+0200",
+  "updated": "2025-06-26T11:30:19.559+0200",
+  "linkedIdeas": [
+    "LAIOUTR-42"
+  ],
+  "enrichedData": {}
+}

@@ -1,0 +1,50 @@
+{
+  "key": "LUI-234",
+  "title": "Studio / Sections / Testimonial - Quote Card Slider",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Testimonial - Quote Card Slider |\n| --- | --- |\n| **Description** | A slider to present your users' top ratings and quotes. |\n| **Options** | Display: Scrollbar y/n Star rating y/n Profile picture y/n Logo y/n |\n| **Design options** | Section Styling: Style: full width boxed Section Background: None (default) custom Card Styling: Card style: Default Dark background color Bright background color Outline Haptic → Display the following settings from the card style as childs: Background color Text color Star color Content alignment: left center right Layout: Margin: None S M L Padding: None S M L |\n\n## Testimonial \n\n| **Options** | Star rating (select from ‘1 of 5’ to '5 of 5') Testimonial Name  Position Company Quote text Profile picture Company logo |\n| --- | --- |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Design options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Testimonial slider showcasing multiple customer quotes in carousel format.",
+  "features": [
+    "Optional scrollbar display",
+    "Multiple card styles (Default, Dark, Bright, Outline, Haptic)",
+    "Star ratings, profile pictures, and company logo support",
+    "Flexible content alignment options"
+  ],
+  "keywords": [
+    "testimonial slider",
+    "quote carousel",
+    "review slider"
+  ],
+  "shortDescription": "The Testimonial Quote Card Slider extends the single Quote Card into an interactive carousel for displaying multiple customer testimonials. It includes all styling options from the single card variant while adding slider-specific controls like optional scrollbar. Each slide contains a complete testimonial with name, position, company, quote, optional star rating, profile picture, and company logo. Ideal for showcasing a collection of top ratings and customer stories without taking excessive vertical space."
+}

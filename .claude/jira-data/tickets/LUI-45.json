@@ -1,0 +1,90 @@
+{
+  "key": "LUI-45",
+  "title": "Category Nodes / Big",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "For more info and global requirements, please read the idea ticket or epic description.\n\n| **Variants** [square](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=10798-228528&t=Ar5LTHJDEX3yaImj-4) [rectangle landscape](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=10846-40909&t=Ar5LTHJDEX3yaImj-4) [rectangle portrait](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=10846-42296&t=Ar5LTHJDEX3yaImj-4) | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=39525e11-8b75-44ba-bd0f-326b7e9665fe&&collection=&height=268&occurrenceKey=null&width=683&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| --- | --- |\n| **Properties** |  |\n| device mobile desktop |  |\n| text position on the image below image | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=43ae4164-8966-4f96-8265-ca735c789ac0&&collection=&height=212&occurrenceKey=null&width=180&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=9c913036-899e-4a23-b4ed-1d3e66378469&&collection=&height=186&occurrenceKey=null&width=181&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) For the text on the image, the title has a wrapper that has different padding on the left and right depending on the theme: **category node / big / title padding** ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=ee57f7c8-4eeb-4b88-b44c-ed6f47eae63f&&collection=&height=357&occurrenceKey=null&width=717&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| text alignment left center state default hover pressed focus color on light background on dark background on bright background |  |\n| image light dark | This refers to the color of the text on the image and whether a gradient is displayed: ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=49b48fab-ee03-4698-a206-475c0306eaff&&collection=&height=193&occurrenceKey=null&width=403&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) use this gradient as base gradient: ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=6f9bb10d-a3fd-4b3b-b64f-f6a6140c87bf&&collection=&height=224&occurrenceKey=null&width=277&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) the user can optionally adjust the opacity of the gradient layer afterwards. |\n| has category flag true false | Please note that the flags are in a wrapper that has variable padding on the left and top: **category node / big / flag padding** ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=5b1b9b58-e47e-4a1a-8626-d22e4f1b91d4&&collection=&height=401&occurrenceKey=null&width=765&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| → please do not forget that the background color of each node can be changed by the user (e.g. to match the selected image) Background color of nodes is customizable |  |\n\n Storybook stories have been created:\n\n* category node big, square and flag\n* category node big, square with overlay and flag\n* category node big, landscape and flag\n* category node big, landscape with overlay and flag\n* category node big, portrait and flag\n* category node big, portrait with overlay and flag\n\nPlease make sure to put these images into `packages/ui/playground/.storybook/public/category-node/`\n\n## Technical details\n\nI believe the see-more variant is always the same colors as the default variant. Therefore there is no separate see-more. They only distinguish themselves by content.\n\nAll states (default, hover, active, focus) are implemented correctly.\n\nThe variant of the CategoryNode decides which flag-corners to use. The corners of the flag-prop must be ignored.\n\n### molecule/CategoryNode/CategoryNodeBig.vue\n\nImage is 1:1 on square. Rectangle are custom dimensions for desktop/mobile.\n\nSome props:\n\n* textPosition: inside, below\n* textAlign: left, center\n* href: element is linked\n* media: optional Media\n* colorMode: on-light, on-dark, on-bright\n* imageSize: square, landscape, portrait\n* flag: optional flag-props\n* showOverlay: bool\n\nNo icon prop, no variant prop. For now.\n\nFor showOverlay true, see the playground with the image: dark variants. You may be able to use the LuiImageContrastOverlay component for this.",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=10798-228528&t=Ar5LTHJDEX3yaImj-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=10846-40909&t=Ar5LTHJDEX3yaImj-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=10846-42296&t=Ar5LTHJDEX3yaImj-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "textPosition",
+        "type": "string",
+        "default": null,
+        "description": "inside (on image) or below image"
+      },
+      {
+        "name": "textAlign",
+        "type": "string",
+        "default": null,
+        "description": "left or center alignment"
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "default": null,
+        "description": "URL for linking the category node"
+      },
+      {
+        "name": "media",
+        "type": "object",
+        "default": null,
+        "description": "optional Media object for category image"
+      },
+      {
+        "name": "colorMode",
+        "type": "string",
+        "default": null,
+        "description": "on-light, on-dark, on-bright"
+      },
+      {
+        "name": "imageSize",
+        "type": "string",
+        "default": null,
+        "description": "square, landscape, or portrait aspect ratio"
+      },
+      {
+        "name": "flag",
+        "type": "object",
+        "default": null,
+        "description": "optional flag-props for promotional badges"
+      },
+      {
+        "name": "showOverlay",
+        "type": "boolean",
+        "default": null,
+        "description": "Show gradient overlay for dark images"
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/05.ui-kit-content/LinkTileBig.md",
+  "parentEpic": {
+    "key": "LUI-34",
+    "title": "Inpage Navigation"
+  },
+  "summary": "Large-format category node with multiple aspect ratios, text overlay options, and gradient overlays for prominent in-page navigation.",
+  "features": [
+    "Three image aspect ratios: square (1:1), landscape, and portrait",
+    "Text positioning options: on image or below image",
+    "Optional gradient overlay for improved text readability on dark images",
+    "Customizable background color per node"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-41"
+  ],
+  "longDescription": "## Purpose\n\nThe CategoryNodeBig component provides a large-format category navigation element for prominent placement on entry pages and homepages. It offers visual impact through larger imagery and flexible text positioning options.\n\n## Use Cases\n\n- Create hero-style category navigation on homepages\n- Display featured categories with high-impact imagery\n- Use landscape format for wide banner-style category links\n- Use portrait format for vertical category showcases\n- Add promotional badges like \"Sale\" or \"New\" to highlight featured categories\n- Apply gradient overlays to ensure text readability on varied imagery\n\n## Design Rationale\n\nThe big variant prioritizes visual impact while maintaining flexibility. Three aspect ratio options accommodate different layout requirements and imagery. Text can be positioned on the image (with optional gradient overlay for contrast) or below for clean separation. The gradient opacity is adjustable to balance image visibility with text readability. Flag positioning uses themed padding to maintain visual harmony across different node configurations.",
+  "keywords": [
+    "hero-tile",
+    "banner-navigation",
+    "text-on-image"
+  ],
+  "shortDescription": "Ideal for hero-style category navigation on homepages and entry pages. Supports promotional badges like \"Sale\" or \"New\" with themed flag positioning. Full interaction states (default, hover, pressed, focus) provide clear feedback. Gradient opacity is adjustable to balance image visibility with text readability, and the component uses LuiImageContrastOverlay for dark image variants."
+}

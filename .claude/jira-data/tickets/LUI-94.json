@@ -1,0 +1,56 @@
+{
+  "key": "LUI-94",
+  "title": "PDP / buybox - Quantity discount",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "| represents volume discounts depending on the product or product group number of discount levels is freely adjustable | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=a2351085-11dc-41eb-8454-9cacf1daa6ff&&collection=&height=140&occurrenceKey=null&width=439&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| --- | --- |\n\nby <custom data-type=\"mention\" data-id=\"id-0\">@bassem mohamed</custom> \n\n### **Acceptance Criterea:**\n\n* Add storybook stories\n\n    * Two items (like in figma design)\n    * One item\n    * Example data (see below)\n    \n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=8c670284-b383-494f-b9fc-9769b50b722b&&collection=&height=198&occurrenceKey=null&width=608&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n### **Technical Details:**\n\n_**organism/PDP/BuyBoxQuantityPrices**_\n\n```\ninterface QuantityPriceItem {\n  savingsPercent: number;\n  quantity: number;\n}\ninterface BuyBoxQuantityDiscountProps {\n  prices: QuantityPriceItem[]\n}\n```\n\n* use `LuiText` , `LuiProductTileFlag`\n* prices-prop data may look like this (it does not come pre-sorted by quantity)\n\n    * ```\n      prices = [{\n        quanity: 1,\n        savingsPercent: 0\n      }, {\n        quantity: 4,\n        savingsPercent: 10\n      }, {\n        quantity: 3,\n        savingsPercent: 7\n      }, {\n        quantity: 2,\n        savingsPercent: 5\n      }]\n      ```\n    \n* The text in each item is auto generated:\n\n    * If the quantity is 1, do not show item\n    * If the item is not the highest quantity (ie. 2), show text \"From x pieces\"\n    * If the item is the highest quantity (ie. 4), show text \"From x pieces and more\"\n    * Show items sorted by ascending quantity, e.g.:\n    \n        * From 2 items\n        * From 3 items\n        * From 4 items and more\n        \n    \n\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "savingsPercent",
+        "type": "number",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "quantity",
+        "type": "number",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "prices",
+        "type": "QuantityPriceItem[]",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-84",
+    "title": "Product Detail Page"
+  },
+  "summary": "A volume discount display component showing tiered pricing benefits based on purchase quantity with auto-generated discount tier labels.",
+  "features": [
+    "Dynamic discount tier labels",
+    "Automatic sorting by quantity",
+    "Savings percentage badges",
+    "Flexible number of discount levels"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-48"
+  ],
+  "longDescription": "## Purpose\n\nThe Quantity Discount component displays volume discount tiers to encourage bulk purchases by showing customers the savings available at different quantity thresholds. It motivates larger orders by clearly communicating progressive discount benefits.\n\n## Use Cases\n\n- Displaying volume discount tiers for bulk purchases\n- Showing progressive savings percentages at quantity thresholds\n- Auto-generating tier labels based on quantity breakpoints\n- Supporting flexible discount structures per product or category\n\n## Design Rationale\n\nThe component automatically sorts and formats discount tiers to ensure consistent presentation regardless of input data order. Auto-generated labels reduce configuration complexity while maintaining clear communication. The visual design emphasizes savings percentages to draw attention to the value proposition. Support for unlimited discount levels accommodates various B2B and B2C pricing strategies.",
+  "keywords": [
+    "volume discount",
+    "tiered pricing",
+    "bulk savings"
+  ],
+  "shortDescription": "The Quantity Discount component displays volume discount tiers to encourage bulk purchases by showing customers the savings available at different quantity thresholds. The component automatically sorts and formats discount tiers to ensure consistent presentation regardless of input data order. Auto-generated labels reduce configuration complexity while maintaining clear communication. Support for unlimited discount levels accommodates various B2B and B2C pricing strategies."
+}

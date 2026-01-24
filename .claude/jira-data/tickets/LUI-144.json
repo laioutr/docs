@@ -1,0 +1,18 @@
+{
+  "key": "LUI-144",
+  "title": "Add amount pill to counter in the documentation",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": "we already have a counter, it's named \"amount pill\" but has the same functionality",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "summary": "Documentation task to add amount pill reference to counter component docs.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "This documentation task addresses the naming discrepancy between the existing Counter component and its alternate name 'Amount Pill'. Both refer to the same functionality - displaying numeric counts or quantities. Adding this cross-reference helps developers find the component regardless of which term they search for, improving documentation discoverability and reducing confusion about component naming conventions."
+}

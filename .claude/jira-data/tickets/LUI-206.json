@@ -1,0 +1,41 @@
+{
+  "key": "LUI-206",
+  "title": "Studio / Blocks / Buy Box / Add to Cart",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Add to Cart |\n| --- | --- |\n| **Description** | Adds an Add to Cart button and a Quantity Picker. This is required so that your customers can add items to their shopping cart. |\n| **Options**  | Display: Quantity Picker y/n Button: Default theme button but fully [editable](https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=925-101184&t=lyLXOO9i864GgV9v-4) Layout: Margin (margin top and bottom) S M L none |\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=925-101184&t=lyLXOO9i864GgV9v-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Add to cart block for Buy Box with button and optional quantity picker.",
+  "features": [
+    "Optional quantity picker display",
+    "Fully customizable button styling",
+    "Configurable margin options"
+  ],
+  "keywords": ["add to cart", "buy button", "quantity picker"],
+  "shortDescription": "The Add to Cart block provides the essential purchase action within the Buy Box. It combines an add-to-cart button with an optional quantity picker, enabling customers to select quantities before adding items. The button inherits theme styling but can be fully customized in appearance. Margin controls allow proper spacing within the Buy Box layout. This block is required for any product page where direct cart additions are needed."
+}

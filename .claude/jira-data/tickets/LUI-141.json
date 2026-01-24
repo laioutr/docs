@@ -1,0 +1,21 @@
+{
+  "key": "LUI-141",
+  "title": "Avatar Group",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": "Wrap multiple Avatars within an AvatarGroup to stack them.",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "A wrapper for stacking multiple Avatar components with overlap styling.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "Avatar Group wraps multiple Avatar components and displays them in an overlapping stack arrangement. It handles proper z-index layering so earlier avatars appear behind later ones, and optionally shows a count indicator when the number of avatars exceeds a configured maximum. Commonly used to display team members, participants, or contributors in a compact space-efficient format."
+}

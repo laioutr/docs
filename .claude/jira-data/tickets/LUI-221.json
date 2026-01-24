@@ -1,0 +1,62 @@
+{
+  "key": "LUI-221",
+  "title": "Studio / Sections / Footer",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Footer |\n| --- | --- |\n| **Description** | A simple footer with columns on desktop and accordion tabs on mobile devices. |\n| **Design  Options**  | Style: Full width boxed Margin: None S M L Padding: None S M L Alignment: left center right Columns: Desktop (select) Alignment (for column content) left center right  |\n| **Logo** | Image upload |\n| **Contact information** | Inputs: email phone adress (text field) |\n| **Bottom row** | Icon buttons (on/off) button style (select) buttons ‘add buttons’ button Email button (on/off) button style (select) email input icon left icon right Copyright input |\n\n## Left sidebar layers\n\n| ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=fc05ae90-5272-4531-a9df-37f14c84e811&&collection=&height=178&occurrenceKey=null&width=279&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) | No extra “group” Remove the “footer/” prefix for the blocks Number the menus Since it is not possible to add further/other blocks at the moment:  remove the “below logo content” group |\n| --- | --- |\n\n## Footer / menu options\n\n| **Open on default**  | block info menu items  |\n| --- | --- |\n| **Menu options** | title (display title) title link |\n| **Menu items** | same as buttons, but different labels (“item” instead of “button”) different [popover content](https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=985-108133&t=lxa1EnPQ6WmLk1ee-4) then buttons: ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=26d9b110-1cc4-41fb-857e-11be0467654f&&collection=&height=234&occurrenceKey=null&width=261&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=985-108133&t=lxa1EnPQ6WmLk1ee-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Design  Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Logo",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Contact information",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Bottom row",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/09.ui-app-navigation/footer.md",
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "sourceEpic": null,
+  "sourceIdeas": [],
+  "summary": "Responsive footer with desktop columns and mobile accordion tabs.",
+  "features": [
+    "Responsive layout with desktop columns and mobile accordion",
+    "Integrated contact information display (email, phone, address)",
+    "Bottom row with icon buttons, email input, and copyright",
+    "Configurable menu sections with title links"
+  ],
+  "keywords": ["site footer", "navigation footer", "contact info"],
+  "shortDescription": "The Footer section provides a fully-featured site footer that adapts between desktop column layout and mobile accordion for optimal space usage. It includes areas for logo, contact information (email, phone, address), and multiple menu sections. The bottom row accommodates social icon buttons, an email signup input, and copyright text. Menu items support different popover content than standard buttons. Column count and alignment are independently configurable for desktop views."
+}

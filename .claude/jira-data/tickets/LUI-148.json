@@ -1,0 +1,23 @@
+{
+  "key": "LUI-148",
+  "title": "Table",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "Table component for displaying structured tabular data like pricing.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The Table component renders structured data in rows and columns with semantic HTML table elements. Designed for accessibility with proper header associations and scope attributes. Supports features like sortable columns, sticky headers, and responsive behavior for smaller screens. Currently documented in the context of pricing tables but can be used for any tabular data including order history, comparison charts, or data grids.",
+  "sourceEpic": "LUI-123",
+  "sourceIdeas": []
+}

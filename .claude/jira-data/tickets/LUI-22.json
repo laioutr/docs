@@ -1,0 +1,50 @@
+{
+  "key": "LUI-22",
+  "title": "CTA Banner Image Overlay",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "Create a re-usable component for displaying above images. It is used for improving contrast and readability for text being displayed above images.\n\nFrom the ideas page:\n\nIt should be possible to optionally switch on a transparent gradient or a transparent color area as an overlay. [In the examples](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4663-127427&t=4XGop48INZdEbUEO-4), you can see that users can select the overlay to match the selected orientation and their design.\n\n* Opacity should be choosable.\n* Gradient goes from bottom to top: black alpha 12 to black alpha 1, with 40% opacity to the gradient layer\n* Standard full color overlay has black alpha 8 as fill color.\n\n## Technical details\n\n### Atom/ImageContrastOverlay\n\nSome props:\n\n* opacity\n* style: off/gradient/color\n\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "style",
+        "type": "string",
+        "default": null,
+        "description": "Overlay style: off (disabled), gradient (bottom-to-top fade), or color (solid semi-transparent)"
+      },
+      {
+        "name": "opacity",
+        "type": "number",
+        "default": null,
+        "description": "Adjustable opacity level for fine-tuned contrast control"
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/02.ui-kit-general/ImageContrastOverlay.md",
+  "parentEpic": {
+    "key": "LUI-17",
+    "title": "CTA Banners"
+  },
+  "summary": "A utility component that enhances text readability over images through customizable gradient or solid color overlays with adjustable opacity.",
+  "features": [
+    "Multiple overlay styles: off (disabled), gradient, or solid color",
+    "Adjustable opacity for precise contrast tuning",
+    "Gradient option with smooth bottom-to-top fade effect",
+    "Reusable across all CTA banner components"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-32"
+  ],
+  "longDescription": "## Purpose\n\nThe ImageContrastOverlay component ensures text remains readable when displayed over background images of varying brightness and complexity. It provides a consistent approach to handling contrast challenges across all CTA banner variants, maintaining accessibility standards while preserving visual appeal.\n\n## Use Cases\n\n- Darkening bright or busy background images to improve headline and subline readability\n- Creating subtle gradient effects that draw attention to text without fully obscuring imagery\n- Ensuring consistent text visibility across dynamically uploaded marketing images\n- Maintaining WCAG accessibility compliance for text contrast ratios\n\n## Design Rationale\n\nBy centralizing overlay logic in a dedicated component, all CTA banners benefit from consistent behavior and simplified maintenance. The gradient option provides a sophisticated fade effect that darkens the image progressively, ideal for banners where text appears at specific positions. The solid color option offers uniform darkening for situations requiring predictable contrast improvement. Marketing teams can confidently use diverse imagery knowing the overlay system will maintain readability.",
+  "shortDescription": "Centralizes overlay logic for all CTA banner variants, maintaining accessibility standards while preserving visual appeal. Darkens bright or busy background images to improve headline readability. Creates subtle gradient effects that draw attention to text without fully obscuring imagery. Ensures consistent text visibility across dynamically uploaded marketing images. Marketing teams can confidently use diverse imagery knowing the overlay system will maintain readability.",
+  "keywords": [
+    "WCAG contrast",
+    "semi-transparent layer",
+    "darkening overlay"
+  ]
+}

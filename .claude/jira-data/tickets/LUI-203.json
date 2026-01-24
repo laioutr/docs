@@ -1,0 +1,39 @@
+{
+  "key": "LUI-203",
+  "title": "Studio / Blocks / Buy Box / Stock & Delivery information",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Stock & Delivery information |\n| --- | --- |\n| **Description** | Display individual stock and delivery information for your customers. |\n| **Options**  | Multiple items, also known as stock and delivery information, can be created. Each item has the following options: Choose between manual and dynamic data ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=51e72763-7313-490f-8b52-fe47041aefec&&collection=&height=332&occurrenceKey=null&width=550&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  you can set up rules for each item ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=ddef824b-4a5f-4622-b0a0-69638359923e&&collection=&height=401&occurrenceKey=null&width=262&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Stock and delivery information block for Buy Box with conditional display rules.",
+  "features": [
+    "Multiple information items with individual configuration",
+    "Manual or dynamic data source options",
+    "Conditional display rules per item"
+  ],
+  "keywords": ["stock status", "delivery info", "availability"],
+  "shortDescription": "The Stock & Delivery Information block displays product availability and shipping details within the Buy Box. Merchants can configure multiple information lines, each pulling from manual entries or dynamic backend data. Conditional rules control when each item appears—for example showing 'In Stock' messaging when inventory is available or 'Ships in 3-5 days' when backordered. This flexibility supports complex fulfillment scenarios while keeping customers informed."
+}

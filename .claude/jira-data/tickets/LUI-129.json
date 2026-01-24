@@ -1,0 +1,21 @@
+{
+  "key": "LUI-129",
+  "title": "Fieldset",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "A fieldset component for grouping related form fields with semantic HTML.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The Fieldset component groups related form fields together using semantic HTML fieldset and legend elements. This improves form accessibility by establishing logical relationships between inputs and providing clear section labeling for screen readers. Use it to organize complex forms into digestible sections like shipping address, billing information, or contact details."
+}

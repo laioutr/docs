@@ -1,0 +1,99 @@
+{
+  "validatedAt": "2026-01-23",
+  "validatedFiles": [
+    {
+      "file": "laioutr-UI",
+      "fileId": "92moLelAY8lh8mI0rhCGzy",
+      "totalNodes": 138,
+      "invalidNodes": 18,
+      "affectedTickets": 17,
+      "invalidNodeIds": [
+        "4633:61147", "1219:51525", "3492:21109", "20402:32683", "20402:32702",
+        "6481:79382", "6689:73076", "4663:127427", "7389:38139", "6904:152633",
+        "7763:32584", "4200:53346", "9131:104078", "8267:3", "9416:81029",
+        "10173:31111", "10345:74175", "10708:183341"
+      ]
+    },
+    {
+      "file": "laioutr-SHOP",
+      "fileId": "L5EsT6m0VoOX",
+      "totalNodes": 36,
+      "invalidNodes": 0,
+      "affectedTickets": 0,
+      "invalidNodeIds": []
+    },
+    {
+      "file": "Component-Examples",
+      "fileId": "Zle03g3Z7ieN",
+      "totalNodes": 24,
+      "invalidNodes": 6,
+      "affectedTickets": 4,
+      "invalidNodeIds": [
+        "880:493032", "36:316870", "42:348552", "44:349383", "44:349414", "10:48933"
+      ]
+    },
+    {
+      "file": "Studio-v1.0",
+      "fileId": "QgRgNtTxBTCA",
+      "totalNodes": 8,
+      "invalidNodes": 1,
+      "affectedTickets": 1,
+      "invalidNodeIds": ["1586:115241"]
+    },
+    {
+      "file": "Ambiendo-sunny",
+      "fileId": "gDN7wlDFp5mw",
+      "totalNodes": 8,
+      "invalidNodes": 1,
+      "affectedTickets": 1,
+      "invalidNodeIds": ["106:21835"]
+    },
+    {
+      "file": "Laioutr-Basic",
+      "fileId": "iOpGWO38Hkhn",
+      "totalNodes": 5,
+      "invalidNodes": 0,
+      "affectedTickets": 0,
+      "invalidNodeIds": []
+    },
+    {
+      "file": "laioutr-CMS",
+      "fileId": "fU79c88OUWKP",
+      "totalNodes": 4,
+      "invalidNodes": 0,
+      "affectedTickets": 0,
+      "invalidNodeIds": []
+    }
+  ],
+  "affectedTicketDetails": {
+    "LUI-11": ["4633:61147", "1219:51525"],
+    "LUI-2": ["3492:21109"],
+    "LUI-20": ["6481:79382"],
+    "LUI-21": ["6689:73076"],
+    "LUI-22": ["4663:127427"],
+    "LUI-24": ["7389:38139", "6904:152633"],
+    "LUI-25": ["7763:32584"],
+    "LUI-3": ["3492:21109", "4200:53346"],
+    "LUI-36": ["9131:104078"],
+    "LUI-37": ["9131:104078"],
+    "LUI-38": ["8267:3", "9416:81029"],
+    "LUI-4": ["3492:21109"],
+    "LUI-43": ["10173:31111", "10345:74175"],
+    "LUI-44": ["10708:183341", "8267:3"],
+    "LUI-47": ["8267:3"],
+    "LUI-5": ["3492:21109"],
+    "LUI-65": ["10173:31111"],
+    "LUI-75": ["36:316870"],
+    "LUI-85": ["42:348552", "44:349383", "44:349414"],
+    "LUI-96": ["10:48933"],
+    "LUI-112": ["880:493032"],
+    "LUI-115": ["106:21835"],
+    "LUI-167": ["1586:115241"]
+  },
+  "pendingValidation": [],
+  "brokenLinksRemoved": {
+    "Component-Examples": ["LUI-75", "LUI-85", "LUI-96", "LUI-112"],
+    "Studio-v1.0": ["LUI-167"],
+    "Ambiendo-sunny": ["LUI-115"]
+  }
+}

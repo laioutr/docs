@@ -1,0 +1,21 @@
+{
+  "key": "LUI-124",
+  "title": "Button Group",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "A container component for grouping related buttons in a cohesive layout.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "Button Group organizes multiple related action buttons into a unified visual unit. It handles proper spacing, alignment, and connected styling between buttons, commonly used for toolbars, action sets, or toggle button groups where related options need to be presented together as a single interactive element."
+}

@@ -1,0 +1,34 @@
+{
+  "key": "LUI-38",
+  "title": "Inpage Navigation / Basic / Slider",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "Please read the Epic and Idea Ticket for more context and information.\n\n## The Inpage Navigation Basic Slider is mainly used when the user wants to save space in the interface. A common use is under the title of a listing page to display subcategories of the next level.\n\n| **Properties** breakpoint style default (aka on light/pale background) white nodes on pale background on dark background on bright background rows 1 or 2 on mobile (only 1 on desktop) is sale true/false slider navigation on top / bottom show scrollbar true/false show optional headings true/false has button  yes / no button variant is choosable | **ignore** this property in figma: ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=67f52bb6-7ab8-43d5-87fa-42d5f6c63fac&&collection=&height=35&occurrenceKey=null&width=238&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) _This is only used to hide the top navigation buttons in layouts when all nodes are visible._ |\n| --- | --- |\n| User can decide between one row slider or two row slider Same behaviour as <custom data-type=\"smartlink\" data-id=\"id-0\">https://laioutr.atlassian.net/browse/THEMES-13</custom>  If all nodes are visible, hide navigation elements 2 row slider becomes one row at lg breackpoint and larger | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=b9e121e9-472f-42a3-8c88-d87a6e0d6b76&&collection=&height=194&occurrenceKey=null&width=191&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| if text would break, and top navigation buttons are visible: same behaviour as described here: <custom data-type=\"smartlink\" data-id=\"id-1\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=8267-3&t=WGKlkG3l0TsCUryI-4</custom>   |  |\n| the user can always decide to show or show not a scrollbar. |  |\n| the navigation buttons are obligatory, but the user can decide if they should appear above the slider or under it <custom data-type=\"smartlink\" data-id=\"id-2\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=9416-81029&t=WGKlkG3l0TsCUryI-4</custom>   | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=54446f05-e414-4fb1-95d7-fcf0ad66c48b&&collection=&height=751&occurrenceKey=null&width=1058&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| if all category nodes are visible on the screen (for example on large screens), the navigation elements are hidden |  |\n\n## **Testing (stories):**\n\n* Slider on light background - one row - naviagtion top - has scrollbar \n* Slider on dark background - two rows - navigation bottom - has scrollbar \n* Slider on bright background - one row - navigation hidden - no scrollbar \n* Slider on light background - two rows - navigation bottom - has scrollbar - has action button\n\n## **Technical details**:\n\n_**organism/InpageNavigationBasicSlider**_\n\n```\nconst InpageNavigationBasicSlider {\n  colorMode: 'on-light' | 'on-dark' | 'on-bright';\n  \n  categoryNodesBasic : categoryNodeBasicProps[];\n  \n  header? : string;\n  \n  subline? : string;\n  \n  rowsNumbers : 'one' | 'two'\n  \n  navigationPosition? : 'top' | 'bottom'\n  \n  hasScrollbar? : boolean;\n  \n  cta? : {\n    text : string;\n    link : string;\n    variant : ButtonVariants\n  }\n}\n```\n\n‌\n\n* if a CTA added the navigation position will be on bottom by default \n* please use `LuiCommonSwipper` for slider \n* do not use fixed css values for slides use slider options \n* components will be used `LuiText` ,`LuiButton`, `CategoryNodeBasic`,`LuiCommonSwipper` , `LuiSwiperNavigationCompact` , `LuiSwipperScrollbar`\n\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/11.ui-app-ecommerce/InpageNavigationBasicSlider.md",
+  "parentEpic": {
+    "key": "LUI-34",
+    "title": "Inpage Navigation"
+  },
+  "summary": "Space-efficient horizontal slider for displaying subcategory nodes with configurable rows and navigation positioning.",
+  "features": [
+    "One or two row slider options (two-row collapses to single on desktop)",
+    "Auto-hiding navigation when all nodes are visible on screen",
+    "Optional CTA button with variant selection",
+    "Support for promotional flags on category nodes"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-41"
+  ],
+  "longDescription": "## Purpose\n\nThe InpageNavigationBasicSlider component provides a space-saving horizontal slider for displaying category nodes, ideal for interfaces where vertical space is limited. It is commonly used under listing page titles to display subcategories of the next navigation level.\n\n## Use Cases\n\n- Display subcategory navigation on product listing pages\n- Show category previews in a compact horizontal format\n- Provide one or two row layouts depending on content density needs\n- Add promotional flags to highlight sale or new categories within the slider\n- Include optional CTA buttons for directing users to category overviews\n\n## Design Rationale\n\nThe slider automatically adapts its navigation visibility based on content: when all nodes fit on screen, navigation controls hide to reduce visual clutter. The two-row option on mobile collapses to a single row on larger breakpoints to optimize space usage. Navigation position flexibility (top or bottom) allows integration with various page layouts and header configurations.",
+  "shortDescription": "Commonly used under listing page titles for subcategory display. Uses LuiCommonSwiper, LuiSwiperNavigationCompact, and LuiSwipperScrollbar for slider functionality. CTA button automatically positions navigation to bottom. Multiple color modes support light, dark, and bright backgrounds with optional header and subline text.",
+  "keywords": [
+    "subcategory-navigation",
+    "horizontal-scroll",
+    "multi-row"
+  ]
+}

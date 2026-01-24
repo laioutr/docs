@@ -1,0 +1,58 @@
+{
+  "key": "LUI-229",
+  "title": "Studio / Sections / Product Review",
+  "issueType": "Story",
+  "status": "Dev QA",
+  "labels": [],
+  "description": "| **Name** | Product Review |\n| --- | --- |\n| **Description** | Your customers' reviews are displayed here. |\n| **Options**  | Data Source selection |\n| **Buttons** | Create a review button (primary button per default, optional) Filter button (optional) Sorting button (optional) |\n| **Rating summary** | Size Small Medium (default) Orientation Vertical (default) Horizontal Alignment Left Center (default) Right Display Stars y/n Size S SM (default) M Color scheme Accent (default) Primary Yellow Black White |\n| **Design** | Styling Style full width boxed Color scheme (for the entire section) Accent Primary Yellow Stars Black Background none (default) custom Layout Margin S M L Padding S M L |\n\n## Modals / Dialogs\n\n| To enable editing of the review dialogs, the dialogs are displayed as blocks in the left sidebar. | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=12baf59b-2fa0-44b3-ac8e-44f4f659dca7&&collection=&height=334&occurrenceKey=null&width=576&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| --- | --- |\n\n## Review Dialog\n\n| In the right sidebar of the Review dialog, you can specify whether login is required to write a review and whether there should be a success message. When the options are disabled, the corresponding blocks are displayed as \"not visible\" in the left sidebar, but can still be clicked on and edited. | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=7e30f93d-601c-424c-91b7-fd1975420d1b&&collection=&height=164&occurrenceKey=null&width=526&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| --- | --- |\n| **Options** | Login required y/n Success message y/n Display: Product info y/n With short summary y/n |\n| **Content** | Heading Subline Rating scale Color scheme Accent (default) Primary Yellow Black Short summary input Label Placeholder text Review input Label Placeholder text Buttons Cancel (default tertiary) Send review (default primary) |\n\n## Login message\n\n| **Content (no tab heading)** | Icon selection Default icon: login-1 Heading Subline Buttons Cancel (default tertiary) Login (default primary) |\n| --- | --- |\n\n## Success message\n\n| **Content (no tab heading)** | Icon selection Default icon: check-circle-filled with success color 9 applied Heading Subline Buttons Close window (default primary) |\n| --- | --- |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Buttons",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Rating summary",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Design",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Product review section with rating summaries, filtering, and review submission.",
+  "features": [
+    "Rating summary with multiple size and color scheme options",
+    "Create review, filter, and sorting buttons",
+    "Review dialog with optional login requirement and success message",
+    "Full width or boxed layout with customizable styling"
+  ],
+  "keywords": ["customer reviews", "product ratings", "review submission"],
+  "shortDescription": "The Product Review section provides a complete review system for displaying and collecting customer feedback. It pulls reviews from a configured data source and presents them with a rating summary in various sizes and orientations. Users can filter and sort reviews, and submit new ones through a customizable dialog. The review dialog supports optional login requirements, product info display, short summaries, and success messages. Login and success dialogs are configurable as sidebar blocks."
+}

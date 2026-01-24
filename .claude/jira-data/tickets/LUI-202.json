@@ -1,0 +1,39 @@
+{
+  "key": "LUI-202",
+  "title": "Studio / Blocks / Buy Box / Quantity Discount",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Quantity Discount |\n| --- | --- |\n| **Description** | Display quantity or unit discounts in a nice table. |\n| **Options**  | Title text Data Source Discount Flag Flag color default (sale) custom (proposed colors: accent 9, primary 9, always black) Text input with color popover and dynamic data source option |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Quantity discount block for Buy Box displaying volume pricing in a table format.",
+  "features": [
+    "Customizable title text",
+    "Discount flag with color options",
+    "Dynamic data source integration"
+  ],
+  "keywords": ["bulk pricing", "volume discount", "tiered pricing"],
+  "shortDescription": "The Quantity Discount Studio block displays volume-based pricing tiers in a clear table format within the Buy Box. Ideal for B2B scenarios or products with bulk purchase incentives, it shows customers exactly how much they save at each quantity level. A customizable discount flag highlights the savings, with color options including default sale styling or custom brand colors. Data can be entered manually or pulled dynamically from the commerce backend."
+}

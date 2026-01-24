@@ -1,0 +1,21 @@
+{
+  "key": "LUI-139",
+  "title": "Toggle",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": "A two-state button that can be either on or off.",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "A two-state toggle button for switching between on and off states.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The Toggle component provides a two-state button that switches between on and off states with each interaction. Unlike switches which indicate settings, toggles function as pressable buttons that maintain their active state until clicked again. Commonly used for toolbar actions like bold/italic formatting, view mode switching, or any binary action where the current state should be visually indicated on the button itself."
+}

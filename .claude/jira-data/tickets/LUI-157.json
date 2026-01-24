@@ -1,0 +1,20 @@
+{
+  "key": "LUI-157",
+  "title": "Create new block BlockProductDetailVariantsMultiple",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "As a customer i want to be able to view the available variants on the product detail page. For that i need to be able to add a Block BlockProductDetailVariantsMultiple, which renders the MultipleVariantSelection component.\n\n### Technical details\n\nThe new Block should be created in `packages/ui-app/src/runtime/app/block/ProductDetail/`. You can copy the block definition-schema from e.g. [BlockProductDetailBasicInfo](https://github.com/laioutr/laioutr/blob/46b927eaa0340b17500c254a6d2f63ce6ff7dd0c/packages/ui-app/src/runtime/app/block/ProductDetail/BlockProductDetailBasicInfo.vue). That will give you access to the current product as `props.product` and the products' variants as `props.product?.links['ecommerce/product/variants'].entities`.\n\nPlease let me know if there's any data missing in the variants, that are required for rendering the MultipleVariantSelection.",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "summary": "New block for displaying multiple product variants on the PDP using MultipleVariantSelection.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The BlockProductDetailVariantsMultiple is a new studio block that renders the MultipleVariantSelection component on product detail pages. Located in the ProductDetail block directory, it follows the same schema pattern as BlockProductDetailBasicInfo and receives product data including variant entities through the linked ecommerce data. This enables customers to view and select from all available product variants such as size, color, or material combinations.",
+  "sourceEpic": null,
+  "sourceIdeas": []
+}

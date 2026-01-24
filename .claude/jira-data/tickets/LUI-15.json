@@ -1,0 +1,104 @@
+{
+  "key": "LUI-15",
+  "title": "Cards",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## **Acceptance criteria** \n\nStorybook stories have been created :\n\n* card with _**plain**_ style and 1:1 aspect ratio landscaped\n* card with _**outline**_ style and 4:3 aspect ratio landscape\n* card with _**haptic**_ style and 16:9 aspect ration portrait (title only)(centered)\n* card with _**large**_ size and 4:3 aspect ratio portrait (centered)\n* additional examples as you like \n\n## **Technical Details**\n\n### molecule/Card/Card.vue\n\nprops: \n\n```\ninterface CardProps {\n  title : string;\n  description? : string;\n  // Appearance variants\n  variant: 'plain' | 'outline' | 'haptic';\n  \n  // Media\n  media?: Media\n  \n  // Media Ratio\n  aspectRatio?: string | number;\n  \n  // Card sizing\n  size?: 'default' | 'large';\n  \n  // Content alignment\n  textAlignment?: 'left' | 'center' | 'right';\n  \n  // Link configuration\n  link?: {\n    href: string;\n    text: string;\n    color: 'primary' | 'white' | 'dark';\n  };\n  \n  // Call to action button\n  cta?: {\n    text: string;\n    variant: ButtonVariant;\n  };\n}\n```\n\n* use `<component :is=\"link.href ? NuxtLink : 'div'\" />` to render anchor if the whole component is linked or to render div element if not \n* for the `'outline' | 'haptic'` variant there is different paddings for the card container in mobile viewport \n* use `LuiText` `LuiButton` `LuiMedia` `LuiLink(inprogress)` components\n\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "variant",
+        "type": "'plain' | 'outline' | 'haptic'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "media",
+        "type": "Media",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "aspectRatio",
+        "type": "string | number",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "size",
+        "type": "'default' | 'large'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "textAlignment",
+        "type": "'left' | 'center' | 'right'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "link",
+        "type": "{",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "text",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "color",
+        "type": "'primary' | 'white' | 'dark'",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-14",
+    "title": "Card Grid MVP"
+  },
+  "summary": "A flexible card component displaying media, title, description, and actions with three appearance variants.",
+  "features": [
+    "Three appearance variants (plain, outline, haptic) for visual hierarchy",
+    "Customizable aspect ratios for media content",
+    "Support for inline links and call-to-action buttons",
+    "Two size options with responsive mobile padding"
+  ],
+  "longDescription": "## Purpose\n\nThe Card component serves as the foundational building block for presenting content in easily digestible units within grid layouts. It enables website visitors to browse multiple content options efficiently, supporting quick comparison and easy access to information of interest.\n\n## Use Cases\n\n- Display product information, blog posts, or category previews in a structured format\n- Present content with images, alt text, titles, descriptions, and call-to-action elements\n- Create consistent card dimensions across grids to maintain visual harmony\n- Support various content types through flexible media aspect ratios\n\n## Design Rationale\n\nThe component offers three distinct appearance variants to accommodate different visual contexts and content hierarchies. The plain variant provides minimal styling, outline adds subtle borders for definition, and haptic introduces elevated visual feedback. This flexibility ensures cards integrate seamlessly into diverse page layouts while maintaining a consistent user experience.",
+  "keywords": [
+    "content tile",
+    "product card",
+    "CTA card"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-30"
+  ],
+  "shortDescription": "The Card component serves as the foundational building block for presenting content in grid layouts, enabling visitors to browse and compare multiple content options efficiently. It supports product information, blog posts, and category previews with consistent dimensions across grids. The plain variant provides minimal styling, outline adds subtle borders, and haptic introduces elevated visual feedback for different contexts."
+}

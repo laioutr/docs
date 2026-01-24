@@ -1,0 +1,19 @@
+{
+  "key": "LUI-248",
+  "title": "Dark mode logo upload",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": "Wherever a logo can be uploaded, we need two upload options: light mode and dark mode logo. This is missing in the footer, for example.",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Enhancement adding light and dark mode logo upload options.",
+  "features": [],
+  "keywords": ["dark mode logo", "theme logos", "logo upload"],
+  "shortDescription": "This enhancement extends all logo upload fields across the platform to support separate uploads for light and dark mode appearances. Currently missing in components like the footer, this feature ensures logos remain visible and properly styled regardless of the active color scheme. When users enable dark mode, the appropriate logo variant displays automatically, preventing contrast issues where light logos disappear on light backgrounds."
+}

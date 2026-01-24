@@ -1,0 +1,33 @@
+{
+  "key": "LAIOUTR-24",
+  "title": "Corporate / Pricing Page Template",
+  "issueType": "Idea",
+  "status": "Parking lot",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\nAs a customer, I want to know what subscription plans Laioutr offers and what they offer me.\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-1\">:gorilla:</custom> Goal\n\nA page template on which we can present our plans, features and additional offers transparently and simply.\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-2\">:brain:</custom> Assumptions\n\n* A good pricing page makes it easier to win new customers <custom data-type=\"emoji\" data-id=\"id-3\">:moneybag:</custom> **revenue**\n* Transparent information about features and costs strengthens customer confidence in our product 💕 **trust**\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-4\">:clipboard:</custom> Requirements\n\n* All options and costs are clearly explained and comparable\n* There are no hidden costs\n* Users can contact us at any time if they have any questions about the plans / features\n* **MVP**: Instead of subscribing directly online, there should be the option of arranging a demo or contacting us.\n* It should be as easy as possible to link features to other pages/ankers\n* Content of Cards and Table should be easy maintainable\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-5\">:paintbrush:</custom> Design",
+  "linkedLuiTickets": [
+    "LUI-1"
+  ],
+  "created": "2025-02-19T12:42:11.411+0100",
+  "updated": "2025-06-11T22:30:30.543+0200",
+  "enrichedData": {
+    "purpose": "Provides customers with clear information about Laioutr subscription plans, features, and pricing through a dedicated page template.",
+    "goals": [
+      "Present plans, features, and additional offers transparently and simply",
+      "Make it easier to win new customers (revenue)",
+      "Strengthen customer confidence in the product (trust)"
+    ],
+    "designRationale": [
+      "A good pricing page makes it easier to win new customers",
+      "Transparent information about features and costs strengthens customer confidence in our product"
+    ],
+    "useCases": [
+      "Display all options and costs clearly explained and comparable",
+      "Present pricing without hidden costs",
+      "Provide contact options for questions about plans or features",
+      "Offer demo scheduling or contact form instead of direct online subscription (MVP)",
+      "Link features to other pages or anchors easily",
+      "Maintain content of cards and tables with minimal effort"
+    ]
+  }
+}

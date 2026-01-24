@@ -1,0 +1,21 @@
+{
+  "key": "LUI-140",
+  "title": "Toggle group",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": "A set of two-state buttons that can be toggled on or off.",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "A group of toggle buttons with single or multiple selection support.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "Toggle Group organizes multiple toggle buttons into a cohesive set, supporting both single-select (radio-like) and multi-select modes. When single-select is enabled, activating one toggle deactivates others. In multi-select mode, toggles operate independently. This pattern is ideal for segmented controls, view switching, filter options, or any context where users choose from mutually exclusive or combinable options presented as buttons."
+}

@@ -1,0 +1,52 @@
+{
+  "key": "LUI-231",
+  "title": "Studio / Sections / Inpage Navigation Basic",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Inpage Navigation Basic |\n| --- | --- |\n| **Description** | Standard links with images that stimulate users to click. Good for promoting categories on the home page. |\n| **Section Style Options** | Style: Full width boxed Section background color: None Theme Presets Custom Text color: On light background On dark background On bright background Display as: Grid Slider Navigation position top bottom Show scrollbar (y/n) Rows: 1 2 Content alignment: Left Center Right Auto Margin: None S M L Padding: None S M L |\n| **Tiles styling options** | Image Background: default Flags: Show flags (y/n) if true: Variant Size Text or Icon |\n| **Proposed Colors for  image background** | Accent 3 Grey 3 Primary 3 |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Section Style Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Tiles styling options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Proposed Colors for  image background",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Basic in-page navigation section with standard image links for categories.",
+  "features": [
+    "Grid or slider display modes",
+    "Optional flag display with variant and size options",
+    "Customizable image background colors",
+    "Navigation position and scrollbar options"
+  ],
+  "keywords": ["category navigation", "image links", "homepage categories"],
+  "shortDescription": "The Inpage Navigation Basic section offers a straightforward approach to category navigation using image links that encourage user interaction. It sits between the compact and large navigation variants, providing a balanced visual footprint. Tiles feature images with customizable backgrounds and optional promotional flags. The section works as a static grid or scrollable slider with configurable rows and alignment. Ideal for homepage category promotion where visual appeal matters but space is limited."
+}

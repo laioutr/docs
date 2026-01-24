@@ -1,0 +1,58 @@
+{
+  "key": "LUI-89",
+  "title": "PDP / buybox - Product Title & Basic Info",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "‌\n\n| Display the product name, brand, brand logo (and in the future: rating summary (stars and number of reviews)). | <custom data-type=\"smartlink\" data-id=\"id-0\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=17908-139941&t=UMVYiwKBxFSENScG-4</custom>   ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=173d0081-0d68-4977-83f1-063f6e42c6d5&&collection=&height=71&occurrenceKey=null&width=388&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| --- | --- |\n\n---\n\nby <custom data-type=\"mention\" data-id=\"id-1\">@bassem mohamed</custom> \n\n## Acceptance criteria: \n\nStorybook story: default with logo , brand name and product title (like in Figma)\n\n## Technical details:\n\n### _molecule/PDP/BuyBoxProductInfoBasic_ \n\n```\ninterface BuyBoxProductInfoBasicProps {\n  title : string;\n  brand? : string;\n  logo? : Media;\n}\n```\n\nuse `LuiMedia` , `LuiText`",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=17908-139941&t=UMVYiwKBxFSENScG-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "brand",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "logo",
+        "type": "Media",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-84",
+    "title": "Product Detail Page"
+  },
+  "summary": "A buy box header component displaying product title, brand name, and optional brand logo.",
+  "features": [
+    "Product title and brand name display",
+    "Optional brand logo support",
+    "Future-ready for rating summary integration",
+    "Linkable brand name to brand pages"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-48"
+  ],
+  "longDescription": "## Purpose\n\nThe Product Title and Basic Info component displays essential product identification information at the top of the buy box. It provides customers with immediate recognition of what product they are viewing and which brand manufactures it.\n\n## Use Cases\n\n- Displaying product name prominently within the buy box\n- Showing brand identity through name and optional logo\n- Linking brand name to dedicated brand pages for brand discovery\n- Reserving space for future rating summary integration\n\n## Design Rationale\n\nThe component prioritizes product title visibility as the primary identifier while supporting optional brand elements. The brand logo option accommodates stores that emphasize brand partnerships, while the text-only brand name option suits simpler layouts. The modular design allows future extension with rating summaries without breaking existing implementations.",
+  "shortDescription": "Provides customers with immediate recognition of the product and manufacturer at the top of the buy box. The brand logo option accommodates stores emphasizing brand partnerships, while text-only suits simpler layouts. Modular design allows future extension with rating summaries.",
+  "keywords": [
+    "product header",
+    "manufacturer",
+    "product identity"
+  ]
+}

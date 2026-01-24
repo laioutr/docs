@@ -1,0 +1,50 @@
+{
+  "key": "LUI-211",
+  "title": "Studio / Sections / Shop Header",
+  "issueType": "Story",
+  "status": "Dev QA",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Shop Header  |\n| --- | --- |\n| **Description** | Well suited if you have an online shop with multiple categories and many products. You can even choose between different flyouts or a dropdown menu. |\n| **Options** | Menu data source (dynamic data source) selection When a data source has been selected, no menu items are displayed in the left sidebar, as these come from a different source. Display: Submenu variant: [Mega Menu Flyout](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=7-65951&t=CgTr7wMZS8zPZvhC-4) [Side by Side](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=30-38696&t=CgTr7wMZS8zPZvhC-4) [Dropdown](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-24) Cart y/n Customer Account y/n Wishlist y/n Search y/n Display as: Search bar Button Text Display Icon y/n Icon select Top bar y/n Links (max 3) Language Select y/n Mode switch y/n Style Grey Black |\n| **Logo** | Logo upload |\n\n## Menu \n\n| **Options** | Title (displayed in header) Title link (optional) Sale design y/n |\n| --- | --- |\n| **Menu items** | can have submenu  ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=76b63267-bcea-49a9-a4e8-5fe905dc69fb&&collection=&height=314&occurrenceKey=null&width=285&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=b0416450-4743-4535-91a4-10785846cca0&&collection=&height=339&occurrenceKey=null&width=267&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  Menu and items are also displayed in the left sidebar as layers:  ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=2be2ac51-1cf2-46f2-9708-a0d90c6aab5b&&collection=&height=341&occurrenceKey=null&width=313&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| **level 1 menu  content slots** | can have content in slots **if submenu variant is \"****[**mega menu flyout**](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=7-65951&t=CgTr7wMZS8zPZvhC-4)**\"** ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=518a5b82-05d1-4aa7-b9c0-d0f7f9c9fdd3&&collection=&height=138&occurrenceKey=null&width=287&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=7-65951&t=CgTr7wMZS8zPZvhC-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=30-38696&t=CgTr7wMZS8zPZvhC-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-24"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Logo",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/09.ui-app-navigation/ShopHeader.md",
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "E-commerce header with mega menus, cart, search, and account functionality.",
+  "features": [
+    "Multiple submenu variants (Mega Menu, Side by Side, Dropdown)",
+    "Integrated cart, account, wishlist, and search",
+    "Dynamic menu data source integration",
+    "Optional top bar with language and mode switch"
+  ],
+  "keywords": ["shop header", "mega menu", "e-commerce navigation"],
+  "shortDescription": "The Shop Header is a full-featured e-commerce navigation component designed for stores with extensive product catalogs. It supports dynamic menu data from the commerce backend with three submenu display variants: mega menu flyouts with content slots, side-by-side panels, or simple dropdowns. Integrated utility icons provide access to cart, customer account, wishlist, and search. An optional top bar adds secondary links, language selection, and dark mode toggle."
+}

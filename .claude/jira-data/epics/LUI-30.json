@@ -1,0 +1,51 @@
+{
+  "key": "LUI-30",
+  "title": "USP Banner",
+  "issueType": "Epic",
+  "status": "Done",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\n### As a Shop Owner\n\nI want to implement a **flexible** USP banner that showcases multiple unique selling points with icons, so that I can effectively communicate key benefits to all users, including those relying on assistive technologies.\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-1\">:gorilla:</custom> Goal\n\nThe USP (Unique Selling Proposition) Banner Component aims to create a prominent, accessible display of key business advantages that immediately capture visitor attention. This component serves multiple strategic purposes:\n\n* **Value Communication:** Instantly highlight the most compelling reasons for customers to choose your business or product\n* **Trust Building:** Demonstrate credibility and reliability through clear presentation of business strengths\n* **User Experience:** Provide quick, scannable information that helps users make informed decisions\n* **Accessibility:** Ensure all users, regardless of their abilities, can access and understand your key value propositions\n* **Brand Reinforcement:** Consistently communicate core business values across the user interface\n\nBy implementing this component with attention to both visual appeal and accessibility, businesses can effectively communicate their competitive advantages while ensuring an inclusive user experience.\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-2\">:clipboard:</custom> Requirements\n\n* **Layout & Positioning:**\n\n    * Banner can be placed at different positions on the page \n    \n        * above navigation header\n        * under navigation header\n        * below hero\n        * it should be possible to set the position globally and then define deviations (_for example, globally above the header, but on the home page below the hero_)\n        * in addition, the component should also be able to be used freely in the content on individual pages as a cms block\n        \n    * Multiple USPs are arranged horizontally in a slim band design\n    \n        * if there is not enough space for the USPs, only one USP is displayed + additional navigation arrows and the banner becomes a slider\n        * there is no maximum limit for the number of USP, but the recommendation is three pieces\n        \n    * Layout remains responsive across different screen sizes\n    * Banner is NOT sticky\n    \n* **Content & Visual Elements:**\n\n    * Each USP can display a custom icon\n    \n        * default icon: check\n        * preferred / suggested icons to choose from: \n        \n            * check\n            * info\n            * alert\n            * calendar\n            * bag\n            * bag-heart\n            * cart\n            * bill\n            * delivery\n            * delivery-2\n            * store\n            * chat-bubbles\n            * customer-service\n            * shield-check\n            * sso\n            * return\n            * clock\n            * map-pin\n            * star-outline\n            * heart-outline\n            \n        \n    * Icons must have proper alt text descriptions\n    * Text content must maintain sufficient color contrast (4.5:1 ratio)\n    * Theme colors are used (variables in figma)\n    \n* **Accessibility Features:**\n\n    * ARIA landmarks and roles properly implemented\n    * Keyboard navigation support between USP items\n    * Screen reader compatibility with meaningful descriptions\n    * Focus indicators visible for interactive elements\n    * Support for text resizing up to 200% without loss of functionality\n    \n* **Interactive Elements:**\n\n    * Navigation controls (if needed) must be keyboard accessible\n    * Touch targets sized appropriately\n    * Interactive elements must have clear focus states\n    \n* Compliant with WCAG 2.1 Level AA standards\n* Semantic HTML structure\n* Responsive design implementation\n* Cross-browser compatibility\n\n",
+  "figmaLinks": [],
+  "childTickets": [
+    "LUI-31"
+  ],
+  "created": "2025-03-18T15:17:19.680+0100",
+  "updated": "2025-04-23T14:31:09.748+0200",
+  "linkedIdeas": [
+    "LAIOUTR-37"
+  ],
+  "enrichedData": {
+    "purpose": "Shop owners need a prominent, accessible way to communicate unique selling points to all visitors, including those using assistive technologies, to build trust and drive conversions.",
+    "goals": [
+      "Instantly highlight compelling reasons for customers to choose the business",
+      "Demonstrate credibility and reliability through clear presentation of business strengths",
+      "Provide quick, scannable information for informed decision-making",
+      "Ensure accessibility for all users regardless of abilities",
+      "Consistently communicate core business values across the interface"
+    ],
+    "useCases": [
+      "Position USP banner above navigation header, under navigation header, or below hero",
+      "Set global banner position with page-specific overrides",
+      "Use banner as a CMS block within page content",
+      "Display multiple USPs horizontally in a slim band design",
+      "Automatically convert to slider when space is limited",
+      "Select custom icons from a predefined set for each USP",
+      "Navigate between USPs using keyboard controls",
+      "Resize text up to 200% without losing functionality"
+    ]
+  },
+  "summary": "A flexible banner for displaying unique selling propositions with icons, multiple positioning options, and automatic responsive slider behavior.",
+  "features": [
+    "Multiple positioning: above header, below header, below hero, or as CMS block with page overrides",
+    "Horizontal slim band layout with automatic slider conversion on smaller screens",
+    "Curated icon library with 20+ options including delivery, customer service, and trust indicators",
+    "WCAG 2.1 Level AA compliant with keyboard navigation and screen reader support"
+  ],
+  "longDescription": "## Purpose\n\nThe USP Banner component provides shop owners with a prominent, accessible way to communicate key business advantages and unique selling points to all visitors. It serves as a trust-building element that helps customers quickly understand why they should choose a particular business.\n\n## Use Cases\n\nThe component supports flexible placement throughout the storefront, including above or below the navigation header, below the hero section, or embedded as a CMS block within page content. This flexibility allows merchants to strategically position value propositions where they have the greatest impact on customer decision-making.\n\n## Design Rationale\n\nThe slim band design ensures USPs are visible without overwhelming page content. Automatic slider behavior on constrained viewports maintains usability across devices while preserving the ability to display multiple selling points. The curated icon library provides visual reinforcement of common ecommerce benefits like fast delivery, secure checkout, and quality customer service.",
+  "shortDescription": "Three style variants available: default, pale, and bright. Global positioning can be set with page-specific deviations for strategic placement. No maximum limit on USP count though three is recommended. Text resizing supported up to 200% without functionality loss. Sufficient color contrast (4.5:1 ratio) maintained for readability.",
+  "keywords": [
+    "value proposition",
+    "trust indicators",
+    "benefits banner"
+  ]
+}

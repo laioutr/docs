@@ -1,0 +1,34 @@
+{
+  "key": "LUI-49",
+  "title": "persona quote navigation slider numbers",
+  "issueType": "Task",
+  "status": "Done",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "userStory": "As a Website Visitor, I want to see which testimonial I am viewing and how many are available So that I can navigate through all customer experiences efficiently",
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-23",
+    "title": "Testimonial Components"
+  },
+  "summary": "Numbered navigation indicator for testimonial sliders displaying current position in \"n / n\" format.",
+  "features": [
+    "Current position display in \"n / n\" format (e.g., \"1 / 5\")",
+    "Integrated navigation controls for previous/next slide movement",
+    "Adaptive positioning that moves below text when author names are long",
+    "Consistent styling with light, dark, and bright background themes"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-31"
+  ],
+  "longDescription": "## Purpose\n\nThe Persona Quote Navigation component provides clear positional feedback within testimonial sliders, allowing visitors to understand how many testimonials are available and which one they are currently viewing. This improves the browsing experience by giving users control over their navigation.\n\n## Use Cases\n\n- Display current position indicator within Persona Quote sliders showing \"1 / 5\" format\n- Provide previous/next navigation controls alongside the position counter\n- Adapt layout when combined with long author names to prevent text overlap\n- Maintain visual consistency across different background theme variants\n\n## Design Rationale\n\nThe numbered counter format was chosen over dots or progress bars because it clearly communicates both the current position and total count, helping users decide whether to continue browsing. The adaptive positioning ensures the navigation remains accessible and visually balanced even when author information requires additional space.",
+  "keywords": [
+    "slide-counter",
+    "pagination-numbers",
+    "carousel-navigation"
+  ],
+  "shortDescription": "Provides clear positional feedback within testimonial sliders, helping visitors understand how many testimonials are available. The numbered counter format was chosen over dots or progress bars because it clearly communicates both current position and total count. Adaptive positioning ensures navigation remains accessible even when author information requires additional space."
+}

@@ -1,0 +1,64 @@
+{
+  "key": "LUI-90",
+  "title": "PDP / buybox - Price Info",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "| Show the current price, any discounts, and original price (struck through if discounted). Include VAT information and shipping cost/hint (e.g. \"incl. VAT, plus shipping\"). | [https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-224223&t=wABQtnJ0GubOC0US-4](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-224223&t=wABQtnJ0GubOC0US-4) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=dd1ee71e-c814-4208-b0e0-0d1ec4e15f42&&collection=&height=58&occurrenceKey=null&width=379&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| --- | --- |\n\nby <custom data-type=\"mention\" data-id=\"id-0\">@bassem mohamed</custom> \n\n## Acceptance Criteria:\n\nStorybook stories:\n\n* pricing with taxes \n* pricing with taxes and shipping-rate\n* pricing with taxes , shipping-rate , strikethrough price and savings flag (like in figma)\n\n### Technical details: \n\n#### atom/SavingsBadge\n\nProps:\n\n* savingsPercent: number\n\nRenders the badge on the right side of the price box \"Spare 28%\" (i.e. \"save 28%\")\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=71fec26d-938b-45d4-82f9-dfd7e98df191&&collection=&height=27&occurrenceKey=null&width=85&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\nCreate a storybook story for this badge.\n\n#### organism/PDP/BuyBoxPriceInfo\n\n```\ninterface BuyBoxPriceInfoProps {\n  price: Money;\n  strikethroughPrice?: Money;\n  shippingRate? : Money;\n  savingsPercent?: number;\n}\n```\n\n* use LuiText , LuiProductTileFlag\n* render price with `{{ $money(price) }}` \n* import money type like this\n\n    ```\n    import type { Money } from '@laioutr-core/canonical-types';\n    ```\n\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-224223&t=wABQtnJ0GubOC0US-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "price",
+        "type": "Money",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "strikethroughPrice",
+        "type": "Money",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "shippingRate",
+        "type": "Money",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "savingsPercent",
+        "type": "number",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-84",
+    "title": "Product Detail Page"
+  },
+  "summary": "A pricing display component for the buy box showing current price, discounts, VAT information, and optional shipping costs with savings badges.",
+  "features": [
+    "Current and strikethrough price display",
+    "Savings percentage badge",
+    "VAT and shipping cost hints",
+    "Localized currency formatting"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-48"
+  ],
+  "longDescription": "## Purpose\n\nThe Price Info component displays comprehensive pricing information within the buy box, enabling customers to understand the total cost and any savings before making a purchase decision. It ensures pricing transparency through VAT and shipping disclosures.\n\n## Use Cases\n\n- Displaying current price with discounts and original price struck through\n- Showing savings percentage badges to highlight promotional offers\n- Indicating VAT inclusion and shipping cost information\n- Supporting multiple currencies through localized formatting\n\n## Design Rationale\n\nThe component follows e-commerce best practices by prominently displaying the current price while using visual hierarchy to show original prices and savings. Strikethrough styling for original prices creates immediate recognition of discounts. The savings badge draws attention to promotional value. Legal compliance is supported through configurable VAT and shipping hints that adapt to regional requirements.",
+  "keywords": [
+    "product price",
+    "savings badge",
+    "discount display"
+  ],
+  "shortDescription": "The Price Info component displays comprehensive pricing information within the buy box, enabling customers to understand total cost and savings before purchase. It follows e-commerce best practices by prominently displaying the current price while using visual hierarchy to show original prices and discounts. Strikethrough styling creates immediate recognition of savings. Legal compliance is supported through configurable VAT and shipping hints that adapt to regional requirements."
+}

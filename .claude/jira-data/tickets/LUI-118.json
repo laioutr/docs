@@ -1,0 +1,67 @@
+{
+  "key": "LUI-118",
+  "title": "Brand Page",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "### <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\n**As** a shopper interested in a specific brand, **I want** to visit a dedicated brand page that shows all products from that brand, **so that** I can easily explore and purchase items only from the brand I trust or prefer.\n\n---\n\n[Basic Page Template](https://www.figma.com/design/iOpGWO38HkhnTYkEeEq8Oz/Laioutr-Basic?node-id=89-298202&t=WsyhlVHQyGVajZ9T-4) | [AMBIENDO Page Template](https://www.figma.com/design/gDN7wlDFp5mwXQfRDhotzR/Ambiendo---sunny?node-id=176-91126&t=ILbTDINjUqk3ekCU-4)\n\nThe Brand Page will be a dedicated landing page for each brand available on the platform. It should display all associated products, allow filtering and sorting, feature relevant SEO content for search engines, and offer a way to explore other brands.\n\n| **Brand Header** Brand logo (if available) Brand name Short brand description (optional) Background image with black or white overlay (optional)  only show overlay when the user adds a background image has 3 background image styles/variants: light image dark image plain (aka no image) use [placeholder image svgs](https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=1321-379646&t=zXwA6JoVu4dYHZte-4) for the different variants | [Design examples](https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=1321-379624) [laioutr CMS component](https://www.figma.com/design/fU79c88OUWKPwScoPQ0Yag/laioutr-CMS?node-id=289-110320&t=67PEL5DWpbtQtnpO-4) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=ffb4a9cc-6a52-42f4-8408-8fb76fbaeb44&&collection=&height=684&occurrenceKey=null&width=249&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=434e2080-c02c-4000-808c-8548c0966670&&collection=&height=491&occurrenceKey=null&width=233&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| --- | --- |\n| **Products** display filter bar list all products of that brand as grid show **load more** if the number of products is more than the specified load more limit | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=094b6e19-b99d-4399-a034-659071492ff3&&collection=&height=540&occurrenceKey=null&width=701&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **SEO Content Section** Editable CMS content can also simply be HTML / richtext if the user does not want to use blocks Positioned below the product list Contains keyword-optimized brand-related information (e.g., \"About \\[Brand Name\\]\") | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=7f477650-077f-4bfb-950e-d89918cef184&&collection=&height=1020&occurrenceKey=null&width=711&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **Brand grid** display brand grid  | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=9a5061a3-852c-4f11-859a-0bbe32e141d2&&collection=&height=456&occurrenceKey=null&width=712&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **URL Structure** SEO-friendly: `/brands/{brand-name}/` Canonical URL to prevent duplication OpenGraph and meta tags per brand |  |\n| **CMS Integration** Admins must be able to: Add/edit SEO content Add brand logos and metadata Associate products with brands Reorder filter options (if needed) |  |\n| **Accessibility** WCAG 2.1 AA compliant Keyboard navigation ARIA labels for interactive elements |  |\n| **Analytics and Tracking** <custom data-type=\"status\" data-id=\"id-1\">nice to have</custom>  Track visits to each brand page Track filter/sort usage Product impressions and clicks SEO text interaction (scroll depth, link clicks) |  |\n\n### Technical details\n\n* Create new BrandHero component in ui-package\n\n    * logo?: Media\n    * name: string\n    * description?: string\n    * background?: Media\n    * overlay?: Overlay\n    * colorMode: on-dark, on-light\n    \n* Create new BrandGrid component in ui-package\n\n    * links: {name:string; href:string; count?: number; }\\[\\]\n    * Use [Intl.Collator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator) for locale-sensitive comparison (use [useLocale](https://github.com/laioutr/laioutr/blob/2a5d8cf41e6fe8d5c86f64c66e6b5f5cb549f02a/packages/ui-kit/src/runtime/app/composables/useLocale.ts) from ui-kit for current locale)\n    * Use [Intl.Segmenter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Segmenter/segment) for getting the first grapheme (character) of a name\n    \n\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/iOpGWO38HkhnTYkEeEq8Oz/Laioutr-Basic?node-id=89-298202&t=WsyhlVHQyGVajZ9T-4",
+    "https://www.figma.com/design/gDN7wlDFp5mwXQfRDhotzR/Ambiendo---sunny?node-id=176-91126&t=ILbTDINjUqk3ekCU-4",
+    "https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=1321-379646&t=zXwA6JoVu4dYHZte-4",
+    "https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=1321-379624",
+    "https://www.figma.com/design/fU79c88OUWKPwScoPQ0Yag/laioutr-CMS?node-id=289-110320&t=67PEL5DWpbtQtnpO-4"
+  ],
+  "userStory": "As a a shopper interested in a specific brand, I want to visit a dedicated brand page that shows all products from that brand,, so that I can easily explore and purchase items only from the brand I trust or prefer",
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "friendly",
+        "type": null,
+        "default": null,
+        "description": "`/brands/{brand-name}/` Canonical URL to prevent duplication OpenGraph and meta tags per brand |  |"
+      },
+      {
+        "name": "name",
+        "type": null,
+        "default": null,
+        "description": "string"
+      },
+      {
+        "name": "colorMode",
+        "type": null,
+        "default": null,
+        "description": "on-dark, on-light"
+      },
+      {
+        "name": "links",
+        "type": null,
+        "default": null,
+        "description": "{name:string; href:string; count?: number; }\\[\\]"
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-113",
+    "title": "Page templates"
+  },
+  "summary": "Dedicated brand landing page with hero header, filterable product grid, and SEO content section.",
+  "features": [
+    "Brand hero with logo and customizable background variants",
+    "Filter bar with sorting for brand products",
+    "Product grid with load more pagination",
+    "Editable SEO content section for brand information"
+  ],
+  "keywords": [
+    "brand landing page",
+    "manufacturer page",
+    "BrandHero component"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-66"
+  ],
+  "shortDescription": "The Brand Page creates a dedicated landing experience for individual brands, combining brand storytelling with product discovery. The BrandHero component supports flexible visual presentation through three background variants (light, dark, plain) with automatic overlay handling. Product listings utilize the standard filter bar and grid components with load more pagination for large catalogs. The page includes a CMS-editable SEO content section below products for keyword-optimized brand information, plus a BrandGrid component for cross-brand discovery using locale-sensitive sorting via Intl.Collator."
+}

@@ -1,0 +1,44 @@
+{
+  "key": "LUI-28",
+  "title": "Image Block",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "For Requirements, please check linked Idea Ticket.\n\nSee the attached Figma Design for what the lightbox-indicator looks like.\n\nStorybook stories:\n\n* Single MediaBlock without lightbox with border-radius\n* Single MediaBlock with lightbox without border-radius.\n* Single MediaBlock with custom height. Different values for mobile/desktop\n* Three MediaBlocks with lightbox\n\n## Technical details\n\n### Molecule/MediaLightbox\n\nNo design for this. This component uses the [Radix Vue Dialog Component](https://www.radix-vue.com/components/dialog.html). When open, it renders a almost-fullscreen dialog with a close-button in the top-right. The content displays a swiper-instance [with zoom enabled](https://swiperjs.com/swiper-api#param-panOnMouseMove). The swiper also shows all other images from MediaBlock-components, wheree lightbox is enabled.\n\n### Blocks/MediaBlock\n\nProps:\n\n* media\n* custom aspect ratio, to override the one from media\n\n    * separate values for mobile/desktop\n    \n* fixed height\n\n    * separate values for mobile/desktop\n    * if this value is given, it overrides the custom aspect ratio if given as well\n    \n* rounded borders\n* lightbox enabled\n\n    * If yes, clicking the image causes the MediaLightbox to open\n    * If yes, show lightbox-indicator\n    \n* optional description\n\nTo enable the lightbox to show all lightbox-enabled images, you must add the media of this component to a global list of lightbox-enabled media on the current page.",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "components",
+        "type": null,
+        "default": null,
+        "description": "wheree lightbox is enabled."
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/02.ui-kit-general/Media.md",
+  "parentEpic": {
+    "key": "LUI-27",
+    "title": "Video / Image Block"
+  },
+  "summary": "A responsive image block component with optional lightbox functionality, customizable aspect ratios, and device-specific sizing controls.",
+  "features": [
+    "Lightbox with zoom and pan using Radix Vue Dialog and Swiper",
+    "Cross-image navigation in lightbox across all enabled media on the page",
+    "Custom aspect ratios with separate mobile and desktop values",
+    "Fixed height option with responsive values that overrides aspect ratio"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-47"
+  ],
+  "longDescription": "## Purpose\n\nThe Image Block component enables content editors to insert and manage responsive images within page layouts, creating visually engaging content that adapts seamlessly across all device sizes.\n\n## Use Cases\n\n- Display product images, hero banners, or editorial photography with consistent styling\n- Enable users to examine image details through an interactive lightbox with zoom and pan controls\n- Navigate between multiple images in a gallery-style lightbox experience\n- Configure different aspect ratios or fixed heights for mobile versus desktop to optimize visual presentation\n- Add captions and accessibility descriptions for improved user experience\n\n## Design Rationale\n\nThe component leverages Radix Vue Dialog for accessible lightbox implementation and Swiper for smooth zoom and navigation interactions. The separation of mobile and desktop sizing options ensures optimal presentation across devices without requiring duplicate content blocks.",
+  "shortDescription": "Enables content editors to insert and manage responsive images within page layouts. Creates visually engaging content that adapts seamlessly across all device sizes. Display product images, hero banners, or editorial photography with consistent styling. Configure different sizing for mobile versus desktop to optimize visual presentation. Add captions and accessibility descriptions for improved user experience. Leverages Radix Vue Dialog for accessible lightbox implementation.",
+  "keywords": [
+    "media block",
+    "lightbox viewer",
+    "fullscreen"
+  ]
+}

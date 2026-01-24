@@ -1,0 +1,40 @@
+{
+  "key": "LUI-196",
+  "title": "Studio / Sections / USP Banner",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | USP Banner |\n| --- | --- |\n| **Description** | A narrow, mobile-optimized USP banner with navigation arrows on smaller screens. |\n| **Options** | USPs title icon (default is 'check' icon) Styling Display Icons y/n Style Default Grey Pale Dark background Bright background Custom Background color Text color Icon color |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "summary": "Mobile-optimized USP banner section with navigation arrows and customizable styling.",
+  "features": [
+    "Custom title and icon for each USP item",
+    "Multiple style presets (Default, Grey, Pale, Dark, Bright)",
+    "Customizable background, text, and icon colors"
+  ],
+  "keywords": ["USP", "value proposition", "trust banner"],
+  "shortDescription": "The USP Banner Studio section displays unique selling propositions in a narrow horizontal strip, typically placed below the header. On mobile devices, navigation arrows allow users to scroll through multiple USPs. Merchants can configure each item with a title and icon (defaulting to checkmark), then apply style presets or custom colors to match their branding. Ideal for highlighting shipping benefits, return policies, or competitive advantages.",
+  "sourceEpic": null,
+  "sourceIdeas": []
+}

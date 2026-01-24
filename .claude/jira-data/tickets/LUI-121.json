@@ -1,0 +1,43 @@
+{
+  "key": "LUI-121",
+  "title": "PDP / buybox - SwatchPreview",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "We need a utility component which is responsible for rendering the preview of a swatch.\n\n### Technical details\n\nby <custom data-type=\"mention\" data-id=\"id-0\">@Sebastian Langer</custom> \n\n_**atom/SwatchPreview/SwatchPreview**_\n\nRenders a preview of a swatch. No borders, no border-radius, etc. Just the preview. That may be either a single color, multiple colors, a gradient or a thumbnail. See definition of `Swatch` type.\n\n```\ninterface SwatchPreviewProps {\n  swatch?: Swatch;\n}\n```\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=2d1e5a66-e862-4bb6-9b5b-9984ed284b71&&collection=&height=47&occurrenceKey=null&width=48&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=e624ccae-7680-4792-9859-f750010c379e&&collection=&height=49&occurrenceKey=null&width=46&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=281c4e35-228b-4a35-97e6-a476df28f160&&collection=&height=128&occurrenceKey=null&width=133&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n(Gradients are rendered at a botom-left to top-right angle)\n\nIf no swatch is passed, render an empty div. The size of this preview depends entirely on the css of the component using this. For images, use 1:1 aspect-ratio and set the \"width\" and \"sizes\" props to 64px.",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "swatch",
+        "type": "Swatch",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/2.ui-kit-general/SwatchPreview.md",
+  "parentEpic": {
+    "key": "LUI-84",
+    "title": "Product Detail Page"
+  },
+  "summary": "Utility component for rendering swatch previews including colors, gradients, and thumbnails.",
+  "features": [
+    "Single color and multi-color swatch rendering",
+    "Gradient display at bottom-left to top-right angle",
+    "Image thumbnails with 1:1 aspect ratio",
+    "Flexible sizing controlled by parent CSS"
+  ],
+  "keywords": [
+    "color picker",
+    "variant selector",
+    "product options"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-48"
+  ],
+  "shortDescription": "SwatchPreview is a foundational atom component that renders visual representations of product variant attributes without any decorative styling. It handles multiple swatch types: single colors, multi-color combinations, CSS gradients rendered at a diagonal angle, and thumbnail images at 1:1 aspect ratio. The component intentionally omits borders and border-radius, delegating visual treatment to consuming parent components for maximum reusability across different UI contexts including buybox variant selectors, product cards, and filter interfaces."
+}

@@ -1,0 +1,47 @@
+{
+  "key": "LUI-82",
+  "title": "PLP Empty State",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## PLP Empty State\n\nIs used in the event that a user arrives at an empty list. For example, if they have used an old link to a pre-filtered list and the products are already sold out or no longer in the shop. The aim is to keep the user in the flow and active by using friendly wording and appropriate components, i.e. to avoid a dead end.\n\n---\n\n<custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User story\n\n**As a** user,  \n**I want** to see a helpful and informative empty state screen when there are no products in the product list,  \n**So that** I understand why the list is empty and what actions I can take next.\n\n## Requirements\n\n| **Visual Design & Layout** The empty state screen should appear only when the product list contains **zero items**. It should occupy the **main content area** where products are normally listed. Include a **friendly illustration or icon** that represents an empty product list. Include **concise messaging** that communicates the state clearly. | <custom data-type=\"smartlink\" data-id=\"id-1\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15272-139031&t=KBarTgaq8f4rSg2p-4</custom>  ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=f88e09b2-4490-49fb-979d-15f1b9b42911&&collection=&height=369&occurrenceKey=null&width=208&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| --- | --- |\n| **Best Practice Page Content** To keep the user in action, it is advisable to display additional content outside the message: Recommendation Slider Top Categories Newly arrived products Top Brands etc. Another option would be to display products as a product grid from another category or the supercategory | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=6dd5835f-ad8a-40d0-b4e7-f10ce00c9445&&collection=&height=726&occurrenceKey=null&width=478&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| **Empty State Message Component** has 3 variants: with icon with image just text user can change the icon or emoji as they like image recommendation is with transparent background default color is theme/colors/grey 3, but user can change that if he wants can change text alignment | [design in figma ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15272-139050&t=KBarTgaq8f4rSg2p-4)<custom data-type=\"emoji\" data-id=\"id-2\">:link:</custom>[ ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15272-139050&t=KBarTgaq8f4rSg2p-4) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=b10e3155-f425-4372-9d12-23322510f1a5&&collection=&height=494&occurrenceKey=null&width=203&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15272-139031&t=KBarTgaq8f4rSg2p-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15272-139050&t=KBarTgaq8f4rSg2p-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "user",
+        "type": null,
+        "default": null,
+        "description": "**I want** to see a helpful and informative empty state screen when there are no products in the product list,"
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/02.ui-kit-general/EmptyState.md",
+  "parentEpic": {
+    "key": "LUI-68",
+    "title": "Product Listing Page"
+  },
+  "summary": "Empty state component for product listing pages with friendly messaging when no products are available.",
+  "features": [
+    "Three display variants: icon, image, or text-only",
+    "Customizable icons, emojis, or illustrations",
+    "Configurable text alignment and background color",
+    "Integration points for recommendation sliders and category links"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-46"
+  ],
+  "longDescription": "## Purpose\n\nThe PLP Empty State component provides a user-friendly fallback display when a product listing page contains zero items. Rather than showing a blank page, it communicates the situation clearly and encourages continued engagement through helpful messaging and alternative content.\n\n## Use Cases\n\n- Display when filtered results return no products\n- Show when an outdated category link leads to discontinued products\n- Present when search results yield no matches\n- Appear when sold-out categories have no available inventory\n- Integrate with recommendation sliders to suggest alternative products\n\n## Design Rationale\n\nThe component is designed to prevent dead ends in the user journey. By offering three variants (icon, image, text-only), it adapts to different brand aesthetics and use cases. The recommendation to pair the empty state with additional content like product sliders or category links keeps users engaged and reduces bounce rates. Theming support ensures visual consistency with the overall store design.",
+  "shortDescription": "Occupies the main content area where products are normally listed. Best practice is to display additional content outside the message such as recommendation sliders, top categories, newly arrived products, or products from the supercategory. Image variant recommends transparent backgrounds. Default color uses theme/colors/grey 3 but is customizable. Designed to keep users in the flow and avoid dead ends.",
+  "keywords": [
+    "no results",
+    "fallback display",
+    "user retention"
+  ]
+}

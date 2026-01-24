@@ -1,0 +1,31 @@
+{
+  "key": "LUI-167",
+  "title": "PDP / Buy Box / Variant Selection / Configurator",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "Create a selection of variants for the product detail page in the style of a configurator. \n\nOptional icons refer to the active selection.\n\nFor example, if a specific shape can be selected and there are images or icons for it (circle, square, triangle, or similar), then the image/icon of the active selection is displayed at the top of the button.\n\nAn optional info button opens a modal.  \n\n---\n\nPlease also note the [block description](https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=1586-115241&t=DbsEktYWA8Dj8jGj-4) for the studio. And the [popover options.](https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=1587-118248&t=DbsEktYWA8Dj8jGj-4)\n\n---\n\n## Dummy\n\n[https://www.figma.com/proto/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=36-328326&p=f&m=dev&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2668%3A205015&show-proto-sidebar=1](https://www.figma.com/proto/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=36-328326&p=f&m=dev&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2668%3A205015&show-proto-sidebar=1) ",
+  "figmaLinks": [
+    "https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=1587-118248&t=DbsEktYWA8Dj8jGj-4",
+    "https://www.figma.com/proto/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=36-328326&p=f&m=dev&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2668%3A205015&show-proto-sidebar=1"
+  ],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": null,
+  "summary": "Product variant configurator for Buy Box with visual selection icons and info modals.",
+  "features": [
+    "Optional icons for active selection display",
+    "Info button with modal support",
+    "Visual representation of selected variants"
+  ],
+  "keywords": [
+    "variant configurator",
+    "product options",
+    "visual selector"
+  ],
+  "shortDescription": "The Variant Selection Configurator provides a visual product customization interface within the Buy Box. Unlike simple dropdowns, this component displays selection buttons with optional icons or images representing each choice—ideal for shape, material, or style options. The active selection is visually highlighted at the button top. An optional info button opens a modal with additional details about each variant, helping customers make informed decisions for configurable products.",
+  "sourceEpic": null,
+  "sourceIdeas": []
+}

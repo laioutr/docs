@@ -1,0 +1,50 @@
+{
+  "key": "LUI-31",
+  "title": "USP Banner",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:clipboard:</custom> Requirements\n\n* **Layout & Positioning:**\n\n    * Banner can be placed at different positions on the page \n    \n        * above navigation header\n        * under navigation header\n        * below hero\n        * it should be possible to set the position globally and then define deviations (_for example, globally above the header, but on the home page below the hero_)\n        * in addition, the component should also be able to be used freely in the content on individual pages as a cms block\n        \n    * Multiple USPs are arranged horizontally in a slim band design\n    \n        * if there is not enough space for the USPs, only one USP is displayed + additional navigation arrows and the banner becomes a slider\n        * there is no maximum limit for the number of USP, but the recommendation is three pieces\n        \n    * Layout remains responsive across different screen sizes\n    * Banner is NOT sticky\n    \n* **Content & Visual Elements:**\n\n    * Each USP can display a custom icon\n    \n        * default icon: check\n        * preferred / suggested icons to choose from: \n        \n            * check\n            * info\n            * alert\n            * calendar\n            * bag\n            * bag-heart\n            * cart\n            * bill\n            * delivery\n            * delivery-2\n            * store\n            * chat-bubbles\n            * customer-service\n            * shield-check\n            * sso\n            * return\n            * clock\n            * map-pin\n            * star-outline\n            * heart-outline\n            \n        \n    * Icons must have proper alt text descriptions\n    * Text content must maintain sufficient color contrast (4.5:1 ratio)\n    * Theme colors are used (variables in figma)\n    \n* **Accessibility Features:**\n\n    * ARIA landmarks and roles properly implemented\n    * Keyboard navigation support between USP items\n    * Screen reader compatibility with meaningful descriptions\n    * Focus indicators visible for interactive elements\n    * Support for text resizing up to 200% without loss of functionality\n    \n* **Interactive Elements:**\n\n    * Navigation controls (if needed) must be keyboard accessible\n    * Touch targets sized appropriately\n    * Interactive elements must have clear focus states\n    \n* Compliant with WCAG 2.1 Level AA standards\n* Semantic HTML structure\n* Responsive design implementation\n* Cross-browser compatibility\n\n## Technical details\n\nUse swiper for rendering multiple USPs. One item on mobile, up to three on desktop (lg).\n\nSome props:\n\n* style (default, pale, bright)\n* usps, an array of\n\n    * icon\n    * text\n    \n\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "usps",
+        "type": "array",
+        "default": null,
+        "description": "Array of USP items, each containing an icon identifier and text content"
+      },
+      {
+        "name": "style",
+        "type": "string",
+        "default": "default",
+        "description": "Visual style variant: 'default', 'pale', or 'bright'"
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/10.ui-app-marketing/UspBanner.md",
+  "parentEpic": {
+    "key": "LUI-30",
+    "title": "USP Banner"
+  },
+  "summary": "A slim, responsive banner for displaying unique selling propositions with customizable icons and automatic slider behavior when space-constrained.",
+  "features": [
+    "Multiple positioning options: above header, below header, below hero, or inline CMS block",
+    "Horizontal slim band layout with automatic slider conversion on mobile",
+    "Curated icon library with 20+ options (delivery, shield-check, customer-service, etc.)",
+    "WCAG 2.1 Level AA compliant with keyboard navigation and screen reader support"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-37"
+  ],
+  "longDescription": "## Purpose\n\nThe USP Banner component enables shop owners to prominently display key business advantages and unique selling points to visitors. By communicating value propositions clearly and accessibly, the component helps build customer trust and supports informed purchasing decisions.\n\n## Use Cases\n\nMerchants can position the banner strategically throughout the storefront: above or below the navigation header for maximum visibility, below the hero section for contextual reinforcement, or embedded within page content as a CMS block. The component adapts to available space by displaying items in a horizontal band on larger screens and converting to a navigable slider on mobile devices.\n\n## Design Rationale\n\nThe slim band design balances visibility with content hierarchy, ensuring USPs enhance rather than dominate the page. Swiper-based rendering provides smooth touch interactions on mobile while maintaining performance. The curated icon set covers common ecommerce benefits like fast delivery, secure payments, and quality service, providing immediate visual recognition of value propositions.",
+  "shortDescription": "Enables shop owners to prominently display key business advantages to visitors. Communicates value propositions clearly and accessibly to build customer trust and support informed purchasing decisions. Position strategically throughout the storefront for maximum visibility or contextual reinforcement. Adapts to available space with horizontal band on larger screens and navigable slider on mobile. Slim band design balances visibility with content hierarchy. Swiper-based rendering provides smooth touch interactions.",
+  "keywords": [
+    "trust indicators",
+    "benefits strip",
+    "ecommerce benefits"
+  ]
+}

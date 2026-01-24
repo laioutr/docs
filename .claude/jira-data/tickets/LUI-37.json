@@ -1,0 +1,34 @@
+{
+  "key": "LUI-37",
+  "title": "Inpage Navigation / Basic / Grid",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "Please read the Epic and Idea Ticket for more context and information.\n\n### The Inpage Navigation Grid can be used flexibly and is often used on entry pages to better guide the end user into categories.\n\n| **Properties/Variants** breakpoint  color on light background on dark background on bright background is sale true/false node background color alignment left center auto (refers to even spacing of the nodes) optional headings true/false | Find [design examples and themes here](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=9131-104078&t=WGKlkG3l0TsCUryI-4) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=ab44d855-e170-47d9-8a0d-ea718d01c11a&&collection=&height=816&occurrenceKey=null&width=916&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=44036f2b-1070-4a20-8199-184e2548bfdf&&collection=&height=530&occurrenceKey=null&width=206&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| --- | --- |\n\n## **Testing (stories):**\n\n* Grid on light background - alignment left - header - subline \n* Grid on dark background - alignment center \n* Grid on bright background - alignment left - showmore\n* Grid on light background - alignment center - flaged nodes\n\n## **Technical details**:\n\n_**organism/InpageNavigationBasicGrid**_\n\n```\nconst InpageNavigationBasicGrid {\n  colorMode: 'on-light' | 'on-dark' | 'on-bright';\n  \n  categoryNodesBasic : categoryNodeBasicProps[];\n  \n  Header? : string;\n  \n  subline? : string;\n  \n  alignment : 'left' | 'center' | 'auto'\n  \n  showMoreLink? : {\n    link : string;\n    text : string;\n  }\n}\n```\n\n‌\n\n* showMoreLink will add extra node to the list at the end \n* components will be used `LuiText` , `CategoryNodeBasic`\n\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/11.ui-app-ecommerce/InpageNavigationBasicGrid.md",
+  "parentEpic": {
+    "key": "LUI-34",
+    "title": "Inpage Navigation"
+  },
+  "summary": "Flexible grid layout for displaying basic category nodes on entry pages with customizable alignment and headings.",
+  "features": [
+    "Multiple color modes: on-light, on-dark, on-bright",
+    "Three alignment options: left, center, and auto spacing",
+    "Optional header, subline, and show more link",
+    "Support for flagged category nodes with promotional badges"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-41"
+  ],
+  "longDescription": "## Purpose\n\nThe InpageNavigationBasicGrid component provides a flexible grid layout for displaying category nodes on entry pages, helping guide shoppers into relevant product categories. It serves as a primary navigation aid especially on homepages and landing pages.\n\n## Use Cases\n\n- Display category overview grids on store entry pages and homepages\n- Highlight sale categories with dedicated styling and promotional flags\n- Add contextual headings and sublines to describe the category section\n- Include a \"show more\" link to direct users to complete category listings\n- Apply promotional badges to individual category nodes within the grid\n\n## Design Rationale\n\nThe grid layout offers three alignment modes to accommodate different design aesthetics: left-aligned for traditional layouts, center-aligned for balanced presentations, and auto for even node spacing. The component integrates seamlessly with CategoryNodeBasic components and supports the full range of promotional flags for highlighting time-sensitive or featured categories.",
+  "shortDescription": "Guides users into product categories on homepages and landing pages. Show more link renders as an additional node at the end of the grid. Integrates with CategoryNodeBasic components and LuiText for typography. Responsive breakpoint handling adapts layout for mobile and desktop viewports.",
+  "keywords": [
+    "category-grid",
+    "entry-page",
+    "organism"
+  ]
+}

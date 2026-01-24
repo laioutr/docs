@@ -1,0 +1,56 @@
+{
+  "key": "LUI-217",
+  "title": "Studio / Sections / Inpage Navigation Compact",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Inpage Navigation Compact |\n| --- | --- |\n| **Description** | Small and compact tiles perfect for linking to categories. |\n| **Section Style Options** | Style: Full width boxed Section background color: None Theme Presets Custom Text color: On light background On dark background On bright background Display as: Grid Slider Navigation position top bottom Show scrollbar (y/n) Rows: 1 2 Content alignment: Left Center Right Auto Margin: None S M L Padding: None S M L |\n| **Tiles styling options** | Styling: Variants: default solid outline Background: none light pale dark bright custom (look at [side bar field](https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=1097-109502&t=9EJlR79R8Ia0gjO0-4) ) Flags: Show flags (y/n) if true: Variant Size Text or Icon |\n| **Proposed Colors for  costum background** | Accent 3 Grey 3 Primary 3 |\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=1097-109502&t=9EJlR79R8Ia0gjO0-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Section Style Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Tiles styling options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Proposed Colors for  costum background",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "sourceEpic": null,
+  "sourceIdeas": [],
+  "summary": "Compact tile navigation section for space-efficient category linking.",
+  "features": [
+    "Multiple tile variants (default, solid, outline)",
+    "Background color options (none, light, pale, dark, bright, custom)",
+    "Optional flag display with variant and size options",
+    "Grid or slider display with navigation controls"
+  ],
+  "keywords": ["compact navigation", "category tiles", "space-efficient"],
+  "shortDescription": "The Inpage Navigation Compact section provides a space-efficient alternative to the larger image tile navigation. It uses smaller tiles perfect for secondary navigation or when many categories need to be displayed without dominating the page. Tiles come in multiple visual variants (default, solid, outline) with extensive background color options to match any theme. Optional flags can highlight sales, new arrivals, or special categories. The responsive layout works as grid or slider with configurable rows and alignment."
+}

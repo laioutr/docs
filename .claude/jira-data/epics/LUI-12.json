@@ -1,0 +1,32 @@
+{
+  "key": "LUI-12",
+  "title": "Logo Slider",
+  "issueType": "Epic",
+  "status": "Done",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "childTickets": [
+    "LUI-13"
+  ],
+  "created": "2025-02-28T09:27:49.137+0100",
+  "updated": "2025-04-23T14:30:21.636+0200",
+  "linkedIdeas": [
+    "LAIOUTR-29"
+  ],
+  "enrichedData": {},
+  "summary": "A horizontal logo display component that automatically converts to a slider when logos exceed available space.",
+  "features": [
+    "Horizontal row display with automatic slider transformation and navigation arrows",
+    "Static grid option supporting up to 6 logos with configurable mobile row layouts",
+    "Optional caption, headline, and subline with selectable text size variants",
+    "Support for PNG and SVG formats with alt text for accessibility"
+  ],
+  "longDescription": "## Purpose\n\nThe Logo Slider enables marketing managers to display partner and client logos in a space-efficient horizontal layout. The component intelligently adapts between static grid and slider modes based on the number of logos, showcasing partnerships without consuming excessive vertical page space.\n\n## Use Cases\n\n- **Partner showcases**: Display technology partners, integration partners, or business affiliates in a professional horizontal arrangement\n- **Client testimonials**: Accompany customer testimonials with recognizable client logos\n- **Trust badges**: Show certification logos, security badges, or industry association memberships\n- **Press mentions**: Display media outlet logos for featured press coverage\n\n## Design Rationale\n\nThe adaptive layout automatically switches between static grid and slider modes based on available space and logo count, eliminating manual configuration. Mobile-specific row configurations ensure optimal presentation on smaller screens. SVG support maintains crisp logo rendering at any resolution while PNG support accommodates existing brand assets.",
+  "shortDescription": "The component intelligently adapts between static grid and slider modes based on available space and logo count. Mobile-specific configurations offer one, two, or three row options for optimal presentation on smaller screens. Smooth horizontal swipe animations enhance touch interactions. Even spacing and alignment maintain professional appearance across all display modes.",
+  "keywords": [
+    "partner logos",
+    "trust badges",
+    "social proof"
+  ]
+}

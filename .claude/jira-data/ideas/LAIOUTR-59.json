@@ -1,0 +1,32 @@
+{
+  "key": "LAIOUTR-59",
+  "title": "Promotion Sets",
+  "issueType": "Idea",
+  "status": "Parking lot",
+  "labels": [],
+  "description": "## A flexible system for creating promotional offers by combining different components and rules.\n\nIt should not only be possible to define the conditions in a promotion set, but also to include or exclude products and categories. At the same time, it should be possible to add components for the store frontend (banners, selection flags, etc.).\n\n### **The promotion set controls the logic and also the UI.**\n\nThis makes it possible, for example, that the user only has to select a color once for a promotion (e.g. pink for Valentine's Day) and the associated elements such as flags, promo banners, etc. are automatically adjusted.\n\nUsers can also control the scope of the display in the front end. For example, whether flags should also be displayed on categories (category nodes) and up to what level. This also includes a timing for setting the promotion live and taking it off again.\n\nIt should be possible to create several promotion sets and to have parallel promotions.\n\n---\n\n## Main Benefits\n\n* **Unified Control:** Single point of management for both promotional logic and visual presentation\n* **Consistency:** Automated coordination of visual elements (banners, flags, colors) across all promotional touchpoints\n* **Flexibility:** Support for multiple concurrent promotions with different rules and presentations\n* **Time Efficiency:** Reduced setup time through automated application of visual elements and rules\n* **Granular Control:** Precise management of promotion visibility, timing, and scope across the platform\n\n---\n\n## Core Components\n\n* **Product and Category Selection**\n\n    * Individual products\n    * Product categories\n    * Brand-specific items\n    * Price ranges\n    \n* **Discount Types**\n\n    * Percentage off\n    * Fixed amount off\n    * Buy X Get Y\n    * Bundle pricing\n    * Discount Code\n    \n        * with fixed percentage off\n        * with fixed amount off\n        \n    \n\n---\n\n## Rule System\n\n* **Quantity Rules**\n\n    * Minimum purchase amount\n    * Maximum discount amount\n    * Items per customer\n    \n* **Timing Rules**\n\n    * Valid date range\n    * Time of day restrictions\n    * Day of week applicability\n    \n* **Customer Rules**\n\n    * Member-only promotions\n    * First-time customer offers\n    * Loyalty tier requirements\n    \n\n---\n\n## Implementation Notes\n\n* Sets should be easily configurable through an admin interface\n* Rules should be stackable and prioritized\n* System must validate rule conflicts\n* Real-time calculation of discounts\n* Clear display of active promotions to customers\n\n---\n\n## Monitoring and Analytics\n\n* Track usage patterns\n* **Measure promotion effectiveness**\n* Monitor discount amounts\n* Analyze customer behavior\n\n",
+  "linkedLuiTickets": [],
+  "created": "2025-03-25T09:46:45.617+0100",
+  "updated": "2025-06-11T22:31:26.933+0200",
+  "enrichedData": {
+    "purpose": "Provides a unified system for creating and managing promotional offers that controls both the business logic (discounts, rules, targeting) and the frontend presentation (banners, flags, colors) from a single configuration point.",
+    "goals": [
+      "Unified control for promotional logic and visual presentation",
+      "Automated coordination of visual elements across promotional touchpoints",
+      "Support multiple concurrent promotions with different rules",
+      "Reduce setup time through automated application of visual elements",
+      "Enable precise management of promotion visibility, timing, and scope"
+    ],
+    "useCases": [
+      "Define promotion scope by selecting individual products, categories, brands, or price ranges",
+      "Configure discount types including percentage off, fixed amount, buy X get Y, and bundle pricing",
+      "Set quantity rules for minimum purchase amounts and items per customer",
+      "Schedule promotions with date ranges, time-of-day, and day-of-week restrictions",
+      "Target promotions to specific customer segments such as members or first-time buyers",
+      "Automatically apply consistent visual styling (colors, banners, flags) across promotion touchpoints",
+      "Control frontend display scope including category node flags at configurable depth levels",
+      "Run multiple parallel promotions with different configurations",
+      "Track promotion effectiveness and analyze customer behavior"
+    ]
+  }
+}

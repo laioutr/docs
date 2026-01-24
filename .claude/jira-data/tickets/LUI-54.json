@@ -1,0 +1,36 @@
+{
+  "key": "LUI-54",
+  "title": "Gallery Content Slider with Button",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "**User Story**\n\nAs a user, I sometimes want to display a button on my slider to link to another page.\n\n[https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=8174-149288&p=f&m=dev](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=8174-149288&p=f&m=dev) \n\n‌\n\n---\n\n**Task**\n\nAdd the option to display a button to the Gallery Content Slier.\n\n* There are pre-selected buttons for the color variants\n* It is always possible for the user to change the button variant\n* The button must be linked\n\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=8174-149288&p=f&m=dev"
+  ],
+  "userStory": "As a user, I sometimes want to display a button on my slider to link to another page.",
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-32",
+    "title": "Gallery Content Slider"
+  },
+  "summary": "An enhancement to the Gallery Content Slider adding an optional CTA button for linking to pages.",
+  "features": [
+    "Pre-selected button styles for color variants",
+    "Customizable button variant selection",
+    "Linkable call-to-action button",
+    "Seamless integration with existing slider content"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-38"
+  ],
+  "longDescription": "## Purpose\n\nThis enhancement extends the Gallery Content Slider with an optional call-to-action button, enabling merchants to drive user engagement and navigation directly from promotional slider content.\n\n## Use Cases\n\n- Link slider content to related category pages or product collections\n- Direct users to promotional landing pages from hero banners\n- Guide customers to seasonal sale pages from featured content\n- Connect storytelling content with shoppable destinations\n- Provide clear navigation paths from inspirational galleries\n\n## Design Rationale\n\nThe button integration maintains visual harmony by offering pre-selected color variants that complement the slider's visual style. Allowing merchants to override the default button variant provides flexibility for brand-specific requirements or contrast needs. The button's mandatory link requirement ensures every CTA provides meaningful navigation value, avoiding dead-end user experiences.",
+  "keywords": [
+    "CTA",
+    "navigation",
+    "hero banner"
+  ],
+  "shortDescription": "Extends the Gallery Content Slider with an optional call-to-action button, enabling merchants to drive user engagement directly from promotional slider content. Use cases include linking slider content to category pages, directing users to promotional landing pages from hero banners, and guiding customers to seasonal sale pages. The mandatory link requirement ensures every CTA provides meaningful navigation value, avoiding dead-end user experiences."
+}

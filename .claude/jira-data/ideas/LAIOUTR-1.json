@@ -1,0 +1,19 @@
+{
+  "key": "LAIOUTR-1",
+  "title": "What are archived ideas? ",
+  "issueType": "Idea",
+  "status": "Parking lot",
+  "labels": [],
+  "description": "If multiple and similar ideas have been created, use the merge function to keep only one and archive others. \n\nArchiving ideas is also a way to keep your project clean without deleting idea - as an archived idea can always be restored. ",
+  "linkedLuiTickets": [],
+  "created": "2025-02-18T15:44:57.344+0100",
+  "updated": "2025-05-22T10:36:11.874+0200",
+  "enrichedData": {
+    "purpose": "Enables project managers to consolidate duplicate ideas and maintain a clean project workspace while preserving archived content for future reference.",
+    "useCases": [
+      "Merge similar or duplicate ideas into a single consolidated idea",
+      "Archive redundant ideas to reduce clutter without permanent deletion",
+      "Restore previously archived ideas when needed"
+    ]
+  }
+}

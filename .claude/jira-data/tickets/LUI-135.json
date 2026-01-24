@@ -1,0 +1,21 @@
+{
+  "key": "LUI-135",
+  "title": "Slider (as value selection)",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": "An input where the user selects a value from within a given range.\n\n---\n\n<custom data-type=\"smartlink\" data-id=\"id-0\">https://reka-ui.com/docs/components/slider</custom> \n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=7ec48c19-137b-487b-9ed2-4bb6fce9fccf&&collection=&height=988&occurrenceKey=null&width=847&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "A slider input for selecting values from within a given range.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The Slider component provides an interactive control for selecting numeric values within a defined range through drag or click interaction. Built on Reka UI's slider primitive, it supports single and dual-thumb configurations for range selection, step intervals, and orientation options. Commonly used for price range filters, volume controls, or any input where users benefit from a visual representation of value position within bounds."
+}

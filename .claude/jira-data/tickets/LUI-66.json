@@ -1,0 +1,85 @@
+{
+  "key": "LUI-66",
+  "title": "Mega Menu Desktop - Category Nodes Compact",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "| **Desktop mega menu - category nodes compact** | <custom data-type=\"smartlink\" data-id=\"id-0\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13944-50374&t=4gWdGg1GDlnYog3D-4</custom>  |\n| --- | --- |\n| This mega menu represents the second and third navigation level of the store in a flyout with column layout. Please note the annotations in Figma Multi-column layouts for subcategories. max 5 columns one column can have multiple categories in it content slots for banners or other content like category nodes big can have up to 3 content components, depending on the number of category columns Used components: [Footer Link Title](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=2995-31348&t=Q215QIPUMsuOXdY3-4) [Category Node Compact / Desktop / mega menu](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13800-322943&t=4gWdGg1GDlnYog3D-4) [text link with icon](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4243-79656&t=4gWdGg1GDlnYog3D-4) | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=914729f9-6651-469a-bbee-4953d65c931a&&collection=&height=1181&occurrenceKey=null&width=1786&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| Design examples with placeholder content and images: <custom data-type=\"smartlink\" data-id=\"id-1\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13821-344454&t=4gWdGg1GDlnYog3D-4</custom>   | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=9fdc064f-b966-47de-985f-c27760fc21c6&&collection=&height=509&occurrenceKey=null&width=1075&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) [Example 1](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13974-42556&t=4gWdGg1GDlnYog3D-4) [Example 2](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13974-185739&t=4gWdGg1GDlnYog3D-4) [Example 3](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13974-186408&t=4gWdGg1GDlnYog3D-4) |\n\n## **Acceptance criterea:**\n\n* mega menu - 4 columns categories - 2 tile grid\n* mega menu - 3 columns categories - 1 tile grid \n* mega menu - 2 columns categories - 3 tile grid\n* mega menu - 3 columns categories - 3 tile grid - masonry layout\n\n## Technical details\n\nby <custom data-type=\"mention\" data-id=\"id-2\">@bassem mohamed</custom> and <custom data-type=\"mention\" data-id=\"id-3\">@Sebastian Langer</custom> \n\nUse [@yeger/vue-masonry-wall](https://www.npmjs.com/package/@yeger/vue-masonry-wall) (already installed) for masonry layout of the menu-items.\n\n_**organism/MegaMenuDesktop**_\n\n```\ninterface MegaMenuItem extends CategoryNodeCompactProps{\n  id: string\n  children?: MegaMenuItem[]\n}\n\ninterface MegaMenuProps {\n  colorMode: 'on-light' | 'on-dark'\n  isOpen?: boolean\n  MegaMenuItems: MegaMenuItem[]\n  columns?: number\n  contentLayout?: 'row' | 'column'\n}\n```\n\n### **Notes:**\n\n* please check Caro notes regarding the layout changes based on column numbers\n* handle multilevel item views\n* add smooth transition when clicking on item that has subcategories\n* main categories links will be represented as the **See all** \n* the category header is also a link and clickable\n* use LuiCategoryNodeCompact , LuiFooterTitle , LuiLink\n* add slot for content on the right side. MegaMenuDesktop has styling for showing the slot-items in the correct layout (see contentLayout and Figma annotations)\n\n### Storybook stories\n\nCreate a story which shows an opened desktop mega menu with visible masonry-effect. 5 Categories, 2 content-items",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13944-50374&t=4gWdGg1GDlnYog3D-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=2995-31348&t=Q215QIPUMsuOXdY3-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13800-322943&t=4gWdGg1GDlnYog3D-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4243-79656&t=4gWdGg1GDlnYog3D-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13821-344454&t=4gWdGg1GDlnYog3D-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13974-42556&t=4gWdGg1GDlnYog3D-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13974-185739&t=4gWdGg1GDlnYog3D-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13974-186408&t=4gWdGg1GDlnYog3D-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "colorMode",
+        "type": "'on-light' | 'on-dark'",
+        "default": null,
+        "description": "Controls the visual theme for light or dark backgrounds"
+      },
+      {
+        "name": "isOpen",
+        "type": "boolean",
+        "default": null,
+        "description": "Controls the visibility of the mega menu flyout"
+      },
+      {
+        "name": "MegaMenuItems",
+        "type": "MegaMenuItem[]",
+        "default": null,
+        "description": "Array of category items with optional nested children"
+      },
+      {
+        "name": "columns",
+        "type": "number",
+        "default": null,
+        "description": "Number of category columns (max 5)"
+      },
+      {
+        "name": "contentLayout",
+        "type": "'row' | 'column'",
+        "default": null,
+        "description": "Layout direction for promotional content slots"
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/09.ui-app-navigation/MegaMenuDesktop.md",
+  "parentEpic": {
+    "key": "LUI-58",
+    "title": "Shop Navigation"
+  },
+  "subTasks": [
+    {
+      "key": "LUI-67",
+      "title": "Create Category Node Compact Variant: Desktop Mega Menu",
+      "description": "This variant is used in the Mega Menu Flyout. Please see the story for examples.\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=ed419a72-2520-4c58-b49f-5b38b18f25b7&&collection=&height=322&occurrenceKey=null&width=179&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=0d13b015-f3aa-4ac7-a5d2-d88f4bbaff53&&collection=&height=497&occurrenceKey=null&width=1100&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n",
+      "figmaLinks": []
+    }
+  ],
+  "summary": "Desktop mega menu flyout displaying second/third navigation levels in multi-column masonry layout with promotional content slots.",
+  "features": [
+    "Multi-column masonry layout supporting up to 5 category columns",
+    "Promotional content slots (up to 3) with row or column layout options",
+    "Smooth transitions for multilevel subcategory navigation",
+    "Light and dark color mode support"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-43"
+  ],
+  "longDescription": "## Purpose\n\nThe MegaMenuDesktop component provides desktop shoppers with a comprehensive category exploration interface through a large flyout panel. It displays second and third navigation levels in an organized multi-column layout, enabling efficient browsing of deep category structures.\n\n## Use Cases\n\n- **Deep Category Navigation**: Users hover or click main navigation items to reveal subcategories organized in up to 5 columns with masonry layout for optimal space utilization.\n- **Promotional Placement**: Content slots on the right side accommodate banners, featured categories, or promotional content. The number of slots (up to 3) adapts based on category column count.\n- **Multilevel Exploration**: Clicking categories with subcategories triggers smooth transitions to reveal deeper levels, with See all links providing direct access to main category pages.\n\n## Design Rationale\n\nThe masonry layout (via @yeger/vue-masonry-wall) efficiently distributes categories of varying sizes across columns. The component's layout rules adapt based on column count: 4 columns allow 2 content tiles, 3 columns allow 1 or 3 tiles (masonry), and 2 columns allow 3 tiles. This ensures visual balance regardless of category structure depth.",
+  "shortDescription": "Uses @yeger/vue-masonry-wall for efficient category distribution. Layout rules adapt based on column count: 4 columns allow 2 content tiles, 3 columns allow 1 or 3 tiles with masonry, and 2 columns allow 3 tiles. Category headers are clickable links, with main categories represented as See all links. Includes slot for promotional content on the right side with configurable row/column layout.",
+  "keywords": [
+    "flyout menu",
+    "dropdown navigation",
+    "category flyout"
+  ]
+}

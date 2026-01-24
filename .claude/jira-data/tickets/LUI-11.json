@@ -1,0 +1,44 @@
+{
+  "key": "LUI-11",
+  "title": "add basic hero slider",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "For definition, please have a look into idea ticket. Also you have to read the additional informations provided by Caro [in the design](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4633-61147&m=dev).\n\nStorybook stories have been created:\n\n* Only a single slide\n* Multiple slides:\n\n    * The first with a dark background image\n    * The second with a light background image\n    \n* One with a CTA-slide in the first slide\n* One with two CTAs in the first slide\n* One with a single flag in the first slide\n* One with multiple flags in the first slide\n* Some more examples you may think of\n\nPlaygrounds can be found here:\n\n* <custom data-type=\"smartlink\" data-id=\"id-0\">https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1219-51525&p=f&m=dev&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=4633%3A65467&show-proto-sidebar=1</custom> (mobile)\n* <custom data-type=\"smartlink\" data-id=\"id-1\">https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1219-51525&p=f&m=dev&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=4734%3A30227&show-proto-sidebar=1</custom> (desktop)\n\n## Technical details\n\nThese are not exhaustive lists of all props. Please have a look at the ideas-page and the design to figure out additional props you may have to define for each component.\n\n### Block/BasicHeroSliderBlock/BasicHeroSliderSlide.vue\n\nSome props:\n\n* background fallback color\n* background media:\n\n    * mobile\n    * desktop\n    * (ignore videos for now)\n    \n* background color dark/light\n* heading\n* subline\n* content alignment mobile/desktop\n* flags\n\n    * style\n    * background\n    \n* CTAs\n* Overlay\n\n    * Gradient/Full color\n    * Opacity\n    \n\nIf possible, try using the `container` class for slide maxwidth.\n\n### Block/BasicHeroSliderBlock/BasicHeroSliderBlock.vue\n\nFor slider you can use Swiper. Nuxt Swiper @1.2.2 (using the Swiperjs Vue API) is already installed and can be used.\n\n* [Nuxt Swiper](https://github.com/cpreston321/nuxt-swiper/tree/v1.2.2) docs\n* [Swiper.js Vue](https://swiperjs.com/vue) docs\n* [Related PR](https://github.com/laioutr/laioutr/pull/75)\n\nSome props:\n\n* slides: an array of props for BasicHeroSliderSlide\n\nUse SwiperNavigationCompact for navigation. Wait for <custom data-type=\"smartlink\" data-id=\"id-2\">https://laioutr.atlassian.net/browse/THEMES-19</custom>. You probably need to make some kind of modification to the component for it to adapt to the background being either dark or light.",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "slides",
+        "type": null,
+        "default": null,
+        "description": "an array of props for BasicHeroSliderSlide"
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/10.ui-app-marketing/HeroSlider.md",
+  "parentEpic": {
+    "key": "LUI-10",
+    "title": "Basic Hero MVP"
+  },
+  "summary": "A flexible hero component serving as static hero section or interactive slider with full-width backgrounds.",
+  "features": [
+    "Separate mobile and desktop image uploads for responsive design",
+    "Dark and light background modes with automatic text color adjustment",
+    "Up to two customizable CTA buttons per slide",
+    "Gradient or full-color overlay with adjustable opacity"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-28"
+  ],
+  "longDescription": "## Purpose\n\nThe Basic Hero Slider provides website owners with a versatile hero component that serves dual purposes: a static hero section for focused messaging and an interactive slider for showcasing multiple promotional items. This flexibility enables engaging landing pages and prominent content displays.\n\n## Use Cases\n\n- **Landing page heroes**: Display full-width promotional banners with compelling imagery and call-to-action buttons\n- **Product launches**: Showcase new arrivals or featured products with dedicated slides\n- **Campaign promotion**: Rotate through multiple marketing messages with automatic or manual navigation\n- **Brand storytelling**: Present brand narratives with combined imagery, headings, and sublines\n\n## Design Rationale\n\nThe component prioritizes responsive design with separate mobile and desktop image configurations, ensuring optimal visual presentation across devices. The dark/light mode detection enables automatic text color adjustment for readability. Overlay options with adjustable opacity provide design flexibility while maintaining content legibility.",
+  "shortDescription": "Provides website owners with a versatile hero component for focused messaging or showcasing multiple promotional items. Display full-width promotional banners with compelling imagery. Showcase new arrivals or featured products with dedicated slides. Rotate through multiple marketing messages with automatic or manual navigation. Present brand narratives with combined imagery, headings, and sublines.",
+  "keywords": [
+    "banner",
+    "landing page",
+    "swiper"
+  ]
+}

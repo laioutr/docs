@@ -1,0 +1,40 @@
+{
+  "key": "LUI-34",
+  "title": "Inpage Navigation",
+  "issueType": "Epic",
+  "status": "Done",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\nAs a Business User, I want to have flexible inpage navigation components with category nodes that can be displayed as both a grid and slider, so that I can present categorized content in an engaging and adaptable way.\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-1\">:clipboard:</custom> Requirements\n\nThese requirements apply to all 3 variants of Inpage Navigation\n\n* **Display Options:**\n\n    * Category nodes can be displayed in grid layout\n    * Category nodes can be displayed in slider format\n    * Users can switch between display modes\n    * Optional Headings (Caption, Headline, Subline) can be displayed\n    * Category nodes can have flags\n    \n* **Category Node Features:**\n\n    * Each node contains an image and title\n    * Each node is linked to a category\n    * Not part of this MVP:\n    \n        * ~~The user can choose whether to manually select categories and create nodes, or whether they should be created automatically (recommendations maybe not part of MVP?)~~\n        \n            * ~~Show all subcategories from level X~~\n            * ~~Most popular categories/subcategories~~\n            * ~~Category recommendations based on~~\n            \n                * ~~the product viewed~~\n                * ~~recently viewed categories and products~~\n                \n            \n        \n    * Background color of nodes is customizable (We therefore recommend using transparent images)\n    * Flags can be added manually\n    * System can automatically assign flags based on predefined rules\n    \n* **\"Sale\" Mode:**\n\n    * One-click activation of \"Sale\" mode\n    * Visual appearance of nodes changes in \"Sale\" mode\n    * Sale-specific styling can be predefined\n    \n\n---\n\n‌",
+  "figmaLinks": [],
+  "childTickets": [
+    "LUI-35",
+    "LUI-36",
+    "LUI-37",
+    "LUI-38",
+    "LUI-39",
+    "LUI-40",
+    "LUI-43",
+    "LUI-44",
+    "LUI-45",
+    "LUI-46",
+    "LUI-47"
+  ],
+  "created": "2025-03-26T09:14:15.671+0100",
+  "updated": "2025-06-27T14:24:25.409+0200",
+  "linkedIdeas": [
+    "LAIOUTR-41"
+  ],
+  "enrichedData": {
+    "purpose": "Business users need flexible inpage navigation components that can display categorized content in both grid and slider formats to engage visitors and drive category exploration.",
+    "useCases": [
+      "Display category nodes in a grid layout",
+      "Display category nodes in a slider format",
+      "Switch between grid and slider display modes",
+      "Add optional headings with caption, headline, and subline",
+      "Add flags to category nodes manually or automatically",
+      "Customize background color of category nodes",
+      "Activate Sale mode with one click for promotional styling",
+      "Link each category node to its corresponding category page"
+    ]
+  }
+}

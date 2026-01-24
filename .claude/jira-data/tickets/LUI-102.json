@@ -1,0 +1,37 @@
+{
+  "key": "LUI-102",
+  "title": "Create PDP Ambiendo MVP",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## Product Detail Page - MVP Template\n\n| **Product Information Display** The page has a buybox A product description and further details in an accordion are displayed for accordion please have a look at the [dummy](https://www.figma.com/proto/gDN7wlDFp5mwXQfRDhotzR/Ambiendo-sunny?node-id=1-2&p=f&m=dev&scaling=scale-down&content-scaling=fixed&starting-point-node-id=25%3A167348) and [dummy content](https://www.figma.com/design/gDN7wlDFp5mwXQfRDhotzR/Ambiendo---sunny?node-id=28-93657&m=dev). | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=b4fe7454-b1a8-4048-948c-c8da8c0bfffb&&collection=&height=1146&occurrenceKey=null&width=458&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=103a90b5-879b-405e-80c8-c830d39d2a25&&collection=&height=1214&occurrenceKey=null&width=454&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| --- | --- |\n| **Image Gallery** Users can click / swipe through multiple product images. Users can open the lightbox | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=edc457a6-4951-405a-bcab-641c0b2ff759&&collection=&height=236&occurrenceKey=null&width=232&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=e7412eea-84e7-4a4d-a13f-3ca5e89042aa&&collection=&height=457&occurrenceKey=null&width=672&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **Stock Status** Show whether the product is in stock, low stock, or out of stock. **Shipping and Returns Info** Display estimated delivery time  |  |\n| **Add to Cart Functionality** Users can add the product to their cart by selecting the desired variant (if applicable) and quantity. Clicking \"Add to Cart\" gives immediate feedback (e.g., cart sheet opens TBA). |  |\n| Has 2 Content Slots that can be filled via: the global template creating a copy and assign it to categories or for products of a brand or individual products Content slots can be empty | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=e8ad9429-f8a0-4a9f-b3a1-4d23be068614&&collection=&height=902&occurrenceKey=null&width=244&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **Related Products Section** Display recommended or similar products below the main content and after the first content slot | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=49f35eba-fba4-4f78-9468-ca2c8d84ade3&&collection=&height=271&occurrenceKey=null&width=257&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=c86267f1-d36c-4a25-a4c3-90a6e6a330a6&&collection=&height=290&occurrenceKey=null&width=260&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=41b7b29e-c3ac-4261-804f-6e3c899ea74f&&collection=&height=791&occurrenceKey=null&width=276&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| Has Newsletter Registration above the shop footerHas a shop footer Has a shop footer | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=3a5f8fcb-9acd-4848-bc72-6bd1cd9d5947&&collection=&height=718&occurrenceKey=null&width=231&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n",
+  "figmaLinks": [
+    "https://www.figma.com/proto/gDN7wlDFp5mwXQfRDhotzR/Ambiendo-sunny?node-id=1-2&p=f&m=dev&scaling=scale-down&content-scaling=fixed&starting-point-node-id=25%3A167348",
+    "https://www.figma.com/design/gDN7wlDFp5mwXQfRDhotzR/Ambiendo---sunny?node-id=28-93657&m=dev"
+  ],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-84",
+    "title": "Product Detail Page"
+  },
+  "summary": "A complete product detail page template for Ambiendo MVP with image gallery, buy box, and related products.",
+  "features": [
+    "Product image gallery with lightbox",
+    "Buy box with variant selection and add-to-cart",
+    "Content slots for promotional and related products",
+    "Newsletter registration and shop footer integration"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-48"
+  ],
+  "longDescription": "## Purpose\n\nThe PDP Ambiendo MVP template provides a complete, production-ready product detail page implementation that combines all essential e-commerce elements. It enables customers to view comprehensive product information, select variants, and complete purchases while discovering related products and promotional content.\n\n## Use Cases\n\n- Displaying product name, price, description, and high-quality images\n- Navigating through product images with gallery and lightbox\n- Selecting product variants and quantity with add-to-cart functionality\n- Showing stock availability and estimated delivery time\n- Featuring related products and customizable content areas\n\n## Design Rationale\n\nThe template follows proven e-commerce patterns with the image gallery and buy box as primary focus areas above the fold. The accordion pattern for product details keeps the page scannable while providing access to comprehensive information. Content slots enable merchandising flexibility through category-specific or brand-specific promotions. The related products section supports cross-selling while the newsletter and footer integration completes the page experience.",
+  "shortDescription": "Production-ready template combining all essential e-commerce elements. Displays product name, price, description with collapsible accordion for details. Shows stock availability and estimated delivery time. Follows proven e-commerce patterns with primary focus areas above the fold. Supports cross-selling through merchandising flexibility with category-specific or brand-specific promotions.",
+  "keywords": [
+    "PDP layout",
+    "Ambiendo MVP",
+    "page composition"
+  ]
+}

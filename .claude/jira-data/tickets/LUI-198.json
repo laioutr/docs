@@ -1,0 +1,38 @@
+{
+  "key": "LUI-198",
+  "title": "Studio / Sections / Scroll Anchor",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "| **Name** | Scroll Anchor |\n| --- | --- |\n| **Description** | An invisible anchor that allows you to jump directly to specific sections on the page. |\n| **Options** | ID if ID is filled, display a copyable URL: ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=2920cdc1-1abd-4f19-bf67-bb62aa00c4ec&&collection=&height=204&occurrenceKey=null&width=277&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Invisible anchor section for deep-linking and direct navigation to page sections.",
+  "features": [
+    "Custom ID configuration for anchor targets",
+    "Copyable URL display for easy sharing"
+  ],
+  "keywords": ["anchor link", "deep linking", "page navigation"],
+  "shortDescription": "The Scroll Anchor Studio section places an invisible target element on the page that enables direct linking to specific content sections. When editors assign an ID, the studio displays a copyable URL containing the anchor hash. This allows marketing teams to share links that jump directly to promotions, product features, or FAQ sections without requiring developer intervention."
+}

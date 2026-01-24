@@ -1,0 +1,23 @@
+{
+  "key": "LUI-149",
+  "title": "User",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": "used to display a name for the user",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "User display component for showing names and identities.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The User component displays user identity information in a consistent format throughout the interface. Typically combines an Avatar with the user's name and optionally additional details like email or role. Used in headers to show the logged-in user, in comments to identify authors, in team member lists, or anywhere user attribution is needed. Supports various sizes and layouts to fit different contexts.",
+  "sourceEpic": "LUI-123",
+  "sourceIdeas": []
+}

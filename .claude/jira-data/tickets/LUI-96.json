@@ -1,0 +1,115 @@
+{
+  "key": "LUI-96",
+  "title": "Desktop Side by Side Menu",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "This is needed for Ambiendo MVP, as they are restructuring their category structure and navigation right now\n\n---\n\n🧑‍💻 **User Story**\n\n**As** a user of an online shop on desktop,  \n**I want** a clear and accessible navigation menu that slides in from the left,  \n**so that** I can easily browse through categories and subcategories to find relevant products quickly.\n\n---\n\n|  |  |\n| --- | --- |\n| **General Behavior** The menu is opened via the main navigation in the header The menu **slides in from the left as an off-canvas panel** and displays the category corresponding to the clicked element  The rest of the page is overlaid with a semi-transparent background. The menu can be closed: by clicking a close (\"X\") icon at the top right of the menu, by clicking the overlay, or by pressing the Escape key. | Uses:  [desktop-menu-category-node-button](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=24-7307&t=6wm3tnzO3UwBzAin-4) [desktop-menu-list](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=18539-5274&t=36WdzhCBw9t12SQT-4) [text link with icon](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4243-79657&t=36WdzhCBw9t12SQT-4) [desktop-menu-button](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=18532-65719&t=36WdzhCBw9t12SQT-4) |\n| **Navigation Levels** **First level** displays main categories (e.g., Furniture, Decoration, Textiles and so on) and optionally addtional link list Clicking a category opens the **second level** with subcategories (e.g., \"Textiles\" → \"Cussions\" \"Plaids\" \"Curtains\" and so on). Clicking a subcategory opens the **third level** if there is one Each new level **slides in to the right**, [see simple example dummy](https://www.figma.com/proto/Zle03g3Z7ieN700SDq5j77/Component-Examples?page-id=1%3A143&node-id=10-48933&viewport=65%2C-19001%2C1&t=x8frY224lD6x49fe-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=10%3A48933) (click on \"Textilien\" → \"Kissen\") When starting at second level A \"Back\" button at the top allows navigation to first level. Transitions are **smoothly animated** (e.g., 300ms slide-in animation). Mobile-like UX on desktop, inspired by mobile app menus. | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=c20148ab-5da5-413b-b80b-36d87e22aa45&&collection=&height=972&occurrenceKey=null&width=1444&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) User clicked on \"Textiles\" in the main naviagtion ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=26d719d0-5cb2-4f12-a532-d964e8951c58&&collection=&height=958&occurrenceKey=null&width=1443&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) User clicked on the \"to all categories\" link at the top |\n| **Accessibility**  Fully navigable using the keyboard. Includes proper screen reader labels and ARIA roles. Focus trap enabled: focus remains within the menu while it is open. |  |\n\n## Technical details\n\nBy <custom data-type=\"mention\" data-id=\"id-0\">@bassem mohamed</custom> \n\nCreate storybook stories:\n\n* Button to open root menu\n* Button to open directly in child-menu, showing back-button\n\n### _organism/DesktopSideBySideMenu/DesktopSideBySideMenu.vue_\n\n```\ninterface DesktopSideBySideMenuProps {\n  isOpen : boolean;\n  selectedItemId : string;\n  logo: media;\n  categoryNodes: DesktopCategoryNode[]; // see below for definition\n  rootMenuItems? : MobileMenuListItemProps[];\n}\n```\n\n* can be opened on a root category or child category (might be root-category or sub-category)\n* if it's opened on the second or third level add link to the top to go back to it's parent \n* use selectedItemId to detect it's on which level (if unset, open root menu)\n* render the root and child menu inside the same component\n* use `LuiSheet` , use `DesktopSideBySideRootMenu` , `DesktopSideBySideChildMenu`, `LuiMedia` , `LuiSeparator`\n* Renders logo, close-button, \"All Categories\" (back-button) + RootMenu and ChildMenus\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=2312a834-128b-4711-8401-b1b8fbf5d750&&collection=&height=564&occurrenceKey=null&width=759&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n### _Organism/DesktopSideBySideMenu/DesktopSideBySideRootMenu_\n\n```\ninterface DesktopSideBySideRootMenuProps {\n  categoryNodes: DesktopCategoryNode[]; // see below for definition\n  menuItems? : MobileMenuListItemProps[];\n}\n```\n\n* Renders the category nodes and menu-items of the root menu\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=f035e7d9-de5b-4328-878c-33ec1999526c&&collection=&height=438&occurrenceKey=null&width=210&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n### Organism/DesktopSideBySideMenu/DesktopSideBySideChildMenu\n\n```\ninterface DesktopSideBySideChildMenuProps {\n  node: DesktopCategoryNode; // Information about the node to render in this menu, see below for definition\n}\n```\n\n* Renders title, \"show all\" and child-nodes of the given node\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=77018b32-8cb9-40da-9689-d3d1f36e1210&&collection=&height=342&occurrenceKey=null&width=209&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n### Organism/MobileMenu/MobileMenuListItem\n\nModify this existing component so we can also use it on desktop. The component-name stays the same for now. Add three new props:\n\n* size: 'desktop' | 'mobile', defaults to mobile. Mobile is the same styling as it currently is. Desktop is the new desktop-specific styling\n* isActive?: boolean, defaults to false\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=0fe0a3d4-2a56-4afd-8ada-447ca1fc5698&&collection=&height=277&occurrenceKey=null&width=313&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n### Organism/DesktopSideBySideMenu/CategoryNodeButton\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=d7d6728b-159d-4816-802e-ef5e118190ca&&collection=&height=388&occurrenceKey=null&width=229&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n```\ninterface DesktopCategoryNode {\n  title: string;\n  media: Media; \n  showChevron: boolean;\n  href: string;\n}\n```\n\n* use `LuiText` , `LuiIcon`, `LuiSepartor`\n* If the node has child-categories, opens child-menu\n* Otherwise, navigates to href\n* The component must always be an <a> element\n\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=24-7307&t=6wm3tnzO3UwBzAin-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=18539-5274&t=36WdzhCBw9t12SQT-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4243-79657&t=36WdzhCBw9t12SQT-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=18532-65719&t=36WdzhCBw9t12SQT-4"
+  ],
+  "userStory": "As a a user of an online shop on desktop, I want a clear and accessible navigation menu that slides in from the left,, so that I can easily browse through categories and subcategories to find relevant products quickly",
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "isOpen",
+        "type": "boolean",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "selectedItemId",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "logo",
+        "type": "media",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "categoryNodes",
+        "type": "DesktopCategoryNode[]",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "rootMenuItems",
+        "type": "MobileMenuListItemProps[]",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "categoryNodes",
+        "type": "DesktopCategoryNode[]",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "menuItems",
+        "type": "MobileMenuListItemProps[]",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "node",
+        "type": "DesktopCategoryNode",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "media",
+        "type": "Media",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "showChevron",
+        "type": "boolean",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/7.ui-app/store-navigation/DesktopSideBySideMenu.md",
+  "parentEpic": {
+    "key": "LUI-58",
+    "title": "Shop Navigation"
+  },
+  "summary": "A desktop navigation menu that slides in from the left as an off-canvas panel, displaying hierarchical category navigation with smooth slide-in transitions between levels.",
+  "features": [
+    "Multi-level category navigation with slide animations",
+    "Back button for parent navigation",
+    "Category nodes with images and chevrons",
+    "Keyboard navigation and focus trap"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-43"
+  ],
+  "longDescription": "## Purpose\n\nThe Desktop Side by Side Menu provides desktop users with an intuitive, mobile-inspired navigation experience for browsing product categories. It presents a clear hierarchical structure that helps customers quickly locate products within complex category trees.\n\n## Use Cases\n\n- Browsing through main product categories from the header navigation\n- Drilling down into subcategories with animated slide transitions\n- Navigating back to parent levels using the back button\n- Accessing category landing pages directly from menu items\n\n## Design Rationale\n\nThe side-by-side sliding pattern brings the familiar mobile app navigation experience to desktop, providing a consistent mental model across devices. Smooth 300ms animations create a polished feel while maintaining performance. The off-canvas approach keeps the main content visible with an overlay, allowing users to maintain context. Focus trapping and keyboard navigation ensure full accessibility compliance.",
+  "keywords": [
+    "side navigation",
+    "category navigation",
+    "off-canvas menu"
+  ],
+  "shortDescription": "The Desktop Side by Side Menu provides desktop users with an intuitive, mobile-inspired navigation experience for browsing product categories. The side-by-side sliding pattern brings familiar mobile app navigation to desktop, providing a consistent mental model across devices. Smooth 300ms animations create a polished feel while maintaining performance. The off-canvas approach keeps the main content visible with an overlay, allowing users to maintain context during navigation."
+}

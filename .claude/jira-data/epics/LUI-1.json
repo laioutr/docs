@@ -1,0 +1,23 @@
+{
+  "key": "LUI-1",
+  "title": "Pricing Page",
+  "issueType": "Epic",
+  "status": "Done",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "childTickets": [
+    "LUI-2",
+    "LUI-3",
+    "LUI-4",
+    "LUI-5",
+    "LUI-6"
+  ],
+  "created": "2025-02-20T10:31:47.776+0100",
+  "updated": "2025-04-23T14:30:49.823+0200",
+  "linkedIdeas": [
+    "LAIOUTR-23",
+    "LAIOUTR-24"
+  ],
+  "enrichedData": {}
+}

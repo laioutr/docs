@@ -1,0 +1,43 @@
+{
+  "key": "LUI-226",
+  "title": "Performance Investigation / PDP LCP",
+  "issueType": "Story",
+  "status": "Ready for Development",
+  "labels": [],
+  "description": "DOMContentLoaded-Time is relatively high on the PDP due to a lot of images being errornously preloaded. See <custom data-type=\"smartlink\" data-id=\"id-0\">https://ambiendo-storefront.vercel.app/products/bassetti-kerala-einrichtungsfoulard-1</custom>.\n\n| <link rel=\"preload\" as=\"image\" href=\"[https://www.ambiendo.de/cdn/shop/files/ambiendo.svg?v=1730299726&width=159](https://www.ambiendo.de/cdn/shop/files/ambiendo.svg?v=1730299726&width=159)\" imagesrcset=\"[https://www.ambiendo.de/cdn/shop/files/ambiendo.svg?v=1730299726&width=159](https://www.ambiendo.de/cdn/shop/files/ambiendo.svg?v=1730299726&width=159) 1x\" media=\"(min-width: 800px)\" fetchpriority=\"low\"> |\n| --- |\n| <link rel=\"preload\" as=\"image\" href=\"[https://www.ambiendo.de/cdn/shop/files/ambiendo.svg?v=1730299726&width=159](https://www.ambiendo.de/cdn/shop/files/ambiendo.svg?v=1730299726&width=159)\" imagesrcset=\"[https://www.ambiendo.de/cdn/shop/files/ambiendo.svg?v=1730299726&width=159](https://www.ambiendo.de/cdn/shop/files/ambiendo.svg?v=1730299726&width=159) 1x\" media=\"(max-width: 799px)\" fetchpriority=\"low\"> |\n| <link rel=\"preload\" as=\"image\" href=\"[https://cdn.shopify.com/s/files/1/0843/0606/7782/files/8050261322856_0.jpg?v=1743152437](https://cdn.shopify.com/s/files/1/0843/0606/7782/files/8050261322856_0.jpg?v=1743152437)\" imagesizes=\"100px\" imagesrcset=\"[https://cdn.shopify.com/s/files/1/0843/0606/7782/files/8050261322856_0.jpg?v=1743152437&width=100&height=100](https://cdn.shopify.com/s/files/1/0843/0606/7782/files/8050261322856_0.jpg?v=1743152437&width=100&height=100) 100w\" media=\"(min-width: 800px)\"> |\n| …dozens more |\n\nThese are the images that are being preloaded. Instead they should be loaded lazily. Investigate the component that is adding these as preloaded. Only preload the first image of the component, if it is above-the-fold. Use `useMediaAboveTheFold`.",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "width",
+        "type": null,
+        "default": null,
+        "description": "800px)\" fetchpriority=\"low\"> |"
+      },
+      {
+        "name": "width",
+        "type": null,
+        "default": null,
+        "description": "799px)\" fetchpriority=\"low\"> |"
+      },
+      {
+        "name": "width",
+        "type": null,
+        "default": null,
+        "description": "800px)\"> |"
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "sourceEpic": null,
+  "sourceIdeas": [],
+  "summary": "Performance task to optimize PDP LCP by fixing erroneous image preloading.",
+  "features": [],
+  "keywords": ["LCP optimization", "image preload", "performance"],
+  "shortDescription": "This performance investigation addresses slow DOMContentLoaded times on Product Detail Pages caused by excessive image preloading. The issue stems from components preloading all gallery images instead of only above-the-fold content. The fix involves using the useMediaAboveTheFold composable to conditionally preload only the first visible image while lazy-loading subsequent gallery images. This optimization significantly improves Core Web Vitals metrics."
+}

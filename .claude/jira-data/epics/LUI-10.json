@@ -1,0 +1,33 @@
+{
+  "key": "LUI-10",
+  "title": "Basic Hero MVP",
+  "issueType": "Epic",
+  "status": "Done",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "childTickets": [
+    "LUI-11",
+    "LUI-19"
+  ],
+  "created": "2025-02-28T09:19:26.496+0100",
+  "updated": "2025-04-23T14:30:29.196+0200",
+  "linkedIdeas": [
+    "LAIOUTR-28"
+  ],
+  "enrichedData": {},
+  "summary": "A versatile hero component functioning as static hero or interactive slider for landing pages and content showcases.",
+  "features": [
+    "Full-width backgrounds with separate mobile/desktop images and video support",
+    "Toggle between static hero and slider mode with infinite scrolling and navigation",
+    "Overlay content with headings, sublines, caption flags, and up to two CTAs per slide",
+    "Color/gradient overlays with adjustable opacity and independent content alignment per viewport"
+  ],
+  "longDescription": "## Purpose\n\nThe Basic Hero MVP provides website owners with a versatile hero component that functions as both a static hero section for focused messaging and an interactive slider for showcasing multiple promotional items. This dual-purpose design enables engaging landing pages and prominent content displays without requiring separate components.\n\n## Use Cases\n\n- **Landing page heroes**: Display full-width promotional banners with compelling imagery and call-to-action buttons\n- **Product launches**: Showcase new arrivals or featured products with dedicated slides and video backgrounds\n- **Campaign promotion**: Rotate through multiple marketing messages with navigation controls\n- **Brand storytelling**: Present brand narratives combining imagery, headings, sublines, and caption flags\n\n## Design Rationale\n\nThe component prioritizes responsive design with separate mobile and desktop media configurations, ensuring optimal visual presentation across all devices. Flexible overlay options with adjustable opacity maintain content legibility while providing design flexibility. The accessibility-first approach includes alternative descriptions for all background media.",
+  "shortDescription": "The component supports separate mobile and desktop media configurations for optimal presentation across devices. Background colors can be selected from global palette, HEX values, or image color picker. Alternative descriptions for background media ensure accessibility compliance. Fallback colors enable smooth slider animations between slides.",
+  "keywords": [
+    "carousel",
+    "banner",
+    "promotional"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "key": "LUI-116",
+  "title": "Blog Post Page",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## Blog Post Page\n\n### <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom>  User stroy\n\n**As** a visitor to a Shopify store, **I want** to read a specific blog post in full with images, formatting, and related content, **so that** I can engage with valuable content, learn more about the brand/products, and potentially convert into a customer.\n\n---\n\n| **Content Display** Render the full content of the blog post, including: Post title Featured image Body content (supports HTML formatting, embedded images, links, headings, etc.) Support for custom content slots or Shopify metafields (e.g., embedded video, pull quotes) after the blog post content Images should: Be responsive Include alt text for accessibility Use lazy loading for performance Feature a button if linked to an URL, so the users knows what happens when they click on it |  |\n| --- | --- |\n| **Navigation** Show a breadcrumb or link back to the blog overview page. Include \"Previous\" and \"Next\" blog post navigation (if available). |  |\n| **Engagement Features** **Social sharing buttons** (Facebook, Twitter, Pinterest, LinkedIn, etc.) **Related posts** section at the bottom, displaying recent posts |  |\n| **SEO & Accessibility** Semantic HTML (e.g., `<article>`, `<header>`, `<section>`) Use of structured data (`BlogPosting` schema) for better SEO Accessible headings and alt text Canonical URL tag to prevent duplicate content |  |\n|  |  |\n|  |  |\n\n### Technical details\n\nModify RichContent component to support blockquotes. Compare result of using RichContent with design. If the design has different margins/spacings/font-sizes, add a new prop for RichContent called \"size\".\n\nCreate a storybook-story which renders a blog-post page using the existing components.\n\nCreate a share-bar component\n\n**molecule/SocialShare**\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=a3ddc68c-87d7-4c87-82ac-f8d380caee73&&collection=&height=73&occurrenceKey=null&width=434&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\nClicking one of the buttons opens the share-dialog of the social network\n\n* Facebook: <custom data-type=\"smartlink\" data-id=\"id-1\">https://stackoverflow.com/questions/14829040/facebook-sharer-popup-window</custom> \n* Instagram: Use <custom data-type=\"smartlink\" data-id=\"id-2\">https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share</custom> \n* X: Use <custom data-type=\"smartlink\" data-id=\"id-3\">https://developer.x.com/en/docs/x-for-websites/tweet-button/guides/web-intent</custom> , e.g. `https://x.com/intent/post?url=<url>&text=<title>`\n* Pinterest: Use `http://pinterest.com/pin/create/button/?url=<url>`\n* Email: Use `mailto:?body=<url>`\n\n",
+  "figmaLinks": [],
+  "userStory": "As a a visitor to a Shopify store, I want to read a specific blog post in full with images, formatting, and related content,, so that I can engage with valuable content, learn more about the brand",
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "sizes",
+        "type": null,
+        "default": null,
+        "description": "add a new prop for RichContent called \"size\"."
+      },
+      {
+        "name": "Facebook",
+        "type": null,
+        "default": null,
+        "description": "<custom data-type=\"smartlink\" data-id=\"id-1\">https://stackoverflow.com/questions/14829040/facebook-sharer-popup-window</custom>"
+      },
+      {
+        "name": "Instagram",
+        "type": null,
+        "default": null,
+        "description": "Use <custom data-type=\"smartlink\" data-id=\"id-2\">https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share</custom>"
+      },
+      {
+        "name": "X",
+        "type": null,
+        "default": null,
+        "description": "Use <custom data-type=\"smartlink\" data-id=\"id-3\">https://developer.x.com/en/docs/x-for-websites/tweet-button/guides/web-intent</custom> , e.g. `https://x.com/intent/post?url=<url>&text=<title>`"
+      },
+      {
+        "name": "Pinterest",
+        "type": null,
+        "default": null,
+        "description": "Use `http://pinterest.com/pin/create/button/?url=<url>`"
+      },
+      {
+        "name": "Email",
+        "type": null,
+        "default": null,
+        "description": "Use `mailto:?body=<url>`"
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/8.ui-pro/blog/BlogPost.md",
+  "parentEpic": {
+    "key": "LUI-113",
+    "title": "Page templates"
+  },
+  "summary": "Blog post page with rich content, social sharing, breadcrumbs, and related posts section.",
+  "features": [
+    "Social sharing buttons for Facebook, X, Pinterest, and Email",
+    "Related posts section for content discovery",
+    "Previous and next post navigation links",
+    "SEO-optimized with BlogPosting schema structured data"
+  ],
+  "keywords": [
+    "article page",
+    "content marketing",
+    "share bar"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-63"
+  ],
+  "shortDescription": "The Blog Post Page template delivers a complete article reading experience optimized for both engagement and conversion. It renders full post content through the RichContent component with blockquote support, responsive images with lazy loading, and custom content slots for embedded media. The SocialShare molecule opens native share dialogs for each platform using their respective web intents and APIs. Semantic HTML structure with proper heading hierarchy combined with BlogPosting schema markup ensures strong search engine visibility while canonical URL tags prevent duplicate content penalties."
+}

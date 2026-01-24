@@ -1,0 +1,34 @@
+{
+  "key": "LUI-44",
+  "title": "Inpage Navigation / Compact / Slider",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "‌\n\n| **Properties** breakpoint style default  solid outline node bg color: none light bg dark bg bright bg pale color: on light bg on dark bg on bright bg is sale true/false slider navigation on top / bottom show scrollbar true/false show optional headings true/false has button yes / no button variant is choosable | Find some styling examples here: <custom data-type=\"smartlink\" data-id=\"id-0\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=10708-183341&t=ZbFF2YqJ9ZCSERCk-4</custom>    ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=3cd48d48-df8f-46e8-ae3c-20316c104273&&collection=&height=898&occurrenceKey=null&width=1258&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| --- | --- |\n| if text would break, and top navigation buttons are visible: same behaviour as described here: <custom data-type=\"smartlink\" data-id=\"id-1\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=8267-3&t=WGKlkG3l0TsCUryI-4</custom>   |  |\n| the user can always decide to show or show not a scrollbar. |  |\n| the navigation buttons are obligatory, but the user can decide if they should appear above the slider or under it |  |\n| if all category nodes are visible on the screen (for example on large screens), the navigation elements are hidden |  |\n\n \n\n## **Testing (stories):**\n\n* Slider on light background - solid - naviagtion top - has scrollbar \n* slider on dark background - pale - navigation bottom - has scrollbar \n* slider on bright background - solid - navigation hidden - no scrollbar \n* slider on light background - pale - navigation bottom - has scrollbar - has action button\n\n## **Technical details**:\n\n_**organism/InpageNavigationCompactSlider**_\n\n```\nconst InpageNavigationCompactSlider {\n  colorMode: 'on-light' | 'on-dark' | 'on-bright';\n  \n  categoryNodesCompact : categoryNodeCompactProps[];\n  \n  header? : string;\n  \n  subline? : string;\n  \n  navigationPosition? : 'top' | 'bottom'\n  \n  hasScrollbar? : boolean;\n  \n  cta? : {\n    text : string;\n    link : string;\n    variant : ButtonVariants\n  }\n}\n```\n\n‌\n\n* if a CTA added the navigation position will be on bottom by default \n* please use `LuiCommonSwipper` for slider \n* do not use fixed css values for slides use slider options \n* hide navigation arrow if all the nodes are available\n* components will be used `LuiText` ,`LuiButton`, `CategoryNodeBasic`,`LuiCommonSwipper` , `LuiSwiperNavigationCompact` , LuiSwipperScrollbar\n\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/11.ui-app-ecommerce/InpageNavigationCompactSlider.md",
+  "parentEpic": {
+    "key": "LUI-34",
+    "title": "Inpage Navigation"
+  },
+  "summary": "Horizontal slider for compact category nodes with configurable navigation, scrollbar visibility, and optional CTA buttons.",
+  "features": [
+    "Multiple node styles: default, solid, outline with various backgrounds",
+    "Configurable navigation position (top or bottom)",
+    "Auto-hiding navigation when all nodes fit on screen",
+    "Optional call-to-action button with variant selection"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-41"
+  ],
+  "longDescription": "## Purpose\n\nThe InpageNavigationCompactSlider component provides a horizontal slider for displaying compact category nodes, optimized for space-constrained layouts. It combines the efficiency of compact nodes with smooth slider navigation for browsing larger category sets.\n\n## Use Cases\n\n- Display subcategory sliders on product listing page headers\n- Create horizontal category navigation in sidebar or filter sections\n- Show sale category highlights with dedicated styling variants\n- Add promotional flags like \"Sale\" or \"New\" to featured categories\n- Include optional CTA buttons for directing users to category overviews\n\n## Design Rationale\n\nThe slider automatically adapts its navigation visibility: when all nodes fit on screen, controls hide to reduce clutter. Multiple background options (none, light, dark, bright, pale) combined with node variants (default, solid, outline) provide extensive styling flexibility. Navigation position flexibility (top or bottom) allows integration with various page layouts. CTA buttons automatically position navigation to the bottom for balanced visual layout.",
+  "keywords": [
+    "subcategory-carousel",
+    "swiper-component",
+    "pale-background"
+  ],
+  "shortDescription": "Optimized for space-constrained layouts like product listing page headers and sidebar filter sections. Supports sale category highlights with dedicated styling variants and promotional flags. Multiple background options (none, light, dark, bright, pale) combined with node variants provide extensive styling flexibility. CTA buttons automatically position navigation to the bottom for balanced visual layout."
+}

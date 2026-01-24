@@ -1,0 +1,64 @@
+{
+  "key": "LUI-200",
+  "title": "Studio / Sections / Product Slider",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Product Slider |\n| --- | --- |\n| **Description** | Present a collection of products as a practical slider. |\n| **Options** | Data Source Display: Navigation position Top Bottom When a button is added, the navigation position is automatically at the bottom, so this line is grayed out and cannot be clicked by the user. Scrollbar (on/off) |\n| **Content** | Text alignment left center heading subline button  Only one button can be added |\n| **Product Tiles** | **It is important that the slider also has settings options for the product tiles.** Display (all y/n toggles) Product flags Brand Product description Add to cart button Icon button options Styling Image format Image background Color swatches top bottom none max. title length |\n| **Style Options** | Style: Full width boxed Margin: None S M L Padding: None S M L Background Color: None Theme Presets Custom Content Color: On light background On dark background On bright background |\n| **Proposed Colors for background color** | Accent 3 Grey 3 Primary 3 Grey 12 |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Content",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Product Tiles",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Style Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Proposed Colors for background color",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/11.ui-app-ecommerce/ProductSlider.md",
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Practical product slider section for presenting collections with navigation and scrollbar options.",
+  "features": [
+    "Flexible navigation positioning (Top or Bottom)",
+    "Content area with heading, subline, and button",
+    "Comprehensive product tile customization",
+    "Full width or boxed layout with spacing controls"
+  ],
+  "keywords": ["product carousel", "collection slider", "product grid"],
+  "shortDescription": "The Product Slider Studio section presents product collections in a horizontally scrollable format. Navigation controls can be positioned at the top or bottom, with an optional scrollbar for additional browsing feedback. A content header area supports headings, sublines, and a single call-to-action button. Product tiles are fully configurable for the information displayed. The slider works well for cross-sells, related products, or category highlights throughout the store."
+}

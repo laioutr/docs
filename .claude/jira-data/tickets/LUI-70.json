@@ -1,0 +1,76 @@
+{
+  "key": "LUI-70",
+  "title": "Load more",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "**Used on Listing pages**\n\nplease read the annotations and info text\n\n---\n\n## Requirements\n\nby <custom data-type=\"mention\" data-id=\"id-0\">@Carolin Jütz</custom> \n\n| **Lazy loading and load more:** \"Load more\" button and infinite scrolling in the form of lazy-loading:  \nShow **10** to **32** products on initial page load, and then lazy-load another **10** to **32** products, until you reach **80** products, and then display a \"Load more\" button; once that button is clicked, load another **10** to **32** products, and resume lazy-loading until the next **80** products have loaded, at which point show the \"Load more\" button once again. | <custom data-type=\"mention\" data-id=\"id-1\">@Sebastian Langer</custom>   \nBecause of the number of products to be loaded via lazy loading, I would say that 16 would be enough on mobile, but you would have to try that out. Or you already know a suitable number – Caro |\n| --- | --- |\n| **End of List** If the end of list is reached, hide the \"load more button\" and the progress bar | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=a54b2d97-e654-4c86-96e7-e5006f9d8958&&collection=&height=458&occurrenceKey=null&width=438&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| **Themed Component** Uses variables: theme / load more / ... for background color and progressbar color | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=fa6d0d05-8167-4970-a28d-2078dce1fed8&&collection=&height=964&occurrenceKey=null&width=985&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n\n---\n\nby <custom data-type=\"mention\" data-id=\"id-2\">@bassem mohamed</custom> and <custom data-type=\"mention\" data-id=\"id-3\">@Sebastian Langer</custom> \n\n## **Acceptance criteria:**\n\n* story with load more component in _**light**_ mode\n* story with load more component in _**dark**_ mode\n* story with load more button and progressbar **hidden**\n\n## **Technical definition:**\n\n_**Molecule/LoadMore**_\n\n```\ninterface LoadMoreProps {\n  colorMode : 'on-light' | 'on-dark';\n  \n  loadedCount: number;\n  \n  totalCount: number;\n  \n  cta: {\n    text: string;\n    variant: ButtonVariant; \n    isLoading: bool;\n  }\n}\n```\n\n### Notes:\n\n* this is a dumb component\n* if  `itemsCount` is equal to `totalCount` hide the loadmore button and the progress bar \n* use [window.scrollTo](https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo) for back to top smooth scrolling effect \n* add emitter for loading more items\n* add css transition to the scrollbar\n* use `LuiButton` , `LuiText` , `LuiLink`\n\n### Storybook stories\n\nCreate a storybook story which renders the LoadMore button. loadedCount should be 12, totalCount 48. Clicking the load-button should emulate a load with a small delay (setTimeout). Set isLoading while waiting. After that the loadedCount should increase by 12.",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "colorMode",
+        "type": "'on-light' | 'on-dark'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "loadedCount",
+        "type": "number",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "totalCount",
+        "type": "number",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "cta",
+        "type": "{",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "text",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "variant",
+        "type": "ButtonVariant",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "isLoading",
+        "type": "bool",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/5.ui-kit-form/LoadMore.md",
+  "parentEpic": {
+    "key": "LUI-68",
+    "title": "Product Listing Page"
+  },
+  "summary": "Pagination component combining infinite scroll with Load More button.",
+  "features": [
+    "Hybrid lazy loading with configurable batch sizes",
+    "Visual progress bar showing loaded vs total count",
+    "Smooth back-to-top scrolling functionality",
+    "Auto-hide when all products are loaded"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-46"
+  ],
+  "longDescription": "## Purpose\n\nThe LoadMore component implements a hybrid pagination strategy for product listing pages, combining automatic lazy loading with manual load triggers. This approach balances performance optimization with user control, preventing excessive automatic loading while keeping the browsing experience fluid.\n\n## Use Cases\n\n- Display initial product batch (10-32 items) with automatic lazy loading of subsequent batches\n- Show a \"Load More\" button after 80 products to give users control over additional loading\n- Provide visual feedback through a progress bar indicating browsing progress\n- Enable smooth scroll-to-top navigation after loading many products\n\n## Design Rationale\n\nThe component uses a threshold-based loading pattern: automatic lazy loading continues until reaching 80 products, then pauses for explicit user action. This prevents runaway data loading on large catalogs while maintaining smooth browsing for typical category sizes. The progress indicator helps users understand their position within the full product set, and the component gracefully hides itself when all products are displayed.",
+  "keywords": ["infinite scroll", "pagination", "lazy loading"],
+  "shortDescription": "The LoadMore component implements a hybrid pagination strategy for product listing pages. Automatic lazy loading continues until reaching 80 products, then pauses for explicit user action via the Load More button. This prevents runaway data loading on large catalogs while maintaining smooth browsing. The progress indicator helps users understand their position within the product set, and the component gracefully hides itself when all products are displayed."
+}

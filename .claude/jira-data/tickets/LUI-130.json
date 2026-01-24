@@ -1,0 +1,23 @@
+{
+  "key": "LUI-130",
+  "title": "Input Otp",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": "please check if this [https://reka-ui.com/docs/components/listbox](https://reka-ui.com/docs/components/listbox) \n\nis the same as this: [https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-24](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-24) ",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-24"
+  ],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "An OTP input component for secure verification code entry.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The Input OTP component provides a specialized interface for entering one-time passwords and verification codes. It displays individual character input cells that auto-advance focus as users type, with support for paste handling of complete codes. Commonly used in authentication flows, two-factor verification, and account confirmation processes where security codes need to be entered with minimal friction."
+}

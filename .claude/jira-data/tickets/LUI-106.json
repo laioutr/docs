@@ -1,0 +1,106 @@
+{
+  "key": "LUI-106",
+  "title": "Toasts",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## **Toast** \n\n→ [NUXT UI 3.3](https://ui.nuxt.com/components/toast#usage)\n\n### The Toast component provides non-intrusive, transient notifications to inform users about system events, errors, or user actions (e.g. success messages, warnings, or alerts). It should be simple to trigger, customizable, and stackable.\n\n[https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-40](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-40) \n\n| **Variants**: neutral success warning error **Properties**: orientation: vertical / horizontal boolean:  show icon show buttons has subline  | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=f898a4b9-5357-43e4-97df-5ad4da2e4909&&collection=&height=900&occurrenceKey=null&width=583&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| --- | --- |\n| **Trigger by API or component usage** **Auto-dismissable** after a configurable duration **Manual dismiss (close button)** **Stackable** — supports multiple toasts shown simultaneously **Positioning** — top-right by default; configurable (e.g., bottom-left) **Transition animations** – slide in matching the direction of positioning on the screen (e.g., position is bottom right → slide in from right; position is bottom center-> slide in from bottom to top and so on) **Queue limit** — **optional** max number of concurrent toasts **Pause on hover** **Progress bar** to indicate time remaining **Icons per variant** (e.g., checkmark for success) **Rich content support** — allow for HTML or component slots **Accessibility (a11y)** — proper ARIA roles, keyboard navigation support Toasts should **not block user interaction** **On mobile:** adapt position and spacing for small screens only top or bottom positioning Animations should feel quick but smooth (e.g., 200–300ms) |  |\n| Includes a **progress bar** that decreases to the left as time runs out (as with nuxt UI) | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=d93f687c-c548-4584-9b9b-fef39059a555&&collection=&height=31&occurrenceKey=null&width=434&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **This is a themed component.** To show which buttons should be used for which variant and in which theme, I have used boolean variables in figma:  \nExample neutral buttons ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=4ff99211-91cb-4ae8-a98d-2ee6753a6d3c&&collection=&height=371&occurrenceKey=null&width=1036&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=a132157f-fc15-4506-8c5e-330c96e73140&&collection=&height=1417&occurrenceKey=null&width=980&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **Accessibility (A11Y)** `role=\"status\"` or `role=\"alert\"` depending on type `aria-live=\"polite\"` or `assertive` Keyboard navigable close button Ensure screen readers can detect new toasts |  |\n\n### **Acceptance criteria:**\n\nCreate stories with a button which opens the following toasts:\n\n* neutral toast with icon , title and action - vertical \n* success toast with icon , title , description and action - vertical\n* warning toast with title  , description and two actions - horizontal\n* error toast with icon , title and description - horizontal\n\n### **Technical Details:** \n\n_**molecule/Toaster**_\n\n```\ninterface ToasterProps {\n    id: string;\n    title: string;\n    subline?: string;\n    variant: 'neutral' | 'success' | 'warning' | 'error';\n    orientation: 'vertical' | 'horizontal';\n    showIcon?: boolean;\n    position? : 'top left' | 'top right' | 'bottom left' | 'bottom right' \n    ctas:cta?: {\n      text: string;\n      variant: ButtonVariant;\n      href: string;\n    }[];\n    autoDismiss?: boolean;\n    duration?: number;\n}\n```\n\n* create store that will control state of toasters queue using `createGlobalState`, similar to `lightboxStore` \n* actions of the store\n\n    * `ADD_TOAST`\n    * `REMOVE_TOAST`\n    * `UPDATE_TOAST`\n    * `DISMISS_TOAST`\n    * `SET_QUEUE_LIMIT`\n    \n* use `LuiIcon` , `LuiText`, `LuiButton`\n\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-40"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "id",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "subline",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "variant",
+        "type": "'neutral' | 'success' | 'warning' | 'error'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "orientation",
+        "type": "'vertical' | 'horizontal'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "showIcon",
+        "type": "boolean",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "position",
+        "type": "'top left' | 'top right' | 'bottom left' | 'bottom right'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "ctas",
+        "type": "cta?: {",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "text",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "variant",
+        "type": "ButtonVariant",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/06.ui-kit-surfaces/Toast.md",
+  "parentEpic": {
+    "key": "LUI-105",
+    "title": "Toasts and Alerts"
+  },
+  "summary": "Non-intrusive toast notification component for displaying transient messages with auto-dismiss and queue management.",
+  "features": [
+    "Multiple semantic variants: neutral, success, warning, error with variant-specific icons",
+    "Auto-dismiss with progress bar and pause-on-hover",
+    "Stackable notifications with optional queue limit",
+    "Mobile-responsive positioning and spacing adaptations"
+  ],
+  "longDescription": "## Purpose\n\nThe Toast component delivers lightweight, non-blocking notifications that inform users about application events without interrupting their workflow. Toasts communicate success confirmations, warnings, errors, and neutral information while allowing continued interaction with the underlying interface.\n\n## Use Cases\n\n- Confirm successful operations such as saving data or completing purchases\n- Display warning messages about potential issues requiring attention\n- Show error notifications when operations fail with optional retry actions\n- Provide neutral informational messages about system status or updates\n- Queue multiple simultaneous notifications with configurable display limits\n\n## Design Rationale\n\nToasts use a global state store pattern for centralized queue management, enabling programmatic triggering from anywhere in the application. The progress bar and pause-on-hover features give users control over dismissal timing. Semantic variants with distinct icons ensure quick visual recognition of message importance, while ARIA roles and keyboard navigation maintain accessibility standards.",
+  "shortDescription": "Delivers lightweight, non-blocking notifications about application events. Uses global state store pattern with createGlobalState for centralized queue management, enabling programmatic triggering from anywhere. Supports rich content through HTML or component slots. Includes ARIA roles (status/alert), aria-live regions, and keyboard navigation for accessibility. Transition animations match positioning direction with smooth 200-300ms timing.",
+  "keywords": [
+    "snackbar",
+    "transient",
+    "aria-live"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-65"
+  ]
+}

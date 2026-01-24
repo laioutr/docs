@@ -1,0 +1,50 @@
+{
+  "key": "LUI-20",
+  "title": "CTA Banner Integrated",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "For definition, please look at the idea ticket.\n\nSee the \"Open in playground\" button in figma for the banner:\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=0cf49d0d-bf35-48e8-9fc6-9a19107ed530&&collection=&height=483&occurrenceKey=null&width=302&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\nStorybook stories have been created:\n\n* Implement the banners from the [design examples](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=6481-79382&m=dev):\n\n    * Bag banner full-width\n    * Valentines boxed\n    * Keyboard full-width\n    * Cable full-width\n    * Keyboard boxed\n    * Documentation boxed\n    \n* (Put image files into packages/ui/playground/.storybook/public/placeholders)\n\n## Technical details\n\n### Atom/Link\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=7a8fab62-42f7-4201-a010-52a307195847&&collection=&height=39&occurrenceKey=null&width=143&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\nProps:\n\n* text (should probably be a slot)\n* href\n* color\n\n### Block/CtaBannerIntegrated\n\nUse the ImageContrastOverlay component from <custom data-type=\"smartlink\" data-id=\"id-0\">https://laioutr.atlassian.net/browse/THEMES-22</custom>.\n\nSome props:\n\n* headline\n* subline\n* cta text, link, size & variant\n* background image & fallback color\n\n    * This component only has one image-prop of type `Media`. No mobile image, no focus-point props.\n    \n* overlay props\n* colors: default/always-white/always-black for all texts\n\n[Styling for dark-mode](https://www.notion.so/laioutr/Tips-Tricks-for-development-1835331c061e801ab7d7c68ecfff9e5f?pvs=4#1a65331c061e803880f2eab02bfb4bb9)\n\nFurther props, specific for the showcase-banner:\n\n* Icon\n* link text & href\n* caption\n* variant boxed/full-width (toggles container)\n* Size s/xs\n\nPass `desktopBreakpoint=\"md\"` to the Media component to ensure the mobile foreground/background-image is only used until md.",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "colors",
+        "type": null,
+        "default": null,
+        "description": "default/always-white/always-black for all texts"
+      },
+      {
+        "name": "banner",
+        "type": null,
+        "default": null,
+        "description": "* Icon"
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/05.ui-kit-content/CtaBannerIntegrated.md",
+  "parentEpic": {
+    "key": "LUI-17",
+    "title": "CTA Banners"
+  },
+  "summary": "A space-efficient call-to-action banner with icons, inline links, and compact sizing for content-heavy layouts.",
+  "features": [
+    "Icon support for visual emphasis and quick recognition",
+    "Inline link display with customizable styling",
+    "Compact size options (S, XS) for secondary placements",
+    "Boxed or full-width layout variants"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-32"
+  ],
+  "longDescription": "## Purpose\n\nThe CTA Banner Integrated component provides a compact promotional solution for spaces where a full-sized banner would be excessive. It combines visual elements like icons with concise messaging to create effective calls-to-action that integrate naturally within content layouts without overwhelming the page design.\n\n## Use Cases\n\n- Secondary promotional placements alongside product listings or category pages\n- In-content banners highlighting related services or cross-sell opportunities\n- Compact event or sale announcements within blog posts or editorial content\n- Support or documentation callouts directing users to helpful resources\n\n## Design Rationale\n\nThe smaller sizing options (S, XS) allow this banner to fit within tighter layouts while still providing visual impact through icons and imagery. The inline link option offers a subtler call-to-action compared to prominent buttons, making it suitable for contexts where a softer promotional approach is preferred. Marketing teams can deploy these banners without disrupting the primary content flow.",
+  "keywords": [
+    "compact banner",
+    "secondary CTA",
+    "in-content marketing"
+  ],
+  "shortDescription": "The CTA Banner Integrated provides a compact promotional solution for spaces where full-sized banners would be excessive. It combines icons with concise messaging to create effective calls-to-action that integrate naturally within content layouts. The inline link option offers a subtler approach compared to prominent buttons, suitable for contexts preferring softer promotion. Marketing teams can deploy these banners without disrupting primary content flow."
+}

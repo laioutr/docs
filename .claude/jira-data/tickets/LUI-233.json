@@ -1,0 +1,50 @@
+{
+  "key": "LUI-233",
+  "title": "Studio / Sections / Testimonial - Quote Card",
+  "issueType": "Story",
+  "status": "Dev QA",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Testimonial - Quote Card |\n| --- | --- |\n| **Description** | A simple quote card in a section with different styles and optional star ratings or logos. |\n| **Options** | Display: Star rating y/n Profile picture y/n Logo y/n |\n| **Design options** | Section Styling: Style: full width boxed Section Background: None (default) custom Card Styling: Card style: Default Dark background color Bright background color Outline Haptic → Display the following settings from the card style as childs: Background color Text color Star color Content alignment: left center right Layout: Margin: None S M L Padding: None S M L |\n\n## Testimonial \n\n| **Options** | Star rating (select from ‘1 of 5’ to '5 of 5') Testimonial Name  Position Company Quote text Profile picture Company logo |\n| --- | --- |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Design options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Testimonial quote card with star ratings, profile pictures, and styled design.",
+  "features": [
+    "Multiple card styles (Default, Dark, Bright, Outline, Haptic)",
+    "Optional star ratings display",
+    "Profile picture and company logo support",
+    "Flexible content alignment (left, center, right)"
+  ],
+  "keywords": [
+    "quote card",
+    "testimonial card",
+    "customer quote"
+  ],
+  "shortDescription": "The Testimonial Quote Card section presents customer feedback in elegantly styled cards. It offers five card style variants (Default, Dark, Bright, Outline, Haptic) with customizable background, text, and star colors. Optional elements include star ratings (1-5), profile pictures, and company logos to enhance authenticity. Content alignment options support different layouts. Use this for featuring individual standout testimonials or a small curated selection of customer quotes."
+}

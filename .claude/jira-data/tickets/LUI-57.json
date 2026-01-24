@@ -1,0 +1,53 @@
+{
+  "key": "LUI-57",
+  "title": "CMS Showcase Product Slider",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "This CMS block is used to attract the attention of users by the combination of CTA banners and product sliders and to guide them specifically to categories or brands.\n\n---\n\n| Uses **CTA Banner Basic** as shown in the [component](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=12175-374053&t=kWl7opPn708GdN7H-4) and [design examples.](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=12175-373330&t=kWl7opPn708GdN7H-4) for MVP there is only one text alignment (bottom left) for desktop:  the banner width corresponds to 30% of the max content width of the breakpoint, the height adapts to the height of the product slider on mobile: CTA Banner is full width 1:1 **product slider** is default without headings (but can be added optionally) user can decide how product tiles should be displayed (swatches, title length etc.) user can choose between light background or dark background bg color can be chosen/changed | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=0f196419-5a71-4796-a845-146ca0d74c87&&collection=&height=530&occurrenceKey=null&width=597&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=a08ef73a-c835-44f6-a11d-8011656c1acd&&collection=&height=444&occurrenceKey=null&width=737&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| --- | --- |\n\n### Technical details\n\n#### organism/CmsShowcaseProductSlider\n\nPlease note that the slider items are bleeding outside the container to the right\n\nSome props:\n\n* background: dark, light\n* products: array of products\n* cta banner: object of props from CtaBannerComponent\n* the rest of the props from ProductSlider\n\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=12175-374053&t=kWl7opPn708GdN7H-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=12175-373330&t=kWl7opPn708GdN7H-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "background",
+        "type": null,
+        "default": null,
+        "description": "dark, light"
+      },
+      {
+        "name": "products",
+        "type": null,
+        "default": null,
+        "description": "array of products"
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-55",
+    "title": "Product Slider"
+  },
+  "summary": "A promotional CMS block combining a CTA banner with a product slider to guide shoppers toward categories or brands.",
+  "features": [
+    "Side-by-side layout pairing CTA Banner Basic with Product Slider",
+    "Responsive design: 30% banner width on desktop, full-width stacked on mobile",
+    "Customizable background colors (light or dark mode)",
+    "Edge-bleeding slider items for visual interest beyond container bounds"
+  ],
+  "longDescription": "## Purpose\n\nThe CMS Showcase Product Slider combines promotional messaging with product discovery in a single attention-grabbing block. It enables merchants to pair compelling CTA banners with curated product selections, driving shoppers toward specific categories or brand collections.\n\n## Use Cases\n\n- **Brand storytelling**: Feature a brand banner alongside its product range\n- **Category promotion**: Highlight a category with lifestyle imagery and product previews\n- **Seasonal campaigns**: Combine promotional messaging with relevant product selections\n- **New collection launches**: Introduce collections with descriptive banners and product samples\n\n## Design Rationale\n\nThe component leverages the visual impact of full-bleed imagery combined with scannable product previews. The 30/70 desktop split prioritizes product discovery while maintaining strong promotional presence. Mobile-first stacking ensures the banner context appears before products. Edge-bleeding slider items create visual momentum and encourage horizontal exploration.",
+  "keywords": [
+    "promotional block",
+    "brand showcase",
+    "campaign block"
+  ],
+  "shortDescription": "Combines promotional messaging with product discovery in a single attention-grabbing block. Pairs compelling CTA banners with curated product selections for brand storytelling, category promotion, seasonal campaigns, and new collection launches. The 30/70 desktop split prioritizes product discovery while maintaining strong promotional presence. Mobile-first stacking ensures banner context appears before products, and edge-bleeding slider items create visual momentum encouraging horizontal exploration.",
+  "linkedIdeas": [
+    "LAIOUTR-40"
+  ]
+}

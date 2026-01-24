@@ -1,0 +1,47 @@
+{
+  "key": "LUI-41",
+  "title": "Add Icons in different sizes",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "As a User i want to have recognizable icons which help me understand what's going on.\n\nWe have noticed that some the icons, when sized down, are almost unrecognizable. Therefore Caro has created custom bigger and smaller version of the icons from our icon-sets.\n\n[https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=74-715&m=dev](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=74-715&m=dev)## Technical definition\n\nCopy all SVGs from the Icons Figma file to their corresponding folder in `packages/ui/src/runtime/assets/icons`. The names of the svg-files should follow this naming:\n\n* If the SVG is 24px in size, it probably is from the icon-set directly. If it is a modification of an existing icon, give it the name it has in figma. E.g. copy-linear.svg for this one:\n\n    ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=4e0ec45d-def6-4dd7-8470-11cb7f4f8821&&collection=&height=34&occurrenceKey=null&width=272&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n* Use the names from figma plus the following suffixes for the respective sizes:\n\n    * 32px: `-l.svg`\n    * 20px: `-m.svg`\n    * 16px: `-s.svg`\n    \n* E.g. if the icon is called solar:copy-linear and 16px big, call the file `solar-extension/copy-linear-s.svg`\n\nIn Icon.vue, modify the computed `resolvedName`:\n\n* Resolve the name of the icon just as before\n* If the prop size is set to `m` or unset, return the resolved name\n* Otherwise, in the resolved name replace `hugeicons:` with `huge-extension:` and `solar:` with `solar-extension:` and append the size-suffix.\n\nThis is not the cleanest way. If you have a better idea, please let me know.\n\nAlso it might be worth investigating if it makes sense to automate this process from Figma to SVGs and aliases.",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=74-715&m=dev"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "size",
+        "type": "string",
+        "default": "m",
+        "description": "Icon size: s (16px), m (20px), or l (32px)"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "default": null,
+        "description": "Icon name from icon set (e.g., solar:copy-linear)"
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/02.ui-kit-general/Icon.md",
+  "parentEpic": null,
+  "summary": "Size-optimized icon variants with automatic resolution ensuring recognizability at small, medium, and large sizes.",
+  "features": [
+    "Custom-designed icon variants optimized for each display size",
+    "Three size options: small (16px), medium (20px), and large (32px)",
+    "Automatic size suffix resolution in Icon component",
+    "Support for hugeicons and solar icon sets with extension folders"
+  ],
+  "linkedIdeas": [],
+  "longDescription": "## Purpose\n\nThe enhanced icon system addresses the challenge of icon recognizability at different sizes. Standard icons designed at 24px often become unclear or lose detail when scaled down, making the UI harder to understand. This feature provides custom-designed icon variants optimized for each display size.\n\n## Use Cases\n\n- Display small icons in compact UI elements like buttons and badges\n- Use medium icons for standard interface elements\n- Show large icons in hero sections or prominent navigation\n- Maintain icon clarity across all component sizes in the design system\n- Support both hugeicons and solar icon families with size variants\n\n## Design Rationale\n\nRather than simply scaling icons, custom versions are created for each size to ensure visual clarity and recognizability. The Icon component automatically resolves the correct variant based on the size prop, using extension folders to organize size-specific SVGs. This approach maintains backward compatibility while improving the visual quality of smaller icons.",
+  "shortDescription": "Addresses icon clarity issues when standard 24px icons are scaled down. Icon.vue resolves names by replacing icon set prefixes with extension folder paths and appending size suffixes. SVGs stored in packages/ui/src/runtime/assets/icons with -s, -m, -l suffixes. Backward compatible with existing icon usage when size prop is unset or medium.",
+  "keywords": [
+    "iconography",
+    "svg-icons",
+    "visual-clarity"
+  ]
+}

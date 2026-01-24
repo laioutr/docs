@@ -1,0 +1,56 @@
+{
+  "key": "LUI-91",
+  "title": "PDP / buybox - Energy Label",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "| Same logic as this one: [https://www.ambiendo.de/products/bioledex-tema-led-e14-lampe-gluhbirne?variant=50591815926086&attributionToken=qAHwpwoMCOypv8IGENTsqpUBEAEaJDY4NzE2MzgyLTAwMDAtMjM0YS1iOGYzLTAwMWExMTQ2MzQ5YyokNmVhOTZiNzQtMWNhNC00NTY0LThlZDgtNTc1YTU5NTIxZGYzMjCc1rctxsvzF8LwnhXUsp0Vjr6dFaOAlyK2t4wtqOWqLZ_Wty2a7sYwkPeyMPbowzA6DmRlZmF1bHRfc2VhcmNoSAFoAXABegJ3YQ](https://www.ambiendo.de/products/bioledex-tema-led-e14-lampe-gluhbirne?variant=50591815926086&attributionToken=qAHwpwoMCOypv8IGENTsqpUBEAEaJDY4NzE2MzgyLTAwMDAtMjM0YS1iOGYzLTAwMWExMTQ2MzQ5YyokNmVhOTZiNzQtMWNhNC00NTY0LThlZDgtNTc1YTU5NTIxZGYzMjCc1rctxsvzF8LwnhXUsp0Vjr6dFaOAlyK2t4wtqOWqLZ_Wty2a7sYwkPeyMPbowzA6DmRlZmF1bHRfc2VhcmNoSAFoAXABegJ3YQ) click on the image opens light box modal with the energy label | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=70dc6d61-3472-4a25-8fa6-29ccb8b96a8e&&collection=&height=64&occurrenceKey=null&width=249&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| --- | --- |\n\n### **Acceptance Criteria:**\n\nBuild a storybook story, same as figma design \n\n### **Technical details:**  \n\nmolecule/PDP/BuyBoxEnergyLabel\n\n```\ninterface BuyBoxEnergyLabelProps{\n  labelPreview: MediaImage; // thumb image for pdp\n  labelFullsize: MediaImage; // full image to be displayed in lightbox\n  dataSheetLink?: string;\n}\n```\n\nIf no `dataSheetLink` is provided, show no link. Use `LuiLink` and `useLightboxStore`",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "labelPreview",
+        "type": "MediaImage",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "labelFullsize",
+        "type": "MediaImage",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "dataSheetLink",
+        "type": "string",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-84",
+    "title": "Product Detail Page"
+  },
+  "summary": "EU energy label component with clickable thumbnail preview opening a fullscreen lightbox with datasheet link.",
+  "features": [
+    "Thumbnail preview on product page",
+    "Fullscreen lightbox modal for detailed view",
+    "Optional datasheet link",
+    "EU energy efficiency compliance"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-48"
+  ],
+  "longDescription": "## Purpose\n\nThe Energy Label component enables compliance with EU energy labeling regulations by displaying energy efficiency information for applicable products such as lighting, appliances, and electronics. It provides customers with standardized energy consumption data to support environmentally conscious purchasing decisions.\n\n## Use Cases\n\n- Displaying energy label information in a lightbox modal\n- Showing thumbnail energy label preview within the buy box\n- Linking to detailed product datasheets for technical specifications\n- Supporting EU regulatory compliance for energy-related products\n\n## Design Rationale\n\nThe component uses a compact thumbnail in the buy box to avoid visual clutter while providing full label details on demand through the lightbox. This approach balances regulatory compliance with clean product page design. The optional datasheet link supports customers who need detailed technical specifications beyond the standard energy label information.",
+  "shortDescription": "Enables compliance with EU energy labeling regulations for products like lighting, appliances, and electronics. Uses a compact buy box thumbnail to avoid visual clutter while providing full label details on demand. Supports customers needing detailed technical specifications beyond standard energy label information.",
+  "keywords": [
+    "energy efficiency",
+    "regulatory compliance",
+    "appliance rating"
+  ]
+}

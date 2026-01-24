@@ -1,0 +1,21 @@
+{
+  "key": "LUI-126",
+  "title": "Checkbox Group",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/07.ui-kit-form/Checkbox.md",
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "A container for managing collections of related checkbox inputs.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "Checkbox Group provides a wrapper component that manages the state and behavior of multiple related checkbox inputs. It handles value collection, validation, and accessibility requirements like proper ARIA grouping. Commonly used for multi-select filter options, preference settings, or any form context requiring selection of multiple non-exclusive options."
+}

@@ -1,0 +1,42 @@
+{
+  "key": "LUI-73",
+  "title": "Implement Product Listing Page",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "WIP as Filter & Search aren't ready yet - <custom data-type=\"mention\" data-id=\"id-0\">@Carolin Jütz</custom> \n\n**Contains**:\n\n* [Shop Header](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=12652-199498&t=JdNx9y5r0PDJX6eC-4)\n* [Breadcrumbs](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14145-125661&t=JdNx9y5r0PDJX6eC-4)\n* [Category Header](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14605-394163&t=JdNx9y5r0PDJX6eC-4)\n* [Filterbar](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14980-153735&t=JdNx9y5r0PDJX6eC-4)\n\n    * Ambiendo MVP: Standard Filter bar with Google Retail Connect Filter Suggestions for Collection pages\n    \n* [Product Grid](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14795-155216&t=JdNx9y5r0PDJX6eC-4)\n* [Load more](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14229-187419&t=JdNx9y5r0PDJX6eC-4)\n* [Content Slots](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14795-155027&t=JdNx9y5r0PDJX6eC-4)\n* Optional Newsletter Block\n* Footer\n\n---",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=12652-199498&t=JdNx9y5r0PDJX6eC-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14145-125661&t=JdNx9y5r0PDJX6eC-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14605-394163&t=JdNx9y5r0PDJX6eC-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14980-153735&t=JdNx9y5r0PDJX6eC-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14795-155216&t=JdNx9y5r0PDJX6eC-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14229-187419&t=JdNx9y5r0PDJX6eC-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14795-155027&t=JdNx9y5r0PDJX6eC-4"
+  ],
+  "userStory": "As a shopper browsing an online store, I want a complete product listing page with navigation, filtering, and infinite scroll, so that I can efficiently browse and compare products within categories.",
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-68",
+    "title": "Product Listing Page"
+  },
+  "summary": "Complete product listing page template integrating shop header, breadcrumbs, category header, filter bar, product grid, and load more.",
+  "features": [
+    "Full-page layout composing all PLP components into a cohesive template",
+    "Integration with filter bar and Google Retail Connect filter suggestions",
+    "Infinite scroll with load more pagination and progress indication",
+    "Content slots for newsletter registration and promotional blocks"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-46"
+  ],
+  "longDescription": "## Purpose\n\nThe Product Listing Page template assembles all category browsing components into a cohesive shopping experience. It enables shoppers to browse and compare products within categories through an organized listing page with navigation, filtering, and infinite scroll capabilities.\n\n## Use Cases\n\n- Display products in a responsive grid layout with lazy loading\n- Show breadcrumb navigation reflecting the full category path\n- Display category header with title, SEO text, and subcategory navigation\n- Implement load more functionality with progress indication\n- Handle empty state with helpful messaging and alternative content\n- Integrate filter bar with Google Retail Connect filter suggestions\n- Provide content slots for newsletter blocks and promotional materials\n\n## Design Rationale\n\nThe page template follows a composable architecture, assembling independent components (ShopHeader, Breadcrumbs, CategoryHeader, Filterbar, ProductGrid, LoadMore, Footer) into a complete page experience. This enables consistent page structure across categories while allowing individual components to be updated or swapped independently. The integration points between components (filter state affecting grid, load more triggering grid updates) are handled through shared state management.",
+  "shortDescription": "Follows composable architecture assembling independent components (ShopHeader, Breadcrumbs, CategoryHeader, Filterbar, ProductGrid, LoadMore, Footer) into a complete page. Integration points between components use shared state management for filter state affecting grid and load more triggering updates. Handles empty state with helpful messaging. MVP includes standard filter bar with Google Retail Connect filter suggestions for collection pages.",
+  "keywords": [
+    "PLP",
+    "page template",
+    "composable architecture"
+  ]
+}

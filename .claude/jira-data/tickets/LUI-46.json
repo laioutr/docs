@@ -1,0 +1,34 @@
+{
+  "key": "LUI-46",
+  "title": "Inpage Navigation / Big / Grid",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "For more info and global requirements, please read the idea ticket or epic description.\n\n \n\n| **Properties / Variants** breakpoint text align left center node format (variant) square rectangle landscape rectangle portrait optional headings true false | Of course, the user can also choose between text on the image and text under the image. The properties of the nodes should be controllable as defined in the category node / big component. |\n| --- | --- |\n\n \n\n|  |\n| --- |\n\n## **Testing (stories):**\n\n* Grid on light background - alignment left - header - subline \n* Grid on dark background - alignment center \n* Grid on bright background - alignment left \n\n## **Technical details**:\n\n_**organism/InpageNavigationBigGrid**_\n\n```\nconst InpageNavigationBasicGrid {\n  colorMode: 'on-light' | 'on-dark' | 'on-bright';\n  \n  categoryNodesBig : categoryNodeBigProps[];\n  \n  Header? : string;\n  \n  subline? : string;\n  \n  alignment : 'left' | 'center'\n}\n```\n\n‌\n\n* ColorMode of the grid section will not passed to categoryNodesBig component each node has it's won colorMode based on the contrast of the image\n* alignment is affecting the headline , subline and the nodes\n* components will be used `LuiText` , `CategoryNodeBasic`\n\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/11.ui-app-ecommerce/InpageNavigationBigGrid.md",
+  "parentEpic": {
+    "key": "LUI-34",
+    "title": "Inpage Navigation"
+  },
+  "summary": "High-impact grid layout for large category nodes with independent node color modes and multiple format variants.",
+  "features": [
+    "Multiple node format variants: square, landscape, and portrait",
+    "Optional header and subline for section context",
+    "Left or center alignment for headlines and nodes",
+    "Independent color mode per node based on image contrast"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-41"
+  ],
+  "longDescription": "## Purpose\n\nThe InpageNavigationBigGrid component provides a high-impact grid layout for displaying large category nodes, ideal for hero sections and prominent homepage placements. It creates visual impact through larger imagery while maintaining layout flexibility.\n\n## Use Cases\n\n- Create hero-style category grids on store homepages\n- Display featured category collections with high-impact imagery\n- Mix different node formats (square, landscape, portrait) in a single grid\n- Add promotional badges to highlight sale or new categories\n- Use independent color modes per node to match varied imagery\n\n## Design Rationale\n\nUnlike other navigation grids, the Big Grid does not propagate its colorMode to child nodes. Each CategoryNodeBig determines its own color mode based on the contrast requirements of its specific image. This ensures optimal text readability across nodes with diverse imagery. Alignment options apply consistently to both section headings and the grid layout itself for visual coherence.",
+  "keywords": [
+    "hero-grid",
+    "featured-categories",
+    "entry-page-grid"
+  ],
+  "shortDescription": "Ideal for hero sections and prominent homepage placements. Unlike other navigation grids, does not propagate colorMode to child nodes - each CategoryNodeBig determines its own color mode based on image contrast requirements. Supports promotional badges to highlight sale or new categories. Alignment options apply consistently to both section headings and grid layout for visual coherence."
+}

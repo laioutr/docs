@@ -1,0 +1,56 @@
+{
+  "key": "LUI-21",
+  "title": "CTA Banner Showcase",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "For definition, please look in the idea ticket <custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> \n\nSee the \"Open in playground\" button in figma for the banner:\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=2b0661f2-a753-4fd8-a711-260158a948b5&&collection=&height=487&occurrenceKey=null&width=300&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\nStorybook stories have been created:\n\n* Implement the banners from the [design examples](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=6689-73076&m=dev):\n\n    * Bag banner full-width\n    * Bag banner boxed\n    * Valentines day boxed\n    * Keyboard full-width\n    * Keyboard boxed\n    * Keyboard boxed astro-background\n    * Support-Larry full-width\n    * Support-Larry boxed\n    \n* 16:9 thumbnail with dark text\n* 4:3 thumbnail with light text\n* 1:1 thumbnail with custom background\n* (Put image files into packages/ui/playground/.storybook/public/placeholders)\n\n## Technical details\n\n### Block/CtaBannerShowcase\n\nUse the ImageContrastOverlay component from <custom data-type=\"smartlink\" data-id=\"id-1\">https://laioutr.atlassian.net/browse/THEMES-22</custom>.\n\nSome props:\n\n* headline\n* subline\n* cta text, href, size & variant\n* background image & fallback color\n\n    * This component only has one image-prop of type `Media`. No mobile image, no focus-point props.\n    \n* overlay props\n* colors: default/always-white/always-black for all texts\n\n[Styling for dark-mode](https://www.notion.so/laioutr/Tips-Tricks-for-development-1835331c061e801ab7d7c68ecfff9e5f?pvs=4#1a65331c061e803880f2eab02bfb4bb9)\n\nFurther props, specific for the showcase-banner:\n\n* image aspect ratio desktop/mobile\n* variant boxed/full-width (toggles container)\n* optional caption\n* text align mobile left/center\n\nPass `desktopBreakpoint=\"md\"` to the Media component to ensure the mobile foreground/background-image is only used until md.",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "aspectRatio",
+        "type": "string",
+        "default": null,
+        "description": "Image aspect ratio options: 16:9, 4:3, or 1:1 for desktop and mobile viewports"
+      },
+      {
+        "name": "colors",
+        "type": null,
+        "default": null,
+        "description": "default/always-white/always-black for all texts"
+      },
+      {
+        "name": "textAlignMobile",
+        "type": "string",
+        "default": null,
+        "description": "Mobile text alignment: left or center"
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/05.ui-kit-content/CtaBannerShowcase.md",
+  "parentEpic": {
+    "key": "LUI-17",
+    "title": "CTA Banners"
+  },
+  "summary": "A premium call-to-action banner for high-impact displays with large imagery and foreground/background layering.",
+  "features": [
+    "Customizable image aspect ratios for desktop and mobile (16:9, 4:3, 1:1)",
+    "Foreground and background image support for layered presentations",
+    "Boxed or full-width layout variants",
+    "Light and dark text themes with custom color override support"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-32"
+  ],
+  "longDescription": "## Purpose\n\nThe CTA Banner Showcase component delivers maximum visual impact for premium promotional campaigns. It is specifically designed for product-focused presentations where large, high-quality imagery combined with compelling copy drives customer engagement and conversion.\n\n## Use Cases\n\n- Hero-level product launches showcasing new arrivals with layered foreground product images\n- Seasonal campaign banners for major sales events like Black Friday or holiday promotions\n- Brand storytelling sections featuring lifestyle imagery with prominent calls-to-action\n- Premium product highlights where image quality and visual appeal are paramount\n\n## Design Rationale\n\nThe flexible aspect ratio system ensures banners maintain visual integrity across devices while accommodating different image compositions. The foreground/background image layering capability allows for sophisticated product presentations where items appear to \"pop\" from the background. This component empowers marketing teams to create visually stunning promotions that rival custom-designed campaigns without requiring development resources.",
+  "keywords": [
+    "showcase banner",
+    "premium promotion",
+    "product launch banner"
+  ],
+  "shortDescription": "The CTA Banner Showcase delivers maximum visual impact for premium promotional campaigns. It is designed for product-focused presentations where high-quality imagery combined with compelling copy drives engagement and conversion. The flexible aspect ratio system ensures banners maintain visual integrity across devices. The image layering capability allows sophisticated product presentations where items appear to \"pop\" from the background."
+}

@@ -1,0 +1,30 @@
+{
+  "key": "LUI-68",
+  "title": "Product Listing Page",
+  "issueType": "Epic",
+  "status": "Done",
+  "labels": [],
+  "description": "A Product Listing Page (also called Category Page), shows the products of a category as a grid\n\n---\n\n<custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\n**As a** user shopping in an online store,  \n**I want** to view a list of products within a specific category or filtered selection,  \n**so that** I can easily browse and compare items that match my interests.\n\n---",
+  "figmaLinks": [],
+  "childTickets": [
+    "LUI-69",
+    "LUI-70",
+    "LUI-71",
+    "LUI-72",
+    "LUI-73",
+    "LUI-82"
+  ],
+  "created": "2025-05-07T11:50:28.793+0200",
+  "updated": "2025-09-05T13:54:22.694+0200",
+  "linkedIdeas": [
+    "LAIOUTR-46"
+  ],
+  "enrichedData": {
+    "purpose": "Online shoppers need a structured way to view and compare products within categories or filtered selections to find items matching their interests efficiently.",
+    "useCases": [
+      "View products within a specific category as a grid",
+      "Browse and compare items that match user interests",
+      "Filter product selection based on criteria"
+    ]
+  }
+}

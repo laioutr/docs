@@ -1,0 +1,34 @@
+{
+  "key": "LUI-29",
+  "title": "Video Block",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-27",
+    "title": "Video / Image Block"
+  },
+  "summary": "A video block component for embedding video content from uploads or external platforms like YouTube and Vimeo.",
+  "features": [
+    "Support for uploaded videos and embedded content from YouTube and Vimeo",
+    "Configurable auto-play and custom thumbnail/poster image support",
+    "Modal video player with standard playback controls",
+    "Accessibility support with captions and video transcriptions"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-47"
+  ],
+  "longDescription": "## Purpose\n\nThe Video Block component enables content editors to embed and manage video content within page layouts, supporting both self-hosted uploads and popular external platforms to create engaging multimedia experiences.\n\n## Use Cases\n\n- Embed product demonstration videos or brand storytelling content on landing pages\n- Upload custom video files or embed from YouTube and Vimeo using simple URL input\n- Configure auto-play behavior for hero sections or background video loops\n- Set custom thumbnail images to control the video preview appearance\n- Play videos in a focused modal player with standard controls (play, pause, seek, volume)\n- Provide captions and transcriptions for accessibility compliance\n- Deliver optimized video quality based on user device capabilities and network conditions\n\n## Design Rationale\n\nThe component abstracts the complexity of different video sources behind a unified interface, allowing content editors to work with uploaded files or external embeds interchangeably. Modal playback ensures videos receive full user attention while maintaining page layout integrity.",
+  "shortDescription": "Enables content editors to embed and manage video content within page layouts. Supports both self-hosted uploads and popular external platforms like YouTube and Vimeo. Upload custom files or embed using simple URL input. Configure auto-play for hero sections or background loops. Set custom thumbnails to control video preview appearance. Delivers optimized video quality based on device capabilities and network conditions. Abstracts complexity of different video sources behind a unified interface.",
+  "keywords": [
+    "video embed",
+    "modal player",
+    "streaming"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "key": "LUI-18",
+  "title": "CTA Banner Basic",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "For description and requirements, please go to the idea ticket <custom data-type=\"emoji\" data-id=\"id-0\">:slight_smile:</custom> \n\nSee the \"Open in playground\" button in figma for the banner:\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=0dd8e211-c278-4336-b13f-0633af814fb4&&collection=&height=511&occurrenceKey=null&width=304&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\nStorybook stories have been created:\n\n* Implement the banner from the design example\n* Banner boxed \n\n### Block/CtaBannerBasic\n\nUse the ImageContrastOverlay component from <custom data-type=\"smartlink\" data-id=\"id-1\">https://laioutr.atlassian.net/browse/THEMES-22</custom>.\n\nSome props:\n\n* headline\n* subline\n* cta text, link, size & variant\n* background image & fallback color\n\n    * This component only has one image-prop of type `Media`. No mobile image, no focus-point props.\n    \n* overlay props\n* colors: default/always-white/always-black for all texts\n\n[Styling for dark-mode](https://www.notion.so/laioutr/Tips-Tricks-for-development-1835331c061e801ab7d7c68ecfff9e5f?pvs=4#1a65331c061e803880f2eab02bfb4bb9)\n\nFurther props, specific for the showcase-banner:\n\n* Optional mobile aspect ratio (1:1 or 4:3)\n* Size l/m/s\n* variant boxed/full-width (toggles container)\n* caption\n* additional height small/default/medium/big\n* content alignment desktop/mobile\n\nSizing mode mobile can be either _aspect-ratio_ or _hug_\n\n* If aspect-ratio is selected, do this on mobile (<sm):\n\n    * Ignore additional height\n    * Set aspect-ratio property of banner to selected aspect-ratio\n    * Respect positioning top/center/bottom and left/center/right\n    \n* If aspect-ratio is selected, use same behaviour as hug on desktop\n* If hug is selected:\n\n    * Set height to height of content + padding + additional height\n    * Respect positioning only \"center left\" and \"center center\"\n    \n\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "colors",
+        "type": null,
+        "default": null,
+        "description": "default/always-white/always-black for all texts"
+      },
+      {
+        "name": "banner",
+        "type": null,
+        "default": null,
+        "description": "* Optional mobile aspect ratio (1:1 or 4:3)"
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/05.ui-kit-content/CtaBannerBasic.md",
+  "parentEpic": {
+    "key": "LUI-17",
+    "title": "CTA Banners"
+  },
+  "summary": "A foundational call-to-action banner with background imagery, headline, subline, and configurable action button.",
+  "features": [
+    "Multiple sizing modes (S, M, L) with aspect ratio or content-hugging height",
+    "Customizable image overlay with gradient or solid color options",
+    "Independent content alignment for desktop and mobile viewports",
+    "Boxed or full-width layout variants"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-32"
+  ],
+  "longDescription": "## Purpose\n\nThe CTA Banner Basic component serves as the primary promotional banner for driving user engagement and conversions. It combines compelling visual backgrounds with clear messaging and action buttons to direct visitors toward important landing pages, product details, or signup forms.\n\n## Use Cases\n\n- Highlighting time-sensitive promotions, seasonal sales, or special events on homepage sections\n- Promoting new product launches or featured collections with eye-catching visuals\n- Driving newsletter signups or account registrations with prominent calls-to-action\n- Creating consistent branded promotional spaces across different website sections\n\n## Design Rationale\n\nThe component offers flexible sizing modes to accommodate various content needs while maintaining visual impact. The aspect ratio control on mobile ensures banners display optimally regardless of device, while the overlay system guarantees text readability across diverse background images. Marketing teams can create compelling promotions without developer assistance through the configurable props.",
+  "keywords": [
+    "promotional banner",
+    "hero banner",
+    "marketing component"
+  ],
+  "shortDescription": "The CTA Banner Basic serves as the primary promotional banner for driving engagement and conversions. It directs visitors toward landing pages, product details, or signup forms with compelling visuals and clear messaging. The overlay system guarantees text readability across diverse background images, while flexible sizing modes accommodate various content needs. Marketing teams can create compelling promotions without developer assistance."
+}

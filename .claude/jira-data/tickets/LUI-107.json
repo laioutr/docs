@@ -1,0 +1,117 @@
+{
+  "key": "LUI-107",
+  "title": "Alert Dialog",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## Alert Dialog\n\n### <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User story\n\n**As a** user,  \n**I want** to see a clear and interruptive dialog when I'm about to perform an irreversible or destructive action (e.g. delete a file), **So that** I can confirm or cancel the action and avoid accidental data loss.\n\n---\n\nThe Alert Dialog component provides a modal overlay that prompts the user to confirm or cancel critical or destructive actions. It should clearly communicate the consequence of the action, require intentional confirmation, and block interaction with the underlying interface until resolved.\n\n---\n\n| Features **Modal behavior** (blocks interaction with background) **Title and description** **Optional Content Slot** **Primary action** (e.g., \"Delete\", \"Confirm\") user can choose button style **Secondary action** (e.g., \"Cancel\") user can actively chose to not show the Cancel Button **Escape key** and **overlay click** dismiss (configurable) **Focus trap** for accessibility **Return focus** to previous element after close **Keyboard navigation** (Tab, Shift+Tab, Enter, Escape) **Neutral Styling** for informational content (primary button) **Danger styling** for destructive actions (red button) **Positive Styling** for positive actions (green button) **Custom button text** and slots **Loading state** on confirm button (for async ops) **Prevent closing while loading** | [Examples ](https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=557-224630&t=7pkty4hsIeaPuKYa-4)<custom data-type=\"emoji\" data-id=\"id-1\">:link:</custom>[ ](https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=557-224630&t=7pkty4hsIeaPuKYa-4) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=b317ef59-3b78-41ee-a1df-365bd86b1b0b&&collection=&height=894&occurrenceKey=null&width=480&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=2a9605e3-5336-4b06-b286-0698efb8c9c3&&collection=&height=910&occurrenceKey=null&width=1589&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| --- | --- |\n| UI / UX Appears **centered** on the screen **Overlay backdrop** (dimmed, semi-transparent) **Smooth enter/exit transitions** pop up from the middle Must be **responsive** for mobile and desktop **Z-index** higher than all other UI layers |  |\n| Accessibility (A11Y) Uses `role=\"alertdialog\"` Has `aria-labelledby` and `aria-describedby` Focus is **trapped** within the dialog Buttons have `aria-label`s if text is unclear Supports **keyboard-only** interaction Automatically sets focus on the first focusable element |  |\n\n### **Acceptance Criteria:** \n\n* add button opening the dialog like this example  \n\n    ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=f8acc948-ae9d-4349-8f6f-2d3b2d02ff66&&collection=&height=143&occurrenceKey=null&width=356&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n\n    \n\n\n* add button opening a dialog with content   \n\n    ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=25175e97-4123-4312-962f-dad95ef6d238&&collection=&height=272&occurrenceKey=null&width=407&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n\n    \n\n\n\n### **Technical Details:**\n\n_**store/dialogStore**_ \n\n```typescript\nexport interface DialogOptions {\n  id: symbol;\n  title:string;\n  variant:'neutral' | 'success' | 'warning' | 'danger'\n  titleicon?:string;\n  iconPosition? : 'left' | 'right';\n  description? : string; \n  component: Component;\n  props?: Record<string, any>;\n  buttons?: ButtonProps[] ;\n  cancelButton?: buttonprops;\n  closeOnEsc?: boolean;\n  closeOnOverlayClick?: boolean;\n  zIndex?: number;\n}\n```\n\n* create this store to handle the **stack** of this dialogs using vueuse `createGlobalState` (see useLightboxStore)\n* actions will be \n\n    * `openDialog`\n    * `closeDialog`\n    * `closeAllDialogs`\n    \n* multiple alerts can be opened above each other \n\n_**create organism/AlertDialog**_\n\n* use Reka Ui dialog <custom data-type=\"smartlink\" data-id=\"id-2\">https://reka-ui.com/docs/components/dialog#dialog</custom> \n* use `<component :is>` to render the content component \n* use `LuiText` , `LuiIcon` , `LuiButton`\n\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=557-224630&t=7pkty4hsIeaPuKYa-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "id",
+        "type": "symbol",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "variant",
+        "type": "'neutral' | 'success' | 'warning' | 'danger'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "titleicon",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "iconPosition",
+        "type": "'left' | 'right'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "component",
+        "type": "Component",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "props",
+        "type": "Record<string, any>",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "buttons",
+        "type": "ButtonProps[]",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "cancelButton",
+        "type": "buttonprops",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "closeOnEsc",
+        "type": "boolean",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "closeOnOverlayClick",
+        "type": "boolean",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "zIndex",
+        "type": "number",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/6.ui-kit-surfaces/AlertDialog.md",
+  "parentEpic": {
+    "key": "LUI-105",
+    "title": "Toasts and Alerts"
+  },
+  "summary": "Modal dialog for confirming critical actions with focus trap and keyboard navigation.",
+  "features": [
+    "Neutral, success, warning, and danger styling variants",
+    "Focus trap and keyboard navigation support",
+    "Loading state on confirm button for async operations",
+    "Stackable dialogs with global state management"
+  ],
+  "keywords": [
+    "confirmation modal",
+    "destructive action",
+    "focus trap"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-65"
+  ],
+  "shortDescription": "The Alert Dialog intercepts user workflows when critical or irreversible actions require explicit confirmation. Built on Reka UI's dialog primitive, it implements proper ARIA attributes including role=\"alertdialog\" with labelledby and describedby associations. The component supports multiple concurrent dialogs managed through a global store stack, allowing complex confirmation workflows. Configurable dismiss behaviors (Escape key, overlay click) can be disabled during async operations when the loading state prevents premature closure, ensuring data integrity during server communications."
+}

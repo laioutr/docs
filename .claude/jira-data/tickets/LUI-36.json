@@ -1,0 +1,70 @@
+{
+  "key": "LUI-36",
+  "title": "Category Nodes / Basic",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "Please read the Epic and Idea Ticket for more context and information.\n\nCategory nodes are the basic element in an online store to promote categories and make them visible to customers outside the main navigation. Especially on mobile devices, where the main menu is hidden behind a burger. The basic variant is a classic that has proven itself in many online stores.\n\n|  |  |\n| --- | --- |\n| Are used in the Inpage Navigation Grid and Slider.  Are **themed** components. Have the following properties/variants: device mobile/desktop variant: default SALE see more color on light background on dark background on bright background state default hover pressed focus has flag true/false |    Please ignore that for mobile & desktop the size of the nodes in figma appears the same. for other themes the sizes may be different. |\n| **Requirements** in addition to the default settings for the background color of the image, users can change the color afterwards (see example images on the right) you can find some design and usage examples [here](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=9131-104078&t=WGKlkG3l0TsCUryI-4): ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=59a1bbd8-eb32-4cce-9fee-8ef23c946dbe&&collection=&height=531&occurrenceKey=null&width=670&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=dcb2f0eb-27bf-47fe-84a7-7810ce0834ae&&collection=&height=423&occurrenceKey=null&width=385&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) has green/6 as background color and green/3 as node background color ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=fc7899c1-4111-4b08-9069-1b56e11a3185&&collection=&height=460&occurrenceKey=null&width=402&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) this one is **not dark mode** but has variant \"on dark background\", section background default/black (which stays black in dark mode) and white alpha/6 as node background color. |\n| The \"see more\" variant functions as a button/link to the supercategory / listing page.  Consequently, it should be possible to specify either a category ID or a URL. this creates freedom for the creativity of our customers. The see more variant **is optional** | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=8479eb97-951c-4d3d-b896-917644948d33&&collection=&height=144&occurrenceKey=null&width=110&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n\nStorybook stories have been created:\n\n* category node basic, default with placeholder-image\n* category node basic, default with placeholder-image and flag\n* category node basic, sale with percentage-image (passed as media just like the placeholder-image)\n* category node basic, default with arrow-right icon\n\nPlease make sure to put these images into `packages/ui/playground/.storybook/public/category-node/`\n\n## Technical details\n\nI believe the see-more variant is always the same colors as the default variant. Therefore there is no separate see-more. They only distinguish themselves by content.\n\nAll states (default, hover, active, focus) are implemented correctly.\n\nThe variant of the CategoryNode decides which flag-corners to use. The corners of the flag-prop must be ignored.\n\n### molecule/CategoryNode/CategoryNodeBasic.vue\n\nImage is 1:1\n\nSome props:\n\n* variant: default, sale (only changes colors, not content)\n* colorMode: on-light, on-dark, on-bright\n* href: element is linked\n* media: optional Media\n* icon: name of an Icon to show with LuiIcon\n* flag: optional flag-props\n\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "variant",
+        "type": null,
+        "default": null,
+        "description": "default, sale (only changes colors, not content)"
+      },
+      {
+        "name": "colorMode",
+        "type": null,
+        "default": null,
+        "description": "on-light, on-dark, on-bright"
+      },
+      {
+        "name": "href",
+        "type": null,
+        "default": null,
+        "description": "element is linked"
+      },
+      {
+        "name": "media",
+        "type": null,
+        "default": null,
+        "description": "optional Media"
+      },
+      {
+        "name": "icon",
+        "type": null,
+        "default": null,
+        "description": "name of an Icon to show with LuiIcon"
+      },
+      {
+        "name": "flag",
+        "type": null,
+        "default": null,
+        "description": "optional flag-props"
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/4.ui-kit-content/LinkTileBasic.md",
+  "parentEpic": {
+    "key": "LUI-34",
+    "title": "Inpage Navigation"
+  },
+  "summary": "Classic category node element for promoting categories outside navigation.",
+  "features": [
+    "Multiple color modes: on-light, on-dark, on-bright",
+    "Default and sale variants with different color schemes",
+    "Optional promotional flag support with auto positioning",
+    "See more variant for linking to supercategory pages"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-41"
+  ],
+  "longDescription": "## Purpose\n\nThe CategoryNodeBasic component serves as the foundational building block for promoting categories and making them visible to customers outside the main navigation menu. This is especially important on mobile devices where the main menu is hidden behind a hamburger icon.\n\n## Use Cases\n\n- Display category previews in grid or slider layouts on entry pages\n- Highlight sale categories with dedicated color variants\n- Add promotional badges (Sale, New, Custom) via the flag prop\n- Create \"see more\" links to supercategory or listing pages\n- Customize background colors to match product imagery or brand colors\n\n## Design Rationale\n\nThe basic variant is a proven classic used successfully across many online stores. The component uses a 1:1 square image ratio for visual consistency and supports themed styling to ensure brand coherence. Flag corner positioning is determined by the node variant to maintain visual harmony across different contexts.",
+  "keywords": ["category tile", "link tile", "navigation node"],
+  "shortDescription": "The CategoryNodeBasic component serves as the foundational building block for category promotion outside the main navigation. This is especially important on mobile where the main menu is hidden behind a hamburger. It uses a 1:1 square image ratio with customizable background colors. Flag corner positioning is determined by the node variant to maintain visual harmony. The see-more variant allows linking to supercategory or listing pages with either category IDs or custom URLs."
+}

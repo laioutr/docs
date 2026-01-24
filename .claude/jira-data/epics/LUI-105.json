@@ -1,0 +1,33 @@
+{
+  "key": "LUI-105",
+  "title": "Toasts and Alerts",
+  "issueType": "Epic",
+  "status": "Done",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "childTickets": [
+    "LUI-106",
+    "LUI-107"
+  ],
+  "created": "2025-06-23T14:16:24.844+0200",
+  "updated": "2025-08-14T10:11:35.301+0200",
+  "linkedIdeas": [
+    "LAIOUTR-65"
+  ],
+  "summary": "A notification system providing non-intrusive toasts for user feedback and modal alert dialogs for confirming critical actions.",
+  "features": [
+    "Toast notifications with success, warning, error, and neutral variants with auto-dismiss",
+    "Stackable toasts with queue management and pause-on-hover functionality",
+    "Alert dialogs with modal overlay and danger/positive styling for destructive actions",
+    "Full keyboard navigation, focus trap, and ARIA roles for accessibility"
+  ],
+  "longDescription": "## Purpose\n\nThe Toasts and Alerts epic delivers a complete user notification system that balances information delivery with user workflow. Toast notifications provide lightweight, non-blocking feedback for routine events, while alert dialogs ensure users consciously acknowledge critical actions before proceeding.\n\n## Use Cases\n\n- Display transient success, error, or warning messages after user actions\n- Queue and stack multiple simultaneous notifications with configurable limits\n- Prompt explicit confirmation before irreversible operations like deletions\n- Show loading states during async confirmation operations\n- Maintain accessibility through ARIA roles and keyboard navigation\n\n## Design Rationale\n\nToasts minimize user interruption by auto-dismissing and allowing continued interaction, making them ideal for status updates. Alert dialogs intentionally block interaction to prevent accidental execution of destructive actions, protecting users from data loss while requiring minimal additional clicks for legitimate operations.",
+  "shortDescription": "Toasts feature configurable duration with progress indicator and auto-dismissing behavior for minimal workflow interruption. Alert dialogs block background interaction to prevent accidental execution of irreversible operations like deletions. The system supports loading states during async confirmation operations and configurable notification queue limits.",
+  "keywords": [
+    "snackbar",
+    "confirmation",
+    "modal"
+  ],
+  "enrichedData": {}
+}

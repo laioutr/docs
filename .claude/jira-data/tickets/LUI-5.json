@@ -1,0 +1,186 @@
+{
+  "key": "LUI-5",
+  "title": "Feature Comparison Table",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\nAs a potential customer, I want to be able to compare different subscription plans and features so that I can make a good decision.\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-1\">:clipboard:</custom> Requirements\n\n* As a potential customer I want to see a detailed feature comparison across all plans So that I can make an informed decision about which plan best suits my needs\n* Acceptance Criteria:\n\n    * List all features categorized by functionality\n    * Use clear indicators (checkmarks, x-marks) for feature availability\n    * Include descriptions for features\n    * Possibility to add links / text links\n    * Ensure mobile-responsive design for table layout\n    * Highlight feature differences between plans / make it possible to show only differences\n    * Make the table header sticky, so that the user always knows which plan the features belong to\n    \n        * Add a CTA to the header cells, for easy subscription\n        \n    \n\n| **Component** | **Preview** | **Link** | **UI ready** |\n| --- | --- | --- | --- |\n| table cell first column if a link is placed here, the whole cell is clickable (see states) | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=d83de0bc-72f5-4331-87ee-9b917c0aa4f3&&collection=&height=114&occurrenceKey=null&width=280&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) | <custom data-type=\"smartlink\" data-id=\"id-2\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4230-79346&t=N1ryeUXidyl6cq2O-4</custom>   |  <custom data-type=\"emoji\" data-id=\"id-3\">:check_mark:</custom> |\n| table cell all parts are optional, so you can also have just a number or a single icon in the cell | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=34274e4b-1c99-4409-9e0d-cbdcab95a98f&&collection=&height=139&occurrenceKey=null&width=277&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) | <custom data-type=\"smartlink\" data-id=\"id-4\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4243-79525&t=N1ryeUXidyl6cq2O-4</custom>   includes: [feature info text](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4243-79640&t=N1ryeUXidyl6cq2O-4) [feature icon](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4243-79592&t=N1ryeUXidyl6cq2O-4) [text link with icon](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4243-79657&t=N1ryeUXidyl6cq2O-4) | <custom data-type=\"emoji\" data-id=\"id-5\">:check_mark:</custom> |\n| table section header please make sure that an anchor link can also be set here | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=c13679d2-7195-4dac-b257-973fbbc0b105&&collection=&height=172&occurrenceKey=null&width=1077&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) | <custom data-type=\"smartlink\" data-id=\"id-6\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4254-80940&t=N1ryeUXidyl6cq2O-4</custom>   |  <custom data-type=\"emoji\" data-id=\"id-7\">:check_mark:</custom> |\n| table header is sticky on desktop: has switch for comparison can have buttons in header cells | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=38a40c72-164e-40a5-9a96-69ec9a1abd82&&collection=&height=87&occurrenceKey=null&width=1083&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=f7260201-9228-4cc9-8072-b5d4127669c0&&collection=&height=60&occurrenceKey=null&width=382&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) | <custom data-type=\"smartlink\" data-id=\"id-8\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4280-98233&t=cKNBnMt7QHXKCXzc-4</custom>  <custom data-type=\"smartlink\" data-id=\"id-9\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4298-169733&t=cKNBnMt7QHXKCXzc-4</custom>    |  <custom data-type=\"emoji\" data-id=\"id-10\">:check_mark:</custom> |\n| table | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=066447de-f867-4417-bdf7-93f5ee7e7c94&&collection=&height=1174&occurrenceKey=null&width=1082&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=601f6fa5-a449-4f6b-b05c-ad3456bf8210&&collection=&height=689&occurrenceKey=null&width=392&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) | [Table Dummy Desktop](https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=3492-21109&p=f&viewport=671%2C-478%2C0.13&t=cKNBnMt7QHXKCXzc-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=4085%3A54137&show-proto-sidebar=1) [Table Mobile Dummy](https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=3492-21109&p=f&viewport=-1606%2C-3368%2C0.5&t=cKNBnMt7QHXKCXzc-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=4161%3A14216&show-proto-sidebar=1) [Table](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4254-84104&t=cKNBnMt7QHXKCXzc-4) Components:  [Table Section Header](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4254-80940&t=cKNBnMt7QHXKCXzc-4) [Table Cell 1st Column](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4230-79346&t=cKNBnMt7QHXKCXzc-4) [Table Cell](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4243-79525&t=cKNBnMt7QHXKCXzc-4) [Feature Info Text](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4243-79640&t=cKNBnMt7QHXKCXzc-4) [Feature Icon](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4243-79592&t=cKNBnMt7QHXKCXzc-4) |  <custom data-type=\"emoji\" data-id=\"id-11\">:check_mark:</custom>  |\n\n---\n\n## Technical details\n\n```typescript\ntype PricingTablePlanKey = string;\n\ninterface PricingTablePlan {\n  key: PricingTablePlanKey;\n  name: string;\n  ctaLink: string;\n}\n\ninterface PricingTableRowValue {\n  title?: string;\n  description?: string;\n  /** Renders the title as rainbow text */\n  isHighlight?: boolean;\n  linkText?: string;\n  linkHref?: string;\n  /** Each boolean renders a feature-icon. true indicates that the feature is included, false indicates that it is not. */\n  subFeatures?: boolean[];\n}\n\ninterface PricingTableRow {\n  title: string;\n  /** If set, the whole cell is a link */\n  titleHref?: string;\n  /** Rendered below title */\n  description: string;\n  /** Each string is rendered as a single text line to indicate sub-features */\n  subFeatures?: string[];\n  /** Indicate that all values are the same for all plans. Used for comparing differences between plans. */\n  hasDifference: boolean;\n  values: Record<PricingTablePlanKey, PricingTableRowValue>;\n}\n\ninterface PricingTableSection {\n  title: string;\n  description: string;\n  icon: string;\n  anchor?: string;\n  rows: PricingTableRow[];\n}\n\ninterface PricingTable {\n  plans: PricingTablePlan[];\n  sections: PricingTableSection[];\n}\n```\n\n```typescript\nconst pricingTable: PricingTable = {\n  plans: [\n    { key: \"basic\", name: \"Basic\", ctaLink: \"#\" },\n    { key: \"premium\", name: \"Premium\", ctaLink: \"#\" },\n    { key: \"enterprise\", name: \"Enterprise\", ctaLink: \"#\" }\n  ],\n  sections: [\n    {\n      title: \"General\",\n      description: \"Short section description that summarizes the content of the section.\",\n      icon: \"solar:clipboard-list-outline\",\n      anchor: \"general\",\n      rows: [\n        {\n          title: \"Max. Projects included\",\n          description: \"A short explanation of the feature goes here\",\n          hasDifference: true,\n          values: {\n            basic: { title: \"1\" },\n            premium: { title: \"3\" },\n            enterprise: { title: \"unlimited\", isHighlight: true }\n          }\n        },\n        {\n          title: \"Max. Locales per Project\",\n          description: \"A short explanation of the feature goes here\",\n          hasDifference: true,\n          values: {\n            basic: { title: \"1\" },\n            premium: { title: \"2\" },\n            enterprise: { title: \"unlimited\", isHighlight: true }\n          }\n        },\n        {\n          title: \"Users/Seats incl.\",\n          description: \"A short explanation of the feature goes here\",\n          hasDifference: true,\n          values: {\n            basic: { title: \"5\", description: \"Subline text or additional info\" },\n            premium: { title: \"10\", description: \"Subline text or additional info\" },\n            enterprise: { title: \"unlimited\", isHighlight: true }\n          }\n        },\n        {\n          title: \"Max. User/Seats\",\n          titleHref: \"#\",\n          description: \"A short explanation of the feature goes here\",\n          hasDifference: true,\n          values: {\n            basic: { title: \"10\", description: \"Add new user at 10 € /month\" },\n            premium: { title: \"20\", description: \"Add new user at 10 € /month\" },\n            enterprise: { title: \"unlimited\", isHighlight: true }\n          }\n        },\n        {\n          title: \"Custom Domains\",\n          description: \"A short explanation of the feature goes here\",\n          hasDifference: true,\n          values: {\n            basic: { title: \"1\" },\n            premium: { title: \"3\" },\n            enterprise: { title: \"unlimited\", isHighlight: true }\n          }\n        },\n        {\n          title: \"Uptime SLA\",\n          titleHref: \"#\",\n          description: \"A short explanation of the feature goes here\",\n          hasDifference: true,\n          values: {\n            basic: { title: \"95%\" },\n            premium: { title: \"97%\" },\n            enterprise: { title: \"99.99%\" }\n          }\n        },\n        {\n          title: \"Support\",\n          titleHref: \"#\",\n          description: \"A short explanation of the feature goes here\",\n          subFeatures: [\"Prioritized customer support\", \"Guaranteed response time\", \"Customer Success Manager\"],\n          hasDifference: true,\n          values: {\n            basic: { subFeatures: [true, false, false] },\n            premium: { subFeatures: [true, true, true] },\n            enterprise: { subFeatures: [true, true, true] }\n          }\n        },\n        {\n          title: \"ISO 27001\",\n          titleHref: \"#\",\n          description: \"A short explanation of the feature goes here\",\n          hasDifference: false,\n          values: {\n            basic: { subFeatures: [true] },\n            premium: { subFeatures: [true] },\n            enterprise: { subFeatures: [true] }\n          }\n        }\n      ]\n    },\n    {\n      title: \"Cockpit\",\n      description: \"Short section description that summarizes the content of the section.\",\n      icon: \"solar:tuning-square-linear\",\n      anchor: \"cockpit\",\n      rows: [\n        {\n          title: \"Automatic Updates\",\n          titleHref: \"#\",\n          description: \"A short explanation of the feature goes here\",\n          hasDifference: false,\n          values: {\n            basic: { subFeatures: [true] },\n            premium: { subFeatures: [true] },\n            enterprise: { subFeatures: [true] }\n          }\n        },\n        {\n          title: \"Activity Log\",\n          description: \"A short explanation of the feature goes here\",\n          hasDifference: true,\n          values: {\n            basic: { subFeatures: [true] },\n            premium: { subFeatures: [true] },\n            enterprise: { subFeatures: [true] }\n          }\n        },\n        {\n          title: \"Extended Activity Log\",\n          description: \"Unlimited activity log and automatic daily backups to your personal Google Cloud bucket.\",\n          hasDifference: true,\n          values: {\n            basic: { subFeatures: [false] },\n            premium: { subFeatures: [true] },\n            enterprise: { subFeatures: [true] }\n          }\n        },\n        {\n          title: \"Access to Documentation\",\n          description: \"A short explanation of the feature goes here\",\n          hasDifference: false,\n          values: {\n            basic: { subFeatures: [true] },\n            premium: { subFeatures: [true] },\n            enterprise: { subFeatures: [true] }\n          }\n        },\n        {\n          title: \"Unlimited Languages\",\n          description: \"A short explanation of the feature goes here\",\n          hasDifference: false,\n          values: {\n            basic: { subFeatures: [true] },\n            premium: { subFeatures: [true] },\n            enterprise: { subFeatures: [true] }\n          }\n        },\n        {\n          title: \"2 Factor Authentication (2FA)\",\n          description: \"A short explanation of the feature goes here\",\n          hasDifference: false,\n          values: {\n            basic: { subFeatures: [true] },\n            premium: { subFeatures: [true] },\n            enterprise: { subFeatures: [true] }\n          }\n        },\n        {\n          title: \"Additional Data Centre (EU, US, CA, AUS)\",\n          description: \"A short explanation of the feature goes here\",\n          hasDifference: false,\n          values: {\n            basic: { subFeatures: [true] },\n            premium: { subFeatures: [true] },\n            enterprise: { subFeatures: [true] }\n          }\n        },\n        {\n          title: \"Fine Grained Access Control\",\n          description: \"A short explanation of the feature goes here\",\n          hasDifference: false,\n          values: {\n            basic: { subFeatures: [false] },\n            premium: { subFeatures: [true] },\n            enterprise: { subFeatures: [true] }\n          }\n        },\n        {\n          title: \"Webhook Secrets\",\n          description: \"A short explanation of the feature goes here\",\n          hasDifference: false,\n          values: {\n            basic: { subFeatures: [false] },\n            premium: { subFeatures: [true] },\n            enterprise: { subFeatures: [true] }\n          }\n        }\n      ]\n    }\n  ]\n};\n```\n\n### Organism/PricingTable/PricingTableHeader.vue\n\nRenders a `<thead>` + `<tr>` + `<th>`\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=38a40c72-164e-40a5-9a96-69ec9a1abd82&&collection=&height=87&occurrenceKey=null&width=1083&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=f7260201-9228-4cc9-8072-b5d4127669c0&&collection=&height=60&occurrenceKey=null&width=382&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n| **Prop** | **Default** | **Type** |\n| --- | --- | --- |\n| plans | - | `PricingTablePlan[]` |\n| v-model:compareDifferences | - | `boolean`  \nUse defineModel to be able to bind to the switch |\n| v-model:activeMobilePlan | - | `string`  \nKey of the currently active plan on mobile. E.g. `basic | premium | enterprise` |\n\nIf possible, try not to use `useBreakpoint` or `useMobile`.\n\n### Organism/PricingTable/PricingTableSectionHeader.vue\n\nRenders a `<tr>` + `<th>`\n\nFor props, see `PricingTableSection` (except `rows`)\n\n### Organism/PricingTable/PricingTableRowHeader.vue\n\nRenders a `<th>`\n\n| Prop | Default | Type |\n| --- | --- | --- |\n| title | - | `string` |\n| titleHref | - | `string | undefined`  \nIf set, the whole cell is a link |\n| description | - | `string`  \nRendered below title |\n| subFeatures | - | `string[] | undefined`  \nEach given string is rendered as a single text line to indicate sub-features |\n| hasDifference | - | `boolean`  \nIndicates that all values are the same for all plans. Used for comparing differences between plans. |\n\n### Organism/PricingTable/PricingTableRowValue.vue\n\nRenders a `<td>`\n\n| Prop | Default | Type |\n| --- | --- | --- |\n| title | - | `string | undefined` |\n| description | - | `string | undefined` |\n| isHighlight | - | `boolean | undefined `  \nRenders the title as rainbow text |\n| linkText | - | `string | undefined` |\n| linkHref | - | `string | undefined` |\n| subFeatures | - | `boolean[] | undefined `  \nEach boolean renders a feature-icon. true indicates that the feature is included, false indicates that it is not. |\n\nOrder of rendered elements is:\n\n1. subFeatures checkmarks / minus-signs\n2. title\n3. description\n4. linkText\n\nNote that if the only given prop is subFeatures with more than one item, we need to add padding to the top to align with the RowHeader, see:\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=83d322eb-0d34-4fff-b5a8-9013f1ea107e&&collection=&height=220&occurrenceKey=null&width=546&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n### Organism/PricingTable/PricingTable.vue\n\nRenders a `<table>`\n\n| Prop | Default | Type |\n| --- | --- | --- |\n| plans | - | `PricingTablePlan[]` |\n| sections | - | `PricingTableSection[]` |\n\nBind to PricingTableHeader.compareDifferences. If set to true, only render rows with `hasDifference = true`.\n\nTemplate of this component may look something like this\n\n```html\n<table>\n  <PricingTableHeader [table header props...] />\n  <tbody>\n    <template v-for=\"section in sections\">\n      <PricingTableSectionHeader [section header props...] />\n      <tr v-for=\"row in rows\">\n        <PricingTableRowHeader [row header props...] />\n        <PricingTableRowValue [basic props...] />\n        <PricingTableRowValue [premium props...] />\n        <PricingTableRowValue [enterprise props...] />\n      </tr>\n    </template>\n  </tbody>\n</table>\n```",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4230-79346&t=N1ryeUXidyl6cq2O-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4243-79525&t=N1ryeUXidyl6cq2O-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4243-79640&t=N1ryeUXidyl6cq2O-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4243-79592&t=N1ryeUXidyl6cq2O-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4243-79657&t=N1ryeUXidyl6cq2O-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4254-80940&t=N1ryeUXidyl6cq2O-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4280-98233&t=cKNBnMt7QHXKCXzc-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4298-169733&t=cKNBnMt7QHXKCXzc-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4254-84104&t=cKNBnMt7QHXKCXzc-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4254-80940&t=cKNBnMt7QHXKCXzc-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4230-79346&t=cKNBnMt7QHXKCXzc-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4243-79525&t=cKNBnMt7QHXKCXzc-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4243-79640&t=cKNBnMt7QHXKCXzc-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4243-79592&t=cKNBnMt7QHXKCXzc-4"
+  ],
+  "userStory": "As a potential customer, I want to be able to compare different subscription plans and features so that I can make a good decision",
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "key",
+        "type": "PricingTablePlanKey",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "ctaLink",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "isHighlight",
+        "type": "boolean",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "linkText",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "linkHref",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "subFeatures",
+        "type": "boolean[]",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "titleHref",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "subFeatures",
+        "type": "string[]",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "hasDifference",
+        "type": "boolean",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "values",
+        "type": "Record<PricingTablePlanKey, PricingTableRowValue>",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "anchor",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "rows",
+        "type": "PricingTableRow[]",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "plans",
+        "type": "PricingTablePlan[]",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "sections",
+        "type": "PricingTableSection[]",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/14.ui-pro/subscription/PricingTable.md",
+  "parentEpic": {
+    "key": "LUI-1",
+    "title": "Pricing Page"
+  },
+  "summary": "A feature comparison table for side-by-side plan comparison with sticky headers and differences filtering.",
+  "features": [
+    "Clear feature availability indicators using checkmarks and x-marks",
+    "Sticky header row with plan names and CTA buttons",
+    "Toggle to show only feature differences between plans",
+    "Categorized feature sections with icons and anchor links"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-23",
+    "LAIOUTR-24"
+  ],
+  "longDescription": "## Purpose\n\nThe PricingTable component provides a detailed, structured comparison of all features across subscription plans. It enables potential customers to make informed decisions by clearly showing what is included in each tier, reducing confusion and building trust through transparent feature presentation.\n\n## Use Cases\n\n- Present all plan features organized into logical categories with section headers and icons\n- Use checkmarks and x-marks to clearly indicate feature availability per plan\n- Allow users to toggle a differences-only view to quickly identify distinguishing features\n- Keep plan headers sticky while scrolling so users always know which column they are viewing\n- Link feature names to detailed documentation or anchor points on other pages\n- Highlight premium values (like unlimited) with rainbow text styling\n\n## Design Rationale\n\nWell-structured feature information helps users understand plan value and decide confidently. The sticky header ensures plan context is never lost during long table scrolling. The differences toggle reduces cognitive load by focusing attention on what varies between plans. CTA buttons in headers provide convenient subscription access from anywhere in the table.",
+  "shortDescription": "Provides a detailed, structured comparison of all features across subscription plans. Present all plan features organized into logical categories with section headers and icons. Link feature names to detailed documentation or anchor points. Highlight premium values with rainbow text styling. CTA buttons in headers provide convenient subscription access from anywhere in the table.",
+  "keywords": [
+    "feature matrix",
+    "mobile plan selector",
+    "subscription decision"
+  ]
+}

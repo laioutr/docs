@@ -1,0 +1,48 @@
+{
+  "key": "LUI-27",
+  "title": "Video / Image Block",
+  "issueType": "Epic",
+  "status": "To Do",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\n**As a** content editor\n\n**I want to** easily insert and manage media content (images and videos) in my layouts\n\n**So that** I can create visually engaging content for all users across different devices\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-1\">:clipboard:</custom> Requirements\n\n### Acceptance Criteria:\n\n* **Image Display:**\n\n    * I can place single images in common formats (JPG, PNG, WebP)\n    * I can set alternative text for accessibility\n    * I can define image dimensions and aspect ratios\n    * Images are responsive and adjust to different screen sizes\n    \n* **Video Integration:**\n\n    * I can upload videos or embed from external sources (YouTube, Vimeo)\n    * Videos are displayed in a responsive player\n    * I can set custom thumbnails for videos\n    * Auto-play settings are configurable\n    * **Video Accessibility:**\n    \n        * Captions must be available for all videos\n        * Provide video transcriptions\n        * Audio descriptions for important visual content\n        * Descriptive video metadata (title, description, duration)\n        * High-contrast and customizable video interface\n        * Controls must be keyboard-accessible\n        \n    \n* **Enhanced Viewing Experience:**\n\n    * Users can click images to view them in a lightbox\n    * The lightbox supports zooming and panning for images\n    * Videos open in a modal player with standard controls\n    * Navigation between media items in lightbox/modal is possible\n    \n* **Mobile Considerations:**\n\n    * Media loads optimized versions based on device and connection\n    * Touch-friendly controls for lightbox/video player\n    * Proper orientation handling for fullscreen mode\n    * Bandwidth-conscious loading strategies\n    \n* **Technical Requirements:**\n\n    * Lazy loading implementation for performance\n    * Support for modern image formats and compression\n    * Accessible controls and keyboard navigation\n    * Cross-browser compatibility\n    \n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-2\">:paintbrush:</custom> Design\n\nUse [Aspect Ratio](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-17&m=dev)\n\n* corner radius depends on **forms-border-radius**\n* user can deactivate corner radius \"rounded corners on/off\"\n\nAfter consultation with Sebastian Langer, there are no Figma designs here for the time being. If UI elements are needed in the implementation, please contact me (<custom data-type=\"mention\" data-id=\"id-3\">@Carolin Jütz</custom>) directly.",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-17&m=dev"
+  ],
+  "childTickets": [
+    "LUI-28",
+    "LUI-29"
+  ],
+  "created": "2025-03-17T13:23:07.118+0100",
+  "updated": "2025-03-17T13:24:11.632+0100",
+  "linkedIdeas": [
+    "LAIOUTR-47"
+  ],
+  "enrichedData": {
+    "purpose": "Content editors need a streamlined way to insert and manage images and videos in their layouts to create visually engaging, accessible content that works across all devices.",
+    "useCases": [
+      "Place single images in JPG, PNG, or WebP formats with customizable dimensions and aspect ratios",
+      "Set alternative text for image accessibility",
+      "Upload videos or embed from YouTube and Vimeo",
+      "Configure video auto-play settings and custom thumbnails",
+      "View images in a lightbox with zoom and pan functionality",
+      "Navigate between media items in lightbox or modal views",
+      "Provide captions and transcriptions for video accessibility",
+      "Load optimized media versions based on device and connection speed",
+      "Toggle rounded corners on or off for media blocks"
+    ]
+  },
+  "longDescription": "## Purpose\n\nThe Video / Image Block component provides content editors with a unified solution for embedding and managing visual media within page layouts. It addresses the need for rich, engaging content while maintaining performance and accessibility standards across diverse device types and network conditions.\n\n## Use Cases\n\nThis component serves multiple content scenarios: product galleries requiring high-quality imagery with zoom capabilities, marketing pages featuring embedded promotional videos, editorial content combining images and video interviews, and landing pages optimized for conversion with attention-grabbing media. The lightbox and modal player features enhance user engagement by providing immersive viewing experiences without navigation away from the page.\n\n## Design Rationale\n\nThe block leverages configurable aspect ratios and responsive loading strategies to balance visual quality with performance. Corner radius customization via design tokens ensures brand consistency, while comprehensive accessibility features including captions, transcriptions, and keyboard navigation meet WCAG compliance requirements.",
+  "summary": "A unified media block for embedding images and videos with lightbox viewing, responsive loading, and accessibility features.",
+  "features": [
+    "Lightbox with zoom/pan for images and modal player for videos with navigation between items",
+    "YouTube and Vimeo embedding with custom thumbnails and configurable auto-play",
+    "Responsive loading with device/connection-based optimization and lazy loading",
+    "WCAG-compliant with captions, transcriptions, keyboard navigation, and alt text"
+  ],
+  "shortDescription": "Supports JPG, PNG, and WebP image formats with configurable dimensions and aspect ratios. Corner radius can be toggled on/off using design tokens for brand consistency. Touch-friendly controls and proper orientation handling for fullscreen mode on mobile devices. Bandwidth-conscious loading strategies deliver optimized media versions based on connection speed.",
+  "keywords": [
+    "lightbox",
+    "video embed",
+    "media gallery"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "key": "LUI-47",
+  "title": "Inpage Navigation / Big / Slider",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "For global requirements and more info, please read epic description or idea ticket.\n\n‌\n\n| **Properties** breakpoint node format: square rectangle landscape rectangle portrait slider navigation on top / bottom show scrollbar true/false show optional headings true/false has button  yes / no button variant is choosable | Find some styling examples here:  <custom data-type=\"smartlink\" data-id=\"id-0\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=10862-246843&t=Ar5LTHJDEX3yaImj-4</custom>    |\n| --- | --- |\n| if text would break, and top navigation buttons are visible: same behaviour as described here: <custom data-type=\"smartlink\" data-id=\"id-1\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=8267-3&t=WGKlkG3l0TsCUryI-4</custom>   |  |\n| the user can always decide to show or show not a scrollbar. |  |\n| the navigation buttons are obligatory, but the user can decide if they should appear above the slider or under it |  |\n| if all category nodes are visible on the screen (for example on large screens), the navigation elements are hidden |  |\n\n \n\n## **Testing (stories):**\n\n* Slider on light background - light nodes - naviagtion top - has scrollbar \n* slider on light background - dark nodes - navigation bottom - has scrollbar \n* slider on dark background - dark nodes - navigation hidden - no scrollbar \n* slider on bright background - light nodes - navigation bottom - has scrollbar - has action button\n\n## **Technical details**:\n\n_**organism/InpageNavigationCompactSlider**_\n\n```\nconst InpageNavigationCompactSlider {\n  colorMode: 'on-light' | 'on-dark' | 'on-bright';\n  \n  categoryNodesBig : categoryNodeBigProps[];\n  \n  header? : string;\n  \n  subline? : string;\n  \n  navigationPosition? : 'top' | 'bottom'\n  \n  hasScrollbar? : boolean;\n  \n  cta? : {\n    text : string;\n    link : string;\n    variant : ButtonVariants\n  }\n}\n```\n\n‌\n\n* if a CTA added the navigation position will be on bottom by default \n* please use `LuiCommonSwipper` for slider \n* do not use fixed css values for slides use slider options \n* do not pass colorMode to the nodes because it has it's own modes based on the background\n* hide navigation arrow if all the nodes are available\n* components will be used `LuiText` ,`LuiButton`, `CategoryNodeBasic`,`LuiCommonSwipper` , `LuiSwiperNavigationCompact` , `LuiSwipperScrollbar`\n\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=10862-246843&t=Ar5LTHJDEX3yaImj-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/11.ui-app-ecommerce/InpageNavigationBigSlider.md",
+  "parentEpic": {
+    "key": "LUI-34",
+    "title": "Inpage Navigation"
+  },
+  "summary": "High-impact horizontal slider for large category nodes with independent color modes and configurable navigation.",
+  "features": [
+    "Multiple node formats: square, landscape, and portrait",
+    "Navigation position options: top or bottom",
+    "Auto-hiding navigation when all nodes fit on screen",
+    "Independent color mode per node based on image contrast"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-41"
+  ],
+  "longDescription": "## Purpose\n\nThe InpageNavigationBigSlider component provides a high-impact horizontal slider for displaying large category nodes, ideal for hero sections and prominent homepage placements. It combines visual impact with smooth slider navigation for browsing featured categories.\n\n## Use Cases\n\n- Create hero-style category carousels on store homepages\n- Display featured category collections with high-impact imagery\n- Mix different node formats (square, landscape, portrait) in a single slider\n- Add promotional badges to highlight sale or new categories\n- Include optional CTA buttons for directing users to category overviews\n\n## Design Rationale\n\nThe slider does not propagate its colorMode to child nodes; each CategoryNodeBig determines its own color mode based on its image contrast requirements. This ensures optimal text readability across nodes with diverse imagery. Navigation visibility adapts automatically: controls hide when all nodes fit on screen to reduce visual clutter. CTA buttons automatically position navigation to the bottom for balanced visual layout.",
+  "keywords": [
+    "hero-slider",
+    "featured-carousel",
+    "swiper-navigation"
+  ],
+  "shortDescription": "Ideal for hero sections and prominent homepage placements. Does not propagate colorMode to child nodes - each CategoryNodeBig determines its own color mode based on image contrast. Supports promotional badges and optional CTA buttons with selectable variants. Uses LuiCommonSwiper for smooth navigation with optional scrollbar display."
+}

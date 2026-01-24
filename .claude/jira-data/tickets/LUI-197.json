@@ -1,0 +1,41 @@
+{
+  "key": "LUI-197",
+  "title": "Studio / Sections / Top bar",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Top bar |\n| --- | --- |\n| **Description** | A narrow bar that is usually positioned at the top of the header. It contains links, a language selection, and an optional switch between light and dark mode. |\n| **Options** | Links  Language Select y/n Mode switch y/n Style Grey Black |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "summary": "Narrow top bar section above header with links, language selector, and mode switch.",
+  "features": [
+    "Configurable navigation links",
+    "Optional language selector dropdown",
+    "Dark/light mode toggle switch",
+    "Style options (Grey, Black)"
+  ],
+  "keywords": ["top bar", "utility navigation", "language selector"],
+  "shortDescription": "The Top Bar Studio section creates a slim utility strip positioned above the main header. It provides space for secondary navigation links such as store locator or contact pages, along with optional language selection and color mode toggle. Available in Grey or Black styles, the top bar keeps utility features accessible without cluttering the primary header navigation.",
+  "sourceEpic": null,
+  "sourceIdeas": []
+}

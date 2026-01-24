@@ -1,0 +1,33 @@
+{
+  "key": "LAIOUTR-63",
+  "title": "Blog Pages and Overview",
+  "issueType": "Idea",
+  "status": "Done",
+  "labels": [],
+  "description": "## Overview page\n\n### <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User story\n\n**As** an online store visitor, **I want** to view a neatly organized overview of all blog posts, **so that** I can quickly browse through content, discover topics of interest, and engage more with the brand.\n\n---\n\n|  |  |\n| --- | --- |\n| **Page Layout and Structure** Has H1 title and an optional subline The blog overview page must display a grid or list of blog posts. Each blog post preview should include: Featured image Blog post title Excerpt (summary or first \\~100 words) Link to full blog post (`Read More`) There must be the option to display a featured post above the grid Layout options: Grid layout (3 columns) for desktops Stacked layout for mobile viewports (responsive design) content slot after pagination | [basic template](https://www.figma.com/design/iOpGWO38HkhnTYkEeEq8Oz/Laioutr-Basic?node-id=44-112670&t=bEXX3iWukUFWihvM-4) [AMBIENDO page layout](https://www.figma.com/design/gDN7wlDFp5mwXQfRDhotzR/Ambiendo---sunny?node-id=106-21835&t=CXICWc7vpUCFE48F-4)     |\n| **Pagination or Infinite Scroll** Support for: Pagination  **or** Infinite scroll (load more posts on scroll) | <custom data-type=\"smartlink\" data-id=\"id-1\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=20068-1706</custom>  ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=a62f13de-f649-4495-ba94-6e51e01886f2&&collection=&height=90&occurrenceKey=null&width=170&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **SEO & Accessibility** Use semantic HTML (`<article>`, `<h2>`, `<time>`, etc.) for each post preview. Page should be optimized with appropriate meta tags, structured data for blog posts. Alt text for all featured images. Use ARIA labels for navigation and filter elements. |  |\n| **CMS Integration** Blog posts should be dynamically pulled from Shopify's built-in blog engine. Support for multiple blogs (Shopify supports more than one blog per store). Admin should be able to assign featured images, tags, excerpts via the Shopify admin. |  |\n\n---\n\n## Blog Page\n\n### <custom data-type=\"emoji\" data-id=\"id-2\">:person_with_crown:</custom>  User stroy\n\n**As** a visitor to a Shopify store, **I want** to read a specific blog post in full with images, formatting, and related content, **so that** I can engage with valuable content, learn more about the brand/products, and potentially convert into a customer.\n\n---\n\n| **Content Display** Render the full content of the blog post, including: Post title Featured image Body content (supports HTML formatting, embedded images, links, headings, etc.) Support for custom content slots or Shopify metafields (e.g., embedded video, pull quotes) after the blog post content Images should: Be responsive Include alt text for accessibility Use lazy loading for performance Feature a button if linked to an URL, so the users knows what happens when they click on it |  |\n| --- | --- |\n| **Navigation** Show a breadcrumb or link back to the blog overview page. Include \"Previous\" and \"Next\" blog post navigation (if available). |  |\n| **Engagement Features** **Social sharing buttons** (Facebook, Twitter, Pinterest, LinkedIn, etc.) **Related posts** section at the bottom, displaying recent posts |  |\n| **SEO & Accessibility** Semantic HTML (e.g., `<article>`, `<header>`, `<section>`) Use of structured data (`BlogPosting` schema) for better SEO Accessible headings and alt text Canonical URL tag to prevent duplicate content |  |\n|  |  |\n|  |  |\n",
+  "linkedLuiTickets": [
+    "LUI-116",
+    "LUI-115"
+  ],
+  "created": "2025-05-05T10:49:15.125+0200",
+  "updated": "2025-08-14T08:59:11.923+0200",
+  "enrichedData": {
+    "purpose": "Enables store visitors to browse and discover blog content through an organized overview page and read full articles with rich formatting, improving brand engagement and customer conversion.",
+    "useCases": [
+      "Display blog overview with H1 title and optional subline",
+      "Show blog post previews with featured image, title, excerpt, and read more link",
+      "Feature a highlighted post above the main grid",
+      "Use 3-column grid layout for desktop and stacked layout for mobile",
+      "Support pagination or infinite scroll for navigating posts",
+      "Render full blog post content with HTML formatting, images, and headings",
+      "Display responsive images with alt text and lazy loading",
+      "Show breadcrumb navigation back to blog overview",
+      "Include previous and next post navigation links",
+      "Provide social sharing buttons for Facebook, Twitter, Pinterest, and LinkedIn",
+      "Display related posts section at bottom of article",
+      "Support custom content slots and Shopify metafields for embedded video and pull quotes",
+      "Use semantic HTML and BlogPosting schema for SEO",
+      "Integrate dynamically with Shopify blog engine supporting multiple blogs"
+    ]
+  }
+}

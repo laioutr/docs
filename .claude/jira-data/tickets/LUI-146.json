@@ -1,0 +1,23 @@
+{
+  "key": "LUI-146",
+  "title": "Dialog",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/06.ui-kit-surfaces/AlertDialog.md",
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "Modal dialog component for displaying overlay content with customizable behaviors.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The Dialog component creates a modal overlay that focuses user attention on specific content or actions. Built on Reka UI primitives, it provides accessible keyboard navigation, focus trapping, and proper ARIA attributes. Dialogs interrupt the workflow intentionally, making them suitable for confirmations, forms, or important information that requires acknowledgment before proceeding. Includes backdrop dimming and configurable close behaviors.",
+  "sourceEpic": "LUI-123",
+  "sourceIdeas": []
+}

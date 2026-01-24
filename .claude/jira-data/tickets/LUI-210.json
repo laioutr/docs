@@ -1,0 +1,45 @@
+{
+  "key": "LUI-210",
+  "title": "Studio / Blocks / Buy Box",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "This sections contains a other blocks.\n\n<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Buy Box |\n| --- | --- |\n| **Description** | Product information, Add to Cart button, product availability, and more in one block. |\n| **Options** ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=a1ebd2d4-157e-4938-b8e3-c608e26ab72c&&collection=&height=390&occurrenceKey=null&width=280&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  | Data Source selection Display (y/n): Basic Product Info Benefits Box Coupon Box Energy label Price Quantity Discount Stock & Delivery information Variant information |\n| **Design options** | Section Styling: Style: full width boxed Section Background: None (default) custom Text color: Default custom  Layout: Spacing (_spacing between blocks_) 0 – 4XL (laioutr UI spacing) Margin: None S M L Padding: None S M L |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=a1ebd2d4-157e-4938-b8e3-c608e26ab72c&&collection=&height=390&occurrenceKey=null&width=280&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Design options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Container block for Buy Box combining product info, cart, and availability blocks.",
+  "features": [
+    "Toggleable child blocks (Basic Info, Benefits, Coupon, Price, etc.)",
+    "Full width or boxed layout options",
+    "Customizable spacing, background, and text color"
+  ],
+  "keywords": ["buy box", "product purchase", "PDP container"],
+  "shortDescription": "The Buy Box is a container block that orchestrates the product purchase experience on the PDP. It houses multiple child blocks including Basic Product Info, Price, Variant Selection, Stock Information, Benefits Box, Coupon Box, and Energy Label—each toggleable based on merchant needs. The container manages consistent spacing between blocks and offers layout choices between full-width and boxed styles with customizable backgrounds. This modular approach allows flexible Buy Box configurations."
+}

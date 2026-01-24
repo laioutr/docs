@@ -1,0 +1,21 @@
+{
+  "key": "LUI-136",
+  "title": "Tags Input",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": "Tag inputs render tags inside an input, followed by an actual text input.\n\n---\n\n<custom data-type=\"smartlink\" data-id=\"id-0\">https://reka-ui.com/docs/components/tags-input</custom> \n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=e2bfecb5-a46e-4d7f-b873-127a84e2ea93&&collection=&height=699&occurrenceKey=null&width=742&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "A tags input component for adding and managing removable tag items.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The Tags Input component renders an array of removable tags within an input field, allowing users to add new tags through text entry. Built on Reka UI's tags-input primitive, it handles tag creation on Enter or delimiter, removal via backspace or click, and keyboard navigation between tags. Ideal for multi-value inputs like product tags, email recipients, or search keywords where users need to enter multiple discrete values."
+}

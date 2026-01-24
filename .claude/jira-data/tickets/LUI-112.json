@@ -1,0 +1,77 @@
+{
+  "key": "LUI-112",
+  "title": "PDP / buybox / coupon box",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "### <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User story\n\n**As a** shopper on the product detail page, **I want** to clearly see a promotion box in the Buy Box that shows the discount, a brief promotional message, and gives me the option to activate a coupon code, **so that** I can easily take advantage of available deals and apply them during checkout without needing to search for codes manually.\n\nThe coupon box will appear within the Buy Box on the product detail page and will include:\n\n* A **promotional icon** (e.g., gift, tag, lightning bolt)\n* A **discount percentage** (e.g., \"-20%\")\n* A **text description** (e.g., \"Save 20% with this coupon!\")\n* A **coupon activation button** (e.g., \"Apply Coupon\")\n\n    * Alternative: a copy code button\n    \n\n| **Requirement** | **Description** |  |\n| --- | --- | --- |\n| Display Logic | It is displayed in the [buybox](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=98-245816&t=edNTmchAoqmIS03q-4) The box should only display if there is an active promotion/coupon for the product. It must be responsive and adapt to desktop and mobile layouts. | [component](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=1462-227879&t=edNTmchAoqmIS03q-4)  |\n| Variants | Variant with Icon choosable icon variant with discount field Derived dynamically from the coupon configuration (e.g., 10%, 15%, 25%). |  |\n| Text | Configurable promotional message. Supports localization for international markets. |  |\n| Customization | Admins can set: icon, discount %, message, start/end date, Button text Multiple styles supported for different campaigns. <custom data-type=\"status\" data-id=\"id-1\">later</custom>  |  |\n| Theming and Colors | Colors are initially managed via theme variables and use global promotion color If these colours are changed by the user, it must be ensured that the colours for texts, icons and also the button variants are also changed (simplest solution): only use colors with shade 9 for background differentiate between **normal colours** and **bright colours** (as defined in the color variables), as shade 9 is set up so that black text conforms to WCAG AA for bright colours and white text conforms to WCAG AA for normal colours. if a bright colour is used:  texts & icon color: always black buttons: black secondary and always black ghost discount bg: always black alpha 8 if a normal color is used: texts & icon color: always white buttons: white secondary and white ghost discount bg: always white alpha 8 example: color is themes / colors / **bright colors** / cyan 9, then use always black variables color is themes / colors / **colors** / soft blue 9, use always white variables | [Theming example with different colours](https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=870-158814&t=0Bc3saTY56wL63ld-4) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=367da070-a3a6-49ff-9bb5-d53eb5113cac&&collection=&height=1518&occurrenceKey=null&width=932&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| Buttons and Variants | Apply button white or black button, defined by **theme variables** (boolean) only for shop systems that support this function On click: the coupon is \"clipped\" or stored for the user and visually confirmed via success toast If already activated, show confirmation (e.g., \" Applied\").  Make sure the user can change the text optional icon left in the button (checkmark) Copy code button white or always black ghost button with icon on the right, defined by **theme variables** (boolean) fallback for all other shop systems/user can choose to not use the apply button On click: copies code to the users clipboard | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=f3cea85e-ffd4-46d1-8a5e-169107b71f24&&collection=&height=299&occurrenceKey=null&width=850&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)   |\n| Coupon Logic | Upon clicking \"Apply Coupon\": Coupon is linked to the user's session/cart. Feedback is shown (toast success) with option to navigate to cart | [apply button example](https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=880-493032&t=0Bc3saTY56wL63ld-4) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=9a63e997-894c-4738-be6e-f0f5afd9b45c&&collection=&height=771&occurrenceKey=null&width=1120&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| Performance | Should not significantly impact page load; load asynchronously if needed. |  |\n| Accessibility | Fully keyboard-navigable and screen-reader friendly. |  |\n| A/B Test Ready | Box display should be configurable for testing. |  |\n| Analytics | Track impressions, clicks, and activations (event hooks available). |  |\n\nCreate a storybook story:\n\n* Show component with discountText and \"copy\" button\n* Show component with icon and \"apply\" button. Write the story in a way that displays the \"isApplied\" state after clicking.\n\n### Technical details\n\n**molecule/PDP/BuyBoxApplyDiscountCode**\n\n```\ninterface BuyBoxApplyDiscountCodeProps {\n  icon?: string; // defaults to \"shopping/discount-1\", rendered if no discountText is given\n  text: string;\n  code: string;\n  discountText?: string; // If given, renders on the left side instead of the icon\n  action: 'apply' | 'copy'; // defaults to copy\n  isApplied?: boolean; // Show \"✔️ Applied\" state\n}\n```\n\nIf the action is set to apply, use vueuse [useClipboard](https://vueuse.org/core/useClipboard/) to copy the code. Show a toast afterwards.\n\nIf the action is set to apply, emit a `apply(code: string)` event from the component. No further action is taken",
+  "figmaLinks": [
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=98-245816&t=edNTmchAoqmIS03q-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=1462-227879&t=edNTmchAoqmIS03q-4",
+    "https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=870-158814&t=0Bc3saTY56wL63ld-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "icon",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "text",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "code",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "discountText",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "action",
+        "type": "'apply' | 'copy'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "isApplied",
+        "type": "boolean",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-110",
+    "title": "Promotion Banner"
+  },
+  "summary": "Promotional coupon box for the buy box with apply or copy functionality and themed styling.",
+  "features": [
+    "Apply coupon directly or copy code to clipboard",
+    "Theme-aware color contrast for WCAG compliance",
+    "Configurable icon or discount percentage display",
+    "Applied state confirmation with toast feedback"
+  ],
+  "keywords": [
+    "discount code",
+    "promo banner",
+    "coupon activation"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-42"
+  ],
+  "shortDescription": "The BuyBox Coupon Box surfaces active promotions directly within the product detail page purchase flow, eliminating the friction of manually searching for discount codes. The component intelligently adapts its color scheme based on theme brightness settings—using black text and buttons on bright backgrounds or white text on darker backgrounds—ensuring WCAG AA compliance regardless of customization. It supports two interaction modes: direct coupon application for compatible shop systems that trigger session/cart binding, or clipboard copying as a universal fallback with toast confirmation."
+}

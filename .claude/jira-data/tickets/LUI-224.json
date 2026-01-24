@@ -1,0 +1,62 @@
+{
+  "key": "LUI-224",
+  "title": "Studio / Sections / Basic Hero Slider",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Basic Hero Slider |\n| --- | --- |\n| **Description** | A simple full-width hero slider with two sizes. Can also be used as a single large hero banner. |\n| **Section Options** | **Height**: Default Full height **Alignment**: Mobile Desktop The positioning on mobile and desktop also determines the position of the slider navigation. If the mobile position is bottom left, center left, or top left, the mobile alignment of the navigation is left, etc. |\n| **Left Sidebar layers** | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=a9f009c0-4465-481d-bdbd-1d11229e3269&&collection=&height=155&occurrenceKey=null&width=309&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) one slide is added per default, when the basic hero slider is added to a page. If it is not renamed by the user, the default name is \"Slide 1\" and all subsequent slides are numbered consecutively. When adding another slide, add it directly and do not open a selection modal. |\n| **Slide Options** | **Content**: Color Dark background Light background [Caption](https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=917-103219&t=5VvNTXN86PoYsZCc-4) Plain Default text color Custom text color Flag Default text & bg color Custom text & bg color Heading & Subline Default text color Custom text color [Buttons](https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=925-101184&t=5VvNTXN86PoYsZCc-4) **Background**: Media Fallback color Overlay → [see background media](https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=925-105539&t=5VvNTXN86PoYsZCc-4) |\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=917-103219&t=5VvNTXN86PoYsZCc-4",
+    "https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=925-101184&t=5VvNTXN86PoYsZCc-4",
+    "https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=925-105539&t=5VvNTXN86PoYsZCc-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Section Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Left Sidebar layers",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Slide Options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "sourceEpic": null,
+  "sourceIdeas": [],
+  "summary": "Full-width hero slider with two height options, usable as single banner.",
+  "features": [
+    "Default or full-height options",
+    "Separate alignment controls for mobile and desktop",
+    "Rich content options including captions, flags, headings, and buttons",
+    "Background media support with overlay and fallback color"
+  ],
+  "keywords": [
+    "hero banner",
+    "homepage slider",
+    "full-width carousel"
+  ],
+  "shortDescription": "The Basic Hero Slider creates impactful full-width hero areas typically placed at the top of homepages or landing pages. It supports multiple slides or can function as a single hero banner. Each slide includes content options like captions, flags, headings, sublines, and buttons with customizable colors. Background media (images or video) supports overlay effects and fallback colors. Navigation positioning automatically follows content alignment, which is configured separately for mobile and desktop breakpoints."
+}

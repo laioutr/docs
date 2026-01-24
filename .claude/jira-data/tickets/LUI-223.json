@@ -1,0 +1,48 @@
+{
+  "key": "LUI-223",
+  "title": "Studio / Sections / Banner Container",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "| **Name** | Banner Container |\n| --- | --- |\n| **Description** | A container that can hold one or more banners. |\n| **Options** | Style: Full width boxed Margin: None S M L Padding: None S M L Background Color: None Theme Presets Custom Columns: Mobile (amount) Desktop (amount) Alignemnt Left Center Right |\n| **Proposed Colors for Color Popove**r | Accent 9 Accent 3 Primary 9 Primary 3 Allways Black Allways white |\n\n<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Proposed Colors for Color Popover",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "sourceEpic": null,
+  "sourceIdeas": [],
+  "summary": "Banner container section for organizing multiple banners with responsive layouts.",
+  "features": [
+    "Responsive column configuration (mobile and desktop)",
+    "Multiple alignment options (left, center, right)",
+    "Customizable background color and spacing",
+    "Full width or boxed layout"
+  ],
+  "keywords": ["banner grid", "promo container", "banner layout"],
+  "shortDescription": "The Banner Container section is specifically optimized for organizing promotional banners in grid arrangements. While similar to the general Container, it focuses on banner-specific use cases like promotional grids, feature highlights, or CTA collections. Column counts for mobile and desktop are set independently, and content alignment (left, center, right) positions banners within their cells. Background color options with theme presets create visual grouping. Ideal for homepage promotional areas or marketing campaign displays."
+}

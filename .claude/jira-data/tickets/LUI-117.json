@@ -1,0 +1,71 @@
+{
+  "key": "LUI-117",
+  "title": "Brand Page Overview",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\n**As a** shopper looking to browse products by brand, **I want** to view all available brands grouped alphabetically, **so that** I can quickly find a specific brand and explore its product offerings.\n\n| Alphabetical Grouping Brands are listed A–Z, grouped under corresponding letter headings. Non-alphabetic characters (e.g., numbers, symbols) are grouped and positioned before A–Z | [mobile brand list](https://www.figma.com/design/fU79c88OUWKPwScoPQ0Yag/laioutr-CMS?node-id=276-97391&t=2FpqZago9DvoDz6H-4) [desktop brand list](https://www.figma.com/design/fU79c88OUWKPwScoPQ0Yag/laioutr-CMS?node-id=276-113560&t=2FpqZago9DvoDz6H-4) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=706fd84f-caba-4290-b1fa-f07ff6236000&&collection=&height=544&occurrenceKey=null&width=420&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| --- | --- |\n| Link Behavior Each brand name is a link to its individual brand detail/product page. Links open in the same tab unless configured otherwise. [Use internal brand list link with amount pill](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=20214-5383&t=trMEQiF1AD9o3Leb-4) | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=d62b4089-0324-41c9-b255-abd3e9c67d07&&collection=&height=480&occurrenceKey=null&width=360&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **Layout** has optional \"Top brands\" section under the title (Logo Slider) has content slot after brand list  | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=f91f74dc-db6b-4512-9ad9-b14ad27ad783&&collection=&height=317&occurrenceKey=null&width=246&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) if the top brands section is hidden, hide the separator under it too (so that no two separators can be seen directly one after the other)  |\n| **SEO** URL Structure URL: `/brands/` (canonical) Brand page links should follow a clean, SEO-friendly format HTML Markup Use semantic HTML (`<section>`, `<h2>`, `<ul>`, `<li>`, `<a>`) for brand groupings. Use meaningful heading structure: `h1` for the page title, `h2` for alphabet letters, `h3` optional under each section. Internal Linking All brand links should be crawlable by search engines (no JavaScript-only rendering). Ensure each brand has a dedicated page linked from this overview. Meta Tags Custom `<title>` and `<meta description>` for `/brands/` page. Structured data (e.g., `ItemList` schema) can be added to improve search engine understanding. |  |\n| **Accessibility**  Semantic HTML Use correct ARIA roles (e.g., `role=\"navigation\"` for the letter index). Use `<nav aria-label=\"Brand alphabet navigation\">` for the A–Z index. Keyboard Navigation All links must be accessible via keyboard (tab and enter). Skip link provided to bypass navigation and jump to main content. Screen Reader Support Letter groupings should be announced properly (e.g., \"Section A – Brands starting with A\").  |  |\n| **Non-Functional Requirements** **Performance**: Fast loading using pagination or lazy loading if there are hundreds of brands. **Scalability**: Can support hundreds of brands without degrading performance. **Accessibility**: Meet WCAG 2.1 AA compliance. **SEO**: Structured, crawlable HTML and keyword-optimized copy. |  |\n\n### **Acceptance Criteria:**\n\n* create example like figma , add top brands section , product slider and CMS text image slots\n\n### **Technical Details:**  \n\n_**organism/BrandList**_\n\n```\ninterface BrandListProps{\n  title : string;\n  brands : {\n    title : string;\n    amount? : number;\n    link? : string;\n  }[] // list of brand \n}\n```\n\n* group brands in alphabetical order list \n* use `nuxtlink` , `Text` , `AmountBill`\n\n_**pages/BrandOverviewPage/BrandOverviewPage****.stories.ts**",
+  "figmaLinks": [
+    "https://www.figma.com/design/fU79c88OUWKPwScoPQ0Yag/laioutr-CMS?node-id=276-97391&t=2FpqZago9DvoDz6H-4",
+    "https://www.figma.com/design/fU79c88OUWKPwScoPQ0Yag/laioutr-CMS?node-id=276-113560&t=2FpqZago9DvoDz6H-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=20214-5383&t=trMEQiF1AD9o3Leb-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "brands",
+        "type": "{",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "amount",
+        "type": "number",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "link",
+        "type": "string",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-113",
+    "title": "Page templates"
+  },
+  "summary": "Brand directory page with A-Z alphabetical grouping and optional featured brands slider.",
+  "features": [
+    "Alphabetical grouping with A-Z letter headings",
+    "Optional top brands logo slider section",
+    "Product count pills showing items per brand",
+    "SEO-optimized with ItemList structured data"
+  ],
+  "keywords": [
+    "brand directory",
+    "A-Z navigation",
+    "manufacturer list"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-66"
+  ],
+  "shortDescription": "The Brand Page Overview provides a comprehensive directory enabling shoppers to discover brands through intuitive alphabetical navigation. Brands are grouped under letter headings with non-alphabetic entries positioned at the start. Each brand entry links to its dedicated product page and optionally displays a product count indicator. The page supports an optional featured brands section using the Logo Slider component for highlighting key partnerships. Performance optimizations including lazy loading ensure smooth operation even with hundreds of brands while maintaining full accessibility compliance and search engine crawlability."
+}

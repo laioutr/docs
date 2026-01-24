@@ -1,0 +1,23 @@
+{
+  "key": "LUI-133",
+  "title": "Progress",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": "Add [https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-32](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-32)  \nto this in the documentation:  [https://5f0bd6d3.laioutr-docs.pages.dev/laioutr-ui-kit/form/progress](https://5f0bd6d3.laioutr-docs.pages.dev/laioutr-ui-kit/form/progress)",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-32"
+  ],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/02.ui-kit-general/ProgressBar.md",
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "A progress indicator displaying task or operation completion status.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The Progress component visualizes completion status of tasks, operations, or goals through a horizontal bar indicator. It accepts a value representing current progress and optionally displays percentage text. Commonly used for file uploads, checkout steps, free shipping thresholds, and any workflow where users benefit from understanding how much progress has been made toward a goal."
+}

@@ -1,0 +1,46 @@
+{
+  "key": "LUI-52",
+  "title": "Product Flags",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "For further information and context please read idea ticket\n\n| [Product Flags](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11179-50563&t=t5p6T6f67QhRVCAN-4) global styling for **background and text color** → matching the category node flags default global wording for the selected promo, sale or similiar has different styling in padding, border radius and size → figma variables: flags / product flag | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=fc01dc1a-bd9e-4c5b-a304-e352b1ff07d5&&collection=&height=218&occurrenceKey=null&width=136&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| --- | --- |\n\n## Technical detail\n\n### molecule/ProductTileFlag\n\nSome props:\n\n* variant: promo, sale, new\n\nA slot for content",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11179-50563&t=t5p6T6f67QhRVCAN-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "variant",
+        "type": null,
+        "default": null,
+        "description": "promo, sale, new"
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/08.ui-kit-indicators/ProductTileFlag.md",
+  "parentEpic": {
+    "key": "LUI-50",
+    "title": "Product Tiles Basic"
+  },
+  "summary": "A visual flag component for product tiles highlighting promotional labels like sale, promo, or new items.",
+  "features": [
+    "Multiple variant styles: promo, sale, and new",
+    "Global theming for background and text colors",
+    "Customizable content via slot",
+    "Configurable styling through Figma variables"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-39"
+  ],
+  "longDescription": "## Purpose\n\nThe ProductTileFlag component draws customer attention to special product attributes such as sales, promotions, or new arrivals by displaying prominent visual badges on product tiles.\n\n## Use Cases\n\n- Highlight discounted products with a sale flag during promotional periods\n- Mark newly added products to help customers discover recent additions\n- Display promotional badges for special offers or limited-time deals\n- Apply custom labels through the content slot for unique marketing campaigns\n- Maintain visual consistency across product grids and category listings\n\n## Design Rationale\n\nThe component uses predefined variants (promo, sale, new) to ensure consistent visual hierarchy across the storefront while allowing global theming customization. Styling matches category node flags for a unified design language. The slot-based content approach enables merchants to customize label text while maintaining the established visual treatment. Figma variables control spacing and appearance to ensure design system compliance.",
+  "keywords": [
+    "badge",
+    "label",
+    "discount"
+  ],
+  "shortDescription": "Draws customer attention to special product attributes by displaying prominent visual badges on product tiles. Supports use cases including highlighting discounted products during promotional periods, marking newly added items, and displaying special offer badges. Uses predefined variants to ensure consistent visual hierarchy across the storefront while allowing theming customization. The slot-based content approach enables merchants to customize label text while maintaining established visual treatment."
+}

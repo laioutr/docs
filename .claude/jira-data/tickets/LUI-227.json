@@ -1,0 +1,25 @@
+{
+  "key": "LUI-227",
+  "title": "Studio / Sections / CtaButton Link Field",
+  "issueType": "Story",
+  "status": "Ready for Development",
+  "labels": [],
+  "description": "In `import { ctaButton } from ‘../../shared-fields/ctaButton'` there’s a shared fieldset that provides Button fields to many sections and blocks.\n\nModify it, so the `link` field is of type `link` instead of `text`.\n\nAll sections and blocks using this shared fieldset must be updated to handle link-objects instead of plain urls. You can use `useLinkResolver` from `#import` to turn these links into urls.",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "sourceEpic": null,
+  "sourceIdeas": [],
+  "summary": "Technical enhancement converting CTA button link field to structured link type.",
+  "features": [],
+  "keywords": [
+    "link field",
+    "shared fieldset",
+    "useLinkResolver"
+  ],
+  "shortDescription": "This technical enhancement upgrades the shared ctaButton fieldset used across many Studio sections and blocks. The link field changes from plain text URLs to structured link objects, enabling richer link capabilities like internal page references and dynamic URLs. All components using this shared fieldset must be updated to handle link objects using the useLinkResolver composable for URL resolution."
+}

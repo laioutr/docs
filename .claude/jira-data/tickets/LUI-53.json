@@ -1,0 +1,121 @@
+{
+  "key": "LUI-53",
+  "title": "Product Tile Basic",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "[Design Examples ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11271-205258&t=t5p6T6f67QhRVCAN-4)<custom data-type=\"emoji\" data-id=\"id-0\">:link:</custom>[ ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11271-205258&t=t5p6T6f67QhRVCAN-4)\n\nFor further information and context please read idea ticket\n\n| **Properties** device mobile desktop color swatches bottom top no swatches is sale yes no title length: 1 line 2 lines 3 lines image ratio: 1:1 3:4 add to cart button true false product flags true false brand (name) true false product description & info true false base price true false |  |\n| --- | --- |\n| [States and focus order are implemented](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11271-206067&t=t5p6T6f67QhRVCAN-4) product tiles have states tap or click on an product image to open the product detail page tap or click on the product name to open the product detail page brand name is only clikable and focusable if the brand name is linked to a specific page | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=ac0bda4b-85bc-4386-9018-13f9fe63db34&&collection=&height=741&occurrenceKey=null&width=1042&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| Image background color is choosable globally and grid / or slider specific |  |\n| there is a color variant on dark bg | example ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=239c15a9-e682-44de-b601-4bf890f24fa9&&collection=&height=674&occurrenceKey=null&width=1273&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| the user can choose the icon button variant for \"add to cart\" globally for example, if the user would rather have the positive green button, etc. |  |\n\nStorybook stories have been created:\n\n* 1:1 image, sale-flag, promo-flag, brand + brand-link, 3 lines title, subtitle, price, strikethrough-price, unit-price, add-to-cart button, more than four colors in the swatch\n* Same as before but with a 3:4 image\n* 1:1 image, no flags, brand but no link, 2 lines title, subtitle, price, strikethrough-price, add-to-cart button, 3 colors\n* 1:1 image, no flags, no brand, 1 line title, subtitle, price, add-to-cart button, 1 color\n* 1:1 image, no flags, brand but no link, 1 line title, no subtitle, no add-to-cart button, no colors\n* 1:1 transparent png image with selected background color, the rest is up to you\n\n## Technical details\n\n### organism/ProductTile\n\nThe tile itself is a regular `<div>`. The image is inside a link, the brand is a link (if brandHref is provided), the title is a link, the swatch is a link, the add-to-cart-button is a LuiButton. This ensures correct focus-order. If the image-link is focused, the focus should be around the whole card (as seen in the focus-explanation (1) in figma)\n\nSome props:\n\n* productId\n* href\n* image: Media\n* imageAspectRatio: 1:1 or 3:4\n* flags: array of flag-variant + label\n* colors: array of color-swatches, see <custom data-type=\"smartlink\" data-id=\"id-1\">https://laioutr.atlassian.net/browse/THEMES-51</custom>\n* colorsPosition: top or bottom\n* brand and brandHref (both optional)\n* title and titleLines\n* subtitle (optional)\n* price: Money\n* strikethroughPrice: Money (optional)\n* unitPrice (Money) and measurementUnit (e.g. \"l\", so we get e.g. $14.99/l; both optional)\n* showAddToCart: boolean\n* color: on-light, on-dark\n\nIf a strikethroughPrice is given, the price must be displayed in red with the strikethroughPrice next to it.\n\nClicking on the Add-to-cart button emits an event from the ProductTile component\n\nThe tile itself does not have an inherent width.\n\nPlease make sure that you click around the playground for this component in figma. If some data is missing on the tile, there will still be a blank space, instead of the tile getting smaller. This is required to always have the same height in all tiles, independent of provided content.\n\nFor rendering prices, use `{{ $money(price) }}` in the template: <custom data-type=\"smartlink\" data-id=\"id-2\">https://github.com/laioutr/laioutr/blob/main/packages/frontend-core/src/runtime/app/i18n/plugins/i18nMoney.ts</custom>\n\nUse existing components for ColorSwatches, Button, Media",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11271-205258&t=t5p6T6f67QhRVCAN-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11271-206067&t=t5p6T6f67QhRVCAN-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "1",
+        "type": null,
+        "default": null,
+        "description": "1 image, sale-flag, promo-flag, brand + brand-link, 3 lines title, subtitle, price, strikethrough-price, unit-price, add-to-cart button, more than four colors in the swatch"
+      },
+      {
+        "name": "1",
+        "type": null,
+        "default": null,
+        "description": "1 image, no flags, brand but no link, 2 lines title, subtitle, price, strikethrough-price, add-to-cart button, 3 colors"
+      },
+      {
+        "name": "1",
+        "type": null,
+        "default": null,
+        "description": "1 image, no flags, no brand, 1 line title, subtitle, price, add-to-cart button, 1 color"
+      },
+      {
+        "name": "1",
+        "type": null,
+        "default": null,
+        "description": "1 image, no flags, brand but no link, 1 line title, no subtitle, no add-to-cart button, no colors"
+      },
+      {
+        "name": "1",
+        "type": null,
+        "default": null,
+        "description": "1 transparent png image with selected background color, the rest is up to you"
+      },
+      {
+        "name": "image",
+        "type": null,
+        "default": null,
+        "description": "Media"
+      },
+      {
+        "name": "imageAspectRatio",
+        "type": null,
+        "default": null,
+        "description": "1:1 or 3:4"
+      },
+      {
+        "name": "flags",
+        "type": null,
+        "default": null,
+        "description": "array of flag-variant + label"
+      },
+      {
+        "name": "colors",
+        "type": null,
+        "default": null,
+        "description": "array of color-swatches, see <custom data-type=\"smartlink\" data-id=\"id-1\">https://laioutr.atlassian.net/browse/THEMES-51</custom>"
+      },
+      {
+        "name": "colorsPosition",
+        "type": null,
+        "default": null,
+        "description": "top or bottom"
+      },
+      {
+        "name": "price",
+        "type": null,
+        "default": null,
+        "description": "Money"
+      },
+      {
+        "name": "strikethroughPrice",
+        "type": null,
+        "default": null,
+        "description": "Money (optional)"
+      },
+      {
+        "name": "showAddToCart",
+        "type": null,
+        "default": null,
+        "description": "boolean"
+      },
+      {
+        "name": "color",
+        "type": null,
+        "default": null,
+        "description": "on-light, on-dark"
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/7.ui-app/product-previews/ProductCard.md",
+  "parentEpic": {
+    "key": "LUI-50",
+    "title": "Product Tiles Basic"
+  },
+  "summary": "Versatile product tile for grids and sliders with pricing and cart.",
+  "features": [
+    "Flexible content: brand, title, pricing, flags, swatches",
+    "Multiple image aspect ratios (1:1 or 3:4)",
+    "Sale pricing with strikethrough original price",
+    "Add-to-cart button with customizable icon variant"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-39"
+  ],
+  "longDescription": "## Purpose\n\nThe ProductTile component serves as the primary building block for product listings, providing a consistent and flexible way to showcase products across category pages, search results, and promotional sliders.\n\n## Use Cases\n\n- Display products in grid layouts on category and search result pages\n- Present featured products in homepage sliders and carousels\n- Show sale items with original and discounted prices clearly indicated\n- Enable quick add-to-cart functionality directly from product listings\n- Support brand-focused merchandising with linked brand names\n- Accommodate products with multiple color variants via integrated swatches\n\n## Design Rationale\n\nThe component maintains consistent height regardless of content variations, ensuring visual alignment in grid layouts. Focus order follows accessibility best practices: image link, brand link (if present), title link, color swatches, then add-to-cart button. The tile emits events rather than handling cart logic internally, enabling flexible integration with various commerce backends. Internationalized price formatting uses the $money helper for proper locale handling.",
+  "keywords": ["product card", "product listing", "e-commerce tile"],
+  "shortDescription": "The ProductTile component serves as the primary building block for product listings across category pages, search results, and promotional sliders. It maintains consistent height regardless of content variations for grid alignment. Focus order follows accessibility best practices. The tile emits events rather than handling cart logic internally for flexible commerce backend integration. Internationalized price formatting uses the $money helper for proper locale handling."
+}

@@ -1,0 +1,74 @@
+{
+  "key": "LUI-40",
+  "title": "Category Nodes / Compact",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "Please read the Epic and Idea Ticket for more context and information.\n\nThe compact variant is particularly useful when the space in the first fold is limited. For example on product listing pages. \n\n| Are used in the Inpage Navigation / Compact /Grid and Slider.  Are **themed** components. Have the following properties/variants: device mobile/desktop variant (design variants): default outline solid default sale outline sale solid sale default see more outline see more solid see more color on light background on dark background on bright background bg color none light bg dark bg bright bg pale sale red state default hover pressed focus has flag true/false |    |\n| --- | --- |\n| **Requirements** in addition to the default settings for the background color of the image, users can change the color afterwards the user can change the background color of the nodes The \"see more\" variant functions as a button/link to the supercategory / listing page.  Consequently, it should be possible to specify either a category ID or a URL. this creates freedom for the creativity of our customers. The see more variant **is optional** **The category node image is optional** the user can decide if they want to show the images or not |  |\n\nStorybook stories have been created:\n\n* category node compact, default with placeholder-image\n* category node compact, default with placeholder-image and flag\n* category node compact, outline with placeholder-image\n* category node compact, outline with placeholder-image and flag\n* category node compact, outline-sale with placeholder-image\n* category node compact, solid-light with percentage-image (passed as media just like the placeholder-image)\n* category node compact, solid-bright with percentage-image\n* category node compact, solid-pale with percentage-image\n* category node compact, solid-sale with percentage-image\n* category node compact, solid-sale-red with percentage-image\n* category node compact, default with arrow-right icon\n* category node compact, default without image\n* category node compact, solid-pale without image\n\nPlease make sure to put these images into `packages/ui/playground/.storybook/public/category-node/`\n\n## Technical details\n\nI believe the see-more variant is always the same colors as the default variant. Therefore there is no separate see-more. They only distinguish themselves by content.\n\nAll states (default, hover, active, focus) are implemented correctly.\n\nThe variant of the CategoryNode decides which flag-corners to use. The corners of the flag-prop must be ignored.\n\n### molecule/CategoryNode/CategoryNodeCompact.vue\n\nImage is 1:1\n\nSome props:\n\n* variant:\n\n    * default (in figma: variant=default, bg=none)\n    * outline (f: variant=outline)\n    * outline-sale (f: variant=outline sale)\n    * solid-light (f: variant=solid, bg=light bg)\n    * solid-bright (f: variant=solid, bg=bright bg)\n    * solid-pale (f: variant=solid, bg=pale)\n    * solid-sale (f: variant=solid sale, bg=light bg)\n    * solid-sale-red (f: variant=solid, bg=sale red)\n    \n* colorMode: on-light, on-dark, on-bright\n* href: element is linked\n* media: optional Media\n* icon: name of an Icon to show with LuiIcon\n* flag: optional flag-props\n\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "variant",
+        "type": "string",
+        "default": "default",
+        "description": "default, outline, outline-sale, solid-light, solid-bright, solid-pale, solid-sale, solid-sale-red"
+      },
+      {
+        "name": "colorMode",
+        "type": "string",
+        "default": null,
+        "description": "on-light, on-dark, on-bright"
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "default": null,
+        "description": "URL or category ID for linking"
+      },
+      {
+        "name": "media",
+        "type": "object",
+        "default": null,
+        "description": "optional Media object for category image"
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "default": null,
+        "description": "name of an Icon to show with LuiIcon"
+      },
+      {
+        "name": "flag",
+        "type": "object",
+        "default": null,
+        "description": "optional flag-props for promotional badges"
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/05.ui-kit-content/LinkTileCompact.md",
+  "parentEpic": {
+    "key": "LUI-34",
+    "title": "Inpage Navigation"
+  },
+  "summary": "Space-efficient category node variant for listing pages with eight design variants and optional images.",
+  "features": [
+    "Eight design variants: default, outline, outline-sale, solid-light, solid-bright, solid-pale, solid-sale, solid-sale-red",
+    "Optional image display with text-only mode available",
+    "Promotional flag support with automatic corner positioning based on variant",
+    "Full interaction states: default, hover, pressed, focus"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-41"
+  ],
+  "longDescription": "## Purpose\n\nThe CategoryNodeCompact component provides a space-efficient category navigation element designed for areas with limited viewport space, such as product listing pages and compact navigation sections. It offers extensive styling flexibility while maintaining a small footprint.\n\n## Use Cases\n\n- Display subcategory navigation on product listing pages\n- Create compact category grids in sidebar or filter areas\n- Show text-only category links when images are not needed\n- Highlight sale categories with dedicated red or branded sale variants\n- Add promotional badges like \"Sale\", \"New\", or custom flags\n- Link to supercategory pages via the see more pattern\n\n## Design Rationale\n\nThe compact variant prioritizes space efficiency while maintaining visual appeal through multiple design options. The optional image feature allows flexibility for text-focused layouts. Eight variant combinations cover common use cases from subtle outlines to bold sale highlights. Flag corner positioning is automatically determined by the node variant to ensure visual consistency.",
+  "shortDescription": "Used in Inpage Navigation Compact Grid and Slider components. Supports customizable background colors per node and 1:1 aspect ratio images. See more variant links to supercategory pages via category ID or URL. Themed component with multiple color modes for light, dark, and bright backgrounds. Icon display available via LuiIcon integration.",
+  "keywords": [
+    "compact-tile",
+    "listing-page",
+    "sale-highlight"
+  ]
+}

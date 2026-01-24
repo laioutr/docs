@@ -1,0 +1,34 @@
+{
+  "key": "LUI-14",
+  "title": "Card Grid MVP",
+  "issueType": "Epic",
+  "status": "Done",
+  "labels": [],
+  "description": "For definition look into the idea ticket please.",
+  "figmaLinks": [],
+  "childTickets": [
+    "LUI-15",
+    "LUI-16",
+    "LUI-48"
+  ],
+  "created": "2025-02-28T16:43:32.863+0100",
+  "updated": "2025-04-23T14:31:24.209+0200",
+  "linkedIdeas": [
+    "LAIOUTR-30"
+  ],
+  "enrichedData": {},
+  "summary": "A responsive card grid layout supporting 1-4 cards per row for browsing and comparing multiple content items.",
+  "features": [
+    "Responsive column layouts displaying 1-4 cards per row based on screen size",
+    "Card content with image, alt text, title, description, and call-to-action",
+    "Lazy loading for efficient image performance with consistent card dimensions",
+    "Full keyboard navigation and entire card clickable with hover states"
+  ],
+  "longDescription": "## Purpose\n\nThe Card Grid MVP provides website visitors with a responsive grid layout for browsing multiple content options simultaneously. The component enables quick visual comparison and easy access to information of interest through a structured, scannable format.\n\n## Use Cases\n\n- **Content discovery**: Present blog posts, articles, or resources in an easily scannable grid format\n- **Product categories**: Display product category previews with images and brief descriptions\n- **Service offerings**: Showcase different service tiers or options with dedicated cards\n- **Team members**: Present team member profiles with photos and role descriptions\n- **Portfolio items**: Display project showcases or case studies in a visual grid\n\n## Design Rationale\n\nThe responsive column system adapts from single-column mobile layouts to four-column desktop displays, ensuring optimal content presentation across devices. Lazy loading improves page performance by deferring image loading until needed. Full card clickability with hover states provides intuitive interaction patterns while keyboard navigation ensures accessibility compliance.",
+  "shortDescription": "The component enables quick visual comparison through a structured, scannable format ideal for content discovery, product categories, service offerings, team members, and portfolio items. Proper spacing between cards maintains visual clarity. Accessibility standards are maintained across all card interactions.",
+  "keywords": [
+    "content grid",
+    "portfolio grid",
+    "comparison layout"
+  ]
+}

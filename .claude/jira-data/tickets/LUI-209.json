@@ -1,0 +1,58 @@
+{
+  "key": "LUI-209",
+  "title": "Studio / Blocks / Buy Box / Basic Product Info",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Basic Product Info |\n| --- | --- |\n| **Description** | Product Title, Brand and Brand Logo  |\n| **Options**  | Data Source selection Display (y/n): Brand logo Brand name Product title Rating |\n| **Brand** | Brand logo Data Source Link y/n (means link to brand page or custom URL) Format mobile (square, portrait, landscape) desktop (square, portrait, landscape) Styling Background none (default) custom Rounded corners y/n Brand name Data source Link y/n Styling Size XS – 4XL (laioutr UI font sizes) Color default (text grey) custom proposed colors: text colors |\n| **Product title** | Brand name Data source Styling Size XS – 4XL (laioutr UI font sizes) Color default (text black) custom proposed colors: text colors |\n| **Rating** | Styling: Size Small Medium Display Stars y/n Variant Accent (default) Primary Yellow Black Layout: Orientation Horizontal Vertical Alignment left center right |\n|  |  |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Brand",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Product title",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Rating",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Basic product info block for Buy Box with title, brand, logo, and rating.",
+  "features": [
+    "Brand logo with customizable format and background",
+    "Brand name with optional link to brand page",
+    "Product title with customizable styling",
+    "Rating display with variant and alignment options"
+  ],
+  "keywords": ["product title", "brand info", "product header"],
+  "shortDescription": "The Basic Product Info block displays essential product identification at the top of the Buy Box. It combines the product title, brand name, brand logo, and aggregate rating into a cohesive header area. The brand elements can link to brand pages for cross-selling. Logo format adapts between mobile and desktop with optional background styling. Rating display offers multiple star color variants and layout orientations to match the page design."
+}

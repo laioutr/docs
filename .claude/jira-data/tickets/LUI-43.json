@@ -1,0 +1,76 @@
+{
+  "key": "LUI-43",
+  "title": "Inpage Navigation / Compact / Grid",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "Please read the Epic and Idea Ticket for more context and information.\n\n### Compact / Grid\n\n<custom data-type=\"smartlink\" data-id=\"id-0\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=10173-31111&t=fJoh7FT64L5Yukdp-4</custom> \n\n| **Properties/Variants** breakpoint  node variant default solid outline color on light background on dark background on bright background is sale true/false node background color none light bg dark bg vright bg pale alignment left center auto (refers to even spacing of the nodes) optional headings true/false | Find [design examples here.](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=10345-74175&t=fJoh7FT64L5Yukdp-4) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=3ea354aa-5b37-474e-ac88-8c33d80b1590&&collection=&height=657&occurrenceKey=null&width=413&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)   |\n| --- | --- |\n\n---\n\n## **Testing (stories):**\n\n* Grid on light background - alignment left - header - subline \n* Grid on dark background - alignment center \n* Grid on bright background - alignment left - showmore\n* Grid on light background - alignment center - flaged nodes\n\n##   \nTechnical details\n\n### organism/InpageNavigationCompactGrid\n\nSome props:\n\n* nodes: array of [nodes props](https://laioutr.atlassian.net/browse/THEMES-40) (only href, icon, media, flag and text)\n* nodesVariant: see <custom data-type=\"smartlink\" data-id=\"id-1\">https://laioutr.atlassian.net/browse/THEMES-40</custom>. Also passed to nodes\n* colorMode: on-light, on-dark, on-bright. Also passed to nodes\n* showMoreLink: string, optional, shows the \"More\" node if given\n* alignment: left, center, auto\n* headline & subline: string, both optional\n\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "nodes",
+        "type": "array",
+        "default": null,
+        "description": "Array of node props including href, icon, media, flag, and text"
+      },
+      {
+        "name": "nodesVariant",
+        "type": "string",
+        "default": null,
+        "description": "Design variant passed to all nodes: default, solid, or outline"
+      },
+      {
+        "name": "colorMode",
+        "type": "string",
+        "default": null,
+        "description": "on-light, on-dark, on-bright - passed to nodes"
+      },
+      {
+        "name": "showMoreLink",
+        "type": "string",
+        "default": null,
+        "description": "Optional URL that adds a 'More' node to the grid"
+      },
+      {
+        "name": "alignment",
+        "type": "string",
+        "default": null,
+        "description": "left, center, or auto spacing"
+      },
+      {
+        "name": "headline",
+        "type": "string",
+        "default": null,
+        "description": "Optional section headline"
+      },
+      {
+        "name": "subline",
+        "type": "string",
+        "default": null,
+        "description": "Optional section subline"
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/7.ui-app/category-previews/InpageNavigationCompactGrid.md",
+  "parentEpic": {
+    "key": "LUI-34",
+    "title": "Inpage Navigation"
+  },
+  "summary": "Space-efficient grid layout for compact category nodes on listing pages.",
+  "features": [
+    "Multiple node variants: default, solid, and outline",
+    "Multiple color modes: on-light, on-dark, on-bright",
+    "Optional headline, subline, and show more link",
+    "Support for promotional flags on category nodes"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-41"
+  ],
+  "longDescription": "## Purpose\n\nThe InpageNavigationCompactGrid component provides a space-efficient grid layout for displaying compact category nodes, ideal for product listing pages and areas where viewport real estate is limited. It maintains full functionality while minimizing visual footprint.\n\n## Use Cases\n\n- Display subcategory navigation grids on product listing pages\n- Create compact category overviews in sidebar sections\n- Highlight sale categories with dedicated styling and promotional flags\n- Add contextual headings and sublines to describe navigation sections\n- Include show more links to direct users to complete category listings\n\n## Design Rationale\n\nThe compact grid combines the space efficiency of compact nodes with flexible layout options. Node variants (default, solid, outline) are applied consistently across all grid items for visual coherence. The alignment options accommodate different design aesthetics while promotional flag support enables highlighting time-sensitive or featured categories. Color mode propagation to child nodes ensures consistent theming.",
+  "keywords": ["compact grid", "subcategory navigation", "listing page"],
+  "shortDescription": "The InpageNavigationCompactGrid component provides a space-efficient grid layout for compact category nodes, ideal for product listing pages where viewport space is limited. Node variants (default, solid, outline) apply consistently across all grid items for visual coherence. Alignment options (left, center, auto) accommodate different design aesthetics. Color mode propagation ensures consistent theming while promotional flags highlight time-sensitive or featured categories."
+}

@@ -1,0 +1,42 @@
+{
+  "key": "LUI-207",
+  "title": "Studio / Blocks / Buy Box / Energy label",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Energy label |\n| --- | --- |\n| **Description** | Displays energy labels and allows them to be viewed in an optional lightbox. |\n| **Options**  | Data Source selection Display  Enable Lightbox y/n |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Energy label block for Buy Box with optional lightbox viewing.",
+  "features": [
+    "Data source selection",
+    "Optional lightbox display for detailed viewing"
+  ],
+  "keywords": [
+    "energy efficiency",
+    "EU energy label",
+    "appliance rating"
+  ],
+  "shortDescription": "The Energy Label block displays EU energy efficiency ratings within the Buy Box, meeting regulatory requirements for appliances and electronics. The label data is pulled from configured product attributes. An optional lightbox allows customers to view the full energy label in detail, including consumption figures and efficiency class. Required for compliance in markets where energy labeling regulations apply to the product category."
+}

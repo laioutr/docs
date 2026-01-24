@@ -1,0 +1,54 @@
+{
+  "key": "LUI-56",
+  "title": "Create Product Slider",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\nAs a store visitor, I want to get an impression of the store range, and sliders that show different products help me to do this.\n\n‌\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-1\">:clipboard:</custom> Requirements\n\n| Properties: slider navigation (position) top / bottom optional headings yes / no with button yes / no choosable button variant show scrollbar yes / no default is: show scrollbar true There are two color variants as individual components in Figma: [on light background](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11286-268738&t=kWl7opPn708GdN7H-4) [on dark background](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11286-279482&t=kWl7opPn708GdN7H-4) |  |\n| --- | --- |\n| It must be possible for the user to select how extensive the displayed product tiles should be. It must be possible to adjust the background color of the product images (if transparent pngs are used) for the products in the slider. The user can also decide which image format should be used (1:1 or 3:4), in contrast to the global setting. The user can specifically add or deactivate an Add to Cart button for the product tiles in the slider if desired You can find some [design examples here.](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11286-299244&t=kWl7opPn708GdN7H-4) | Example: Very minimalist product tiles: ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=2521d88d-cff2-4b6b-a8fb-5c12089c0244&&collection=&height=489&occurrenceKey=null&width=510&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) Product tiles with more information: ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=534c68ee-e1a2-4f81-9c3b-7c8eb65d3801&&collection=&height=481&occurrenceKey=null&width=252&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| It should later be possible to add products to the slider as follows: Manual entry of SKUs / article numbers Specification of one or more category IDs Only products with a specific label (e.g. promo or sale etc.) Automated recommendations |  |\n\n### Technical details\n\nUse LuiCommonSwiper instead of regular Swiper component and SwiperScrollbar.\n\nSome props:\n\n* products: array of props from [https://laioutr.atlassian.net/browse/THEMES-53](https://laioutr.atlassian.net/browse/THEMES-53) \n* navigation position: top, bottom\n* headline and subline (both optional)\n* CTA text variant and href (optional)\n* show scrollbar (default true)\n* colorMode: on-light, on-dark\n\nCreate a storybook story displaying 8 products in this slider",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11286-268738&t=kWl7opPn708GdN7H-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11286-279482&t=kWl7opPn708GdN7H-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11286-299244&t=kWl7opPn708GdN7H-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "products",
+        "type": null,
+        "default": null,
+        "description": "array of props from [https://laioutr.atlassian.net/browse/THEMES-53](https://laioutr.atlassian.net/browse/THEMES-53)"
+      },
+      {
+        "name": "colorMode",
+        "type": null,
+        "default": null,
+        "description": "on-light, on-dark"
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-55",
+    "title": "Product Slider"
+  },
+  "summary": "A horizontally scrollable product carousel displaying compact product previews with customizable tile appearance and navigation controls.",
+  "features": [
+    "Configurable navigation position (top or bottom) with scrollbar toggle",
+    "Light and dark color mode variants for different page backgrounds",
+    "Customizable product tile detail level (swatches, title, add-to-cart)",
+    "Selectable image aspect ratio (1:1 or 3:4) independent of global settings"
+  ],
+  "longDescription": "## Purpose\n\nThe Product Slider component enables shoppers to quickly scan and compare multiple products within a compact, horizontally scrollable carousel. It presents essential purchase decision information including product images, titles, prices, and availability in a scannable format.\n\n## Use Cases\n\n- **Product discovery**: Display featured, new arrival, or trending products on landing pages\n- **Category exploration**: Show product ranges within a specific category or brand\n- **Cross-selling**: Present related or complementary products on product detail pages\n- **Promotional showcases**: Highlight sale items or products with specific labels\n\n## Design Rationale\n\nThe slider leverages the LuiCommonSwiper foundation for consistent touch and mouse interactions. Flexible tile configuration allows merchants to balance information density with visual appeal, from minimalist image-focused layouts to comprehensive tiles with variant swatches and quick-add functionality. Dual color modes ensure integration across varied page designs.",
+  "keywords": [
+    "carousel",
+    "cross-sell",
+    "featured products"
+  ],
+  "shortDescription": "Enables shoppers to quickly scan and compare multiple products within a compact horizontally scrollable carousel. Presents essential purchase decision information including product images, titles, prices, and availability. Supports product discovery on landing pages, category exploration, cross-selling on product detail pages, and promotional showcases. Leverages LuiCommonSwiper for consistent touch and mouse interactions with flexible tile configuration balancing information density with visual appeal.",
+  "linkedIdeas": [
+    "LAIOUTR-40"
+  ]
+}

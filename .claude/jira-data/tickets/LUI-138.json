@@ -1,0 +1,18 @@
+{
+  "key": "LUI-138",
+  "title": "toast documentation",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": "add toast here: [https://5f0bd6d3.laioutr-docs.pages.dev/laioutr-ui-kit/form/toast](https://5f0bd6d3.laioutr-docs.pages.dev/laioutr-ui-kit/form/toast)\n\n‌\n\nplease change name and headline to toast (the naming is slider right now)",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": null,
+  "summary": "Documentation task to add toast component docs and fix naming inconsistencies.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "This task addresses documentation updates for the Toast component, including adding proper documentation content and correcting naming inconsistencies where the component was incorrectly labeled as 'slider'. The Toast component provides non-blocking notification messages that appear temporarily to inform users of actions, errors, or status updates without interrupting their workflow."
+}

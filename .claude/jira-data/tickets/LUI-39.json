@@ -1,0 +1,62 @@
+{
+  "key": "LUI-39",
+  "title": "Scrollbar",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "The scrollbar indicates how much content of a slider is currently visible and where you are.\n\n**Example:**\n\n* A slider has 18 items.\n* On mobile, 3 items are always visible at once. The bar (b) is then the width (w) of the entire bar / 6 long. b = w/6 \n* On desktop, 6 items are always visible, i.e.:   \n  b = w/3\n\nPlease note that the handle/bar requires a clickable area of at least 24px height/width. therefore the component has padding to symbolize this.\n\n## Technical definition\n\nWe create two components: one for rendering the scrollbar, another for integration with swiper.\n\nCreate four storybook stories:\n\n* horizontal dark & light\n* vertical dark & light\n\n### Atom/Scrollbar\n\nReceive the following props and render a scrollbar:\n\n* color on-light/on-dark\n* orientation: vertical/horizontal\n* trackSize\n* progress\n* emit onChange\n\nPlease use css transform for moving the scrollbar-track\n\n### Molecule/Swiper/SwiperScrollbar\n\nJust like the SwiperNavigationCompact component, create a new component in the same folder.\n\nSwiper itself has a scrollbar-module which does something very similar to our goals. We cannot use it, as that would make the scrollbar non-reusable, but some code can probably be copied from here for integration with swiper:\n\n<custom data-type=\"smartlink\" data-id=\"id-0\">https://github.com/nolimits4web/swiper/blob/master/src/modules/scrollbar/scrollbar.mjs</custom> \n\nRenders the scrollbar using the previously created atom component",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "color",
+        "type": "string",
+        "default": null,
+        "description": "on-light or on-dark color mode"
+      },
+      {
+        "name": "orientation",
+        "type": "string",
+        "default": null,
+        "description": "vertical or horizontal"
+      },
+      {
+        "name": "trackSize",
+        "type": "number",
+        "default": null,
+        "description": "Size of the scrollbar track"
+      },
+      {
+        "name": "progress",
+        "type": "number",
+        "default": null,
+        "description": "Current scroll progress position"
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/02.ui-kit-general/Scrollbar.md",
+  "parentEpic": {
+    "key": "LUI-34",
+    "title": "Inpage Navigation"
+  },
+  "summary": "Visual progress indicator for sliders showing content visibility and scroll position with Swiper integration.",
+  "features": [
+    "Horizontal and vertical orientations with light and dark color modes",
+    "Dynamic progress indicator proportional to visible content",
+    "Swiper integration via dedicated SwiperScrollbar molecule component",
+    "Accessible 24px minimum clickable touch target area"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-41"
+  ],
+  "longDescription": "## Purpose\n\nThe Scrollbar component provides visual feedback for slider and carousel components, indicating how much content is currently visible and the user's position within the scrollable area. It helps users understand content extent and navigate through slider items.\n\n## Use Cases\n\n- Display scroll progress on category node sliders\n- Provide visual navigation aid for horizontal product carousels\n- Show vertical scroll position in content containers\n- Integrate with Swiper-based sliders for synchronized scroll feedback\n- Support both light and dark themed sections\n\n## Design Rationale\n\nThe component is split into two parts: a reusable Atom component for rendering and a Molecule wrapper for Swiper integration. This separation ensures the scrollbar can be used independently or with Swiper. The minimum 24px clickable area ensures accessibility compliance for touch interactions. CSS transforms are used for smooth, performant position updates during scrolling.",
+  "shortDescription": "Split into Atom (rendering) and Molecule (Swiper integration) components for reusability. Bar width calculated proportionally based on visible items versus total items. Uses CSS transforms for smooth, performant position updates. Emits onChange event for external scroll control.",
+  "keywords": [
+    "progress-bar",
+    "scroll-indicator",
+    "atom-component"
+  ]
+}

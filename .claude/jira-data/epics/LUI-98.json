@@ -1,0 +1,24 @@
+{
+  "key": "LUI-98",
+  "title": "Prepare Products within separated Packages, UI Kit, Laioutr UI and Laioutr UI Pro",
+  "issueType": "Epic",
+  "status": "Done",
+  "labels": [],
+  "description": "We defined our UI Products:\n\n* Laioutr UI Kit\n* Laioutr UI\n* Laioutr UI Pro\n\nWe need to separate our current ui package into 3 packages.",
+  "figmaLinks": [],
+  "childTickets": [
+    "LUI-100",
+    "LUI-101",
+    "LUI-99"
+  ],
+  "created": "2025-06-11T23:49:17.770+0200",
+  "updated": "2025-10-14T21:31:23.911+0200",
+  "enrichedData": {
+    "purpose": "The existing monolithic UI package needs to be reorganized into three distinct product packages (UI Kit, Laioutr UI, Laioutr UI Pro) to support different product tiers and customer needs.",
+    "useCases": [
+      "Separate the current UI package into Laioutr UI Kit",
+      "Separate the current UI package into Laioutr UI",
+      "Separate the current UI package into Laioutr UI Pro"
+    ]
+  }
+}

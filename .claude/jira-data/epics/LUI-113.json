@@ -1,0 +1,19 @@
+{
+  "key": "LUI-113",
+  "title": "Page templates",
+  "issueType": "Epic",
+  "status": "Done",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "childTickets": [
+    "LUI-115",
+    "LUI-116",
+    "LUI-117",
+    "LUI-118",
+    "LUI-119"
+  ],
+  "created": "2025-06-24T10:27:25.798+0200",
+  "updated": "2025-10-14T10:28:18.912+0200",
+  "enrichedData": {}
+}

@@ -1,0 +1,71 @@
+{
+  "key": "LUI-199",
+  "title": "Studio / Sections / Product Slider – Showcase",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Product Slider – Showcase |\n| --- | --- |\n| **Description** | A product slider with a banner section at the beginning to attract more attention. |\n| **Options** | Data Source |\n| **Banner** | [Caption](https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=917-103219&t=5VvNTXN86PoYsZCc-4) Plain Default text color Custom text color Flag Default text & bg color Custom text & bg color Heading Button Background image Media Fallback color Overlay → [see background media](https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=925-105539&t=5VvNTXN86PoYsZCc-4) Styling Background (banner background) Text color Text size |\n| **Product Tiles** | **It is important that the slider also has settings options for the product tiles.** Display (all y/n toggles) Product flags Brand Product description Add to cart button Icon button options Styling Image format Image background Color swatches top bottom none max. title length |\n| **Style Options** | Style: Full width boxed Margin: None S M L Padding: None S M L Background Color: None Theme Presets Custom Content Color: On light background On dark background On bright background |\n| **Proposed Colors for background color** | Accent 3 Grey 3 Primary 3 Grey 12 |\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=917-103219&t=5VvNTXN86PoYsZCc-4",
+    "https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=925-105539&t=5VvNTXN86PoYsZCc-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Banner",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Product Tiles",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Style Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Proposed Colors for background color",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Product slider with integrated banner at the start for showcasing featured collections.",
+  "features": [
+    "Banner section with caption, heading, button, and background media",
+    "Comprehensive product tile display options",
+    "Full width or boxed layout with customizable spacing",
+    "Multiple background and content color presets"
+  ],
+  "keywords": [
+    "showcase slider",
+    "featured products",
+    "promotional carousel"
+  ],
+  "shortDescription": "The Product Slider Showcase combines a promotional banner with a product carousel to draw attention to featured collections. The leading banner supports background images, captions, flags, headings, and call-to-action buttons—ideal for seasonal campaigns or curated selections. Product tiles follow with full customization of displayed information including flags, brand, description, and add-to-cart actions. Layout options range from full-width immersive to contained boxed styles."
+}

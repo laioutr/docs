@@ -1,0 +1,30 @@
+{
+  "key": "LUI-101",
+  "title": "Create Package Laioutr UI Pro",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-98",
+    "title": "Prepare Products within separated Packages, UI Kit, Laioutr UI and Laioutr UI Pro"
+  },
+  "summary": "Create the Laioutr UI Pro package containing advanced and premium components for enterprise implementations.",
+  "features": [
+    "Premium component package",
+    "Advanced e-commerce features",
+    "Enterprise-grade components"
+  ],
+  "longDescription": "## Purpose\n\nThe Laioutr UI Pro package provides advanced and premium components for sophisticated e-commerce implementations. It includes specialized features, complex interactive patterns, and enterprise-grade components that extend beyond the standard Laioutr UI offering.\n\n## Use Cases\n\n- Implementing advanced pricing tables and subscription management\n- Building complex blog and content management interfaces\n- Creating premium customer experiences with advanced components\n\n## Design Rationale\n\nThe Pro package establishes a premium tier that supports the business model while providing genuine additional value to customers with advanced requirements. Components in this tier typically involve more complex interactions, specialized use cases, or features that benefit enterprise customers. The clear separation ensures customers understand the value proposition of each tier.",
+  "shortDescription": "Part of the separated product packages structure, establishing a premium tier. Includes specialized features for advanced pricing tables, subscription management, and content management interfaces. Components involve complex interactions suited for enterprise customers. Supports the business model while providing genuine additional value.",
+  "keywords": [
+    "pro tier",
+    "premium license",
+    "subscription features"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "key": "LUI-245",
+  "title": "Studio / Sections / Brand Grid",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "| **Name** | Brand Grid |\n| --- | --- |\n| **Description** | A full-width list of brand-links for your brand pages, matching your theme |\n| **Options** | **Content:** Brands (Array) Name (text) Link (link) Count (number) |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Full-width brand grid displaying brand links for overview pages.",
+  "features": [
+    "Brand array with name, link, and product count",
+    "Theme-matched styling",
+    "Full-width layout for comprehensive brand displays"
+  ],
+  "keywords": ["brand directory", "brand links", "manufacturer list"],
+  "shortDescription": "The Brand Grid section creates an organized directory of all brands or manufacturers available in the store. Each brand entry includes the brand name, link to their dedicated page, and an optional product count showing how many items are available. The full-width layout accommodates large brand portfolios while the theme-matched styling ensures visual consistency. Ideal for brand overview pages, manufacturer directories, or partner showcases."
+}

@@ -1,0 +1,149 @@
+{
+  "key": "LUI-2",
+  "title": "Pricing Card",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\nAs a potential customer, I want to be able to compare different subscription plans and features so that I can make a good decision.\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-1\">:clipboard:</custom> Requirements\n\n### Pricing Cards \n\n* As a potential customer I want to see pricing plans displayed in a clear card layout so that I can easily compare different subscription tiers\n* Acceptance Criteria:\n\n    * Display at least 3 pricing tiers (Basic, Premium, Enterprise)\n    * Show price, billing period, and key features for each plan\n    * Integrate variant switch between monthly and annually payment\n    \n        * display strikethrough prices\n        \n    * Include CTA button for each plan\n    \n* Storybook-stories have been created\n\n    * Basic Plan\n    * Premium Plan\n    * Enterprise Plan (with disccounted price)\n    \n\n| **Component** | **Preview** | **Link** | **UI ready** |\n| --- | --- | --- | --- |\n| **Pricing Cards** | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=85cd170a-458c-48bb-95e5-749156f252b6&&collection=&height=594&occurrenceKey=null&width=369&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) | <custom data-type=\"smartlink\" data-id=\"id-2\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=3795-21654&t=FoBBvGt4bI9KoJwB-4</custom>   | <custom data-type=\"emoji\" data-id=\"id-3\">:check_mark:</custom>  |\n\n‌\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-4\">:video_game:</custom>  Dummy\n\n[Discount Strikethrough Dummy](https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=3492-21109&p=f&m=dev&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=3787%3A7251&show-proto-sidebar=1)\n\n## **Technical Definition Acceptance :** \n\n### 📂 Component : `Molecule/Pricing/PricingCard.vue`\n\n### Description : \n\nA pricing card component that displays a **Plan's title**, **price**, **features**, and **CTA**. It supports **strike-through pricing**, **unlimited seats**, and **localized money formatting**.  \n\n| **Prop** | **Default** | **Type** |\n| --- | --- | --- |\n| title | - | `string`  \nName of the plan that is being displayed on top |\n| price | - | `Money` |\n| strikethroughPrice | - | `Money | undefined`  \nIf given, render this price before the actual price with a strikethrough-effect. ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=e5cd3077-c6d3-4848-beb3-5f95a0a959e0&&collection=&height=48&occurrenceKey=null&width=228&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| description | - | `string` |\n| includedSeats | - | `number | 'unlimited'` |\n| pricePerAdditionalSeat | - | `Money | undefined` |\n| includedFeatures | - | `string[]`  \nList of features that are include in the plan |\n| excludedFeatures | - | `string[]`  \nList of features not included in the plan. Rendered below `includedFeatures` |\n| ctaText | - | `string`   \nThe title of the button |\n| ctaLink  | - | `string`  \nThe page the button links to. Button is disabled if no link is provided. |\n| period  | `'month'` | `string `   \nThe **billing period** (e.g., /month). |\n\n* **Feature lists** → Rendered using `LuiIconList` for a consistent visual layout.\n* **Prices** → Displayed using `I18nMoney` to ensure proper localization.\n* **Strikethrough price** → Appears before the main price if provided, styled accordingly.\n* **CTA button** → Navigates to `ctaLink` when clicked. \n\n##   \nTechnical Considerations:\n\n**If** `ctaLink` is **empty  → The CTA Button shouldn't be displayed.**",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=3795-21654&t=FoBBvGt4bI9KoJwB-4"
+  ],
+  "userStory": "As a potential customer, I want to be able to compare different subscription plans and features so that I can make a good decision",
+  "technicalSpecs": {
+    "componentPath": "Molecule/Pricing/PricingCard.vue",
+    "props": [
+      {
+        "name": "title",
+        "type": null,
+        "default": "-",
+        "description": null
+      },
+      {
+        "name": "Name of the plan that is being displayed on top",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "price",
+        "type": "Money",
+        "default": "-",
+        "description": null
+      },
+      {
+        "name": "strikethroughPrice",
+        "type": "Money",
+        "default": "-",
+        "description": null
+      },
+      {
+        "name": "If given, render this price before the actual price with a strikethrough-effect. ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=e5cd3077-c6d3-4848-beb3-5f95a0a959e0&&collection=&height=48&occurrenceKey=null&width=228&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "default": "-",
+        "description": null
+      },
+      {
+        "name": "includedSeats",
+        "type": "number",
+        "default": "-",
+        "description": null
+      },
+      {
+        "name": "pricePerAdditionalSeat",
+        "type": "Money",
+        "default": "-",
+        "description": null
+      },
+      {
+        "name": "includedFeatures",
+        "type": null,
+        "default": "-",
+        "description": null
+      },
+      {
+        "name": "List of features that are include in the plan",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "excludedFeatures",
+        "type": null,
+        "default": "-",
+        "description": null
+      },
+      {
+        "name": "List of features not included in the plan. Rendered below `includedFeatures`",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "ctaText",
+        "type": null,
+        "default": "-",
+        "description": null
+      },
+      {
+        "name": "The title of the button",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "ctaLink",
+        "type": null,
+        "default": "-",
+        "description": null
+      },
+      {
+        "name": "The page the button links to. Button is disabled if no link is provided.",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "period",
+        "type": null,
+        "default": "'month'",
+        "description": null
+      },
+      {
+        "name": "The billing period (e.g., /month).",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/14.ui-pro/subscription/PricingPlan.md",
+  "parentEpic": {
+    "key": "LUI-1",
+    "title": "Pricing Page"
+  },
+  "summary": "A pricing card component displaying subscription plan details with strikethrough pricing for discounts.",
+  "features": [
+    "Strikethrough pricing for annual billing discounts",
+    "Included and excluded feature lists with icon indicators",
+    "Localized money formatting with I18nMoney",
+    "CTA button with customizable text and link"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-23",
+    "LAIOUTR-24"
+  ],
+  "longDescription": "## Purpose\n\nThe PricingCard component enables potential customers to quickly understand and compare subscription plan options through a clear, visually structured card layout. It presents pricing information transparently to help users make informed purchasing decisions.\n\n## Use Cases\n\n- Display individual subscription tiers (Basic, Premium, Enterprise) with their respective pricing and features\n- Show discounted annual pricing alongside regular monthly rates using strikethrough formatting\n- Present included features with checkmarks and excluded features with visual indicators\n- Provide clear call-to-action buttons for plan selection or subscription initiation\n\n## Design Rationale\n\nWell-structured pricing information helps users decide on a plan more confidently. The component supports transparent pricing presentation without hidden costs, which strengthens customer confidence. Strikethrough pricing visually communicates savings for annual billing, encouraging longer-term commitments.",
+  "shortDescription": "Enables potential customers to understand and compare subscription options through a clear card layout. Display individual tiers with respective pricing, show discounted annual pricing with strikethrough formatting, and present included features with checkmarks and excluded features with visual indicators. Supports transparent pricing presentation without hidden costs to strengthen customer confidence.",
+  "keywords": [
+    "SaaS pricing",
+    "user seats",
+    "conversion optimization"
+  ]
+}

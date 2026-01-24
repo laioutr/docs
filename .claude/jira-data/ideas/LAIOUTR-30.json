@@ -1,0 +1,30 @@
+{
+  "key": "LAIOUTR-30",
+  "title": "Card Grid MVP",
+  "issueType": "Idea",
+  "status": "Done",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\nAs a website visitor, I want to view content displayed in a responsive card grid so that I can quickly browse multiple options and easily access the information I'm interested in.\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-1\">:gorilla:</custom> Goal\n\n* Increase engagement rates by presenting information in easily digestible \"bites\"\n* Support the visual hierarchy of the website and highlight important content\n* Clearly display multiple content options so users can quickly compare and select\n* Improve the user experience through consistent design and intuitive navigation\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-2\">:clipboard:</custom> Requirements\n\n* The card grid should display 1-4 cards per row depending on screen size\n* On desktop, the grid should display 4 columns maximum\n* On tablet, the grid should display 2-3 columns\n* On mobile, the grid should display 1 column\n* Each card should contain:\n\n    * An image with appropriate alt text\n    * A title \n    * A short description text\n    * A call-to-action button or link\n    \n* Cards should have consistent dimensions\n* The grid should maintain proper spacing between cards\n* The component should be reusable across the site\n* Ensure all images load efficiently (consider lazy loading)\n* Maintain accessibility standards (proper contrast, focus states, etc.)\n* Support keyboard navigation\n* If the card has a link:\n\n    * Button or link are displayed\n    * The Card get's a hover state to encourage interaction\n    * The whole card is clickable\n    \n        * on click: change state back to default\n        \n    \n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-3\">:paintbrush:</custom> Design\n\n[Example Content Design Options ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4946-49276&t=D724dKcINpdeFMPu-4)<custom data-type=\"emoji\" data-id=\"id-4\">:link:</custom>[ ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4946-49276&t=D724dKcINpdeFMPu-4)\n\n[Hover Dummy ](https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4886-36128&p=f&m=dev&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=5183%3A10456)<custom data-type=\"emoji\" data-id=\"id-5\">:link:</custom>[ ](https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4886-36128&p=f&m=dev&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=5183%3A10456)\n\n[https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4886-36128](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4886-36128) ",
+  "linkedLuiTickets": [
+    "LUI-14"
+  ],
+  "created": "2025-02-20T10:14:46.817+0100",
+  "updated": "2025-06-11T21:55:59.639+0200",
+  "enrichedData": {
+    "purpose": "Allows website visitors to browse multiple content options in a responsive card grid layout, enabling quick comparison and easy access to information of interest.",
+    "goals": [
+      "Increase engagement rates by presenting information in easily digestible bites",
+      "Support the visual hierarchy of the website and highlight important content",
+      "Clearly display multiple content options so users can quickly compare and select",
+      "Improve the user experience through consistent design and intuitive navigation"
+    ],
+    "useCases": [
+      "Display 1-4 cards per row depending on screen size with responsive column layouts",
+      "Include an image with alt text, title, description, and call-to-action in each card",
+      "Maintain consistent card dimensions with proper spacing between cards",
+      "Implement lazy loading for efficient image loading",
+      "Support keyboard navigation and maintain accessibility standards",
+      "Make the entire card clickable with hover states when a link is present"
+    ]
+  }
+}

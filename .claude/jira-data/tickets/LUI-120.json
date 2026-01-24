@@ -1,0 +1,66 @@
+{
+  "key": "LUI-120",
+  "title": "Search Results Page",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\n**As a** shopper on a Shopify store, **I want** to see a well-organized and visually clear list of relevant products after I search for a term, **so that** I can quickly find the item I'm looking for and make a purchase decision.\n\n---\n\nImplement a user-friendly **search results page** that displays relevant product results. The page should be styled consistently with the store theme and include features that enhance product discoverability and conversion.\n\n---\n\n| **Requirement** | **Description** | **Link / Example** |\n| --- | --- | --- |\n| Display Results | Show matching products based on the search query on a search results page | [standard page layout](https://www.figma.com/design/iOpGWO38HkhnTYkEeEq8Oz/Laioutr-Basic?node-id=17-69657) \\| [ambiendo](https://www.figma.com/design/gDN7wlDFp5mwXQfRDhotzR/Ambiendo---sunny?node-id=72-160914) |\n| Query Highlight | Display the user's search term clearly on the results page. | [mobile](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=1359-228442&t=3GgRqyYPI4KvyUBH-4) \\| [desktop](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=1359-228603&t=3GgRqyYPI4KvyUBH-4) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=cedaebcd-3692-48f4-a504-cc70b33d6668&&collection=&height=33&occurrenceKey=null&width=356&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| Result Count | Show the number of results found | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=b427b834-e483-47c6-876b-4d5a530f8c11&&collection=&height=78&occurrenceKey=null&width=427&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) [amount pill](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=18636-187911) |\n| Filterbar | Use basic filterbar for sorting and filtering option | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=9831d39c-4e82-4751-8131-56772b7e7319&&collection=&height=82&occurrenceKey=null&width=456&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) filterbar: [mobile](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=82-217205&t=3GgRqyYPI4KvyUBH-4) \\| [desktop](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=82-220118&t=3GgRqyYPI4KvyUBH-4) |\n| Product Grid | Use product grid for displaying results | [mobile](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=73-75128&t=3GgRqyYPI4KvyUBH-4) \\| [desktop](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=73-75194&t=3GgRqyYPI4KvyUBH-4)  |\n| Infinite scroll | Use laod more component | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=b4972318-15c1-4d2a-8bf0-ce32d596f52c&&collection=&height=193&occurrenceKey=null&width=456&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) [figma link](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14229-103688&t=iXSN3ICO8paiylX4-4)  |\n| No Results State | If no results are found, show a friendly message and product recommendations. hide the search results header hide filterbar If the \"delete search\" button is clicked: hide empty state message show filterbar load product list with all products | [standard layout](https://www.figma.com/design/iOpGWO38HkhnTYkEeEq8Oz/Laioutr-Basic?node-id=38-30131&t=xppr2dTiGfn0a5IL-4) \\| [ambiendo example](https://www.figma.com/design/gDN7wlDFp5mwXQfRDhotzR/Ambiendo---sunny?node-id=79-36446&t=DlhHohoI87DkZZhT-4) [no results message mobile](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=1429-227393&t=3GgRqyYPI4KvyUBH-4) \\| [desktop](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=1429-227737&t=3GgRqyYPI4KvyUBH-4)  all products [laioutr](https://www.figma.com/design/iOpGWO38HkhnTYkEeEq8Oz/Laioutr-Basic?node-id=38-30132&t=xppr2dTiGfn0a5IL-4) \\| [ambiendo](https://www.figma.com/design/gDN7wlDFp5mwXQfRDhotzR/Ambiendo---sunny?node-id=79-60624&t=DlhHohoI87DkZZhT-4) |\n| SEO-Friendly URLs | Ensure URLs reflect the search term and filters |  |\n| Search Term Persistence <custom data-type=\"status\" data-id=\"id-1\">nice to have</custom>  | Keep the query visible in the search field after submission. |  |\n| Performance | Results should load within 2 seconds under normal conditions. |  |\n| Accessability | Must comply with **WCAG 2.1 AA**: keyboard navigation, screen reader support, proper color contrast, and semantic HTML. User can navigate the entire page using only a keyboard. All images and links have descriptive labels or `alt` text. Search results are announced to screen readers after submission. Filter controls are labeled and usable by assistive tech. Page meets automated accessibility checks (e.g., Lighthouse, WAVE). Manual testing confirms screen reader usability (e.g., with NVDA, VoiceOver). |  |\n\nby <custom data-type=\"mention\" data-id=\"id-2\">@bassem mohamed</custom> \n\n### **Acceptance Criteria:**\n\n* one story example like the design with slot that have two CMS image blocks and newsletter registration\n* one story example like the design with empty products that have slots like category grid , logo slider , two CMS image blocks and newsletter registration\n\n### **Technical Details:**\n\n_**molecule/SearchResultHeader**_\n\n```\ninterface SearchResultHeaderProps {\n  amount : number;\n  searchTerm : string;\n}\n```\n\n* use `Text` , `AmontBill`\n\n‌\n\n_**pages/SearchResultsPage/SearchResultsPage.stories.ts**_\n\n* create only story to view the same page as figma\n* add two slots `regular` and `seo` \n* handle all the callbacks that related to the `filterBar` and the `loadmore` component \n* if no products render the `EmptyState` component and the `ProductsSlider` with the suggestedProducts prop \n* use `ShopHeader` , `Breadcrumb` , `FiltterBar` , `PropductsGrid` , `LoadMore` , `Footer`\n\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/iOpGWO38HkhnTYkEeEq8Oz/Laioutr-Basic?node-id=17-69657",
+    "https://www.figma.com/design/gDN7wlDFp5mwXQfRDhotzR/Ambiendo---sunny?node-id=72-160914",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=1359-228442&t=3GgRqyYPI4KvyUBH-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=1359-228603&t=3GgRqyYPI4KvyUBH-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=18636-187911",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=82-217205&t=3GgRqyYPI4KvyUBH-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=82-220118&t=3GgRqyYPI4KvyUBH-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=73-75128&t=3GgRqyYPI4KvyUBH-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=73-75194&t=3GgRqyYPI4KvyUBH-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14229-103688&t=iXSN3ICO8paiylX4-4",
+    "https://www.figma.com/design/iOpGWO38HkhnTYkEeEq8Oz/Laioutr-Basic?node-id=38-30131&t=xppr2dTiGfn0a5IL-4",
+    "https://www.figma.com/design/gDN7wlDFp5mwXQfRDhotzR/Ambiendo---sunny?node-id=79-36446&t=DlhHohoI87DkZZhT-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=1429-227393&t=3GgRqyYPI4KvyUBH-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=1429-227737&t=3GgRqyYPI4KvyUBH-4",
+    "https://www.figma.com/design/iOpGWO38HkhnTYkEeEq8Oz/Laioutr-Basic?node-id=38-30132&t=xppr2dTiGfn0a5IL-4",
+    "https://www.figma.com/design/gDN7wlDFp5mwXQfRDhotzR/Ambiendo---sunny?node-id=79-60624&t=DlhHohoI87DkZZhT-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "amount",
+        "type": "number",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "searchTerm",
+        "type": "string",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-108",
+    "title": "Search"
+  },
+  "summary": "Search results page with query highlighting, filter bar, product grid, and empty state handling.",
+  "features": [
+    "Search term display with result count indicator",
+    "Filter bar for sorting and filtering results",
+    "Responsive product grid with load more pagination",
+    "Empty state with product recommendations"
+  ],
+  "keywords": [
+    "SERP",
+    "product listing",
+    "faceted search"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-61"
+  ],
+  "shortDescription": "The Search Results Page organizes search matches into a scannable product listing optimized for conversion. The SearchResultHeader displays the query term with an AmountPill indicating total matches. Results appear in a responsive product grid with filter bar controls for sorting and refinement, while the load more component enables progressive loading without page refreshes. When no products match, the page gracefully transitions to an empty state with product recommendations, and clearing the search reveals the full product catalog. SEO-friendly URLs preserve search terms and active filters for shareability."
+}

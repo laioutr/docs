@@ -1,0 +1,44 @@
+{
+  "key": "LUI-19",
+  "title": "Slider Navigation",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "As a customer i want to be able to navigate a slider on desktop and mobile in an accessible way.\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=696b1757-8505-4ef2-8b7a-6329fc3f95b1&&collection=&height=230&occurrenceKey=null&width=393&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n## Technical details\n\n### Molecule/Swiper/SwiperNavigationCompact.vue\n\n**Example usage**\n\n```\n<Swiper>\n  <SwiperSlide />\n  <SwiperSlide />\n  <SwiperSlide />\n  \n  <template #container-end>\n    <SwiperNavigationCompact />\n  </template>\n</Swiper>\n```\n\nIt uses `useSwiper()` to navigate the slider on arrow-click. Use LuiButton component for the arrows and LuiNavigationBullets for the dots.\n\nprops:\n\n* mode: dark/light\n* showArrows mobile/desktop/both/none\n* showBullets mobile/desktop/both/none\n\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "mode",
+        "type": null,
+        "default": null,
+        "description": "dark/light"
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/12.ui-app-slider/SwiperNavigationCompact.md",
+  "parentEpic": {
+    "key": "LUI-10",
+    "title": "Basic Hero MVP"
+  },
+  "summary": "A compact slider navigation component providing accessible arrow and bullet controls with dark/light mode support.",
+  "features": [
+    "Dark and light mode support for different background contexts",
+    "Configurable arrow visibility per viewport (mobile/desktop/both/none)",
+    "Configurable bullet indicator visibility per viewport",
+    "Integrates with Swiper via useSwiper() composable"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-28"
+  ],
+  "longDescription": "## Purpose\n\nSwiperNavigationCompact provides an accessible and visually adaptable navigation interface for slider components. It enables users to navigate through slides using arrow buttons and bullet indicators, supporting both keyboard and pointer interactions.\n\n## Use Cases\n\n- **Hero sliders**: Navigate through promotional content slides with clear visual indicators\n- **Product carousels**: Allow customers to browse product images or featured items\n- **Content galleries**: Enable exploration of image collections or testimonial slides\n- **Touch-friendly navigation**: Provide intuitive controls for mobile users alongside desktop arrow navigation\n\n## Design Rationale\n\nThe component adapts to its parent slider's background through dark/light mode switching, ensuring navigation controls remain visible and accessible regardless of slide content. Viewport-specific visibility controls allow designers to optimize the navigation experience for each device type, such as showing bullets only on mobile where arrow buttons might be less practical, or hiding navigation entirely for auto-advancing sliders.",
+  "keywords": [
+    "carousel controls",
+    "pagination dots",
+    "swiper"
+  ],
+  "shortDescription": "SwiperNavigationCompact provides an accessible navigation interface for slider components, enabling navigation through arrow buttons and bullet indicators with keyboard and pointer support. The component adapts to its parent slider's background through dark/light mode switching, ensuring controls remain visible regardless of slide content. Viewport-specific visibility controls allow optimizing the navigation experience for each device type."
+}

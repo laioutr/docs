@@ -1,0 +1,20 @@
+{
+  "key": "LUI-156",
+  "title": "BlockProductMediaGallery / Use ProductImageGallery component",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "As a customer i expect to be able to see all product-images on the product-detail-page.\n\nThe block \"Product Media Gallery\" (BlockProductMediaGallery.vue) should use the ProductImageGallery.vue component, instead of just a MediaPreview.\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=8fe2dee5-be79-4bd9-b77f-353ac2da465e&&collection=&height=754&occurrenceKey=null&width=1224&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": null,
+  "summary": "Product Media Gallery block now uses full ProductImageGallery for complete image viewing.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "This update replaces the basic MediaPreview in the Product Media Gallery block with the full-featured ProductImageGallery component. Customers can now view all product images with gallery navigation, zoom capabilities, and thumbnail strips. The change improves the product detail page experience by providing comprehensive media browsing that was previously limited to a single preview image.",
+  "sourceEpic": null,
+  "sourceIdeas": []
+}

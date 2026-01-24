@@ -1,0 +1,62 @@
+{
+  "key": "LUI-16",
+  "title": "Grid",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## **Acceptance Criteria** \n\nStorybook Stories have been created\n\n* Grid with four cards with title aligned on left (plain - ratio 4:3 - landscape - default size)\n* Grid with four cards with title aligned on left (outlined - No image - linked - default size)\n* Grid with three cards with title aligned on center (haptic - ratio 1:1 - landscape - no actions - large size)\n* Grid with three cards with title aligned on center (plain - ratio 16:9 - portrait - title only - large size) \n\n‌\n\n## **Technical Details** \n\n### **blocks/BlockCmsCardGrid/BlockCmsCardGrid.vue**\n\n```\nexport interface CardGridProps {\n  title? : string;\n  columns : 3 | 4;\n  alignment? : 'left' | 'center';\n  cards : Card[];\n}\n```\n\n* in three column grid, cards are large by default \n* headings have maxwidth in different viewports\n* use `.container` class \n* use `LuiText` and `LuiCard` components \n* (Put image files into packages/ui/playground/.storybook/public/placeholders)\n\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "title",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "columns",
+        "type": "3 | 4",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "alignment",
+        "type": "'left' | 'center'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "cards",
+        "type": "Card[]",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/11.ui-app-ecommerce/GridCardContent.md",
+  "parentEpic": {
+    "key": "LUI-14",
+    "title": "Card Grid MVP"
+  },
+  "summary": "A responsive card grid layout arranging content cards in 3 or 4 column configurations with consistent spacing.",
+  "features": [
+    "Responsive grid adapting from 1-4 cards per row based on screen size",
+    "Automatic card sizing (large for 3-column, default for 4-column)",
+    "Optional section title with responsive max-width constraints",
+    "Container-based layout with configurable content alignment"
+  ],
+  "longDescription": "## Purpose\n\nThe Card Grid component enables website visitors to browse multiple content options in a responsive grid layout. By presenting information in visually organized columns, users can quickly compare options and select content of interest, increasing engagement through digestible content presentation.\n\n## Use Cases\n\n- Display 1-4 cards per row depending on screen size with responsive column layouts\n- Present category previews, product collections, or featured content sections\n- Create content comparison layouts where users evaluate multiple options simultaneously\n- Build landing page sections that highlight important content with visual hierarchy\n\n## Design Rationale\n\nThe component supports two column configurations (3 and 4) to balance content density with readability. Three-column layouts automatically use larger cards for increased visual impact, while four-column layouts optimize for displaying more items. The alignment options and optional section title provide flexibility for different content contexts while maintaining consistent spacing and accessibility standards.",
+  "keywords": [
+    "content grid",
+    "responsive columns",
+    "card container"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-30"
+  ],
+  "shortDescription": "The Card Grid component enables visitors to browse multiple content options in a visually organized layout, supporting quick comparison and selection. It balances content density with readability through two column configurations: three-column layouts use larger cards for visual impact, while four-column layouts display more items. The component maintains consistent spacing and accessibility standards across different page contexts."
+}

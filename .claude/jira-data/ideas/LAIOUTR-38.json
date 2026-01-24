@@ -1,0 +1,33 @@
+{
+  "key": "LAIOUTR-38",
+  "title": "Gallery Content Slider",
+  "issueType": "Idea",
+  "status": "Done",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\nAs a user, I want a responsive gallery content slider that can showcase different types of content components with flexible styling options\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-1\">:brain:</custom> Assumptions\n\n* Users will primarily interact with the slider on product pages, landing pages, and promotional sections\n* The majority of users will access the slider on mobile devices\n* Increased engagement through interactive content presentation\n* Reduced bounce rates due to improved content accessibility\n* Higher conversion rates through better visual storytelling\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-2\">:clipboard:</custom> Requirements\n\nThe gallery slider should support:\n\n* Multiple content / component types\n* Responsive design that adapts to different screen sizes and orientations\n* Different alignment options that influence navigation position\n* Optimized visibility for different background types:\n\n    * Light backgrounds\n    * Dark backgrounds\n    * Bright/high-contrast backgrounds\n    \n* Gallery should be fully responsive across all device sizes\n* Navigation elements (arrows, dots, numbers) should:\n\n    * Be clearly visible on all background types\n    * Adapt their color scheme based on background selection\n    * Support touch gestures on mobile devices\n    * Can be chosen by the user:\n    \n        * default is bullet navigation for the bottom navigation\n        * no inidicator (just buttons)\n        * numbers\n        \n    \n* Content components should:\n\n    * Load efficiently without performance impact\n    * Support various aspect ratios\n    * Maintain quality across different screen resolutions\n    * Should adapt in height to the highest item in the slider\n    \n* Accessibility requirements:\n\n    * Keyboard navigation support\n    * Screen reader compatibility\n    * ARIA labels for all interactive elements\n    \n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-3\">:paintbrush:</custom> Design\n\n[https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=8174-149288](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=8174-149288) ",
+  "linkedLuiTickets": [
+    "LUI-32"
+  ],
+  "created": "2025-02-28T11:11:17.435+0100",
+  "updated": "2025-06-11T22:35:05.997+0200",
+  "enrichedData": {
+    "purpose": "Provides a responsive gallery slider component that showcases different types of content with flexible styling options, improving user engagement and visual storytelling on product pages, landing pages, and promotional sections.",
+    "designRationale": [
+      "Users will primarily interact with the slider on product pages, landing pages, and promotional sections",
+      "The majority of users will access the slider on mobile devices",
+      "Interactive content presentation increases engagement",
+      "Improved content accessibility reduces bounce rates",
+      "Better visual storytelling leads to higher conversion rates"
+    ],
+    "useCases": [
+      "Display multiple content component types in a single slider",
+      "Adapt slider layout to different screen sizes and orientations",
+      "Configure alignment options that influence navigation position",
+      "Optimize visibility for light, dark, or bright backgrounds",
+      "Select navigation style: bullet navigation, buttons only, or numbers",
+      "Support touch gestures on mobile devices",
+      "Navigate slider using keyboard controls",
+      "Adapt slider height to the tallest item"
+    ]
+  }
+}

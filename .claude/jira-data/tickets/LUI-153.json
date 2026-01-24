@@ -1,0 +1,25 @@
+{
+  "key": "LUI-153",
+  "title": "Review Section",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "| Style options: Accent Primary Yellow Stars Black | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=eb519e65-e251-4999-b049-21b8f7885c61&&collection=&height=498&occurrenceKey=null&width=1014&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=ff091212-bd05-4e6b-896c-00392e3e1da6&&collection=&height=518&occurrenceKey=null&width=982&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=37131148-c54f-428d-859d-61ed489dbdd2&&collection=&height=472&occurrenceKey=null&width=986&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=3fe5f153-ac9c-40f3-a56e-3ce0572268be&&collection=&height=560&occurrenceKey=null&width=970&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| --- | --- |\n| User can choose summary Style | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=8219be64-0b1a-43b7-8aad-c1d601ff1965&&collection=&height=126&occurrenceKey=null&width=156&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| Sorting Options: Newest Oldest Rating: low to high  Rating: high to low |  |\n| Filter options: All reviews 5 Stars 4 Stars 3 Stars 2 Stars 1 Star |  |\n| progress bar rows are clickable and filter the review Clicking the \"Write a review\" button opens Review Modal Allow review management like answers from the Customer Service or publishing reviews only after approval |  |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/13.ui-app-reviews/ReviewSection.md",
+  "parentEpic": null,
+  "summary": "Product review section with rating summaries, sorting, filtering, and review management.",
+  "features": [
+    "Multiple star style options (Accent, Primary, Yellow, Black)",
+    "Sorting options (Newest, Oldest, Rating high/low)",
+    "Star rating filters with clickable progress bars",
+    "Review modal and management with publishing approval"
+  ],
+  "keywords": ["customer reviews", "review filtering", "UGC"],
+  "shortDescription": "The Review Section provides a comprehensive area for displaying and managing customer reviews on product detail pages. Users can browse reviews with sorting and filtering by star rating using interactive progress bar charts that double as filter buttons. The 'Write a Review' button triggers a submission modal. For merchants, the component supports moderation workflows including customer service responses and pre-publication approval to maintain review quality.",
+  "sourceEpic": null,
+  "sourceIdeas": []
+}

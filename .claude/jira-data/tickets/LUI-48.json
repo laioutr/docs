@@ -1,0 +1,34 @@
+{
+  "key": "LUI-48",
+  "title": "Cards / Make the whole card clickable",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "We've implemented the card component in <custom data-type=\"smartlink\" data-id=\"id-0\">https://laioutr.atlassian.net/browse/THEMES-15</custom>. There is however one issue with this implementation:\n\nWe did not link the whole card, only the CTAs. The reason for this is that we cannot have links (<a> elements) inside links. That's semantically incorrect. Therefore we need to find a solution that allows linking the whole card. Please talk to Caro about that.\n\nA possible solution might be to disable CTAs when the whole card is linked. Or the CTAs just being <div>s while the whole element is clickable.",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-14",
+    "title": "Card Grid MVP"
+  },
+  "summary": "Enhancement making entire card surface clickable while maintaining semantic HTML by avoiding nested anchor elements.",
+  "features": [
+    "Full card surface clickable when a link is configured",
+    "Semantic HTML compliance avoiding nested anchor elements",
+    "Hover state feedback on the entire card",
+    "Keyboard navigation support for accessibility"
+  ],
+  "longDescription": "## Purpose\n\nThis enhancement improves the card component's usability by making the entire card clickable when a link is present, rather than requiring users to click on specific CTA elements. This creates a more intuitive interaction pattern where the entire content unit responds to user input.\n\n## Use Cases\n\n- Enable one-click navigation from any point on the card surface\n- Improve mobile usability where larger tap targets enhance the user experience\n- Support keyboard navigation with proper focus states for accessibility compliance\n- Provide visual hover feedback across the entire card for clear interaction affordance\n\n## Design Rationale\n\nThe implementation addresses the HTML semantic constraint that anchor elements cannot be nested. When a card has a primary link, CTAs are rendered as non-anchor elements while the card wrapper becomes the clickable link. This approach maintains valid HTML structure, supports assistive technologies, and creates a consistent user experience where the entire card signals its interactive nature through hover states.",
+  "keywords": [
+    "tap-target",
+    "link-wrapper",
+    "interactive-card"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-30"
+  ],
+  "shortDescription": "Improves mobile usability with larger tap targets for better user experience. When a card has a primary link, CTAs render as non-anchor elements while the card wrapper becomes the clickable link. This maintains valid HTML structure and supports assistive technologies. Provides visual hover feedback across the entire card for clear interaction affordance."
+}

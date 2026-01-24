@@ -1,0 +1,43 @@
+{
+  "key": "LAIOUTR-23",
+  "title": "Pricing Page Components",
+  "issueType": "Idea",
+  "status": "Done",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\nAs a potential customer, I want to be able to compare different subscription plans and features so that I can make a good decision.\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-1\">:gorilla:</custom> Goal\n\nTo make pricing as transparent and easy to understand as possible in order to convince more customers.\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-2\">:brain:</custom> Assumptions\n\n* Well-structured information on the plans helps users to decide on a plan\n* A well-designed price comparison helps to sell users an annual subscription\n* Transparent information on pricing and feature scope has a positive influence on customers' purchasing decisions\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-4\">:clipboard:</custom> Requirements\n\n### Pricing Cards Grid\n\n* As a potential customer I want to see pricing plans displayed in a clear card layout So that I can easily compare different subscription tiers\n* Acceptance Criteria:\n\n    * Display at least 3 pricing tiers (Basic, Premium, Enterprise)\n    * Show price, billing period, and key features for each plan\n    * Integrate variant switch between monthly and annually payment\n    \n        * display strikethrough prices\n        \n    * Include CTA button for each plan\n    * Grid is a swipe slider on mobile\n\n### Payment Switch (Monthly/Annually)\n\n* As a potential customer I want to toggle between monthly and annual pricing So that I can choose my preferred billing cycle and see potential savings\n* Acceptance Criteria:\n\n    * Toggle switch between monthly and annual pricing\n    * Show percentage/amount saved with annual billing\n    * Update all pricing cards simultaneously when switching\n    * Maintain selected billing preference during session\n\n### Feature Comparison Table\n\n* As a potential customer I want to see a detailed feature comparison across all plans So that I can make an informed decision about which plan best suits my needs\n* Acceptance Criteria:\n\n    * List all features categorized by functionality\n    * Use clear indicators (checkmarks, x-marks) for feature availability\n    * Include descriptions for features\n    * Possibility to add links / text links\n    * Ensure mobile-responsive design for table layout\n    * Highlight feature differences between plans / make it possible to show only differences\n    * Make the table header sticky, so that the user always knows which plan the features belong to\n    \n        * Add a CTA to the header cells, for easy subscription",
+  "linkedLuiTickets": [
+    "LUI-2",
+    "LUI-3",
+    "LUI-4",
+    "LUI-6",
+    "LUI-1"
+  ],
+  "created": "2025-02-19T11:50:00.262+0100",
+  "updated": "2025-06-11T21:55:45.761+0200",
+  "enrichedData": {
+    "purpose": "Enables potential customers to compare different subscription plans and features to make informed purchasing decisions through clear, transparent pricing presentation.",
+    "goals": [
+      "Make pricing as transparent and easy to understand as possible",
+      "Convince more customers to subscribe"
+    ],
+    "designRationale": [
+      "Well-structured information on the plans helps users to decide on a plan",
+      "A well-designed price comparison helps to sell users an annual subscription",
+      "Transparent information on pricing and feature scope has a positive influence on customers' purchasing decisions"
+    ],
+    "useCases": [
+      "Display pricing plans in a clear card layout with at least 3 tiers (Basic, Premium, Enterprise)",
+      "Show price, billing period, and key features for each plan",
+      "Toggle between monthly and annual pricing with a payment switch",
+      "Display strikethrough prices when showing discounts for annual billing",
+      "Show percentage or amount saved with annual billing",
+      "Update all pricing cards simultaneously when switching billing periods",
+      "Present feature comparison table with categorized features",
+      "Use clear indicators (checkmarks, x-marks) for feature availability",
+      "Make table header sticky so users always know which plan features belong to",
+      "Highlight feature differences between plans or show only differences",
+      "Display pricing cards as swipe slider on mobile devices",
+      "Include CTA buttons for each plan and in table header cells"
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "key": "LUI-3",
+  "title": "Pricing Grid",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\nAs a potential customer, I want to be able to compare different subscription plans and features so that I can make a good decision.\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-1\">:clipboard:</custom> Requirements\n\n### Pricing Cards Grid\n\n* As a potential customer I want to see pricing plans displayed in a clear card layout So that I can easily compare different subscription tiers\n* Acceptance Criteria:\n\n    * Display at least 3 pricing tiers (Basic, Premium, Enterprise)\n    * Show price, billing period, and key features for each plan\n    * Integrate variant switch between monthly and annually payment\n    \n        * display strikethrough prices\n        \n    * Include CTA button for each plan\n    * Grid is a swipe slider on mobile\n    \n* A storybook story has been created, rendering the design from figma (not discounted, just the cards-grid)\n\n| **Component** | **Preview** | **Link** | **UI ready** |\n| --- | --- | --- | --- |\n| **Pricing Cards Grid** | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=fc408e7f-78f7-4021-ba5c-d1c4e88ddc0f&&collection=&height=306&occurrenceKey=null&width=555&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) [Discount Strikethrough Dummy](https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=3492-21109&p=f&m=dev&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=3787%3A7251&show-proto-sidebar=1) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=a4673985-46dd-4f45-9a67-29e2c7c12788&&collection=&height=581&occurrenceKey=null&width=416&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) [Mobile Pricing Cards Slider Dummy](https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=3492-21109&p=f&m=dev&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=3795%3A16289&show-proto-sidebar=1) | [Pricing Cards Grid](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4085-62868&t=U5zoMMsDXxVv1RWo-4)  [Pricing Cards Slider](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4200-50200&t=U5zoMMsDXxVv1RWo-4) [Breakpoint Preview](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4200-53346&t=U5zoMMsDXxVv1RWo-4) | <custom data-type=\"emoji\" data-id=\"id-2\">:check_mark:</custom>  |\n\n---\n\n### <custom data-type=\"emoji\" data-id=\"id-3\">:video_game:</custom> Dummy\n\n[Mobile Pricing Cards Slider Dummy](https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=3492-21109&p=f&m=dev&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=3795%3A16289&show-proto-sidebar=1)\n\n## Technical Definition\n\n### Molecule/Pricing/PricingGrid.vue\n\n**Example usage**\n\n```html\n<PricingGrid :plans=[{...}]/>\n```\n\n| **Prop** | **Default** | **Type** |\n| --- | --- | --- |\n| plans | - | `PricingCardProps[]`  \nSee PricingCard-component |\n\nOn mobile, the cards are being displayed in a carousel. This is achieved by using Swiper.\n\nNuxt Swiper @1.2.2 (using the Swiperjs Vue API) is already installed and can be used.\n\n* [Nuxt Swiper](https://github.com/cpreston321/nuxt-swiper/tree/v1.2.2) docs\n* [Swiper.js Vue](https://swiperjs.com/vue) docs\n* [Related PR](https://github.com/laioutr/laioutr/pull/75)\n\nYou can see the **animation in action** in the [figma dummy](https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=3492-21109&p=f&m=dev&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=3795%3A16289&show-proto-sidebar=1).\n\nUse either the [coverflow-effect](https://swiperjs.com/swiper-api#coverflow-effect) or the [creative-effect](https://swiperjs.com/swiper-api#creative-effect) (see [Notion](https://www.notion.so/laioutr/Tips-Tricks-for-development-1835331c061e801ab7d7c68ecfff9e5f?pvs=4#1a55331c061e800fa5b6dcbc28bbd027) for resolution on unocss-problems with creative-effect) to achieve the effect shown in figma.\n\nOn desktop, we can still use swiper, we just have to hide the NavigationBullets and disable the effect.\n\nFor connecting the NavigationBullets to Swiper, you have to create the following new component:\n\n### Molecule/Swiper/SwiperNavigationBullets.vue\n\n**Example usage**\n\n```\n<Swiper>\n  <SwiperSlide />\n  <SwiperSlide />\n  <SwiperSlide />\n  \n  <template #container-end>\n    <SwiperNavigationBullets />\n  </template>\n</Swiper>\n```\n\nThis component receives no props and no slots. It uses `useSwiper().realIndex` to figure out which slide is currently active and sends that to the NavigationBullets-component.\n\nAlso, clicking the bullets navigates to the corresponding card.",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4085-62868&t=U5zoMMsDXxVv1RWo-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4200-50200&t=U5zoMMsDXxVv1RWo-4"
+  ],
+  "userStory": "As a potential customer, I want to be able to compare different subscription plans and features so that I can make a good decision",
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "plans",
+        "type": null,
+        "default": "-",
+        "description": null
+      },
+      {
+        "name": "See PricingCard-component",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": "content/3.laioutr-ui/14.ui-pro/subscription/PricingPlans.md",
+  "parentEpic": {
+    "key": "LUI-1",
+    "title": "Pricing Page"
+  },
+  "summary": "A responsive pricing grid arranging plan cards side-by-side on desktop with mobile swipe carousel.",
+  "features": [
+    "Side-by-side grid layout for comparing multiple pricing tiers",
+    "Mobile swipe carousel with coverflow animation effects",
+    "Navigation bullets for slide indication and direct navigation",
+    "Responsive breakpoint handling between grid and slider modes"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-23",
+    "LAIOUTR-24"
+  ],
+  "longDescription": "## Purpose\n\nThe PricingGrid component provides a responsive container for displaying multiple subscription plans in an easily comparable format. It adapts to different screen sizes to ensure optimal user experience across devices while maintaining clear pricing presentation.\n\n## Use Cases\n\n- Display three or more pricing tiers in a horizontal grid on desktop for easy side-by-side comparison\n- Present pricing cards as a swipeable slider on mobile with engaging coverflow animation effects\n- Allow users to navigate between plans using touch gestures or navigation bullet indicators\n- Synchronize with billing cycle switches to update all cards simultaneously\n\n## Design Rationale\n\nPresenting pricing plans in a clear, comparable layout helps users make informed decisions quickly. The mobile carousel approach maintains usability on smaller screens while the coverflow effect provides visual engagement. Navigation bullets ensure users can access all plans without excessive swiping.",
+  "shortDescription": "Provides a responsive container for displaying multiple subscription plans in an easily comparable format. Display three or more pricing tiers in a horizontal grid on desktop for easy side-by-side comparison. On mobile, present cards as a swipeable slider with engaging coverflow animation effects. Synchronizes with billing cycle switches to update all cards simultaneously.",
+  "keywords": [
+    "swiper carousel",
+    "touch gestures",
+    "mobile optimization"
+  ]
+}

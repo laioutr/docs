@@ -1,0 +1,21 @@
+{
+  "key": "LUI-145",
+  "title": "Description List",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": "use styling from pdp",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "Description list component for displaying key-value pairs with PDP styling.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The Description List component renders key-value pairs in a semantically correct definition list format. Styled to match the product detail page patterns, it presents attribute labels alongside their values in a consistent layout. Ideal for displaying product specifications, order details, account information, or any structured data where items have descriptive labels. Supports various layouts including horizontal, vertical, and grid arrangements."
+}

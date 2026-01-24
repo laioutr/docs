@@ -1,0 +1,33 @@
+{
+  "key": "LUI-119",
+  "title": "404 Page",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## Display a Friendly 404 Error Page for Missing or Broken Links\n\n---\n\n### <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\n**As a** website visitor, **I want** to see a helpful and friendly page when I land on a broken or missing link (404 error), **So that** I understand that the page doesn't exist and can easily navigate back to the main content.\n\n---\n\n* **Design**\n\n    * The page should follow the site's overall theme\n    * Has Headline and Subline, can be changed by user\n    * Include a button to product list with all products , can be changed by user\n    * Has a theme dependent header image ([Find asstes here](https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=1429-308738&t=vF1TziFkO1YsXgqq-4)), can be changed by user\n    * Has a content section so the user can display product sliders and other content as they wish \n    \n        * Watch [AMBIENDO sunny page example](https://www.figma.com/design/gDN7wlDFp5mwXQfRDhotzR/Ambiendo---sunny?node-id=204-52113&t=IFNnHLbSJgLr2OPS-4)\n        \n    \n* **Error Code Display**\n\n    * Include the actual HTTP status code \"404\" for transparency or technical clarity.\n    \n* **Logging**\n\n    * The 404 event should be logged server-side (or to an analytics tool) for tracking broken links.\n    \n* **No Indexing**\n\n    * The page should include meta tags (`noindex`) to prevent search engines from indexing the error page.\n    \n* Return HTTP status code `404`.\n* Load within <2 seconds.\n* Do not redirect automatically (unless redirecting to a customized 404 route).\n* Compatible with all major browsers.\n* Accessible (meets WCAG 2.1 AA standards).\n\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=1429-308738&t=vF1TziFkO1YsXgqq-4",
+    "https://www.figma.com/design/gDN7wlDFp5mwXQfRDhotzR/Ambiendo---sunny?node-id=204-52113&t=IFNnHLbSJgLr2OPS-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-113",
+    "title": "Page templates"
+  },
+  "summary": "Friendly 404 error page with customizable messaging, CTA button, and content slots.",
+  "features": [
+    "Customizable headline and subline text",
+    "Theme-dependent header image with customization",
+    "Content slots for product sliders and promotions",
+    "Server-side 404 event logging for broken link tracking"
+  ],
+  "keywords": [
+    "error page",
+    "not found",
+    "navigation recovery"
+  ],
+  "shortDescription": "The 404 Page transforms broken link encounters into recovery opportunities by presenting a branded, helpful error experience. It displays customizable headline and subline messaging alongside a theme-dependent header image, with a prominent call-to-action button directing visitors to the product catalog. Flexible content slots enable merchants to display product sliders or promotional content that may recapture visitor interest. Server-side logging tracks 404 events for broken link analysis while noindex meta tags prevent search engine indexing of error pages."
+}

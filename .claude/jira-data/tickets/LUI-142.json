@@ -1,0 +1,18 @@
+{
+  "key": "LUI-142",
+  "title": "remove chip entry from documentation",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": "we don't need this component – CJ",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "summary": "Documentation task to remove the chip component entry that is no longer needed.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "This documentation maintenance task involves removing the Chip component entry from the Laioutr UI documentation. The component was deemed unnecessary for the current design system and should be removed to keep documentation accurate and avoid confusion. This cleanup ensures developers only see components that are actively supported and maintained within the UI kit."
+}

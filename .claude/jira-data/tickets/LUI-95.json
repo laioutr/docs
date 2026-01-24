@@ -1,0 +1,74 @@
+{
+  "key": "LUI-95",
+  "title": "PDP / buybox - Benefits box",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "| display icon & texts texts can have links delivery info / costs  hide when free delivery applies to a product (see examples) Possibility of different delivery texts according to product groups (e.g. €5.95 shipping for decorative items, €39.95 shipping for bulky goods, etc.) user can add as many benefits as he/she likes, but recommendet are 3 benefits |  ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=adcdedab-60a0-4558-9da7-ae56e8d9d9fd&&collection=&height=204&occurrenceKey=null&width=441&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=b9b34ddb-9616-4b2a-b3c4-c04a6990ebd6&&collection=&height=236&occurrenceKey=null&width=451&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| --- | --- |\n\n### **Acceptance Criteria:** \n\nStorybook stories:\n\n* example with delivery info\n* example with free delivery \n\n### **Technical details:** \n\n_**molecule/PDP/BuyBoxBenefitsBox**_\n\n```\ninterface Benefit {\n  icon : string;\n  title : string;\n  description : string;\n}\n\ninterface BuyBoxBenefitsBoxProps{\n  deliveryBenefitText : string;\n  isFreeDelivery: boolean;\n  benefits : benefit[];\n}\n```\n\n* hide deliveryInfo item if its free delivery \n* use `LuiText` , `LuiIcon`\n\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "icon",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "deliveryBenefitText",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "isFreeDelivery",
+        "type": "boolean",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "benefits",
+        "type": "benefit[]",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-84",
+    "title": "Product Detail Page"
+  },
+  "summary": "A benefits display box showing delivery info, shipping costs, and customizable benefit items with icons.",
+  "features": [
+    "Conditional delivery info display based on free shipping",
+    "Customizable icon and text benefits",
+    "Support for links in benefit descriptions",
+    "Product group-specific shipping costs"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-48"
+  ],
+  "longDescription": "## Purpose\n\nThe Benefits Box component displays shipping and benefit information with customizable icons to reinforce value propositions and build purchase confidence. It communicates key selling points such as free returns, warranty information, and delivery details in a scannable format.\n\n## Use Cases\n\n- Displaying shipping and benefit information with customizable icons\n- Showing product-specific delivery costs based on product categories\n- Hiding redundant delivery information when free shipping applies\n- Communicating trust signals like secure payment and easy returns\n\n## Design Rationale\n\nThe component uses icons paired with concise text to create easily scannable benefit highlights. Conditional logic hides delivery cost information when free shipping applies, avoiding redundant messaging. Support for product group-specific shipping costs accommodates stores with varied fulfillment requirements such as bulky goods versus standard items. The flexible number of benefits allows stores to emphasize their unique value propositions.",
+  "shortDescription": "Reinforces value propositions and builds purchase confidence by communicating key selling points in a scannable format. Uses icons paired with concise text for easily scannable benefit highlights. Accommodates stores with varied fulfillment requirements like bulky goods versus standard items.",
+  "keywords": [
+    "trust signals",
+    "value proposition",
+    "USP display"
+  ]
+}

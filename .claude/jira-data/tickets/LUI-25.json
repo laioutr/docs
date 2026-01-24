@@ -1,0 +1,82 @@
+{
+  "key": "LUI-25",
+  "title": "Quote Card",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "For global requirements and further info, please look into Epic\n\nThe Quote Card is used to display simple quotes or customer reviews and works best in a slider, but also in content or as a grid.\n\n[Design examples](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=7763-32584&m=dev)\n\n###  **Quote Card Requirements:**\n\n* User can choose Card Style:\n\n    * default\n    * on dark background\n    * on bright background\n    * outline\n    * haptic\n    \n* Cards contain:\n\n    * Logo (optional)\n    * [Star Rating](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=7409-40884&m=dev) (optional)\n    \n        * Default displayed variant depends on chosen card style\n        * User can change style of the Star Rating\n        \n    * Quote\n    * Author Information:\n    \n        * Profile Picture (optional)\n        * Name\n        * Up to 2 Additional Information (optional)\n        \n    \n* Cards can have left oder center aligned content\n* User can change card background color\n* Logos sizes:\n\n    * square or portrait logos have a max height of 50px\n    * rectangle logos have a max width of 130px and should have a height of 30px\n    * logo safe area is 130x50 px  \n       \n    \n\n###  **Technical Definition:** \n\n* New Molecule Ui Component \n* Create new Vue component file under : `packages/ui/src/runtime/components/molecule/Qoute/QouteCard/QouteCard.vue`\n* Make sure to use css vars for spacing , border radius  …etc.\n* Use `LuiText` Component for main quote.\n* Create storybook stories:\n\n    * default, left-aligned with avatar and logo\n    * default, center-aligned with stars and avatar\n    * default, center-aligned with stars and no avatar\n    * dark-background, left-aligned with stars and avatar and logo\n    * bright-background, left-aligned with stars and avatar and logo\n    * outline, left-aligned with stars and avatar and logo\n    * haptic, left-aligned with stars and avatar and logo\n    \n\n‌\n\nOptionally you could add (\" \") using css before and after :   \ne.g…\n\n```\n.qoute__text::before,\n.qoute__text::after {\n  color: red;\n  font-size: 1.2em;\n}\n.qoute__text::before {\n  content: \"\\\"\";\n}\n```\n\n* Quote color should be manageable using props, Optionally you could use computed method to generate the the style object and check the value if not presented to have a fallback color.  \n* use background colors to switch between desired style use `box-shadow` for haptic/elevated card style\n* use Rx AvatarRoot to apply avatar image .   \n\n    ```\n    <RxAvatarRoot class=\"AvatarRoot\">\n          <RxAvatarImage :src=\"props.authorImage\"></RxAvatarImage>\n           <AvatarFallback\n            class=\"AvatarFallback\"\n            :delay-ms=\"600\" >\n          </AvatarFallback>\n    </RxAvatarRoot>\n    ```\n\n‌\n\n* (Optional) Create Custom component for rating as might be used else where, `packages/ui/src/runtime/components/molecule/StarRating/StarRating.vue`\n\n    * Component should accept `rating` as a prop number.\n    * Use `Icon` Component lucid icons start \n    * Component should accept `rating` as a prop number.\n    * Should output stars colored based on the design \n    \n\n```\n<Icon name=\"lucid:star\" />\n```\n\n‌\n\n**Props:** \n\n| **Prop/slot** | **Type** | **Default** |\n| --- | --- | --- |\n| align | `String | undefined` |  \"left\" |\n| style  | `\"default\" | \"outline\" | \"haptic\"` | \"default\" |\n| hasAvatar | boolean | true |\n| authorMedia | `Media` | {  \n    type: \"\";  \n    provider: \"\";  \n    src: \"\";  \n    alt: \"\";  \n    meta: \"\";  \n} |\n| rating | `Number` | 1 |\n| logo | `Media | undefined`  |  |\n\n  \n",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=7409-40884&m=dev"
+  ],
+  "userStory": "As a Website Visitor, I want to see authentic testimonials from other customers So that I can trust the company and make informed decisions about their services",
+  "technicalSpecs": {
+    "componentPath": "packages/ui/src/runtime/components/molecule/Qoute/QouteCard/QouteCard.vue",
+    "props": [
+      {
+        "name": "align",
+        "type": "String | undefined",
+        "default": "left",
+        "description": "Content alignment within the card"
+      },
+      {
+        "name": "style",
+        "type": "\"default\" | \"outline\" | \"haptic\"",
+        "default": "default",
+        "description": "Visual style variant of the card"
+      },
+      {
+        "name": "hasAvatar",
+        "type": "boolean",
+        "default": "true",
+        "description": "Whether to display the author avatar"
+      },
+      {
+        "name": "authorMedia",
+        "type": "Media",
+        "default": null,
+        "description": "Media object for the author's profile picture"
+      },
+      {
+        "name": "rating",
+        "type": "Number",
+        "default": "1",
+        "description": "Star rating value to display"
+      },
+      {
+        "name": "logo",
+        "type": "Media | undefined",
+        "default": null,
+        "description": "Optional company logo media object"
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/7.ui-app/reviews/QuoteCard.md",
+  "parentEpic": {
+    "key": "LUI-23",
+    "title": "Testimonial Components"
+  },
+  "subTasks": [
+    {
+      "key": "LUI-42",
+      "title": "Create Star Rating",
+      "description": "Themed Component  \nTheme examples:  \n[https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=7409-49967&t=fJoh7FT64L5Yukdp-4](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=7409-49967&t=fJoh7FT64L5Yukdp-4) ",
+      "figmaLinks": [
+        "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=7409-49967&t=fJoh7FT64L5Yukdp-4"
+      ]
+    }
+  ],
+  "summary": "Quote card component for displaying customer reviews and testimonials.",
+  "features": [
+    "Five card style variants (default, dark, bright, outline, haptic)",
+    "Optional star rating with themed variants",
+    "Author info with profile picture and additional details",
+    "Company logo support with standardized sizing"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-31"
+  ],
+  "longDescription": "## Purpose\n\nThe Quote Card component displays simple customer quotes and reviews in a compact, visually appealing format. It provides an accessible alternative to the Persona Quote when profile pictures are unavailable or when a simpler presentation is preferred.\n\n## Use Cases\n\n- Display customer reviews in a slider carousel on product or landing pages\n- Present testimonials in a grid layout for comparison across multiple reviewers\n- Embed individual quotes within content sections to support marketing claims\n- Showcase star ratings alongside customer feedback to reinforce product quality\n\n## Design Rationale\n\nThe component offers multiple visual styles to integrate seamlessly with different page designs and brand aesthetics. Optional elements (avatar, logo, rating, additional info) allow content administrators to create engaging testimonials even when not all customer details are available. The standardized logo sizing ensures consistent presentation across testimonials from various sources.",
+  "keywords": ["testimonial card", "customer review", "star rating"],
+  "shortDescription": "The Quote Card component presents customer testimonials in a compact, visually appealing format ideal for sliders, grids, or inline content. It offers five visual style variants to match different page designs. Optional elements include star ratings (with themed colors matching the card style), author avatars, and company logos with standardized sizing constraints. Content can be left or center aligned. Use this when profile pictures are unavailable or when a simpler presentation than the Persona Quote is preferred."
+}

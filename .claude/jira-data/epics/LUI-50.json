@@ -1,0 +1,22 @@
+{
+  "key": "LUI-50",
+  "title": "Product Tiles Basic",
+  "issueType": "Epic",
+  "status": "Done",
+  "labels": [],
+  "description": "[Design Examples ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11271-205258&t=t5p6T6f67QhRVCAN-4)<custom data-type=\"emoji\" data-id=\"id-0\">:link:</custom>[ ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11271-205258&t=t5p6T6f67QhRVCAN-4)",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11271-205258&t=t5p6T6f67QhRVCAN-4"
+  ],
+  "childTickets": [
+    "LUI-51",
+    "LUI-52",
+    "LUI-53"
+  ],
+  "created": "2025-04-16T12:29:59.310+0200",
+  "updated": "2025-05-22T09:27:12.226+0200",
+  "linkedIdeas": [
+    "LAIOUTR-39"
+  ],
+  "enrichedData": {}
+}

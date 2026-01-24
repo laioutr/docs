@@ -1,0 +1,21 @@
+{
+  "key": "LUI-137",
+  "title": "Text area",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/03.ui-kit-typography/Text.md",
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "A multi-line text input for entering longer form content.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The Textarea component provides a multi-line text input field for entering longer content such as descriptions, comments, or messages. It supports configurable rows for initial height, auto-resize behavior to expand with content, and character count limits. Commonly used in forms requiring free-text input like product reviews, contact messages, or address fields requiring multiple lines."
+}

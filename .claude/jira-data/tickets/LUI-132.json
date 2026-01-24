@@ -1,0 +1,23 @@
+{
+  "key": "LUI-132",
+  "title": "Numberfield",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": "please check [https://reka-ui.com/docs/components/number-field](https://reka-ui.com/docs/components/number-field)  and [https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-48](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-48) \n\nand decide what we keep in the documentation:\n\n* [https://5f0bd6d3.laioutr-docs.pages.dev/laioutr-ui-kit/form/quantityselector](https://5f0bd6d3.laioutr-docs.pages.dev/laioutr-ui-kit/form/quantityselector)\n* [https://5f0bd6d3.laioutr-docs.pages.dev/laioutr-ui-kit/form/numberfield](https://5f0bd6d3.laioutr-docs.pages.dev/laioutr-ui-kit/form/numberfield)\n\n---\n\nplease inform <custom data-type=\"mention\" data-id=\"id-0\">@Carolin Jütz</custom> if the Qunatity Picker in Figma needs updates or additional properties",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-48"
+  ],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "A number input field with optional increment/decrement controls.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The Numberfield component provides a specialized input for numeric values with optional increment and decrement buttons. Built on Reka UI's number-field primitive, it handles numeric validation, min/max constraints, and step values. The component relates to but differs from QuantityPicker in that it focuses on general numeric input while QuantityPicker is optimized for product quantity selection in e-commerce contexts."
+}

@@ -1,0 +1,21 @@
+{
+  "key": "LUI-127",
+  "title": "Combobox",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "A combobox combining text input with a dropdown selection list.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The Combobox component combines free-form text input with a filterable dropdown selection list. Users can type to filter options or select directly from the list. Built on Reka UI primitives, it provides proper ARIA combobox semantics and keyboard navigation. Ideal for autocomplete fields, searchable selects, or any input requiring both typing and selection capabilities."
+}

@@ -1,0 +1,47 @@
+{
+  "key": "LUI-4",
+  "title": "Payment Switch",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\nAs a potential customer, I want to be able to compare different subscription plans and features so that I can make a good decision.\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-1\">:clipboard:</custom> Requirements\n\n* As a potential customer I want to toggle between monthly and annual pricing So that I can choose my preferred billing cycle and see potential savings\n* Acceptance Criteria:\n\n    * Toggle switch between monthly and annual pricing\n    * Show percentage/amount saved with annual billing\n    * Update all pricing cards simultaneously when switching\n    * Maintain selected billing preference during session\n    * The whole component is clickable\n    \n* A storybook-story has been created, rendering the design from figma\n\n| **Component** | **Preview** | **Link** | **UI ready** |\n| --- | --- | --- | --- |\n| **Payment Switch** | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=efb2c459-56f5-4ce3-8f58-0dc37b4beaec&&collection=&height=72&occurrenceKey=null&width=294&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) | <custom data-type=\"smartlink\" data-id=\"id-2\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=3880-37284&t=FoBBvGt4bI9KoJwB-4</custom>   | <custom data-type=\"emoji\" data-id=\"id-3\">:check_mark:</custom>  |\n\n---\n\n### <custom data-type=\"emoji\" data-id=\"id-4\">:video_game:</custom> Dummies\n\n[Discount Strikethrough Dummy](https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=3492-21109&p=f&m=dev&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=3787%3A7251&show-proto-sidebar=1)\n\n[Mobile Pricing Cards Slider Dummy](https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=3492-21109&p=f&m=dev&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=3795%3A16289&show-proto-sidebar=1)\n\n## Technical details\n\n### Molecule/Pricing/BillingCycleSwitch.vue\n\nUse `LuiSwitch` component.\n\nThe component has no props, everything is hardcoded.\n\nUse [useStorage](https://vueuse.org/core/useStorage/) to persist state in localStorage.\n\n| **Prop** | **Default** | **Type** |\n| --- | --- | --- |\n| @emit `change(isActive: boolean)` | - | Emitted when the switch-status changes |\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=3880-37284&t=FoBBvGt4bI9KoJwB-4"
+  ],
+  "userStory": "As a potential customer, I want to be able to compare different subscription plans and features so that I can make a good decision",
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "@emit `change(isActive: boolean)`",
+        "type": "Emitted when the switch-status changes",
+        "default": "-",
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/07.ui-kit-form/Switch.md",
+  "parentEpic": {
+    "key": "LUI-1",
+    "title": "Pricing Page"
+  },
+  "summary": "A billing cycle toggle switch for switching between monthly and annual pricing with savings display.",
+  "features": [
+    "Toggle between monthly and annual billing cycles",
+    "Display savings percentage or amount for annual billing",
+    "Synchronized update of all pricing cards when toggled",
+    "Persisted preference via localStorage using useStorage"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-23",
+    "LAIOUTR-24"
+  ],
+  "longDescription": "## Purpose\n\nThe BillingCycleSwitch component enables users to easily compare monthly versus annual pricing options. By showing potential savings with annual billing, it helps drive conversions to longer-term subscriptions while giving users full control over their billing preference.\n\n## Use Cases\n\n- Toggle the entire pricing page between monthly and annual billing views\n- Display strikethrough prices on cards when annual billing shows discounts\n- Persist user's billing preference in localStorage so it remains selected during navigation\n- Communicate savings visually to encourage annual subscription commitments\n\n## Design Rationale\n\nA well-designed price comparison toggle helps sell users on annual subscriptions by clearly showing the value proposition. The synchronized update of all pricing elements ensures consistency and reduces cognitive load. LocalStorage persistence improves user experience by remembering their preference across page reloads and navigation.",
+  "shortDescription": "Enables users to compare monthly versus annual pricing options easily. Toggle the entire pricing page between billing views. Display strikethrough prices when annual billing shows discounts. Persists billing preference in localStorage so it remains selected during navigation. Communicates savings visually to encourage annual subscription commitments.",
+  "keywords": [
+    "useStorage",
+    "payment cycle",
+    "subscription toggle"
+  ]
+}

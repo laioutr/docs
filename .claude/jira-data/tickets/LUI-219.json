@@ -1,0 +1,60 @@
+{
+  "key": "LUI-219",
+  "title": "Studio / Sections / Flexible Content Slider",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Flexible Content Slider (**before:** Gallery Content Slider) |\n| --- | --- |\n| **Description** | A very flexible slider in which you can display cards, images, banners, products, and other blocks, also in combination! |\n| **Options** | Display: Navigation position Top Bottom When a button is added, the navigation position is automatically at the bottom, so this line is grayed out and cannot be clicked by the user. Scrollbar (on/off) |\n| **Content** | Text alignment left center heading subline button  Only one button can be added |\n| **Style Options** | Style: Full width boxed Margin: None S M L Padding: None S M L Background Color: None Theme Presets Custom Content Color: On light background On dark background On bright background |\n| **Proposed Colors for background color** | Accent 3 Grey 3 Primary 3 Grey 12 |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Content",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Style Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Proposed Colors for background color",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "sourceEpic": null,
+  "sourceIdeas": [],
+  "summary": "Flexible content slider displaying cards, images, banners, products, and blocks in combination.",
+  "features": [
+    "Mixed content support (cards, images, banners, products, blocks)",
+    "Navigation position options (top/bottom)",
+    "Optional scrollbar display",
+    "Content area with heading, subline, and button support"
+  ],
+  "keywords": ["content carousel", "mixed slider", "flexible gallery"],
+  "shortDescription": "The Flexible Content Slider is the most versatile carousel section, capable of displaying any combination of content types in a single slider. Unlike dedicated product or image sliders, it accepts cards, images, banners, products, and custom blocks together. A content area above or beside the slider provides space for headings, sublines, and a call-to-action button. Navigation automatically repositions to bottom when a button is present. Ideal for curated collections mixing different content formats."
+}

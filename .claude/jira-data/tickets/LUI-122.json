@@ -1,0 +1,78 @@
+{
+  "key": "LUI-122",
+  "title": "Avatar",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "‌\n\n| **Properties** |  |\n| --- | --- |\n| **Size** small medium large extra large → has different border radius values via variables: theme/avatar/`border-radius-small` and theme/avatar/`border-radius` | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=070da700-bb42-402b-bc55-07aa34824637&&collection=&height=176&occurrenceKey=null&width=501&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **Color** pale solid → two color sets managed via variables: theme/avatar/pale and theme/avatar/solid: `background` `icon` `text` | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=9590ef74-75bc-49cc-aacd-c0b00b2875cd&&collection=&height=352&occurrenceKey=null&width=506&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **Variant** icon initials should be generated automatically from the first letters of the user name if there are two letters in the first and last name if there is only one name, only one letter image each theme has its own placeholder image for a profile photo | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=6a872b7a-f3ff-401c-8b15-cae92301e5dd&&collection=&height=88&occurrenceKey=null&width=231&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **Avatar Images** different placeholder images for themes, managed via style in figma placeholder for pale and solid color variant find [assets here](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=20345-6874&t=d3lxzSvfCLvDJnbv-4) | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=c2f99084-cf19-40b2-bd5f-9909f5b399a6&&collection=&height=397&occurrenceKey=null&width=854&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n\n### Technical details\n\nPut this component into the ui-kit library.\n\nProps:\n\n* size, defaults to medium\n* color: solid & pale, defaults to pale\n* fallbackVariant: icon, initials, image, defaults to initials (if name given, otherwise use image)\n\n    * fallbackIcon: string, defaults to essentials/user\n    * fallbackImage: string, default depends on theme\n    * name: string, default empty.\n    * Depending on the fallbackVariant, display either the icon, image or initials. For initals, take the name, split it by whitespace and use the first letter of the first and last entry (ex. Sebastian Kurt Langer => SL).\n    \n* src: string, defaults to empty. URL of the image to display. If none is given, shows fallback\n\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=20345-6874&t=d3lxzSvfCLvDJnbv-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "size",
+        "type": null,
+        "default": null,
+        "description": "medium"
+      },
+      {
+        "name": "color",
+        "type": null,
+        "default": null,
+        "description": "solid & pale, defaults to pale"
+      },
+      {
+        "name": "fallbackVariant",
+        "type": null,
+        "default": null,
+        "description": "icon, initials, image, defaults to initials (if name given, otherwise use image)"
+      },
+      {
+        "name": "fallbackIcon",
+        "type": null,
+        "default": null,
+        "description": "string, defaults to essentials/user"
+      },
+      {
+        "name": "fallbackImage",
+        "type": null,
+        "default": null,
+        "description": "string, default depends on theme"
+      },
+      {
+        "name": "name",
+        "type": null,
+        "default": null,
+        "description": "string, default empty."
+      },
+      {
+        "name": "src",
+        "type": null,
+        "default": null,
+        "description": "string, defaults to empty. URL of the image to display. If none is given, shows fallback"
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/02.ui-kit-general/Avatar.md",
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "Avatar component for displaying user images, initials, or icons with size and color variants.",
+  "features": [
+    "Multiple sizes with theme-specific border radius",
+    "Pale and solid color variants with theme colors",
+    "Auto-generated initials from user name",
+    "Theme-specific placeholder images"
+  ],
+  "keywords": [
+    "profile picture",
+    "user icon",
+    "initials display"
+  ],
+  "shortDescription": "The Avatar component provides flexible user representation across the UI through profile images, auto-generated initials, or icon fallbacks. It intelligently extracts initials from names by taking the first letter of the first and last words (e.g., \"Sebastian Kurt Langer\" becomes \"SL\"). Four size variants (small, medium, large, extra large) use theme-controlled border radius values, while pale and solid color variants apply distinct background, icon, and text colors. Each theme provides custom placeholder images ensuring visual consistency when no user image is available."
+}

@@ -1,0 +1,74 @@
+{
+  "key": "LUI-71",
+  "title": "Category Header / Basic",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "### The basic variant of the page header for product lists aka categories. This contains not only the page title (category title), but also space for a short SEO text and an in-page navigation.\n\n‌\n\n---\n\n<custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\n**As** a user browsing a category page on an online store,  \n**I want** to see a clear category title, relevant navigation links, and visually engaging styling,  \n**so that** I can understand what section I'm in, quickly access related subcategories, and enjoy a consistent, themed shopping experience.\n\n---\n\n## Requirements\n\nby <custom data-type=\"mention\" data-id=\"id-1\">@Carolin Jütz</custom> \n\n[https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14605-394163&t=2VdYnJXHqVZcfASo-4](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14605-394163&t=2VdYnJXHqVZcfASo-4)  \n\n| **Title and SEO Text** **Category Title** Displayed as an `<h1>` element for accessibility and SEO. Pulled dynamically based on the current category context. **Optional SEO Text** Rich text block displayed directly under the `<h1>`. Supports basic formatting (bold, italic, links). Editable per locale via CMS. | [Example in Figma ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14605-393664&t=2VdYnJXHqVZcfASo-4)<custom data-type=\"emoji\" data-id=\"id-2\">:link:</custom>[ ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14605-393664&t=2VdYnJXHqVZcfASo-4) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=5be4d019-f0be-48fa-b06b-296eec18507b&&collection=&height=488&occurrenceKey=null&width=437&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=ced01e06-649d-4405-b9bd-5b8ced2fe6f3&&collection=&height=435&occurrenceKey=null&width=431&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| --- | --- |\n| **In-Page Navigation Slider** **Category Nodes Slider** Uses Inpage Navigation / Basic, / Big and / Compact Slider, depending on the Theme Those are presets and can be changed by the user. Either globally or only for a specific category. Each node is a clickable button or card linking to a subcategory page. **Styling Flexibility** Ability to apply different visual styles to the category nodes in the chosen slider Styles are controlled via theme or design tokens per default A user can also decide to show no category nodes at all (can be the case with very small stores that have no further subcategories) | [Examples in Figma ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14605-399172&t=2VdYnJXHqVZcfASo-4)<custom data-type=\"emoji\" data-id=\"id-3\">:link:</custom>[ ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14605-399172&t=2VdYnJXHqVZcfASo-4) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=ff78b55a-6084-4c9e-bc11-0312203edc07&&collection=&height=590&occurrenceKey=null&width=774&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| **Category Navigation**  If the last subcategory is reached and there are no further subcategories: Show the siblings of this category. So if this is category lvl 3, then show all other lvl 3 category nodes in this tree. Highlight the current category in the category nodes slider (annotation in figma) | [Example in Figma ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14606-400379&t=2VdYnJXHqVZcfASo-4)<custom data-type=\"emoji\" data-id=\"id-4\">:link:</custom>[ ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14606-400379&t=2VdYnJXHqVZcfASo-4) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=da8591b3-b655-47ec-8b2f-0ca4eec041d6&&collection=&height=636&occurrenceKey=null&width=308&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| **Background & Theming** **Background Customization** Background color of the header section can be set per category or theme. Initially set by theme variable **theme / category header / basic / bg-color** **Theming Support** Component supports multiple visual themes Each theme may define: A unique category node slider layout/style. Custom spacing, fonts, and iconography. Background and border settings. | [Some Design Examples in use ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14601-393138&t=2VdYnJXHqVZcfASo-4)<custom data-type=\"emoji\" data-id=\"id-5\">:link:</custom>[ ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14601-393138&t=2VdYnJXHqVZcfASo-4) [Some header examples in Figma ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14605-399172&t=2VdYnJXHqVZcfASo-4)<custom data-type=\"emoji\" data-id=\"id-6\">:link:</custom>[ ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14605-399172&t=2VdYnJXHqVZcfASo-4) |\n| **Responsive Design** Fully responsive behavior with mobile-first implementation. Slider supports touch gestures and swipe interactions. |  |\n| **Accessibility & Performance** WCAG 2.1 AA compliant: Proper ARIA roles for slider and nav elements. Keyboard navigability for all interactive components. Lazy-loading support for images and slider content. Fast render times and optimized for Core Web Vitals. |  |\n\n---\n\nby <custom data-type=\"mention\" data-id=\"id-7\">@bassem mohamed</custom> \n\n## **Acceptance criteria :**\n\n* slider for **laioutr** theme with category nodes **compact**\n* slider for **sunny** theme with category nodes **compact**\n* slider for **classic** theme with category nodes **big**\n* slider for **tech** theme with category nodes **big**\n\n## **Technical Details:**\n\nsections/CategoryHeaderBasic\n\n```\ninterface CategoryNodesBasicProps {\n  colorMode: 'on-light' | 'on-dark' | 'on-bright';\n  \n  header: string;\n  \n  subline?: string;\n  \n  nodesVariant : 'basic' | 'big' | 'compact';\n  \n  nodes : categoryNodeBasic[] | categoryNodeBig[] | categoryNodeCompact[]; \n}\n```\n\n### Notes:\n\n* use `<component>` tag to determine which slider you will render based on the variant prop \n* subline has maxwidth on large screens \n* use for section background :` background: var(--category-title-basic-bg-color);`\n* use  LuiText , `LuiInpageNavigationCompactSlider` , `LuiInpageNavigationBasicSlider`,`LuiInpageNavigationBigSlider`\n\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14605-394163&t=2VdYnJXHqVZcfASo-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14605-393664&t=2VdYnJXHqVZcfASo-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14605-399172&t=2VdYnJXHqVZcfASo-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14606-400379&t=2VdYnJXHqVZcfASo-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14601-393138&t=2VdYnJXHqVZcfASo-4"
+  ],
+  "userStory": "As a a user browsing a category page on an online store, I want to see a clear category title, relevant navigation links, and visually engaging styling,, so that I can understand what section I",
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "colorMode",
+        "type": "'on-light' | 'on-dark' | 'on-bright'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "header",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "subline",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "nodesVariant",
+        "type": "'basic' | 'big' | 'compact'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "nodes",
+        "type": "categoryNodeBasic[] | categoryNodeBig[] | categoryNodeCompact[]",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-68",
+    "title": "Product Listing Page"
+  },
+  "summary": "Page header for product listing pages with category title, SEO text, and in-page navigation slider.",
+  "features": [
+    "Dynamic category title rendered as semantic h1 element",
+    "Multiple in-page navigation slider variants (basic, big, compact)",
+    "Theme-aware background customization via design tokens",
+    "Automatic sibling category display at leaf nodes"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-46"
+  ],
+  "longDescription": "## Purpose\n\nThe Category Header Basic component serves as the primary orientation element on product listing pages. It communicates the current category context to shoppers while providing quick navigation to subcategories through an integrated slider component. The optional SEO text area supports search engine optimization goals.\n\n## Use Cases\n\n- Display category title with SEO text on product listing pages\n- Show in-page category node sliders for quick subcategory access\n- Present sibling categories when viewing leaf-level categories with no children\n- Support multiple visual themes with distinct slider layouts and styling\n- Enable CMS-editable SEO content per locale\n\n## Design Rationale\n\nThe component dynamically renders different slider variants based on theme configuration, allowing visual consistency across the store while providing flexibility for different merchandise strategies. The automatic fallback to sibling categories at leaf nodes ensures the navigation remains useful even at the deepest category levels. Background theming via CSS variables enables per-category customization without code changes.",
+  "shortDescription": "SEO text supports rich formatting (bold, italic, links) and is editable per locale via CMS. Subline has maxwidth on large screens. Slider presets can be changed globally or per specific category; users may opt to show no category nodes for small stores. Current category is highlighted in the nodes slider. WCAG 2.1 AA compliant with keyboard navigability, proper ARIA roles, and lazy-loading support. Uses LuiText and LuiInpageNavigation slider components.",
+  "keywords": [
+    "CategoryHeaderBasic",
+    "CMS editable",
+    "leaf category"
+  ]
+}

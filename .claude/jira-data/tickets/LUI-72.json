@@ -1,0 +1,69 @@
+{
+  "key": "LUI-72",
+  "title": "Product Grid",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:diamond_shape_with_a_dot_inside:</custom> Product Grid\n\n---\n\n<custom data-type=\"emoji\" data-id=\"id-1\">:person_with_crown:</custom> **User Story**\n\n**As a** user browsing a product listing page,  \n**I want** to view products in a clear, visually organized grid layout,  \n**So that** I can easily compare options and find items that interest me without having to scroll through disorganized content.\n\n---\n\n### Requirements\n\nby <custom data-type=\"mention\" data-id=\"id-2\">@Carolin Jütz</custom> \n\n[https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14795-155216&t=D15GraY4m5o14KTa-4](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14795-155216&t=D15GraY4m5o14KTa-4)  \n\nPlease note the annotations in Figma\n\n| Display amount of products, defined by lazy loading rules Responsive Layout Possibility to display other content in [**content slots**](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14795-155027&t=QALGOSrjTweT4ylU-4) or directly [**in the grid**](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14795-155026&t=QALGOSrjTweT4ylU-4). see [design example here](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14452-164025&t=QALGOSrjTweT4ylU-4) Clicking on a product takes the user to its detailed product page. The grid updates dynamically when filters or sorting options are applied. The layout adjusts responsively for different screen sizes (desktop, tablet, mobile). | content slot example: ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=b40229a0-2d86-4a89-aca1-949b83b4b5c8&&collection=&height=277&occurrenceKey=null&width=206&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) content in grid exapmle: ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=e55c3267-b277-4a97-8fa9-1fbb914fbf62&&collection=&height=515&occurrenceKey=null&width=208&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)   |\n| --- | --- |\n| **Accessibility Requirements:** Each product item must be navigable via keyboard (e.g., using Tab and Enter keys). Product images must include descriptive `alt` text. Use semantic HTML (e.g., `<ul>`/`<li>`, `<section>`, `<article>`) to structure the grid. ARIA roles or landmarks must be used appropriately (e.g., `role=\"list\"` for the grid and `role=\"listitem\"` for each product card). Focus indicators must be visible and clearly styled for interactive elements. Screen readers should announce product titles and prices when focused on a product card. |  |\n\n---\n\nby <custom data-type=\"mention\" data-id=\"id-3\">@bassem mohamed</custom> \n\n## **Acceptance criteria:**\n\nproducts grid with **two** **tiles components** first one replacing _**one Item**_ and the second replacing _**two Items**_ (ex:MediaBlock) also _**one content slot**_\n\n## **Technical definition:**\n\n_**section/ProductGrid**_\n\n```\ntype AllowedComponents = 'MediaBlock' | 'CtaBannerBasic' // etc\n\ninterface ComponentPropsMap {\n  MediaBlock : MediaBlockProps;\n  CtaBannerBasic : CtaBannerBasicProps;\n}\n\ninterface TileConfig<T extends AllowedComponents> {\n  component: Component \n  componentName: T\n  props: ComponentPropsMap[T] \n  colspan: 1 | 2 | 3 | 4\n}\n\ninterface ProductGridProps {\n  colorMode: 'on-light' | 'on-dark'\n  products: ProductTileProps[]\n  tiles?: TileConfig<AllowedComponents>[] // Allow any of the defined components\n}\n```\n\n### Notes:\n\n* use <component :is=\"component\"> to render tiles\n* add #**content** slot for the centered content \n* it has special pattern to position tiles based on \n\n    * treat count tile as product after adding it\n    * the first tile after 8 products\n    * next tile after 16 products\n    * the next after 32 products\n    * after that, always 1 tile after 32 products\n    \n* The position of this content slot is depending on the number of products loaded in total before the first \"load more if it 32 it will appear after the 16th product including slots\n* Combine products and custom tiles in the correct order using computed function\n\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14795-155216&t=D15GraY4m5o14KTa-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14795-155027&t=QALGOSrjTweT4ylU-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14795-155026&t=QALGOSrjTweT4ylU-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14452-164025&t=QALGOSrjTweT4ylU-4"
+  ],
+  "userStory": "As a user browsing a product listing page, I want to view products in a clear, visually organized grid layout, so that I can easily compare options and find items that interest me.",
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "MediaBlock",
+        "type": "MediaBlockProps",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "CtaBannerBasic",
+        "type": "CtaBannerBasicProps",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "colorMode",
+        "type": "'on-light' | 'on-dark'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "products",
+        "type": "ProductTileProps[]",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "tiles",
+        "type": "TileConfig<AllowedComponents>[] // Allow any of the defined components",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-68",
+    "title": "Product Listing Page"
+  },
+  "summary": "Responsive product grid with promotional tiles at strategic positions.",
+  "features": [
+    "Responsive grid for desktop, tablet, and mobile",
+    "Custom tile insertion at positions (8, 16, 32 products)",
+    "Configurable tile colspan for multi-column content",
+    "Full keyboard navigation with ARIA roles"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-46"
+  ],
+  "longDescription": "## Purpose\n\nThe Product Grid component displays products in an organized, responsive layout that enables shoppers to efficiently browse and compare items within a category. It supports the insertion of promotional content and custom tiles at strategic positions to enhance merchandising without disrupting the browsing flow.\n\n## Use Cases\n\n- Display products in a responsive grid layout with lazy loading integration\n- Insert promotional banners, media blocks, or CTA components within the product grid\n- Support keyboard navigation and screen reader accessibility for product grids\n- Enable content slots within the product grid for promotional content\n- Update dynamically when filters or sorting options are applied\n\n## Design Rationale\n\nThe tile positioning algorithm places promotional content at progressively spaced intervals (8, 16, 32, then every 32 products) to maintain product visibility while providing merchandising opportunities. The colspan configuration allows tiles to span multiple grid columns for greater visual impact. Semantic HTML with proper ARIA roles ensures the grid remains accessible to all users, with clear focus indicators and screen reader announcements for product information.",
+  "keywords": ["product grid", "listing layout", "promotional tiles"],
+  "shortDescription": "The Product Grid component displays products in an organized, responsive layout for category pages. It supports inserting promotional content at progressively spaced intervals (8, 16, 32, then every 32 products) to maintain product visibility while providing merchandising opportunities. Colspan configuration allows tiles to span multiple columns for greater visual impact. Semantic HTML with proper ARIA roles ensures accessibility with clear focus indicators and screen reader announcements."
+}

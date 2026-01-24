@@ -1,0 +1,60 @@
+{
+  "key": "LUI-220",
+  "title": "Studio / Sections / Filter Bar",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Filter Bar |\n| --- | --- |\n| **Description** | Your standard filter bar for filtering and sorting products. Optional with dynamic quick filters. |\n| **Options** | Dynamic Filters: on/off if on: select source Behavior: is sticky (on/off) Display: active filters (on/off) active filters on mobile (on/off) – _aka hide on mobile_ product amount (on/off) |\n| **Style Options** (_Only display style options for dynamic Quick Filters, if the option is active_) | Style: Full width boxed Margin: None S M L Padding: None S M L Background Color: None Theme Presets Custom Quick Filters Background Color: None Theme Presets Custom Product amount: Number (choose color) Word (choose color) Buttons:  \n_(User can choose button variants from all available variants)_ Open Filter Sheet Sort Active Filters Reset Filters Quick Filters  |\n| **Proposed Colors for background color** | Accent 3 Grey 3 Primary 3 Allways Black Allways white |\n| **Proposed Colors for quick filters background color** | Accent 3 Grey 3 Primary 3 |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "_(User can choose button variants from all available variants)_ Open Filter Sheet Sort Active Filters Reset Filters Quick Filters",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Proposed Colors for background color",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Proposed Colors for quick filters background color",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "sourceEpic": null,
+  "sourceIdeas": [],
+  "summary": "Standard filter bar for product filtering and sorting with dynamic quick filters.",
+  "features": [
+    "Dynamic quick filters with data source selection",
+    "Sticky behavior option",
+    "Active filters display with mobile visibility toggle",
+    "Customizable button variants for filter actions"
+  ],
+  "keywords": ["product filter", "sorting", "quick filters"],
+  "shortDescription": "The Filter Bar section provides essential product filtering and sorting functionality for category and search result pages. It can display dynamic quick filters populated from the data source for one-click filtering by popular attributes. The sticky option keeps the bar visible during scrolling for easy access. Active filters show currently applied selections with optional mobile visibility control. All action buttons (open filter sheet, sort, reset, quick filters) support customizable variants to match the site design."
+}

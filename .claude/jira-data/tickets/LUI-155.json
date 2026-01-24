@@ -1,0 +1,20 @@
+{
+  "key": "LUI-155",
+  "title": "Shop Header / Open Cart on Cart-Click",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "When clicking on the cart icon in the shop header i expect the offcanvas cart to open, showing an empy cart. The cart-state should be passed into the cart component as prop. Empty cart is default.\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=fcacc33d-a3d8-4425-9857-9fd738e84ca3&&collection=&height=51&occurrenceKey=null&width=113&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": null,
+  "summary": "Shop header cart icon click triggers offcanvas cart with current or empty state.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "This enhancement connects the shop header cart icon to the offcanvas cart drawer component. Clicking the cart icon opens the slide-in panel displaying the current cart contents or an empty cart state when no items exist. The cart state is passed as a prop allowing the header and cart components to remain synchronized. This provides users with quick cart access from any page without navigating away.",
+  "sourceEpic": null,
+  "sourceIdeas": []
+}

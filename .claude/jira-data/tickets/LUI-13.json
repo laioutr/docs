@@ -1,0 +1,34 @@
+{
+  "key": "LUI-13",
+  "title": "Logo Slider",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "For definition, please have a look into idea ticket (linked below).\n\nStorybook-stories have been created:\n\n* Single row slider (navigation top)\n* Single row slider (navigation bottom)\n* Double row slider\n* Grid view\n\nAll of these have headlines and sublines\n\n## Technical definition\n\n### Block/LogoSliderBlock/LogoSliderItem.vue\n\nRenders a single logo\n\n### Block/LogoSliderBlock/LogoSliderBlock.vue\n\nFor slider you can use Swiper. Nuxt Swiper @1.2.2 (using the Swiperjs Vue API) is already installed and can be used.\n\n* [Nuxt Swiper](https://github.com/cpreston321/nuxt-swiper/tree/v1.2.2) docs\n* [Swiper.js Vue](https://swiperjs.com/vue) docs\n* [Related PR](https://github.com/laioutr/laioutr/pull/75)\n\nHave a look at [swipers grid-mode](https://swiperjs.com/swiper-api#grid), which may be helpful here.\n\nSome props:\n\n* navigation position top/bottom\n* headline\n* subline\n* show as grid/slider\n* number of rows in slider\n* text size\n\nThis is not an exhaustive list of all props. Please have a look at the ideas-page and the design to figure out additional props you may have to define.\n\nUse SwiperNavigationCompact for navigation. Wait for <custom data-type=\"smartlink\" data-id=\"id-0\">https://laioutr.atlassian.net/browse/THEMES-19</custom> ",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-12",
+    "title": "Logo Slider"
+  },
+  "summary": "A space-efficient logo slider for displaying partner and client logos with automatic slider conversion.",
+  "features": [
+    "Display logos in a horizontal row with even spacing and alignment",
+    "Automatic slider transformation when logos exceed available space",
+    "Alternative static grid view mode supporting up to 6 logos",
+    "Configurable navigation position at top or bottom of slider"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-29"
+  ],
+  "longDescription": "## Purpose\n\nThe Logo Slider component enables marketing managers to showcase partner and client logos in a space-efficient horizontal layout. It builds trust and credibility by displaying recognizable brand associations without consuming excessive vertical page space.\n\n## Use Cases\n\n- **Partnership showcase**: Display partner logos in an evenly spaced horizontal row that automatically converts to a slider when content exceeds available width.\n- **Client testimonials**: Present client logos with optional headlines and sublines to reinforce brand credibility.\n- **Mobile optimization**: Configure between one, two, or three rows on mobile devices for optimal viewing.\n- **Static presentations**: Use grid mode for controlled displays of up to 6 logos without animation.\n\n## Design Rationale\n\nThe dynamic slider improves engagement over static displays while demonstrating company growth through regularly updated partnerships. Visitors seeing familiar brands are more likely to convert, and the space-efficient design allows showcasing multiple partnerships without compromising page layout.",
+  "shortDescription": "Enables marketing managers to showcase partner and client logos in a space-efficient horizontal layout. Builds trust and credibility by displaying recognizable brand associations. Configure between one, two, or three rows on mobile devices for optimal viewing. Use grid mode for controlled displays of up to 6 logos without animation.",
+  "keywords": [
+    "trust signals",
+    "social proof",
+    "marketing block"
+  ]
+}

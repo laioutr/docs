@@ -1,0 +1,23 @@
+{
+  "key": "LUI-147",
+  "title": "Tabs",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "Tabbed navigation component for switching between content panels.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The Tabs component organizes content into multiple panels accessible through a tab list, allowing users to switch views without page navigation. Follows WAI-ARIA tabs pattern with proper keyboard navigation (arrow keys, Home, End) and focus management. Supports horizontal and vertical orientations, automatic or manual activation modes, and lazy loading of tab content. Commonly used for product information sections, settings pages, or categorized content areas.",
+  "sourceEpic": "LUI-123",
+  "sourceIdeas": []
+}

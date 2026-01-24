@@ -1,0 +1,34 @@
+{
+  "key": "LUI-92",
+  "title": "Quantity Picker",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "This is a Basic UI component that has not yet been created.\n\n| A stepper input to choose quantity (default: 1). clicking on the number field, allows you to type in a number Prevent exceeding stock limits. |  ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=cb2f2d22-4061-40ee-846c-48f56147cf98&&collection=&height=279&occurrenceKey=null&width=147&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| --- | --- |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/07.ui-kit-form/QuantityPicker.md",
+  "parentEpic": {
+    "key": "LUI-84",
+    "title": "Product Detail Page"
+  },
+  "summary": "A stepper input for selecting product quantities with increment/decrement buttons, direct input, and stock validation.",
+  "features": [
+    "Increment and decrement buttons",
+    "Direct number input via text field",
+    "Stock limit validation",
+    "Minimum and maximum value constraints"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-48"
+  ],
+  "longDescription": "## Purpose\n\nThe Quantity Picker enables customers to select the desired quantity of a product before adding it to their cart. It provides both quick adjustment through stepper buttons and precise entry through direct input, while enforcing stock availability constraints.\n\n## Use Cases\n\n- Selecting product quantity using a stepper input with stock limits\n- Incrementing or decrementing quantities with button controls\n- Entering specific quantities directly via keyboard input\n- Preventing orders that exceed available stock\n\n## Design Rationale\n\nThe dual-input approach accommodates different user preferences: stepper buttons for quick single-unit adjustments and direct text entry for bulk orders. Stock limit validation prevents frustrating checkout failures by catching quantity issues early. The default value of 1 aligns with typical single-item purchase patterns while supporting multi-quantity orders when needed.",
+  "shortDescription": "Enables customers to select product quantity before adding to cart with dual-input approach accommodating different user preferences. Default value of 1 aligns with typical single-item purchase patterns while supporting multi-quantity bulk orders when needed.",
+  "keywords": [
+    "numeric stepper",
+    "cart quantity",
+    "order quantity"
+  ]
+}

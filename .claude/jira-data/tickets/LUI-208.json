@@ -1,0 +1,64 @@
+{
+  "key": "LUI-208",
+  "title": "Studio / Blocks / Buy Box / Price",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Price |\n| --- | --- |\n| **Description** | Display price, Strikethrough prices, VAT and shipping costs |\n| **Options** ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=04084322-6cee-484b-9dff-d1f4a9c4f230&&collection=&height=262&occurrenceKey=null&width=278&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  | Data Source selection Display (y/n): Price Base price VAT Shipping costs |\n| **Price** ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=59fdd7f6-98d8-40a1-94bb-827973a0aa37&&collection=&height=636&occurrenceKey=null&width=279&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  | Data Source Styling Size XS – 4XL (laioutr UI font sizes) Color default (text black) custom proposed colors: text colors Discount options Rules Sale price color  default = sale price custom Strike through price y/n with RRP y/n color default (text black) custom Discount flag y/n Flag color default (sale) custom (proposed colors: accent 9, primary 9, always black) Text input with color popover and dynamic data source option  |\n| **Base price** ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=5ebdd85a-ea18-4297-9252-eb23438e429e&&collection=&height=196&occurrenceKey=null&width=280&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  | Data Source Styling Color default (text grey) custom proposed colors: text colors |\n| **VAT** ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=09c86b1b-a712-4b9a-92af-8032c5975ac8&&collection=&height=204&occurrenceKey=null&width=283&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) | Data Source Text input with color popover and dynamic data source |\n| **Shipping costs** ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=240b9d87-066e-49a1-a90f-89d7315a98ed&&collection=&height=203&occurrenceKey=null&width=279&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) | Data Source Text input with color popover and dynamic data source |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=04084322-6cee-484b-9dff-d1f4a9c4f230&&collection=&height=262&occurrenceKey=null&width=278&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Price ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=59fdd7f6-98d8-40a1-94bb-827973a0aa37&&collection=&height=636&occurrenceKey=null&width=279&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Base price ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=5ebdd85a-ea18-4297-9252-eb23438e429e&&collection=&height=196&occurrenceKey=null&width=280&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "VAT ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=09c86b1b-a712-4b9a-92af-8032c5975ac8&&collection=&height=204&occurrenceKey=null&width=283&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Shipping costs ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=240b9d87-066e-49a1-a90f-89d7315a98ed&&collection=&height=203&occurrenceKey=null&width=279&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Comprehensive price block for Buy Box showing price, strikethrough, VAT, and shipping.",
+  "features": [
+    "Main price with customizable size and color",
+    "Sale price with discount flag and strikethrough",
+    "Base price, VAT, and shipping cost display",
+    "Dynamic data source integration"
+  ],
+  "keywords": ["product price", "sale price", "price display"],
+  "shortDescription": "The Price block presents complete pricing information within the Buy Box. It displays the main price with extensive customization for size and color, along with optional strikethrough pricing for sales showing RRP comparisons. Discount flags highlight savings with customizable colors. Additional lines show base price for unit comparison, VAT information, and shipping costs—all meeting European e-commerce regulatory requirements. Each element pulls from configurable data sources."
+}

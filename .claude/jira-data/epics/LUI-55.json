@@ -1,0 +1,51 @@
+{
+  "key": "LUI-55",
+  "title": "Product Slider",
+  "issueType": "Epic",
+  "status": "Done",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\nAs a store visitor, I want to get an impression of the store range, and sliders that show different products help me to do this.\n\n‌\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-1\">:clipboard:</custom> Requirements\n\n| Properties: slider navigation (position) top / bottom optional headings yes / no with button yes / no choosable button variant show scrollbar yes / no default is: show scrollbar true There are two color variants as individual components in Figma: [on light background](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11286-268738&t=kWl7opPn708GdN7H-4) [on dark background](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11286-279482&t=kWl7opPn708GdN7H-4) |  |\n| --- | --- |\n| It must be possible for the user to select how extensive the displayed product tiles should be. It must be possible to adjust the background color of the product images (if transparent pngs are used) for the products in the slider. The user can also decide which image format should be used (1:1 or 3:4), in contrast to the global setting. The user can specifically add or deactivate an Add to Cart button for the product tiles in the slider if desired You can find some [design examples here.](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11286-299244&t=kWl7opPn708GdN7H-4) | Example: Very minimalist product tiles: ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=a92965f3-0193-4236-a646-ceeee8e2ecc8&&collection=&height=489&occurrenceKey=null&width=510&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) Product tiles with more information: ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=3c5b433a-a8eb-48ea-b95b-b6a315143727&&collection=&height=481&occurrenceKey=null&width=252&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| It should later be possible to add products to the slider as follows: Manual entry of SKUs / article numbers Specification of one or more category IDs Only products with a specific label (e.g. promo or sale etc.) Automated recommendations |  |\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11286-268738&t=kWl7opPn708GdN7H-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11286-279482&t=kWl7opPn708GdN7H-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11286-299244&t=kWl7opPn708GdN7H-4"
+  ],
+  "childTickets": [
+    "LUI-56",
+    "LUI-57"
+  ],
+  "created": "2025-04-23T13:19:51.233+0200",
+  "updated": "2025-06-27T14:23:45.152+0200",
+  "linkedIdeas": [
+    "LAIOUTR-40"
+  ],
+  "summary": "A horizontally scrollable product carousel for browsing and discovering products with configurable tile displays and navigation.",
+  "features": [
+    "Configurable navigation position with optional headline, subline, and CTA button",
+    "Customizable product tile detail level from minimalist to comprehensive with optional Add to Cart",
+    "Light and dark color modes with adjustable image background for transparent PNGs",
+    "Product sourcing via manual SKU entry, category IDs, labels, or automated recommendations"
+  ],
+  "longDescription": "## Purpose\n\nThe Product Slider component provides store visitors with an engaging, horizontally scrollable carousel for browsing products across the catalog. It enables quick discovery and comparison of multiple items without navigating away from the current page.\n\n## Use Cases\n\n- **Homepage product discovery**: Showcase featured, new arrival, or bestseller products\n- **Category cross-selling**: Display related products from complementary categories\n- **Promotional campaigns**: Highlight sale items or products with specific labels\n- **Personalized recommendations**: Present algorithmically suggested products\n\n## Design Rationale\n\nThe component supports both minimalist and information-rich product tile configurations, allowing merchants to balance visual appeal with purchase decision data. Dual color modes ensure seamless integration into varied page designs, while flexible product sourcing options support both manual curation and automated population.",
+  "shortDescription": "Scrollbar visibility can be toggled for navigation feedback preference. Selectable image aspect ratio (1:1 or 3:4) overrides global settings per slider instance. Supports multiple product sourcing methods enabling both manual curation and automated population based on categories or labels.",
+  "keywords": [
+    "carousel",
+    "product discovery",
+    "cross-sell"
+  ],
+  "enrichedData": {
+    "purpose": "Store visitors need an engaging way to browse the product range through sliders that showcase different products and help them discover items of interest.",
+    "useCases": [
+      "Position slider navigation at top or bottom",
+      "Add optional headings to product sliders",
+      "Include or exclude action buttons with choosable variants",
+      "Show or hide scrollbar navigation",
+      "Display slider on light or dark backgrounds",
+      "Select product tile detail level from minimalist to comprehensive",
+      "Customize product image background color for transparent PNGs",
+      "Choose image aspect ratio (1:1 or 3:4) per slider",
+      "Enable or disable Add to Cart button on product tiles",
+      "Add products by SKU, category ID, or product labels"
+    ]
+  }
+}

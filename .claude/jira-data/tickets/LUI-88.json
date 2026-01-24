@@ -1,0 +1,135 @@
+{
+  "key": "LUI-88",
+  "title": "PDP / buybox - Multiple Variant Selection Ambiendo",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## This variant of the variant selection is especially for Ambiendo, or also stores that have products with many variant combinations, for example many color and size options.\n\n| Allow users to select size and color variants display the current size and color variant [as a button on pdp](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-223391&t=wABQtnJ0GubOC0US-4) display number of available  colors and sizes under the [button link ](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-223441&t=wABQtnJ0GubOC0US-4)<custom data-type=\"emoji\" data-id=\"id-0\">:link:</custom>[ ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=17674-464154&t=vDdy4ZSrnFBrmVF4-4) when user clicks on the button, open [off canvas sheet](https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=46-342925&t=PKu1n1KwdC4FDyjD-4) for selection | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=62df2967-493e-46b6-a2c1-de5b91a651c7&&collection=&height=357&occurrenceKey=null&width=411&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| --- | --- |\n| **Off Canvas** Display variants in groups (by color) Group title is the color name optional color swatch in front of the title:  ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=f56b7990-37a2-4eec-a3e5-3d6c09bd9e16&&collection=&height=45&occurrenceKey=null&width=161&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) Each variant is a [button](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-223469&t=wABQtnJ0GubOC0US-4) and can display: thumbnail variant name price infos [delivery and stock information](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-223456&t=wABQtnJ0GubOC0US-4) Selecting a variants loads the correct Product Title, Information, Price and Product images in the background and closes the off canvas | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=fe7590ec-9cf6-4867-a1a6-21edf9084c68&&collection=&height=790&occurrenceKey=null&width=390&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=826ab666-b3d0-4e19-aa92-3b3a2a2fa1a5&&collection=&height=917&occurrenceKey=null&width=409&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n\nBy <custom data-type=\"mention\" data-id=\"id-1\">@bassem mohamed</custom> \n\n### **Acceptance criteria:**\n\n* story for the amount pill\n* story for MultipleVariantSelectionAvailability\n\n    * with one option\n    * with two options\n    \n* story for the MultipleVariantSelectionVariant\n* story for the fully built MultipleVariantSelection like in Figma\n* story for the fully built MultiVariantSelection but all variants only have the color option\n\n### **Technical details:**\n\n_**atoms/AmountPill**_\n\n```\ninterface AmountPillProps {\n  amount : number\n}\n```\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=b7509f4f-cecc-490d-a102-36b8a0a92bad&&collection=&height=184&occurrenceKey=null&width=155&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n* Use `body-xl` class\n\n_**molecule/MultipleVariantSelection/MultipleVariantSelectionTrigger**_\n\n```\ninterface MultipleVariantSelectionTriggerProps {\n  image: Media;\n  options: string[] // Lines of text to be displayed inside the button\n}\n```\n\n* use <button/> tag and apply all the states on it \n* emitter to the parent that this button is clicked \n* use `LuiMedia` , text classes, `LuiIcon`\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=47c35251-790b-48b7-9e12-7673b2e1dcca&&collection=&height=506&occurrenceKey=null&width=508&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n_**molecule/MultipleVariantSelection/MultipleVariantSelectionAvailability**_\n\nDIsplays the AmountPills and appropriate texts\n\n```\ninterface MultipleVariantSelectionAvailabilityProps {\n  // @example [{ amount: 4, name: 'Colors', singleName: 'Color' }, { amount: 2, name: 'Sizes', singleName: 'Size' }]  \n  options: { amount: number; name: string; singleName?: string; }[]\n}\n```\n\nIf a `singleName` is not given, falls back to `name`. Options are separated by \",\" Ends with \"available\". If no options are given, component is not displayed.\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=2da7d554-6bed-4756-b70d-f2a111384f7f&&collection=&height=32&occurrenceKey=null&width=203&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n_**molecule/MultipleVariantSelection**_/_**MultipleVariantSelectionVariant**_\n\n```\ninterface VariantSelectionVariant {\n  id: string;\n  // E.g. [{ wellKnownName: 'color', name: 'Color', value: 'Red' }, { name: 'Size', value: '155x220 + 2x 80x80 cm' }]\n  selectedOptions: { name: string; value: string }[]\n  image: Media;\n  price: Money;\n  strikethroughPrice?: Money;\n  unitPrice?: UnitPrice; // from @laioutr-core/canonical-types\n  stockInfo?: BuyBoxStockInfoProps;\n  savingsPercent? : number;\n  swatch?: string | string[] | MediaImage // a single color, an array of two colors or a preview-image\n}\n```\n\n```\ninterface MultipleVariantSelectionVariantProps {\n  variant: VariantSelectionVariant;\n}\n```\n\n* use reka Ui radio group  `RxRadioGroupItem` , `RxRadioGroupIndicator` <custom data-type=\"smartlink\" data-id=\"id-2\">https://reka-ui.com/docs/components/radio-group</custom>. Each Item is a single RadioGroupItem. The RadioGroup is the Sheet itself.\n* emit the variant props to the parent \n* use `LuiIcon` , `LuiText` , `LuiBuyBoxStockInfo` (<custom data-type=\"smartlink\" data-id=\"id-3\">https://laioutr.atlassian.net/browse/LUI-93</custom>) , `LuiMedia` , `LuiProductTileFlag` \n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=193ff8c5-fcf9-4d77-8c1c-2059edd07a21&&collection=&height=250&occurrenceKey=null&width=203&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n‌\n\n_**organism/MultipleVariantSelection**_/_**MultipleVariantSelectionSheet**_\n\n```\ninterface MultipleVariantSelectionSheetProps {\n  isOpen: boolean;\n  groupedVariants: {\n    swatch?: string | string[] | MediaImage // a single color, an array of two colors or a preview-image\n    groupName: string; // title of each group, displayed above the items \n    variants:  VariantSelectionVariant[];\n  }\n}\n```\n\n* use `RxCheckboxGroup` \n* use `LuiSheet` , `LuiColorSwatch` , `LuiVariantSelectButton`\n* use reka Ui radio group  `RxRadioGroup` <custom data-type=\"smartlink\" data-id=\"id-4\">https://reka-ui.com/docs/components/radio-group</custom> \n* use `SwatchPreview` <custom data-type=\"smartlink\" data-id=\"id-5\">https://laioutr.atlassian.net/browse/LUI-121</custom> \n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=25c6c876-6433-4f1f-9076-6987363ddbcb&&collection=&height=574&occurrenceKey=null&width=248&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n_**molecule/MultipleVariantSelection/MultipleVariantSelection**_\n\nThis is the component that ties all other components together. It renders the _**MultipleVariantSelectionTrigger**_ and the _**MultipleVariantSelectionAvailability**_. When clicking the button it opens the _**MultipleVariantSelectionSheet**_.\n\n```\ninterface MultipleVariantSelectionProps {\n  variants: {\n    id: string;\n    // E.g. [{ wellKnownName: 'color', name: 'Color', value: 'Red' }, { name: 'Size', value: '155x220 + 2x 80x80 cm' }]\n    selectedOptions: { name: string; value: string }[]\n    image: Media;\n    price: Money;\n    strikethroughPrice?: Money;\n    unitPrice?: UnitPrice; // from @laioutr-core/canonical-types\n    stockInfo?: BuyBoxStockInfoProps;\n    savingsPercent? : number;\n    swatch?: Swatch // Import from @laioutr-core/canonical-types\n  }[];\n  groupBy: string; // E.g. 'color' ensures that the variants are grouped by the option with `wellKnownName` 'color'\n  selectedVariant: Variant; // (see variants-array before)\n```\n\nAdd a model using `defineModel` for the selectedVariant. It changes whenever the user selects a different variant in the sheet.\n\n* map the product variants into new array grouped by \"groupBy\" (default \"color\") \n* Only group the variants if at least one variant has more than one selectedOption\n\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-223391&t=wABQtnJ0GubOC0US-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-223441&t=wABQtnJ0GubOC0US-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=17674-464154&t=vDdy4ZSrnFBrmVF4-4",
+    "https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=46-342925&t=PKu1n1KwdC4FDyjD-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-223469&t=wABQtnJ0GubOC0US-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-223456&t=wABQtnJ0GubOC0US-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "amount",
+        "type": "number",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "image",
+        "type": "Media",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "options",
+        "type": "string[] // Lines of text to be displayed inside the button",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "amount",
+        "type": "4, name: 'Colors', singleName: 'Color'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "wellKnownName",
+        "type": "'color', name: 'Color', value: 'Red'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "variant",
+        "type": "VariantSelectionVariant",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "isOpen",
+        "type": "boolean",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "groupedVariants",
+        "type": "{",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "swatch",
+        "type": "string | string[] | MediaImage // a single color, an array of two colors or a preview-image",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "groupName",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "variants",
+        "type": "VariantSelectionVariant[]",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "variants",
+        "type": "{",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "wellKnownName",
+        "type": "'color', name: 'Color', value: 'Red'",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-84",
+    "title": "Product Detail Page"
+  },
+  "summary": "An advanced variant selection component for products with many options, using an off-canvas sheet to display variants grouped by color with thumbnails and pricing.",
+  "features": [
+    "Off-canvas sheet with grouped variant display",
+    "Variant thumbnails with price, stock info, and savings badges",
+    "Radio group selection with real-time product updates",
+    "Amount pills showing available colors and sizes"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-48"
+  ],
+  "longDescription": "## Purpose\n\nThe Multiple Variant Selection component handles products with many variant combinations, providing a scalable interface for stores like Ambiendo that offer extensive color and size options. It prevents buy box clutter by moving variant selection into an organized off-canvas panel.\n\n## Use Cases\n\n- Handling products with many variant combinations via off-canvas selection panel\n- Selecting product variants such as size and color using grouped displays\n- Viewing variant-specific pricing, stock status, and savings information\n- Browsing variants organized by color groups with swatches\n\n## Design Rationale\n\nThe off-canvas approach solves the challenge of displaying many variants without overwhelming the main product page. Grouping variants by color with visual swatches helps customers quickly navigate to their desired option. Each variant card shows complete purchasing information including price, stock status, and savings to enable informed decisions without returning to the main page. The radio group pattern ensures single selection while providing immediate visual feedback.",
+  "keywords": [
+    "off-canvas",
+    "grouped variants",
+    "variant panel"
+  ],
+  "shortDescription": "The Multiple Variant Selection handles products with many variant combinations, providing a scalable interface for stores offering extensive color and size options. The off-canvas approach prevents buy box clutter by organizing variants into grouped panels with color swatches. Each variant card shows complete purchasing information including price, stock status, and savings. The radio group pattern ensures single selection with immediate visual feedback while the Reka UI primitives provide accessible interaction."
+}

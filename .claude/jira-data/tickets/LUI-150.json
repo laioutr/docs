@@ -1,0 +1,23 @@
+{
+  "key": "LUI-150",
+  "title": "Remove Button Icon Animation on hover",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "The fact that the button gets bigger on hover when it contains an icon is causing a few headaches. To prevent this, we must remove the animation entirely.",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "Fix removing icon animation on button hover that caused layout issues.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "This fix addresses a layout instability issue where buttons containing icons would increase in size during hover states due to icon animation effects. The size change caused content reflow and visual jitter, particularly problematic in dense button groups or navigation areas. The solution removes the hover animation entirely for icon buttons, ensuring stable dimensions and preventing layout shifts while maintaining other interactive feedback like color changes.",
+  "sourceEpic": "LUI-123",
+  "sourceIdeas": []
+}

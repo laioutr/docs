@@ -1,0 +1,46 @@
+{
+  "key": "LUI-84",
+  "title": "Product Detail Page",
+  "issueType": "Epic",
+  "status": "In Progress",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> **User Story:**\n\n**As a** customer,  \n**I want** to view detailed information about a product,  \n**so that** I can make an informed purchasing decision.\n\n* **Product Information Display**\n\n    * The page must show the product name, price, short description, and high-quality images.\n    * A longer product description and technical specifications (if applicable) should be available.\n    \n* **Image Gallery**\n\n    * Users can click through multiple product images.\n    * Zoom-in functionality should be available on desktop.\n    \n* **Variants**\n\n    * If the product has variants (e.g., size, color), dropdowns or buttons should allow the user to select these options.\n    * The page should update the price, image, or availability according to the selected variant.\n    \n* **Stock Status**\n\n    * Show whether the product is in stock, low stock, or out of stock.\n    \n* **Add to Cart Functionality**\n\n    * Users can add the product to their cart by selecting the desired variant (if applicable) and quantity.\n    * Clicking \"Add to Cart\" gives immediate feedback (e.g., confirmation modal or banner).\n    \n* **Shipping and Returns Info**\n\n    * Display estimated delivery time and return policy details (optional).\n    \n* **Related Products Section**\n\n    * Display recommended or similar products below the main content.\n    \n\n",
+  "figmaLinks": [],
+  "childTickets": [
+    "LUI-102",
+    "LUI-121",
+    "LUI-85",
+    "LUI-86",
+    "LUI-87",
+    "LUI-88",
+    "LUI-89",
+    "LUI-90",
+    "LUI-91",
+    "LUI-92",
+    "LUI-93",
+    "LUI-94",
+    "LUI-95",
+    "LUI-97"
+  ],
+  "created": "2025-05-23T15:35:50.663+0200",
+  "updated": "2025-06-11T15:43:09.405+0200",
+  "linkedIdeas": [
+    "LAIOUTR-48"
+  ],
+  "enrichedData": {
+    "purpose": "Customers need comprehensive product information including images, variants, pricing, and availability to make informed purchasing decisions.",
+    "useCases": [
+      "View product name, price, short description, and high-quality images",
+      "Access longer product description and technical specifications",
+      "Click through multiple product images in a gallery",
+      "Zoom in on product images on desktop",
+      "Select product variants using dropdowns or buttons",
+      "See updated price, image, and availability based on selected variant",
+      "Check stock status (in stock, low stock, out of stock)",
+      "Add product to cart with selected variant and quantity",
+      "Receive immediate feedback after adding to cart",
+      "View estimated delivery time and return policy",
+      "Browse recommended or similar products"
+    ]
+  }
+}

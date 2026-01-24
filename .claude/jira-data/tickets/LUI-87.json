@@ -1,0 +1,132 @@
+{
+  "key": "LUI-87",
+  "title": "PDP / Lightbox Modal",
+  "issueType": "Story",
+  "status": "UX QA",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\n**As a** customer,  \n**I want** a lightbox modal to open when I click on a product image,  \n**so that** I can view larger, high-quality images with easy navigation and a clear overview of all product visuals, even on mobile devices.\n\n---\n\nPlease note the examples and annotations in Figma!\n\n| Clicking/tapping the main product image on mobile devices opens the lightbox modal. on desktop: click on image and zoom button open full screen zoom modal/lightbox with thumbnails The modal displays the selected image in a large, centered view. Modal opens fullscreen on mobile for immersive viewing. Please note that the [mobile lightbox navigation component](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=162-220503&t=QXcTXXSs6yFxXc5B-4) and desktop selector not only contain styling variables for the themes, but also a variable for the component variant: **lightbox-zoom lvl selector-navigation style** This means that, depending on the theme, either the \"white glass\" or \"black glass\" variant is displayed here. on desktop, the theme also determines whether the navigation buttons are white glass or black glass. | [Mobile Lightbox](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=17551-342104&t=RjxnVmSM5Q6iOxuw-4) Themed component [Examples](https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=82-364835&t=zS0D1Ct2rhbt9YPo-4) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=43423def-71d8-4ec9-87a2-2ebd865b253c&&collection=&height=461&occurrenceKey=null&width=995&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) [Desktop Lightbox](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=162-221712&t=QXcTXXSs6yFxXc5B-4) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=9eca5b9f-0428-4e34-a27f-f2ebcf9ea65c&&collection=&height=401&occurrenceKey=null&width=642&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) Themed component [Examples](https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=87-368394&t=zS0D1Ct2rhbt9YPo-4) |\n| --- | --- |\n| **Main Image Display** High-resolution version of the selected image shown in the center. Z**oom:** Zoom functionality (pinch to zoom on mobile, hover/click zoom on desktop). **Zoom Levels:** Offer zoom levels (1x, 2x, 3x) to avoid unwanted over-zooming or jerky transitions.  [Mobile Zoom lvl selector](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=162-220494&t=QXcTXXSs6yFxXc5B-4) [Desktop Zoom lvl selector](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=162-221701&t=QXcTXXSs6yFxXc5B-4) **Panning:** Allow users to pan (move) the zoomed image to explore different sections. This is crucial for larger images, especially on mobile devices | **mobile**: ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=401a55cb-6f68-43ad-b8f6-851c988c3f18&&collection=&height=232&occurrenceKey=null&width=250&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=4b924471-5df8-4579-8674-4471ca61a69c&&collection=&height=658&occurrenceKey=null&width=1335&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) **desktop**: ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=d28ca645-84dc-4cc6-aa43-e440c45eda96&&collection=&height=65&occurrenceKey=null&width=135&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=a94e577e-b5e6-4d45-8300-6bfaaebf06f2&&collection=&height=841&occurrenceKey=null&width=2521&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **Thumbnail Navigation** A thumbnail strip displays all product images within the modal. Desktop: Thumbnails are horizontally aligned below the main image. Mobile: Thumbnails appear in a scrollable horizontal strip beneath the image. [View variant examples](https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=82-362248&t=zS0D1Ct2rhbt9YPo-4) Clicking/tapping a thumbnail updates the main image. The user can also hide the thumbnail navigation (not recommended) If only one image is available, no thumbnail navigation is displayed. | **mobile**:  ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=17c19d29-a5e1-48aa-8223-a2f1affb97d7&&collection=&height=102&occurrenceKey=null&width=417&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) **desktop**: ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=71db622a-93c5-436f-96ae-0f34673e030d&&collection=&height=87&occurrenceKey=null&width=1254&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **Navigation Controls** Next/previous arrow buttons on both desktop and mobile. use [pdp lightbox / mobile navigation & zoom](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=162-220503&t=QXcTXXSs6yFxXc5B-4) on mobile use [glass icon buttons](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15658-126948&t=RjxnVmSM5Q6iOxuw-4) on desktop as shown in figma Keyboard support: Left/right arrows to navigate images. Esc key closes modal. Swipe gesture support for image switching on mobile. | **mobile**: ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=6c41c86f-9e39-4376-bfd7-d4525fdb02d4&&collection=&height=333&occurrenceKey=null&width=943&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) **desktop:** ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=76563169-aea1-4fcc-9e25-c9204b72a645&&collection=&height=799&occurrenceKey=null&width=1280&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **Close Button** Modal has a clearly visible \"Close\" (X) button in the top-right corner. Clicking outside the modal or pressing Esc closes it. |  |\n| **Accessibility (WCAG 2.1 AA Compliance)** **Focus Trap**: Focus remains within the modal while open. **Keyboard Navigation**: All interactive elements (arrows, close button, thumbnails) are keyboard operable. Tab order is logical and intuitive. **Screen Reader Support**: Main image has appropriate `alt` text. Announce changes to the image with ARIA live regions (e.g., \"Image 2 of 6: Back view\"). Thumbnails and navigation buttons have `aria-labels` (e.g., \"Thumbnail 3: Side view\"). **Contrast & Touch Targets**: All elements have accessible contrast and minimum 44x44px touch target size on mobile. |  |\n| **Mobile Optimization** Modal opens in fullscreen mode. Touch-friendly navigation controls. Swiping between images is smooth and performant. Lazy-load thumbnails for performance. Scalable images with pinch-to-zoom support (if feasible). |  |\n| **Non-Functional Requirements** **Performance**: Modal must open within 300ms. Images should be optimized for fast loading  **Responsiveness**: Seamless experience across all screen sizes and orientations. **Analytics**: (optional) Track modal opens, image views, and close actions. **Localization**: UI elements support i18n (e.g., alt text, labels, and tooltips are translatable). |  |\n\n### **Acceptance Critera:** \n\n* slider with  1x zoom image \n* slider with 2x zoom image\n* slider with 3x zoom image \n* slider with navigation images slider\n\n### **Technical Details:** \n\n* add new variant to the button component called _**white-glass**_\n\n‌\n\n**molecule/Swiper/SwiperZoomLevelSelectorMobile**\n\n```\ninterface swiperZoomLevelSelectorMobileProps {\n  variant : 'white' | 'black';\n  levels : number;\n}\n```\n\n* use `swiperInstance`\n* use `levels : number` prop for example if it 4 will have 4 levels of zoom in buttons\n* \n\n    ```\n    const zoomIn = (ratio: number) => {\n      if (swiperInstance.value?.zoom) {\n        swiperInstance.value.zoom.in(ratio);\n      }\n    };\n    ```\n\n_**molecule/Swiper/SwiperZoomLevelSelectorDesktop**_\n\n```\ninterface swiperZoomLevelSelectorDesktopProps {\n  variant : 'white' | 'black';\n  maxLevel : number;\n  minLevel : number;\n}\n```\n\n* use `swiperInstance`\n* ```\n  const zoomIn = (ratio: number) => {\n    if (swiperInstance.value?.zoom) {\n      swiperInstance.value.zoom.in(ratio);\n    }\n  };\n  const zoomOut = () => {\n    if (swiperInstance.value?.zoom) {\n      swiperInstance.value.zoom.out();\n    }\n  };\n  ```\n\n_**molecule/Swiper/SwiperGlassArrowsNavigation**_\n\n```\ninterface SwiperGlassArrowsProps {\n  variant : black | 'white';\n  size : 'medium' | 'small';\n}\n```\n\n* use `swiperInstance` to navigate between slides\n\n_**Organism/ThumbnailNavigation/Thumbnail**_ \n\n```\ninterface ThumbnailProps {\n  isActive : boolean;\n  media : Media;\n}\n```\n\n* emiter for selecting a thumbnail and use button tag\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=02d3195c-8e4a-4105-a747-19407fd4e51d&&collection=&height=511&occurrenceKey=null&width=283&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n_**organisms/ThumbnailNavigation**_\n\n```\ninterface ThumbnailNavigationProps {\n  orientation : 'vertical' | 'horizontal';\n  thumbnails : thumbnailProps[];\n}\n```\n\n* use `Commonswiper` , `Thumbnail`, `SwiperGlassArrows`\n* use swiperInstance to navigate between images see `NavigationBullets` component\n\n‌\n\n_**organisms/LightboxMobile**_\n\n```\ninterface LightboxMobileProps{\n  brand? : string;\n  title : string;\n  medias : Media[]\n}\n```\n\n* use `thumbnailNavigation` with horizontal orientation\n* use Reka UI dialog\n* use `CommonSwiper` , `Icon`, `SwiperGlassArrowsNavigation`, SwiperZoomLevelSelectorMobile\n\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=162-220503&t=QXcTXXSs6yFxXc5B-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=17551-342104&t=RjxnVmSM5Q6iOxuw-4",
+    "https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=82-364835&t=zS0D1Ct2rhbt9YPo-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=162-221712&t=QXcTXXSs6yFxXc5B-4",
+    "https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=87-368394&t=zS0D1Ct2rhbt9YPo-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=162-220494&t=QXcTXXSs6yFxXc5B-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=162-221701&t=QXcTXXSs6yFxXc5B-4",
+    "https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=82-362248&t=zS0D1Ct2rhbt9YPo-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15658-126948&t=RjxnVmSM5Q6iOxuw-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "variant",
+        "type": "'white' | 'black'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "levels",
+        "type": "number",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "variant",
+        "type": "'white' | 'black'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "maxLevel",
+        "type": "number",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "minLevel",
+        "type": "number",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "variant",
+        "type": "black | 'white'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "size",
+        "type": "'medium' | 'small'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "isActive",
+        "type": "boolean",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "media",
+        "type": "Media",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "orientation",
+        "type": "'vertical' | 'horizontal'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "thumbnails",
+        "type": "thumbnailProps[]",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "brand",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "medias",
+        "type": "Media[]",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-84",
+    "title": "Product Detail Page"
+  },
+  "summary": "A fullscreen lightbox modal for viewing product images with multi-level zoom, thumbnail navigation, and pinch-to-zoom support on mobile.",
+  "features": [
+    "Three zoom levels (1x, 2x, 3x) with pan/drag support",
+    "Horizontal thumbnail strip for image navigation",
+    "Keyboard and swipe gesture navigation",
+    "Theme-aware glass button variants"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-48"
+  ],
+  "longDescription": "## Purpose\n\nThe Lightbox Modal provides customers with an immersive fullscreen experience for viewing product images in high resolution. It enables detailed visual inspection through multi-level zoom and pan functionality, supporting informed purchasing decisions.\n\n## Use Cases\n\n- Viewing images in a fullscreen lightbox with zoom and pan functionality\n- Navigating through multiple product images using thumbnail navigation\n- Using pinch-to-zoom on mobile devices for detailed product inspection\n- Exploring product details at different zoom levels (1x, 2x, 3x)\n\n## Design Rationale\n\nThe lightbox implements distinct mobile and desktop experiences optimized for each platform's interaction patterns. Mobile uses fullscreen mode with swipe gestures and pinch-to-zoom, while desktop provides hover zoom and click-based navigation. Theme-aware glass button variants ensure visual consistency across different store themes. Focus trapping and comprehensive keyboard navigation ensure accessibility compliance while maintaining a seamless user experience.",
+  "keywords": [
+    "image viewer",
+    "zoom controls",
+    "fullscreen modal"
+  ],
+  "shortDescription": "The Lightbox Modal provides an immersive fullscreen experience for viewing product images in high resolution. It implements distinct mobile and desktop experiences—mobile uses fullscreen mode with swipe gestures and pinch-to-zoom, while desktop provides hover zoom and click-based navigation. The component supports multi-level zoom (1x, 2x, 3x) with pan functionality for detailed product inspection. Focus trapping and comprehensive keyboard navigation ensure accessibility compliance."
+}

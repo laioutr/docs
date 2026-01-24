@@ -1,0 +1,31 @@
+{
+  "key": "LAIOUTR-40",
+  "title": "Product Slider",
+  "issueType": "Idea",
+  "status": "Done",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\nAs a store visitor, I want to get an impression of the store range, and sliders that show different products help me to do this.\n\n‌\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-1\">:clipboard:</custom> Requirements\n\n| Properties: slider navigation (position) top / bottom optional headings yes / no with button yes / no choosable button variant show scrollbar yes / no default is: show scrollbar true There are two color variants as individual components in Figma: [on light background](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11286-268738&t=kWl7opPn708GdN7H-4) [on dark background](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11286-279482&t=kWl7opPn708GdN7H-4) |  |\n| --- | --- |\n| It must be possible for the user to select how extensive the displayed product tiles should be. It must be possible to adjust the background color of the product images (if transparent pngs are used) for the products in the slider. The user can also decide which image format should be used (1:1 or 3:4), in contrast to the global setting. The user can specifically add or deactivate an Add to Cart button for the product tiles in the slider if desired You can find some [design examples here.](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11286-299244&t=kWl7opPn708GdN7H-4) | Example: Very minimalist product tiles: ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=7faa235b-06a1-43c4-bfd5-9595e21c2c25&&collection=&height=489&occurrenceKey=null&width=510&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) Product tiles with more information: ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=bcae21c9-3576-4575-a9ad-1f9002d67a99&&collection=&height=481&occurrenceKey=null&width=252&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| It should later be possible to add products to the slider as follows: Manual entry of SKUs / article numbers Specification of one or more category IDs Only products with a specific label (e.g. promo or sale etc.) Automated recommendations |  |\n",
+  "linkedLuiTickets": [
+    "LUI-55"
+  ],
+  "created": "2025-02-28T11:16:31.823+0100",
+  "updated": "2025-06-27T14:23:59.061+0200",
+  "enrichedData": {
+    "purpose": "Enables store visitors to browse product ranges through horizontal sliders that showcase different products, giving them an impression of available merchandise.",
+    "useCases": [
+      "Position slider navigation at top or bottom",
+      "Display optional headings with or without action button",
+      "Select button variant for heading area",
+      "Toggle scrollbar visibility",
+      "Choose between light and dark background variants",
+      "Configure product tile detail level (minimalist to extensive)",
+      "Adjust product image background color for transparent PNGs",
+      "Override global image format setting (1:1 or 3:4) per slider",
+      "Toggle add-to-cart button on product tiles",
+      "Populate slider via manual SKU entry",
+      "Populate slider by specifying category IDs",
+      "Filter products by label (promo, sale)",
+      "Display automated product recommendations"
+    ]
+  }
+}

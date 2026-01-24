@@ -1,0 +1,82 @@
+{
+  "key": "LUI-69",
+  "title": "Breadcrumbs",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "Are a global component that should be visible on all pages, but with the possibility of exceptions, such as the home page.\n\n---\n\n<custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\n**As** a user browsing an online shop,  \n**I want** to see breadcrumb navigation on category and product pages,  \n**so that** I can easily understand where I am and navigate back to higher-level categories.\n\n---\n\n### Requirements\n\nby <custom data-type=\"mention\" data-id=\"id-1\">@Carolin Jütz</custom> \n\nPlease note the annotations in Figma\n\n| **Structure** Reflect the full navigation path (e.g., `Home > Women > Shoes > Sneakers`). If a page has multiple different parents, identify a canonical path to it in the site hierarchy and  show that path in  the breadcrumb trail. Each level (except the current page) is a clickable link. On PDP, the current category is clickable ([Details and Example here ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14145-361398&t=aARHqzA1E7J0jGbx-4)<custom data-type=\"emoji\" data-id=\"id-2\">:link:</custom>[ ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14145-361398&t=aARHqzA1E7J0jGbx-4)), product title is not part of the breadcrumb | <custom data-type=\"smartlink\" data-id=\"id-3\">https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14145-125661&t=aARHqzA1E7J0jGbx-4</custom>   |\n| --- | --- |\n| **Components used** [white secondary icon button small](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=122-2180&t=aARHqzA1E7J0jGbx-4) [.internal/ \\_navigation-menu-item mobile](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14145-16128&t=aARHqzA1E7J0jGbx-4) |  |\n| **Mobile Optimization** To save space on mobile devices, a \"see more\" button and only two categories are displayed: the current and the parent category. Clicking on the button shows the full navigation path [Example in Figma ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14145-361386&t=aARHqzA1E7J0jGbx-4)<custom data-type=\"emoji\" data-id=\"id-4\">:link:</custom>[ ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14145-361386&t=aARHqzA1E7J0jGbx-4) On small mobile screens it can happen that the breadcrumbs would also break in the shortened view. If this is the case, only show the current category. If the category name is still too long, truncate it. [Example in Figma ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14145-360978&t=aARHqzA1E7J0jGbx-4)<custom data-type=\"emoji\" data-id=\"id-5\">:link:</custom>[ ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14145-360978&t=aARHqzA1E7J0jGbx-4) | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=28089367-f8dd-41ea-8a2c-c0e8f17fae08&&collection=&height=484&occurrenceKey=null&width=426&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=dc897433-b490-44da-b693-c833d160a5b6&&collection=&height=487&occurrenceKey=null&width=385&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| **Desktop** Display full navigation path Hover over Breadcrumb item opens dropdown with sub categories Click on Breadcrumb item opens the corresponding page [Example in Figma ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14145-361805&t=aARHqzA1E7J0jGbx-4)<custom data-type=\"emoji\" data-id=\"id-6\">:link:</custom>[ ](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14145-361805&t=aARHqzA1E7J0jGbx-4) | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=a0ec8535-e0fe-4297-993c-af4be04fbff0&&collection=&height=546&occurrenceKey=null&width=1302&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| **Localization** Breadcrumb labels adapt to the selected language and locale (Right-to-left layout support for RTL languages (e.g., Arabic, Urdu).) |  |\n| **Dynamic Rendering** Generate dynamically based on the page's taxonomy and hierarchy. Support deep linking and SEO-friendly URLs. |  |\n|  |  |\n\n---\n\nby <custom data-type=\"mention\" data-id=\"id-7\">@bassem mohamed</custom> \n\n## **Acceptance critera:**\n\n* Breadcrumbs with light mode \n* Breadcrumbs with dark mode\n\n## **Technical details:**\n\n_**organisms/BreadcrumbItem**_\n\n```\nexport interface BreadcrumbItem {\n  id:string\n  label: string;\n  href?: string;\n  subitems?: BreadcrumbItem[];\n}\n```\n\n* this component is used to render the single breadcrumb item and when hovering a dropdown is displayed if it has subitems \n* use `LuiText` , `LuiNavigationMenuTextItem` , `LuiDropdown` for rendering the dropdown on hover (desktop-only)\n\n_**organisms/Breadcrumbs**_\n\n```\nexport interface BreadcrumbProps {\n  colorMode : 'on-light' | 'on-dark'\n  items: BreadcrumbItem[];\n}\n```\n\nThe difference in layout between mobile and desktop has to be implement with css only, to not cause any layout-shifts when loading the page. Interaction can of course be done with js.\n\n### Storybook stories\n\nCreate these stories:\n\n* 4 levels deep with level 1, level 2 and level 3 having a dropdown-menu\n* 2 levels deep with level 1 having a dropdown-menu\n\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14145-361398&t=aARHqzA1E7J0jGbx-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14145-125661&t=aARHqzA1E7J0jGbx-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=122-2180&t=aARHqzA1E7J0jGbx-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14145-16128&t=aARHqzA1E7J0jGbx-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14145-361386&t=aARHqzA1E7J0jGbx-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14145-360978&t=aARHqzA1E7J0jGbx-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14145-361805&t=aARHqzA1E7J0jGbx-4"
+  ],
+  "userStory": "As a a user browsing an online shop, I want to see breadcrumb navigation on category and product pages,, so that I can easily understand where I am and navigate back to higher",
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "id",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "href",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "subitems",
+        "type": "BreadcrumbItem[]",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "colorMode",
+        "type": "'on-light' | 'on-dark'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "items",
+        "type": "BreadcrumbItem[]",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/09.ui-app-navigation/breadcrumb.md",
+  "parentEpic": {
+    "key": "LUI-68",
+    "title": "Product Listing Page"
+  },
+  "summary": "Breadcrumb navigation displaying user location in site hierarchy with expandable dropdown menus for subcategory access.",
+  "features": [
+    "Full navigation path with clickable links reflecting category hierarchy",
+    "Dropdown menus showing subcategories on hover (desktop)",
+    "Mobile-optimized collapsible display with expandable navigation",
+    "CSS-only responsive layout to prevent layout shifts"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-46"
+  ],
+  "longDescription": "## Purpose\n\nThe Breadcrumbs component provides essential wayfinding for shoppers navigating category and product pages. It displays the full hierarchical path from the homepage to the current page, enabling users to quickly understand their location within the store structure and navigate back to parent categories.\n\n## Use Cases\n\n- Display the complete category path on product listing pages (e.g., Home > Women > Shoes > Sneakers)\n- Provide mobile-optimized breadcrumbs with an expandable \"see more\" button to conserve screen space\n- Enable quick subcategory navigation via hover-triggered dropdown menus on desktop\n- Support deep-linked URLs and SEO-friendly navigation structures\n\n## Design Rationale\n\nThe component uses CSS-only responsive layout differences between mobile and desktop to prevent layout shifts during page load. On mobile, only the current and parent categories display initially, with truncation for long names on very small screens. The dropdown menus on desktop provide rapid access to sibling categories without requiring additional page loads.",
+  "shortDescription": "Reflects canonical navigation path with each level (except current page) as a clickable link. On PDPs, current category remains clickable while product title is excluded. On small mobile screens, shows only current category with truncation for long names. Supports RTL languages and dynamically generates paths based on page taxonomy. Uses LuiText, LuiNavigationMenuTextItem, and LuiDropdown for rendering.",
+  "keywords": [
+    "wayfinding",
+    "taxonomy",
+    "SEO navigation"
+  ]
+}

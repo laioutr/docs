@@ -1,0 +1,44 @@
+{
+  "key": "LUI-97",
+  "title": "PDP / create buybox",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "Displays different components related to the product, variants, price etc.\n\n<custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> **User Story:**\n\n**As a** customer,  \n**I want** to see a clearly visible and interactive buy box on the product detail page,  \n**so that** I can easily select the desired product options and proceed to purchase without confusion.\n\n---\n\n## Buy Box requirements:\n\n| **Requires**: Product Title & Basic Info Logo (optional) Brand (optional) can be linked to brand page Product title Price Info Variant Selection (basic or multi variant, can be chosen by the customer, MVP for Ambiendo: multi variant) Energy Label Info Quantity Picker & CTA Stock availability & Shipping Info (optional) If the free delivery limit is reached, display \"Free delivery!\" hint Quantity discount box (optional) Benefits (optional) if the free delivery limit is reached, hide the delivery benefit  ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=015385d0-24a9-4130-ad34-4c97c8817b1f&&collection=&height=342&occurrenceKey=null&width=1029&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |  |\n| --- | --- |\n| To make it possible to create further PDP templates for different themes later, it must be possible to hide parts of the Buybox.  In the example on the right you can see an example where the title and price information are displayed above the image gallery and are therefore not displayed in the buybox. This is not part of the Ambiendo MVP, but should be taken into account | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=98ff0e23-5840-47fb-bdfe-fa4fac79d9d1&&collection=&height=1419&occurrenceKey=null&width=966&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **Responsive Design** Must be fully responsive and optimized for mobile, tablet, and desktop views. **Accessibility** All interactive elements must be keyboard navigable. Comply with WCAG 2.1 AA standards (e.g., proper labels for screen readers).  |  |\n\n### **Non-Functional Requirements**\n\n* **Performance**: The buy box must load in under 1 second after page render.\n* **Analytics**: Track interactions like add-to-cart clicks, variant selections, and quantity changes.\n* **Localization**: Support multiple languages and currencies depending on the user's region.\n* **Fallbacks**: If data (e.g., stock info) cannot be loaded, show a graceful fallback or message.\n\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "customer",
+        "type": null,
+        "default": null,
+        "description": "**I want** to see a clearly visible and interactive buy box on the product detail page,"
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-84",
+    "title": "Product Detail Page"
+  },
+  "summary": "The main buy box container component for product detail pages, combining title, pricing, variant selection, quantity picker, and action buttons into a cohesive purchase interface.",
+  "features": [
+    "Modular composition with optional components",
+    "Multiple variant selection modes (basic or multi)",
+    "Responsive design for all screen sizes",
+    "Free delivery threshold detection"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-48"
+  ],
+  "longDescription": "## Purpose\n\nThe Buy Box is the central purchase interface on product detail pages, consolidating all elements customers need to make informed purchasing decisions and complete their selection. It serves as the primary conversion point where customers finalize product options and initiate the purchase process.\n\n## Use Cases\n\n- Displaying comprehensive product information including title, brand, and pricing\n- Selecting product variants and quantity before adding to cart\n- Adding products to cart with immediate feedback confirmation\n- Showing stock availability and delivery information\n- Displaying volume discounts and product benefits\n\n## Design Rationale\n\nThe buy box uses modular composition to support different PDP layouts and theme requirements. Optional components can be shown or hidden based on product type and store configuration. The responsive design ensures optimal usability across devices. Integration with free delivery thresholds dynamically updates messaging to incentivize purchases. WCAG 2.1 AA compliance ensures accessibility for all customers.",
+  "keywords": [
+    "buy box",
+    "purchase interface",
+    "add to cart"
+  ],
+  "shortDescription": "The Buy Box is the central purchase interface on product detail pages, consolidating all elements customers need to make informed purchasing decisions. It uses modular composition to support different PDP layouts and theme requirements, with optional components that can be shown or hidden based on product type and store configuration. Integration with free delivery thresholds dynamically updates messaging to incentivize purchases. WCAG 2.1 AA compliance ensures accessibility for all customers."
+}

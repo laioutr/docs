@@ -1,0 +1,64 @@
+{
+  "key": "LUI-93",
+  "title": "PDP / buybox / Stock availability & delivery",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "| contains : [delivery & stock information component](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-224580&t=wABQtnJ0GubOC0US-4) indicates when shipping is free shows whether a product is in stock, whether it needs to be ordered, etc.  depends on the rules that are stored in the system the user can decide freely about emojis or icons the font colors are set by default by the theme. but can be changed | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=8e64c687-a8af-4b66-817f-53ab92c23cde&&collection=&height=234&occurrenceKey=null&width=531&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=f5483c2f-c623-4640-a726-37a1900797c8&&collection=&height=102&occurrenceKey=null&width=320&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| --- | --- |\n\nby <custom data-type=\"mention\" data-id=\"id-0\">@bassem mohamed</custom> \n\n### **Acceptance criteria:** \n\n* same as figma examples\n\n    * \"Free shipping\", positive, check-icon\n    * \"Delivery in 2-5 days\", positive, shipping-box icon \n    \n        ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=f1034762-4019-4a38-862b-fe361964eab5&&collection=&height=27&occurrenceKey=null&width=28&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n    * \"Free shipping\", positive, party-popper emoji\n    * \"Delivery in 2-5 days\", positive, truck emoji\n    * \"Delivery in 14-21 days\", warning, shipping-box icon\n    * \"Currently not in stock\", negative, cross-mark icon\n    \n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=f85ffb19-fd0c-4cfe-8bde-0b8129c14eba&&collection=&height=248&occurrenceKey=null&width=846&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n### **Technical Details:**\n\n_**molecule/PDP/BuyBoxStockInfo**_\n\nThis component renders a single line of text prefixed by either an icon or an emoji\n\n```\ninterface BuyBoxStockInfoProps {\n  text: string;\n  size: 'small' | 'medium' = 'small';\n  icon: string;\n  style: 'positive' | 'warning' | 'negative' = 'positive';\n}\n```\n\n* use\n\n    * -`-delivery-and-stock-info-positive-text-color` as positive color\n    * `--delivery-and-stock-info-warning-text-color` as warning and \n    * `--delivery-and-stock-info-negative-text-color` as negative\n    \n* use `LuiIcon` , `LuiText`\n\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-224580&t=wABQtnJ0GubOC0US-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "text",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "size",
+        "type": "'small' | 'medium' = 'small'",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "icon",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "style",
+        "type": "'positive' | 'warning' | 'negative' = 'positive'",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-84",
+    "title": "Product Detail Page"
+  },
+  "summary": "A stock and delivery status component displaying availability information with customizable icons, emojis, and semantic color coding for positive, warning, and negative states.",
+  "features": [
+    "Dynamic icon or emoji display with positive, warning, and negative states",
+    "Theme-based color variables for semantic status indication",
+    "Configurable text with small and medium size variants",
+    "Free shipping and delivery time indicators"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-48"
+  ],
+  "longDescription": "## Purpose\n\nThe Stock Availability and Delivery component communicates product availability and expected delivery timeframes to customers. It uses semantic color coding and visual indicators to help customers quickly understand whether a product can be purchased and when it will arrive.\n\n## Use Cases\n\n- Showing stock availability status and estimated delivery time\n- Indicating free shipping eligibility with positive visual feedback\n- Warning customers about extended delivery times for backordered items\n- Displaying out-of-stock status with clear negative indication\n\n## Design Rationale\n\nThe semantic color system (positive/warning/negative) provides immediate visual feedback about availability status without requiring customers to read detailed text. Support for both icons and emojis allows stores to maintain brand personality while conveying important information. Theme-based color variables ensure consistency with the overall store design while maintaining accessibility through sufficient color contrast.",
+  "keywords": [
+    "stock status",
+    "delivery time",
+    "availability indicator"
+  ],
+  "shortDescription": "The Stock Availability and Delivery component communicates product availability and expected delivery timeframes to customers. It uses semantic color coding (positive/warning/negative) to provide immediate visual feedback without requiring customers to read detailed text. Support for both icons and emojis allows stores to maintain brand personality while conveying important information. Theme-based color variables ensure consistency with the overall store design while maintaining accessibility."
+}

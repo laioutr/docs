@@ -1,0 +1,58 @@
+{
+  "key": "LUI-212",
+  "title": "Studio / Sections / Product Detail",
+  "issueType": "Story",
+  "status": "Dev QA",
+  "labels": [],
+  "description": "This sections contains a lot of blocks.\n\n<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Product Detail |\n| --- | --- |\n| **Description** | Everything you need to showcase a product. With Add to Cart button, media gallery, and Buy Box. |\n| **Options** | Name Data Source selection Display: Media Buy Box Product Details |\n| **Media** | Display Mode: Gallery Image Style: full boxed Media data source Single Media Styling Rounded corners y/n Enable Lightbox y/n Format mobile (square, landscape, portrait) desktop (square, landscape, portrait) Height mobile desktop |\n| **Product Details** | Data Source |\n| **Design options** | Section Styling: Style: full width boxed Section Background: None (default) custom Text color: Default custom  Layout: Margin: None S M L Padding: None S M L |\n\n## Die Buy Box enthält weitere Blöcke:\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=42e9e156-c480-4bc6-a528-a0f5944ebb61&&collection=&height=201&occurrenceKey=null&width=138&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Media",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Product Details",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Design options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Comprehensive product detail section with media gallery, Buy Box, and details.",
+  "features": [
+    "Media gallery or single image with lightbox support",
+    "Responsive format options (square, landscape, portrait)",
+    "Integrated Buy Box with child blocks",
+    "Full width or boxed layout with spacing controls"
+  ],
+  "keywords": ["PDP section", "product page", "product showcase"],
+  "shortDescription": "The Product Detail section serves as the main container for product detail pages. It orchestrates three key areas: the media gallery showcasing product images with optional lightbox, the Buy Box containing all purchase-related blocks, and the product details area for descriptions and specifications. Media format adapts between mobile and desktop breakpoints. The section handles data source configuration and offers layout customization through style, background, and spacing options."
+}

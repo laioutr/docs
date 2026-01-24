@@ -1,0 +1,21 @@
+{
+  "key": "LUI-128",
+  "title": "Editable",
+  "issueType": "Story",
+  "status": "To Do",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-123",
+    "title": "Laioutr UI Kit Components"
+  },
+  "summary": "An editable component for seamless inline content editing.",
+  "features": [],
+  "keywords": [],
+  "shortDescription": "The Editable component enables inline content editing with a seamless transition between view and edit modes. It displays text normally until clicked, then transforms into an input field for modification. This pattern reduces form complexity by allowing direct manipulation of displayed content, commonly used for quick edits to titles, labels, or any text that users may need to modify in place."
+}

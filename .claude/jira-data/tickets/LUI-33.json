@@ -1,0 +1,62 @@
+{
+  "key": "LUI-33",
+  "title": "Add Gallery Content Slider",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## **Acceptance Criteria**\n\n* Slider with 4:3 block images (landscaped)\n* slider with 4:3 block images (portrait)\n* slider with cards component \n* slider with mixed components (cards & CTA banner & image)\n* slider with CTA banners\n\n‌\n\nCreate storybook stories:\n\n* 6x ImageBlock 4:3\n* 6x Card (some with CTAs, some without)\n* 1x CTA Banner Basic, 2x Card, 1x ImageBlock 1:1, 2x ImageBlock 4:3\n\n## **Technical Details**\n\n### components/section/GalleryContentSlider/SectionGalleryContentSlider.vue\n\nThis filename is very important, as it ensures the section is loaded into cockpit automatically. For now we don't add a section-definition. There will be a follow-up ticket.\n\n```\nexport interface GalleryContentSliderProps {\n  // color theme of slider \n  colorMode : 'light' | 'dark' | 'bright';\n  \n  // headline and subline will be on the left or center\n  textPositions : 'left ' | 'center';\n  \n  // arrows will be on top right or on bottom right\n  navigationPosition : 'top' | 'bottom';\n  \n  // slider will have a scrollbar or not \n  hasScrollbar : boolean \n}\n```\n\n**location : block/BlockGalleryContentSlider/BlockGalleryContentSlider.vue**\n\n* use slide element as _**slot**_ it can be any component as Cards , ImageBlock , CTABanner components \n* the elements of the slider will be stretched according to the highest element hight\n* use LuiText or typography-classes, SwiperNavigationCompact\n\nIf the width-adjustment for image-blocks with an aspect-ratio is hard, we will do a follow-up ticket for that and fall back to all elements having the same width.",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "colorMode",
+        "type": "'light' | 'dark' | 'bright'",
+        "default": null,
+        "description": "Color theme of the slider for visual consistency"
+      },
+      {
+        "name": "textPositions",
+        "type": "'left' | 'center'",
+        "default": null,
+        "description": "Alignment of headline and subline text"
+      },
+      {
+        "name": "navigationPosition",
+        "type": "'top' | 'bottom'",
+        "default": null,
+        "description": "Position of navigation arrows (top right or bottom right)"
+      },
+      {
+        "name": "hasScrollbar",
+        "type": "boolean",
+        "default": null,
+        "description": "Whether to display a scrollbar indicator"
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-32",
+    "title": "Gallery Content Slider"
+  },
+  "summary": "A versatile content slider displaying mixed content types including cards, images, and CTA banners in a gallery format.",
+  "features": [
+    "Slot-based architecture for flexible content composition with cards, images, and CTA banners",
+    "Multiple color modes: light, dark, and bright themes",
+    "Configurable text alignment and navigation arrow positioning",
+    "Automatic height normalization across slide elements"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-38"
+  ],
+  "longDescription": "## Purpose\n\nThe Gallery Content Slider provides a flexible, visually engaging way to present diverse content types in a horizontal scrolling format. It serves as a foundational component for showcasing product categories, promotional content, and mixed media presentations.\n\n## Use Cases\n\n- Display category previews with image blocks in landscape or portrait orientations\n- Showcase promotional cards with optional call-to-action buttons\n- Create mixed-content galleries combining CTA banners, cards, and images\n- Present visual content that supports brand identity through customizable theming\n- Enable content discovery through intuitive horizontal navigation\n\n## Design Rationale\n\nThe component uses a slot-based architecture to maximize flexibility, allowing any combination of child components. Height normalization ensures visual consistency regardless of content variety. Multiple color modes and configurable navigation positions enable seamless integration with different page layouts and brand guidelines.",
+  "shortDescription": "Supports various image aspect ratios (4:3, 1:1) for landscape and portrait orientations. Includes optional scrollbar for progress indication. Automatically loaded into cockpit as a section component. Uses LuiText, typography classes, and SwiperNavigationCompact internally.",
+  "keywords": [
+    "carousel",
+    "swiper",
+    "cockpit section"
+  ]
+}

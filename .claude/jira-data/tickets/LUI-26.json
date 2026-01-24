@@ -1,0 +1,50 @@
+{
+  "key": "LUI-26",
+  "title": "Quote Card Slider",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "For global requirements and further info, please look into Epic\n\n* simple animation\n* no max. cards limit\n* for lg breakpoint and above: fixed card with:\n\n    ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=e9657d98-4a25-4842-8ae3-cd16244a664d&&collection=&height=255&occurrenceKey=null&width=640&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)\n* user can choose card style for the slider\n* user can change card background color\n* user can choose star rating variant\n* user can choose navigation style (bullets or numbers)\n* Height of each card adjusts to the height of the highest card\n\n    * There are no max. characters, but we recommend approx. 200 characters.\n    \n\nThe following storybook stories have been created:\n\n* Slider with slides (default, left-aligned with avatar and logo) and navigation-buttons\n* Slider with slides (default, center-aligned with stars and avatar) and scrollbar-buttons\n* Slider with slides (dark-background, left-aligned with stars and avatar and logo) and scrollbar-buttons\n* Slider with slides (bright-background, left-aligned with stars and avatar and logo) and scrollbar-buttons\n* Slider with slides (outline, left-aligned with stars and avatar and logo) and scrollbar-buttons\n* Slider with slides (haptic, left-aligned with stars and avatar and logo) and scrollbar-buttons\n\n## Technical details\n\n### Block/QuoteSlider\n\nUses the linked QuoteCard-component from <custom data-type=\"smartlink\" data-id=\"id-0\">https://laioutr.atlassian.net/browse/THEMES-25</custom> inside a Swiper.\n\n| **Prop** | **Type** | **Default** |\n| --- | --- | --- |\n| slides | QuoteCardProps\\[\\] |  |\n| navigationStyle | `scrollbar-buttons | navigation-buttons` | `navigation-buttons` |\n",
+  "figmaLinks": [],
+  "userStory": "As a Website Visitor, I want to browse through multiple customer testimonials So that I can see diverse experiences and build confidence in the company's services",
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "slides",
+        "type": "QuoteCardProps[]",
+        "default": null,
+        "description": "Array of quote card configurations for each slide"
+      },
+      {
+        "name": "navigationStyle",
+        "type": "scrollbar-buttons | navigation-buttons",
+        "default": "navigation-buttons",
+        "description": "Navigation control style for the slider"
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-23",
+    "title": "Testimonial Components"
+  },
+  "summary": "A carousel slider displaying multiple Quote Cards with animated transitions, customizable navigation, and consistent card height adjustment.",
+  "features": [
+    "Unlimited slides with smooth animated transitions",
+    "Two navigation styles: scrollbar buttons or navigation buttons",
+    "Unified card styling across slides (default, dark, bright, outline, haptic)",
+    "Automatic height equalization to match the tallest card"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-31"
+  ],
+  "longDescription": "## Purpose\n\nThe Quote Card Slider enables website visitors to browse through multiple customer testimonials in an engaging carousel format. By presenting diverse experiences from different customers, it builds trust and helps potential customers make informed decisions.\n\n## Use Cases\n\n- Display a collection of customer reviews on landing pages with easy navigation between testimonials\n- Showcase testimonials from different industries or customer segments in a compact space\n- Present star-rated reviews in a visually consistent carousel format\n- Feature customer feedback prominently on homepage or product pages\n\n## Design Rationale\n\nThe slider format maximizes the impact of social proof by allowing multiple testimonials to occupy the same visual space while maintaining engagement through user-controlled navigation. The automatic height equalization ensures visual consistency when testimonials vary in length. Supporting multiple card styles allows the component to adapt to different page contexts and brand requirements.",
+  "shortDescription": "Enables visitors to browse through multiple customer testimonials in an engaging carousel format. Presents diverse experiences from different customers to build trust. Display collections on landing pages with easy navigation. Showcase testimonials from different industries or customer segments in a compact space. Present star-rated reviews in a visually consistent format. Maximizes social proof impact by allowing multiple testimonials to occupy the same visual space.",
+  "keywords": [
+    "swiper",
+    "review collection",
+    "card carousel"
+  ]
+}

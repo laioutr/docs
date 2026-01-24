@@ -1,0 +1,22 @@
+{
+  "key": "LAIOUTR-26",
+  "title": "Test version Overlay Reminder with Next Steps and Benefit Communication",
+  "issueType": "Idea",
+  "status": "Parking lot",
+  "labels": [],
+  "description": "## <custom data-type=\"emoji\" data-id=\"id-0\">:person_with_crown:</custom> User Story\n\nAs a user trying out a trial version, it is important that I can see how long I have left and what my next options are.\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-1\">:gorilla:</custom> Goal\n\nIncrease subscriptions by active communication to trial users.\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-2\">:brain:</custom> Assumptions\n\n* Trial users are more concerned with the next steps if you provide them with a simple overview by means of a banner or button\n* By exerting gentle pressure, we as a brand are not aggressive, but friendly and helpful, because we provide decision-making aids and a feeling of transparency. This in turn has a positive effect on the purchase decision.\n* if you then insert a countdown in the last 3 days of the trial version, this is not regarded as a \"raid\", but as a reminder\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-3\">:clipboard:</custom> Requirements\n\n‌\n\n---\n\n## <custom data-type=\"emoji\" data-id=\"id-4\">:paintbrush:</custom> Design",
+  "linkedLuiTickets": [],
+  "created": "2025-02-19T15:57:10.302+0100",
+  "updated": "2025-06-11T22:27:01.276+0200",
+  "enrichedData": {
+    "purpose": "Enables trial users to understand their remaining trial time and available next steps, helping them make informed subscription decisions.",
+    "goals": [
+      "Increase subscriptions by active communication to trial users"
+    ],
+    "designRationale": [
+      "Trial users are more concerned with the next steps if you provide them with a simple overview by means of a banner or button",
+      "By exerting gentle pressure, we as a brand are not aggressive, but friendly and helpful, because we provide decision-making aids and a feeling of transparency",
+      "A countdown in the last 3 days of the trial version is regarded as a reminder, not as a raid"
+    ]
+  }
+}

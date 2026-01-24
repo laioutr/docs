@@ -1,0 +1,90 @@
+{
+  "key": "LUI-75",
+  "title": "Standard Filter Bar",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "## Standard Filter Bar\n\nIs based on Shopify Standard. has the option to work with Google Retail Connect App, which is needed for Ambiendo MVP.\n\nMobile: <custom data-type=\"smartlink\" data-id=\"id-0\">https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=82-217205&m=dev</custom> \n\nDesktop: <custom data-type=\"smartlink\" data-id=\"id-1\">https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=82-220118&m=dev</custom> \n\n<custom data-type=\"smartlink\" data-id=\"id-2\">https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=36-316870&m=dev</custom>  \n\n‌\n\n---\n\n<custom data-type=\"emoji\" data-id=\"id-3\">:person_with_crown:</custom> **User Story**\n\n**As a** user browsing the product listing page,  \n**I want** to see how many products match my current filters and have quick access to sorting and filtering options,  \n**So that** I can efficiently narrow down and organize the results to find what I'm looking for.\n\n### Requirements\n\nby <custom data-type=\"mention\" data-id=\"id-4\">@Carolin Jütz</custom> \n\n| **Figma properties:** breakpoint active filters yes/no more then 4 filters yes/no google retail connect yes/no Watch [**Ambiendo mobile dummy**](https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-47&p=f&viewport=-5079%2C384%2C0.25&t=JdNx9y5r0PDJX6eC-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=14894%3A105958&show-proto-sidebar=1) to see interaction: _Clicked filters from the GRC App combined with filters in the off canvas sheet._ Watch[ Basic Filter Dummy ](https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-47&p=f&viewport=-10451%2C-1014%2C0.5&t=JdNx9y5r0PDJX6eC-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=14980%3A109869&show-proto-sidebar=1)and filter for the color\"blau\" | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=aef04128-b737-44a1-8971-c23e841c110a&&collection=&height=84&occurrenceKey=null&width=415&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=fe0e8deb-bb48-4bb0-9c03-952715072455&&collection=&height=230&occurrenceKey=null&width=413&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| --- | --- |\n| **Active / set filters:** Clicking the primary button \"All filters\" opens the [**filter off canvas sheet**](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15055-191629&t=reqgsA9rbH2D4nWh-4) Clicking the ghost button \"Sort\" opens [sorting **drop down**](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15139-159597&t=reqgsA9rbH2D4nWh-4) If any filter is selected, display a tertiarry button small with a delete icon and the corresponding filter name Tapping/clicking on the filter button deletes the selection If there are more then 4 filters slected, display an additional ghost button small \"Reset all filters\" if this button is clicked → all active filters are removed | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=13e9b22d-7ebf-4fa4-b145-c48598deede1&&collection=&height=385&occurrenceKey=null&width=377&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=cbdfdd76-b032-4e21-8e26-bb9647cc12d7&&collection=&height=645&occurrenceKey=null&width=420&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **Sticky behaviour** See example [here](https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14980-153702&t=JdNx9y5r0PDJX6eC-4) And see example for [mobile and desktop here from ikea.](https://www.ikea.com/de/de/cat/kissen--bezuege-10659/)  The normal sticky shop header is displayed (if it isn't turned of) When the filter bar scrolls out of the viewport, the sticky filter bar is displayed and \"pushes\" the navigation to the top out of the screen This works the same way in reverse. See [live example here](https://www.ikea.com/de/de/cat/kissen--bezuege-10659/) | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=099d6dab-1b34-4b28-a3cd-764eae6db7cb&&collection=&height=235&occurrenceKey=null&width=217&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n| **Product Count Display** Shows total number of products currently visible after applying filters. Dynamically updates as filters are applied or cleared. | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=5df846b1-60f3-4939-91d0-c008f8accac4&&collection=&height=34&occurrenceKey=null&width=135&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **Accessibility Requirements:** **Keyboard Navigation:** All interactive elements (buttons, dropdowns) must be reachable and operable via keyboard (Tab, Enter, Arrow keys). **ARIA Roles & Attributes:** Use appropriate ARIA roles: `aria-haspopup=\"dialog\"` or `menu` for buttons that open modals or dropdowns. Include `aria-expanded` to reflect open/closed state of filters or sort menus. Ensure live updates (like product count) use `aria-live=\"polite\"` to announce changes for screen readers. **Focus Management:** When a modal or menu is opened, focus should shift to the first focusable element inside. Focus should return to the trigger element (e.g., \"All Filters\" button) when the modal/menu is closed. **Screen Reader Support:** Buttons should have clear, descriptive labels (e.g., `aria-label=\"Open all filters\"`). Product count should be announced clearly (e.g., \"Showing 45 products\"). |  |\n\n---\n\nA storybook story has been created which renders the FilterBar with some fake filters, sortings and quick-filters available.\n\nCreate an additional story which displays the regular shop-header, to demonstrate that these components don't interfere with each other in regards to their sticky behaviour. See ikea example.\n\n### Technical Definition\n\nby <custom data-type=\"mention\" data-id=\"id-5\">@Sebastian Langer</custom> \n\n_**organism/FilterBar/FilterBarQuickFilters**_\n\n```\ninterface SingleFilterOption {\n  filterId: string;\n  optionId?: string; // Only set if this option represents a filter-value in a list-filter \n  label: string; // Text to be rendered as button-text \n  dsa}\n\ninterface FilterBarQuickFiltersProps {\n  headline?: string;\n  filterOptions: QuickFilterOption[]; \n}\n```\n\n![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=5c1f9316-582d-4344-8863-0c5b8942db7a&&collection=&height=143&occurrenceKey=null&width=384&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__FileName=null&__fileSize=null&__mediaTraceId=null&url=null)\nEmits:\n\n* `setFilterOption(option: SingleFilterOption)` on click of an option\n\n_**organism/FilterBar/FilterBar**_\n\n```\ninterface FilterBarProps {\n  total: number;\n  availableSorting: { key: string; label?: string; }[]; // Render \"key\" if \"label\" is not given \n  activeSorting: string;\n  activeFilterOptions: SingleFilterOption[]; \n  quickFilterHeadline?: string;\n  quickFilterOptions?: QuickFilterOption[]; \n}\n```\n\nEmits:\n\n* `clearAllFilterOptions()`\n* `clearFilterOption(option: SingleFilterOption)`\n* `setFilterOption` see above\n\nUses `FilterBarQuickFilters` component. If quickFilterOptions is empty, do not show quick filters",
+  "figmaLinks": [
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=82-217205&m=dev",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=82-220118&m=dev",
+    "https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-47&p=f&viewport=-5079%2C384%2C0.25&t=JdNx9y5r0PDJX6eC-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=14894%3A105958&show-proto-sidebar=1",
+    "https://www.figma.com/proto/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-47&p=f&viewport=-10451%2C-1014%2C0.5&t=JdNx9y5r0PDJX6eC-0&scaling=scale-down&content-scaling=fixed&starting-point-node-id=14980%3A109869&show-proto-sidebar=1",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15055-191629&t=reqgsA9rbH2D4nWh-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15139-159597&t=reqgsA9rbH2D4nWh-4",
+    "https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14980-153702&t=JdNx9y5r0PDJX6eC-4"
+  ],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "filterId",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "optionId",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "headline",
+        "type": "string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "filterOptions",
+        "type": "QuickFilterOption[]",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "total",
+        "type": "number",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "availableSorting",
+        "type": "{ key: string",
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-74",
+    "title": "PLP - Filter & Sorting"
+  },
+  "summary": "Sticky filter bar with dynamic count, quick filters, and sorting.",
+  "features": [
+    "Dynamic product count updating with filter changes",
+    "Quick filter chips with instant application",
+    "Active filters as removable tags with reset option",
+    "Smart sticky behavior replacing header on scroll"
+  ],
+  "linkedIdeas": [
+    "LAIOUTR-60"
+  ],
+  "longDescription": "## Purpose\n\nThe Standard Filter Bar provides the primary interface for users to refine and organize product results on a product listing page. It serves as the central control point for all filtering and sorting interactions, maintaining visibility of the current filter state while offering quick access to additional options.\n\n## Use Cases\n\n- Display and dynamically update product count as filters change\n- Provide one-click access to the full filter sheet via the \"All filters\" button\n- Enable quick sorting through a dedicated dropdown menu\n- Show currently active filters as removable tag buttons for easy modification\n- Offer bulk filter reset when many filters are applied\n\n## Design Rationale\n\nThe component implements sticky positioning behavior that intelligently coordinates with the shop header, ensuring filter controls remain accessible during scroll without interfering with navigation. The design follows Shopify standards while supporting Google Retail Connect integration for enhanced filtering capabilities. Accessibility is prioritized through comprehensive keyboard navigation and screen reader support via ARIA attributes.",
+  "keywords": ["filter bar", "product filtering", "faceted search"],
+  "shortDescription": "The Standard Filter Bar provides the primary interface for refining and organizing product results on listing pages. It implements sticky positioning that coordinates with the shop header, ensuring filter controls remain accessible during scroll. The design follows Shopify standards while supporting Google Retail Connect integration. Accessibility is prioritized through comprehensive keyboard navigation and screen reader support via ARIA attributes and aria-live regions for dynamic count updates."
+}

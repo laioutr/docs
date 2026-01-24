@@ -1,0 +1,38 @@
+{
+  "key": "LUI-83",
+  "title": "CTA Banner / Remove from container",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "As a developer i want to have the flexibility to place the CTA Banner components (CTA Banner basic, showcase and integrated) everywhere i want.\n\nCurrently there are some problems in the way of achieving this:\n\n1. The banners are wrapped in `.container` classes or have margins which prevent them from being placed anywhere\n2. The banners adjust inner paddings and margins according to the screen-width. That's not useful when rendering the banner at only 25% of the viewport-width. We need to use container-queries for these properties instead of media-queries.\n3. The CTA Banner Basic is currently defined as a section. This needs to be refactored, so we can use it as a basic component again. That means we need to replace the defineSection/definitionToProps with a regular defineProps with a passed type (same as all other components)\n\nAlso please move all component files into the molecule-folder, e.g.\n\n* molecule/CtaBannerBasic\n* molecule/CtaBannerIntegrated\n* molecule/CtaBannerShowcase\n\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "folder",
+        "type": null,
+        "default": null,
+        "description": "e.g."
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "summary": "Refactoring CTA Banner components for flexible placement using container queries and standard props.",
+  "features": [
+    "Removed container wrapper classes for flexible placement",
+    "Container queries for responsive spacing based on component width",
+    "Refactored from section definition to standard component props",
+    "Component files reorganized into molecule folder"
+  ],
+  "longDescription": "## Purpose\n\nThis refactoring initiative transforms the CTA Banner components from rigid, container-bound sections into flexible, placement-agnostic molecules. The changes enable developers to position banners anywhere in a layout without inheriting unwanted container constraints or responsive breakpoint assumptions.\n\n## Use Cases\n\n- Embed CTA banners within narrow sidebar areas at 25% viewport width\n- Place banners inside grid cells or card containers\n- Use banners in modal dialogs or overlay panels\n- Nest banners within other components without layout conflicts\n- Integrate banners into PLP empty states or product detail pages\n\n## Design Rationale\n\nThe original implementation assumed banners would always occupy full-width sections, leading to hard-coded container classes and media-query-based responsive adjustments. Container queries solve the fundamental issue by making the component respond to its own container width rather than the viewport. Moving to standard defineProps aligns the components with the rest of the UI library architecture, improving consistency and reducing cognitive overhead for developers.",
+  "shortDescription": "The original implementation assumed banners would always occupy full-width sections with hard-coded container classes and media-query responsive adjustments. This enables embedding banners in narrow sidebars, grid cells, card containers, modals, or nested within other components without layout conflicts.",
+  "keywords": [
+    "container queries",
+    "CSS containment",
+    "responsive component"
+  ]
+}

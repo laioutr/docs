@@ -1,0 +1,46 @@
+{
+  "key": "LUI-253",
+  "title": "Studio / Blocks / Card",
+  "issueType": "Story",
+  "status": "Ready for Development",
+  "labels": [],
+  "description": "## Goal\n\nProvide the \"Card\" block for users in the studio.\n\n## Properties\n\nPlease note the annotations in Figma.\n\n| **Name** | Card |  |\n| --- | --- | --- |\n| **Description** | A flexible and compact card with different styles for displaying content. |  |\n| **Options** | **Design** Style plain outline haptic Image ratio 1:1 4:3 16:9 Image orientation landscape portrait **Media** Standard image upload with the following options for the chosen media: Fallback color **Heading** **Body** **Button** **Text link** | Image ratio and Image orientation do not refer to the media source, but to the image area displayed on the card The image in this example originally has a rectangular portrait format. The design settings change the display on the card: ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=82600311-1ea3-44b9-a480-fd0f9b605646&&collection=&height=716&occurrenceKey=null&width=1402&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| **Reminder** | If a button or text link is added, make the whole card clickable <custom data-type=\"smartlink\" data-id=\"id-0\">https://laioutr.atlassian.net/browse/LUI-48?atlOrigin=eyJpIjoiMzRhMzIxYTc5NDJkNDRmODkyY2Y0Y2QxNDc1NzcwYWQiLCJwIjoiaiJ9</custom>  |  |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Reminder",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": true,
+  "documentationPath": "content/3.laioutr-ui/05.ui-kit-content/Card.md",
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Flexible content card block with multiple styles and media support.",
+  "features": [
+    "Multiple style options (plain, outline, haptic)",
+    "Configurable image ratio (1:1, 4:3, 16:9) and orientation",
+    "Media support with fallback color",
+    "Entire card becomes clickable when button or link added"
+  ],
+  "keywords": ["content card", "media card", "card block"],
+  "shortDescription": "The Card block provides a versatile content container in Studio for displaying mixed media and text. It offers three visual styles (plain, outline, haptic) to match different design contexts. Image display settings control the ratio and orientation independently of the source media, allowing consistent card layouts. Content areas include heading, body text, optional button, and text link. When any interactive element is added, the entire card surface becomes clickable for improved usability."
+}

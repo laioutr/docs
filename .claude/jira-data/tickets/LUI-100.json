@@ -1,0 +1,30 @@
+{
+  "key": "LUI-100",
+  "title": "Create Package Laioutr UI",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": null,
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": {
+    "key": "LUI-98",
+    "title": "Prepare Products within separated Packages, UI Kit, Laioutr UI and Laioutr UI Pro"
+  },
+  "summary": "Create the Laioutr UI package containing e-commerce-focused components for building storefronts.",
+  "features": [
+    "E-commerce component package",
+    "Product display and navigation components",
+    "Builds on UI Kit foundation"
+  ],
+  "longDescription": "## Purpose\n\nThe Laioutr UI package provides the standard suite of e-commerce components needed for building online storefronts. It includes product displays, navigation elements, and shopping-focused components that build upon the foundational UI Kit.\n\n## Use Cases\n\n- Building standard e-commerce storefronts with ready-made components\n- Implementing product listings, cards, and detail page elements\n- Creating consistent shopping experiences across different stores\n\n## Design Rationale\n\nThe Laioutr UI package represents the core offering for e-commerce implementations, providing a complete set of components for typical storefront needs. By building on the UI Kit foundation, it maintains consistency while adding commerce-specific functionality. The separation from Pro components ensures clear licensing boundaries and allows customers to choose the appropriate tier for their needs.",
+  "shortDescription": "Part of the separated product packages structure alongside UI Kit and UI Pro. Provides a complete set of components for typical storefront needs including product listings, cards, and detail page elements. Maintains consistency with the UI Kit while adding commerce-specific functionality. Clear separation from Pro components ensures licensing boundaries.",
+  "keywords": [
+    "npm package",
+    "commerce library",
+    "standard tier"
+  ]
+}

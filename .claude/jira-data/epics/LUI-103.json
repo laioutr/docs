@@ -1,0 +1,42 @@
+{
+  "key": "LUI-103",
+  "title": "Cart Sheet",
+  "issueType": "Epic",
+  "status": "Done",
+  "labels": [],
+  "description": "This component is initially based on the Shopify standard.\n\n## 🧑‍💼 User Story\n\n**As an online shopper**,  \nI want to view and manage my cart in an on-page overlay or side drawer (cart sheet)  \nSo that I can quickly:\n\n* see which items I've added (including variant, quantity, stock status)\n* apply discount codes\n* understand potential savings (discount, free-shipping threshold)\n* estimate shipping costs or tax\n* checkout securely using my preferred payment method  \n  without leaving the current page\n\n---\n\n## Product Requirements \n\n| Cart Sheet Entry & Appearance **Trigger** via clicking cart icon or \"Add to cart\" button. Slides in from side / bottom with visually clear backdrop. Responsive design  | [mobile dummy](https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=271-42424&t=fmtTWu3hMKpEVBUe-4) [desktop dummy](https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=271-42425&t=fmtTWu3hMKpEVBUe-4) |\n| --- | --- |\n| Cart Item  **Line item list** with: thumbnail, product title + variant details, unit price, subtotal. [mobile](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=466-308896&t=5foJt3MFeIhYmV77-4) / [desktop](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=520-225833&t=5foJt3MFeIhYmV77-4) **Quantity selector** (+/– or input) that updates cart in real time (with debounce loading states). **Remove item** control (trash icon or \"Remove\" link). **Quantity discount flag**   | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=8fc332ce-a260-4dc1-be13-b8f7621b99cc&&collection=&height=994&occurrenceKey=null&width=468&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| Discounts & Free‑Shipping Progress **Discount code field** with \"Apply\" button; show updated totals upon success or failure. [mobile](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=466-313581&t=5foJt3MFeIhYmV77-4) / [desktop](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=520-223983&t=5foJt3MFeIhYmV77-4) [**Free‑shipping progress bar**:](https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=466-313684&t=5foJt3MFeIhYmV77-4) e.g. \"$15 away from free shipping\" -> dynamically updates with cart changes (customarily standard in latest release). with success state / message when free shipping limit is reached | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=3c03d25b-df44-4dd8-9d7b-fdeb6f180690&&collection=&height=413&occurrenceKey=null&width=476&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=4d6b73e3-2ee2-4653-b38a-0ffaff1e063f&&collection=&height=182&occurrenceKey=null&width=449&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| Totals & Cost Breakdown Show **subtotal**, **total discounts**, estimated shipping, estimated tax, and final total. **Currency support** with localization to shopper's locale. [see dummies here](https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=261-61060) | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=74abea29-e89f-456a-bcca-f09cb90357d0&&collection=&height=123&occurrenceKey=null&width=444&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| Checkout & Payment Options Prominent \"Proceed to checkout\" button linking to checkout flow (or one‑page checkout). Display **accepted payment methods** (Apple Pay, Google Pay, PayPal, credit cards) as logos, matching store setup  Ensure **secure checkout compliance**: SSL + PCI Level 1. | ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=0534aaf9-d3d5-431e-9d90-4cd59ee88427&&collection=&height=138&occurrenceKey=null&width=451&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null)  |\n| Performance & UX **Optimistic updates** for quantity and discount code actions, with loading spinner where needed. Fall back gracefully to server-rendered refresh  **Accessibility**: ARIA roles, proper focus management, keyboard navigation. |  |\n| Custom Fields & Scaling Ability to capture **cart attributes** (e.g. special instructions via `cart.attributes`)  Possibility to support metafields or custom cart messaging. |  |\n| . Checkout Sheet Compatibility (Mobile SDKs) Ensure compatibility with Shopify's **Checkout Sheet Kits** (React Native / Android), preserving branding, UI extensions, and payment flows  |  |\n",
+  "figmaLinks": [
+    "https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=271-42424&t=fmtTWu3hMKpEVBUe-4",
+    "https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=271-42425&t=fmtTWu3hMKpEVBUe-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=466-308896&t=5foJt3MFeIhYmV77-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=520-225833&t=5foJt3MFeIhYmV77-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=466-313581&t=5foJt3MFeIhYmV77-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=520-223983&t=5foJt3MFeIhYmV77-4",
+    "https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=466-313684&t=5foJt3MFeIhYmV77-4",
+    "https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=261-61060"
+  ],
+  "childTickets": [
+    "LUI-104"
+  ],
+  "created": "2025-06-17T14:52:01.672+0200",
+  "updated": "2025-08-14T10:11:30.799+0200",
+  "linkedIdeas": [
+    "LAIOUTR-58"
+  ],
+  "enrichedData": {
+    "purpose": "Online shoppers need a convenient way to view and manage their cart without leaving the current page, including applying discounts, understanding costs, and proceeding to checkout.",
+    "useCases": [
+      "Open cart sheet by clicking cart icon or Add to Cart button",
+      "View cart items with thumbnail, title, variant details, price, and subtotal",
+      "Adjust item quantity using increment/decrement controls or direct input",
+      "Remove items from cart",
+      "Apply discount codes and see updated totals",
+      "Track progress toward free shipping threshold",
+      "View cost breakdown with subtotal, discounts, shipping, tax, and total",
+      "See accepted payment method logos",
+      "Proceed to checkout with a prominent button",
+      "Add special instructions via cart attributes",
+      "Navigate cart using keyboard controls"
+    ]
+  }
+}

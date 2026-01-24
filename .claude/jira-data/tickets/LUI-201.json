@@ -1,0 +1,38 @@
+{
+  "key": "LUI-201",
+  "title": "Studio / Blocks / Benefits Box",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Benefits Box |\n| --- | --- |\n| **Description** | Perfect for showing your customers the benefits of your shop in a compact way. |\n| **Options**  | Data Source Multiple items can be created. Each item has the following options and can either be manual or dynamic  ![](blob:https://media.staging.atl-paas.net/?type=file&localId=null&id=b165ae54-173c-4787-9168-40f49be9b639&&collection=&height=491&occurrenceKey=null&width=275&__contextId=null&__displayType=null&__external=false&__fileMimeType=null&__fileName=null&__fileSize=null&__mediaTraceId=null&url=null) |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Compact benefits box block for displaying shop advantages with manual or dynamic data.",
+  "features": [
+    "Multiple benefit items with individual configuration",
+    "Manual or dynamic data source options per item"
+  ],
+  "keywords": ["benefits list", "shop advantages", "trust signals"],
+  "shortDescription": "The Benefits Box Studio block presents shop advantages in a compact, scannable format. Merchants can add multiple benefit items, each configurable with manual content or dynamic data from backend systems. Typical uses include highlighting free shipping thresholds, return policies, secure payment options, or customer service availability. The block works well on product pages to reinforce purchase confidence or on landing pages to communicate brand value."
+}

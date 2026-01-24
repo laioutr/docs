@@ -1,0 +1,48 @@
+{
+  "key": "LUI-216",
+  "title": "Studio / Sections / Inpage Navigation Big",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Inpage Navigation Big |\n| --- | --- |\n| **Description** | Beautiful large image tiles to link to content or categories. |\n| **Section Style Options** | Style: Full width boxed Section background color: None Theme Presets Custom Text color: On light background On dark background On bright background Display as: Grid Slider Navigation position top bottom Show scrollbar (y/n) Rows: 1 2 Content alignment: Left Center Right Auto Margin: None S M L Padding: None S M L |\n| **Tiles styling options** | Image: Format: square portrait landscape Overlay: y/n Title: Alignment left center right Position: On the image Below the image Background is dark y/n Flags: Show flags (y/n) if true: Variant Size Text or Icon |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Section Style Options",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Tiles styling options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "sourceEpic": null,
+  "sourceIdeas": [],
+  "summary": "Large image tile navigation section for linking to content or categories.",
+  "features": [
+    "Large image tiles with multiple format options (square, portrait, landscape)",
+    "Title positioning on or below images",
+    "Optional overlay and flag display",
+    "Grid or slider display with navigation controls"
+  ],
+  "keywords": ["category tiles", "image navigation", "visual links"],
+  "shortDescription": "The Inpage Navigation Big section creates striking visual entry points to categories or content pages using large image tiles. Each tile supports multiple image formats (square, portrait, landscape) with optional dark overlay for better text readability. Titles can be positioned directly on the image or below it with configurable alignment. The section displays as either a static grid or scrollable slider with navigation controls. Ideal for homepage category showcases, collection highlights, or feature page links where visual impact is paramount."
+}

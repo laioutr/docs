@@ -1,0 +1,20 @@
+{
+  "key": "LUI-74",
+  "title": "PLP - Filter & Sorting",
+  "issueType": "Epic",
+  "status": "Done",
+  "labels": [],
+  "description": null,
+  "figmaLinks": [],
+  "childTickets": [
+    "LUI-75",
+    "LUI-76",
+    "LUI-81"
+  ],
+  "created": "2025-05-13T12:23:14.986+0200",
+  "updated": "2025-08-14T10:11:18.211+0200",
+  "linkedIdeas": [
+    "LAIOUTR-60"
+  ],
+  "enrichedData": {}
+}

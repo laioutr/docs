@@ -1,0 +1,44 @@
+{
+  "key": "LUI-230",
+  "title": "Studio / Sections / Brand Hero",
+  "issueType": "Story",
+  "status": "Done",
+  "labels": [],
+  "description": "<custom data-type=\"emoji\" data-id=\"id-0\">:bulb:</custom> _For information about the display and which inputs or select fields should be used, as well as how the sidebar fields should be labeled, please refer to Figma._\n\n| **Name** | Brand Hero |\n| --- | --- |\n| **Description** | A full-width hero for your brand pages matching your theme while containing brief information and a logo.  |\n| **Options** | **Content**: Heading & Description Default text color Custom text color Logo (image upload) **Background**: Style Dark background Light background No background Background image |\n",
+  "figmaLinks": [],
+  "userStory": null,
+  "technicalSpecs": {
+    "componentPath": null,
+    "props": [
+      {
+        "name": "Description",
+        "type": null,
+        "default": null,
+        "description": null
+      },
+      {
+        "name": "Options",
+        "type": null,
+        "default": null,
+        "description": null
+      }
+    ]
+  },
+  "implemented": false,
+  "documentationPath": null,
+  "parentEpic": null,
+  "linkedIdeas": [],
+  "summary": "Full-width brand hero section with heading, description, logo, and theming.",
+  "features": [
+    "Customizable heading and description text colors",
+    "Logo image upload",
+    "Multiple background styles (dark, light, none, image)",
+    "Theme-matching design integration"
+  ],
+  "keywords": [
+    "brand page",
+    "brand hero",
+    "manufacturer page"
+  ],
+  "shortDescription": "The Brand Hero section creates dedicated header areas for brand or manufacturer landing pages. It combines a prominent brand logo with heading and description text to introduce the brand to visitors. Background styles range from dark and light solid colors to custom images, automatically adjusting text colors for readability. This section helps establish brand identity within the store while maintaining visual consistency with the overall theme."
+}
