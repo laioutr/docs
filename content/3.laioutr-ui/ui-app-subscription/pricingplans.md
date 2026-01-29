@@ -28,10 +28,10 @@ story-id: molecules-pricing-pricinggrid--pricing-grid
 ::features
 ---
 items:
-  - "Side-by-side grid layout for comparing multiple pricing tiers"
-  - "Mobile swipe carousel with coverflow animation effects"
-  - "Navigation bullets for slide indication and direct navigation"
-  - "Responsive breakpoint handling between grid and slider modes"
+  - Side-by-side grid layout for comparing multiple pricing tiers
+  - Mobile swipe carousel with coverflow animation effects
+  - Navigation bullets for slide indication and direct navigation
+  - Responsive breakpoint handling between grid and slider modes
 ---
 ::
 

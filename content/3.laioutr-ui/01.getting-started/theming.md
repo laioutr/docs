@@ -51,7 +51,6 @@ The core brand/functional color.
 ::
 
 ::card
-#default
 High-contrast shades for readability.
 
 #title

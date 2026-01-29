@@ -27,10 +27,10 @@ story-id: organisms-pricingtable--default
 ::features
 ---
 items:
-  - "Clear feature availability indicators using checkmarks and x-marks"
-  - "Sticky header row with plan names and CTA buttons"
-  - "Toggle to show only feature differences between plans"
-  - "Categorized feature sections with icons and anchor links"
+  - Clear feature availability indicators using checkmarks and x-marks
+  - Sticky header row with plan names and CTA buttons
+  - Toggle to show only feature differences between plans
+  - Categorized feature sections with icons and anchor links
 ---
 ::
 

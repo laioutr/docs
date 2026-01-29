@@ -27,10 +27,10 @@ story-id: molecules-pricing-pricingcard--enterprise-plan-offer
 ::features
 ---
 items:
-  - "Strikethrough pricing for annual billing discounts"
-  - "Included and excluded feature lists with icon indicators"
-  - "Localized money formatting with I18nMoney"
-  - "CTA button with customizable text and link"
+  - Strikethrough pricing for annual billing discounts
+  - Included and excluded feature lists with icon indicators
+  - Localized money formatting with I18nMoney
+  - CTA button with customizable text and link
 ---
 ::
 
