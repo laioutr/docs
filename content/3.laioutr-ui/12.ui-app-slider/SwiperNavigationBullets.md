@@ -4,6 +4,8 @@ description: A swiper navigation bullets component
 links: []
 ---
 
+## Usage
+
 ::component-code
 ---
 :name: LuiSwiperNavigationBullets
