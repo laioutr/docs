@@ -1,9 +1,9 @@
 ---
-title: Bring your own Server
-description: Integrate with the Laioutr Cockpit
+title: Webhook Configuration
+description: "The best way to integrate your own hosting solution into the Laioutr is to setup a webhook. The Cockpit will call this webhook for every deployment-related action, e.g.:"
 ---
 
-# Webhooks configuration
+# General
 
 The best way to integrate your own hosting solution into the Laioutr is to setup a webhook. The Cockpit will call this webhook for every deployment-related action, e.g.:
 

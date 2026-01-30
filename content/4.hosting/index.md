@@ -9,6 +9,19 @@ This hosting documentation will guide you through both options, helping you choo
 
 For most teams, Laioutr Cloud is the fastest way to go live. It is the built-in hosting environment included with Laioutr, offering a production-ready setup without requiring any additional infrastructure work. Deployment, runtime management, and delivery are handled automatically, allowing you to focus entirely on building and optimizing your storefront experience.
 
-## Hosting Adapter Service (Custom Infrastructure)
+## Hosting Adapter (Hyperscaler Integrations)
 
-For organizations with existing DevOps standards or custom hosting requirements, Laioutr also offers the Hosting Adapter Service. Hosting adapters allow developers to integrate their own deployment pipelines and infrastructure into Laioutr. By creating a custom adapter, you can control how frontends are built, deployed, and operated, while still using Laioutr as the central frontend management layer.
+Laioutr also provides Hosting Adapters, pre-built integrations that connect the Laioutr Cockpit directly with popular cloud and hyperscaler platforms.
+
+Hosting adapters allow you to trigger deployments and manage frontend delivery through providers such as:
+
+- Google Cloud
+- AWS
+- Microsoft Azure
+- and many more
+
+This approach combines the flexibility of enterprise infrastructure with the simplicity of a standardized integration, enabling teams to deploy Laioutr frontends into their preferred cloud ecosystem with minimal setup.
+
+## Bring Your Own Server & Deployment Strategy (fully custom)
+
+For organizations with existing DevOps standards or custom hosting requirements, Laioutr also offers the Bring your own Server Service. This allows developers to integrate their own deployment pipelines and infrastructure for the Laioutr frontend. By using our Webhook Approach, you can control how frontends are built, deployed, and operated, while still using Laioutr as the central frontend management layer.
