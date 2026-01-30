@@ -13,6 +13,17 @@ jiraIssueId: LUI-2
 
 Enables potential customers to understand and compare subscription options through a clear card layout. Display individual tiers with respective pricing, show discounted annual pricing with strikethrough formatting, and present included features with checkmarks and excluded features with visual indicators. Supports transparent pricing presentation without hidden costs to strengthen customer confidence.
 
+## Key Business & UX Benefits
+
+- One card for plan details and pricing so comparison is clear.
+- Strikethrough and feature lists support annual discounts and inclusions.
+- Localized pricing and CTA keep the card on-brand and actionable.
+- Transparent presentation builds trust and reduces support.
+
+:::tip
+Pro-Tip from Larry: Use Pricing Plan cards so customers can compare tiers at a glance.
+:::
+
 ## Usage
 
 ::component-code
@@ -22,7 +33,7 @@ story-id: molecules-pricing-pricingcard--enterprise-plan-offer
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

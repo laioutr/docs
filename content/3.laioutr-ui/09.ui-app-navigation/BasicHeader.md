@@ -13,6 +13,17 @@ links:
 
 The Basic Header provides a compact navigation option for simpler sites or landing pages. Its signature feature is the frosted glass background effect that activates on scroll, creating visual depth while maintaining readability. The header can be sticky to remain visible during scrolling. It includes logo, menu items, optional CTA button, language selector, and dark mode toggle. The mobile menu supports a customizable footer with social links and styled buttons.
 
+## Key Business & UX Benefits
+
+- Compact header fits landing pages and simple sites without overwhelming the layout.
+- Glass effect on scroll adds depth and keeps content readable.
+- Sticky option keeps nav available without taking space until needed.
+- Mobile menu with social footer keeps experience consistent on small screens.
+
+:::tip
+Pro-Tip from Larry: Use Basic Header for landing pages so the nav stays compact and the CTA stands out.
+:::
+
 ## Usage
 
 ::component-code
@@ -22,7 +33,7 @@ story-id: ui-blocks-header--fixed
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

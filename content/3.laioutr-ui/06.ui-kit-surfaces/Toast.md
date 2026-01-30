@@ -13,6 +13,17 @@ links:
 
 Delivers lightweight, non-blocking notifications about application events. Uses global state store pattern with createGlobalState for centralized queue management, enabling programmatic triggering from anywhere. Supports rich content through HTML or component slots. Includes ARIA roles (status/alert), aria-live regions, and keyboard navigation for accessibility. Transition animations match positioning direction with smooth 200-300ms timing.
 
+## Key Business & UX Benefits
+
+- Surfaces success, warning, or error feedback without blocking the flow.
+- Auto-dismiss and progress bar keep notifications from piling up.
+- Stackable toasts with queue limit keep the UI from getting noisy.
+- Accessible with live regions and keyboard so everyone gets the message.
+
+:::tip
+Pro-Tip from Larry: Use semantic variants (success, warning, error) so users understand the message at a glance.
+:::
+
 ## Usage
 
 ::component-code
@@ -23,7 +34,7 @@ story-id: ui-kit-toaster--neutral
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

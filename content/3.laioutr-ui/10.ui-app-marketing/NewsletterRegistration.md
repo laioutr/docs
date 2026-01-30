@@ -8,6 +8,17 @@ jiraIssueId: LUI-214
 
 The Newsletter Registration section provides a dedicated area for email list signups, typically placed in footer regions. It includes heading, subline, email input with custom placeholder, submit button, and legal text for GDPR compliance. Status messages for loading, success, error, and neutral states are fully customizable with optional emojis or icons. An accompanying image can enhance visual appeal. Background colors and text adapt to various theme contexts.
 
+## Key Business & UX Benefits
+
+- One section for newsletter signup with heading, input, and legal text.
+- Customizable status messages keep users informed during signup.
+- Optional image and theme options fit different footer designs.
+- GDPR-friendly legal text and placeholder support compliance.
+
+:::tip
+Pro-Tip from Larry: Use Newsletter Registration in the footer so signup is visible and compliant.
+:::
+
 ## Usage
 
 ::component-code
@@ -17,7 +28,7 @@ story-id: ui-blocks-newsletterregistration--default
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

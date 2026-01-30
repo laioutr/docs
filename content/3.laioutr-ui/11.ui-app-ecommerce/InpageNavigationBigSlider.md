@@ -13,6 +13,17 @@ links:
 
 Ideal for hero sections and prominent homepage placements. Does not propagate colorMode to child nodes - each CategoryNodeBig determines its own color mode based on image contrast. Supports promotional badges and optional CTA buttons with selectable variants. Uses LuiCommonSwiper for smooth navigation with optional scrollbar display.
 
+## Key Business & UX Benefits
+
+- Hero-style category slider for home and entry pages so categories stand out.
+- Square, landscape, and portrait formats fit different imagery.
+- Independent color mode per node keeps contrast readable on each image.
+- Auto-hiding navigation and optional scrollbar keep the slider clean.
+
+:::tip
+Pro-Tip from Larry: Use Inpage Navigation Big Slider for hero category sliders so categories are prominent.
+:::
+
 ## Usage
 
 ::component-code
@@ -22,7 +33,7 @@ story-id: organisms-inpagenavigationbigslider--square-light-node-on-light
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

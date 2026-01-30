@@ -8,6 +8,17 @@ jiraIssueId: LUI-37
 
 Guides users into product categories on homepages and landing pages. Show more link renders as an additional node at the end of the grid. Integrates with CategoryNodeBasic components and LuiText for typography. Responsive breakpoint handling adapts layout for mobile and desktop viewports.
 
+## Key Business & UX Benefits
+
+- Surfaces category links on home and landing pages so users can browse without the main nav.
+- Grid layout and optional header keep the section scannable.
+- Show more link and flags support promotions and deeper discovery.
+- Responsive breakpoints fit mobile and desktop layouts.
+
+:::tip
+Pro-Tip from Larry: Use Inpage Navigation Basic Grid on the homepage so categories are visible at a glance.
+:::
+
 ## Usage
 
 ::component-code
@@ -17,7 +28,7 @@ story-id: organisms-inpagenavigationbasicgrid--grid-on-light-background
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

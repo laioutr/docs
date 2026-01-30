@@ -13,6 +13,17 @@ links:
 
 The TopBar component provides international shoppers with quick access to essential site-wide controls above the main header. It enables locale switching with currency and language updates, plus dark mode toggling with persistent preferences. Two visual styles (default and black) accommodate different header designs. On mobile devices, these functions relocate to the off-canvas menu for a compact mobile header. Optional for single-locale stores.
 
+## Key Business & UX Benefits
+
+- Locale and dark mode in one bar keep the main header focused on nav and search.
+- Persisted preferences keep language and theme across sessions.
+- Optional info links support store locator, contact, or help.
+- Mobile relocation to off-canvas keeps the header clean on small screens.
+
+:::tip
+Pro-Tip from Larry: Use Top Bar for locale and dark mode so the main header stays focused on navigation.
+:::
+
 ## Usage
 
 ::component-code
@@ -22,7 +33,7 @@ story-id: molecules-topbar--dark
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

@@ -13,6 +13,17 @@ links:
 
 The Cart Sheet provides shoppers a non-disruptive way to review and modify their cart contents through a slide-in overlay triggered by cart interactions. It consolidates essential cart management features including real-time quantity adjustments with optimistic updates, coupon code application via an expandable accordion, and a dynamic free shipping progress indicator. The component displays a complete cost breakdown with localized currency formatting and prominently shows accepted payment methods, enabling confident purchase decisions without navigating away from the current browsing context.
 
+## Key Business & UX Benefits
+
+- Lets users review and edit the cart without leaving the page.
+- Keeps header, content, and footer in one predictable layout.
+- Supports scrollable content so long lists don’t overflow the viewport.
+- Slide-in pattern is familiar and works well on mobile and desktop.
+
+:::tip
+Pro-Tip from Larry: Use Sheet for cart and filters so users can peek and close without losing context.
+:::
+
 ## Usage
 
 ::component-code{:name="Sheet" story-id="ui-kit-sheet--default"}
@@ -34,7 +45,7 @@ The Cart Sheet provides shoppers a non-disruptive way to review and modify their
 ```
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

@@ -13,12 +13,23 @@ links:
 
 The Shop Header is a full-featured e-commerce navigation component designed for stores with extensive product catalogs. It supports dynamic menu data from the commerce backend with three submenu display variants: mega menu flyouts with content slots, side-by-side panels, or simple dropdowns. Integrated utility icons provide access to cart, customer account, wishlist, and search. An optional top bar adds secondary links, language selection, and dark mode toggle.
 
+## Key Business & UX Benefits
+
+- One header supports mega menu, side-by-side, or dropdown so nav fits the catalog.
+- Cart, account, wishlist, and search in one place reduce header complexity.
+- Dynamic menu data keeps nav in sync with the backend without hardcoding.
+- Optional top bar keeps locale and dark mode accessible without crowding the main nav.
+
+:::tip
+Pro-Tip from Larry: Choose the submenu variant (mega, side-by-side, dropdown) that fits your category depth.
+:::
+
 ## Usage
 
 ::component-code{:name="SectionHeader" story-id="organisms-shop-header--header"}
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

@@ -13,6 +13,17 @@ links:
 
 Uses @yeger/vue-masonry-wall for efficient category distribution. Layout rules adapt based on column count: 4 columns allow 2 content tiles, 3 columns allow 1 or 3 tiles with masonry, and 2 columns allow 3 tiles. Category headers are clickable links, with main categories represented as See all links. Includes slot for promotional content on the right side with configurable row/column layout.
 
+## Key Business & UX Benefits
+
+- Mega menu shows many categories and promo content without leaving the header.
+- Masonry layout uses space well and keeps flyouts scannable.
+- Promo slots support campaigns and featured links in the nav.
+- Light and dark modes fit different header designs.
+
+:::tip
+Pro-Tip from Larry: Use promo slots in the mega menu to highlight campaigns without leaving the nav.
+:::
+
 ## Usage
 
 ::component-code
@@ -22,7 +33,7 @@ story-id: organisms-megamenudesktop--four-columns-two-grid
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

@@ -13,6 +13,17 @@ links:
 
 Draws customer attention to special product attributes by displaying prominent visual badges on product tiles. Supports use cases including highlighting discounted products during promotional periods, marking newly added items, and displaying special offer badges. Uses predefined variants to ensure consistent visual hierarchy across the storefront while allowing theming customization. The slot-based content approach enables merchants to customize label text while maintaining established visual treatment.
 
+## Key Business & UX Benefits
+
+- Highlights sale, promo, or new on product cards at a glance.
+- Themed variants keep flags consistent across the storefront.
+- Slot-based content supports custom text (e.g. “-25%”) and localization.
+- Fits product grids and sliders without extra layout.
+
+:::tip
+Pro-Tip from Larry: Use ProductTileFlag for sale and new so customers spot promotions quickly.
+:::
+
 ## Usage
 
 ::component-code
@@ -28,7 +39,7 @@ story-id: ui-kit-producttileflag--sale-flag
 ```
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

@@ -13,6 +13,17 @@ jiraIssueId: LUI-3
 
 Provides a responsive container for displaying multiple subscription plans in an easily comparable format. Display three or more pricing tiers in a horizontal grid on desktop for easy side-by-side comparison. On mobile, present cards as a swipeable slider with engaging coverflow animation effects. Synchronizes with billing cycle switches to update all cards simultaneously.
 
+## Key Business & UX Benefits
+
+- One section for multiple pricing cards so comparison is easy.
+- Grid on desktop and slider on mobile fit different viewports.
+- Billing cycle sync keeps all cards in sync when toggling monthly/annual.
+- Navigation bullets and coverflow keep the slider usable.
+
+:::tip
+Pro-Tip from Larry: Use Pricing Plans with a billing cycle switch so cards update together.
+:::
+
 ## Usage
 
 ::component-code
@@ -23,7 +34,7 @@ story-id: molecules-pricing-pricinggrid--pricing-grid
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

@@ -13,6 +13,17 @@ links:
 
 Enables users to compare monthly versus annual pricing options easily. Toggle the entire pricing page between billing views. Display strikethrough prices when annual billing shows discounts. Persists billing preference in localStorage so it remains selected during navigation. Communicates savings visually to encourage annual subscription commitments.
 
+## Key Business & UX Benefits
+
+- Lets users switch between monthly and annual billing in one place.
+- Savings display encourages annual commitment without pressure.
+- Persisted preference keeps the choice across navigation.
+- Small and medium sizes fit headers and pricing blocks.
+
+:::tip
+Pro-Tip from Larry: Show savings on the annual option so users see the benefit at a glance.
+:::
+
 ## Usage
 
 ### Different Sizes
@@ -81,7 +92,7 @@ title: Switch Checked Disabled
 ```
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

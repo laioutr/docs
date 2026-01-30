@@ -4,6 +4,21 @@ description: A tags input component that renders removable tags inside an input 
 jiraIssueId: LUI-136
 ---
 
+## Overview
+
+The Input component provides a styled text field for forms and search. It supports optional addons (icons or buttons) on the left or right via slots, outline and other variants, and integrates with Field for labels and validation.
+
+## Key Business & UX Benefits
+
+- Consistent look and behavior for text fields across the app.
+- Addon slots support search icons, clear buttons, and custom actions.
+- Works with Field for labels and errors so forms stay accessible.
+- Outline and other variants fit different layouts and emphasis.
+
+:::tip
+Pro-Tip from Larry: Use addon slots for search icon and clear button so the input is self-contained.
+:::
+
 ## Usage
 
 ### Regular Input
@@ -41,6 +56,18 @@ story-id: ui-kit-input--with-addons
   </template>
 </Input>
 ```
+::
+
+## Feature List
+
+::features
+---
+items:
+  - "Styled text input with outline and other variants"
+  - "Optional addon slots for icons or buttons left and right"
+  - "Integration with Field for label and error display"
+  - "Placeholder and disabled state support"
+---
 ::
 
 ## API Reference

@@ -8,6 +8,17 @@ jiraIssueId: LUI-19
 
 SwiperNavigationCompact provides an accessible navigation interface for slider components, enabling navigation through arrow buttons and bullet indicators with keyboard and pointer support. The component adapts to its parent slider's background through dark/light mode switching, ensuring controls remain visible regardless of slide content. Viewport-specific visibility controls allow optimizing the navigation experience for each device type.
 
+## Key Business & UX Benefits
+
+- Arrows and bullets in one compact control so sliders stay usable.
+- Dark/light mode keeps controls visible on any slide background.
+- Viewport-specific visibility (mobile/desktop) fits different layouts.
+- Keyboard and pointer support keep navigation accessible.
+
+:::tip
+Pro-Tip from Larry: Use Swiper Navigation Compact so arrows and bullets adapt to the slider background.
+:::
+
 ## Usage
 
 ::component-code
@@ -17,7 +28,7 @@ story-id: molecules-swiper-swipernavigationcompact--swiper-navigation-compact
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

@@ -8,6 +8,17 @@ jiraIssueId: LUI-92
 
 Enables customers to select product quantity before adding to cart with dual-input approach accommodating different user preferences. Default value of 1 aligns with typical single-item purchase patterns while supporting multi-quantity bulk orders when needed.
 
+## Key Business & UX Benefits
+
+- Lets users change quantity with buttons or direct input.
+- Min/max and stock validation prevent invalid quantities.
+- Clear increment/decrement keeps the control familiar and accessible.
+- Fits buybox and cart for single and bulk orders.
+
+:::tip
+Pro-Tip from Larry: Set max to stock so users can’t add more than available.
+:::
+
 ## Usage
 
 ::component-code
@@ -21,7 +32,7 @@ story-id: ui-kit-quantitypicker--increment-value-one
 ```
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

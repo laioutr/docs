@@ -3,7 +3,36 @@ title: Content With Text Columns
 description: A section cms container component
 ---
 
+## Overview
+
+The Content With Text Columns section provides a CMS container for cards or columns of text and optional buttons. It supports multiple blocks (cards, text, buttons) in a configurable layout for landing pages and content sections.
+
+## Key Business & UX Benefits
+
+- One section for multi-column content and cards without custom layout.
+- Configurable blocks (card, text, button) fit different content needs.
+- Consistent styling with other CMS sections.
+- Fits landing pages and marketing content.
+
+:::tip
+Pro-Tip from Larry: Use Content With Text Columns for feature grids and landing page content blocks.
+:::
+
+## Usage
+
 :component-code{name="SectionCmsContainer" story-id="sections-cmscontainer--default"}
+
+## Feature List
+
+::features
+---
+items:
+  - "CMS container for cards, text, and button blocks"
+  - "Configurable column and layout options"
+  - "Block types: card content, text, button"
+  - "Theme-aligned styling for light and dark modes"
+---
+::
 
 ## API Reference
 

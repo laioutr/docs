@@ -8,6 +8,17 @@ jiraIssueId: LUI-18
 
 The CTA Banner Basic serves as the primary promotional banner for driving engagement and conversions. It directs visitors toward landing pages, product details, or signup forms with compelling visuals and clear messaging. The overlay system guarantees text readability across diverse background images, while flexible sizing modes accommodate various content needs. Marketing teams can create compelling promotions without developer assistance.
 
+## Key Business & UX Benefits
+
+- Drives traffic to key pages with clear headline, subline, and CTA.
+- Keeps text readable on any image via gradient or solid overlays.
+- Sizing modes (S, M, L) fit different slots without custom code.
+- Boxed or full-width layout fits hero areas and content sections.
+
+:::tip
+Pro-Tip from Larry: Use the overlay so headlines stay readable on bright or busy images.
+:::
+
 ## Usage
 
 ::component-code
@@ -17,7 +28,7 @@ story-id: ui-kit-ctabannerbasic--medium-banner
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

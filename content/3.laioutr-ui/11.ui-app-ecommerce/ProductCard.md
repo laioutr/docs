@@ -13,6 +13,17 @@ links:
 
 The ProductTile component serves as the primary building block for product listings across category pages, search results, and promotional sliders. It maintains consistent height regardless of content variations for grid alignment. Focus order follows accessibility best practices. The tile emits events rather than handling cart logic internally for flexible commerce backend integration. Internationalized price formatting uses the $money helper for proper locale handling.
 
+## Key Business & UX Benefits
+
+- One tile for product image, title, price, and add-to-cart across grids and sliders.
+- Consistent height keeps grids aligned and scannable.
+- Sale pricing and flags support promotions without extra components.
+- Event-based cart integration fits any commerce backend.
+
+:::tip
+Pro-Tip from Larry: Use Product Card in grids and sliders so product listings stay consistent everywhere.
+:::
+
 ## Usage
 
 ### ProductCard Vertical
@@ -27,7 +38,7 @@ story-id: organisms-producttilebasic--full-featured
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

@@ -13,6 +13,17 @@ jiraIssueId: LUI-5
 
 Provides a detailed, structured comparison of all features across subscription plans. Present all plan features organized into logical categories with section headers and icons. Link feature names to detailed documentation or anchor points. Highlight premium values with rainbow text styling. CTA buttons in headers provide convenient subscription access from anywhere in the table.
 
+## Key Business & UX Benefits
+
+- One table for feature comparison across plans so differences are clear.
+- Sticky header and difference toggle keep the table scannable.
+- Checkmarks and x-marks make availability obvious.
+- Category sections and anchor links support long tables and docs.
+
+:::tip
+Pro-Tip from Larry: Use Pricing Table for detailed plan comparison so customers see all features side by side.
+:::
+
 ## Usage
 
 ::component-code
@@ -22,7 +33,7 @@ story-id: organisms-pricingtable--default
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

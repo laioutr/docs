@@ -8,11 +8,22 @@ jiraIssueId: LUI-16
 
 The Card Grid component enables visitors to browse multiple content options in a visually organized layout, supporting quick comparison and selection. It balances content density with readability through two column configurations: three-column layouts use larger cards for visual impact, while four-column layouts display more items. The component maintains consistent spacing and accessibility standards across different page contexts.
 
+## Key Business & UX Benefits
+
+- One grid for content cards with 3 or 4 columns so layouts stay consistent.
+- Responsive column count fits mobile and desktop without custom code.
+- Optional section title and alignment keep the section flexible.
+- Consistent spacing and accessibility across cards.
+
+:::tip
+Pro-Tip from Larry: Use Grid Card Content for category or content grids so cards align and scale with the viewport.
+:::
+
 ## Usage
 
 :component-code{name="LuiGridCardContent" story-id="molecules-gridcardcontent--with-media"}
 
-## Features
+## Feature List
 
 ::features
 ---

@@ -6,7 +6,18 @@ jiraIssueId: LUI-137
 
 ## Overview
 
-The Textarea component provides a multi-line text input field for entering longer content such as descriptions, comments, or messages. It supports configurable rows for initial height, auto-resize behavior to expand with content, and character count limits. Commonly used in forms requiring free-text input like product reviews, contact messages, or address fields requiring multiple lines.
+The Text component provides typography primitives for body, heading, subline, and caption with a consistent scale of sizes. It ensures readable, on-brand text across the UI.
+
+## Key Business & UX Benefits
+
+- Keeps typography consistent so the app feels cohesive.
+- Gives designers and devs one place to control type scale.
+- Supports body, headings, sublines, and captions with clear semantics.
+- Scales from small labels to large display text.
+
+:::tip
+Pro-Tip from Larry: Stick to the size scale so type stays readable and hierarchy is clear.
+:::
 
 ## Usage
 
@@ -88,6 +99,18 @@ story-id: ui-kit-text--caption
 <Text type="caption" size="3xl">caption-3xl</Text>
 <Text type="caption" size="4xl">caption-4xl</Text>
 ```
+::
+
+## Feature List
+
+::features
+---
+items:
+  - "Four types: body, heading, subline, and caption"
+  - "Consistent size scale from xs to 4xl"
+  - "Theme-aligned font family and weight"
+  - "Semantic types for accessibility and SEO"
+---
 ::
 
 ## API Reference

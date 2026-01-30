@@ -13,6 +13,17 @@ links:
 
 Reflects canonical navigation path with each level (except current page) as a clickable link. On PDPs, current category remains clickable while product title is excluded. On small mobile screens, shows only current category with truncation for long names. Supports RTL languages and dynamically generates paths based on page taxonomy. Uses LuiText, LuiNavigationMenuTextItem, and LuiDropdown for rendering.
 
+## Key Business & UX Benefits
+
+- Shows where the user is in the site so they can jump back up the hierarchy.
+- Clickable levels reduce clicks to reach category or home.
+- Mobile truncation keeps breadcrumb useful on small screens.
+- RTL and dynamic paths support international and CMS-driven sites.
+
+:::tip
+Pro-Tip from Larry: Use breadcrumbs on PDP so users can quickly go back to category or home.
+:::
+
 ## Usage
 
 ::component-code
@@ -22,7 +33,7 @@ story-id: organisms-breadcrumbs--four-levels-deep-third-dropdown
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

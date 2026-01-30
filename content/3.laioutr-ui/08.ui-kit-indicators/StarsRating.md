@@ -4,11 +4,40 @@ description: Rating gives you a nice way to display a rating both with graphics 
 links: []
 ---
 
+## Overview
+
+The Stars Rating component displays a numeric rating as stars (and optional text) for products, reviews, or any rating context. It supports full and fractional stars.
+
+## Key Business & UX Benefits
+
+- Familiar star display helps customers understand quality at a glance.
+- Fractional support (e.g. 4.5) shows precise ratings.
+- Fits product cards, reviews, and PDP.
+- Accessible with proper semantics for rating value.
+
+:::tip
+Pro-Tip from Larry: Use Stars Rating for product and review ratings so customers see quality quickly.
+:::
+
+## Usage
+
 ::component-code
 ---
 :name: StarsRating
 :story-height: 100px
 story-id: ui-kit-starsrating--fractional
+---
+::
+
+## Feature List
+
+::features
+---
+items:
+  - "Star graphic display with full and fractional support"
+  - "Optional text display of rating value"
+  - "Configurable size and theme"
+  - "Accessible rating semantics"
 ---
 ::
 

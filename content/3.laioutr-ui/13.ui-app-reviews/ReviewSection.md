@@ -8,6 +8,17 @@ jiraIssueId: LUI-153
 
 The Review Section provides a comprehensive area for displaying and managing customer reviews on product detail pages. Users can browse reviews with sorting and filtering by star rating using interactive progress bar charts that double as filter buttons. The 'Write a Review' button triggers a submission modal. For merchants, the component supports moderation workflows including customer service responses and pre-publication approval to maintain review quality.
 
+## Key Business & UX Benefits
+
+- One section for review list, summary, sort, filter, and write-a-review so PDP stays consistent.
+- Star filters and sort options help users find relevant reviews.
+- Write a Review modal keeps submission on the same page.
+- Moderation and response support keep review quality high.
+
+:::tip
+Pro-Tip from Larry: Use Review Section on PDP so customers can read and write reviews in one place.
+:::
+
 ## Usage
 
 ::component-code
@@ -17,7 +28,7 @@ story-id: organisms-reviewsection--default
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

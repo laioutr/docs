@@ -8,11 +8,22 @@ jiraIssueId: LUI-11
 
 Provides website owners with a versatile hero component for focused messaging or showcasing multiple promotional items. Display full-width promotional banners with compelling imagery. Showcase new arrivals or featured products with dedicated slides. Rotate through multiple marketing messages with automatic or manual navigation. Present brand narratives with combined imagery, headings, and sublines.
 
+## Key Business & UX Benefits
+
+- One hero for static or slider use so marketing can choose per page.
+- Full-width imagery and overlay keep messaging prominent.
+- Separate mobile and desktop images optimize for each viewport.
+- Multiple slides and CTAs support campaigns and product highlights.
+
+:::tip
+Pro-Tip from Larry: Use Hero Slider for the main hero so you can rotate campaigns without changing the layout.
+:::
+
 ## Usage
 
 :component-code{name="SectionBasicHeroSlider" story-id="organisms-basicheroslider--multiple-slides"}
 
-## Features
+## Feature List
 
 ::features
 ---

@@ -8,6 +8,17 @@ jiraIssueId: LUI-38
 
 Commonly used under listing page titles for subcategory display. Uses LuiCommonSwiper, LuiSwiperNavigationCompact, and LuiSwipperScrollbar for slider functionality. CTA button automatically positions navigation to bottom. Multiple color modes support light, dark, and bright backgrounds with optional header and subline text.
 
+## Key Business & UX Benefits
+
+- Surfaces subcategories under listing titles so users can narrow or browse.
+- One or two rows and optional CTA fit different space and emphasis.
+- Auto-hiding navigation keeps the slider clean when all nodes fit.
+- Promotional flags support sale and featured categories.
+
+:::tip
+Pro-Tip from Larry: Use Inpage Navigation Basic Slider under listing titles so subcategories are visible without scrolling.
+:::
+
 ## Usage
 
 ::component-code
@@ -17,7 +28,7 @@ story-id: organisms-inpagenavigationbasicslider--light-one-row-navigationtop-scr
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

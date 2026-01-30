@@ -13,6 +13,17 @@ links:
 
 The Select component provides a dropdown interface for choosing a single option from a predefined list. It renders a trigger button that opens a floating options panel with keyboard navigation support. Built with proper ARIA semantics, it's suitable for form fields where users must select exactly one value from a known set of options, such as country selection, sorting preferences, or category filters.
 
+## Key Business & UX Benefits
+
+- One control for single-choice from a list (country, sort, filter).
+- Keyboard navigation and ARIA keep it accessible.
+- Customizable trigger icon and text fit headers and forms.
+- Fits sort dropdowns, country selectors, and filter bars.
+
+:::tip
+Pro-Tip from Larry: Use Select for sort and filters so users pick one option without leaving the page.
+:::
+
 ## Usage
 
 ::component-code
@@ -33,6 +44,18 @@ story-id: ui-kit-select--sort
   ]"
 />
 ```
+::
+
+## Feature List
+
+::features
+---
+items:
+  - "Dropdown for single selection from a list"
+  - "Customizable trigger icon and text"
+  - "Keyboard navigation and ARIA support"
+  - "Suitable for sort, country, and filter forms"
+---
 ::
 
 ## API Reference

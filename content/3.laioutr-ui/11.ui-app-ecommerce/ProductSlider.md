@@ -13,6 +13,17 @@ links:
 
 The Product Slider Studio section presents product collections in a horizontally scrollable format. Navigation controls can be positioned at the top or bottom, with an optional scrollbar for additional browsing feedback. A content header area supports headings, sublines, and a single call-to-action button. Product tiles are fully configurable for the information displayed. The slider works well for cross-sells, related products, or category highlights throughout the store.
 
+## Key Business & UX Benefits
+
+- One section for product sliders with headline and CTA so cross-sells and related products are easy to add.
+- Flexible navigation (top/bottom) and scrollbar fit different layouts.
+- Full-width or boxed layout and spacing keep the section flexible.
+- Product tile customization supports different catalog needs.
+
+:::tip
+Pro-Tip from Larry: Use Product Slider for cross-sells and related products so collections are visible without a full grid.
+:::
+
 ## Usage
 
 ### Product Slider with Headline and Link
@@ -27,7 +38,7 @@ story-id: organisms-productslider--default
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

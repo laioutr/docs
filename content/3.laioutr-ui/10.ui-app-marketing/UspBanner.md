@@ -8,6 +8,17 @@ jiraIssueId: LUI-31
 
 Enables shop owners to prominently display key business advantages to visitors. Communicates value propositions clearly and accessibly to build customer trust and support informed purchasing decisions. Position strategically throughout the storefront for maximum visibility or contextual reinforcement. Adapts to available space with horizontal band on larger screens and navigable slider on mobile. Slim band design balances visibility with content hierarchy. Swiper-based rendering provides smooth touch interactions.
 
+## Key Business & UX Benefits
+
+- Surfaces USPs (e.g. delivery, returns) in a slim band so trust signals are visible.
+- Horizontal band on desktop and slider on mobile fit each viewport.
+- Icon library and WCAG support keep the banner accessible and on-brand.
+- Fits above header, below hero, or inline in CMS.
+
+:::tip
+Pro-Tip from Larry: Use USP Banner above or below the header so trust signals are visible without scrolling.
+:::
+
 ## Usage
 
 ::component-code
@@ -16,7 +27,7 @@ Enables shop owners to prominently display key business advantages to visitors. 
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

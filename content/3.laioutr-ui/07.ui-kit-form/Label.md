@@ -4,10 +4,20 @@ description: An EU energy label component for products that displays a clickable
 jiraIssueId: LUI-91
 ---
 
-## Features
+## Overview
 
-- Different sizes
-- With required and non required flags
+The Label component displays a form label (and optional required indicator) associated with a control. It ensures the label is linked for accessibility and supports different sizes for compact and standard layouts.
+
+## Key Business & UX Benefits
+
+- Accessible label-to-control association for screen readers and click-to-focus.
+- Required indicator makes mandatory fields clear without extra markup.
+- Size variants fit compact and standard form layouts.
+- Consistent styling with Field and other form components.
+
+:::tip
+Pro-Tip from Larry: Use Label with every form control so the label is always associated for accessibility.
+:::
 
 ## Usage
 
@@ -63,14 +73,15 @@ title: Label Medium Required
 ```
 ::
 
-## Features
+## Feature List
 
 ::features
 ---
 items:
-  - "Thumbnail preview on product page"
-  - "Fullscreen lightbox modal for detailed view"
-  - "Optional datasheet link"
+  - "Form label with accessible association to control"
+  - "Required indicator support"
+  - "Small and medium size variants"
+  - "Consistent styling with Field and form components"
 ---
 ::
 

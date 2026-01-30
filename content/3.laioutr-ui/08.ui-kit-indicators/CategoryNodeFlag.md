@@ -13,11 +13,22 @@ links:
 
 The CategoryNodeFlag component enables store owners to draw attention to featured or time-sensitive categories with visual badges. It supports four semantic variants (promo, sale, new, icon) with theming controls for size, corner radius, padding, and colors. Implemented as a separate molecule, it can be reused across all category node variants (Basic, Compact, Big). The flexible content slot accepts localized text or emoji icons for international storefronts.
 
+## Key Business & UX Benefits
+
+- Surfaces promo, sale, or new on category tiles without custom markup.
+- Four variants and theming keep badges consistent and on-brand.
+- Content slot supports text or emoji for localization.
+- Reusable across Basic, Compact, and Big category nodes.
+
+:::tip
+Pro-Tip from Larry: Use CategoryNodeFlag on category tiles so promotions are visible in navigation.
+:::
+
 ## Usage
 
 :component-code{name="CategoryNodeFlag" story-id="ui-kit-categorynodeflag--promo-flag"}
 
-## Features
+## Feature List
 
 ::features
 ---

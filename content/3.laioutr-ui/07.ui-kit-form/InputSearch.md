@@ -13,6 +13,17 @@ links:
 
 Provides international online shoppers with a fast, accessible search interface prominently placed in the site's main navigation. Users type queries and receive real-time suggestions for products, categories, and brands localized to their selected language and region. On mobile, the search adapts with collapsible or full-screen behavior for optimal touch interaction. Wraps InputGroup and Input with pre-configured search icon and clear button logic for seamless integration into header designs.
 
+## Key Business & UX Benefits
+
+- Speeds up discovery with real-time suggestions and clear button.
+- Localized suggestions support multi-language and multi-region stores.
+- Accessible via keyboard and screen readers for all users.
+- Fits header and overlay patterns for desktop and mobile.
+
+:::tip
+Pro-Tip from Larry: Place search in the main nav so users can find products without digging through menus.
+:::
+
 ## Usage
 
 ::component-code
@@ -23,7 +34,7 @@ story-id: ui-kit-searchinput--searchinput
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

@@ -8,6 +8,17 @@ jiraIssueId: LUI-40
 
 Used in Inpage Navigation Compact Grid and Slider components. Supports customizable background colors per node and 1:1 aspect ratio images. See more variant links to supercategory pages via category ID or URL. Themed component with multiple color modes for light, dark, and bright backgrounds. Icon display available via LuiIcon integration.
 
+## Key Business & UX Benefits
+
+- Fits many category links in grids and sliders without crowding the layout.
+- Eight variants (default, outline, solid, sale, etc.) suit different sections and emphasis.
+- Text-only mode and optional images support flexible content and performance.
+- Full interaction states and optional flags keep tiles clear and accessible.
+
+:::tip
+Pro-Tip from Larry: Use the solid or outline variants in compact grids so tiles read clearly at a glance.
+:::
+
 ## Usage
 
 ::component-code
@@ -17,7 +28,7 @@ story-id: ui-kit-linktilecompact--solid-light
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---
