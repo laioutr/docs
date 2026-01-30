@@ -8,3 +8,15 @@ description: Laioutr Cloud is the built-in hosting and delivery environment for 
 When creating a new frontend project, Laioutr Cloud is available as the default option, enabling teams to get started immediately with a production-ready environment. It handles the core operational needs behind the scenes, allowing you to focus on building and managing your digital experience rather than maintaining infrastructure.
 
 With Laioutr Cloud, you get a seamless path from frontend configuration to deployment, fully integrated into the Laioutr platform.
+
+## Includes
+
+Laioutr Cloud includes the following features:
+
+* Global Edge Computing
+* Global Traffic Management
+* Global Security
+* Global Monitoring
+* Global Logging
+* Global Alerting
+* Global Analytics
