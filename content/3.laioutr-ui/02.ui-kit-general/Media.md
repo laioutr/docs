@@ -8,6 +8,17 @@ jiraIssueId: LUI-28
 
 Enables content editors to insert and manage responsive images within page layouts. Creates visually engaging content that adapts seamlessly across all device sizes. Display product images, hero banners, or editorial photography with consistent styling. Configure different sizing for mobile versus desktop to optimize visual presentation. Add captions and accessibility descriptions for improved user experience. Leverages Radix Vue Dialog for accessible lightbox implementation.
 
+## Key Business & UX Benefits
+
+- Delivers the right image size per device for fast load and good quality.
+- Engages users with lightbox zoom and pan for detailed viewing.
+- Gives editors control over aspect ratio and mobile vs desktop sizing.
+- Keeps images accessible with captions and descriptions.
+
+:::tip
+Pro-Tip from Larry: Set separate mobile and desktop aspect ratios so images look great on every screen.
+:::
+
 ## Usage
 
 Uses [nuxt-image](https://image.nuxt.com/) to render responsive images.
@@ -15,7 +26,7 @@ Uses [nuxt-image](https://image.nuxt.com/) to render responsive images.
 ::component-code{:name="Media" story-id="ui-kit-media--default"}
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

@@ -13,6 +13,17 @@ links:
 
 Occupies the main content area where products are normally listed. Best practice is to display additional content outside the message such as recommendation sliders, top categories, newly arrived products, or products from the supercategory. Image variant recommends transparent backgrounds. Default color uses theme/colors/grey 3 but is customizable. Designed to keep users in the flow and avoid dead ends.
 
+## Key Business & UX Benefits
+
+- Turns empty results into a clear, friendly message instead of a blank page.
+- Keeps users engaged with suggestions like categories or recommendations.
+- Reduces confusion and support questions by explaining why nothing is shown.
+- Keeps users in the flow with next steps instead of dead ends.
+
+:::tip
+Pro-Tip from Larry: Add a recommendation slider or category links below the message so users have somewhere to go.
+:::
+
 ## Usage
 
 ::component-code
@@ -22,7 +33,7 @@ story-id: ui-kit-emptystate--icon-empty-state
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

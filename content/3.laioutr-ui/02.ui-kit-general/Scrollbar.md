@@ -8,6 +8,17 @@ jiraIssueId: LUI-39
 
 Split into Atom (rendering) and Molecule (Swiper integration) components for reusability. Bar width calculated proportionally based on visible items versus total items. Uses CSS transforms for smooth, performant position updates. Emits onChange event for external scroll control.
 
+## Key Business & UX Benefits
+
+- Shows how much content is visible and how far the user has scrolled.
+- Gives a clear, familiar control for horizontal and vertical sliders.
+- Keeps interaction smooth with CSS-based updates.
+- Integrates with Swiper so scroll position stays in sync.
+
+:::tip
+Pro-Tip from Larry: Use the scrollbar with Swiper so users see scroll progress and can drag to scroll.
+:::
+
 ## Usage
 
 ### Horizontal
@@ -38,7 +49,7 @@ title: Scrollbar Vertical
 ```
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

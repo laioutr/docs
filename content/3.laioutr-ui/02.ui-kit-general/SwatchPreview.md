@@ -8,6 +8,17 @@ jiraIssueId: LUI-121
 
 SwatchPreview is a foundational atom component that renders visual representations of product variant attributes without any decorative styling. It handles multiple swatch types: single colors, multi-color combinations, CSS gradients rendered at a diagonal angle, and thumbnail images at 1:1 aspect ratio. The component intentionally omits borders and border-radius, delegating visual treatment to consuming parent components for maximum reusability across different UI contexts including buybox variant selectors, product cards, and filter interfaces.
 
+## Key Business & UX Benefits
+
+- One component for colors, gradients, and thumbnails across the app.
+- Stays flexible so parents control borders and layout.
+- Fits buybox, cards, and filters with consistent behavior.
+- Keeps implementation simple with minimal styling.
+
+:::tip
+Pro-Tip from Larry: Let the parent add borders and radius so SwatchPreview stays reusable everywhere.
+:::
+
 ## Usage
 
 ::component-code
@@ -18,7 +29,7 @@ story-id: ui-kit-swatchpreview--swatch-colors
 ---
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

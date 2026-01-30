@@ -13,11 +13,22 @@ links:
 
 Acts like a native select element but uses the custom dropdown component for enhanced styling. Opens via the Sort button on filter bar. Only one option can be selected at a time with immediate product order update. Similar to Nuxt UI select component pattern. Uses LuiDropdownMenu internally.
 
+## Key Business & UX Benefits
+
+- Matches brand and layout with a custom-styled dropdown instead of native select.
+- Makes the current sort choice obvious with a clear active indicator.
+- Updates results immediately so users see the effect of their choice.
+- Supports keyboard use and accessibility with standard patterns.
+
+:::tip
+Pro-Tip from Larry: Pair the dropdown with a visible label so users know they're changing sort order.
+:::
+
 ## Usage
 
 :component-code{name="DropdownMenu" story-id="ui-kit-dropdownmenu--has-indicator"}
 
-## Features
+## Feature List
 
 ::features
 ---

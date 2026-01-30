@@ -13,6 +13,17 @@ links:
 
 Addresses icon clarity issues when standard 24px icons are scaled down. Icon.vue resolves names by replacing icon set prefixes with extension folder paths and appending size suffixes. SVGs stored in packages/ui/src/runtime/assets/icons with -s, -m, -l suffixes. Backward compatible with existing icon usage when size prop is unset or medium.
 
+## Key Business & UX Benefits
+
+- Keeps icons sharp and readable at every size with dedicated assets.
+- Ensures consistent look and behavior across the app with one icon system.
+- Reduces guesswork for designers and devs with clear size options.
+- Stays compatible with existing usage while supporting new sizes.
+
+:::tip
+Pro-Tip from Larry: Pick the size that matches your context so icons stay crisp and recognizable.
+:::
+
 ## Usage
 
 ### Icons
@@ -29,7 +40,7 @@ title: Icons
 ```
 ::
 
-## Features
+## Feature List
 
 ::features
 ---

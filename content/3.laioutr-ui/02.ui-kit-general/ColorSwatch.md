@@ -13,6 +13,17 @@ links:
 
 The ColorSwatch component provides compact visual representation of product color options, enabling customers to browse variants without leaving product listings. Implemented as a single HTML element for optimal performance, it uses CSS linear-gradients to display multi-color swatches. Maximum of 4 visible swatches prevents visual clutter while the '+n' overflow indicator communicates additional options. Interactive states including hover tooltips improve color name discoverability.
 
+## Key Business & UX Benefits
+
+- Speeds up variant discovery so customers find the right color quickly.
+- Keeps product lists clean with compact, recognizable swatches.
+- Improves accessibility with tooltips and clear selection states.
+- Reduces layout shift and load with lightweight CSS-based rendering.
+
+:::tip
+Pro-Tip from Larry: Use the hover tooltip so customers see the exact color name before clicking.
+:::
+
 ## Usage
 
 ### Single Color
@@ -43,7 +54,7 @@ title: Color Swatch Multiple Colors
 ```
 ::
 
-## Features
+## Feature List
 
 ::features
 ---
