@@ -1,12 +1,12 @@
 ---
 title: Pricing Plan
 description: A pricing card component displaying subscription plan details with strikethrough pricing for discounts.
-jiraIssueId: LUI-2
 links:
   - label: Figma
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=3795-21654&t=FoBBvGt4bI9KoJwB-4
     target: _blank
+jiraIssueId: LUI-2
 ---
 
 ## Overview
