@@ -8,11 +8,12 @@ description: The Bring Your Own Server (BYOS) approach allows you to host and de
 When using BYOS, you maintain full ownership of your hosting infrastructure, build processes, and deployment workflows. The Laioutr Cockpit communicates with your infrastructure through webhooks, enabling seamless integration between frontend management in Laioutr and your custom deployment pipeline.
 
 This approach is ideal for organizations that:
-* Have existing DevOps standards and infrastructure requirements
-* Need to comply with specific security or compliance regulations
-* Want to integrate with internal tooling and monitoring systems
-* Require custom scaling strategies or geographic distribution
-* Need to maintain full control over runtime configuration
+
+- Have existing DevOps standards and infrastructure requirements
+- Need to comply with specific security or compliance regulations
+- Want to integrate with internal tooling and monitoring systems
+- Require custom scaling strategies or geographic distribution
+- Need to maintain full control over runtime configuration
 
 ## Infrastructure Requirements
 
@@ -23,14 +24,13 @@ To successfully host a Laioutr frontend on your own infrastructure, you'll need 
 - **Build Environment**: A build server or CI/CD runner capable of executing Node.js build processes. The build process requires sufficient CPU and memory to compile the Nuxt-based frontend application.
 - **Runtime Environment**: A server or container platform to host the built frontend application. This can be:
   - A Node.js runtime environment for server-side rendering (SSR)
-  - A static file server for static site generation (SSG) deployments
   - Edge computing platforms for optimal global distribution
 - **Scaling Capability**: Infrastructure that can scale horizontally to handle traffic spikes and ensure high availability.
 
 ### Storage
 
-- **Build Artifacts**: Storage for build outputs, which can range from a few hundred megabytes to several gigabytes depending on your frontend size and asset optimization.
-- **Static Assets**: CDN or object storage for serving static assets (images, fonts, compiled CSS/JS) with global distribution capabilities.
+- **Build Artifacts**: Storage for build outputs, which can range from a few hundred megabytes to several gigabytes depending on your frontend size, dependencies and asset optimization.
+- **Static Assets**: CDN or object storage for serving static assets (images, fonts, compiled CSS/JS). Optional but recommended.
 - **Deployment History**: Optional storage for maintaining deployment artifacts for rollback capabilities.
 
 ### Networking
@@ -49,21 +49,16 @@ For optimal performance, consider deploying to multiple regions or using edge co
 ### Runtime Environment
 
 - **Node.js**: Version 22.12 or higher is required for building and running Laioutr frontends. Ensure your build and runtime environments use compatible Node.js versions.
-- **Package Manager**: pnpm is the recommended package manager for Laioutr projects, though npm and yarn are also supported.
 
 ### Build Tools
 
-- **Build System**: Your infrastructure must support executing Node.js build scripts, typically via `pnpm build` or `npm run build`.
-- **Environment Variables**: Capability to securely manage and inject environment variables during the build process, including:
-  - Laioutr project configuration
-  - API endpoints and authentication tokens
-  - Feature flags and environment-specific settings
+- **Build System**: Your infrastructure must support executing Node.js build scripts via pnpm.
+- **Package Manager**: pnpm is the recommended package manager for Laioutr projects.
 
 ### Web Server / Runtime
 
 Depending on your deployment strategy:
 
-- **Static Hosting**: A web server capable of serving static files (Nginx, Apache, or cloud storage with CDN)
 - **SSR Hosting**: A Node.js runtime capable of running Nuxt in SSR mode, with proper process management (PM2, systemd, or container orchestration)
 - **Edge Runtime**: Support for edge computing runtimes if deploying to edge platforms
 
@@ -77,7 +72,6 @@ Redis is a critical component for optimal performance of Laioutr Frontends:
   - API response caching
   - Session management
   - Rate limiting
-  - Temporary data storage for build processes
 - **Requirements**:
   - Redis version 6.0 or higher recommended
   - Persistent storage configuration for production environments
@@ -101,14 +95,11 @@ Redis is a critical component for optimal performance of Laioutr Frontends:
 
 ### Security
 
-- **Secrets Management**: Secure storage and injection of API keys, tokens, and sensitive configuration
 - **Access Control**: Proper authentication and authorization for deployment processes
-- **Vulnerability Scanning**: Regular scanning of dependencies and container images
 - **Network Security**: Firewall rules, DDoS protection, and network isolation as needed
 
 ### Backup & Disaster Recovery
 
-- **Configuration Backups**: Regular backups of deployment configurations and environment settings
 - **Disaster Recovery Plan**: Procedures for recovering from infrastructure failures
 - **Data Retention**: Policies for retaining build artifacts and logs
 
@@ -117,8 +108,8 @@ Redis is a critical component for optimal performance of Laioutr Frontends:
 The BYOS approach integrates with the Laioutr Cockpit through webhooks. When you configure a webhook endpoint in your Laioutr project settings, the Cockpit will send deployment-related events to your infrastructure, allowing you to:
 
 - Trigger builds automatically when frontend configurations change
-- Receive deployment status updates
+- Send deployment status updates
 - Handle deployment promotions and rollbacks
 - Monitor deployment progress and logs
 
-See the [Webhook Configuration](/hosting/bring-your-own-server-(byos)/webhook-config) documentation for detailed information on setting up and handling webhook events.
+See the [Webhook Configuration](/hosting/bring-your-own-server-\(byos\)/webhook-config) documentation for detailed information on setting up and handling webhook events.
