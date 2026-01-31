@@ -10,3 +10,29 @@ The Hosting Adapter Service allows developers and DevOps teams to integrate cust
 Hosting adapters define how frontends are built, deployed, and managed outside of Laioutr Cloud, giving you full control over runtime configuration, CI/CD workflows, scaling strategies, and operational processes.
 
 This approach enables organizations to use Laioutr as the central frontend management layer, while aligning deployment with their existing infrastructure standards.
+
+## Get to know more about the Hosting Adapter Service
+
+::card-group
+
+  :::card{target="_self" title="Vercel Adapter" to="/hosting/hosting-adapter/vercel-adapter"}
+  Learn about the Vercel Adapter.
+  :::
+
+  :::card{target="_self" title="AWS Adapter" to="/hosting/hosting-adapter/aws-adapter"}
+  Learn about the AWS Adapter.
+  :::
+
+  :::card{target="_self" title="Azure Adapter" to="/hosting/hosting-adapter/azure-adapter"}
+  Learn about the Azure Adapter.
+  :::
+
+  :::card{target="_self" title="Google Adapter" to="/hosting/hosting-adapter/google-adapter"}
+  Learn about the Google Adapter.
+  :::
+
+  :::card{target="_self" title="Scale Commerce Adapter" to="/hosting/hosting-adapter/scale-commerce-adapter"}
+  Learn about the Scale Commerce Adapter.
+  :::
+  
+::
