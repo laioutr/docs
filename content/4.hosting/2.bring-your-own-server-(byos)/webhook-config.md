@@ -191,7 +191,7 @@ Sent when a user triggers a deployment. Contains all files needed to build and d
   "data": {
     "deploymentId": "dep_abc123",
     "environment": "production",
-    "callbackUrl": "https://cockpit.laioutr.com/api/webhook/hosting/dep_abc123?secret=xxx",
+    "callbackUrl": "https://cockpit.laioutr.cloud/api/webhook/hosting/dep_abc123?secret=xxx",
     "files": {
       "package.json": "{ \"name\": \"storefront\", ... }",
       "nuxt.config.ts": "export default defineNuxtConfig({ ... })",
@@ -335,7 +335,7 @@ If you set `statusUpdates: true` in your capabilities, you should POST status up
 The callback URL is provided in the `hosting.deployment.created` event:
 
 ```text
-https://cockpit.laioutr.com/api/webhook/hosting/{deploymentId}?secret={secret}
+https://cockpit.laioutr.cloud/api/webhook/hosting/{deploymentId}?secret={secret}
 ```
 
 The secret in the URL authenticates your request. No additional headers are required.
