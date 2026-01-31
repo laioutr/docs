@@ -10,7 +10,7 @@ The Navigation Bullets component shows a row of bullet indicators so users can s
 ## Key Business & UX Benefits
 
 - Shows progress and position so users know where they are in a flow.
-- Lets users jump to any step or slide with a single click.
+- Lets users jump to any step or slide with a single click. 
 - Keeps layouts clean with a compact, recognizable pattern.
 - Works with carousels and steppers for consistent navigation.
 

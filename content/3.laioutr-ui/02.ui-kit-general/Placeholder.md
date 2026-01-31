@@ -11,7 +11,7 @@ The Placeholder component reserves space in the layout while content is loading 
 ## Key Business & UX Benefits
 
 - Reduces layout shift by reserving space before content loads.
-- Keeps grids and lists aligned while images or data load.
+- Keeps grids and lists aligned while images or data load. This is especially useful for lazy loading images or data.
 - Gives designers a simple block to size and style with CSS.
 - Works as a fallback when content is missing or failed to load.
 
