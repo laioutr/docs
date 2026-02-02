@@ -58,6 +58,41 @@ All requests are `POST` with `Content-Type: application/json`. Every request inc
 }
 ```
 
+## TypeScript Types
+
+TypeScript definitions for all webhook events and responses are available in the `@laioutr/webhook-types` package:
+
+```bash
+npm install @laioutr/webhook-types
+```
+
+Usage example:
+
+```typescript
+import type {
+  ByosWebhookEvent,
+  ByosDescribeResponse,
+  ByosWebhookResponse,
+} from '@laioutr/webhook-types/byos';
+
+function handleWebhook(event: ByosWebhookEvent): ByosWebhookResponse {
+  if (event.event === 'hosting.describe') {
+    return {
+      ok: true,
+      data: {
+        name: 'My CI/CD System',
+        capabilities: {/* ... */},
+      },
+    } satisfies ByosDescribeResponse;
+  }
+  if (event.event === 'hosting.deployment.created') {
+    const { deploymentId, callbackUrl, files } = event.data;
+    startBuild(deploymentId, files, callbackUrl);
+  }
+  return { ok: true, data: {} };
+}
+```
+
 ## Delivery Behavior
 
 ### Retries
