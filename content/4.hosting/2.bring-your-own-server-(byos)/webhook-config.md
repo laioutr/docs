@@ -69,11 +69,7 @@ npm install @laioutr/webhook-types
 Usage example:
 
 ```typescript
-import type {
-  ByosWebhookEvent,
-  ByosDescribeResponse,
-  ByosWebhookResponse,
-} from '@laioutr/webhook-types/byos';
+import type { ByosWebhookEvent, ByosDescribeResponse, ByosWebhookResponse } from '@laioutr/webhook-types/byos';
 
 function handleWebhook(event: ByosWebhookEvent): ByosWebhookResponse {
   if (event.event === 'hosting.describe') {
@@ -81,7 +77,10 @@ function handleWebhook(event: ByosWebhookEvent): ByosWebhookResponse {
       ok: true,
       data: {
         name: 'My CI/CD System',
-        capabilities: {/* ... */},
+        url: 'https://storefront.example.com',
+        capabilities: {
+          /* ... */
+        },
       },
     } satisfies ByosDescribeResponse;
   }
@@ -179,6 +178,7 @@ Cockpit sends this event to discover your system's capabilities. This is called 
   "ok": true,
   "data": {
     "name": "Your CI/CD System",
+    "url": "https://storefront.example.com",
     "capabilities": {
       "statusUpdates": true,
       "cancelDeployment": false,
@@ -189,6 +189,14 @@ Cockpit sends this event to discover your system's capabilities. This is called 
   }
 }
 ```
+
+### Fields
+
+| Field          | Description                                                                                                       |
+| -------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `name`         | Display name for your hosting provider (shown in Cockpit UI)                                                      |
+| `url`          | Base URL where the project is hosted (e.g., `https://storefront.example.com`). Will be used in the studio preview |
+| `capabilities` | Object describing which actions your system supports                                                              |
 
 ### Capabilities
 
