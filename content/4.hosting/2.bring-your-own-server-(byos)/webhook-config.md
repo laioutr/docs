@@ -15,6 +15,17 @@ Integrate your own hosting solution into Laioutr by setting up a webhook. Cockpi
 
 You provide a URL that Cockpit will call for each of these actions.
 
+# Laioutr BYOS Agent
+
+A reference implementation of a webhook receiver can be found as an open source project on our GitHub. You can use this to run bash scripts for received webhooks to trigger deployments. Have a look at the README for information about hosting and configuring:
+
+- [laioutr/byos-agent](https://github.com/laioutr/byos-agent) (MIT)
+
+```bash
+npm install -g @laioutr/byos-agent
+laioutr-byos-agent
+```
+
 # Authentication (Standard Webhooks)
 
 All requests from Cockpit are signed using the [Standard Webhooks](https://www.standardwebhooks.com/) specification. When you configure your webhook, you'll receive a signing secret (prefixed with `whsec_`) that you must use to verify incoming requests.
