@@ -1,6 +1,6 @@
 ---
 title: Infrastructure Requirements
-description: To successfully host a Laioutr frontend on your own infrastructure, you'll need to provision the following components:
+description: To successfully host a Laioutr frontend on your own infrastructure, you'll need to provision the required components.
 ---
 
 

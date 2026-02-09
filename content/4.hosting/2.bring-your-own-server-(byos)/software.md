@@ -1,6 +1,6 @@
 ---
 title: Software Requirements
-description: The software requirements for the BYOS approach are as follows:
+description: The software requirements for the BYOS approach.
 ---
 
 
