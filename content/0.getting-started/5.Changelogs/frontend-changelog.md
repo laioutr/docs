@@ -5,14 +5,6 @@ description: Changelog for the Laioutr frontend product following Keep a Changel
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
-## [Unreleased]
-
-### Added
-
-### Changed
-
-### Fixed
-
 ## [0.27.2]
 
 ### Added
