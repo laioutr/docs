@@ -1,6 +1,24 @@
 ---
-title: Checkout root file
+title: Checkout
+description: Overview of Laioutr’s composable checkout library and how it connects to your ecommerce backend and payment providers.
 links: []
 ---
 
-# Checkout root file
+## Laioutr Checkout
+
+Laioutr Checkout is a **composable checkout library** designed to plug into your Laioutr storefront and Orchestr data layer. It gives you a full-featured checkout flow that you can **configure and extend** instead of building everything from scratch.
+
+From a product perspective, Laioutr Checkout aims to provide:
+
+- **Works out of the box** – Pre-integrated with supported ecommerce backends, or usable as a standalone library on top of any backend you connect via Orchestr.
+- **Flexible abstraction** – A checkout domain model (cart, addresses, shipping, payments, discounts) that can handle complex business cases (multi-deliveries, address auto-correct, B2B/B2C specifics) while staying backend-agnostic.
+- **PSP-agnostic payments** – An abstraction layer for payment service providers (PSPs) so you can integrate different gateways (or switch between them) without rewriting your frontend.
+- **Conversion-focused UX** – Support for coupons, discount codes, gift cards, loyalty points and store credits, backed by UI patterns and a Figma kit to design a checkout that matches your brand.
+
+This section of the docs will describe:
+
+- **Architecture** – How the checkout library fits into Laioutr’s storefront, Studio and Orchestr.
+- **Backend integration** – How to connect checkout to your ecommerce backend and PSPs.
+- **Configuration & extensibility** – How to enable, configure and extend the checkout for your own business rules and edge cases.
+
+For a high-level product view, see the marketing page **Laioutr Checkout** on our website. The pages here will focus on the technical side: how to implement, configure and customise the composable checkout in your projects.
