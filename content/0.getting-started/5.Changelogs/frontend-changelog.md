@@ -5,6 +5,22 @@ description: Changelog for the Laioutr frontend product following Keep a Changel
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.27.3]
+
+### Added
+
+- **Frontend Core**: **Multi-market i18n support** using nuxt-i18n:
+  - `buildRoutes` with alias generation and collision detection for localized paths.
+  - `resolveMarketFromRequest` for host- and path-based market resolution.
+  - `buildI18nConfig` transform and `validateI18nConfig` (dangling ref and collision detection).
+  - Utilities: `fillParams`, `toDevHost`, `getExonym`.
+  - Chain-based `unlocalize` and `resolvePagePath`.
+  - Core Types: Render i18n types (RenderLanguage, RenderMarket, RenderI18nConfig, localizedPaths, marketIds).
+
+### Changed
+
+- **Orchestr**: Migrated from async iterable to ChunkStreamer on the server for streaming.
+
 ## [0.27.2]
 
 ### Added

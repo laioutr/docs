@@ -9,6 +9,10 @@ All notable changes to **Cockpit (Studio)** — the visual editor and project ma
 
 ### Added
 
+- **Markets & translations**:
+  - **Markets**: Overview page with empty state and create dialog, settings page with edit form, MarketGeneralSettings and MarketDomainsEditor components, market tRPC router and MarketRepository with CRUD operations.
+  - **Translations**: Overview page with language management, AddLanguageDialog with BCP 47 combobox, flags and keyboard navigation, LanguageCard component, language tRPC router (list/create/delete).
+  - Domain events for language/market CRUD; RcLanguage from core-types for type safety.
 - **BYOS webhook hosting**:
   - WebhookHostingAdapter, WebhookSetupService (JWT-based setup flow), WebhookCallbackHandler and ByosWebhookClient for **Bring-Your-Own-Server (BYOS)** hosting integrations.
   - WebhookSender with **Standard Webhooks** signing, WebhookCallbackVerifier for secure callback authentication and a dedicated webhook callback API route for deployment status updates.
@@ -23,6 +27,7 @@ All notable changes to **Cockpit (Studio)** — the visual editor and project ma
 ### Fixed
 
 - Fixed a **config race condition** in Cockpit’s hosting setup.
+- Fixed **defaultDomainId** being retained when its domain is removed.
 - Addressed unhandled rejection warnings in BudgetedRetry tests.
 - Improved fetch-rc and sidebar behaviour when filtering projects.
 - Fixed a bug when removing a user from an organisation.

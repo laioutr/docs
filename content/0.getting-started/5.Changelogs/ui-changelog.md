@@ -5,6 +5,27 @@ description: Changelog for Laioutr UI and UI Kit following Keep a Changelog and 
 
 All notable changes to **Laioutr UI**, **UI Kit**, and related component libraries will be documented in this file.
 
+## [1.30.0]
+
+### Added
+
+- **UI Kit**: New i18n formatters:
+  - **$timespan** formatter for Timespan objects (date/datetime ranges, locale-aware).
+  - **$duration** formatter for ISO 8601 duration strings (uses `Intl.DurationFormat` when available).
+  - **$money** and **$measurement** moved from frontend-core to UI Kit (template globals and auto-imports unchanged).
+- **UI**: Added missing section thumbnails.
+- **UI**: Table formatting in RichContent component.
+
+### Changed
+
+- **UI**: Component CSS moved to `lui-components` layer for better encapsulation and cascade control.
+- UI Kit & UI: Dependency updates aligned with multi-market frontend and i18n changes.
+
+### Fixed
+
+- **UI**: Input styling and desktop header close button.
+- **UI**: Adjusted ThemeSwitcher meta requirements and import.
+
 ## [1.29.2]
 
 ### Changed
