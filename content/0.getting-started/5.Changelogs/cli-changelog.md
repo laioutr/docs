@@ -5,6 +5,12 @@ description: Changelog for the Laioutr CLI following Keep a Changelog and Semant
 
 All notable changes to the **Laioutr CLI** (the `laioutr` command-line tool) will be documented in this file.
 
+## [0.3.0] – 2025-11-25
+
+### Added
+
+- CLI: Restructured RC commands so `project fetch-rc` becomes `rc fetch`, and introduced a dedicated `rc update` command to pull the latest project configuration into an existing `laioutrrc.json`.
+
 ## [0.2.1] – 2025-09-11
 
 ### Added
