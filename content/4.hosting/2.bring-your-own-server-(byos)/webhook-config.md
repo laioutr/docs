@@ -15,63 +15,9 @@ Integrate your own hosting solution into Laioutr by setting up a webhook. Cockpi
 
 You provide a URL that Cockpit will call for each of these actions.
 
-# Laioutr BYOS Agent (reference implementation)
-
-For most setups you do not need to build your own webhook handler from scratch.  
-We provide an open‑source **BYOS deployment agent** that:
-
-- Verifies Standard Webhooks signatures.
-- Maps BYOS events to **shell scripts** on your server.
-- Streams deployment files to a temporary directory.
-- Sends **status callbacks** back to Cockpit (running, success, promoted, error, canceled).
-
-Use this as a **reference implementation** or as a starting point for your own handler:
-
-- [laioutr/byos-agent](https://github.com/laioutr/byos-agent) (MIT)
-
-```bash
-# Install globally
-npm install -g @laioutr/byos-agent
-
-# Start the agent (listens on :4000 by default)
-laioutr-byos-agent
-```
-
-The agent reads configuration from `byos-agent.config.ts` (or `.js` / `.json`) in the working directory.  
-Configuration includes:
-
-- `signingSecret` (required): your BYOS webhook signing secret (`whsec_…`).
-- `baseUrl`: default deployment URL used by Studio previews.
-- `scripts`: mapping from BYOS events (for example `hosting.deployment.created`) to shell scripts or inline commands.
-- Runtime options like `port`, `shell`, `timeout`, `tempDir`, and `logLevel`.
-
-Each script receives environment variables such as:
-
-- `LAIOUTR_PROJECT` – `<organization-slug>/<project-slug>`
-- `LAIOUTR_EVENT` – event name (for example `hosting.deployment.created`)
-- `LAIOUTR_DEPLOYMENT_ID`, `LAIOUTR_ENVIRONMENT`, `LAIOUTR_CALLBACK_URL`, `LAIOUTR_FILES_DIR`, `LAIOUTR_PAYLOAD_FILE` for deployment events
-
-On `hosting.deployment.created` the script runs in `LAIOUTR_FILES_DIR` and can:
-
-- Build and deploy the frontend from the provided files.
-- Print a final line containing a URL (used as deployment URL).
-- Optionally include the word `promoted` in the final line to mark the deployment as promoted.
-
-The repository contains **ready‑made examples** that you can copy to your own servers:
-
-- **Docker + Traefik** – build Docker images for Laioutr frontends and let Traefik route preview and production domains using container labels.  
-  See `examples/docker-traefik/` in the repository for a `Dockerfile.nuxt`, example scripts (`deploy.sh`, `promote.sh`, `delete.sh`) and a `byos-agent.config.ts` tailored to Traefik.
-
-- **PM2 (bare metal)** – run multiple preview and production Nuxt processes using PM2 on a single machine.  
-  See `examples/pm2/` in the repository for scripts that:
-  - Derive deterministic preview ports from the deployment ID.
-  - Start Nuxt builds under PM2 for each deployment.
-  - Promote a preview deployment by re‑wiring which PM2 process serves the production port.
-
-Use these examples as:
-
-- Drop‑in configurations for your own BYOS host.
-- Blueprints for building custom deployment flows that still speak the standard BYOS webhook protocol.
+::tip
+The [`@laioutr/byos-agent`](https://github.com/laioutr/byos-agent) handles webhook verification, script execution, and status callbacks out of the box. See the [BYOS Agent documentation](/hosting/bring-your-own-server-(byos)/byos-agent) to get started quickly, including deployment examples for Docker and PM2.
+::
 
 # Authentication (Standard Webhooks)
 
