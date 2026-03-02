@@ -1,5 +1,5 @@
 ---
-title: Laioutr Cloud
+title: Product description
 description: Managed hosting and operations for Laioutr-based frontends.
 ---
 

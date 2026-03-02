@@ -1,9 +1,9 @@
 ---
 title: Product description
-links: []
+description: A dedicated, headless checkout frontend generated and managed through the Laioutr platform.
 ---
 
-##
+## Laioutr Checkout
 
 Laioutr Checkout is a dedicated, headless checkout frontend generated and managed through the Laioutr platform. It represents the checkout-specific counterpart to Laioutr Frontend, focusing exclusively on the user-facing checkout experience while remaining fully decoupled from commerce backends and business logic.
 

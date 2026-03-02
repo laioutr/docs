@@ -1,9 +1,9 @@
 ---
 title: Product description
-links: []
+description: A production-ready, headless storefront generated and operated through the Laioutr platform.
 ---
 
-##
+## Laioutr Frontend
 
 Laioutr Frontend is a production-ready, headless storefront generated and operated through the Laioutr platform. Built on modern web technologies and optimized for deployment on Vercel, it delivers fast, scalable, and highly performant commerce experiences out of the box.
 

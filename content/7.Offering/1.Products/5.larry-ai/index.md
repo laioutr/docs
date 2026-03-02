@@ -1,5 +1,5 @@
 ---
-title: Larry AI
+title: Product description
 description: AI copilot and automation layer for Laioutr.
 ---
 

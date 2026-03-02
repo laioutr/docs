@@ -1,9 +1,9 @@
 ---
 title: Product description
-links: []
+description: A frontend management platform designed for teams building and operating headless commerce experiences.
 ---
 
-##
+## Laioutr Cockpit
 
 The Laioutr Cockpit is a frontend management platform designed for teams building and operating headless commerce experiences. It provides a centralized interface to visually configure layouts, components, and frontend behavior without requiring changes to production code. By separating frontend orchestration from implementation, Laioutr Studio enables faster iteration while maintaining a clean, composable architecture.
 
