@@ -1,31 +1,108 @@
 ---
 title: Shopify
-description: Developer documentation for the Laioutr Shopify app package. Connect your Nuxt frontend to a Shopify store via the Storefront API, Admin API, and Customer Account API.
+description: How to connect your Shopify store to Laioutr and what developers can build on top.
 ---
 
-## Overview
+## Part 1 – Connect Shopify and Laioutr (for store owners & project leads)
 
-The **@laioutr-app/shopify** package integrates a Laioutr-powered Nuxt app with a [Shopify](https://www.shopify.com/) store. It uses three APIs: the **Storefront API** (products, collections, cart, menu, content), the **Admin API** (media library, files), and the **Customer Account API** (OAuth2 login, customer profile, addresses). The package registers with the Laioutr orchestr (queries, actions, links, resolvers, templates), provides a Nuxt Image provider for Shopify CDN media, a media library provider for the Laioutr Studio (list and upload), and sections/blocks for content pages.
+This section explains **which values you need from Shopify** and **where to find them**. You can either enter them yourself into the Laioutr project configuration, or hand them to your implementation partner.
 
-To use it, you add the module to your Nuxt config and set the seven required connection options (store domain and IDs, Storefront and Admin tokens, Customer Account OAuth client and redirect URI). The package then exposes canonical ecommerce capabilities so your UI can stay backend-agnostic while talking to Shopify.
+### 1. Information you will need
 
-## Configuration requirements
+To connect a Shopify store to Laioutr you need:
 
-The module expects configuration under the key **`@laioutr-app/shopify`** in `nuxt.config.ts` (or via `runtimeConfig`). All seven options are **required** for full functionality (Storefront, Admin, and Customer Account features).
+- **Store domain**  
+  - Format: **`<store-id>.myshopify.com`**  
+  - Example: `my-brand.myshopify.com`
 
-### Module options
+- **Storefront API private access token**  
+  - Used for product, collection, cart and content data.
+
+- **Customer Account API credentials** (for customer login)  
+  - **Client type:** must be set to **“Confidential”**  
+  - **Client ID**  
+  - **Client Secret**
+  - **Redirect / callback URL** – provided by Laioutr (for example: `https://<your-laioutr-domain>/oauth/callback`)
+
+- **Admin API access token (for media library and additional data)**  
+  - From a **custom app** with the required Admin scopes.
+
+Your implementation partner might ask you to paste these values into a project setup form or send them via a secure channel.
+
+### 2. Enable the headless sales channel and Storefront API
+
+1. In **Shopify Admin**, go to **Apps and sales channels**.  
+2. Install or open the **Headless** sales channel (if your partner has not done this already).  
+3. Inside the Headless channel configuration:
+   - Create a **Storefront API private access token**.
+   - Copy the token for later.
+
+This token is what Laioutr uses to read products, collections, carts, menus and content via the **Storefront API**.
+
+### 3. Configure Customer Account API (for customer login)
+
+If you want customers to log in on your Laioutr storefront using their Shopify account:
+
+1. In **Shopify Admin**, open your **Headless** (or custom) app configuration.
+2. Enable **Customer Account API** and create an **application**.
+3. Set **Client type** to **Confidential**.
+4. Note down:
+   - **Customer Account API Client ID**  
+   - **Customer Account API Client Secret**
+5. Add the **callback / redirect URL** that Laioutr gives you, e.g.:
+   - `https://<your-laioutr-domain>/oauth/callback`
+
+Laioutr uses this information to run the OAuth2 login flow with Shopify.
+
+### 4. Set up a Shopify app for the media library (optional but recommended)
+
+To manage images and files from within Laioutr (for example in the media library of the Studio), a separate app with **Admin API** access is required:
+
+1. In **Shopify Admin**, go to **Settings → Apps and sales channels → Develop apps**.
+2. Create a **new custom app** (or reuse one created for Laioutr), and enable **Admin API** access.
+3. Grant at least these **Admin API scopes** for media and navigation:
+   - `write_files`
+   - `read_files`
+   - `read_themes`
+   - `write_themes`
+   - `read_online_store_navigation`
+4. Generate an **Admin API access token** and store it somewhere safe.
+
+Your implementation partner may request additional scopes (for example to work with metaobjects or product data) depending on your project.
+
+### 5. Hand the data to your developer or partner
+
+At this point you should have:
+
+- Store domain: **`<store-id>.myshopify.com`**  
+- Storefront API private access token  
+- Customer Account API **Client ID** and **Client Secret**  
+- Customer Account API **callback URL** configured  
+- Admin API access token (with the scopes above, if you use the media library)
+
+Developers will now wire these values into the Laioutr project. You do not need to change theme code in Shopify for the integration itself.
+
+---
+
+## Part 2 – Developer setup in Nuxt
+
+Developers integrate Shopify by adding the **`@laioutr-app/shopify`** module to the Nuxt app that powers the Laioutr frontend.
+
+### Module configuration
+
+The module expects configuration under the key **`'@laioutr-app/shopify'`** in `nuxt.config.ts` (or via `runtimeConfig`). All options are required for the full feature set (Storefront, Admin, Customer Account).
 
 | Option | Type | Description |
 |--------|------|-------------|
-| **`shopId`** | `string` | Shopify shop identifier. Use the format **`id.myshopify.com`** (e.g. `my-store.myshopify.com`). Required for the Customer Account API URL. |
-| **`storeDomain`** | `string` | Store domain in the same format: **`id.myshopify.com`**. Used by the Storefront and Admin API clients to resolve the API base URL. |
-| **`privateAccessKey`** | `string` | **Storefront API** private access token. Create a custom app in the Shopify Admin (Settings → Apps and sales channels → Develop apps) and generate a token with Storefront API access. |
-| **`adminAccessToken`** | `string` | **Admin API** access token. From the same or another custom app, with Admin API scopes (e.g. `read_products`, `read_files`, `write_files`, `read_metaobject_definitions`, `read_metaobjects` for media library and metaobjects). |
-| **`customerAccountApiClientId`** | `string` | OAuth2 **Client ID** for the **Customer Account API**. Created when you enable Customer Account API access for your app (Shopify Admin → App setup). |
-| **`customerAccountApiClientSecret`** | `string` | OAuth2 **Client Secret** for the same Customer Account API app. Keep this secret and only use it on the server (the module stores it in private runtime config). |
-| **`redirectUri`** | `string` | OAuth2 **redirect URI** for the Customer Account login flow. Must exactly match the redirect URL configured in your Shopify app (e.g. `https://your-frontend.com/api/orchestr/action/oauth/callback` or your Laioutr OAuth callback route). |
+| **`shopId`** | `string` | Shopify shop identifier. Use **`<store-id>.myshopify.com`** (e.g. `my-brand.myshopify.com`). Used to build Customer Account API URLs. |
+| **`storeDomain`** | `string` | Store domain in the same format: **`<store-id>.myshopify.com`**. Used by Storefront and Admin API clients. |
+| **`privateAccessKey`** | `string` | **Storefront API** private access token from the Headless sales channel. |
+| **`adminAccessToken`** | `string` | **Admin API** access token from the custom app created under **Develop apps** with the scopes listed above. |
+| **`customerAccountApiClientId`** | `string` | OAuth2 **Client ID** for the **Customer Account API** app (client type Confidential). |
+| **`customerAccountApiClientSecret`** | `string` | OAuth2 **Client Secret** for the same Customer Account API app. Keep this in private runtime config. |
+| **`redirectUri`** | `string` | OAuth2 **redirect URI** (callback URL) that you also configured in the Customer Account API app, e.g. `https://your-frontend.com/api/orchestr/action/oauth/callback`. |
 
-### Example configuration
+### Example `nuxt.config.ts`
 
 ```ts
 // nuxt.config.ts
@@ -43,141 +120,109 @@ export default defineNuxtConfig({
 });
 ```
 
-Use environment variables (or a similar secret source) for all tokens and secrets in production; do not commit them.
+Use environment variables or a secret manager for all tokens and secrets; never commit them to version control.
 
-### Runtime behavior
+### Runtime behavior (high level)
 
-- **Storefront API**  
-  The package creates a storefront client per request with `storeDomain` and `privateAccessKey`. It sends the buyer’s IP in the `Shopify-Storefront-Buyer-IP` header when available (for geo/rate limiting). Cart is identified by the **cart ID** stored in the cookie `shopify-cart-id`; the client creates or updates the cart via the Storefront API and persists the ID in that cookie.
+- **Storefront API**
+  - A client is created per request using `storeDomain` and `privateAccessKey`.
+  - Cart identity is stored in the cookie **`shopify-cart-id`**; the package creates/updates carts and syncs the cookie.
 
-- **Admin API**  
-  The admin client is created with `storeDomain` and `adminAccessToken`. It is used for the media library provider (list files, staged uploads, create file) and any future admin-only features. Ensure the token has the scopes required by those features.
+- **Admin API**
+  - A client is created with `storeDomain` and `adminAccessToken`.
+  - Used by the Laioutr media library provider to list and upload files.
 
-- **Customer Account API**  
-  The Customer Account client uses `customerAccountApiClientId`, `customerAccountApiClientSecret`, `redirectUri`, and `shopId` to build the API URL and perform OAuth2. Login redirects the user to Shopify’s authorization URL; after approval, Shopify redirects to `redirectUri` with a code; the package exchanges the code for access/refresh/id tokens and stores them in cookies (`shopify-access-token`, `shopify-refresh-token`, `shopify-id-token`). Authenticated customer requests (e.g. get current customer, addresses) use the access token and refresh it when expired.
+- **Customer Account API**
+  - Uses `shopId`, `customerAccountApiClientId`, `customerAccountApiClientSecret` and `redirectUri` to run an OAuth2 flow.
+  - After login, the package stores tokens in httpOnly cookies:
+    - `shopify-access-token`
+    - `shopify-refresh-token`
+    - `shopify-id-token`
+  - Temporary state/nonce cookies (`shopify-oauth-state`, `shopify-oauth-nonce`) are cleared after the callback.
 
-## Capabilities
+---
 
-The package implements Laioutr’s canonical ecommerce types via the orchestr. The following lists what is available; for exact types and payloads, refer to `@laioutr-core/canonical-types` and the package source.
+## Part 3 – What the Shopify integration provides (for developers)
 
-### Queries
+Once configured, the **`@laioutr-app/shopify`** package implements Laioutr’s canonical ecommerce model through the orchestr. Your frontend can talk to Shopify without knowing its APIs directly.
 
-- **Cart**  
-  - **GetCurrentCartQuery** – Returns the current cart ID (from cookie); cart content is resolved via the cart resolver.
-- **Category (Collection)**  
-  - **CategoryBySlugQuery** – Resolves collection by handle (slug); supports products link with pagination, sorting, and filters.
-- **Menu**  
-  - **MenuByAliasQuery** – Navigation menu by handle (alias); cached (e.g. 10 min TTL).
-- **Product**  
-  - **ProductBySlugQuery** – Product by handle (slug); supports variants link and breadcrumb link.  
-  - **ProductSearchQuery** – Full-text search with pagination, filters, and sort; returns product IDs, total, availableFilters, availableSortings.  
-  - **ProductsByCategorySlugQuery** – Product listing by collection handle with pagination, sorting, filters.
-- **Blog**  
-  - **AllBlogCollectionQuery** – Paginated list of blogs.  
-  - **BlogCollectionBySlug** – Single blog by handle.  
-  - **BlogPostBySlug** – Single article by handle (within a blog).
-- **Content page**  
-  - **ContentPageByHandle** – Page by handle (e.g. CMS page).
-- **Suggested search**  
-  - **SuggestedSearchSearchQuery** – Predictive/suggested search entries (e.g. products, collections, pages).
+### Built-in capabilities
 
-### Query template providers
+- **Canonical queries**
+  - Cart: current cart by ID (using `shopify-cart-id` cookie).
+  - Category / collection: by handle (slug), with paginated product listings.
+  - Menu: menu by alias/handle (navigation).
+  - Product: by handle, product search, products by category.
+  - Blog: blog collections and posts by slug.
+  - Content pages: content page by handle.
+  - Suggested search: predictive search entries.
 
-- **ProductBySlug** – Supplies “product by handle” query templates.  
-- **ProductsByCategorySlug** – Supplies “products by collection handle” templates.  
-- **MenuByAlias** – Supplies “menu by handle” templates.  
-- **BlogByBlogSlug** – Supplies “blog by handle” templates.
+- **Actions**
+  - Auth: login via OAuth, callback handling, logout, password recovery.
+  - Cart: add, update and remove items (and discount codes).
+  - Customer: get current customer and manage addresses (create/update/delete, set default).
 
-### Actions
+- **Links and resolvers**
+  - Links that connect canonical entities (e.g. product → variants, category → products, cart → items, blog → posts).
+  - Resolvers map Shopify entities (products, collections, blogs, etc.) to Laioutr’s canonical types.
 
-- **Auth**  
-  - **AuthLoginOauthAction** – Initiates Customer Account OAuth; returns `authorizationUrl` for redirect.  
-  - **AuthOAuthCallbackAction** – Handles OAuth callback (code → tokens), validates state/nonce, sets auth cookies.  
-  - **AuthLogoutOauthAction** – Clears auth cookies (client should redirect to Shopify logout URL if desired).  
-  - **AuthRecoverAction** – Sends password recovery email (Storefront API).
-- **Cart**  
-  - **CartAddItemsAction** – Adds line items and/or discount codes; creates cart if none exists, stores cart ID in cookie.  
-  - **CartUpdateItemsAction** – Updates line item quantities.  
-  - **CartRemoveItemsAction** – Removes line items.
-- **Customer**  
-  - **CustomerGetCurrentAction** – Returns current customer (Customer Account API; requires auth).  
-  - **CustomerAddressCreateAction**, **CustomerAddressUpdateAction**, **CustomerAddressDeleteAction** – Create/update/delete address.  
-  - **AddressGetAllAction** – List customer addresses.  
-  - **CustomerAddressSetDefaultAction** – Set default address.
+- **Media and images**
+  - **Nuxt Image provider** named `shopify` for `https://cdn.shopify.com` URLs.
+  - **Media library provider** named `shopify` for listing and uploading media via the Admin API.
 
-### Links
+- **Studio sections and blocks**
+  - Sections/blocks (such as `ShopifyContentPageBlock`) and pagetype plugins for content pages backed by Shopify data.
 
-- **Product**: **ProductBreadcrumbLink**, **ProductVariantsLink**.  
-- **Category**: **CategoryProductsLink**, **CategoryBreadcrumbLink**.  
-- **Cart**: **CartItemsLink**.  
-- **Blog**: **BlogCollectionPostsLink**; **BlogPostComments**.  
-- **Suggested search**: **SuggestedSearchEntriesLink**.
+For exact type names and payloads, check the package source and the `@laioutr-core` canonical type definitions.
 
-### Component resolvers (entities)
+---
 
-- **Product** – Maps Shopify product/variant to canonical Product (base, info, prices, media, SEO, description, variants, etc.).  
-- **Product variant** – Maps variant data.  
-- **Category** – Maps collection to canonical Category (base, content, media, SEO, products).  
-- **Menu** – Resolves menu/navigation items.  
-- **Cart** – Resolves cart and line items.  
-- **Cart item** – Resolves individual line items.  
-- **Blog** – Resolves blog entity.  
-- **Blog post** – Resolves article.  
-- **Comment** – Resolves blog comments.  
-- **Content page** – Resolves CMS/page content.  
-- **Suggested search** – Resolves search suggestion entries.
+## Part 4 – Extending the integration
 
-### Image provider
+You can extend the Shopify integration in several ways while staying within Laioutr’s orchestr and canonical model.
 
-- **Provider name:** `shopify`  
-- **Usage:** Use with Nuxt Image when the source is a Shopify CDN URL (e.g. from Storefront API media). The provider supports modifiers: **width**, **height**, **format**. Base URL is `https://cdn.shopify.com`.  
-- **Registration:** The module registers this provider and depends on `@nuxt/image`; ensure the Nuxt Image module is installed.
+### 1. Adding new Shopify-powered features
 
-### Media library provider
+- **New queries**  
+  - Example: expose a new query for product recommendations, order history, or custom metaobjects.  
+  - Implementation pattern:
+    - Call the relevant Shopify Storefront or Admin API endpoint.
+    - Map the response into either existing canonical entities or a new canonical type.
+    - Register a new orchestr query and (optionally) a query template provider so Studio users can wire it in visually.
 
-- **Name:** `shopify`  
-- **Purpose:** Lets the Laioutr Studio **list** and **upload** media via the **Admin API**. List uses the files query (paginated, optional search); upload uses staged uploads then file create.  
-- **Requirements:** Admin API token with `read_files` and `write_files` (and any other scopes required by your app).  
-- **Upload:** Validates file type/size (see package const for limits), then staged upload → upload binary → file create.
+- **New actions**
+  - Example: wishlist operations, subscription management, or loyalty actions that live in Shopify or an app that exposes a Shopify API.
+  - Use the same pattern as the built-in cart and auth actions: validate input, call Shopify, map errors, and return canonical action results.
 
-### Sections and blocks
+### 2. Enriching existing entities
 
-- The package registers **sections** and **blocks** (e.g. `ShopifyContentPageBlock`) and a **pagetypes** plugin for content-page page types. Use these in the Laioutr Studio to build pages backed by Shopify content.
+- **Extending canonical types**
+  - If you need more fields on a product, collection or customer, you can:
+    - Extend the canonical type definition (where appropriate for your project).
+    - Populate the new field from additional Shopify API fields (e.g. metafields, metaobjects).
+  - Be careful to keep extensions backwards compatible and document them for frontend developers.
 
-## Backend requirements
+- **Custom links**
+  - Add links that connect existing entities in new ways, for example:
+    - Product → recommended products.
+    - Customer → recently viewed products (if you store that in Shopify or an adjacent system).
 
-- **Shopify store** – A Shopify store (any plan that supports the APIs you use).  
-- **Storefront API** – A custom app with Storefront API access and a **private access token** (no OAuth for storefront; the token is server-side only).  
-- **Admin API** – Same or another custom app with Admin API scopes. For the media library: **read_products**, **read_files**, **write_files**; for metaobjects (if used): **read_metaobject_definitions**, **read_metaobjects**.  
-- **Customer Account API** – In the Shopify Admin, enable **Customer Account API** for your app and create OAuth2 credentials (Client ID and Client Secret). Configure the **redirect URI** to match your app (e.g. `https://your-domain.com/api/orchestr/action/oauth/callback` or the route that handles `AuthOAuthCallbackAction`).  
-- **CORS / network** – The Nuxt server must be able to call Shopify’s APIs (storefront and admin are per-store URLs; Customer Account API is `https://shopify.com/{shopId}/account/customer/api/...`). For OAuth, the redirect URI must be reachable by the user’s browser and by Shopify after login.
+### 3. Custom sections and blocks for Studio
 
-## Cookies and cart / auth
+- **Create new sections/blocks** that consume the canonical queries and links:
+  - Example: a “Featured collection grid” section that reads products from a Shopify collection handle.
+  - Example: a “Customer account overview” section that uses customer actions and queries.
 
-- **Cart**  
-  The Storefront API uses a **cart ID** to identify the cart. The package stores it in the cookie **`shopify-cart-id`**. It creates a cart on first add-to-cart and updates the cookie when the API returns a new cart ID.
+- **Best practice**
+  - Keep sections/blocks backend-agnostic: they should depend only on canonical types, not on Shopify-specific payloads. This keeps your UI portable if you add other commerce backends later.
 
-- **Customer Account (OAuth)**  
-  After a successful OAuth callback, the package sets:  
-  - **`shopify-access-token`** – Access token (short-lived).  
-  - **`shopify-refresh-token`** – Refresh token (long-lived).  
-  - **`shopify-id-token`** – ID token (for identity).  
-  State and nonce used during the OAuth flow are stored temporarily in **`shopify-oauth-state`** and **`shopify-oauth-nonce`** and cleared after the callback. Cookie options are httpOnly, secure, sameSite strict, path `/`. Ensure your domain and HTTPS setup match so cookies are sent and accepted.
+### 4. Working with media and navigation
 
-## Required Shopify permissions (summary)
+- **Media**
+  - Extend the media provider if you need custom file validation or additional metadata stored in Shopify.
+  - Use the `shopify` Nuxt Image provider for all Shopify CDN media to get automatic optimization.
 
-- **Storefront API** – Required for products, collections, cart, menu, content, search, and password recovery. Use a private access token with the needed storefront access.  
-- **Admin API** – For media library and optional features: **read_products**, **read_files**, **write_files**, **read_metaobject_definitions**, **read_metaobjects** (adjust if you use more admin features).  
-- **Customer Account API** – OAuth2 app with Client ID and Client Secret; redirect URI must match your app. Scope used by the package includes `openid email customer-account-api:full` (see package const).
+- **Navigation**
+  - If you rely heavily on Shopify’s navigation, you can add new queries or links that surface more complex menu structures (for example, navigation trees driven by metaobjects combined with `read_online_store_navigation`).
 
-## Summary checklist for developers
-
-1. **Shopify store** – Have a store and know its **store domain** (`id.myshopify.com`) and **shop ID** (same format for Customer Account API URL).  
-2. **Custom app(s)** – Create a custom app in Shopify Admin; generate **Storefront API** private access token and **Admin API** access token with the scopes above.  
-3. **Customer Account API** – Enable Customer Account API for the app; create OAuth2 Client ID and Client Secret; set **redirect URI** to your OAuth callback URL.  
-4. **Nuxt config** – Add `@laioutr-app/shopify` to `modules` and set all seven options under `'@laioutr-app/shopify'`.  
-5. **Environment** – Put all secrets and URLs in env vars; ensure the Nuxt server can reach Shopify APIs and that the redirect URI is correct and reachable.  
-6. **OAuth callback route** – Ensure the route that receives the OAuth callback (e.g. `/api/orchestr/action/oauth/callback`) is the one configured as `redirectUri` in Shopify and in your config.  
-7. **Orchestr / frontend** – Use the canonical queries, actions, links, and resolvers from your UI; the package maps them to Shopify.  
-8. **Images** – Use the `shopify` Nuxt Image provider for Shopify CDN URLs.  
-9. **Studio** – The `shopify` media library provider will list and upload files once the Admin API and token are correctly configured.
+By combining these extension points, you can gradually grow from a standard Laioutr × Shopify storefront into a highly tailored commerce experience, without losing the benefits of a canonical, backend-agnostic frontend architecture.
