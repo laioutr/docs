@@ -1,0 +1,25 @@
+import { transformMdcBody } from '../utils/llms/transform-mdc';
+
+export default defineNitroPlugin((nitroApp) => {
+  // Transform MDC component nodes in doc.body before llms-full.txt stringification
+  nitroApp.hooks.hook('content:llms:generate:document', async (_event, doc, _options) => {
+    await transformMdcBody(doc.body);
+  });
+
+  // Rewrite llms.txt links to point to /raw/*.md instead of HTML pages
+  nitroApp.hooks.hook('llms:generate', async (_event, options) => {
+    const domain = options.domain?.replace(/\/$/, '') || '';
+    for (const section of options.sections) {
+      if (!section.links) continue;
+      for (const link of section.links) {
+        if (!link.href) continue;
+        // Only rewrite links under our own domain
+        if (domain && !link.href.startsWith(domain)) continue;
+        const path = link.href.slice(domain.length);
+        // Skip non-content links (e.g. /llms-full.txt)
+        if (path.includes('.')) continue;
+        link.href = `${domain}/raw${path}.md`;
+      }
+    }
+  });
+});

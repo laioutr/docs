@@ -3,6 +3,7 @@ import { VueFlow, Handle, Position, useVueFlow } from '@vue-flow/core';
 import '@vue-flow/core/dist/style.css';
 import '@vue-flow/core/dist/theme-default.css';
 import reflected from '@laioutr-core/canonical-types/reflection';
+import { kebabCase } from 'scule';
 
 const props = defineProps<{
   entity: string;
@@ -116,19 +117,21 @@ const wrapHeight = computed(() => {
         <template #node-source-entity="{ data }">
           <div class="entity-flow-node entity-flow-node--source">
             <div class="entity-flow-node__header">{{ data.label }}</div>
-            <div class="entity-flow-node__divider" />
-            <div class="entity-flow-node__section-label">Components</div>
-            <div class="entity-flow-node__components">
+            <template v-if="data.components.length">
+              <div class="entity-flow-node__divider" />
+              <div class="entity-flow-node__section-label">Components</div>
+              <div class="entity-flow-node__components">
               <a
                 v-for="comp in data.components"
                 :key="comp"
-                :href="`#${comp}`"
+                :href="`#${kebabCase(comp)}`"
                 class="entity-flow-node__comp-link"
                 @click.stop
               >
                 {{ comp }}
               </a>
-            </div>
+              </div>
+            </template>
             <Handle type="source" :position="Position.Right" />
           </div>
         </template>

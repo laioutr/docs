@@ -71,3 +71,13 @@ The site extends Docus with custom components for documenting the Laioutr UI lib
 - `nuxt.config.ts` - Extends Docus, configures nuxt-studio integration
 - `app/app.config.ts` - Site-wide settings (colors, header/footer, GitHub links)
 - ESLint uses `@laioutr/eslint-config/nuxt-module`
+
+### LLM-Readable Content Rule
+
+Every custom Vue component used in documentation that adds explanations, API references, or important visualizations **must** have an LLM-readable representation. MDC components like `:action-meta`, `:entity-component-meta`, `::component-meta`, `:query-meta`, and similar are rendered as interactive HTML but appear as raw syntax in `llms-full.txt`, making them invisible to LLMs.
+
+Two approaches (pick whichever fits):
+1. **Markdown-native format** — use formats that are already LLM-readable (e.g., Mermaid diagrams, markdown tables, code blocks). No extra work needed.
+2. **Server-side rendering for llms-full.txt** — convert the component output to plain markdown via the `llms:generate:full` Nitro hook and `server/utils/llms/render-reflected.ts`. This intercepts the full-text generation and replaces raw MDC syntax with readable text (tables, lists, etc.).
+
+**When modifying any component that has an LLM-generator counterpart, you must re-evaluate and update the generator to match.** Changes to a component's output, props, or data shape that aren't reflected in the LLM renderer will cause `llms-full.txt` to become stale or incorrect.

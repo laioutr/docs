@@ -44,7 +44,7 @@ const resolvedProperties = computed(() => {
   </template>
   <template v-else>
     <!-- Object with properties -->
-    <ProseFieldGroup v-if="schema.type === 'object'" class="border-default !my-0 border-l-2 pl-4">
+    <ProseFieldGroup v-if="schema.type === 'object'" class="border-default !my-0 border-l-2 border-dashed pl-4">
       <template v-for="{ name: fieldName, field } in resolvedProperties" :key="fieldName">
         <!-- Expandable field -->
         <UCollapsible v-if="getExpandableVariants(field)" class="my-5">
@@ -120,7 +120,22 @@ const resolvedProperties = computed(() => {
 
     <!-- Root-level array: chip legend on the border -->
     <template v-else-if="schema.type === 'array'">
-      <div>
+      <!-- Primitive array (string[], number[], etc.): show as single type -->
+      <div v-if="!getExpandableVariants(schema) && typeof schema.items === 'object' && !Array.isArray(schema.items) && (schema.items as JSONSchema).type && (schema.items as JSONSchema).type !== 'object' && (schema.items as JSONSchema).type !== 'array'">
+        <ProseCode>{{ getTypeName(schema, mode) }}</ProseCode>
+        <div v-if="getConstraints(schema, mode).length" class="mt-1.5 flex flex-wrap gap-1">
+          <span
+            v-for="c in getConstraints(schema, mode)"
+            :key="c.label"
+            class="border-default text-muted inline-flex items-center gap-1 rounded border px-1.5 py-0.5 font-mono text-[10px] leading-tight"
+          >
+            <span :class="c.value ? 'opacity-60' : ''">{{ c.label }}</span>
+            <span v-if="c.value">{{ c.value }}</span>
+          </span>
+        </div>
+      </div>
+      <!-- Complex array: expandable items -->
+      <div v-else>
         <span class="bg-primary/10 text-primary dark:bg-primary/15 mb-2 inline-block rounded-sm px-1.5 py-0.5 font-mono text-xs font-medium">
           array
         </span>
