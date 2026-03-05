@@ -11,6 +11,11 @@ export default defineAppConfig({
       primary: 'purple',
       neutral: 'slate',
     },
+    prose: {
+      codeIcon: {
+        curl: 'i-lucide-terminal',
+      },
+    },
   },
   header: {
     title: '',

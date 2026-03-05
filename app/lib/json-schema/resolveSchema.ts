@@ -1,5 +1,46 @@
-import { dereferenceSync } from 'dereference-json-schema';
 import type { JSONSchema } from '@laioutr-core/core-types/common';
+
+// Inlined from dereference-json-schema (CJS-only package breaks Vite dev server)
+function klona(val: any): any {
+  if (Array.isArray(val)) {
+    const out = Array(val.length);
+    for (let i = val.length; i--; ) out[i] = val[i] && typeof val[i] === 'object' ? klona(val[i]) : val[i];
+    return out;
+  }
+  if (Object.prototype.toString.call(val) === '[object Object]') {
+    const out: any = {};
+    for (const k in val) out[k] = val[k] && typeof val[k] === 'object' ? klona(val[k]) : val[k];
+    return out;
+  }
+  return val;
+}
+
+function resolveRef(schema: any, ref: string): any {
+  const path = ref.split('/').slice(1);
+  let current: any = schema;
+  for (const segment of path) {
+    if (!current || typeof current !== 'object') return null;
+    current = current[segment] ?? null;
+  }
+  return current;
+}
+
+function dereferenceSync(schema: any): any {
+  const visited = new Set();
+  const cloned = klona(schema);
+  function resolve(current: any): any {
+    if (typeof current !== 'object' || current === null || visited.has(current)) return current;
+    visited.add(current);
+    if (Array.isArray(current)) {
+      for (let i = 0; i < current.length; i++) current[i] = resolve(current[i]);
+    } else {
+      if ('$ref' in current && typeof current.$ref === 'string') return resolveRef(cloned, current.$ref);
+      for (const key in current) current[key] = resolve(current[key]);
+    }
+    return current;
+  }
+  return resolve(cloned);
+}
 
 /**
  * Return a shallow clone of the schema with `id` stamped on every

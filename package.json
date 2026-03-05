@@ -13,7 +13,6 @@
     "@vue-flow/core": "^1.48.2",
     "@vueuse/nuxt": "14.1.0",
     "better-sqlite3": "^12.2.0",
-    "dereference-json-schema": "^0.2.1",
     "didyoumean2": "^7.0.4",
     "docus": "latest",
     "mermaid": "^11.12.2",

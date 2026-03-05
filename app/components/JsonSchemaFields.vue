@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { JSONSchema } from '@laioutr-core/core-types/common';
 import type { SchemaMode } from '../lib/json-schema/introspection';
+import type { JSONSchema } from '@laioutr-core/core-types/common';
 import {
   getConstraints,
   getExpandableVariants,
@@ -152,7 +152,7 @@ const resolvedProperties = computed(() => {
         <template v-if="getExpandableVariants(schema)?.length === 1">
           <JsonSchemaFields :schema="getExpandableVariants(schema)![0]!.schema" dereferenced />
         </template>
-        <JsonSchemaVariantList v-else-if="getExpandableVariants(schema)" :variants="getExpandableVariants(schema)!" />
+        <JsonSchemaVariantList v-else-if="getExpandableVariants(schema)" :variants="getExpandableVariants(schema)!" array />
         <template v-else-if="typeof schema.items === 'object' && !Array.isArray(schema.items)">
           <JsonSchemaFields :schema="schema.items" dereferenced />
         </template>

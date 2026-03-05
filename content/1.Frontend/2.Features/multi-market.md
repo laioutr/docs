@@ -1,97 +1,81 @@
 ---
 title: Multi-market
-description: Laioutr’s multi-market support lets you serve different regions (markets) from one project, each with its own domains, languages, and currency, configured in Cockpit.
+description: Laioutr's multi-market support lets you serve different regions (markets) from one project, each with its own domains, languages, and currency, configured in Cockpit.
 ---
 
 ## Part 1 — For business and content users
 
-### Overview
+A **market** in Laioutr is a regional slice of your storefront: a named region (e.g. Switzerland, Germany) with its own **domains**, **languages**, and **currency**. You configure markets in [Cockpit → Markets](https://cockpit.laioutr.cloud/o/_/p/_/settings/markets).
 
-A **market** in Laioutr is a regional slice of your storefront: a named region (e.g. Switzerland, Germany, France) with its own **domains** (URLs), **languages**, and **currency**. Multi-market lets you run one project that serves several such regions from a single codebase and configuration.
+Each market has one or more **domains**. A domain maps a host and optional path prefix to a language:
 
-### What you can do
+| Domain | Language |
+|--------|----------|
+| `www.shop.ch` | German |
+| `www.shop.ch/fr` | French |
+| `www.shop.de` | German |
 
-- **Create and manage markets** in Cockpit (Markets area): name, slug, currency (e.g. CHF, EUR), region codes, and optional flag for Studio.
-- **Assign domains to each market**: each domain has a **host** (e.g. `www.shop.ch`), an optional **path** prefix (e.g. `/fr` for French), and one **language**. So one market can serve multiple languages via different domains or path prefixes.
-- **Set a default domain** per market so the main URL (e.g. `www.shop.ch` without path) uses that language.
-- **Limit pages to specific markets** (optional): in Studio you can restrict a page so it only appears in selected markets; other markets will not show that route.
+One domain per market is the **default** (the root URL without path prefix). You can also **limit pages to specific markets** in Studio; other markets won't show that route.
 
-### Benefits
+The combination of market and language is the **context** a customer browses in. When someone visits `www.shop.ch/fr`, Laioutr resolves the market (Switzerland) and the language (French). Everything downstream ([currency](/frontend/features/currencies), measurement system, content translations, available pages) follows from this context.
 
-- One Cockpit project can power multiple storefront regions (countries/currencies) without separate deployments.
-- Each market has a clear currency and region; pricing and locale behaviour (e.g. measurement system) can follow the market.
-- Domains and languages are configured in Cockpit, so you can add or change markets and domains without code changes.
-
-### How it relates to languages and currency
-
-- **Languages** are defined once in Cockpit (Translations) and then **assigned to markets** via domains: each domain belongs to one market and one language. See [Multi-language support](./multi-language-support.md).
-- **Currency** is set per market (e.g. CHF for Switzerland, EUR for Germany). The frontend can use the current market’s currency for formatting and display. See [Currencies](./currencies.md).
+**Languages** are defined once in [Cockpit → Translations](https://cockpit.laioutr.cloud/o/_/p/_/settings/translations) and assigned to markets via domains. See [Multi-language support](./multi-language-support.md).
 
 ---
 
 ## Part 2 — For developers
 
-### How it fits in the stack
+### Configuration
 
-Markets and their domains come from **RC**: `laioutrrc.markets` is a dictionary of **`RcMarket`**. Each market has:
+Markets and their domains come from **RC** (`laioutrrc.markets`). Each `RcMarket` has:
 
 - **`id`**, **`slug`**, **`name`**
 - **`currency`** (ISO 4217, e.g. `CHF`)
 - **`regionCodes`** (e.g. `["CH"]`)
-- **`defaultDomainId`**: which domain is the default for this market (e.g. root URL)
-- **`domains`**: dictionary of **`RcMarketDomain`** — each has `id`, `host`, optional `path`, and `languageId` (reference to `RcLanguage`)
+- **`defaultDomainId`**
+- **`domains`**: dictionary of `RcMarketDomain`, each with `id`, `host`, optional `path`, and `languageId`
 
-The frontend never uses this RC directly for routing; it uses a **derived Render config** built by **`buildI18nConfig()`**.
+At build time, Frontend Core transforms this into a **`RenderI18nConfig`** (via `buildI18nConfig()`) with resolved types (`RenderMarket`, `RenderMarketDomain`, `RenderLanguage`) and lookup maps (`marketById`, `marketBySlug`, `hostToMarket`). You access this derived config through composables, never the raw RC.
 
-### Key types (core-types)
+### Composables
 
-- **`RcMarket`**: as above; **`RcMarketDomain`**: `id`, `host`, `path?`, `languageId`.
-- **`RenderMarket`**: built from `RcMarket`; has `id`, `slug`, `name`, `currency`, `regionCodes`, `domains` (array of **`RenderMarketDomain`**), and **`defaultDomain`** (reference).
-- **`RenderMarketDomain`**: adds to RC domain: **`devHost`** (from `toDevHost(host)`), resolved **`language`** (RenderLanguage), **`isDefault`**.
-- **`RenderI18nConfig`**: output of `buildI18nConfig()`; contains `markets`, `marketById`, `marketBySlug`, **`hostToMarket`** (hostname → RenderMarket, including dev hosts), and **`defaultMarket`** (fallback for localhost/unknown host).
+```ts
+const market = useMarket()          // ComputedRef<RenderMarket>
+const language = useLanguage()      // ComputedRef<RenderLanguage>
+const domain = useMarketDomain()    // ComputedRef<RenderMarketDomain>
+const currency = useCurrency()      // ComputedRef<string>, shorthand for market.currency
+const config = useI18nConfig()      // RenderI18nConfig (static, not reactive)
+```
 
-### Build-time and runtime flow
+These are always defined. Resolution falls back to the default market when the host is unknown.
 
-1. **`buildI18nConfig(languages, markets)`**  
-   - Builds **RenderLanguage** for each `RcLanguage` (with BCP 47–derived fields and empty `marketDomains`).  
-   - Builds **RenderMarket** for each `RcMarket` and **RenderMarketDomain** for each domain; resolves `languageId` to **RenderLanguage** and sets **`devHost`** via **`toDevHost(host)`**.  
-   - Fills **`language.marketDomains`** so each language knows which domains serve it.  
-   - Builds **`hostToMarket`** (production + dev hosts).  
-   - Sets **`defaultMarket`** to the first market (or a fallback market if none configured).  
-   - Sets **`allLocales`** to BCP 47 codes referenced by at least one domain.
+Use `useI18nConfig()` when you need the full list of markets and languages, for example to build a market picker.
 
-2. **`resolveMarketFromRequest(config, host, path)`**  
-   - Strips port from `host`.  
-   - Looks up **market** in `config.hostToMarket[host]`; if missing and host is localhost/127.0.0.1 (or still missing), uses **`config.defaultMarket`**.  
-   - Within that market, finds the **domain** by matching **path** to `domain.path` (exact or prefix with `/`). If none matches, uses the market’s **defaultDomain**.  
-   - Returns **`{ market, language, domain }`** (language = `domain.language`).
+**Currency**: use `useCurrency()` for formatting (via the UI Kit's [`$money` formatter](/frontend/features/currencies)) or passing to APIs.
 
-3. **Market detection plugin**  
-   - Runs early (after i18n). Gets `host` (from request header on server, `window.location.host` on client) and current **path**.  
-   - Calls **`resolveMarketFromRequest(config, host, path)`** and stores the result in Nuxt **`useState`** (e.g. `laioutr:market`, `laioutr:language`, `laioutr:domain`) so composables and the app see the current market and language.
-
-4. **Routes: `buildRoutes(pages, config)`**  
-   - For each page, determines **applicable markets** from **`page.marketIds`**: if `marketIds` is set, only those markets; otherwise all markets.  
-   - For each (page, market, domain) with a resolved **page path** (via **`resolvePagePath(page.path, domain.language)`**), builds a full path (domain path prefix + page path).  
-   - Ensures param sets are consistent across aliases; drops aliases with mismatched params and warns.  
-   - Detects **path collisions** between pages and warns.  
-   - Produces one **primary path** (default market’s default domain) and **aliases** for other (market, domain) combinations.  
-   - Enforces an alias cap (e.g. 50k) to avoid build/runtime issues.
-
-### Validation
-
-- **`validateI18nConfig(languages, markets)`** checks: valid BCP 47 on languages; at least one market; every `defaultDomainId` exists in that market’s domains; every domain `languageId` exists in `languages`; no duplicate (host, path) across all domains. Use this (or the build step that runs it) before deploy.
-
-### Dev hosts
-
-- **`toDevHost(host)`**: maps production host to a stable dev host (e.g. `www.shop.ch` → `shop-ch.local.laioutr.tech`) so local development can simulate multiple domains via `/etc/hosts` or similar. Both production and dev hosts are registered in **`hostToMarket`**.
+**Region / measurement**: use `useLanguage().value.measurementSystem` (metric/imperial) or `useMarket().value.regionCodes` for region-specific behaviour.
 
 ### Page-level market scope
 
-- **`RcPage.marketIds`** (optional): if set, the page is only included in routes for those market IDs. **`buildRoutes`** uses **`applicableMarkets(page, config)`** so pages can be market-specific (e.g. a “CH only” landing page).
+`RcPage.marketIds` (optional): if set, the page only exists in routes for those markets. A "CH only" landing page won't generate routes in the Germany market.
 
-### Using the current market in code
+### Validation
 
-- Read market/language from **`useState`** (or from composables that wrap it).  
-- **Currency**: use **`currentMarket.currency`** for formatting (e.g. `$money`) or passing to APIs.  
-- **Region / measurement**: use **`currentLanguage.measurementSystem`** (metric/imperial) or **`currentMarket.regionCodes`** if you need region-specific behaviour.
+`validateI18nConfig(languages, markets)` runs at build time and checks: valid BCP 47 codes, existing `defaultDomainId` and `languageId` references, no duplicate (host, path) pairs. Issues are logged as warnings.
+
+### Dev hosts
+
+`toDevHost(host)` maps production hosts to local development hosts (e.g. `www.shop.ch` → `shop-ch.local.laioutr.tech`). A `*.local.laioutr.tech` wildcard DNS record points to `127.0.0.1`, so you can test multi-domain setups locally. The first market is also aliased to `localhost` as an offline fallback.
+
+### Fallback behaviour
+
+Market and language are **never null** at runtime. Resolution always produces a result:
+
+| Scenario | What happens |
+|----------|-------------|
+| No market matches the request host | Falls back to the default market (first configured). Warning logged. |
+| No path prefix matches within the market | Uses the market's default domain. |
+| Page not in current market (`marketIds`) | No route alias exists. Standard 404. |
+| Language has no path for a page | No alias generated. `useSwitchLanguagePath()` returns `'#'`. |
+| Content has no value for the locale chain | `unlocalize()` returns `undefined`. Components handle missing data. |
+| Invalid RC config (dangling refs, bad BCP 47) | Build-time warnings from `validateI18nConfig()`. |
