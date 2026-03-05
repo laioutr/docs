@@ -142,13 +142,13 @@ Detailed steps and troubleshooting are in [Setup Local Development Environment](
 - **Config key**  
   The module’s `configKey` must be the package name so Laioutr can pass the right slice of `laioutrrc.json` into your module’s `setup(options, nuxt)`.
 
-For deeper dives, see [Architecture](/getting-started/key-concepts/architecture), [Extensibility](/getting-started/key-concepts/extensibility), and the [Orchestr](/orchestr/introduction) docs.
+For deeper dives, see [Architecture](/getting-started/key-concepts/architecture), [Extensibility](/getting-started/key-concepts/extensibility), and the [Orchestr](/frontend/orchestr) docs.
 
 ## Example apps and references
 
 - **App Starter** — [github.com/laioutr/app-starter](https://github.com/laioutr/app-starter)
 - **Customer Demo** — [github.com/laioutr/app-customer-demo](https://github.com/laioutr/app-customer-demo) (example frontend using apps)
-- **App docs** — For specific backends (Shopify, Commercetools, Emporix, Klaviyo, etc.), see the [App docs](/apps/app-docs) section.
+- **App docs** — For specific backends (Shopify, Commercetools, Emporix, Klaviyo, etc.), see the [App docs](/apps) section.
 
 ## Related documentation
 

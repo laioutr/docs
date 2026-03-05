@@ -169,7 +169,7 @@ There are two different layers: **(1) Orchestr’s own data cache** (already bui
 
 ### Orchestr data cache (built-in)
 
-The **Orchestr** layer caches **query**, **link**, and **component resolver** results **on the server** (see [Caching](/frontend/3-orchestr/caching)). So when the same query runs again (e.g. same product, same category), the result can be served from cache instead of calling the backend again. That reduces load on your commerce backend and speeds up SSR and client requests.
+The **Orchestr** layer caches **query**, **link**, and **component resolver** results **on the server** (see [Caching](/frontend/orchestr/caching)). So when the same query runs again (e.g. same product, same category), the result can be served from cache instead of calling the backend again. That reduces load on your commerce backend and speeds up SSR and client requests.
 
 This is **independent** of CDN/HTTP caching: it’s an application-level cache inside the Nuxt/Nitro server. You configure it per query/link/resolver (TTL, cache key, strategy). No extra step is required for “caching API responses” at the Orchestr level beyond what’s in the Caching doc.
 
@@ -211,6 +211,6 @@ If you build a **Laioutr app** or another Nuxt module:
 1. **SSR-safe components** – Use **ClientOnly** or **import.meta.client** for anything that must run only in the browser (e.g. third-party scripts, Studio connection, `window`). Provide a **skeleton** or placeholder so layout doesn’t shift.
 2. **Personalized content** – Prefer loading it **on the client** (e.g. in `onMounted` or a client-only composable) so SSR HTML stays cacheable. Don’t put user-specific data into the initial SSR payload for cacheable pages.
 3. **Cache headers** – In your module’s **setup**, extend **nuxt.options.routeRules** (or **nuxt.options.nitro.routeRules**) to add or override **Cache-Control** (and **Vary**) for the routes your module registers (e.g. API routes or specific page paths).
-4. **Orchestr cache** – For your query/link/resolver handlers, use the existing [Orchestr Caching](/frontend/3-orchestr/caching) (strategy, TTL, buildCacheKey) to control server-side data caching; that’s separate from HTTP/CDN caching.
+4. **Orchestr cache** – For your query/link/resolver handlers, use the existing [Orchestr Caching](/frontend/orchestr/caching) (strategy, TTL, buildCacheKey) to control server-side data caching; that’s separate from HTTP/CDN caching.
 
 This gives you a **basic understanding** of what the frontend does by default (SSR on, no HTTP caching), how to **make SSR cacheable** (good vs bad pages, time-sensitive and personalized content, skeletons), how to **enable SSR and API caching** (TTL, Cache-Control, routeRules), and how to **adjust and override** in your own modules for custom SSR and caching behaviour.

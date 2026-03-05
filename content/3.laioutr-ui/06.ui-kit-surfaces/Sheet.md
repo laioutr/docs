@@ -1,6 +1,6 @@
 ---
 title: Sheet
-description: Slide-in cart drawer for managing items, discounts, and checkout without leaving the page.
+description: Slide-in panel surface for overlaying content such as carts, filters, or detail views without leaving the page.
 jiraIssueId: LUI-104
 links:
   - label: Figma

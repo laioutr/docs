@@ -1,6 +1,6 @@
 ---
 title: Content With Text Columns
-description: A section cms container component
+description: CMS section with configurable columns of text, cards, and optional buttons for landing pages.
 ---
 
 ## Overview

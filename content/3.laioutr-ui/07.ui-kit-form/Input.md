@@ -1,6 +1,6 @@
 ---
 title: Input
-description: A tags input component that renders removable tags inside an input field with text input for adding new tags.
+description: Styled text input for forms and search with optional icon or button addons and variant support.
 jiraIssueId: LUI-136
 ---
 

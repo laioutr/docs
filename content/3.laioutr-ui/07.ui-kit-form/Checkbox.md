@@ -1,6 +1,6 @@
 ---
 title: Checkbox
-description: A container for managing collections of related checkbox inputs.
+description: Checkbox group wrapper managing state, validation, and ARIA grouping for multiple related checkbox inputs.
 jiraIssueId: LUI-126
 ---
 

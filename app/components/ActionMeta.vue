@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import JsonSchemaFields from './JsonSchemaFields.vue';
 import reflected from '@laioutr-core/canonical-types/reflection';
+
 import { useDidYouMean } from '../composables/useDidYouMean';
 import { tokenToExportName } from '../lib/tokens/tokenToExportName';
 import { ProseCode, ProseH3, ProseH4 } from '#components';

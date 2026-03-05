@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import JsonSchemaFields from './JsonSchemaFields.vue';
 import reflected from '@laioutr-core/canonical-types/reflection';
+
 import { useDidYouMean } from '../composables/useDidYouMean';
 import { tokenToExportName } from '../lib/tokens/tokenToExportName';
 import { ProseBadge, ProseCode, ProseH3, ProseH4, ProseP } from '#components';
@@ -36,7 +37,7 @@ const didYouMeanThing = useDidYouMean(
   </div>
 
   <ProseCallout v-else color="warning" icon="i-lucide-alert-circle">
-    No action metadata found for {{ props.name }}.
+    No query metadata found for {{ props.name }}.
     <template v-if="didYouMeanThing">
       Did you mean <ProseCode>{{ didYouMeanThing }}</ProseCode
       >?</template

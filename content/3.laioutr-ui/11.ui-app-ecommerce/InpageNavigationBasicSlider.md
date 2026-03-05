@@ -42,5 +42,5 @@ items:
 
 ## API Reference
 
-::component-meta{:name='1'}
+::component-meta{name="InpageNavigationBasicSlider"}
 ::

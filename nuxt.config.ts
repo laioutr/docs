@@ -1,7 +1,18 @@
+import { withoutTrailingSlash } from 'ufo';
+
 export default defineNuxtConfig({
   extends: ['docus'],
   modules: ['nuxt-studio', '@vueuse/nuxt'],
   css: ['~/assets/css/main.css'],
+
+  hooks: {
+    'content:file:afterParse'(ctx) {
+      const permalink = ctx.content.permalink ?? ctx.content.meta?.permalink;
+      if (permalink) {
+        ctx.content.path = withoutTrailingSlash(permalink);
+      }
+    },
+  },
 
   site: {
     name: 'Laioutr Docs',
@@ -10,6 +21,62 @@ export default defineNuxtConfig({
   llms: {
     domain: 'https://docs.laioutr.io',
     title: 'Laioutr Docs',
+    description:
+      'Documentation for Laioutr, the Composable Frontend Management Platform. Build performant, scalable eCommerce storefronts with a visual editor, unified data layer, and modular app architecture.',
+    sections: [
+      {
+        title: 'Getting Started',
+        contentCollection: 'docs',
+        contentFilters: [{ field: 'path', operator: 'LIKE', value: '/getting-started%' }],
+      },
+      {
+        title: 'Frontend',
+        description: 'Core frontend framework, features, SEO, and Orchestr data layer.',
+        contentCollection: 'docs',
+        contentFilters: [{ field: 'path', operator: 'LIKE', value: '/frontend%' }],
+      },
+      {
+        title: 'Apps',
+        description: 'App development guides and connector app documentation.',
+        contentCollection: 'docs',
+        contentFilters: [{ field: 'path', operator: 'LIKE', value: '/apps%' }],
+      },
+      {
+        title: 'Laioutr UI',
+        description: 'Component library built on UnoCSS and Reka UI.',
+        contentCollection: 'docs',
+        contentFilters: [{ field: 'path', operator: 'LIKE', value: '/laioutr-ui%' }],
+      },
+      {
+        title: 'Hosting',
+        description: 'Laioutr Cloud, hosting adapters, and bring-your-own-server.',
+        contentCollection: 'docs',
+        contentFilters: [{ field: 'path', operator: 'LIKE', value: '/hosting%' }],
+      },
+      { title: 'Checkout', contentCollection: 'docs', contentFilters: [{ field: 'path', operator: 'LIKE', value: '/checkout%' }] },
+      { title: 'Larry AI', contentCollection: 'docs', contentFilters: [{ field: 'path', operator: 'LIKE', value: '/larry-ai%' }] },
+      {
+        title: 'Offering',
+        description: 'Products, SLA, customer support, and compliance.',
+        contentCollection: 'docs',
+        contentFilters: [{ field: 'path', operator: 'LIKE', value: '/offering%' }],
+      },
+      { title: 'Landing', contentCollection: 'landing' },
+      {
+        title: 'Other',
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'NOT LIKE', value: '/getting-started%' },
+          { field: 'path', operator: 'NOT LIKE', value: '/frontend%' },
+          { field: 'path', operator: 'NOT LIKE', value: '/apps%' },
+          { field: 'path', operator: 'NOT LIKE', value: '/laioutr-ui%' },
+          { field: 'path', operator: 'NOT LIKE', value: '/hosting%' },
+          { field: 'path', operator: 'NOT LIKE', value: '/checkout%' },
+          { field: 'path', operator: 'NOT LIKE', value: '/larry-ai%' },
+          { field: 'path', operator: 'NOT LIKE', value: '/offering%' },
+        ],
+      },
+    ] as any,
   },
 
   ogImage: {

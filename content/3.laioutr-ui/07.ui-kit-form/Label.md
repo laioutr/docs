@@ -1,6 +1,6 @@
 ---
 title: Label
-description: An EU energy label component for products that displays a clickable preview image opening a fullscreen lightbox with the full energy label and datasheet link.
+description: Form label component with optional required indicator, linked to a control for accessibility.
 jiraIssueId: LUI-91
 ---
 

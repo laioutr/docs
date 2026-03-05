@@ -1,6 +1,6 @@
 ---
 title: Field
-description: A number input field component for entering numeric values with optional increment/decrement controls.
+description: Form field wrapper providing label, help text, and validation message around an input control.
 jiraIssueId: LUI-132
 links:
   - label: Figma

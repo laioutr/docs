@@ -1,6 +1,6 @@
 ---
 title: Rating Form
-description: The Search is a specialized input field designed for text-based searching on a website. In the provided example, the block includes an additional feature that displays live hints suggestions (autocomplete) as the user types.
+description: Form for submitting product ratings and written reviews.
 ---
 
 ## Overview

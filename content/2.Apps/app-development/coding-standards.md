@@ -175,4 +175,4 @@ export default defineNuxtModule<ModuleOptions>({
 
 - **Never commit** API keys, client secrets, or tokens. Use environment variables or a secret manager (e.g. Infisical) and pass them into **private** runtime config only.
 - **Public runtime config** is exposed to the client. Put only non-sensitive options (e.g. sample rate, feature flags, public URLs) in `RuntimeConfigModulePublic`.
-- Document required env vars and config in your app’s README or in the [App docs](/apps/app-docs) so integrators know what to set.
+- Document required env vars and config in your app’s README or in the [App docs](/apps) so integrators know what to set.

@@ -15,7 +15,7 @@ Each action-token can be implemented in an app-package by an [Action Handler](#a
 
 A canonical action-token is a pre-defined token that is part of the `@laioutr-core/canonical-types` package. This package contains action-tokens for common actions like subscribing to a newsletter, creating an order, or retrieving customer orders.
 
-You can find a list of canonical action-tokens on the [Canonical Actions](/canonical-types/ecommerce/canonical-actions) page.
+You can find a list of canonical action-tokens on the [Canonical Actions](/frontend/api-reference/ecommerce/actions) page.
 
 ### Custom Tokens
 

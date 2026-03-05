@@ -1,6 +1,6 @@
 ---
 title: Basic Banner with Image and Text
-description: A cta banner basic component
+description: Promotional banner section with background image, headline, subline, and optional CTA button.
 ---
 
 ## Overview

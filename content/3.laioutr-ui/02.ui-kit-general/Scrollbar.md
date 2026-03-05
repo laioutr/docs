@@ -1,6 +1,6 @@
 ---
 title: Scrollbar
-description: Visual progress indicator for sliders showing content visibility and scroll position with Swiper integration.
+description: Proportional scrollbar indicator showing content visibility and scroll position, with optional Swiper integration.
 jiraIssueId: LUI-39
 ---
 

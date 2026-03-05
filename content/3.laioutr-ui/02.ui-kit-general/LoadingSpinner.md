@@ -1,6 +1,6 @@
 ---
 title: Loading Spinner
-description: Renders an accessible label associated with controls.
+description: An animated spinner indicating loading or processing state.
 links: []
 ---
 

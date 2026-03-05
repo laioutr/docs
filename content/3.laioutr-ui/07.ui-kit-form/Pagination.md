@@ -1,6 +1,6 @@
 ---
 title: Pagination
-description: Because if anyone actually uses this app you're working on, your data isn't going to fit on a single page for long.
+description: Page navigation component for splitting large data sets across multiple pages.
 links: []
 ---
 

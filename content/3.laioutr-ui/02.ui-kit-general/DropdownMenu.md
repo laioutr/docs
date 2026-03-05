@@ -1,6 +1,6 @@
 ---
 title: Dropdown Menu
-description: Reusable select dropdown component for product sorting with custom dropdown UI and active selection indicator.
+description: Dropdown menu component with custom trigger, selectable items, and active selection indicator.
 jiraIssueId: LUI-81
 links:
   - label: Figma

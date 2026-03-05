@@ -1,6 +1,6 @@
 ---
 title: Text
-description: A multi-line text input for entering longer form content.
+description: Typography primitives for body, heading, subline, and caption with a consistent scale of sizes.
 jiraIssueId: LUI-137
 ---
 

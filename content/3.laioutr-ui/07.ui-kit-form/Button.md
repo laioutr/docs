@@ -1,6 +1,6 @@
 ---
 title: Button
-description: An enhancement to the Gallery Content Slider that adds an optional CTA button for linking to additional pages.
+description: Interactive button component with multiple variants, sizes, and states for triggering actions.
 jiraIssueId: LUI-54
 links:
   - label: Figma

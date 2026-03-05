@@ -1,6 +1,6 @@
 ---
 title: Switch
-description: A billing cycle toggle switch for switching between monthly and annual pricing with savings display.
+description: Toggle switch component for binary on/off choices in forms and settings.
 jiraIssueId: LUI-4
 links:
   - label: Figma
