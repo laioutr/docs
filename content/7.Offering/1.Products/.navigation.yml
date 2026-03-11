@@ -1,16 +1,1 @@
 title: Products
-navigation:
-  defaultOpen: false
-  items:
-    - name: Overview
-      path: /offering/products/overview
-    - name: Frontend
-      path: /offering/products/frontend
-    - name: Cockpit
-      path: /offering/products/cockpit
-    - name: Checkout
-      path: /offering/products/checkout
-    - name: Cloud
-      path: /offering/products/cloud
-    - name: Larry AI
-      path: /offering/products/larry-ai
