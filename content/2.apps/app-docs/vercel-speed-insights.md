@@ -1,13 +1,13 @@
 ---
 title: Vercel Speed Insights
-description: Developer documentation for the Laioutr Vercel Speed Insights app package. Add Vercel Speed Insights to your Nuxt app via a Laioutr page wrapper.
+description: Developer documentation for the Laioutr Vercel Speed Insights app package. Add Vercel Speed Insights to your Nuxt app via a client plugin.
 ---
 
 ## Overview
 
-The **@laioutr/app-vercel-speed-insights** package integrates [Vercel Speed Insights](https://vercel.com/docs/speed-insights) into a Laioutr-powered Nuxt app. It does not register any orchestr handlers; instead it registers a **page wrapper** with Laioutr and adds the official **@vercel/speed-insights** Nuxt component so that real-user performance data is collected on every page rendered through that wrapper.
+The **@laioutr/app-vercel-speed-insights** package integrates [Vercel Speed Insights](https://vercel.com/docs/speed-insights) into a Laioutr-powered Nuxt app. It does not register orchestr handlers. Instead, it adds a **client plugin** that calls Vercel's Nuxt runtime injection API so real-user performance data is collected on client-side page views.
 
-The package uses **@vercel/speed-insights** under the hood. The wrapper component renders the default slot (your page content) and the `<SpeedInsights />` component from `@vercel/speed-insights/nuxt`, passing an optional **sample rate** from runtime config. The module installs **@laioutr-core/frontend-core** on prepare and registers **VercelSpeedInsightsWrapper** as a global component and as Laioutr’s page wrapper.
+The package uses **@vercel/speed-insights** under the hood and passes an optional **sample rate** from Nuxt public runtime config.
 
 ## Configuration requirements
 
@@ -33,18 +33,18 @@ export default defineNuxtConfig({
 
 ### Runtime behavior
 
-- **Page wrapper**  
-  The package registers **VercelSpeedInsightsWrapper** with Laioutr via `registerLaioutrApp({ pageWrapper: ["VercelSpeedInsightsWrapper"] })`. When your app uses Laioutr’s layout/page wrapper stack, this wrapper wraps the page and mounts the Vercel Speed Insights Nuxt component (`<SpeedInsights :sample-rate="config.sampleRate ?? 1" />`), so real-user metrics (e.g. Web Vitals) are sent to Vercel.
+- **Client plugin injection**  
+  The package registers a client plugin (`speed-insights.client.ts`) and calls `injectSpeedInsights({ sampleRate: config.sampleRate ?? 1 })` from `@vercel/speed-insights/nuxt/runtime`. This injects Speed Insights in the browser runtime without requiring a page wrapper component.
 
 - **Public runtime config**  
-  `sampleRate` is merged into **public** runtime config so the wrapper can read it on the client and pass it to `<SpeedInsights />`.
+  `sampleRate` is merged into **public** runtime config under `@laioutr/app-vercel-speed-insights`, then read by the client plugin.
 
-- **Global component**  
-  **VercelSpeedInsightsWrapper** is also registered as a global Nuxt component, so you can use it manually (e.g. `<VercelSpeedInsightsWrapper>...</VercelSpeedInsightsWrapper>`) if you are not relying on Laioutr’s page wrapper for that route.
+- **Laioutr app registration**  
+  The module still registers itself via `registerLaioutrApp({ name, version })` so the app is discoverable in the Laioutr app ecosystem.
 
 ## Capabilities
 
-This package does not provide orchestr queries, actions, links, or resolvers. It only adds Vercel Speed Insights to the client via the page wrapper (or the global component).
+This package does not provide orchestr queries, actions, links, or resolvers. It only adds Vercel Speed Insights to the client runtime.
 
 - **Speed Insights** – Real-user performance data (e.g. LCP, FID, CLS) is collected and sent to your Vercel project when the wrapper is mounted. Sampling is controlled by **sampleRate**. Configuration and dashboard are handled by the Vercel project and [Vercel’s documentation](https://vercel.com/docs/speed-insights).
 
@@ -57,5 +57,10 @@ This package does not provide orchestr queries, actions, links, or resolvers. It
 
 - Add **@laioutr/app-vercel-speed-insights** to Nuxt modules.
 - Optionally set **sampleRate** under `@laioutr/app-vercel-speed-insights` (default 1).
-- Ensure your app uses Laioutr’s page wrapper so **VercelSpeedInsightsWrapper** is included in the wrapper stack; or use **VercelSpeedInsightsWrapper** manually where you want Speed Insights.
+- Ensure client-side navigation is enabled (standard Nuxt SPA behavior after hydration) so Speed Insights can track page views.
 - Deploy on Vercel and enable Speed Insights in the project settings so data is collected and visible in the dashboard.
+
+## Recent changes (since last documented app state)
+
+- **v0.1.4**: Internal integration fix to use Nuxt SDK APIs instead of raw API usage.
+- **v0.1.3**: Updated `@vercel/speed-insights` to `v2.0.0`.
