@@ -5,6 +5,44 @@ description: Changelog for the Laioutr Cockpit (Studio) product following Keep a
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-03]
+
+### Added
+
+- **API Keys & App Releases**:
+  - API key domain module with validator, repository and scopes.
+  - API Keys tRPC router for full CRUD operations.
+  - API Keys tab in organization settings.
+  - `POST /api/v1/app/release` route with API key authentication for automated app publishing.
+  - Domain events for API key and app release lifecycle.
+- **i18n & Localization**:
+  - Localized field indicators and improved debug tools in Studio.
+  - Market-aware language switcher in Studio.
+  - Language selector in the project creation form.
+  - Migration script harness and `ALL_LOCALES` rename migration for transitioning to explicit locale codes.
+  - Enforce field translatability in `setStaticProp`.
+- **Project management**:
+  - Create project button added to the organization projects tab.
+  - Generate proper domain name for default market on project creation.
+- **Miscellaneous**:
+  - Screensharing guard for collaborative sessions.
+  - Consolidated organization routes under `/o/<slug>`.
+  - Re-orderable currencies.
+
+### Changed
+
+- Removed `ALL_LOCALES` wildcard throughout Studio in favor of explicit locale codes, including Yjs CRDT key migration with backup support and circular fallback chain prevention.
+- Improved markets UI, settings, and related components (CircleFlag, SearchableSelect).
+- Simplified deployment waiting page.
+- Made pricing table hideable via feature flag.
+
+### Fixed
+
+- Fixed Yjs CRDT key deletion and added migration backup support.
+- Fixed empty string not being converted to `undefined` in studio field `onChange`.
+- Fixed languages/markets marked unavailable when no i18n config is present.
+- Inlined core-types into Nitro bundle for Vercel compatibility.
+
 ## [2026-02]
 
 ### Added

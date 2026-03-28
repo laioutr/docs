@@ -5,6 +5,12 @@ description: Changelog for the Laioutr CLI following Keep a Changelog and Semant
 
 All notable changes to the **Laioutr CLI** (the `laioutr` command-line tool) will be documented in this file.
 
+## [0.4.0]
+
+### Added
+
+- CLI: New `laioutr app release` command for publishing app releases via the Cockpit API (uses API key authentication).
+
 ## [0.3.0] – 2025-11-25
 
 ### Added

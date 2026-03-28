@@ -5,6 +5,54 @@ description: Changelog for the Laioutr frontend product following Keep a Changel
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.28.4]
+
+### Fixed
+
+- **Frontend Core**: Inlined core-types into Nitro bundle for Vercel compatibility.
+
+## [0.28.3]
+
+### Fixed
+
+- **Frontend Core**: Fixed reflect API route for Vercel deployment.
+
+## [0.28.2]
+
+### Fixed
+
+- **Core Types**: Replaced wildcard package exports with static exports to fix Vercel builds.
+
+## [0.28.1]
+
+### Fixed
+
+- **Frontend Core**: Fixed Orchestr import path.
+
+## [0.28.0]
+
+### Added
+
+- **Frontend Core**: **Field-value coercion** — automatic conversion between field types (text→media, text→link, text→number, number→text).
+- **Frontend Core**: Shadow `nuxt-i18n` composables for seamless multi-market integration.
+- **Frontend Core**: Route aliases for market domains in Studio preview mode.
+- **Frontend Core**: Send proper error 404 responses on not-found pages.
+- **Core Types**: Enforce field translatability in Studio `setStaticProp`.
+- **Core Types**: Enable JSON Schema meta and replace `zodAs` with `z.ZodType`.
+- **Core Types**: Split field definitions into studio and system categories.
+- **Core Types**: Make `RcPage.path` optionally non-localized for pages that don't need per-locale paths.
+
+### Changed
+
+- **Frontend Core**: Removed `ALL_LOCALES` wildcard in favor of explicit locale codes throughout the frontend codebase.
+- **Frontend Core**: Improved route resolution during navigation.
+- Updated Orchestr, Kit and Core Types to `0.28.0`.
+
+### Fixed
+
+- **Frontend Core**: Correct locale-switching behavior in Studio preview.
+- **Frontend Core**: Do not assume no-prefix for default-domain in markets.
+
 ## [0.27.3]
 
 ### Added

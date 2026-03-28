@@ -5,6 +5,29 @@ description: Changelog for Laioutr UI and UI Kit following Keep a Changelog and 
 
 All notable changes to **Laioutr UI**, **UI Kit**, and related component libraries will be documented in this file.
 
+## [1.31.4]
+
+### Fixed
+
+- **UI App**: Added missing `useResolvedLink` import in `SectionBreadcrumbs`.
+
+## [1.31.0]
+
+### Added
+
+- **UI**: Market-domain locale support for **LanguageSwitcher** — the switcher now uses market domains for locale data.
+- **UI**: Adopted **link-fields** throughout blocks and sections, including updated CTA button link fields.
+
+### Changed
+
+- **UI App**: LanguageSwitcher uses navigation for locale switching instead of full page reloads.
+- UI, UI Kit & UI App: Dependency updates aligned with Frontend Core / Core Types `0.28.0`.
+
+### Fixed
+
+- **UI**: SSR hydration errors.
+- **UI App**: Fixed navigation-based locale switching in LanguageSwitcher.
+
 ## [1.30.0]
 
 ### Added
