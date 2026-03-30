@@ -117,6 +117,12 @@ The package implements Laioutr’s canonical ecommerce types via the orchestr. T
 - **Storefront API:**  
   - A sales channel with **Storefront API** enabled and an **access token** generated.  
   - SEO URLs enabled if you use slug-based queries (CategoryBySlug, ProductBySlug, ProductsByCategorySlug).  
+- **Sales channel configuration (user-facing requirements)**:
+  - **Headless sales channel** – Create a **headless** sales channel (Storefront API–only) that your Nuxt frontend will talk to.
+  - **Categories & menus assigned** – Ensure the sales channel has appropriate **navigation entry points** (e.g. main navigation / footer navigation) so category trees and menus resolve as expected.
+  - **Domain configured** – Assign at least one domain to the sales channel (e.g. `https://example.com`) so URL generation, language/currency context, and SEO URLs behave consistently.
+  - **Products assigned** – Assign products (or product groups/categories) to the sales channel so listings and product detail queries return data.
+  - **Reference** – See Shopware docs: [Sales channel → Products](https://docs.shopware.com/en/shopware-6-en/settings/saleschannel#products).
 - **Admin API:**  
   - An **Integration** (OAuth2 client) with client ID and secret, and scopes that include at least what the media library and any admin features need (e.g. `media` read).  
 - **CORS / network:** The Nuxt app (server) must be able to call both the storefront and admin base URLs (same-origin or allowed CORS for server-side requests as applicable).
