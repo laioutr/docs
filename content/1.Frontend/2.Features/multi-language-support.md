@@ -23,9 +23,14 @@ Configuration is centralized in Cockpit ([Translations](https://cockpit.laioutr.
 
 ### Content resolution
 
-`resolvePagePath(paths, language)` resolves a `LocalizedValue<string>` to a single path for a given `RenderLanguage`. It walks the language's `localeChain` and returns the first match. For example, `de-CH` tries `de-CH` → `de-DE` → `de` → `*` → first available value.
+`unlocalize(value, language.localeChain)` resolves a `LocalizedValue<T>` to a single value for a given `RenderLanguage`. It walks the language's `localeChain` and returns the first match. For example, `de-CH` tries `de-CH` → `de-DE` → `de` → `*` → first available value.
 
-The generic version `unlocalize(value, chain)` does the same for any `LocalizedValue<T>`.
+```ts
+import { unlocalize } from '#imports'
+
+const path = unlocalize(page.paths, language.value.localeChain)
+// de-CH → de-DE → de → '*' → first available
+```
 
 ### Integration with nuxt-i18n
 
@@ -40,12 +45,12 @@ nuxt-i18n is configured with `strategy: 'no_prefix'`. It does **not** own routin
 **Frontend Core handles:**
 - Route generation (aliases from market config)
 - Domain → market → language resolution
-- Link resolution (`useLinkResolver`)
+- Link resolution (`linkResolver`)
 - hreflang alternates (`useMarketHead`)
 - Market/language/domain [composables](/frontend/features/multi-market#composables)
 
 ::warning
-If you are coming from a standard nuxt-i18n setup: `useLocalePath()` and prefix-based routing do **not** apply. Use `useSwitchLanguagePath()` and `useSwitchMarketUrl()` instead.
+If you are coming from a standard nuxt-i18n setup: `useLocalePath()` and prefix-based routing do **not** apply. Use `linkResolver.switchLocalePath()` and `linkResolver.switchMarketUrl()` instead.
 ::
 
 ### Locale-aware formatting
@@ -63,9 +68,9 @@ Available in any template: `{{ $money(price) }}`. See [Currencies](/frontend/fea
 
 ### Language switcher
 
-Frontend Core provides two composables for building language and market switchers:
+Frontend Core provides `linkResolver` (auto-imported) for building language and market switchers:
 
-**`useSwitchLanguagePath()`** switches language **within the same market**:
+**`linkResolver.switchLocalePath()`** switches language **within the same market**:
 
 ```vue
 <template>
@@ -73,7 +78,7 @@ Frontend Core provides two composables for building language and market switcher
     <NuxtLink
       v-for="domain in market.domains"
       :key="domain.id"
-      :to="switchLanguagePath(domain.language.id)"
+      :to="linkResolver.switchLocalePath(domain.language.id)"
     >
       {{ domain.language.endonym }}
     </NuxtLink>
@@ -82,37 +87,76 @@ Frontend Core provides two composables for building language and market switcher
 
 <script setup lang="ts">
 const market = useMarket()
-const switchLanguagePath = useSwitchLanguagePath()
 </script>
 ```
 
 Returns `'#'` if the target language is not available in the current market.
 
-**`useSwitchMarketUrl()`** switches to a **different market** (full URL, requires full page load because the host may differ):
+**`linkResolver.switchMarketUrl()`** switches to a **different market** (full URL, requires full page load because the host may differ):
 
 ```ts
-const switchMarketUrl = useSwitchMarketUrl()
-
 // Navigate to Germany market, default language
-navigateTo(switchMarketUrl('mkt_germany'), { external: true })
+navigateTo(linkResolver.switchMarketUrl('mkt_germany'), { external: true })
 
 // Navigate to Germany market, French
-navigateTo(switchMarketUrl('mkt_germany', 'lng_fr'), { external: true })
+navigateTo(linkResolver.switchMarketUrl('mkt_germany', 'lng_fr'), { external: true })
 ```
 
 Both resolve the correct localized path for the current page, including dynamic params.
 
+### Link resolution
+
+`linkResolver.resolve(link)` converts a `Link` object (reference, URL, anchor, page, or page type) into a path string. It is auto-imported and can be used directly in templates:
+
+```vue
+<template>
+  <NuxtLink :to="linkResolver.resolve(item.link)">
+    {{ item.label }}
+  </NuxtLink>
+</template>
+```
+
+::warning
+`linkResolver.resolve()` reads the current language and market domain to resolve localized paths. When called bare in `setup()`, the result is a static string that will **not** update when the language changes — the same reactivity caveat that applies to nuxt-i18n's `$t()` outside of templates and `computed()`. Use `useResolvedLink()` when you need a reactive result.
+::
+
+**`useResolvedLink(link)`** wraps `linkResolver.resolve()` in a `computed()` so the resolved path re-evaluates automatically when the language or market changes:
+
+```ts
+const link = useResolvedLink(props.link) // ComputedRef<string>
+```
+
 ### SEO: hreflang and canonical
 
-Frontend Core registers `useMarketHead()` globally. No setup needed. It injects:
+`useMarketHead(pageMarketIds?)` generates `<link>` tags for search engines. It is auto-imported but you must call it yourself, typically in a layout:
 
-- `<link rel="alternate" hreflang="...">` for every (market × domain) combination with a resolved path for the current page
-- `<link rel="alternate" hreflang="x-default">` pointing to the default market's default domain
-- `<link rel="canonical">` for the current domain + path
+```ts
+// In your layout or page
+useMarketHead()
+```
 
-Pages scoped to specific markets via `marketIds` correctly exclude other markets from hreflang tags.
+It adds the following to `<head>` via Nuxt's `useHead()`:
 
-### Utilities
+- **`<link rel="canonical">`** — the current page's URL on the current domain (`https://{host}{prefix}{path}`)
+- **`<link rel="alternate" hreflang="...">`** — one for every domain across all markets where the current page has a localized path. The `hreflang` value is the domain's language code.
+- **`<link rel="alternate" hreflang="x-default">`** — points to the first market's default domain as the fallback for search engines
 
-- **`getExonym(language, inLocale)`**: returns the language name in another locale (e.g. "German" when the UI is in English). Useful for language picker labels that show names in the current UI language rather than the target language's endonym.
-- **`fillParams(path, params)`**: replaces `:param` segments in a path string. Used internally by the switcher composables; you may need it for custom link building.
+All URLs are built as `https://{domain.host}{domain.path}{localizedPagePath}`, with dynamic route params (e.g. `:slug`) filled from the current route.
+
+Domains where the page has no localized path are silently skipped — no broken alternate links are generated.
+
+#### Market-scoped pages
+
+Pass `pageMarketIds` to restrict alternates to specific markets. Markets not in the list are excluded entirely:
+
+```ts
+// Only generate alternates for Switzerland and Germany
+useMarketHead(['mkt_switzerland', 'mkt_germany'])
+```
+
+This matches the `marketIds` constraint on pages: a page scoped to certain markets should not advertise alternates in other markets.
+
+::note
+`useMarketHead()` does **not** set `<html lang>`, `dir`, or `og:locale`. Those are handled by nuxt-i18n's `useLocaleHead()`.
+::
+

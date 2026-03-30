@@ -30,7 +30,7 @@ Multiple resolvers can serve the same entity type. Each resolver declares which 
 
 Before writing a resolver, define the **component token** — the name and schema of the data your component will hold. Tokens use [Zod](https://zod.dev/) for runtime validation and type inference.
 
-```ts
+```ts twoslash
 // src/runtime/shared/tokens/product-loyalty.ts
 import { z } from 'zod/v4';
 import { defineEntityComponentToken } from '@laioutr-core/core-types/orchestr';
@@ -223,7 +223,10 @@ This is an optimization — your resolver should always handle the case where pa
 
 Component resolvers also work for entirely new entity types. Define your tokens and resolver the same way — just use a new `entityType`:
 
-```ts
+```ts twoslash
+import { z } from 'zod/v4';
+import { defineEntityComponentToken } from '@laioutr-core/core-types/orchestr';
+// ---cut---
 export const StoreLocationBase = defineEntityComponentToken('base', {
   entityType: 'StoreLocation',
   schema: z.object({

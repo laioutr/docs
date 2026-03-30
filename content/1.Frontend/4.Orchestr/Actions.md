@@ -24,6 +24,7 @@ Sometimes you might want to create a custom action-token that is not part of the
 Input and output of an action are defined using the `zod` library. This allows for type-safety and validation of the input and output data. Both input and output are optional and will default to `undefined`.
 
 ```typescript [shared/tokens/newsletter/custom.action.ts] twoslash
+// @errors: 2589 2345
 import { z } from 'zod/v4';
 import { defineActionToken } from '@laioutr-core/core-types/orchestr';
 

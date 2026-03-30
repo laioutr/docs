@@ -68,10 +68,8 @@ The UI Kit also provides `$measurement`, `$timespan`, and `$duration` formatters
 A currency switcher is a **market switcher**. Switching currency means navigating to the same page in a different market:
 
 ```ts
-const switchMarketUrl = useSwitchMarketUrl()
-
 // Switch to Germany market (EUR). Full page load because host may differ.
-navigateTo(switchMarketUrl('mkt_germany'), { external: true })
+navigateTo(linkResolver.switchMarketUrl('mkt_germany'), { external: true })
 ```
 
-See [language switcher](/frontend/features/multi-language-support#language-switcher) for more on `useSwitchMarketUrl()`.
+See [language switcher](/frontend/features/multi-language-support#language-switcher) for more on `linkResolver.switchMarketUrl()`.

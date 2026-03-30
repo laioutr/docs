@@ -45,13 +45,16 @@ const language = useLanguage()      // ComputedRef<RenderLanguage>
 const domain = useMarketDomain()    // ComputedRef<RenderMarketDomain>
 const currency = useCurrency()      // ComputedRef<string>, shorthand for market.currency
 const config = useI18nConfig()      // RenderI18nConfig (static, not reactive)
+const marketPath = useMarketPath()  // (path: string) => string, prepends domain path prefix
 ```
 
 These are always defined. Resolution falls back to the default market when the host is unknown.
 
 Use `useI18nConfig()` when you need the full list of markets and languages, for example to build a market picker.
 
-**Currency**: use `useCurrency()` for formatting (via the UI Kit's [`$money` formatter](/frontend/features/currencies)) or passing to APIs.
+Use `useMarketPath()` when you need to prepend the current domain's path prefix to a URL (e.g. turning `/products` into `/fr/products` on a French-prefixed domain).
+
+**Currency**: use `useCurrency()` when passing the currency code to APIs. For displaying prices, use the [`$money` formatter](/frontend/features/currencies) directly — it reads the currency from the `Money` object, not from `useCurrency()`.
 
 **Region / measurement**: use `useLanguage().value.measurementSystem` (metric/imperial) or `useMarket().value.regionCodes` for region-specific behaviour.
 
@@ -76,6 +79,6 @@ Market and language are **never null** at runtime. Resolution always produces a 
 | No market matches the request host | Falls back to the default market (first configured). Warning logged. |
 | No path prefix matches within the market | Uses the market's default domain. |
 | Page not in current market (`marketIds`) | No route alias exists. Standard 404. |
-| Language has no path for a page | No alias generated. `useSwitchLanguagePath()` returns `'#'`. |
+| Language has no path for a page | No alias generated. `linkResolver.switchLocalePath()` returns `'#'`. |
 | Content has no value for the locale chain | `unlocalize()` returns `undefined`. Components handle missing data. |
 | Invalid RC config (dangling refs, bad BCP 47) | Build-time warnings from `validateI18nConfig()`. |

@@ -11,7 +11,16 @@ For a reference of all built-in page types, see the [Page Types API reference](/
 
 Every page in Laioutr has a **page type**: a named kind of page that defines its URL shape, what data it loads, and how it appears in Studio. Customers add pages of a given type in Studio; developers define page types with `definePageTypeToken`:
 
-```ts
+```ts twoslash
+// @filename: ProductBySlug.query.ts
+import { z } from 'zod/v4';
+import { defineQueryToken } from '@laioutr-core/core-types/orchestr';
+export const ProductBySlugQuery = defineQueryToken('ecommerce/product/by-slug', {
+  entity: 'Product', type: 'single', label: 'Product by slug',
+  input: z.object({ slug: z.string() }),
+});
+// @filename: index.ts
+// ---cut---
 import { definePageTypeToken } from '@laioutr-core/core-types/frontend'
 import { ProductBySlugQuery } from './ProductBySlug.query'
 
@@ -89,7 +98,16 @@ Controls how the page type appears in Studio's "Add page" UI:
 
 Create a file that calls `definePageTypeToken`. The token registers itself globally at import time.
 
-```ts
+```ts twoslash
+// @filename: queries/RecipeBySlug.query.ts
+import { z } from 'zod/v4';
+import { defineQueryToken } from '@laioutr-core/core-types/orchestr';
+export const RecipeBySlugQuery = defineQueryToken('my-app/recipe/by-slug', {
+  entity: 'Recipe', type: 'single', label: 'Recipe by slug',
+  input: z.object({ slug: z.string() }),
+});
+// @filename: pageTypes/index.ts
+// ---cut---
 // runtime/shared/pageTypes/recipe-detail.pagetype.ts
 import { definePageTypeToken } from '@laioutr-core/core-types/frontend'
 import { RecipeBySlugQuery } from '../queries/RecipeBySlug.query'
@@ -123,7 +141,9 @@ export const RecipeDetailPage = definePageTypeToken('my-app/recipe-detail', {
 
 For a **static** page type (e.g. a custom landing page kind), you can omit `requiredQueries` and `resolveFor`:
 
-```ts
+```ts twoslash
+import { definePageTypeToken } from '@laioutr-core/core-types/frontend';
+// ---cut---
 export const PromotionPage = definePageTypeToken('my-app/promotion', {
   kind: 'static',
   studio: {

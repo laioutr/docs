@@ -1,6 +1,7 @@
 ---
 title: Queries & Links
 description: Queries fetch entities by input (e.g. a slug or search term). Links resolve relationships between entities (e.g. product → variants). Together they form the read-side of Orchestr.
+links: []
 ---
 
 A product page needs to load a product by its URL slug. A category page needs to list products belonging to that category. A cart needs to show the items it contains. **Queries** and **links** are how you teach Orchestr to fetch this data from your backend.
@@ -31,7 +32,7 @@ A **query** takes structured input and returns one or more entity IDs. Orchestr 
 
 Every query starts with a **token** — the contract between your app and the frontend. It declares the query name, entity type, input schema, and whether it returns a single entity or a list.
 
-```ts
+```ts twoslash
 // src/runtime/shared/tokens/store-locator.ts
 import { z } from 'zod/v4';
 import { defineQueryToken } from '@laioutr-core/core-types/orchestr';
@@ -48,7 +49,10 @@ export const StoreBySlugQuery = defineQueryToken('store-locator/store/by-slug', 
 
 For queries that return lists, set `type: 'multi'` and optionally provide a `defaultLimit` for pagination:
 
-```ts
+```ts twoslash
+import { z } from 'zod/v4';
+import { defineQueryToken } from '@laioutr-core/core-types/orchestr';
+// ---cut---
 export const StoreSearchQuery = defineQueryToken('store-locator/store/search', {
   entity: 'StoreLocation',
   type: 'multi',
@@ -168,51 +172,13 @@ return {
 };
 ```
 
-### Passing data to component resolvers
-
-When your query already fetched detailed data from the backend, pass it to component resolvers via **passthrough** so they don't make redundant API calls:
-
-```ts
-import { storeFragmentToken } from '../../const/passthroughTokens';
-
-export default defineMyAppQuery(
-  StoreBySlugQuery,
-  async ({ input, context, passthrough }) => {
-    const store = await context.storeApi.getBySlug(input.slug);
-
-    // Pass the raw data so the component resolver can use it
-    passthrough.set(storeFragmentToken, store);
-
-    return { id: store.id };
-  },
-);
-```
-
-The component resolver then calls `passthrough.get(storeFragmentToken)` and falls back to its own API call when the data is not available. See [Component Resolvers — Using Passthrough Data](/frontend/orchestr/component-resolvers#using-passthrough-data).
-
-### The `shouldLoad` helper
-
-When your backend supports selective field loading (e.g. GraphQL), use `shouldLoad` to skip fields the frontend did not request:
-
-```ts
-const response = await context.queryStorefront(ProductBySlugQuery, {
-  handle: input.slug,
-  includeMedia: shouldLoad('media'),
-  includeDescription: shouldLoad('description'),
-  // Check nested link components
-  includeVariantPrices: shouldLoad([ProductVariantsLink, ProductVariantPrices]),
-});
-```
-
-`shouldLoad` accepts either a component name string (`'media'`) or a path array for nested link components (`[LinkToken, ComponentToken]`).
-
 ## Links
 
 A **link** defines a relationship between two entity types — for example, a Product has Variants, or a Category has Products. Links resolve to a list of target entity IDs for each source entity.
 
 ### Defining a Link Token
 
-```ts
+```ts twoslash
 // src/runtime/shared/tokens/store-locator.ts
 import { defineLinkToken } from '@laioutr-core/core-types/orchestr';
 
@@ -327,9 +293,156 @@ The `buildCacheKey` function receives the handler arguments and must return a un
 
 See [Caching](/frontend/orchestr/caching) for the full reference.
 
+## Query Template Providers
+
+A **query template provider** supplies valid input presets for a query token. Studio uses these to offer autocomplete when editors configure page queries (e.g. "pick a category for this listing page").
+
+Register a provider using the builder's `queryTemplateProvider` shortcut:
+
+```ts
+// src/runtime/server/orchestr/Product/byCategorySlug.template.ts
+import { ProductsByCategorySlugQuery } from '@laioutr-core/canonical-types/ecommerce';
+import { defineMyAppQueryTemplateProvider } from '../../middleware/defineMyApp';
+
+export default defineMyAppQueryTemplateProvider({
+  for: ProductsByCategorySlugQuery,
+  run: async ({ input, context }) => {
+    const categories = await context.api.listCategories({ term: input.term, limit: 50 });
+
+    return categories.map((cat) => ({
+      input: { categorySlug: cat.slug },
+      label: cat.name,
+    }));
+  },
+});
+```
+
+The handler receives an `input` object with an optional `term` (the search text the editor typed in Studio) and returns an array of `{ input, label }` objects. Each `input` must match the query token's Zod schema.
+
+Like other handlers, query template providers are auto-discovered from the `orchestr/` directory and support middleware context via the builder pattern.
+
+## Advanced
+
+### Inline Entity Data
+
+Instead of returning just IDs, query handlers can return entity component data inline. Declare the components your handler provides via `provides`, then return `{ entity }` (single) or `{ entities }` (multi) with pre-built entity objects using the `$entity` helper.
+
+```ts
+export default defineMyAppQuery({
+  implements: StoreBySlugQuery,
+  provides: [StoreLocationBase, StoreLocationAddress],
+  run: async ({ input, context, $entity }) => {
+    const store = await context.storeApi.getBySlug(input.slug);
+
+    return {
+      entity: $entity({
+        id: store.id,
+        [StoreLocationBase]: { name: store.name, slug: store.slug },
+        [StoreLocationAddress]: { city: store.city, zip: store.zip },
+      }),
+    };
+  },
+});
+```
+
+**How** `provides` **interacts with component resolvers:** Orchestr splits the frontend's requested components into two sets based on `provides`:
+
+- Components listed in `provides` are extracted from the query handler's inline entity data and returned directly.
+- All remaining requested components are forwarded to [component resolvers](/frontend/orchestr/component-resolvers) as usual.
+
+If your query handler declares `provides: [StoreLocationBase]` but the frontend also requests `address` and `media`, only `address` and `media` go to component resolvers. The query handler's inline data takes precedence for the components it declares. You do not need to provide all components; provide only those your query already has data for, and let resolvers handle the rest.
+
+Use this when your backend already returns component data as part of the query response (e.g. a search endpoint that includes product names and prices). If the data requires a separate API call per entity, let component resolvers handle it instead.
+
+### Passthrough Data
+
+**Passthrough** lets query handlers forward raw backend data to component resolvers and link handlers, avoiding duplicate API calls. Data flows one way: query handler sets it, downstream handlers read it.
+
+Define a typed token with `createPassthroughToken`, then use the `PassthroughStore` API:
+
+```ts
+// tokens/passthrough.ts
+import { createPassthroughToken } from '#orchestr/passthrough';
+export const storeFragmentToken = createPassthroughToken<StoreApiResponse>('store-fragment');
+
+// query handler
+export default defineMyAppQuery(
+  StoreBySlugQuery,
+  async ({ input, context, passthrough }) => {
+    const store = await context.storeApi.getBySlug(input.slug);
+    passthrough.set(storeFragmentToken, store);
+    return { id: store.id };
+  },
+);
+
+// component resolver
+export default defineMyAppResolver(
+  StoreLocationBase,
+  async ({ entityIds, passthrough, context }) => {
+    const cached = passthrough.get(storeFragmentToken);
+    const store = cached ?? await context.storeApi.getById(entityIds[0]);
+    return { /* ... */ };
+  },
+);
+```
+
+The `PassthroughStore` exposes four methods:
+
+| Method    | Description                                    |
+| --------- | ---------------------------------------------- |
+| `set`     | Store a value under a typed token.             |
+| `get`     | Retrieve the value, or `undefined` if not set. |
+| `require` | Retrieve the value, or throw if not set.       |
+| `has`     | Check whether a token has been set.            |
+
+### The `shouldLoad` helper
+
+When your backend supports selective field loading (e.g. GraphQL), use `shouldLoad` to skip fields the frontend did not request:
+
+```ts
+const response = await context.queryStorefront(ProductBySlugQuery, {
+  handle: input.slug,
+  // Check if a direct component is requested
+  includeMedia: shouldLoad('media'),
+  includeDescription: shouldLoad('description'),
+});
+```
+
+`shouldLoad` also accepts a **path array** to check components requested on nested links. Pass link tokens and component tokens to walk the wire query's link tree: each element except the last navigates into a link, and the last element checks for a component (or link) at that level.
+
+Here is a real-world pattern from a category query that conditionally includes product data depending on what the frontend requested:
+
+```ts
+import { CategoryProductsLink, ProductVariantsLink } from '@laioutr-core/canonical-types/ecommerce';
+
+export default defineMyAppQuery(CategoryBySlugQuery, async ({ input, context, shouldLoad }) => {
+  const response = await context.api.getCategoryBySlug(input.slug, {
+    // Direct components on the category itself
+    includeBase: shouldLoad(CategoryBase),
+    includeMedia: shouldLoad(CategoryMedia),
+
+    // Does the frontend want the CategoryProducts link at all?
+    includeProducts: shouldLoad([CategoryProductsLink]),
+
+    // Components on the linked products (one level deep)
+    includeProductBase: shouldLoad([CategoryProductsLink, ProductBase]),
+    includeProductPrices: shouldLoad([CategoryProductsLink, ProductPrices]),
+    includeProductMedia: shouldLoad([CategoryProductsLink, ProductMedia]),
+
+    // Two levels deep: variant components on linked products
+    includeVariants: shouldLoad([CategoryProductsLink, ProductVariantsLink]),
+    includeVariantBase: shouldLoad([CategoryProductsLink, ProductVariantsLink, ProductVariantBase]),
+  });
+
+  // ...
+});
+```
+
+Since tokens are strings at runtime, you can also pass plain strings (`shouldLoad('media')`, `shouldLoad(['ecommerce/product/variants', 'base'])`), but using imported tokens gives you type safety and rename support.
+
 ## File Organization
 
-All files inside the `orchestr/` directory registered with [`registerLaioutrApp`](/apps/app-development/app-starter) are auto-loaded — every exported handler (query, link, component resolver, action) is automatically discovered and registered. No special file suffixes or naming conventions are required.
+All files inside the `orchestr/` directory registered with `registerLaioutrApp` are auto-loaded — every exported handler (query, link, component resolver, action) is automatically discovered and registered. No special file suffixes or naming conventions are required.
 
 That said, the existing Laioutr apps use a convention of `.query.ts`, `.link.ts`, `.resolver.ts` suffixes to make the handler type obvious at a glance:
 
