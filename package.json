@@ -1,13 +1,13 @@
 {
   "name": "@laioutr/docs",
   "scripts": {
-    "build": "nuxt build",
+    "build": "NODE_OPTIONS='--max-old-space-size=8192' nuxt build",
     "dev": "nuxt dev",
     "setup": "infisical run -- npx --yes npmrc-replace-env"
   },
   "dependencies": {
-    "@laioutr-core/canonical-types": "^0.22.3",
-    "@laioutr-core/core-types": "^0.27.1",
+    "@laioutr-core/canonical-types": "^0.22.7",
+    "@laioutr-core/core-types": "^0.28.3",
     "@laioutr-core/ui-component-meta": "^1.28.2",
     "@nuxt/content": "3.9.0",
     "@vue-flow/core": "^1.48.2",
@@ -18,14 +18,25 @@
     "mermaid": "^11.12.2",
     "nuxt": "^4.1.2",
     "nuxt-component-meta": "^0.15.0",
-    "nuxt-studio": "1.1.1"
+    "nuxt-content-twoslash": "^0.3.0",
+    "nuxt-studio": "1.1.1",
+    "twoslash": "^0.3.6"
   },
   "devDependencies": {
+    "@ebec/http": "^2.3.0",
+    "@laioutr-core/frontend-core": "^0.28.3",
+    "@laioutr-core/orchestr": "^0.28.3",
     "@laioutr/eslint-config": "^1.8.8",
     "@laioutr/prettier-config": "^1.1.0",
+    "@oxc-minify/binding-darwin-arm64": "0.102.0",
+    "@oxc-parser/binding-darwin-arm64": "0.102.0",
+    "@oxc-transform/binding-darwin-arm64": "0.102.0",
+    "ebec": "^2.3.0",
     "eslint": "^9.39.2",
     "prettier": "^3.7.4",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "vue": "3.5.25"
+    "typescript": "^5.9.3",
+    "vue": "3.5.25",
+    "zod": "^4.3.6"
   }
 }

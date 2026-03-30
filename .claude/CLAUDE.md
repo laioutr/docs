@@ -72,6 +72,39 @@ The site extends Docus with custom components for documenting the Laioutr UI lib
 - `app/app.config.ts` - Site-wide settings (colors, header/footer, GitHub links)
 - ESLint uses `@laioutr/eslint-config/nuxt-module`
 
+### Twoslash in Code Examples
+
+Code blocks can use `twoslash` for inline type hints (```` ```ts twoslash ```` or ```` ```vue twoslash ````). The twoslash config lives in `nuxt.config.ts` under `twoslash:` and uses `nuxt-content-twoslash`.
+
+Laioutr packages expose a `/types` subpath specifically for docs twoslash. These re-export real functions or declare mock signatures so that twoslash can resolve types without pulling in the full Nuxt runtime:
+
+- **`@laioutr-core/frontend-core/types`** — `defineSection`, `defineBlock`, `definitionToProps`, `defineSectionTemplate`, `defineBlockTemplate`, `linkResolver`, `useLanguage`, `useMarket`, `useMarketDomain`, `useCurrency`, `useResolvedLink`, `useI18nConfig`
+- **`@laioutr-core/orchestr/types`** — `ClientEntity`, `ClientEntitySet`, `ClientResponsePagination`, handler mocks (`defineOrchestrMock`, `defineQueryHandlerMock`, etc.), composable mocks (`useMutationActionMock`, `fetchActionMock`, etc.), cache strategy types, wire format types
+
+Use `// ---cut---` to hide mock imports from the rendered output:
+
+```
+ ```ts twoslash
+ import type { SectionDefinition } from '@laioutr-core/core-types/frontend';
+ // ---cut---
+ // visible code starts here
+ ```
+```
+
+For Vue SFC examples, place the import in `<script lang="ts">` before the cut:
+
+```
+ ```vue twoslash
+ <script lang="ts">
+ import { defineSection, definitionToProps } from '@laioutr-core/frontend-core/types';
+ // ---cut---
+ export const definition = defineSection({ ... });
+ </script>
+ ```
+```
+
+When adding new auto-imports to a Laioutr package that should be usable in docs twoslash, add a corresponding export (real or `declare`) to that package's `src/runtime/types.ts` file.
+
 ### LLM-Readable Content Rule
 
 Every custom Vue component used in documentation that adds explanations, API references, or important visualizations **must** have an LLM-readable representation. MDC components like `:action-meta`, `:entity-component-meta`, `::component-meta`, `:query-meta`, and similar are rendered as interactive HTML but appear as raw syntax in `llms-full.txt`, making them invisible to LLMs.

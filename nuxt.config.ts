@@ -1,8 +1,9 @@
+import { resolve } from 'node:path';
 import { withoutTrailingSlash } from 'ufo';
 
 export default defineNuxtConfig({
   extends: ['docus'],
-  modules: ['nuxt-studio', '@vueuse/nuxt'],
+  modules: ['nuxt-content-twoslash', 'nuxt-studio', '@vueuse/nuxt'],
   css: ['~/assets/css/main.css'],
 
   hooks: {
@@ -10,6 +11,24 @@ export default defineNuxtConfig({
       const permalink = ctx.content.permalink ?? ctx.content.meta?.permalink;
       if (permalink) {
         ctx.content.path = withoutTrailingSlash(permalink);
+      }
+    },
+    // Docus loads @nuxt/content (and MDC) in its layer before nuxt-content-twoslash
+    // runs, so the module's mdc:configSources hook never fires. Re-register it here
+    // so it's available when MDC calls the hook during its setup.
+    'mdc:configSources'(sources: string[]) {
+      const twoslashPath = resolve(__dirname, '.nuxt/twoslash-mdc.config.mjs');
+      if (!sources.includes(twoslashPath)) sources.push(twoslashPath);
+      const extraLangsPath = resolve(__dirname, 'app/twoslash-extra-langs.mdc.config.mjs');
+      if (!sources.includes(extraLangsPath)) sources.push(extraLangsPath);
+    },
+    // The twoslash plugin registers floating-vue components (for type hover popovers)
+    // which fail during SSR. Force the plugin to client-only mode.
+    'app:resolve'(app) {
+      for (const p of app.plugins) {
+        if (typeof p !== 'string' && p.src?.includes('nuxt-content-twoslash')) {
+          p.mode = 'client';
+        }
       }
     },
   },
@@ -102,6 +121,20 @@ export default defineNuxtConfig({
       github: {
         clientId: process.env.DOCS_GITHUB_CLIENT_ID,
         clientSecret: process.env.DOCS_GITHUB_CLIENT_SECRET,
+      },
+    },
+  },
+
+  twoslash: {
+    enableInDev: true,
+    includeNuxtTypes: false,
+    compilerOptions: {
+      moduleResolution: 100 /* ts.ModuleResolutionKind.Bundler */,
+      lib: ['es2020', 'dom'],
+      noImplicitAny: false,
+      // Resolve Nuxt #orchestr/types alias so twoslash can follow the DefinitionToProps type chain
+      paths: {
+        '#orchestr/types': ['./node_modules/@laioutr-core/orchestr/dist/runtime/types'],
       },
     },
   },
