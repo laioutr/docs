@@ -1,4 +1,5 @@
-import { resolve } from 'node:path';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
 import { withoutTrailingSlash } from 'ufo';
 
 export default defineNuxtConfig({
@@ -18,6 +19,12 @@ export default defineNuxtConfig({
     // so it's available when MDC calls the hook during its setup.
     'mdc:configSources'(sources: string[]) {
       const twoslashPath = resolve(__dirname, '.nuxt/twoslash-mdc.config.mjs');
+      // Ensure the file exists before MDC/content tries to import it.
+      // nuxt-content-twoslash generates it later; write a stub for the initial load.
+      if (!existsSync(twoslashPath)) {
+        mkdirSync(dirname(twoslashPath), { recursive: true });
+        writeFileSync(twoslashPath, 'export default {};\n');
+      }
       if (!sources.includes(twoslashPath)) sources.push(twoslashPath);
       const extraLangsPath = resolve(__dirname, 'app/twoslash-extra-langs.mdc.config.mjs');
       if (!sources.includes(extraLangsPath)) sources.push(extraLangsPath);
