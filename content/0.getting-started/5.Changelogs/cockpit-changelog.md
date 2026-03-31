@@ -42,6 +42,9 @@ All notable changes to **Cockpit (Studio)** — the visual editor and project ma
 - Fixed empty string not being converted to `undefined` in studio field `onChange`.
 - Fixed languages/markets marked unavailable when no i18n config is present.
 - Inlined core-types into Nitro bundle for Vercel compatibility.
+- **Studio**: Hidden market name in the language switcher for single-market projects.
+- **Studio**: Increased Studio connection timeout to 10 s for slower network conditions.
+- **Studio**: Fixed stale frontend context reads after HMR reload by reading the valtio proxy lazily at call time.
 
 ## [2026-02]
 

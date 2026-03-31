@@ -5,6 +5,18 @@ description: Changelog for the Laioutr frontend product following Keep a Changel
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.28.6]
+
+### Fixed
+
+- **Frontend Core**: Fixed reflect API returning 503 on Vercel by using `globalThis` as the data transport between the SSR plugin and API handler. Adds a persistent cache fallback for cold starts, a dedicated lightweight SSR trigger route (`/_laioutr/reflect`), and improved error logging.
+
+## [0.28.5]
+
+### Fixed
+
+- **Frontend Core**: Fixed "chain is not iterable" crash when no markets are configured by adding the missing `localeChain` to the fallback language object.
+
 ## [0.28.4]
 
 ### Fixed
