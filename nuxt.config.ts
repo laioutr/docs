@@ -1,10 +1,8 @@
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
 import { withoutTrailingSlash } from 'ufo';
 
 export default defineNuxtConfig({
   extends: ['docus'],
-  modules: ['nuxt-content-twoslash', 'nuxt-studio', '@vueuse/nuxt'],
+  modules: [/* 'nuxt-content-twoslash', */ 'nuxt-studio', '@vueuse/nuxt'],
   css: ['~/assets/css/main.css'],
 
   hooks: {
@@ -14,30 +12,8 @@ export default defineNuxtConfig({
         ctx.content.path = withoutTrailingSlash(permalink);
       }
     },
-    // Docus loads @nuxt/content (and MDC) in its layer before nuxt-content-twoslash
-    // runs, so the module's mdc:configSources hook never fires. Re-register it here
-    // so it's available when MDC calls the hook during its setup.
-    'mdc:configSources'(sources: string[]) {
-      const twoslashPath = resolve(__dirname, '.nuxt/twoslash-mdc.config.mjs');
-      // Ensure the file exists before MDC/content tries to import it.
-      // nuxt-content-twoslash generates it later; write a stub for the initial load.
-      if (!existsSync(twoslashPath)) {
-        mkdirSync(dirname(twoslashPath), { recursive: true });
-        writeFileSync(twoslashPath, 'export default {};\n');
-      }
-      if (!sources.includes(twoslashPath)) sources.push(twoslashPath);
-      const extraLangsPath = resolve(__dirname, 'app/twoslash-extra-langs.mdc.config.mjs');
-      if (!sources.includes(extraLangsPath)) sources.push(extraLangsPath);
-    },
-    // The twoslash plugin registers floating-vue components (for type hover popovers)
-    // which fail during SSR. Force the plugin to client-only mode.
-    'app:resolve'(app) {
-      for (const p of app.plugins) {
-        if (typeof p !== 'string' && p.src?.includes('nuxt-content-twoslash')) {
-          p.mode = 'client';
-        }
-      }
-    },
+    // twoslash is temporarily disabled — re-enable by uncommenting the module
+    // and restoring the mdc:configSources and app:resolve hooks from git history.
   },
 
   site: {
