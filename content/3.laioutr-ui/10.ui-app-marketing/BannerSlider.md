@@ -1,6 +1,9 @@
 ---
 title: Banner Slider
 description: Banners are components that deliver main image and content in various configurations.
+seo:
+  title: Banner Slider | Laioutr
+  description: Banners are components that deliver main image and content in various configurations.
 ---
 
 ## Overview

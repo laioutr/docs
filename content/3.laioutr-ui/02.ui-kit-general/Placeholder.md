@@ -2,6 +2,9 @@
 title: Placeholder
 description: A placeholder component
 links: []
+seo:
+  title: Placeholder | Laioutr
+  description: A placeholder component
 ---
 
 ## Overview

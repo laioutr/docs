@@ -1,5 +1,7 @@
 ---
 title: App Configuration
+seo:
+  title: App Configuration | Laioutr
 ---
 
 ##

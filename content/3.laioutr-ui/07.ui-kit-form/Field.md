@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-48
     target: _blank
+seo:
+  title: Field | Laioutr
+  description: Form field wrapper providing label, help text, and validation message around an input control.
 ---
 
 ## Overview

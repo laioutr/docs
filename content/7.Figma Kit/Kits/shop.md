@@ -1,6 +1,9 @@
 ---
 title: Shop
 description: Commerce-focused components for product discovery, listing, merchandising, and conversion flows.
+seo:
+  title: Shop | Laioutr
+  description: Commerce-focused components for product discovery, listing, merchandising, and conversion flows.
 ---
 
 ## Purpose

@@ -1,6 +1,9 @@
 ---
 title: Header with Text Links
 description: A navigation menu component
+seo:
+  title: Header with Text Links | Laioutr
+  description: A navigation menu component
 ---
 
 ## Overview

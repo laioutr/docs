@@ -2,6 +2,9 @@
 title: Checkbox
 description: Checkbox group wrapper managing state, validation, and ARIA grouping for multiple related checkbox inputs.
 jiraIssueId: LUI-126
+seo:
+  title: Checkbox | Laioutr
+  description: Checkbox group wrapper managing state, validation, and ARIA grouping for multiple related checkbox inputs.
 ---
 
 ## Overview

@@ -2,6 +2,9 @@
 title: Toaster
 description: A toaster component
 links: []
+seo:
+  title: Toaster | Laioutr
+  description: A toaster component
 ---
 
 ## Overview

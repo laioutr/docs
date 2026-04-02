@@ -1,6 +1,9 @@
 ---
 title: Cockpit Changelog
 description: Changelog for the Laioutr Cockpit (Studio) product following Keep a Changelog and Semantic Versioning.
+seo:
+  title: Cockpit Changelog | Laioutr
+  description: Changelog for the Laioutr Cockpit (Studio) product following Keep a Changelog and Semantic Versioning.
 ---
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.

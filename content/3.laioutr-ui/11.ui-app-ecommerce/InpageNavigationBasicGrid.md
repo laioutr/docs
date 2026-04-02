@@ -2,6 +2,9 @@
 title: Inpage Navigation Basic Grid
 description: Flexible grid layout for displaying basic category nodes on entry pages with customizable alignment and headings.
 jiraIssueId: LUI-37
+seo:
+  title: Inpage Navigation Basic Grid | Laioutr
+  description: Flexible grid layout for displaying basic category nodes on entry pages with customizable alignment and headings.
 ---
 
 ## Overview

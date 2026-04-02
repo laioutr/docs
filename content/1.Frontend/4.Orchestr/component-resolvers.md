@@ -1,6 +1,9 @@
 ---
 title: Component Resolvers
 description: Component resolvers map backend data to entity components. They are how you extend the data model — add new data to existing entities or create entirely new entity types.
+seo:
+  title: Component Resolvers | Laioutr
+  description: Component resolvers map backend data to entity components. They are how you extend the data model — add new data to…
 ---
 
 Your shop system provides product names, prices, and images. But what if you need loyalty points from your CRM, or stock levels from your ERP? Component resolvers let you attach data from any source to any entity, without modifying existing code.

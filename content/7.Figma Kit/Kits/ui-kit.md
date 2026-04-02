@@ -1,6 +1,9 @@
 ---
 title: UI Kit
 description: Core library with tokens (Figma Variables) and foundational components used by all other kits.
+seo:
+  title: UI Kit | Laioutr
+  description: Core library with tokens (Figma Variables) and foundational components used by all other kits.
 ---
 
 ## Purpose

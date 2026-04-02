@@ -1,6 +1,9 @@
 ---
 title: CMS
 description: Content-focused sections for marketing pages, editorial layouts, and rich storytelling blocks.
+seo:
+  title: CMS | Laioutr
+  description: Content-focused sections for marketing pages, editorial layouts, and rich storytelling blocks.
 ---
 
 ## Purpose

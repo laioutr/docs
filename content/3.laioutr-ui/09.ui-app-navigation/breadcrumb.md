@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14145-361398&t=aARHqzA1E7J0jGbx-4
     target: _blank
+seo:
+  title: Breadcrumb | Laioutr
+  description: Breadcrumb navigation displaying user location in site hierarchy with expandable dropdown menus for subcategory access.
 ---
 
 ## Overview

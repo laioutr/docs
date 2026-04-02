@@ -1,6 +1,9 @@
 ---
 title: Consent Management
 description: Laioutr's consent management abstraction gives you a single, provider-agnostic API for cookie and consent state. Use it to gate tracking and marketing scripts, and plug in your own consent provider or the ready-to-use Cookiebot app.
+seo:
+  title: Consent Management | Laioutr
+  description: Laioutr's consent management abstraction gives you a single, provider-agnostic API for cookie and consent state. Use…
 ---
 
 ## What is the consent management abstraction?

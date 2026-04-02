@@ -2,6 +2,9 @@
 title: Load More
 description: Pagination component combining infinite scroll with Load More button.
 jiraIssueId: LUI-70
+seo:
+  title: Load More | Laioutr
+  description: Pagination component combining infinite scroll with Load More button.
 ---
 
 ## Overview

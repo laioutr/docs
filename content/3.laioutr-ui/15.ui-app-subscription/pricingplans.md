@@ -7,6 +7,9 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4085-62868&t=U5zoMMsDXxVv1RWo-4
     target: _blank
 jiraIssueId: LUI-3
+seo:
+  title: Pricing Plans | Laioutr
+  description: A responsive pricing grid arranging plan cards side-by-side on desktop with mobile swipe carousel.
 ---
 
 ## Overview

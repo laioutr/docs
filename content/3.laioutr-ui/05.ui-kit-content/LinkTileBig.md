@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=10798-228528&t=Ar5LTHJDEX3yaImj-4
     target: _blank
+seo:
+  title: Link Tile Big | Laioutr
+  description: Large-format category node with multiple aspect ratios, text overlay options, and gradient overlays for prominent…
 ---
 
 ## Overview

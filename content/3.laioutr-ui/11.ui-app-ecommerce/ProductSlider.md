@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=12175-374053&t=kWl7opPn708GdN7H-4
     target: _blank
+seo:
+  title: Product Slider | Laioutr
+  description: Practical product slider section for presenting collections with navigation and scrollbar options.
 ---
 
 ## Overview

@@ -1,6 +1,9 @@
 ---
 title: Sitemap
 description: Generate XML sitemaps for your Laioutr frontend to help search engines discover and index your pages. Automatically includes pages from your runtime config and integrates with robots.txt.
+seo:
+  title: Sitemap | Laioutr
+  description: Generate XML sitemaps for your Laioutr frontend to help search engines discover and index your pages. Automatically…
 ---
 
 ## Overview

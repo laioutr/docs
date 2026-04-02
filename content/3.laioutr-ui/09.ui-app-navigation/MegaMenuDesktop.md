@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13944-50374&t=4gWdGg1GDlnYog3D-4
     target: _blank
+seo:
+  title: Mega Menu Desktop | Laioutr
+  description: Desktop mega menu flyout displaying second/third navigation levels in multi-column masonry layout with promotional…
 ---
 
 ## Overview

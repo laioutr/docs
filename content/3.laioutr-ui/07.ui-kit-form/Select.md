@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-223391&t=wABQtnJ0GubOC0US-4
     target: _blank
+seo:
+  title: Select | Laioutr
+  description: A dropdown select component for choosing a single option from a list.
 ---
 
 ## Overview

@@ -2,6 +2,9 @@
 title: Edge Glow
 description: A edge glow component
 links: []
+seo:
+  title: Edge Glow | Laioutr
+  description: A edge glow component
 ---
 
 ## Overview

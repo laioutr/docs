@@ -1,6 +1,9 @@
 ---
 title: Navigation Bullets
 description: A navigation bullets component
+seo:
+  title: Navigation Bullets | Laioutr
+  description: A navigation bullets component
 ---
 
 ## Overview

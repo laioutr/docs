@@ -1,6 +1,9 @@
 ---
 title: Multi-language Support
 description: Laioutr's multi-language support lets you run storefronts in multiple languages and regions, with language switchers, localized paths, and BCP 47–based configuration managed in Cockpit.
+seo:
+  title: Multi-language Support | Laioutr
+  description: Laioutr's multi-language support lets you run storefronts in multiple languages and regions, with language switchers,…
 ---
 
 ## Part 1 — For business and content users

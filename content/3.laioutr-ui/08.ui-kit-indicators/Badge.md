@@ -2,6 +2,9 @@
 title: Badge
 description: Badges of different kind to be used for several purposes.
 links: []
+seo:
+  title: Badge | Laioutr
+  description: Badges of different kind to be used for several purposes.
 ---
 
 ## Overview

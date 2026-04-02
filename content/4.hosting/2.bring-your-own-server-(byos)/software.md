@@ -1,6 +1,9 @@
 ---
 title: Software Requirements
 description: The software requirements for the BYOS approach.
+seo:
+  title: Software Requirements | Laioutr
+  description: The software requirements for the BYOS approach.
 ---
 
 

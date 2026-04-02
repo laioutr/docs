@@ -2,6 +2,9 @@
 title: Loading Spinner
 description: An animated spinner indicating loading or processing state.
 links: []
+seo:
+  title: Loading Spinner | Laioutr
+  description: An animated spinner indicating loading or processing state.
 ---
 
 ## Overview

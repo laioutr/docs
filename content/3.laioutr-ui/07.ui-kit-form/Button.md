@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=8174-149288&p=f&m=dev
     target: _blank
+seo:
+  title: Button | Laioutr
+  description: Interactive button component with multiple variants, sizes, and states for triggering actions.
 ---
 
 ## Overview

@@ -2,6 +2,9 @@
 title: Rich Content
 description: A rich content component
 links: []
+seo:
+  title: Rich Content | Laioutr
+  description: A rich content component
 ---
 
 ## Overview

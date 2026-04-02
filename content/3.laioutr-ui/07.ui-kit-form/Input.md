@@ -2,6 +2,9 @@
 title: Input
 description: Styled text input for forms and search with optional icon or button addons and variant support.
 jiraIssueId: LUI-136
+seo:
+  title: Input | Laioutr
+  description: Styled text input for forms and search with optional icon or button addons and variant support.
 ---
 
 ## Overview

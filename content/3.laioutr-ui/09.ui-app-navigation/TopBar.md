@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13096-120401&t=mlUfKppRhGmTxkMG-4
     target: _blank
+seo:
+  title: Top Bar | Laioutr
+  description: Optional top bar above header with locale switching and dark mode toggle.
 ---
 
 ## Overview

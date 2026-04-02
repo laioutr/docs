@@ -2,6 +2,9 @@
 title: Label
 description: Form label component with optional required indicator, linked to a control for accessibility.
 jiraIssueId: LUI-91
+seo:
+  title: Label | Laioutr
+  description: Form label component with optional required indicator, linked to a control for accessibility.
 ---
 
 ## Overview

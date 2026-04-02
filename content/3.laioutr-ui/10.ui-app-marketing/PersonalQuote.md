@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=7368-32242&t=WmdxQg1pxxyigx8X-4
     target: _blank
+seo:
+  title: Personal Quote with Text and Image | Laioutr
+  description: A testimonial component showcasing customer experiences with large profile pictures, quote text, personal details, and…
 ---
 
 ## Overview

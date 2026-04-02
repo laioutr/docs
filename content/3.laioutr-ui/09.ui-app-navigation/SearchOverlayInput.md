@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/proto/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=641-133307&p=f&viewport=410%2C309%2.25&t=AlJlxEZtYt22EMFY-0&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=641%3A138550&show-proto-sidebar=1
     target: _blank
+seo:
+  title: Search Overlay Input | Laioutr
+  description: Responsive search overlay with real-time autocomplete suggestions and smooth animations.
 ---
 
 ## Overview

@@ -1,6 +1,9 @@
 ---
 title: Content With Text Columns
 description: CMS section with configurable columns of text, cards, and optional buttons for landing pages.
+seo:
+  title: Content With Text Columns | Laioutr
+  description: CMS section with configurable columns of text, cards, and optional buttons for landing pages.
 ---
 
 ## Overview

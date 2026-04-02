@@ -2,6 +2,9 @@
 title: Password Input
 description: A password input component
 links: []
+seo:
+  title: Password Input | Laioutr
+  description: A password input component
 ---
 
 ## Overview

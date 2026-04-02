@@ -2,6 +2,9 @@
 title: CTA Banner Basic
 description: A foundational call-to-action banner with background imagery, headline, subline, and configurable action button.
 jiraIssueId: LUI-18
+seo:
+  title: CTA Banner Basic | Laioutr
+  description: A foundational call-to-action banner with background imagery, headline, subline, and configurable action button.
 ---
 
 ## Overview

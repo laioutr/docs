@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=74-715&m=dev
     target: _blank
+seo:
+  title: Icon | Laioutr
+  description: Size-optimized icon variants with automatic resolution ensuring recognizability at small, medium, and large sizes.
 ---
 
 ## Overview

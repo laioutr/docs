@@ -2,6 +2,9 @@
 title: Link Tile Basic
 description: Classic category node element for promoting categories outside navigation.
 jiraIssueId: LUI-36
+seo:
+  title: Link Tile Basic | Laioutr
+  description: Classic category node element for promoting categories outside navigation.
 ---
 
 ## Overview

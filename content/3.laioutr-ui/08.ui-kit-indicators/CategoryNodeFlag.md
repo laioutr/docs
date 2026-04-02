@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=8737-34626&t=WGKlkG3l0TsCUryI-4
     target: _blank
+seo:
+  title: Category Node Flag | Laioutr
+  description: Promotional badge component for category navigation with themed variants.
 ---
 
 ## Overview

@@ -2,6 +2,9 @@
 title: Content with Image and Text
 description: Responsive section combining large images or videos with content in flexible proportions.
 jiraIssueId: LUI-218
+seo:
+  title: Content with Image and Text | Laioutr
+  description: Responsive section combining large images or videos with content in flexible proportions.
 ---
 
 ## Overview

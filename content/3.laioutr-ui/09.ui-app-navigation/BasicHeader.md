@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14605-394163&t=2VdYnJXHqVZcfASo-4
     target: _blank
+seo:
+  title: Basic Header | Laioutr
+  description: Compact header with glass effect, sticky option, and CTA button.
 ---
 
 ## Overview

@@ -1,5 +1,7 @@
 ---
 title: Fair usage policy
+seo:
+  title: Fair usage policy | Laioutr
 ---
 
 ## General

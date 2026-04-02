@@ -1,6 +1,9 @@
 ---
 title: Media and Media Library
 description: Laioutr’s media library abstraction lets business users choose assets from connected backends visually in Cockpit. Implement your own media adapter for your asset system so editors can browse and select (and optionally upload) media in Studio.
+seo:
+  title: Media and Media Library | Laioutr
+  description: Laioutr’s media library abstraction lets business users choose assets from connected backends visually in Cockpit.…
 ---
 
 ## What is the media library?

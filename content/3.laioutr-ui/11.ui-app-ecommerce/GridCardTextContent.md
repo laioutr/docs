@@ -1,6 +1,9 @@
 ---
 title: Grid Card Text Content
 description: A grid card text content component
+seo:
+  title: Grid Card Text Content | Laioutr
+  description: A grid card text content component
 ---
 
 ## Overview

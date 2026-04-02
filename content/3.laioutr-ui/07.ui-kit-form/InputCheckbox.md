@@ -2,6 +2,9 @@
 title: Input Checkbox
 description: A control that allows the user to toggle between checked and not checked.
 links: []
+seo:
+  title: Input Checkbox | Laioutr
+  description: A control that allows the user to toggle between checked and not checked.
 ---
 
 ## Overview

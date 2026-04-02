@@ -2,6 +2,9 @@
 title: Backdrop
 description: A backdrop component
 links: []
+seo:
+  title: Backdrop | Laioutr
+  description: A backdrop component
 ---
 
 ## Overview

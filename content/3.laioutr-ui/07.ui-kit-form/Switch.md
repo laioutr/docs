@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=3880-37284&t=FoBBvGt4bI9KoJwB-4
     target: _blank
+seo:
+  title: Switch | Laioutr
+  description: Toggle switch component for binary on/off choices in forms and settings.
 ---
 
 ## Overview

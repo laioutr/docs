@@ -1,6 +1,9 @@
 ---
 title: Shopware
 description: Developer documentation for the Laioutr Shopware app package. Connect your Nuxt frontend to a Shopware backend via the Storefront API and Admin API.
+seo:
+  title: Shopware | Laioutr
+  description: Developer documentation for the Laioutr Shopware app package. Connect your Nuxt frontend to a Shopware backend via the…
 ---
 
 ## Overview

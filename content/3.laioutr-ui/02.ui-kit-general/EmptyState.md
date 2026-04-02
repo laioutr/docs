@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15272-139031&t=KBarTgaq8f4rSg2p-4
     target: _blank
+seo:
+  title: Empty State | Laioutr
+  description: Empty state component for product listing pages with friendly messaging when no products are available.
 ---
 
 ## Overview

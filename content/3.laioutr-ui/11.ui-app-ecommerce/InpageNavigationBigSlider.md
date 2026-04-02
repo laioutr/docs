@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=10862-246843&t=Ar5LTHJDEX3yaImj-4
     target: _blank
+seo:
+  title: Inpage Navigation Big Slider | Laioutr
+  description: High-impact horizontal slider for large category nodes with independent color modes and configurable navigation.
 ---
 
 ## Overview

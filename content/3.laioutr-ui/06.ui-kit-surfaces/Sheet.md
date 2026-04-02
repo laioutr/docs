@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=271-42424&t=fmtTWu3hMKpEVBUe-4
     target: _blank
+seo:
+  title: Sheet | Laioutr
+  description: Slide-in panel surface for overlaying content such as carts, filters, or detail views without leaving the page.
 ---
 
 ## Overview

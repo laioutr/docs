@@ -1,6 +1,9 @@
 ---
 title: Vercel Analytics
 description: Developer documentation for the Laioutr Vercel Analytics app package. Add Vercel Analytics to your Nuxt app via a Laioutr page wrapper.
+seo:
+  title: Vercel Analytics | Laioutr
+  description: Developer documentation for the Laioutr Vercel Analytics app package. Add Vercel Analytics to your Nuxt app via a…
 ---
 
 ## Overview

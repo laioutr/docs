@@ -2,6 +2,9 @@
 title: CTA Banner Showcase
 description: A premium call-to-action banner for high-impact displays with large imagery and foreground/background layering.
 jiraIssueId: LUI-21
+seo:
+  title: CTA Banner Showcase | Laioutr
+  description: A premium call-to-action banner for high-impact displays with large imagery and foreground/background layering.
 ---
 
 ## Overview

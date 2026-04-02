@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=20345-6874&t=d3lxzSvfCLvDJbv-4
     target: _blank
+seo:
+  title: Avatar | Laioutr
+  description: Avatar component for displaying user images, initials, or icons with size and color variants.
 ---
 
 ## Overview

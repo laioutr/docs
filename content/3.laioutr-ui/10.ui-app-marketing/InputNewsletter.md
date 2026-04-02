@@ -1,6 +1,9 @@
 ---
 title: Input for Newsletter
 description: A newsletter input box component
+seo:
+  title: Input for Newsletter | Laioutr
+  description: A newsletter input box component
 ---
 
 ## Overview

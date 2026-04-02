@@ -2,6 +2,9 @@
 title: Text
 description: Typography primitives for body, heading, subline, and caption with a consistent scale of sizes.
 jiraIssueId: LUI-137
+seo:
+  title: Text | Laioutr
+  description: Typography primitives for body, heading, subline, and caption with a consistent scale of sizes.
 ---
 
 ## Overview
