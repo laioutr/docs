@@ -2,6 +2,9 @@
 title: Swiper Navigation with Bullets
 description: A swiper navigation bullets component
 links: []
+seo:
+  title: Swiper Navigation with Bullets | Laioutr
+  description: A swiper navigation bullets component
 ---
 
 ## Overview

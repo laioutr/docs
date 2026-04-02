@@ -2,6 +2,9 @@
 title: Swiper Navigation Compact
 description: A compact slider navigation component providing accessible arrow and bullet controls with dark/light mode support.
 jiraIssueId: LUI-19
+seo:
+  title: Swiper Navigation Compact | Laioutr
+  description: A compact slider navigation component providing accessible arrow and bullet controls with dark/light mode support.
 ---
 
 ## Overview

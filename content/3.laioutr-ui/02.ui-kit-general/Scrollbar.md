@@ -2,6 +2,9 @@
 title: Scrollbar
 description: Proportional scrollbar indicator showing content visibility and scroll position, with optional Swiper integration.
 jiraIssueId: LUI-39
+seo:
+  title: Scrollbar | Laioutr
+  description: Proportional scrollbar indicator showing content visibility and scroll position, with optional Swiper integration.
 ---
 
 ## Overview

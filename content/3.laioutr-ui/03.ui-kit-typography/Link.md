@@ -2,6 +2,9 @@
 title: Link
 description: A link component
 links: []
+seo:
+  title: Link | Laioutr
+  description: A link component
 ---
 
 ## Overview

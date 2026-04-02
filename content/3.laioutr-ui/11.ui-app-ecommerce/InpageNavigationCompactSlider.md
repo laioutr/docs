@@ -2,6 +2,9 @@
 title: Inpage Navigation Compact Slider
 description: Horizontal slider for compact category nodes with configurable navigation, scrollbar visibility, and optional CTA buttons.
 jiraIssueId: LUI-44
+seo:
+  title: Inpage Navigation Compact Slider | Laioutr
+  description: Horizontal slider for compact category nodes with configurable navigation, scrollbar visibility, and optional CTA…
 ---
 
 ## Overview

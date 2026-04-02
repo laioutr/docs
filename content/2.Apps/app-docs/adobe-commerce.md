@@ -1,6 +1,9 @@
 ---
 title: Adobe Commerce
 description: Developer documentation for the Laioutr Adobe Commerce app package. Connect your Nuxt frontend to Adobe Commerce (Magento) via the GraphQL API.
+seo:
+  title: Adobe Commerce | Laioutr
+  description: Developer documentation for the Laioutr Adobe Commerce app package. Connect your Nuxt frontend to Adobe Commerce…
 ---
 
 ## Overview

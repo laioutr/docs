@@ -1,6 +1,9 @@
 ---
 title: CLI Changelog
 description: Changelog for the Laioutr CLI following Keep a Changelog and Semantic Versioning.
+seo:
+  title: CLI Changelog | Laioutr
+  description: Changelog for the Laioutr CLI following Keep a Changelog and Semantic Versioning.
 ---
 
 All notable changes to the **Laioutr CLI** (the `laioutr` command-line tool) will be documented in this file.

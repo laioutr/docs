@@ -2,6 +2,9 @@
 title: Grid Masonry
 description: A grid masonry component
 links: []
+seo:
+  title: Grid Masonry | Laioutr
+  description: A grid masonry component
 ---
 
 ## Overview

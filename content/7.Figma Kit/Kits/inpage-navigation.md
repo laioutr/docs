@@ -1,6 +1,9 @@
 ---
 title: Inpage Navigation
 description: Navigation components that connect categories and content sections with multiple visual styles.
+seo:
+  title: Inpage Navigation | Laioutr
+  description: Navigation components that connect categories and content sections with multiple visual styles.
 ---
 
 ## Purpose

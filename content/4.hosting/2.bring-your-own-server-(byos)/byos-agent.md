@@ -1,6 +1,9 @@
 ---
 title: BYOS Agent
 description: Reference implementation for handling BYOS webhooks and executing deployment scripts.
+seo:
+  title: BYOS Agent | Laioutr
+  description: Reference implementation for handling BYOS webhooks and executing deployment scripts.
 ---
 
 The [`@laioutr/byos-agent`](https://www.npmjs.com/package/@laioutr/byos-agent) package is a ready-to-use webhook handler that executes bash scripts in response to deployment events from the Cockpit. Use it as-is for simple deployments, or as a starting point for custom implementations.

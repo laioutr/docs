@@ -2,6 +2,9 @@
 title: Currencies
 description: Laioutr uses one currency per market. Developers access it via useCurrency() and format prices with the $money formatter.
 links: []
+seo:
+  title: Currencies | Laioutr
+  description: Laioutr uses one currency per market. Developers access it via useCurrency() and format prices with the $money…
 ---
 
 ## Part 1 — For business and content users

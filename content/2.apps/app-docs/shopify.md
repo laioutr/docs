@@ -1,6 +1,9 @@
 ---
 title: Shopify
 description: How to connect your Shopify store to Laioutr and what developers can build on top.
+seo:
+  title: Shopify | Laioutr
+  description: How to connect your Shopify store to Laioutr and what developers can build on top.
 ---
 
 ## Part 1 – Connect Shopify and Laioutr (for store owners & project leads)

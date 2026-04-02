@@ -2,6 +2,9 @@
 title: Icon List
 description: A icon list component
 links: []
+seo:
+  title: Icon List | Laioutr
+  description: A icon list component
 ---
 
 ## Overview

@@ -2,6 +2,9 @@
 title: Media
 description: A responsive image block component with optional lightbox functionality, customizable aspect ratios, and device-specific sizing controls.
 jiraIssueId: LUI-28
+seo:
+  title: Media | Laioutr
+  description: A responsive image block component with optional lightbox functionality, customizable aspect ratios, and…
 ---
 
 ## Overview

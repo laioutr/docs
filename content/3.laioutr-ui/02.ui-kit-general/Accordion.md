@@ -1,6 +1,9 @@
 ---
 title: Accordion
 description: A group of togglable entries
+seo:
+  title: Accordion | Laioutr
+  description: A group of togglable entries
 ---
 
 ## Overview

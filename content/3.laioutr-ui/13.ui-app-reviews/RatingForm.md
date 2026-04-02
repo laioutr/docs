@@ -1,6 +1,9 @@
 ---
 title: Rating Form
 description: Form for submitting product ratings and written reviews.
+seo:
+  title: Rating Form | Laioutr
+  description: Form for submitting product ratings and written reviews.
 ---
 
 ## Overview

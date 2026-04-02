@@ -2,6 +2,9 @@
 title: Rating
 description: Review submission dialog for writing and submitting product reviews with customizable states.
 jiraIssueId: LUI-154
+seo:
+  title: Rating | Laioutr
+  description: Review submission dialog for writing and submitting product reviews with customizable states.
 ---
 
 ## Overview

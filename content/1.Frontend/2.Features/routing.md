@@ -1,6 +1,9 @@
 ---
 title: Routing
 description: How Laioutr generates routes from page types, how URL patterns are configured, and how markets affect route resolution.
+seo:
+  title: Routing | Laioutr
+  description: How Laioutr generates routes from page types, how URL patterns are configured, and how markets affect route resolution.
 ---
 
 ## Controlling your storefront URLs

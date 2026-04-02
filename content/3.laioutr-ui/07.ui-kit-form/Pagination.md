@@ -2,6 +2,9 @@
 title: Pagination
 description: Page navigation component for splitting large data sets across multiple pages.
 links: []
+seo:
+  title: Pagination | Laioutr
+  description: Page navigation component for splitting large data sets across multiple pages.
 ---
 
 ## Overview

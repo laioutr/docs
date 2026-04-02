@@ -2,6 +2,9 @@
 title: Image Contrast Overlay
 description: A utility component that enhances text readability over images through customizable gradient or solid color overlays with adjustable opacity.
 jiraIssueId: LUI-22
+seo:
+  title: Image Contrast Overlay | Laioutr
+  description: A utility component that enhances text readability over images through customizable gradient or solid color overlays…
 ---
 
 ## Overview

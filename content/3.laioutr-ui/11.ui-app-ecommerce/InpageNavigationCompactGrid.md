@@ -2,6 +2,9 @@
 title: Inpage Navigation Compact Grid
 description: Space-efficient grid layout for compact category nodes on listing pages.
 jiraIssueId: LUI-43
+seo:
+  title: Inpage Navigation Compact Grid | Laioutr
+  description: Space-efficient grid layout for compact category nodes on listing pages.
 ---
 
 ## Overview

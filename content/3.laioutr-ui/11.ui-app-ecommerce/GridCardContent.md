@@ -2,6 +2,9 @@
 title: Grid Card Content
 description: A responsive card grid layout arranging content cards in 3 or 4 column configurations with consistent spacing.
 jiraIssueId: LUI-16
+seo:
+  title: Grid Card Content | Laioutr
+  description: A responsive card grid layout arranging content cards in 3 or 4 column configurations with consistent spacing.
 ---
 
 ## Overview

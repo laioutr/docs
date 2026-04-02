@@ -2,6 +2,9 @@
 title: Variant Select Button
 description: A variant select button component
 links: []
+seo:
+  title: Variant Select Button | Laioutr
+  description: A variant select button component
 ---
 
 ## Overview

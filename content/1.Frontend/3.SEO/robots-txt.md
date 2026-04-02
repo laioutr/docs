@@ -1,6 +1,9 @@
 ---
 title: Robots.txt
 description: Control how search engines and crawlers interact with your Laioutr frontend using robots.txt, meta tags, and X-Robots-Tag headers. Configure globally and per-page via Studio.
+seo:
+  title: Robots.txt | Laioutr
+  description: Control how search engines and crawlers interact with your Laioutr frontend using robots.txt, meta tags, and…
 ---
 
 ## What is robots.txt?

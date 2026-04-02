@@ -3,6 +3,9 @@ title: Orchestr Wire Format
 description: Detailed technical documentation of Laioutr's Orchestr API wire format and data structures
 category: Essentials
 order: 4
+seo:
+  title: Orchestr Wire Format | Laioutr
+  description: Detailed technical documentation of Laioutr's Orchestr API wire format and data structures
 ---
 
 The wire format is the HTTP protocol between the Orchestr client (running in the browser or during SSR) and the Orchestr server. All query and action traffic flows through two POST endpoints, encoded as [turbo-stream](https://github.com/jacob-ebey/turbo-stream) for streaming.

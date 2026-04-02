@@ -1,6 +1,9 @@
 ---
 title: Basic Banner with Image and Text
 description: Promotional banner section with background image, headline, subline, and optional CTA button.
+seo:
+  title: Basic Banner with Image and Text | Laioutr
+  description: Promotional banner section with background image, headline, subline, and optional CTA button.
 ---
 
 ## Overview

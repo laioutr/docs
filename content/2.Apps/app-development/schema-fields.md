@@ -1,6 +1,9 @@
 ---
 title: Schema Fields
 description: Reference for all field types available in section and block definition schemas.
+seo:
+  title: Schema Fields | Laioutr
+  description: Reference for all field types available in section and block definition schemas.
 ---
 
 The `schema` property of a [section](/apps/app-development/section-definitions) or [block](/apps/app-development/block-definitions) definition controls the sidebar editor in Studio. It is an array of **fieldsets**, where each fieldset groups related fields into a collapsible panel.

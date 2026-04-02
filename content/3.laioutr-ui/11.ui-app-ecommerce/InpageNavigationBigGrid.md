@@ -2,6 +2,9 @@
 title: Inpage Navigation Big Grid
 description: High-impact grid layout for large category nodes with independent node color modes and multiple format variants.
 jiraIssueId: LUI-46
+seo:
+  title: Inpage Navigation Big Grid | Laioutr
+  description: High-impact grid layout for large category nodes with independent node color modes and multiple format variants.
 ---
 
 ## Overview

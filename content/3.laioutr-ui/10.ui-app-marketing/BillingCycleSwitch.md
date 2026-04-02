@@ -2,6 +2,9 @@
 title: Billing Cycle Switch
 description: A billing cycle switch component
 links: []
+seo:
+  title: Billing Cycle Switch | Laioutr
+  description: A billing cycle switch component
 ---
 
 ## Overview

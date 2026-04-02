@@ -2,6 +2,9 @@
 title: Logo Slider
 description: Logo presentation section displaying brand logos as grid or slider.
 jiraIssueId: LUI-215
+seo:
+  title: Logo Slider | Laioutr
+  description: Logo presentation section displaying brand logos as grid or slider.
 ---
 
 ## Overview

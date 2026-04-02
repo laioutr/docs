@@ -1,5 +1,7 @@
 ---
 title: Backups
+seo:
+  title: Backups | Laioutr
 ---
 
 ## Overview

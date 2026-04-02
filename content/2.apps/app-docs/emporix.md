@@ -1,6 +1,9 @@
 ---
 title: Emporix
 description: Developer documentation for the Laioutr Emporix app package. Connect your Nuxt frontend to Emporix via the Emporix API with anonymous or authenticated auth.
+seo:
+  title: Emporix | Laioutr
+  description: Developer documentation for the Laioutr Emporix app package. Connect your Nuxt frontend to Emporix via the Emporix API…
 ---
 
 ## Overview

@@ -1,6 +1,9 @@
 ---
 title: Google Tag Manager (GTM)
 description: Developer documentation for the Laioutr GTM app package. Add Google Tag Manager to your Nuxt app with consent integration and a tracking adapter for the Laioutr tracking store.
+seo:
+  title: Google Tag Manager (GTM) | Laioutr
+  description: Developer documentation for the Laioutr GTM app package. Add Google Tag Manager to your Nuxt app with consent…
 ---
 
 ## Overview

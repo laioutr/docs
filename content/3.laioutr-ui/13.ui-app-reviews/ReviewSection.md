@@ -2,6 +2,9 @@
 title: Review Section
 description: Product review section with rating summaries, sorting, filtering, and review management.
 jiraIssueId: LUI-153
+seo:
+  title: Review Section | Laioutr
+  description: Product review section with rating summaries, sorting, filtering, and review management.
 ---
 
 ## Overview

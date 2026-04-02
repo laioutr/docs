@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-32
     target: _blank
+seo:
+  title: Progress Bar | Laioutr
+  description: A progress indicator displaying task or operation completion status.
 ---
 
 ## Overview

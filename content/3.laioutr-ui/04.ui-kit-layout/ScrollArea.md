@@ -2,6 +2,9 @@
 title: Scroll Area
 description: A scroll area component
 links: []
+seo:
+  title: Scroll Area | Laioutr
+  description: A scroll area component
 ---
 
 ## Overview

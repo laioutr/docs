@@ -2,6 +2,9 @@
 title: Newsletter Registration
 description: Full-width newsletter subscription section with status messages and image support.
 jiraIssueId: LUI-214
+seo:
+  title: Newsletter Registration | Laioutr
+  description: Full-width newsletter subscription section with status messages and image support.
 ---
 
 ## Overview

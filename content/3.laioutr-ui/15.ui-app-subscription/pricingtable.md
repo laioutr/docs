@@ -7,6 +7,9 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=4230-79346&t=N1ryeUXidyl6cq2O-4
     target: _blank
 jiraIssueId: LUI-5
+seo:
+  title: Pricing Table | Laioutr
+  description: A feature comparison table for side-by-side plan comparison with sticky headers and differences filtering.
 ---
 
 ## Overview

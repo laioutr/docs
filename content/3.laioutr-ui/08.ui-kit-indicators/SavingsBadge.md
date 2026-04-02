@@ -2,6 +2,9 @@
 title: Savings Badge
 description: A savings badge component
 links: []
+seo:
+  title: Savings Badge | Laioutr
+  description: A savings badge component
 ---
 
 ## Overview

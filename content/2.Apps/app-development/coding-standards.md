@@ -1,6 +1,9 @@
 ---
 title: Coding Standards
 description: Conventions and quality guidelines for developing Laioutr apps. Use these standards to keep app code consistent, maintainable, and aligned with the Laioutr ecosystem.
+seo:
+  title: Coding Standards | Laioutr
+  description: Conventions and quality guidelines for developing Laioutr apps. Use these standards to keep app code consistent,…
 ---
 
 ## Overview

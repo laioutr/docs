@@ -1,6 +1,9 @@
 ---
 title: Theming
 description: The laioutr UI Kit uses a sophisticated variable architecture to handle themes. By leveraging Figma Variables, you can change the entire visual identity of your project from colors to typography, with just a few clicks.
+seo:
+  title: Theming | Laioutr
+  description: The laioutr UI Kit uses a sophisticated variable architecture to handle themes. By leveraging Figma Variables, you can…
 ---
 
 ## How Themes Work

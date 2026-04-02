@@ -2,6 +2,9 @@
 title: Inpage Navigation Basic Slider
 description: Space-efficient horizontal slider for displaying subcategory nodes with configurable rows and navigation positioning.
 jiraIssueId: LUI-38
+seo:
+  title: Inpage Navigation Basic Slider | Laioutr
+  description: Space-efficient horizontal slider for displaying subcategory nodes with configurable rows and navigation positioning.
 ---
 
 ## Overview

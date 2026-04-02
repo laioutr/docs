@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/QgRgNtTxCAxpTe1rriHM/Studio-v1.0?node-id=985-108133&t=lxa1EnPQ6WmLk1ee-4
     target: _blank
+seo:
+  title: Footer | Laioutr
+  description: Responsive footer with desktop columns and mobile accordion tabs.
 ---
 
 ## Overview

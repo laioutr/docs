@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11271-205258&t=t5p6T6f67QhRVCAN-4
     target: _blank
+seo:
+  title: Product Card | Laioutr
+  description: Versatile product tile for grids and sliders with pricing and cart.
 ---
 
 ## Overview

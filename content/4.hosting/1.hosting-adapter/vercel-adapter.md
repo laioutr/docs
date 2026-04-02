@@ -1,6 +1,9 @@
 ---
 title: Vercel Adapter
 description: The Vercel Adapter is a pre-built integration that connects the Laioutr Cockpit with Vercel. It allows you to deploy your Laioutr frontend to your own Vercel account (Bring Your Own) or to use Laioutr-managed Vercel hosting.
+seo:
+  title: Vercel Adapter | Laioutr
+  description: The Vercel Adapter is a pre-built integration that connects the Laioutr Cockpit with Vercel. It allows you to deploy…
 ---
 
 ## Overview

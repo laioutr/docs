@@ -1,5 +1,7 @@
 ---
 title: Figma Kit
+seo:
+  title: Figma Kit | Laioutr
 ---
 
 ## Overview

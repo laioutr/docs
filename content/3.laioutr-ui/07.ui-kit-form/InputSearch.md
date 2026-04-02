@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13084-116873&t=6xBvZNXlqO6bv1Wx-4
     target: _blank
+seo:
+  title: Search Input | Laioutr
+  description: A search input component for site navigation enabling real-time product discovery with auto-suggestions across all…
 ---
 
 ## Overview

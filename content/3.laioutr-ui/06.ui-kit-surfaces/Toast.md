@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-40
     target: _blank
+seo:
+  title: Toast | Laioutr
+  description: Non-intrusive toast notification component for displaying transient messages with auto-dismiss and queue management.
 ---
 
 ## Overview

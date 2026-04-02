@@ -2,6 +2,9 @@
 title: Image Variant Thumbnail
 description: A selectable image variant thumbnail component
 links: []
+seo:
+  title: Image Variant Thumbnail | Laioutr
+  description: A selectable image variant thumbnail component
 ---
 
 ## Overview

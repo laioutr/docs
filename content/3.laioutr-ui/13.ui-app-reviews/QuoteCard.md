@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=7409-40884&m=dev
     target: _blank
+seo:
+  title: Quote Card | Laioutr
+  description: Quote card component for displaying customer reviews and testimonials.
 ---
 
 ## Overview

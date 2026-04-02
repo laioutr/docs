@@ -2,6 +2,9 @@
 title: Thumbnail
 description: A thumbnail component
 links: []
+seo:
+  title: Thumbnail | Laioutr
+  description: A thumbnail component
 ---
 
 ## Overview

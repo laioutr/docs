@@ -1,6 +1,9 @@
 ---
 title: DevOps Components
 description: DevOps components are the components that are required to successfully host a Laioutr frontend on your own infrastructure.
+seo:
+  title: DevOps Components | Laioutr
+  description: DevOps components are the components that are required to successfully host a Laioutr frontend on your own…
 ---
 
 ## Caching Layer: Redis

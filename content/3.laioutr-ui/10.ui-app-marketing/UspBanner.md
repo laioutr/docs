@@ -2,6 +2,9 @@
 title: USP Banner
 description: A slim, responsive banner for displaying unique selling propositions with customizable icons and automatic slider behavior when space-constrained.
 jiraIssueId: LUI-31
+seo:
+  title: USP Banner | Laioutr
+  description: A slim, responsive banner for displaying unique selling propositions with customizable icons and automatic slider…
 ---
 
 ## Overview

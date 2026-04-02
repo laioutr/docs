@@ -1,6 +1,9 @@
 ---
 title: Redirects
 description: How Laioutr frontends use Nuxt 3 redirects to send visitors to the right page.
+seo:
+  title: Redirects | Laioutr
+  description: How Laioutr frontends use Nuxt 3 redirects to send visitors to the right page.
 ---
 
 ## Redirects in Laioutr frontends

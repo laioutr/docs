@@ -1,6 +1,9 @@
 ---
 title: UI Changelog
 description: Changelog for Laioutr UI and UI Kit following Keep a Changelog and Semantic Versioning.
+seo:
+  title: UI Changelog | Laioutr
+  description: Changelog for Laioutr UI and UI Kit following Keep a Changelog and Semantic Versioning.
 ---
 
 All notable changes to **Laioutr UI**, **UI Kit**, and related component libraries will be documented in this file.

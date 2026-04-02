@@ -1,6 +1,9 @@
 ---
 title: Color Mode Switch
 description: A dark mode switch component
+seo:
+  title: Color Mode Switch | Laioutr
+  description: A dark mode switch component
 ---
 
 ## Overview

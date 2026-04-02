@@ -1,6 +1,9 @@
 ---
 title: Cookiebot
 description: Developer documentation for the Laioutr Cookiebot app package. Add Cookiebot cookie consent management to your Nuxt app via the Laioutr consent store.
+seo:
+  title: Cookiebot | Laioutr
+  description: Developer documentation for the Laioutr Cookiebot app package. Add Cookiebot cookie consent management to your Nuxt…
 ---
 
 ## Overview

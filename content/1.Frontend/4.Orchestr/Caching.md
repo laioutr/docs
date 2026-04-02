@@ -2,6 +2,9 @@
 title: Caching
 description: How Orchestr caches API data — query cache, link cache, and component cache. Configure strategies and cache keys for your own integrations.
 links: []
+seo:
+  title: Caching | Laioutr
+  description: How Orchestr caches API data — query cache, link cache, and component cache. Configure strategies and cache keys for…
 ---
 
 Orchestr caches results from query handlers, link handlers, and component resolvers so repeated requests skip external API calls. The cache layer is built on [unstorage](https://unstorage.unjs.io) (Nitro's storage abstraction), so you can swap drivers (in-memory, Redis, etc.) per environment.

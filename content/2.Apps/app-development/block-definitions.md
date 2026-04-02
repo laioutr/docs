@@ -1,6 +1,9 @@
 ---
 title: Block Definitions
 description: How to create and register block definitions for Laioutr Studio.
+seo:
+  title: Block Definitions | Laioutr
+  description: How to create and register block definitions for Laioutr Studio.
 ---
 
 Blocks are smaller components that live inside a section's slots. A product card in a grid, a slide in a carousel, a single FAQ item: these are blocks. Like sections, every block starts with a **definition** that declares the component, Studio metadata, and configurable fields.

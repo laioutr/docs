@@ -2,6 +2,9 @@
 title: Grid Fill
 description: A grid fill component
 links: []
+seo:
+  title: Grid Fill | Laioutr
+  description: A grid fill component
 ---
 
 ## Overview

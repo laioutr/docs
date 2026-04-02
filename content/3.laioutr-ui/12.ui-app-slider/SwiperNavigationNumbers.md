@@ -1,6 +1,9 @@
 ---
 title: Swiper Navigation with Numbers
 description: A swiper navigation numbers component
+seo:
+  title: Swiper Navigation with Numbers | Laioutr
+  description: A swiper navigation numbers component
 ---
 
 ## Overview

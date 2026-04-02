@@ -1,6 +1,9 @@
 ---
 title: Best Practice
 description: Best practices for developing Laioutr apps.
+seo:
+  title: Best Practice | Laioutr
+  description: Best practices for developing Laioutr apps.
 ---
 
 ## Overview

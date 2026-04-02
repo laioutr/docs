@@ -2,6 +2,9 @@
 title: Rating Summary
 description: A rating summary component
 links: []
+seo:
+  title: Rating Summary | Laioutr
+  description: A rating summary component
 ---
 
 ## Overview

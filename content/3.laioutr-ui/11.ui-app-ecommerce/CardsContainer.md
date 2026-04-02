@@ -2,6 +2,9 @@
 title: Cards Container
 description: Container section for holding banners with responsive column layouts.
 jiraIssueId: LUI-222
+seo:
+  title: Cards Container | Laioutr
+  description: Container section for holding banners with responsive column layouts.
 ---
 
 ## Overview

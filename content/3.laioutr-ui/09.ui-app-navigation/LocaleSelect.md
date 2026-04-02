@@ -1,6 +1,9 @@
 ---
 title: Locale Select
 description: A language switcher component
+seo:
+  title: Locale Select | Laioutr
+  description: A language switcher component
 ---
 
 ## Overview

@@ -2,6 +2,9 @@
 title: Quantity Picker
 description: A stepper input for selecting product quantities with increment/decrement buttons, direct input, and stock validation.
 jiraIssueId: LUI-92
+seo:
+  title: Quantity Picker | Laioutr
+  description: A stepper input for selecting product quantities with increment/decrement buttons, direct input, and stock validation.
 ---
 
 ## Overview

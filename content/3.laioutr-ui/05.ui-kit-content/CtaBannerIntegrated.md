@@ -2,6 +2,9 @@
 title: CTA Banner Integrated
 description: A space-efficient call-to-action banner with icons, inline links, and compact sizing for content-heavy layouts.
 jiraIssueId: LUI-20
+seo:
+  title: CTA Banner Integrated | Laioutr
+  description: A space-efficient call-to-action banner with icons, inline links, and compact sizing for content-heavy layouts.
 ---
 
 ## Overview

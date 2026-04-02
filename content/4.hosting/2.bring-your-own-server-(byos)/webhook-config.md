@@ -1,6 +1,9 @@
 ---
 title: Webhook Configuration
 description: Integrate your own hosting solution into Laioutr by setting up a webhook. Cockpit calls this webhook for every deployment-related action.
+seo:
+  title: Webhook Configuration | Laioutr
+  description: Integrate your own hosting solution into Laioutr by setting up a webhook. Cockpit calls this webhook for every…
 ---
 
 # General

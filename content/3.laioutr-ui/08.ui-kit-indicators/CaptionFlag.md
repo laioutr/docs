@@ -2,6 +2,9 @@
 title: Caption Flag
 description: A caption flag component
 links: []
+seo:
+  title: Caption Flag | Laioutr
+  description: A caption flag component
 ---
 
 ## Overview

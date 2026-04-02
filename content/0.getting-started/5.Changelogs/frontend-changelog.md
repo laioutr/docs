@@ -1,6 +1,9 @@
 ---
 title: Frontend Changelog
 description: Changelog for the Laioutr frontend product following Keep a Changelog and Semantic Versioning.
+seo:
+  title: Frontend Changelog | Laioutr
+  description: Changelog for the Laioutr frontend product following Keep a Changelog and Semantic Versioning.
 ---
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.

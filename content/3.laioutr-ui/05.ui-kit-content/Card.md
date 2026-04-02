@@ -2,6 +2,9 @@
 title: Card
 description: Flexible content card block with multiple styles and media support.
 jiraIssueId: LUI-253
+seo:
+  title: Card | Laioutr
+  description: Flexible content card block with multiple styles and media support.
 ---
 
 ## Overview

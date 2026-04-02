@@ -2,6 +2,9 @@
 title: Hero Slider
 description: A flexible hero component serving as static hero section or interactive slider with full-width backgrounds.
 jiraIssueId: LUI-11
+seo:
+  title: Hero Slider | Laioutr
+  description: A flexible hero component serving as static hero section or interactive slider with full-width backgrounds.
 ---
 
 ## Overview

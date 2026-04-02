@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13254-120608&t=gY1zYbY2NWGSIZKZ-4
     target: _blank
+seo:
+  title: Shop Header | Laioutr
+  description: E-commerce header with mega menus, cart, search, and account functionality.
 ---
 
 ## Overview

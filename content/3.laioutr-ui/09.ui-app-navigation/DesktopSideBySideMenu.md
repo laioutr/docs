@@ -7,6 +7,9 @@ links:
     icon: i-simple-icons-figma
     to: https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=24-7307&t=6wm3tnzO3UwBzAin-4
     target: _blank
+seo:
+  title: Desktop Side By Side Menu | Laioutr
+  description: A desktop navigation menu that slides in from the left as an off-canvas panel, displaying hierarchical category…
 ---
 
 ## Overview

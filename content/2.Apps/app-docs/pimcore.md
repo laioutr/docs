@@ -1,6 +1,9 @@
 ---
 title: Pimcore
 description: Developer documentation for the Laioutr Pimcore app. Connect your Laioutr-powered Nuxt app to Pimcore and fetch data through its native REST API.
+seo:
+  title: Pimcore | Laioutr
+  description: Developer documentation for the Laioutr Pimcore app. Connect your Laioutr-powered Nuxt app to Pimcore and fetch data…
 ---
 
 ## Overview
