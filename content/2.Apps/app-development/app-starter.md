@@ -51,7 +51,7 @@ After opening the App Starter, you’ll see a structure like this:
 
 | Path | Purpose |
 |------|---------|
-| **`src/module.ts`** | Nuxt module entry. Defines `configKey` (must match `package.json` name), `registerLaioutrApp` (orchestr dirs, sections, blocks), runtime config, and optional `installModule` for peer deps. |
+| **`src/module.ts`** | Nuxt module entry. Defines `configKey` (must match `package.json` name), `registerLaioutrApp` (orchestr dirs, sections, blocks), runtime config, and optional `installModule` for peer deps (see [Platform Dependencies](/apps/app-development/platform-dependencies)). |
 | **`src/globalExtensions.ts`** | TypeScript module augmentation for Nuxt runtime config and Vue so your app’s config key is typed. |
 | **`src/runtime/server/orchestr/`** | Orchestr handlers live here: e.g. `product/by-slug.query.ts`, `cart/add-item.action.ts`, `menu/base.resolver.ts`. The starter only adds a `plugins/` (e.g. Zod fix) and leaves entity folders for you. |
 | **`src/runtime/app/sections/`** | Vue components and definitions for **sections** (Studio). Starter ships an empty folder with a `.gitkeep`. |

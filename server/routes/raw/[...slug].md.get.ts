@@ -4,6 +4,17 @@ import { queryCollection } from '@nuxt/content/server';
 import type { Collections } from '@nuxt/content';
 import { transformMdcBody } from '../../utils/llms/transform-mdc';
 
+// Custom pre handler that fixes minimark bug: missing space between language and meta
+// Without this, "```ts twoslash" becomes "```tstwoslash"
+function pre(node: any, state: any) {
+  const [_, attributes, ...children] = node;
+  const language = attributes.language || '';
+  const filename = attributes.filename ? ' [' + attributes.filename + ']' : '';
+  const meta = attributes.meta ? ' ' + attributes.meta : '';
+  const result = '```' + language + filename + meta + '\n' + String(node[1]?.code || children.join('')).trim() + '\n```';
+  return result + state.context.blockSeparator;
+}
+
 export default eventHandler(async (event) => {
   const slug = getRouterParams(event)['slug.md'];
   if (!slug?.endsWith('.md')) {
@@ -27,5 +38,5 @@ export default eventHandler(async (event) => {
   }
 
   setHeader(event, 'Content-Type', 'text/markdown; charset=utf-8');
-  return stringify({ ...page.body, type: 'minimark' }, { format: 'markdown/html' });
+  return stringify({ ...page.body, type: 'minimark' }, { format: 'markdown/html', handlers: { pre } });
 });

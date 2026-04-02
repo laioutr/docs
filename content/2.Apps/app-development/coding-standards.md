@@ -54,7 +54,7 @@ export default defineNuxtModule<ModuleOptions>({
   2. Add runtime to transpile: `nuxt.options.build.transpile.push(resolve("./runtime"))`.
   3. Merge options into runtime config (see [Configuration](#configuration)).
   4. Call `registerLaioutrApp` with `name`, `version`, and the appropriate dirs (`orchestrDirs`, `sections`, `blocks`, `pageWrapper`).
-  5. On `nuxt.options._prepare`, call `installModule` for peer dependencies so auto-imports and aliases work in consuming apps.
+  5. On `nuxt.options._prepare`, call `installModule` for peer dependencies so auto-imports and aliases work in consuming apps. Check [Platform Dependencies](/apps/app-development/platform-dependencies) first to avoid installing modules the platform already provides.
 
 ### registerLaioutrApp
 
