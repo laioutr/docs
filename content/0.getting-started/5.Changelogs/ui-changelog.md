@@ -5,6 +5,12 @@ description: Changelog for Laioutr UI and UI Kit following Keep a Changelog and 
 
 All notable changes to **Laioutr UI**, **UI Kit**, and related component libraries will be documented in this file.
 
+## [1.32.2]
+
+### Fixed
+
+- **UI**: Fixed CSS layer order in Studio preview to ensure correct cascade and style isolation.
+
 ## [1.31.4]
 
 ### Fixed

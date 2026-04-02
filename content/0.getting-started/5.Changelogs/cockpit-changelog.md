@@ -5,6 +5,15 @@ description: Changelog for the Laioutr Cockpit (Studio) product following Keep a
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-04]
+
+### Fixed
+
+- **Studio**: Fixed duplicate sections appearing in the section list.
+- **Studio**: Improved search in the Studio section/block picker.
+- **Studio**: Hidden the localized field indicator when the project has only a single language configured.
+- **Project Settings**: Removed a no-op translate button from project settings.
+
 ## [2026-03]
 
 ### Added
