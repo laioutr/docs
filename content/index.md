@@ -10,9 +10,49 @@ seo:
 ::docs-landing
 
 #description
-Laioutr is a Composable Frontend Management Platform in the Cloud that consists of several features to help you create performant, scalable, and customizable eCommerce storefronts. From our UI Library, Themes, Customer Facing Apps, our Frontend Builder and Hosting, we provide your business the tools to build the ideal headless commerce experience — the way it should be.
+Laioutr is the **Composable Frontend Management Platform** built for modern eCommerce teams. It connects your storefront's UI layer, data integration, deployment infrastructure, and AI tooling into one coherent platform — so you can move fast without sacrificing flexibility or control.
+
+Whether you're building a storefront from scratch, extending an existing one, or migrating away from a monolithic stack, Laioutr gives every team member the right set of tools without forcing anyone into a one-size-fits-all workflow.
 
 #default
+
+:::card-group
+
+::::card
+---
+title: For Developers
+icon: i-lucide-code-2
+---
+Build with a TypeScript-first framework designed around composable storefront patterns. The **Frontend** layer gives you `defineSection`, `defineBlock`, and the **Orchestr** data layer to wire backend data to your components with full type safety. Extend, override, or replace any part of the stack without leaving the framework behind.
+::::
+
+::::card
+---
+title: For Frontend & Design Teams
+icon: i-lucide-palette
+---
+The **Laioutr UI** library provides a production-ready component set built on UnoCSS and Reka UI — accessible, themeable, and fully composable. Customize tokens, swap components, or build your own design system on top of a battle-tested foundation.
+::::
+
+::::card
+---
+title: For Agencies & Platform Engineers
+icon: i-lucide-puzzle
+---
+**Apps** and connector integrations let you plug in your existing commerce backend — Commercetools, Shopify, Pimcore, and more — without custom glue code. **Hosting** gives you Laioutr Cloud, self-hosting via adapters, or your own infrastructure. You decide the deployment model.
+::::
+
+::::card
+---
+title: For Business & Operations Teams
+icon: i-lucide-sparkles
+---
+**Larry AI** helps you manage and iterate on your storefront without requiring a developer for every change. Pair it with **Studio** for in-context content editing and **Cockpit** for project-level control.
+::::
+
+:::
+
+## Explore the docs
 
 :::card-group
 
@@ -22,7 +62,7 @@ title: Getting Started
 icon: i-lucide-rocket
 to: /getting-started/
 ---
-Set up your project and learn the fundamentals of the platform.
+Get your first storefront running. Covers prerequisites, project setup, and core concepts.
 ::::
 
 ::::card
@@ -31,7 +71,7 @@ title: Frontend
 icon: i-lucide-code
 to: /frontend/
 ---
-Core framework, features, SEO, and the Orchestr data layer.
+The TypeScript frontend framework: sections, blocks, SEO, routing, and the Orchestr data integration layer.
 ::::
 
 ::::card
@@ -40,7 +80,7 @@ title: Apps
 icon: i-lucide-puzzle
 to: /apps/
 ---
-Connector apps and third-party integrations for your storefront.
+Pre-built connectors for Commercetools, Shopify, Pimcore, and other commerce backends.
 ::::
 
 ::::card
@@ -49,7 +89,7 @@ title: Laioutr UI
 icon: i-lucide-palette
 to: /laioutr-ui/
 ---
-Component library built on UnoCSS and Reka UI.
+Accessible, themeable component library. Customize tokens and extend components for your design system.
 ::::
 
 ::::card
@@ -58,7 +98,7 @@ title: Hosting
 icon: i-lucide-cloud
 to: /hosting/
 ---
-Laioutr Cloud, deployment adapters, and self-hosting options.
+Deploy to Laioutr Cloud, use a platform adapter, or self-host — your infrastructure, your rules.
 ::::
 
 ::::card
@@ -67,7 +107,7 @@ title: Checkout
 icon: i-lucide-shopping-cart
 to: /checkout/
 ---
-Checkout solution and payment integration.
+Headless checkout flow with payment provider integration, built to work with your storefront.
 ::::
 
 ::::card
@@ -76,7 +116,7 @@ title: Larry AI
 icon: i-lucide-sparkles
 to: /larry-ai/
 ---
-AI assistant for building and managing your storefront.
+Your AI co-pilot for storefront management: generate, edit, and optimize without leaving the platform.
 ::::
 
 ::::card
@@ -85,7 +125,7 @@ title: Offering
 icon: i-lucide-shield-check
 to: /offering/
 ---
-Service level agreements, support, and compliance.
+SLAs, support tiers, and compliance details for teams running Laioutr in production.
 ::::
 
 :::

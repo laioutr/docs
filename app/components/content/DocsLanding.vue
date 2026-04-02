@@ -155,6 +155,10 @@
   margin: 0;
 }
 
+.dl-hero-desc :deep(p + p) {
+  margin-top: 0.75rem;
+}
+
 .dl-hero-actions {
   display: flex;
   gap: 0.875rem;
@@ -191,6 +195,15 @@
 /* ─── Cards section ─── */
 .dl-cards {
   padding: 2rem 0 3rem;
+}
+
+.dl-cards :deep(h2) {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ui-text-dimmed);
+  margin: 2rem 0 1rem;
 }
 
 .dl-cards :deep(.card-group) {
