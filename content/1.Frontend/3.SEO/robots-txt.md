@@ -11,7 +11,7 @@ description: Control how search engines and crawlers interact with your Laioutr 
 - **Control crawling** to avoid wasting crawl budget on duplicate or low-value pages.
 - **Avoid duplicate content issues** by ensuring non-production environments (dev, staging) are not indexed.
 
-Laioutr uses the **[@nuxtjs/robots](https://nuxtseo.com/docs/robots/getting-started/introduction)** module (part of Nuxt SEO) to manage robots.txt and robots directives. The module is **automatically installed** with **@laioutr-core/frontend-core**, so every Laioutr frontend has robots.txt support out of the box.
+Laioutr uses the **[@nuxtjs/robots](https://nuxtseo.com/docs/robots/getting-started/introduction)** module (part of Nuxt SEO) to manage robots.txt and robots directives. The module is automatically installed with **@laioutr-core/frontend-core** (see [Platform Dependencies](/apps/app-development/platform-dependencies)), so every Laioutr frontend has robots.txt support out of the box.
 
 ## How it works
 
