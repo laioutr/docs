@@ -37,6 +37,16 @@ Markets and their domains come from **RC** (`laioutrrc.markets`). Each `RcMarket
 
 At build time, Frontend Core transforms this into a **`RenderI18nConfig`** (via `buildI18nConfig()`) with resolved types (`RenderMarket`, `RenderMarketDomain`, `RenderLanguage`) and lookup maps (`marketById`, `marketBySlug`, `hostToMarket`). You access this derived config through composables, never the raw RC.
 
+### Host-to-market constraint
+
+Each host (e.g. `www.shop.ch`) must belong to **exactly one market**. Within that market, path prefixes differentiate languages (e.g. `/` for German, `/fr` for French). You cannot assign the same host to two different markets with different path prefixes — `hostToMarket` maps each host to a single market, so only the last-processed market would be reachable.
+
+If you need two regions on the same domain, use a single market with multiple domains (path-prefixed), or use separate hosts per market.
+
+::callout{type="warning"}
+Validation catches duplicate `(host, path)` pairs within one market, but does **not** prevent two markets from sharing a host. If this happens, a warning is logged at build time and one market silently shadows the other.
+::
+
 ### Composables
 
 ```ts
