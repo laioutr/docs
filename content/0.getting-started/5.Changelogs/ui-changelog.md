@@ -14,6 +14,24 @@ All notable changes to **Laioutr UI**, **UI Kit**, and related component librari
 
 - **UI**: Fixed CSS layer order in Studio preview to ensure correct cascade and style isolation.
 
+## [1.32.1]
+
+### Fixed
+
+- **UI**: Fixed navigation on locale change.
+
+## [1.32.0]
+
+### Added
+
+- **UI Kit**: New `$tl` Vue global for locale translations. Expanded locale system with 13 new message groups, full German translations, and umlaut fixes across 46 components.
+- **UI App**: New **ProductReviews** block, **PageHeader** section, and **SearchResultsHeader** section.
+- **UI**: Loading spinner for suggested-search queries.
+
+### Fixed
+
+- **UI**: Corrected hover font colors for various elements in the classic theme.
+
 ## [1.31.4]
 
 ### Fixed

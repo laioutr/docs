@@ -8,6 +8,12 @@ seo:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.28.8]
+
+### Fixed
+
+- **Frontend Core**: Fixed `useRoute()` in Studio preview mode.
+
 ## [0.28.6]
 
 ### Fixed
