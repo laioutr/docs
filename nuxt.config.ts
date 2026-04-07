@@ -2,7 +2,12 @@ import { withoutTrailingSlash } from 'ufo';
 
 export default defineNuxtConfig({
   extends: ['docus'],
-  modules: [/* 'nuxt-content-twoslash', */ 'nuxt-studio', '@vueuse/nuxt'],
+  modules: [
+    /* 'nuxt-content-twoslash', */
+    'nuxt-studio',
+    '@vueuse/nuxt',
+    '@nuxtjs/sitemap',
+  ],
   css: ['~/assets/css/main.css'],
 
   hooks: {
@@ -18,6 +23,8 @@ export default defineNuxtConfig({
 
   site: {
     name: 'Laioutr Docs',
+    // Required for @nuxtjs/sitemap absolute <loc> URLs. Override per env (e.g. Cloudflare build: NUXT_SITE_URL).
+    url: process.env.NUXT_SITE_URL || 'https://docs.laioutr.io',
   },
 
   llms: {
