@@ -57,7 +57,7 @@
     ]
   },
   "implemented": true,
-  "documentationPath": "content/3.laioutr-ui/02.ui-kit-general/Avatar.md",
+  "documentationPath": "content/3.laioutr-ui/UI Kit/01.general/Avatar.md",
   "parentEpic": {
     "key": "LUI-123",
     "title": "Laioutr UI Kit Components"

@@ -105,7 +105,7 @@
     ]
   },
   "implemented": true,
-  "documentationPath": "content/3.laioutr-ui/02.ui-kit-general/ColorSwatch.md",
+  "documentationPath": "content/3.laioutr-ui/UI Kit/01.general/ColorSwatch.md",
   "parentEpic": {
     "key": "LUI-50",
     "title": "Product Tiles Basic"

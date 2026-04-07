@@ -55,7 +55,7 @@
     ]
   },
   "implemented": true,
-  "documentationPath": "content/3.laioutr-ui/07.ui-kit-form/LoadMore.md",
+  "documentationPath": "content/3.laioutr-ui/UI Kit/06.form/LoadMore.md",
   "parentEpic": {
     "key": "LUI-68",
     "title": "Product Listing Page"

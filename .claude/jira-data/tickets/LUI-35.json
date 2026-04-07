@@ -33,7 +33,7 @@
     ]
   },
   "implemented": true,
-  "documentationPath": "content/3.laioutr-ui/08.ui-kit-indicators/CategoryNodeFlag.md",
+  "documentationPath": "content/3.laioutr-ui/UI Kit/07.indicators/CategoryNodeFlag.md",
   "parentEpic": {
     "key": "LUI-34",
     "title": "Inpage Navigation"

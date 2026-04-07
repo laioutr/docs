@@ -11,7 +11,7 @@
   "userStory": null,
   "technicalSpecs": null,
   "implemented": false,
-  "documentationPath": "content/3.laioutr-ui/02.ui-kit-general/DropdownMenu.md",
+  "documentationPath": "content/3.laioutr-ui/UI Kit/01.general/DropdownMenu.md",
   "parentEpic": {
     "key": "LUI-74",
     "title": "PLP - Filter & Sorting"

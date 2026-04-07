@@ -25,7 +25,7 @@
     ]
   },
   "implemented": false,
-  "documentationPath": "content/3.laioutr-ui/02.ui-kit-general/ImageContrastOverlay.md",
+  "documentationPath": "content/3.laioutr-ui/UI Kit/01.general/ImageContrastOverlay.md",
   "parentEpic": {
     "key": "LUI-17",
     "title": "CTA Banners"

@@ -37,7 +37,7 @@
     ]
   },
   "implemented": true,
-  "documentationPath": "content/3.laioutr-ui/02.ui-kit-general/Scrollbar.md",
+  "documentationPath": "content/3.laioutr-ui/UI Kit/01.general/Scrollbar.md",
   "parentEpic": {
     "key": "LUI-34",
     "title": "Inpage Navigation"

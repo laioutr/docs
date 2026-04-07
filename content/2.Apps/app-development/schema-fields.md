@@ -310,7 +310,7 @@ Rich text editor with formatting (bold, italic, links, headings, lists, etc.).
   :::
 ::
 
-The field value is an HTML string. Render it with the [`RichContent`](/laioutr-ui/ui-kit-typography/RichContent) component from the UI Kit to get consistent typography for headings, lists, blockquotes, tables, links, and images:
+The field value is an HTML string. Render it with the [`RichContent`](/laioutr-ui/ui-kit/typography/richcontent) component from the UI Kit to get consistent typography for headings, lists, blockquotes, tables, links, and images:
 
 ```vue
 <template>
@@ -365,7 +365,7 @@ Media picker for images and videos from the media library.
   :::
 ::
 
-The field value is a `Media` object containing source URLs, dimensions, and alt text. Render it with the [`Media`](/laioutr-ui/ui-kit-general/Media) component from the UI Kit:
+The field value is a `Media` object containing source URLs, dimensions, and alt text. Render it with the [`Media`](/laioutr-ui/ui-kit/general/media) component from the UI Kit:
 
 ```vue
 <template>

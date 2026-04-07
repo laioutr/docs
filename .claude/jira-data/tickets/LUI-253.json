@@ -31,7 +31,7 @@
     ]
   },
   "implemented": true,
-  "documentationPath": "content/3.laioutr-ui/05.ui-kit-content/Card.md",
+  "documentationPath": "content/3.laioutr-ui/UI Kit/04.content/Card.md",
   "parentEpic": null,
   "linkedIdeas": [],
   "summary": "Flexible content card block with multiple styles and media support.",

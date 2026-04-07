@@ -22,7 +22,7 @@
     ]
   },
   "implemented": true,
-  "documentationPath": "content/3.laioutr-ui/02.ui-kit-general/EmptyState.md",
+  "documentationPath": "content/3.laioutr-ui/UI Kit/01.general/EmptyState.md",
   "parentEpic": {
     "key": "LUI-68",
     "title": "Product Listing Page"

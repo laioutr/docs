@@ -25,7 +25,7 @@
     ]
   },
   "implemented": true,
-  "documentationPath": "content/3.laioutr-ui/05.ui-kit-content/CtaBannerIntegrated.md",
+  "documentationPath": "content/3.laioutr-ui/UI Kit/04.content/CtaBannerIntegrated.md",
   "parentEpic": {
     "key": "LUI-17",
     "title": "CTA Banners"

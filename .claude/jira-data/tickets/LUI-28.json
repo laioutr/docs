@@ -19,7 +19,7 @@
     ]
   },
   "implemented": false,
-  "documentationPath": "content/3.laioutr-ui/02.ui-kit-general/Media.md",
+  "documentationPath": "content/3.laioutr-ui/UI Kit/01.general/Media.md",
   "parentEpic": {
     "key": "LUI-27",
     "title": "Video / Image Block"

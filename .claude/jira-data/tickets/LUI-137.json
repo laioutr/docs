@@ -9,7 +9,7 @@
   "userStory": null,
   "technicalSpecs": null,
   "implemented": true,
-  "documentationPath": "content/3.laioutr-ui/03.ui-kit-typography/Text.md",
+  "documentationPath": "content/3.laioutr-ui/UI Kit/02.typography/Text.md",
   "parentEpic": {
     "key": "LUI-123",
     "title": "Laioutr UI Kit Components"

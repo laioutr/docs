@@ -93,7 +93,7 @@
     ]
   },
   "implemented": true,
-  "documentationPath": "content/3.laioutr-ui/06.ui-kit-surfaces/AlertDialog.md",
+  "documentationPath": "content/3.laioutr-ui/UI Kit/05.surfaces/AlertDialog.md",
   "parentEpic": {
     "key": "LUI-105",
     "title": "Toasts and Alerts"

@@ -49,7 +49,7 @@
     ]
   },
   "implemented": false,
-  "documentationPath": "content/3.laioutr-ui/05.ui-kit-content/LinkTileBasic.md",
+  "documentationPath": "content/3.laioutr-ui/UI Kit/04.content/LinkTileBasic.md",
   "parentEpic": {
     "key": "LUI-34",
     "title": "Inpage Navigation"

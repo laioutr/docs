@@ -21,7 +21,7 @@
     ]
   },
   "implemented": true,
-  "documentationPath": "content/3.laioutr-ui/07.ui-kit-form/Switch.md",
+  "documentationPath": "content/3.laioutr-ui/UI Kit/06.form/Switch.md",
   "parentEpic": {
     "key": "LUI-1",
     "title": "Pricing Page"

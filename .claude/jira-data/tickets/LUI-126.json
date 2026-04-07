@@ -9,7 +9,7 @@
   "userStory": null,
   "technicalSpecs": null,
   "implemented": true,
-  "documentationPath": "content/3.laioutr-ui/07.ui-kit-form/Checkbox.md",
+  "documentationPath": "content/3.laioutr-ui/UI Kit/06.form/Checkbox.md",
   "parentEpic": {
     "key": "LUI-123",
     "title": "Laioutr UI Kit Components"

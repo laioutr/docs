@@ -27,7 +27,7 @@
     ]
   },
   "implemented": true,
-  "documentationPath": "content/3.laioutr-ui/02.ui-kit-general/Icon.md",
+  "documentationPath": "content/3.laioutr-ui/UI Kit/01.general/Icon.md",
   "parentEpic": null,
   "summary": "Size-optimized icon variants with automatic resolution ensuring recognizability at small, medium, and large sizes.",
   "features": [
