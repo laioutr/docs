@@ -310,7 +310,7 @@ Rich text editor with formatting (bold, italic, links, headings, lists, etc.).
   :::
 ::
 
-The field value is an HTML string. Render it with the [`RichContent`](/laioutr-ui/ui-kit/typography/richcontent) component from the UI Kit to get consistent typography for headings, lists, blockquotes, tables, links, and images:
+The field value is an HTML string. Render it with the [`RichContent`](/laioutr-ui/ui-kit/typography/rich-content) component from the UI Kit to get consistent typography for headings, lists, blockquotes, tables, links, and images:
 
 ```vue
 <template>
