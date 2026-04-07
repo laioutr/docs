@@ -1,4 +1,10 @@
 export default defineAppConfig({
+  socials: {
+    linkedin: 'https://www.linkedin.com/company/laioutr/',
+    x: 'https://x.com/laioutr',
+    youtube: 'https://www.youtube.com/@Laioutr',
+    instagram: 'https://www.instagram.com/laioutr/',
+  },
   github: {
     url: 'https://github.com/laioutr/docs',
     branch: 'main',
