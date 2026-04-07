@@ -5,6 +5,8 @@ export default defineAppConfig({
   },
   seo: {
     title: 'Laioutr Documentation',
+    titleTemplate: '%s | Laioutr',
+    description: 'Documentation for the Laioutr Composable Frontend Management Platform.',
   },
   ui: {
     colors: {
@@ -21,9 +23,10 @@ export default defineAppConfig({
     title: '',
     to: '/',
     logo: {
-      alt: 'laioutr logo',
+      alt: 'Laioutr',
       light: '/logo/logo-dark.svg',
       dark: '/logo/logo-light.svg',
+      brandAssetsUrl: 'https://www.laioutr.com/brandkit',
     },
     search: true,
     colorMode: true,
@@ -46,6 +49,12 @@ export default defineAppConfig({
         target: '_blank',
         'aria-label': 'laioutr on GitHub',
       },
+      {
+        icon: 'simple-icons:appstore',
+        to: 'https://apps.laioutr.com',
+        target: '_blank',
+        'aria-label': 'Appstore by Laioutr',
+      },
     ],
   },
   toc: {
@@ -63,8 +72,20 @@ export default defineAppConfig({
         {
           icon: 'i-lucide-gem',
           label: 'Try Laioutr',
-          to: 'https://www.laioutr.com/pricing',
+          to: 'https://www.laioutr.com/',
           target: '_blank',
+        },
+        {
+          icon: 'simple-icons:appstore',
+          to: 'https://apps.laioutr.com',
+          target: '_blank',
+          'aria-label': 'Visit our Appstore',
+        },
+        {
+          icon: 'simple-icons:homeassistantcommunitystore',
+          to: 'https://preview.laioutr.com',
+          target: '_blank',
+          'aria-label': 'Laioutr UI Preview',
         },
       ],
     },
