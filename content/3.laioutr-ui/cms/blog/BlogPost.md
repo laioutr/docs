@@ -1,9 +1,9 @@
 ---
-title: BlogPost
+title: Blog Post
 description: Blog post page with rich content, social sharing, breadcrumbs, and related posts section.
 jiraIssueId: LUI-116
 seo:
-  title: BlogPost | Laioutr
+  title: Blog Post | Laioutr
   description: Blog post page with rich content, social sharing, breadcrumbs, and related posts section.
 ---
 

@@ -47,7 +47,7 @@ export default defineAppConfig({
         icon: 'i-simple-icons-github',
         to: 'https://github.com/laioutr',
         target: '_blank',
-        'aria-label': 'laioutr on GitHub',
+        'aria-label': 'Laioutr on GitHub',
       },
       {
         icon: 'simple-icons:appstore',
@@ -77,15 +77,15 @@ export default defineAppConfig({
         },
         {
           icon: 'simple-icons:appstore',
+          label: 'Visit our Appstore',
           to: 'https://apps.laioutr.com',
           target: '_blank',
-          'aria-label': 'Visit our Appstore',
         },
         {
           icon: 'simple-icons:homeassistantcommunitystore',
+          label: 'Laioutr UI Preview',
           to: 'https://preview.laioutr.com',
           target: '_blank',
-          'aria-label': 'Laioutr UI Preview',
         },
       ],
     },
