@@ -8,6 +8,28 @@ seo:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.28.10]
+
+### Added
+
+- **Frontend Core**: Cross-locale redirect middleware that redirects users to the correct locale URL on entry.
+- **Frontend Core**: Shared hreflang link utility with fixes for missing `x-default` path prefix.
+- **Frontend Core**: Longest-prefix domain matching for multi-market domain resolution.
+- **Frontend Core**: Warning logs for host-sharing conflicts and unknown market/locale fallbacks.
+
+### Fixed
+
+- **Frontend Core**: Fixed SSR protocol detection in `linkResolver` to correctly generate absolute URLs.
+- **Frontend Core**: Language fallback in `buildI18nConfig` now resolves correctly when a locale has no explicit configuration.
+
+## [0.28.9]
+
+### Fixed
+
+- **Frontend Core**: Fixed duplicate section templates in Studio by switching the template registry from an array to a Map, preventing re-registration on repeated SSR renders.
+- **Frontend Core**: Wired mock style tokens into the reflect API so the Studio receives color and icon data instead of empty objects.
+- **Frontend Core**: Fixed `useRoute()` returning stale route data in Studio preview. The preview now emits `page:finish` after each navigation to keep `useRoute()` current.
+
 ## [0.28.8]
 
 ### Fixed

@@ -8,6 +8,24 @@ seo:
 
 All notable changes to **Laioutr UI**, **UI Kit**, and related component libraries will be documented in this file.
 
+## [1.32.5]
+
+### Fixed
+
+- **UI**: Fixed `Card` component `RichContent` prop (`:content` → `:html`).
+- **UI App**: Simplified `SocialShare` layout by removing an unnecessary wrapper div.
+- **UI App**: Wrapped `BlogPostDetail` content in a container div for consistent layout.
+
+## [1.32.4]
+
+### Added
+
+- **UI App**: New standalone `BlockSocialShare` block for sharing the current page via social platforms.
+
+### Fixed
+
+- **UI**: Fixed breadcrumb item text wrapping by applying single-line text-overflow with ellipsis.
+
 ## [1.32.2]
 
 ### Fixed
