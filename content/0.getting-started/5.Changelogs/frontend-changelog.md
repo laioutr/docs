@@ -8,6 +8,12 @@ seo:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.28.11]
+
+### Added
+
+- **Orchestr**: Exported `OrchestrBuilder` types so apps can re-export their builders with correct TypeScript types.
+
 ## [0.28.10]
 
 ### Added
