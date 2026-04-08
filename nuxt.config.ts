@@ -2,6 +2,13 @@ import { withoutTrailingSlash } from 'ufo';
 
 export default defineNuxtConfig({
   extends: ['docus'],
+  app: {
+    head: {
+      meta: [
+        { name: 'google-site-verification', content: 'qwFXebMaXjyk7RdnQpI5g2nft5v4CnxXKgkNEF7Y2Lo' },
+      ],
+    },
+  },
   modules: [
     /* 'nuxt-content-twoslash', */
     'nuxt-studio',
