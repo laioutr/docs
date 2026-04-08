@@ -129,3 +129,7 @@ Without this cookie, the first request triggers anonymous login and sets it; sub
 - Ensure the Emporix API client has anonymous login and access to cart, category, product, price, and availability.
 - Rely on orchestr queries/actions/links/resolvers and the MenuByAliasQuery template provider for cart, menu, product, and variant data.
 - Use canonical media with `provider: "emporix"` for product/variant images; configure Nuxt Image with an Emporix provider if required.
+
+## Changelog
+
+Version history is maintained in [`CHANGELOG.md`](https://github.com/laioutr/app-emporix/blob/main/CHANGELOG.md) in the public repository [**laioutr/app-emporix**](https://github.com/laioutr/app-emporix).

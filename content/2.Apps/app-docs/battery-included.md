@@ -98,3 +98,7 @@ This package does not set or read any cookies. All calls are stateless per reque
 - Ensure your BatteryIncluded collection is populated and the API key has access to browse, suggest, highlights, and recommendations.
 - Use **ProductSearchQuery** for search results, **SuggestedSearchSearchQuery** + **SuggestedSearchEntriesLink** + **SuggestedSearchEntry** for autocomplete, and **BatteryIncludedProductRecommendations** link + **ProductRecommendation** resolver for recommendations.
 - Keep **apiKey** in private runtime config only; do not expose it to the client.
+
+## Changelog
+
+All changelogs are managed in **`CHANGELOG.md`** in the package’s GitHub repository. This app does not currently have a [public repository under the Laioutr organization](https://github.com/orgs/laioutr/repositories?q=&type=public); when it is published there, use that repo’s **`CHANGELOG.md`** for release notes.

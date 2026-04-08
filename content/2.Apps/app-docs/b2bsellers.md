@@ -281,3 +281,7 @@ Most list endpoints accept a **Criteria** object in the request body for filteri
 - [B2Bsellers Store API Reference](https://docs.b2b-sellers.com/b2b-platform/api-reference/store-api) — Full endpoint documentation with request/response schemas
 - [B2Bsellers Platform Documentation](https://docs.b2b-sellers.com/b2b-platform) — General platform documentation
 - [B2Bsellers Website](https://www.b2b-sellers.com/) — Product overview and pricing
+
+## Changelog
+
+All changelogs are managed in **`CHANGELOG.md`** in the package’s GitHub repository. This app does not currently have a [public repository under the Laioutr organization](https://github.com/orgs/laioutr/repositories?q=&type=public); when it is published there, use that repo’s **`CHANGELOG.md`** for release notes.

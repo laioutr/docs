@@ -229,3 +229,7 @@ You can extend the Shopify integration in several ways while staying within Laio
   - If you rely heavily on Shopify’s navigation, you can add new queries or links that surface more complex menu structures (for example, navigation trees driven by metaobjects combined with `read_online_store_navigation`).
 
 By combining these extension points, you can gradually grow from a standard Laioutr × Shopify storefront into a highly tailored commerce experience, without losing the benefits of a canonical, backend-agnostic frontend architecture.
+
+## Changelog
+
+All changelogs are managed in **`CHANGELOG.md`** in the package’s GitHub repository. Shopify integration is not currently offered as a [public repository under the Laioutr organization](https://github.com/orgs/laioutr/repositories?q=&type=public); when it is published there, use that repo’s **`CHANGELOG.md`** for release notes.

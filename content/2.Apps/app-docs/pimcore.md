@@ -15,3 +15,7 @@ The app establishes a foundational connection to the Pimcore system. It handles 
 ::callout{icon="i-heroicons-information-circle"}
 This integration is currently in an early stage. Detailed configuration options, available queries, actions, and further implementation guidance will be added as the implementation progresses.
 ::
+
+## Changelog
+
+All changelogs are managed in **`CHANGELOG.md`** in the package’s GitHub repository. This app does not currently have a [public repository under the Laioutr organization](https://github.com/orgs/laioutr/repositories?q=&type=public); when it is published there, use that repo’s **`CHANGELOG.md`** for release notes.

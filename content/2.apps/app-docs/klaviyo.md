@@ -76,3 +76,7 @@ This package does not set or read any cookies. Subscription is stateless per req
 - Set `baseURL` (optional), `companyId`, and `defaultNewsletterListId` under `@laioutr/app-klaviyo` (e.g. from env).
 - Create a Klaviyo list and use its ID as the default newsletter list.
 - Invoke **SubscribeAction** from your UI (e.g. newsletter form) with at least `email`; optionally pass `listId`, `source`, `phone`, `person`, `address`, and `customFields`.
+
+## Changelog
+
+Version history is maintained in [`CHANGELOG.md`](https://github.com/laioutr/app-klaviyo/blob/main/CHANGELOG.md) in the public repository [**laioutr/app-klaviyo**](https://github.com/laioutr/app-klaviyo).

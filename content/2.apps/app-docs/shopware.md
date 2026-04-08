@@ -150,3 +150,7 @@ Ensure your domain and cookie settings align with your Shopware sales channel an
 7. **Studio** – The `shopware` media library provider will work once the Admin API and integration are correctly configured.
 
 For type-level details and exact canonical action/query names, see the package source and `@laioutr-core/canonical-types` in the laioutr repository.
+
+## Changelog
+
+Version history is maintained in [`CHANGELOG.md`](https://github.com/laioutr/app-shopware/blob/main/CHANGELOG.md) in the public repository [**laioutr/app-shopware**](https://github.com/laioutr/app-shopware).

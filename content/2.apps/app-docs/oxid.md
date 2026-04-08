@@ -138,3 +138,7 @@ The package implements Laioutr’s canonical ecommerce types via the orchestr. T
 4. **Environment** – Put credentials in env vars; ensure the Nuxt server can reach the OXID GraphQL endpoint.  
 5. **Orchestr / frontend** – Use the canonical queries, actions, links, and resolvers from your UI; the package maps them to OXID.  
 6. **Images** – Use the `oxid` Nuxt Image provider for OXID media when you have thumbnail lists in the src fragment; otherwise use the raw URL.
+
+## Changelog
+
+Version history is maintained in [`CHANGELOG.md`](https://github.com/laioutr/app-oxid/blob/main/CHANGELOG.md) in the public repository [**laioutr/app-oxid**](https://github.com/laioutr/app-oxid).

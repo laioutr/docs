@@ -77,3 +77,7 @@ This package does not provide orchestr queries, actions, links, or resolvers. It
 - Set **cbid** (and optionally **consentMode**, **consentModeDefaults**) under `@laioutr-app/cookiebot` (e.g. from env).
 - Ensure your Cookiebot domain group is configured and the CBID matches.
 - Use the consent store (e.g. **useConsentStore()**, **hasCategoryConsent**) in your app or in other apps (e.g. GTM) to gate scripts based on consent.
+
+## Changelog
+
+All changelogs are managed in **`CHANGELOG.md`** in the package’s GitHub repository. This app does not currently have a [public repository under the Laioutr organization](https://github.com/orgs/laioutr/repositories?q=&type=public); when it is published there, use that repo’s **`CHANGELOG.md`** for release notes.

@@ -51,3 +51,7 @@ This package does not provide orchestr queries, actions, links, or resolvers. It
 - Add **@laioutr/app-vercel-analytics** to Nuxt modules.
 - Ensure your app uses Laioutr’s page wrapper so **VercelAnalyticsPageWrapper** is included in the wrapper stack; or use **VercelAnalyticsPageWrapper** manually where you want analytics.
 - Deploy on Vercel and enable Vercel Analytics in the project settings so data is collected and visible in the dashboard.
+
+## Changelog
+
+All changelogs are managed in **`CHANGELOG.md`** in the package’s GitHub repository. This app does not currently have a [public repository under the Laioutr organization](https://github.com/orgs/laioutr/repositories?q=&type=public); when it is published there, use that repo’s **`CHANGELOG.md`** for release notes.

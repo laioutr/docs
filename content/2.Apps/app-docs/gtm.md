@@ -73,3 +73,7 @@ This package does not set or read cookies itself. GTM and the tags you configure
 - Optionally add a consent adapter (e.g. **@laioutr-app/cookiebot**) so Consent Mode updates are applied when the user accepts or revokes categories.
 - Use the tracking store (e.g. **useTrackingStore().track({ eventName, payload })**) in your app or in other apps to send events to GTM.
 - Configure tags and triggers in the GTM container to react to data layer events and consent state.
+
+## Changelog
+
+All changelogs are managed in **`CHANGELOG.md`** in the package’s GitHub repository. This app does not currently have a [public repository under the Laioutr organization](https://github.com/orgs/laioutr/repositories?q=&type=public); when it is published there, use that repo’s **`CHANGELOG.md`** for release notes.

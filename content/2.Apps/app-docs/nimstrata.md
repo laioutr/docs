@@ -111,3 +111,7 @@ The package implements Laioutr’s canonical search, category, suggested-search,
 - Set **baseURL** (optional), **projectId**, **catalogId** (optional), and optionally **serving** under `@laioutr-app/nimstrata` (e.g. from env).
 - Ensure Nimstrata project and catalog are configured and serving configs exist for search, byCategory, and predict.
 - Use **ProductSearchQuery**, **ProductsByCategorySlugQuery**, **NimstrataProductRecommendationsQuery** (and its template provider), **SuggestedSearchSearchQuery** + **SuggestedSearchEntriesLink** + **SuggestedSearchEntry** resolver, and **TrackEventAction** as needed. Call **TrackEventAction** for page views, detail views, cart, and purchase so recommendations and analytics work.
+
+## Changelog
+
+All changelogs are managed in **`CHANGELOG.md`** in the package’s GitHub repository. This app does not currently have a [public repository under the Laioutr organization](https://github.com/orgs/laioutr/repositories?q=&type=public); when it is published there, use that repo’s **`CHANGELOG.md`** for release notes.

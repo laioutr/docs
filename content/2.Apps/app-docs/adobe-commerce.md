@@ -143,3 +143,7 @@ Ensure **@nuxt/image** is in your Nuxt config when using the provider.
 - Ensure the Adobe Commerce GraphQL API is reachable and the access token has catalog and cart permissions.
 - Rely on orchestr queries, actions, links, resolvers, and query template providers for cart, menu, category, product, and variant data.
 - Use the **adobecommerce** Nuxt Image provider for product/category images when using Nuxt Image.
+
+## Changelog
+
+All changelogs are managed in **`CHANGELOG.md`** in the package’s GitHub repository. This app does not currently have a [public repository under the Laioutr organization](https://github.com/orgs/laioutr/repositories?q=&type=public); when it is published there, use that repo’s **`CHANGELOG.md`** for release notes.

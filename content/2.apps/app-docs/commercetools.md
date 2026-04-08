@@ -286,3 +286,7 @@ Without these cookies, the app uses client credentials only; `GetCurrentCartQuer
 - Check cookie settings (httpOnly, secure, sameSite) align with your deployment
 - Verify the domain allows cookies to be set
 - Check for cookie size limits if storing large tokens
+
+## Changelog
+
+Version history is maintained in [`CHANGELOG.md`](https://github.com/laioutr/app-commercetools/blob/main/CHANGELOG.md) in the public repository [**laioutr/app-commercetools**](https://github.com/laioutr/app-commercetools).

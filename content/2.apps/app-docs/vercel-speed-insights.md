@@ -67,3 +67,7 @@ This package does not provide orchestr queries, actions, links, or resolvers. It
 
 - **v0.1.4**: Internal integration fix to use Nuxt SDK APIs instead of raw API usage.
 - **v0.1.3**: Updated `@vercel/speed-insights` to `v2.0.0`.
+
+## Changelog
+
+The full version history is maintained in [`CHANGELOG.md`](https://github.com/laioutr/app-vercel-speed-insights/blob/main/CHANGELOG.md) in the public repository [**laioutr/app-vercel-speed-insights**](https://github.com/laioutr/app-vercel-speed-insights).
