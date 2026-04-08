@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     'nuxt-studio',
     '@vueuse/nuxt',
     '@nuxtjs/sitemap',
+    '@nuxtjs/robots',
     // Ensure module order: sitemap must load before content (esp. when using `extends`)
     '@nuxt/content',
   ],
@@ -27,12 +28,18 @@ export default defineNuxtConfig({
     name: 'Laioutr Docs',
     // Required for @nuxtjs/sitemap absolute <loc> URLs. Override per env (e.g. Cloudflare build: NUXT_SITE_URL).
     url: process.env.NUXT_SITE_URL || 'https://docs.laioutr.io',
+    indexable: process.env.NODE_ENV === 'production',
   },
 
   sitemap: {
-    // Nuxt Content integration: exposes content URLs to the sitemap generator
-    // (Route provided by @nuxtjs/sitemap itself)
     sources: ['/__sitemap__/nuxt-content-urls.json'],
+  },
+
+  robots: {
+    groups: process.env.NODE_ENV === 'production'
+      ? [{ userAgent: ['*'], allow: ['/'] }]
+      : [{ userAgent: ['*'], disallow: ['/'] }],
+    sitemap: ['/sitemap.xml'],
   },
 
   llms: {
