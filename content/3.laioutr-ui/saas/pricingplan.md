@@ -10,6 +10,12 @@ jiraIssueId: LUI-2
 seo:
   title: Pricing Plan | Laioutr
   description: A pricing card component displaying subscription plan details with strikethrough pricing for discounts.
+sitemap:
+  loc: /laioutr-ui/saas/pricingplan
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

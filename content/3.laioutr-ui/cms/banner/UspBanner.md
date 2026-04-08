@@ -5,6 +5,12 @@ jiraIssueId: LUI-31
 seo:
   title: USP Banner | Laioutr
   description: A slim, responsive banner for displaying unique selling propositions with customizable icons and automatic slider…
+sitemap:
+  loc: /laioutr-ui/cms/banner/uspbanner
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

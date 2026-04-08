@@ -4,6 +4,12 @@ description: Commerce-focused components for product discovery, listing, merchan
 seo:
   title: Shop | Laioutr
   description: Commerce-focused components for product discovery, listing, merchandising, and conversion flows.
+sitemap:
+  loc: /figma-kit/kits/shop
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Purpose

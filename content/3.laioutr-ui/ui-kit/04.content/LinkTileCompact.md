@@ -5,6 +5,12 @@ jiraIssueId: LUI-40
 seo:
   title: Link Tile Compact | Laioutr
   description: Space-efficient category node variant for listing pages with eight design variants and optional images.
+sitemap:
+  loc: /laioutr-ui/ui-kit/content/linktilecompact
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

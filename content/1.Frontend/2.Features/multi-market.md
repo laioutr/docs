@@ -4,6 +4,12 @@ description: Laioutr's multi-market support lets you serve different regions (ma
 seo:
   title: Multi-market | Laioutr
   description: Laioutr's multi-market support lets you serve different regions (markets) from one project, each with its own domains,…
+sitemap:
+  loc: /frontend/features/multi-market
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Part 1 — For business and content users

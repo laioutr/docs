@@ -4,6 +4,12 @@ description: The Google Adapter is a pre-built integration that connects the Lai
 seo:
   title: Google Adapter | Laioutr
   description: The Google Adapter is a pre-built integration that connects the Laioutr Cockpit directly with Google Cloud. It allows…
+sitemap:
+  loc: /hosting/hosting-adapter/google-adapter
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 # Google Adapter file

@@ -4,6 +4,12 @@ description: Developer documentation for the Laioutr Klaviyo app package. Integr
 seo:
   title: Klaviyo | Laioutr
   description: Developer documentation for the Laioutr Klaviyo app package. Integrate Klaviyo newsletter signup into your Nuxt app…
+sitemap:
+  loc: /apps/app-docs/klaviyo
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

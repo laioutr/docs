@@ -10,6 +10,12 @@ links:
 seo:
   title: Basic Header | Laioutr
   description: Compact header with glass effect, sticky option, and CTA button.
+sitemap:
+  loc: /laioutr-ui/navigation/basicheader
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

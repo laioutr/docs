@@ -5,6 +5,12 @@ jiraIssueId: LUI-126
 seo:
   title: Checkbox | Laioutr
   description: Checkbox group wrapper managing state, validation, and ARIA grouping for multiple related checkbox inputs.
+sitemap:
+  loc: /laioutr-ui/ui-kit/form/checkbox
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

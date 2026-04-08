@@ -4,6 +4,12 @@ description: Navigation components that connect categories and content sections 
 seo:
   title: Inpage Navigation | Laioutr
   description: Navigation components that connect categories and content sections with multiple visual styles.
+sitemap:
+  loc: /figma-kit/kits/inpage-navigation
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Purpose

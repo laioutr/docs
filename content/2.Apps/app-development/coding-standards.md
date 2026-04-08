@@ -4,6 +4,12 @@ description: Conventions and quality guidelines for developing Laioutr apps. Use
 seo:
   title: Coding Standards | Laioutr
   description: Conventions and quality guidelines for developing Laioutr apps. Use these standards to keep app code consistent,…
+sitemap:
+  loc: /apps/app-development/coding-standards
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

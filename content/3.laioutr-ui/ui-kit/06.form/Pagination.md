@@ -5,6 +5,12 @@ links: []
 seo:
   title: Pagination | Laioutr
   description: Page navigation component for splitting large data sets across multiple pages.
+sitemap:
+  loc: /laioutr-ui/ui-kit/form/pagination
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

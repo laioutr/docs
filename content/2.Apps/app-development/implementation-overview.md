@@ -4,6 +4,12 @@ description: What a connector app needs to implement for Laioutr and Laioutr UI 
 seo:
   title: Implementation Overview | Laioutr
   description: What a connector app needs to implement for Laioutr and Laioutr UI compatibility, and what existing connectors already…
+sitemap:
+  loc: /apps/app-development/implementation-overview
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 You're building a connector app that plugs a commerce backend into Laioutr. The canonical types in `@laioutr-core/canonical-types` define the full contract between your connector and the frontend. The [API reference](/frontend/api-reference) documents every action, query, link, and entity in detail. This page adds what the reference does not: which parts of that contract matter most, what constitutes a minimum viable connector, and how far existing connectors go.

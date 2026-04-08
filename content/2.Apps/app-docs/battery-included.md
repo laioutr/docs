@@ -4,6 +4,12 @@ description: Developer documentation for the Laioutr Battery Included app packag
 seo:
   title: Battery Included | Laioutr
   description: Developer documentation for the Laioutr Battery Included app package. Add search, suggested search, and product…
+sitemap:
+  loc: /apps/app-docs/battery-included
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

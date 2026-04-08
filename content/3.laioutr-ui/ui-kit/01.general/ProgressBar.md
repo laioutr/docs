@@ -10,6 +10,12 @@ links:
 seo:
   title: Progress Bar | Laioutr
   description: A progress indicator displaying task or operation completion status.
+sitemap:
+  loc: /laioutr-ui/ui-kit/general/progressbar
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

@@ -5,6 +5,12 @@ jiraIssueId: LUI-136
 seo:
   title: Input | Laioutr
   description: Styled text input for forms and search with optional icon or button addons and variant support.
+sitemap:
+  loc: /laioutr-ui/ui-kit/form/input
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

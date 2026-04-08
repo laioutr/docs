@@ -4,6 +4,12 @@ description: Laioutr's consent management abstraction gives you a single, provid
 seo:
   title: Consent Management | Laioutr
   description: Laioutr's consent management abstraction gives you a single, provider-agnostic API for cookie and consent state. Use…
+sitemap:
+  loc: /frontend/features/consent-management
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## What is the consent management abstraction?

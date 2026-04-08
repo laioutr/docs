@@ -4,6 +4,12 @@ description: The laioutr UI Kit uses a sophisticated variable architecture to ha
 seo:
   title: Theming | Laioutr
   description: The laioutr UI Kit uses a sophisticated variable architecture to handle themes. By leveraging Figma Variables, you can…
+sitemap:
+  loc: /laioutr-ui/getting-started/theming
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## How Themes Work

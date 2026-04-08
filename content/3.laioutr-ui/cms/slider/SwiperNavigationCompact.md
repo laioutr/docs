@@ -5,6 +5,12 @@ jiraIssueId: LUI-19
 seo:
   title: Swiper Navigation Compact | Laioutr
   description: A compact slider navigation component providing accessible arrow and bullet controls with dark/light mode support.
+sitemap:
+  loc: /laioutr-ui/cms/slider/swipernavigationcompact
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

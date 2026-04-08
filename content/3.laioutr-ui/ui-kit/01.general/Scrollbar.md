@@ -5,6 +5,12 @@ jiraIssueId: LUI-39
 seo:
   title: Scrollbar | Laioutr
   description: Proportional scrollbar indicator showing content visibility and scroll position, with optional Swiper integration.
+sitemap:
+  loc: /laioutr-ui/ui-kit/general/scrollbar
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

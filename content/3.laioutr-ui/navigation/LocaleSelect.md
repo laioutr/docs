@@ -4,6 +4,12 @@ description: A language switcher component
 seo:
   title: Locale Select | Laioutr
   description: A language switcher component
+sitemap:
+  loc: /laioutr-ui/navigation/localeselect
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

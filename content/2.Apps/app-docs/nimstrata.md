@@ -4,6 +4,12 @@ description: Developer documentation for the Laioutr Nimstrata app package. Add 
 seo:
   title: Nimstrata Google Retail API | Laioutr
   description: Developer documentation for the Laioutr Nimstrata app package. Add AI-powered search, recommendations, suggested…
+sitemap:
+  loc: /apps/app-docs/nimstrata
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

@@ -5,6 +5,12 @@ jiraIssueId: LUI-153
 seo:
   title: Review Section | Laioutr
   description: Product review section with rating summaries, sorting, filtering, and review management.
+sitemap:
+  loc: /laioutr-ui/cms/reviews/reviewsection
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

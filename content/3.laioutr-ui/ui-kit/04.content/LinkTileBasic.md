@@ -5,6 +5,12 @@ jiraIssueId: LUI-36
 seo:
   title: Link Tile Basic | Laioutr
   description: Classic category node element for promoting categories outside navigation.
+sitemap:
+  loc: /laioutr-ui/ui-kit/content/linktilebasic
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

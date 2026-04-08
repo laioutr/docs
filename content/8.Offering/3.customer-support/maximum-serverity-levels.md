@@ -5,6 +5,12 @@ links: []
 seo:
   title: Customer Support Severity Levels of Laioutr… | Laioutr
   description: The following table defines which of Laioutr's products and their components or features are supported at which…
+sitemap:
+  loc: /offering/customer-support/maximum-serverity-levels
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 The following table defines which of Laioutr's products and their components or features are supported at which maximum Support Severity Level.

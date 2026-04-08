@@ -10,6 +10,12 @@ links:
 seo:
   title: Breadcrumb | Laioutr
   description: Breadcrumb navigation displaying user location in site hierarchy with expandable dropdown menus for subcategory access.
+sitemap:
+  loc: /laioutr-ui/navigation/breadcrumb
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

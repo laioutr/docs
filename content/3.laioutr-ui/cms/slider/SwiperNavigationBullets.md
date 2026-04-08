@@ -5,6 +5,12 @@ links: []
 seo:
   title: Swiper Navigation with Bullets | Laioutr
   description: A swiper navigation bullets component
+sitemap:
+  loc: /laioutr-ui/cms/slider/swipernavigationbullets
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

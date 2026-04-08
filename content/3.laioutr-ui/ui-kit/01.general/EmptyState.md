@@ -10,6 +10,12 @@ links:
 seo:
   title: Empty State | Laioutr
   description: Empty state component for product listing pages with friendly messaging when no products are available.
+sitemap:
+  loc: /laioutr-ui/ui-kit/general/emptystate
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

@@ -5,6 +5,12 @@ jiraIssueId: LUI-121
 seo:
   title: Swatch Preview | Laioutr
   description: Utility component for rendering swatch previews including colors, gradients, and thumbnails.
+sitemap:
+  loc: /laioutr-ui/ui-kit/general/swatchpreview
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

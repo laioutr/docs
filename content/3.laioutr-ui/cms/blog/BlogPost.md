@@ -5,6 +5,12 @@ jiraIssueId: LUI-116
 seo:
   title: Blog Post | Laioutr
   description: Blog post page with rich content, social sharing, breadcrumbs, and related posts section.
+sitemap:
+  loc: /laioutr-ui/cms/blog/blogpost
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

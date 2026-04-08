@@ -5,6 +5,12 @@ links: []
 seo:
   title: Savings Badge | Laioutr
   description: A savings badge component
+sitemap:
+  loc: /laioutr-ui/ui-kit/indicators/savingsbadge
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

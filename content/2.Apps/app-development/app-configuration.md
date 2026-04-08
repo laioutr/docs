@@ -2,6 +2,12 @@
 title: App Configuration
 seo:
   title: App Configuration | Laioutr
+sitemap:
+  loc: /apps/app-development/app-configuration
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ##

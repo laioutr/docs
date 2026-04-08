@@ -5,6 +5,12 @@ jiraIssueId: LUI-44
 seo:
   title: Inpage Navigation Compact Slider | Laioutr
   description: Horizontal slider for compact category nodes with configurable navigation, scrollbar visibility, and optional CTA…
+sitemap:
+  loc: /laioutr-ui/shop/inpagenavigationcompactslider
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

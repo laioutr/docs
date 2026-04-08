@@ -10,6 +10,12 @@ links:
 seo:
   title: Quote Card | Laioutr
   description: Quote card component for displaying customer reviews and testimonials.
+sitemap:
+  loc: /laioutr-ui/cms/reviews/quotecard
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

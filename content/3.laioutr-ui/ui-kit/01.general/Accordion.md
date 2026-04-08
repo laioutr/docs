@@ -4,6 +4,12 @@ description: A group of togglable entries
 seo:
   title: Accordion | Laioutr
   description: A group of togglable entries
+sitemap:
+  loc: /laioutr-ui/ui-kit/general/accordion
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

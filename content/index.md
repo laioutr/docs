@@ -5,6 +5,12 @@ description: Laioutr is a Composable Frontend Management Platform in the Cloud t
 seo:
   title: Laioutr Docs | Laioutr
   description: Laioutr is a Composable Frontend Management Platform in the Cloud that consists of several features to help you create customizable eCommerce storefronts.
+sitemap:
+  loc: /
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ::docs-landing

@@ -4,6 +4,12 @@ description: Visually divides content sections, so that a clear visual hierarchy
 seo:
   title: Separator | Laioutr
   description: Visually divides content sections, so that a clear visual hierarchy is generated and improves content readability.
+sitemap:
+  loc: /laioutr-ui/ui-kit/layout/separator
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

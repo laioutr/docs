@@ -5,6 +5,12 @@ links: []
 seo:
   title: Badge | Laioutr
   description: Badges of different kind to be used for several purposes.
+sitemap:
+  loc: /laioutr-ui/ui-kit/indicators/badge
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

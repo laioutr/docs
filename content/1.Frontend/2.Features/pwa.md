@@ -4,6 +4,12 @@ description: Turn your Laioutr frontend into a Progressive Web App—installable
 seo:
   title: PWA | Laioutr
   description: Turn your Laioutr frontend into a Progressive Web App—installable on devices, with offline support and an app-like…
+sitemap:
+  loc: /frontend/features/pwa
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## What is PWA?

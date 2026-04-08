@@ -4,6 +4,12 @@ description: Integrate your own hosting solution into Laioutr by setting up a we
 seo:
   title: Webhook Configuration | Laioutr
   description: Integrate your own hosting solution into Laioutr by setting up a webhook. Cockpit calls this webhook for every…
+sitemap:
+  loc: /hosting/bring-your-own-server-byos/webhook-config
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 # General

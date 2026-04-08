@@ -10,6 +10,12 @@ links:
 seo:
   title: Personal Quote with Text and Image | Laioutr
   description: A testimonial component showcasing customer experiences with large profile pictures, quote text, personal details, and…
+sitemap:
+  loc: /laioutr-ui/cms/quotes/personalquote
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

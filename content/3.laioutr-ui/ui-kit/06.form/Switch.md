@@ -10,6 +10,12 @@ links:
 seo:
   title: Switch | Laioutr
   description: Toggle switch component for binary on/off choices in forms and settings.
+sitemap:
+  loc: /laioutr-ui/ui-kit/form/switch
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

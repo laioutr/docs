@@ -5,6 +5,12 @@ jiraIssueId: LUI-37
 seo:
   title: Inpage Navigation Basic Grid | Laioutr
   description: Flexible grid layout for displaying basic category nodes on entry pages with customizable alignment and headings.
+sitemap:
+  loc: /laioutr-ui/shop/inpagenavigationbasicgrid
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

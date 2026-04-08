@@ -10,6 +10,12 @@ links:
 seo:
   title: Button | Laioutr
   description: Interactive button component with multiple variants, sizes, and states for triggering actions.
+sitemap:
+  loc: /laioutr-ui/ui-kit/form/button
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

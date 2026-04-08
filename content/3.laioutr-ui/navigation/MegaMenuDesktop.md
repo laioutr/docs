@@ -10,6 +10,12 @@ links:
 seo:
   title: Mega Menu Desktop | Laioutr
   description: Desktop mega menu flyout displaying second/third navigation levels in multi-column masonry layout with promotional…
+sitemap:
+  loc: /laioutr-ui/navigation/megamenudesktop
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

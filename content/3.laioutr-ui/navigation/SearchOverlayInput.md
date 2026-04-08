@@ -10,6 +10,12 @@ links:
 seo:
   title: Search Overlay Input | Laioutr
   description: Responsive search overlay with real-time autocomplete suggestions and smooth animations.
+sitemap:
+  loc: /laioutr-ui/navigation/searchoverlayinput
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

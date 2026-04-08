@@ -10,6 +10,12 @@ jiraIssueId: LUI-3
 seo:
   title: Pricing Plans | Laioutr
   description: A responsive pricing grid arranging plan cards side-by-side on desktop with mobile swipe carousel.
+sitemap:
+  loc: /laioutr-ui/saas/pricingplans
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

@@ -4,6 +4,12 @@ description: To successfully host a Laioutr frontend on your own infrastructure,
 seo:
   title: Infrastructure Requirements | Laioutr
   description: To successfully host a Laioutr frontend on your own infrastructure, you'll need to provision the required components.
+sitemap:
+  loc: /hosting/bring-your-own-server-byos/infrastructure
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 

@@ -5,6 +5,12 @@ jiraIssueId: LUI-18
 seo:
   title: CTA Banner Basic | Laioutr
   description: A foundational call-to-action banner with background imagery, headline, subline, and configurable action button.
+sitemap:
+  loc: /laioutr-ui/ui-kit/content/ctabannerbasic
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

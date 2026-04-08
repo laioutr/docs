@@ -4,6 +4,12 @@ description: Control how search engines and crawlers interact with your Laioutr 
 seo:
   title: Robots.txt | Laioutr
   description: Control how search engines and crawlers interact with your Laioutr frontend using robots.txt, meta tags, and…
+sitemap:
+  loc: /frontend/seo/robots-txt
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## What is robots.txt?

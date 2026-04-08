@@ -5,6 +5,12 @@ links: []
 seo:
   title: Thumbnail | Laioutr
   description: A thumbnail component
+sitemap:
+  loc: /laioutr-ui/ui-kit/general/thumbnail
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

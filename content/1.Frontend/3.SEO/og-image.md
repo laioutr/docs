@@ -4,6 +4,12 @@ description: Generate social media preview images (og:image) for your Laioutr fr
 seo:
   title: OG Image | Laioutr
   description: Generate social media preview images (og:image) for your Laioutr frontend using Vue templates. Create dynamic, branded…
+sitemap:
+  loc: /frontend/seo/og-image
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

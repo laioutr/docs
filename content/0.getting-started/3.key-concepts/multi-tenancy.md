@@ -4,6 +4,12 @@ description: How to structure multiple storefronts, brands, or regions in Laiout
 seo:
   title: Multi-tenancy | Laioutr
   description: How to structure multiple storefronts, brands, or regions in Laioutr — single project with rule engine vs. multiple…
+sitemap:
+  loc: /getting-started/key-concepts/multi-tenancy
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Running multiple storefronts

@@ -4,6 +4,12 @@ description: Laioutr’s tracking abstraction gives you a single API to send ana
 seo:
   title: Tracking | Laioutr
   description: Laioutr’s tracking abstraction gives you a single API to send analytics and marketing events. Use one or more tracking…
+sitemap:
+  loc: /frontend/features/tracking
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## What is the tracking abstraction?

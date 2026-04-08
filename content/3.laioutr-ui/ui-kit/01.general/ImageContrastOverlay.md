@@ -5,6 +5,12 @@ jiraIssueId: LUI-22
 seo:
   title: Image Contrast Overlay | Laioutr
   description: A utility component that enhances text readability over images through customizable gradient or solid color overlays…
+sitemap:
+  loc: /laioutr-ui/ui-kit/general/imagecontrastoverlay
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

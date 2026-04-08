@@ -5,6 +5,12 @@ links: []
 seo:
   title: Queries & Links | Laioutr
   description: Queries fetch entities by input (e.g. a slug or search term). Links resolve relationships between entities (e.g.…
+sitemap:
+  loc: /frontend/orchestr/queries
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 A product page needs to load a product by its URL slug. A category page needs to list products belonging to that category. A cart needs to show the items it contains. **Queries** and **links** are how you teach Orchestr to fetch this data from your backend.

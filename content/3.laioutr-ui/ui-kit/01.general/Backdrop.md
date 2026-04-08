@@ -5,6 +5,12 @@ links: []
 seo:
   title: Backdrop | Laioutr
   description: A backdrop component
+sitemap:
+  loc: /laioutr-ui/ui-kit/general/backdrop
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

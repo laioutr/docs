@@ -5,6 +5,12 @@ links: []
 seo:
   title: Radio Group | Laioutr
   description: A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.
+sitemap:
+  loc: /laioutr-ui/ui-kit/form/radioselect
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

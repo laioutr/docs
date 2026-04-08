@@ -5,6 +5,12 @@ jiraIssueId: LUI-218
 seo:
   title: Content with Image and Text | Laioutr
   description: Responsive section combining large images or videos with content in flexible proportions.
+sitemap:
+  loc: /laioutr-ui/cms/banner/contentwithimageandtext
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

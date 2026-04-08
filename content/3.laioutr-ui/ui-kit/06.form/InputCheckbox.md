@@ -5,6 +5,12 @@ links: []
 seo:
   title: Input Checkbox | Laioutr
   description: A control that allows the user to toggle between checked and not checked.
+sitemap:
+  loc: /laioutr-ui/ui-kit/form/inputcheckbox
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

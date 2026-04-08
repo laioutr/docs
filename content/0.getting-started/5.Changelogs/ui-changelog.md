@@ -4,6 +4,12 @@ description: Changelog for Laioutr UI and UI Kit following Keep a Changelog and 
 seo:
   title: UI Changelog | Laioutr
   description: Changelog for Laioutr UI and UI Kit following Keep a Changelog and Semantic Versioning.
+sitemap:
+  loc: /getting-started/changelogs/ui-changelog
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 All notable changes to **Laioutr UI**, **UI Kit**, and related component libraries will be documented in this file.

@@ -5,6 +5,12 @@ links: []
 seo:
   title: Currencies | Laioutr
   description: Laioutr uses one currency per market. Developers access it via useCurrency() and format prices with the $money…
+sitemap:
+  loc: /frontend/features/currencies
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Part 1 — For business and content users

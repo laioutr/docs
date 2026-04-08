@@ -5,6 +5,12 @@ jiraIssueId: LUI-46
 seo:
   title: Inpage Navigation Big Grid | Laioutr
   description: High-impact grid layout for large category nodes with independent node color modes and multiple format variants.
+sitemap:
+  loc: /laioutr-ui/shop/inpagenavigationbiggrid
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

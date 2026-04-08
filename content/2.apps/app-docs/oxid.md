@@ -4,6 +4,12 @@ description: Developer documentation for the Laioutr OXID app package. Connect y
 seo:
   title: OXID eShop | Laioutr
   description: Developer documentation for the Laioutr OXID app package. Connect your Nuxt frontend to OXID eShop via the GraphQL API…
+sitemap:
+  loc: /apps/app-docs/oxid
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

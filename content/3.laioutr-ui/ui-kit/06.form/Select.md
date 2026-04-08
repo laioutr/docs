@@ -10,6 +10,12 @@ links:
 seo:
   title: Select | Laioutr
   description: A dropdown select component for choosing a single option from a list.
+sitemap:
+  loc: /laioutr-ui/ui-kit/form/select
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

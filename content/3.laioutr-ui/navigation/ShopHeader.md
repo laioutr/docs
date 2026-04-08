@@ -10,6 +10,12 @@ links:
 seo:
   title: Shop Header | Laioutr
   description: E-commerce header with mega menus, cart, search, and account functionality.
+sitemap:
+  loc: /laioutr-ui/navigation/shopheader
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

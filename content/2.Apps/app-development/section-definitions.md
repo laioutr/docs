@@ -4,6 +4,12 @@ description: How to create and register section definitions that appear in Laiou
 seo:
   title: Section Definitions | Laioutr
   description: How to create and register section definitions that appear in Laioutr Studio.
+sitemap:
+  loc: /apps/app-development/section-definitions
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 You have a Laioutr app and you want editors to place a new section on pages through Studio. Every section starts with a **definition**: a TypeScript object that declares the component name, Studio metadata, configurable fields, and slots for blocks.

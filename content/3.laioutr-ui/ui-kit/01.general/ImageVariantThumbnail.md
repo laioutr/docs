@@ -5,6 +5,12 @@ links: []
 seo:
   title: Image Variant Thumbnail | Laioutr
   description: A selectable image variant thumbnail component
+sitemap:
+  loc: /laioutr-ui/ui-kit/general/imagevariantthumbnail
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

@@ -5,6 +5,12 @@ links: []
 seo:
   title: Caption Flag | Laioutr
   description: A caption flag component
+sitemap:
+  loc: /laioutr-ui/ui-kit/indicators/captionflag
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

@@ -4,6 +4,12 @@ description: Developer documentation for the Laioutr Shopware app package. Conne
 seo:
   title: Shopware | Laioutr
   description: Developer documentation for the Laioutr Shopware app package. Connect your Nuxt frontend to a Shopware backend via the…
+sitemap:
+  loc: /apps/app-docs/shopware
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

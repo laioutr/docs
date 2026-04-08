@@ -5,6 +5,12 @@ links: []
 seo:
   title: Link | Laioutr
   description: A link component
+sitemap:
+  loc: /laioutr-ui/ui-kit/typography/link
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

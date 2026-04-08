@@ -4,6 +4,12 @@ description: Automatically scan your Laioutr frontend for broken links and SEO i
 seo:
   title: Link Checker | Laioutr
   description: Automatically scan your Laioutr frontend for broken links and SEO issues during development and build time.
+sitemap:
+  loc: /frontend/seo/link-checker
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

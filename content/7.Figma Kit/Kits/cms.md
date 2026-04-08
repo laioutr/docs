@@ -4,6 +4,12 @@ description: Content-focused sections for marketing pages, editorial layouts, an
 seo:
   title: CMS | Laioutr
   description: Content-focused sections for marketing pages, editorial layouts, and rich storytelling blocks.
+sitemap:
+  loc: /figma-kit/kits/cms
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Purpose

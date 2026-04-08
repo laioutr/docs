@@ -4,6 +4,12 @@ description: Changelog for the Laioutr CLI following Keep a Changelog and Semant
 seo:
   title: CLI Changelog | Laioutr
   description: Changelog for the Laioutr CLI following Keep a Changelog and Semantic Versioning.
+sitemap:
+  loc: /getting-started/changelogs/cli-changelog
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 All notable changes to the **Laioutr CLI** (the `laioutr` command-line tool) will be documented in this file.

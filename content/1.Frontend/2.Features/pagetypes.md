@@ -4,6 +4,12 @@ description: Page types define the kinds of pages customers can add in Studio (H
 seo:
   title: Page Types | Laioutr
   description: Page types define the kinds of pages customers can add in Studio (Home, Product Detail, Landing Page, etc.) and…
+sitemap:
+  loc: /frontend/features/pagetypes
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ::callout{icon="i-lucide-list"}

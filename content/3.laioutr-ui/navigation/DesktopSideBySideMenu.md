@@ -10,6 +10,12 @@ links:
 seo:
   title: Desktop Side By Side Menu | Laioutr
   description: A desktop navigation menu that slides in from the left as an off-canvas panel, displaying hierarchical category…
+sitemap:
+  loc: /laioutr-ui/navigation/desktopsidebysidemenu
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

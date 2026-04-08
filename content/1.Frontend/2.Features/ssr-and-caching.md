@@ -4,6 +4,12 @@ description: How the Laioutr frontend uses SSR, how to enable CDN caching with r
 seo:
   title: Server-Side Rendering (SSR) and Caching | Laioutr
   description: How the Laioutr frontend uses SSR, how to enable CDN caching with route rules, and how to handle multi-market setups…
+sitemap:
+  loc: /frontend/features/ssr-and-caching
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 The Laioutr frontend is a Nuxt 3 app with **SSR enabled by default** and **no HTTP caching configured out of the box**. The server renders HTML for every request, hydrates on the client, and you opt in to CDN caching by adding route rules.

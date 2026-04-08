@@ -4,6 +4,12 @@ description: Changelog for the Laioutr Cockpit (Studio) product following Keep a
 seo:
   title: Cockpit Changelog | Laioutr
   description: Changelog for the Laioutr Cockpit (Studio) product following Keep a Changelog and Semantic Versioning.
+sitemap:
+  loc: /getting-started/changelogs/cockpit-changelog
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.

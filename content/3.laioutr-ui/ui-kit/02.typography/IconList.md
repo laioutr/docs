@@ -5,6 +5,12 @@ links: []
 seo:
   title: Icon List | Laioutr
   description: A icon list component
+sitemap:
+  loc: /laioutr-ui/ui-kit/typography/iconlist
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview
