@@ -87,6 +87,12 @@ export default defineNuxtConfig({
       { title: 'Checkout', contentCollection: 'docs', contentFilters: [{ field: 'path', operator: 'LIKE', value: '/checkout%' }] },
       { title: 'Larry AI', contentCollection: 'docs', contentFilters: [{ field: 'path', operator: 'LIKE', value: '/larry-ai%' }] },
       {
+        title: 'Cockpit',
+        description: 'End-user guide to the Laioutr Cockpit (deployments, Studio, settings, account).',
+        contentCollection: 'docs',
+        contentFilters: [{ field: 'path', operator: 'LIKE', value: '/cockpit%' }],
+      },
+      {
         title: 'Offering',
         description: 'Products, SLA, customer support, and compliance.',
         contentCollection: 'docs',
@@ -104,6 +110,7 @@ export default defineNuxtConfig({
           { field: 'path', operator: 'NOT LIKE', value: '/hosting%' },
           { field: 'path', operator: 'NOT LIKE', value: '/checkout%' },
           { field: 'path', operator: 'NOT LIKE', value: '/larry-ai%' },
+          { field: 'path', operator: 'NOT LIKE', value: '/cockpit%' },
           { field: 'path', operator: 'NOT LIKE', value: '/offering%' },
         ],
       },

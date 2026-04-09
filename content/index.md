@@ -127,6 +127,15 @@ Your AI co-pilot for storefront management: generate, edit, and optimize without
 
 ::::card
 ---
+title: Cockpit
+icon: i-lucide-layout-dashboard
+to: /cockpit/
+---
+Operate your projects in the web app: deployments, Apps, Studio, project settings, and your account preferences.
+::::
+
+::::card
+---
 title: Offering
 icon: i-lucide-shield-check
 to: /offering/
