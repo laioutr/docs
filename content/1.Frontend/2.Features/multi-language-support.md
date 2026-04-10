@@ -71,7 +71,7 @@ Available in any template: `{{ $money(price) }}`. See [Currencies](/frontend/fea
 
 ### Language switcher
 
-Frontend Core provides `linkResolver` (auto-imported) for building language and market switchers:
+Frontend Core provides `linkResolver` (auto-imported) for building language and market switchers. You can override the resolution logic with [Link Resolver hooks](/frontend/features/hooks#link-resolver).
 
 **`linkResolver.switchLocalePath()`** switches language **within the same market**:
 

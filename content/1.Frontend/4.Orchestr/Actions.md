@@ -63,7 +63,7 @@ Technically, each registered action acts as an http POST handler on the server. 
 
 The action response is encoded as a [turbo-stream](https://github.com/jacob-ebey/turbo-stream) response, which is a superset of JSON. This means that any data-type supported by turbo-stream can be returned. This includes regular objects and arrays but also Dates, Maps, Sets, etc.
 
-Additionally, the client will add the `clientEnv` to the request. This is an object which contains information about the client environment (like his locale or currency) to the action-handler.
+The client adds `clientEnv` to every request. This object contains information about the client environment (like locale or currency). You can modify it with the [`orchestr:client-env:modify` hook](/frontend/features/hooks#client-environment).
 
 ```typescript [server/orchestr/newsletter/subscribe.ts] twoslash
 import { defineActionHandlerMock as defineActionHandler } from '@laioutr-core/orchestr/types';
@@ -157,7 +157,7 @@ export class CustomGeneralError extends BaseError {
 
 ## Frontend Usage
 
-Actions can be called from the frontend using the `useQueryAction` or `useMutationAction` composables. These use [pinia-colada](https://pinia-colada.esm.dev/) under the hood.
+Actions can be called from the frontend using the `useQueryAction` or `useMutationAction` composables. These use [pinia-colada](https://pinia-colada.esm.dev/) under the hood. You can observe and react to their lifecycle using [Nuxt runtime hooks](/frontend/features/hooks#orchestr-client-hooks).
 
 ### Query
 
