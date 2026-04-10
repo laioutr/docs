@@ -98,6 +98,49 @@ const sections = [
     ],
   },
   {
+    label: 'Typography',
+    icons: [
+      { name: 'heading', icon: 'lucide:heading' },
+      { name: 'heading1', icon: 'lucide:heading-1' },
+      { name: 'heading2', icon: 'lucide:heading-2' },
+      { name: 'heading3', icon: 'lucide:heading-3' },
+      { name: 'heading4', icon: 'lucide:heading-4' },
+      { name: 'heading5', icon: 'lucide:heading-5' },
+      { name: 'heading6', icon: 'lucide:heading-6' },
+      { name: 'bold', icon: 'lucide:bold' },
+      { name: 'italic', icon: 'lucide:italic' },
+      { name: 'caseLower', icon: 'lucide:case-lower' },
+      { name: 'caseUpper', icon: 'lucide:case-upper' },
+      { name: 'caseSensitive', icon: 'lucide:case-sensitive' },
+    ],
+  },
+  {
+    label: 'Columns & Rows',
+    icons: [
+      { name: 'columns2', icon: 'lucide:columns-2' },
+      { name: 'columns3', icon: 'lucide:columns-3' },
+      { name: 'columns4', icon: 'lucide:columns-4' },
+      { name: 'rows2', icon: 'lucide:rows-2' },
+      { name: 'rows3', icon: 'lucide:rows-3' },
+      { name: 'rows4', icon: 'lucide:rows-4' },
+    ],
+  },
+  {
+    label: 'Aspect Ratio & Crop',
+    icons: [
+      { name: 'aspectRatio', icon: 'tabler:aspect-ratio' },
+      { name: 'imageCover', icon: 'lucide:crop', hint: 'Cover / fill' },
+      { name: 'ratio1x1', icon: 'tabler:crop-1-1' },
+      { name: 'ratio16x9', icon: 'tabler:crop-16-9' },
+      { name: 'ratio3x2', icon: 'tabler:crop-3-2' },
+      { name: 'ratio5x4', icon: 'tabler:crop-5-4' },
+      { name: 'ratio7x5', icon: 'tabler:crop-7-5' },
+      { name: 'ratioLandscape', icon: 'tabler:crop-landscape' },
+      { name: 'ratioPortrait', icon: 'tabler:crop-portrait' },
+      { name: 'imageContain', icon: 'lucide:scan', hint: 'Fit / contain' },
+    ],
+  },
+  {
     label: 'Box Styles',
     icons: [
       { name: 'boxGradient', icon: 'material-symbols:gradient' },
@@ -123,6 +166,15 @@ const sections = [
       { name: 'borderOuter', icon: 'tabler:border-outer' },
       { name: 'borderHorizontal', icon: 'tabler:border-horizontal' },
       { name: 'borderVertical', icon: 'tabler:border-vertical' },
+    ],
+  },
+  {
+    label: 'Corner Radius',
+    icons: [
+      { name: 'cornerSquare', icon: 'tabler:border-corner-square' },
+      { name: 'cornerRounded', icon: 'tabler:border-corner-rounded' },
+      { name: 'cornerPill', icon: 'tabler:border-corner-pill' },
+      { name: 'corners', icon: 'tabler:border-corners' },
     ],
   },
 ];
