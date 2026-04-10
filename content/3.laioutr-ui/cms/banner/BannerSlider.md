@@ -4,6 +4,12 @@ description: Banners are components that deliver main image and content in vario
 seo:
   title: Banner Slider | Laioutr
   description: Banners are components that deliver main image and content in various configurations.
+sitemap:
+  loc: /laioutr-ui/cms/banner/bannerslider
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

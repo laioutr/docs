@@ -5,6 +5,12 @@ jiraIssueId: LUI-215
 seo:
   title: Logo Slider | Laioutr
   description: Logo presentation section displaying brand logos as grid or slider.
+sitemap:
+  loc: /laioutr-ui/cms/slider/logoslider
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

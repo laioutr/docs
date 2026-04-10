@@ -10,6 +10,12 @@ links:
 seo:
   title: Dropdown Menu | Laioutr
   description: Dropdown menu component with custom trigger, selectable items, and active selection indicator.
+sitemap:
+  loc: /laioutr-ui/ui-kit/general/dropdownmenu
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

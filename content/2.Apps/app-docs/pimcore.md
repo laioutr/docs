@@ -4,6 +4,12 @@ description: Developer documentation for the Laioutr Pimcore app. Connect your L
 seo:
   title: Pimcore | Laioutr
   description: Developer documentation for the Laioutr Pimcore app. Connect your Laioutr-powered Nuxt app to Pimcore and fetch data…
+sitemap:
+  loc: /apps/app-docs/pimcore
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

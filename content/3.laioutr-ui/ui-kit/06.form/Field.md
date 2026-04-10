@@ -10,6 +10,12 @@ links:
 seo:
   title: Field | Laioutr
   description: Form field wrapper providing label, help text, and validation message around an input control.
+sitemap:
+  loc: /laioutr-ui/ui-kit/form/field
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

@@ -2,11 +2,21 @@ import { withoutTrailingSlash } from 'ufo';
 
 export default defineNuxtConfig({
   extends: ['docus'],
+  app: {
+    head: {
+      meta: [
+        { name: 'google-site-verification', content: 'qwFXebMaXjyk7RdnQpI5g2nft5v4CnxXKgkNEF7Y2Lo' },
+      ],
+    },
+  },
   modules: [
     /* 'nuxt-content-twoslash', */
     'nuxt-studio',
     '@vueuse/nuxt',
     '@nuxtjs/sitemap',
+    '@nuxtjs/robots',
+    // Ensure module order: sitemap must load before content (esp. when using `extends`)
+    '@nuxt/content',
   ],
   css: ['~/assets/css/main.css'],
 
@@ -25,6 +35,18 @@ export default defineNuxtConfig({
     name: 'Laioutr Docs',
     // Required for @nuxtjs/sitemap absolute <loc> URLs. Override per env (e.g. Cloudflare build: NUXT_SITE_URL).
     url: process.env.NUXT_SITE_URL || 'https://docs.laioutr.io',
+    indexable: process.env.NODE_ENV === 'production',
+  },
+
+  sitemap: {
+    sources: ['/__sitemap__/nuxt-content-urls.json'],
+  },
+
+  robots: {
+    groups: process.env.NODE_ENV === 'production'
+      ? [{ userAgent: ['*'], allow: ['/'] }]
+      : [{ userAgent: ['*'], disallow: ['/'] }],
+    sitemap: ['/sitemap.xml'],
   },
 
   llms: {
@@ -65,6 +87,12 @@ export default defineNuxtConfig({
       { title: 'Checkout', contentCollection: 'docs', contentFilters: [{ field: 'path', operator: 'LIKE', value: '/checkout%' }] },
       { title: 'Larry AI', contentCollection: 'docs', contentFilters: [{ field: 'path', operator: 'LIKE', value: '/larry-ai%' }] },
       {
+        title: 'Cockpit',
+        description: 'End-user guide to the Laioutr Cockpit (deployments, Studio, settings, account).',
+        contentCollection: 'docs',
+        contentFilters: [{ field: 'path', operator: 'LIKE', value: '/cockpit%' }],
+      },
+      {
         title: 'Offering',
         description: 'Products, SLA, customer support, and compliance.',
         contentCollection: 'docs',
@@ -82,6 +110,7 @@ export default defineNuxtConfig({
           { field: 'path', operator: 'NOT LIKE', value: '/hosting%' },
           { field: 'path', operator: 'NOT LIKE', value: '/checkout%' },
           { field: 'path', operator: 'NOT LIKE', value: '/larry-ai%' },
+          { field: 'path', operator: 'NOT LIKE', value: '/cockpit%' },
           { field: 'path', operator: 'NOT LIKE', value: '/offering%' },
         ],
       },

@@ -4,6 +4,12 @@ description: A navigation menu component
 seo:
   title: Header with Text Links | Laioutr
   description: A navigation menu component
+sitemap:
+  loc: /laioutr-ui/navigation/headerwithtextlinks
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

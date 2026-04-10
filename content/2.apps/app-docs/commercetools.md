@@ -4,6 +4,12 @@ description: Developer documentation for the Laioutr Commercetools app package. 
 seo:
   title: Commercetools | Laioutr
   description: Developer documentation for the Laioutr Commercetools app package. Connect your Nuxt frontend to Commercetools via the…
+sitemap:
+  loc: /apps/app-docs/commercetools
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

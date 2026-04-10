@@ -4,14 +4,25 @@ description: Changelog for the Laioutr Cockpit (Studio) product following Keep a
 seo:
   title: Cockpit Changelog | Laioutr
   description: Changelog for the Laioutr Cockpit (Studio) product following Keep a Changelog and Semantic Versioning.
+sitemap:
+  loc: /getting-started/changelogs/cockpit-changelog
+  lastmod: 2026-04-10
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
 ## [2026-04]
 
+### Added
+
+- **Hosting**: Deployment detail page now auto-refreshes and auto-scrolls to the latest build log entries.
+
 ### Fixed
 
+- **Hosting**: Fixed broken snackbar link after triggering a deployment from Studio.
 - **Studio**: Fixed duplicate sections appearing in the section list.
 - **Studio**: Improved search in the Studio section/block picker.
 - **Studio**: Hidden the localized field indicator when the project has only a single language configured.

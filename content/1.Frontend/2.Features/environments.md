@@ -4,6 +4,12 @@ description: How to preview changes before going live, using Vercel preview depl
 seo:
   title: Environments & Staging | Laioutr
   description: How to preview changes before going live, using Vercel preview deployments and workarounds for environment-specific…
+sitemap:
+  loc: /frontend/features/environments
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Previewing before you go live

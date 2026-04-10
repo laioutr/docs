@@ -10,6 +10,12 @@ links:
 seo:
   title: Category Node Flag | Laioutr
   description: Promotional badge component for category navigation with themed variants.
+sitemap:
+  loc: /laioutr-ui/ui-kit/indicators/categorynodeflag
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

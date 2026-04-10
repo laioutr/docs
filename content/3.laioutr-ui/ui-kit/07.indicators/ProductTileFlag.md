@@ -10,6 +10,12 @@ links:
 seo:
   title: Product Tile Flag | Laioutr
   description: A visual flag component for product tiles highlighting promotional labels like sale, promo, or new items.
+sitemap:
+  loc: /laioutr-ui/ui-kit/indicators/producttileflag
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

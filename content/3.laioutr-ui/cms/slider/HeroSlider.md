@@ -5,6 +5,12 @@ jiraIssueId: LUI-11
 seo:
   title: Hero Slider | Laioutr
   description: A flexible hero component serving as static hero section or interactive slider with full-width backgrounds.
+sitemap:
+  loc: /laioutr-ui/cms/slider/heroslider
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

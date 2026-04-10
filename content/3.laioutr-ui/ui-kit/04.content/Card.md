@@ -5,6 +5,12 @@ jiraIssueId: LUI-253
 seo:
   title: Card | Laioutr
   description: Flexible content card block with multiple styles and media support.
+sitemap:
+  loc: /laioutr-ui/ui-kit/content/card
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

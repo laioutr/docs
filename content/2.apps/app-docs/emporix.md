@@ -4,6 +4,12 @@ description: Developer documentation for the Laioutr Emporix app package. Connec
 seo:
   title: Emporix | Laioutr
   description: Developer documentation for the Laioutr Emporix app package. Connect your Nuxt frontend to Emporix via the Emporix API…
+sitemap:
+  loc: /apps/app-docs/emporix
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

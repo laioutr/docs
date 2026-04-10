@@ -5,6 +5,12 @@ jiraIssueId: LUI-28
 seo:
   title: Media | Laioutr
   description: A responsive image block component with optional lightbox functionality, customizable aspect ratios, and…
+sitemap:
+  loc: /laioutr-ui/ui-kit/general/media
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

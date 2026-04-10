@@ -10,6 +10,12 @@ links:
 seo:
   title: Product Slider | Laioutr
   description: Practical product slider section for presenting collections with navigation and scrollbar options.
+sitemap:
+  loc: /laioutr-ui/shop/productslider
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

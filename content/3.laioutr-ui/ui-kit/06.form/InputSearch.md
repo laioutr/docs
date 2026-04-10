@@ -10,6 +10,12 @@ links:
 seo:
   title: Search Input | Laioutr
   description: A search input component for site navigation enabling real-time product discovery with auto-suggestions across all…
+sitemap:
+  loc: /laioutr-ui/ui-kit/form/inputsearch
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

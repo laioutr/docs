@@ -4,6 +4,12 @@ description: Developer documentation for the Laioutr Adobe Commerce app package.
 seo:
   title: Adobe Commerce | Laioutr
   description: Developer documentation for the Laioutr Adobe Commerce app package. Connect your Nuxt frontend to Adobe Commerce…
+sitemap:
+  loc: /apps/app-docs/adobe-commerce
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

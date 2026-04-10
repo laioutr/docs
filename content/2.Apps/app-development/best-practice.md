@@ -4,6 +4,12 @@ description: Best practices for developing Laioutr apps.
 seo:
   title: Best Practice | Laioutr
   description: Best practices for developing Laioutr apps.
+sitemap:
+  loc: /apps/app-development/best-practice
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

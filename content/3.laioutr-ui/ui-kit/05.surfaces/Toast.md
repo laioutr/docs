@@ -10,6 +10,12 @@ links:
 seo:
   title: Toast | Laioutr
   description: Non-intrusive toast notification component for displaying transient messages with auto-dismiss and queue management.
+sitemap:
+  loc: /laioutr-ui/ui-kit/surfaces/toast
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

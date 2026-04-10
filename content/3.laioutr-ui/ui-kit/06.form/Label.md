@@ -5,6 +5,12 @@ jiraIssueId: LUI-91
 seo:
   title: Label | Laioutr
   description: Form label component with optional required indicator, linked to a control for accessibility.
+sitemap:
+  loc: /laioutr-ui/ui-kit/form/label
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

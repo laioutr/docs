@@ -4,6 +4,12 @@ description: Changelog for @laioutr-core/orchestr following Keep a Changelog and
 seo:
   title: Orchestr Changelog | Laioutr
   description: Changelog for @laioutr-core/orchestr following Keep a Changelog and Semantic Versioning.
+sitemap:
+  loc: /getting-started/changelogs/orchestr-changelog
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data-fetching and query orchestration layer, will be documented in this file.

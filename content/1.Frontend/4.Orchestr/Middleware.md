@@ -4,6 +4,12 @@ description: Extend Orchestr handlers with shared context, API clients, and cros
 seo:
   title: Middleware | Laioutr
   description: Extend Orchestr handlers with shared context, API clients, and cross-cutting logic using extendRequest and use.
+sitemap:
+  loc: /frontend/orchestr/middleware
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 Your connector app needs an API client available in every handler — actions, queries, links, and component resolvers. Instead of creating a client in each handler, Orchestr lets you set up shared context once and pass it through to all handlers automatically.

@@ -4,6 +4,12 @@ description: Developer documentation for the Laioutr GTM app package. Add Google
 seo:
   title: Google Tag Manager (GTM) | Laioutr
   description: Developer documentation for the Laioutr GTM app package. Add Google Tag Manager to your Nuxt app with consent…
+sitemap:
+  loc: /apps/app-docs/gtm
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

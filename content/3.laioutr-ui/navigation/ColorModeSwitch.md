@@ -4,6 +4,12 @@ description: A dark mode switch component
 seo:
   title: Color Mode Switch | Laioutr
   description: A dark mode switch component
+sitemap:
+  loc: /laioutr-ui/navigation/colormodeswitch
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

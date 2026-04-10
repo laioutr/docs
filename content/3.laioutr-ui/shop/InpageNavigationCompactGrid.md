@@ -5,6 +5,12 @@ jiraIssueId: LUI-43
 seo:
   title: Inpage Navigation Compact Grid | Laioutr
   description: Space-efficient grid layout for compact category nodes on listing pages.
+sitemap:
+  loc: /laioutr-ui/shop/inpagenavigationcompactgrid
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

@@ -10,6 +10,12 @@ links:
 seo:
   title: Product Card | Laioutr
   description: Versatile product tile for grids and sliders with pricing and cart.
+sitemap:
+  loc: /laioutr-ui/shop/productcard
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

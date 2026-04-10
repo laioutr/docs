@@ -2,6 +2,12 @@
 title: Figma Kit
 seo:
   title: Figma Kit | Laioutr
+sitemap:
+  loc: /laioutr-ui/getting-started/figma-kit
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview
@@ -11,24 +17,3 @@ The Laioutr Figma UI Kit is a professional-grade design system mirrored 1:1 in L
 For the full documentation (library structure, variables, component features, best practices), see the dedicated section:
 
 - [Figma Kit](/figma-kit)
-
-## Getting Started
-
-Use this page as a quick starting point for setting up the libraries in your Figma workspace.
-
-1. **Create a New Project:** In your Figma team, create a new, empty project (e.g., named "Laioutr Design System"). This keeps all four library files in one central location.
-2. **Import the .fig Files:** Drag and drop the four provided .fig files into this new project.
-3. **Publish the Core Kit First:** Open the Laioutr UI Kit file and click the "Publish" button. This file contains the global variables (tokens) that the other libraries rely on
-4. **Publish Specialized Libraries:** Open the SHOP, CMS, and Inpage Navigation files one by one and publish them.
-
-::tip
-**Note on Library Connections:** If the specialized libraries do not automatically recognize your newly published Core Kit (e.g., variables appear missing or unlinked), you can manually re-establish the connection using Figma's Swap library function:
-
-- Open the Assets tab (Alt + 2) within the specialized file (e.g., SHOP Components).
-- Click the Library icon (the book symbol) and locate the original library reference that needs to be replaced.
-- Select "Swap library", choose your newly published Laioutr UI Kit from the dropdown, and click Swap library.
-- Figma will automatically reconnect all components and variables based on name matches.
-::
-
-5. **Enable for Your Design File:** In your actual design project, open the "Assets" panel, click the library icon, and enable all four laioutr libraries.
-6. **Apply Your Theme:** Select a Frame or Page and use the Variable icon in the right sidebar (under "Layer" or "Selection colors") to toggle between the 4 Theme Modes or switch between Mobile/Desktop views.

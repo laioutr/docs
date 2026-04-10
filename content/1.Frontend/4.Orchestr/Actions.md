@@ -4,6 +4,12 @@ description: Understanding the basics of Orchestr actions
 seo:
   title: Actions | Laioutr
   description: Understanding the basics of Orchestr actions
+sitemap:
+  loc: /frontend/orchestr/actions
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 Orchestr actions are the core building blocks for interacting with external services. They can be used to subscribe to newsletters, create orders, or any other action that requires interaction with an external service.

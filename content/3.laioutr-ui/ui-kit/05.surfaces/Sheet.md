@@ -10,6 +10,12 @@ links:
 seo:
   title: Sheet | Laioutr
   description: Slide-in panel surface for overlaying content such as carts, filters, or detail views without leaving the page.
+sitemap:
+  loc: /laioutr-ui/ui-kit/surfaces/sheet
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

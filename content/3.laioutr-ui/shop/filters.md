@@ -5,6 +5,12 @@ links: []
 seo:
   title: Filters | Laioutr
   description: Product filters are a valuable tool for online shoppers to quickly and easily find the products they are looking for…
+sitemap:
+  loc: /laioutr-ui/shop/filters
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

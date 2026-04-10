@@ -4,6 +4,12 @@ description: A navigation bullets component
 seo:
   title: Navigation Bullets | Laioutr
   description: A navigation bullets component
+sitemap:
+  loc: /laioutr-ui/ui-kit/general/navigationbullets
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

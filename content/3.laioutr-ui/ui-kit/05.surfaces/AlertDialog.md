@@ -10,6 +10,12 @@ links:
 seo:
   title: Alert Dialog | Laioutr
   description: Modal dialog for confirming critical actions with focus trap and keyboard navigation.
+sitemap:
+  loc: /laioutr-ui/ui-kit/surfaces/alertdialog
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

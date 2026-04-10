@@ -5,6 +5,12 @@ jiraIssueId: LUI-20
 seo:
   title: CTA Banner Integrated | Laioutr
   description: A space-efficient call-to-action banner with icons, inline links, and compact sizing for content-heavy layouts.
+sitemap:
+  loc: /laioutr-ui/ui-kit/content/ctabannerintegrated
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

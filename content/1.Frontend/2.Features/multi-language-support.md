@@ -4,6 +4,12 @@ description: Laioutr's multi-language support lets you run storefronts in multip
 seo:
   title: Multi-language Support | Laioutr
   description: Laioutr's multi-language support lets you run storefronts in multiple languages and regions, with language switchers,…
+sitemap:
+  loc: /frontend/features/multi-language-support
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Part 1 — For business and content users

@@ -10,6 +10,12 @@ links:
 seo:
   title: Footer | Laioutr
   description: Responsive footer with desktop columns and mobile accordion tabs.
+sitemap:
+  loc: /laioutr-ui/navigation/footer
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

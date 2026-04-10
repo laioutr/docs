@@ -5,6 +5,12 @@ links: []
 seo:
   title: Placeholder | Laioutr
   description: A placeholder component
+sitemap:
+  loc: /laioutr-ui/ui-kit/general/placeholder
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

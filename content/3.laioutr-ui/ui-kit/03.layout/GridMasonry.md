@@ -5,6 +5,12 @@ links: []
 seo:
   title: Grid Masonry | Laioutr
   description: A grid masonry component
+sitemap:
+  loc: /laioutr-ui/ui-kit/layout/gridmasonry
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

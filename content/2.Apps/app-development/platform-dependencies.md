@@ -4,6 +4,12 @@ description: Nuxt modules and their versions that the Laioutr platform installs.
 seo:
   title: Platform Dependencies | Laioutr
   description: Nuxt modules and their versions that the Laioutr platform installs. Check this list before adding dependencies to your…
+sitemap:
+  loc: /apps/app-development/platform-dependencies
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 When you build a custom app, the Laioutr platform already installs several Nuxt modules into the project. If your app needs one of these modules, you can use it directly without adding it as a dependency. If your app depends on a specific version range, check the table below to confirm compatibility.

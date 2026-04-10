@@ -5,6 +5,12 @@ links: []
 seo:
   title: Billing Cycle Switch | Laioutr
   description: A billing cycle switch component
+sitemap:
+  loc: /laioutr-ui/saas/billingcycleswitch
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

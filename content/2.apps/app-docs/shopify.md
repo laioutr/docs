@@ -4,6 +4,12 @@ description: How to connect your Shopify store to Laioutr and what developers ca
 seo:
   title: Shopify | Laioutr
   description: How to connect your Shopify store to Laioutr and what developers can build on top.
+sitemap:
+  loc: /apps/app-docs/shopify
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Part 1 – Connect Shopify and Laioutr (for store owners & project leads)

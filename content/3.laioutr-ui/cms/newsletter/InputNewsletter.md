@@ -4,6 +4,12 @@ description: A newsletter input box component
 seo:
   title: Input for Newsletter | Laioutr
   description: A newsletter input box component
+sitemap:
+  loc: /laioutr-ui/cms/newsletter/inputnewsletter
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

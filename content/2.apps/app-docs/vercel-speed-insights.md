@@ -4,6 +4,12 @@ description: Developer documentation for the Laioutr Vercel Speed Insights app p
 seo:
   title: Vercel Speed Insights | Laioutr
   description: Developer documentation for the Laioutr Vercel Speed Insights app package. Add Vercel Speed Insights to your Nuxt app…
+sitemap:
+  loc: /apps/app-docs/vercel-speed-insights
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

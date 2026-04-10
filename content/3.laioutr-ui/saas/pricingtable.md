@@ -10,6 +10,12 @@ jiraIssueId: LUI-5
 seo:
   title: Pricing Table | Laioutr
   description: A feature comparison table for side-by-side plan comparison with sticky headers and differences filtering.
+sitemap:
+  loc: /laioutr-ui/saas/pricingtable
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

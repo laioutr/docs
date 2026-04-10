@@ -5,6 +5,12 @@ jiraIssueId: LUI-154
 seo:
   title: Rating | Laioutr
   description: Review submission dialog for writing and submitting product reviews with customizable states.
+sitemap:
+  loc: /laioutr-ui/cms/reviews/rating
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

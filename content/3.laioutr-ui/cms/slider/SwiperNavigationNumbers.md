@@ -4,6 +4,12 @@ description: A swiper navigation numbers component
 seo:
   title: Swiper Navigation with Numbers | Laioutr
   description: A swiper navigation numbers component
+sitemap:
+  loc: /laioutr-ui/cms/slider/swipernavigationnumbers
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

@@ -10,6 +10,12 @@ links:
 seo:
   title: Top Bar | Laioutr
   description: Optional top bar above header with locale switching and dark mode toggle.
+sitemap:
+  loc: /laioutr-ui/navigation/topbar
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

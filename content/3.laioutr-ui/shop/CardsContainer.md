@@ -5,6 +5,12 @@ jiraIssueId: LUI-222
 seo:
   title: Cards Container | Laioutr
   description: Container section for holding banners with responsive column layouts.
+sitemap:
+  loc: /laioutr-ui/shop/cardscontainer
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

@@ -4,6 +4,12 @@ description: Documentation for the Laioutr B2Bsellers app. Integrate the B2Bsell
 seo:
   title: B2Bsellers | Laioutr
   description: Documentation for the Laioutr B2Bsellers app. Integrate the B2Bsellers Suite for Shopware 6 to add enterprise B2B features…
+sitemap:
+  loc: /apps/app-docs/b2bsellers
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ::callout{type="warning"}

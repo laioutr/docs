@@ -4,6 +4,12 @@ description: Generate XML sitemaps for your Laioutr frontend to help search engi
 seo:
   title: Sitemap | Laioutr
   description: Generate XML sitemaps for your Laioutr frontend to help search engines discover and index your pages. Automatically…
+sitemap:
+  loc: /frontend/seo/sitemap
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

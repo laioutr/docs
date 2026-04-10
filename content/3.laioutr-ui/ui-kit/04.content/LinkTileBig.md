@@ -10,6 +10,12 @@ links:
 seo:
   title: Link Tile Big | Laioutr
   description: Large-format category node with multiple aspect ratios, text overlay options, and gradient overlays for prominent…
+sitemap:
+  loc: /laioutr-ui/ui-kit/content/linktilebig
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

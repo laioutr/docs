@@ -5,6 +5,12 @@ links: []
 seo:
   title: Loading Spinner | Laioutr
   description: An animated spinner indicating loading or processing state.
+sitemap:
+  loc: /laioutr-ui/ui-kit/general/loadingspinner
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

@@ -5,6 +5,12 @@ jiraIssueId: LUI-38
 seo:
   title: Inpage Navigation Basic Slider | Laioutr
   description: Space-efficient horizontal slider for displaying subcategory nodes with configurable rows and navigation positioning.
+sitemap:
+  loc: /laioutr-ui/shop/inpagenavigationbasicslider
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

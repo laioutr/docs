@@ -5,6 +5,12 @@ links: []
 seo:
   title: Edge Glow | Laioutr
   description: A edge glow component
+sitemap:
+  loc: /laioutr-ui/ui-kit/general/edgeglow
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

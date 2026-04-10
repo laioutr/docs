@@ -10,6 +10,12 @@ links:
 seo:
   title: Inpage Navigation Big Slider | Laioutr
   description: High-impact horizontal slider for large category nodes with independent color modes and configurable navigation.
+sitemap:
+  loc: /laioutr-ui/shop/inpagenavigationbigslider
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

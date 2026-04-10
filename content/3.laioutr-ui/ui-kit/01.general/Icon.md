@@ -10,6 +10,12 @@ links:
 seo:
   title: Icon | Laioutr
   description: Size-optimized icon variants with automatic resolution ensuring recognizability at small, medium, and large sizes.
+sitemap:
+  loc: /laioutr-ui/ui-kit/general/icon
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

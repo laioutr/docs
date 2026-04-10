@@ -4,6 +4,12 @@ description: A grid card text content component
 seo:
   title: Grid Card Text Content | Laioutr
   description: A grid card text content component
+sitemap:
+  loc: /laioutr-ui/shop/gridcardtextcontent
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

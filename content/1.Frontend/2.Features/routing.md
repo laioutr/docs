@@ -4,6 +4,12 @@ description: How Laioutr generates routes from page types, how URL patterns are 
 seo:
   title: Routing | Laioutr
   description: How Laioutr generates routes from page types, how URL patterns are configured, and how markets affect route resolution.
+sitemap:
+  loc: /frontend/features/routing
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Controlling your storefront URLs

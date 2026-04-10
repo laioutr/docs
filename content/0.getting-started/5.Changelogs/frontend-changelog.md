@@ -4,9 +4,27 @@ description: Changelog for the Laioutr frontend product following Keep a Changel
 seo:
   title: Frontend Changelog | Laioutr
   description: Changelog for the Laioutr frontend product following Keep a Changelog and Semantic Versioning.
+sitemap:
+  loc: /getting-started/changelogs/frontend-changelog
+  lastmod: 2026-04-09
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
+
+## [0.28.13]
+
+### Fixed
+
+- **Frontend Core**: Fixed `PageRenderer` crashing when the Nuxt instance is unavailable by removing the hook registration guard safely.
+
+## [0.28.12]
+
+### Added
+
+- **Frontend Core**: New Nuxt hook for page-variant selection, allowing apps to intercept and override the active page variant during rendering.
 
 ## [0.28.11]
 

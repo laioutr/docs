@@ -5,6 +5,12 @@ links: []
 seo:
   title: Stars Rating | Laioutr
   description: Rating gives you a nice way to display a rating both with graphics and through text. This can be used to show the…
+sitemap:
+  loc: /laioutr-ui/ui-kit/indicators/starsrating
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

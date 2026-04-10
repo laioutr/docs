@@ -5,6 +5,12 @@ links: []
 seo:
   title: Rich Content | Laioutr
   description: A rich content component
+sitemap:
+  loc: /laioutr-ui/ui-kit/typography/richcontent
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

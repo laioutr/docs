@@ -4,6 +4,12 @@ description: CMS section with configurable columns of text, cards, and optional 
 seo:
   title: Content With Text Columns | Laioutr
   description: CMS section with configurable columns of text, cards, and optional buttons for landing pages.
+sitemap:
+  loc: /laioutr-ui/cms/banner/contentwithtextcolumns
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

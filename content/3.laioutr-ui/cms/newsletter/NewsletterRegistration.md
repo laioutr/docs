@@ -5,6 +5,12 @@ jiraIssueId: LUI-214
 seo:
   title: Newsletter Registration | Laioutr
   description: Full-width newsletter subscription section with status messages and image support.
+sitemap:
+  loc: /laioutr-ui/cms/newsletter/newsletterregistration
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

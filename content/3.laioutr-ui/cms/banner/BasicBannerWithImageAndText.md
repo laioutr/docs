@@ -4,6 +4,12 @@ description: Promotional banner section with background image, headline, subline
 seo:
   title: Basic Banner with Image and Text | Laioutr
   description: Promotional banner section with background image, headline, subline, and optional CTA button.
+sitemap:
+  loc: /laioutr-ui/cms/banner/basicbannerwithimageandtext
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

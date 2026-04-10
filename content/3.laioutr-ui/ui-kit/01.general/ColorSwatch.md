@@ -10,6 +10,12 @@ links:
 seo:
   title: Color Swatch | Laioutr
   description: Color swatch components for displaying product color variants on tiles.
+sitemap:
+  loc: /laioutr-ui/ui-kit/general/colorswatch
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

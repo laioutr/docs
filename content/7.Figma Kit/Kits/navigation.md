@@ -4,6 +4,12 @@ description: Global navigation libraries for headers, menus, search entry points
 seo:
   title: Navigation | Laioutr
   description: Global navigation libraries for headers, menus, search entry points, breadcrumbs, and utility switches.
+sitemap:
+  loc: /figma-kit/kits/navigation
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Purpose

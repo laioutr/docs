@@ -4,6 +4,12 @@ description: Form for submitting product ratings and written reviews.
 seo:
   title: Rating Form | Laioutr
   description: Form for submitting product ratings and written reviews.
+sitemap:
+  loc: /laioutr-ui/cms/reviews/ratingform
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

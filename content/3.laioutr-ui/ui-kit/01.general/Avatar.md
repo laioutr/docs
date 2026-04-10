@@ -10,6 +10,12 @@ links:
 seo:
   title: Avatar | Laioutr
   description: Avatar component for displaying user images, initials, or icons with size and color variants.
+sitemap:
+  loc: /laioutr-ui/ui-kit/general/avatar
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

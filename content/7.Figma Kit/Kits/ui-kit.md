@@ -4,6 +4,12 @@ description: Core library with tokens (Figma Variables) and foundational compone
 seo:
   title: UI Kit | Laioutr
   description: Core library with tokens (Figma Variables) and foundational components used by all other kits.
+sitemap:
+  loc: /figma-kit/kits/ui-kit
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Purpose

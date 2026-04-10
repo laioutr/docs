@@ -5,6 +5,12 @@ jiraIssueId: LUI-137
 seo:
   title: Text | Laioutr
   description: Typography primitives for body, heading, subline, and caption with a consistent scale of sizes.
+sitemap:
+  loc: /laioutr-ui/ui-kit/typography/text
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

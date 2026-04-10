@@ -4,6 +4,12 @@ description: Developer documentation for the Laioutr CCM19 app package. Add CCM1
 seo:
   title: CCM19 | Laioutr
   description: Developer documentation for the Laioutr CCM19 app package. Add CCM19 cookie consent management to your Nuxt app via the Laioutr consent store.
+sitemap:
+  loc: /apps/app-docs/ccm19
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

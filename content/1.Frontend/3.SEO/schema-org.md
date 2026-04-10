@@ -4,6 +4,12 @@ description: Generate JSON-LD structured data for your Laioutr frontend to enabl
 seo:
   title: Schema.org | Laioutr
   description: Generate JSON-LD structured data for your Laioutr frontend to enable rich snippets in Google search results. Add…
+sitemap:
+  loc: /frontend/seo/schema-org
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview

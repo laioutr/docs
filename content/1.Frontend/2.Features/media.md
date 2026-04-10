@@ -4,6 +4,12 @@ description: Laioutr’s media library abstraction lets business users choose as
 seo:
   title: Media and Media Library | Laioutr
   description: Laioutr’s media library abstraction lets business users choose assets from connected backends visually in Cockpit.…
+sitemap:
+  loc: /frontend/features/media
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## What is the media library?

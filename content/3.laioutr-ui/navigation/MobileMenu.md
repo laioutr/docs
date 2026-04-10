@@ -10,6 +10,12 @@ links:
 seo:
   title: Mobile Menu | Laioutr
   description: Mobile off-canvas navigation with category grid and hierarchical menus.
+sitemap:
+  loc: /laioutr-ui/navigation/mobilemenu
+  lastmod: 2026-04-08
+  changefreq: monthly
+  priority: 1.0
+
 ---
 
 ## Overview
