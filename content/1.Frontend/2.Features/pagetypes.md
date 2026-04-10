@@ -91,7 +91,7 @@ Controls how the page type appears in Studio's "Add page" UI:
 
 - **`label`**: display name (e.g. "Product Detail Page").
 - **`group`**: groups pages in the page list (e.g. "Shop", "General").
-- **`icon`** / **`variantIcon`**: icons for the page type and its variants.
+- **`icon`** / **`variantIcon`**: [icons](/apps/app-development/studio-icons) for the page type and its variants.
 - **`groupBy`**: optional grouping key (e.g. `'year'` for landing pages).
 - **`description`**: optional description shown in Studio.
 

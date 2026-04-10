@@ -103,7 +103,7 @@ You can also pass any custom string.
 
 ### Props wizard
 
-A props wizard lets editors choose a pre-configured variant when they add a section. Each variant sets a predefined combination of props.
+A props wizard lets editors choose a pre-configured variant when they add a section. Studio shows the wizard as a step-by-step flow before the section is placed on the page. Each step presents a set of variants, and the selected variant's props are applied to the new section.
 
 ```ts twoslash
 import type { SectionDefinition } from '@laioutr-core/core-types/frontend';
@@ -122,14 +122,14 @@ export const definition = defineSection({
             {
               id: 'centered',
               label: 'Centered',
-              icon: 'i-heroicons-view-columns',
+              icon: 'layout',
               previewSrc: '/app-my-app/previews/hero-centered.png',
               props: { layout: 'centered', sectionStyle: 'full-width' },
             },
             {
               id: 'split',
               label: 'Split',
-              icon: 'i-heroicons-squares-2x2',
+              icon: 'container',
               previewSrc: '/app-my-app/previews/hero-split.png',
               props: { layout: 'split', sectionStyle: 'boxed' },
             },
@@ -142,6 +142,42 @@ export const definition = defineSection({
   schema: [],
 });
 ```
+
+The `propsWizard` object contains a `steps` array. Currently only `variant` steps are supported.
+
+#### Step properties
+
+::field-group
+  :::field{name="type" type="'variant'" required}
+  Step type. Only `'variant'` is supported.
+  :::
+  :::field{name="title" type="string" required}
+  Heading shown above the variant cards in the wizard.
+  :::
+  :::field{name="input" type="PropsWizardVariant[]" required}
+  The variants the editor can choose from in this step.
+  :::
+::
+
+#### Variant properties
+
+::field-group
+  :::field{name="id" type="string" required}
+  Unique identifier for this variant within the step.
+  :::
+  :::field{name="label" type="string" required}
+  Display name shown on the variant card.
+  :::
+  :::field{name="icon" type="string"}
+  [Studio icon](/apps/app-development/studio-icons) shown on the variant card.
+  :::
+  :::field{name="props" type="Record<string, any>" required}
+  Props applied to the section when this variant is selected. Keys must match field names in the section's `schema`.
+  :::
+  :::field{name="previewSrc" type="string"}
+  Path to a preview image for this variant. Place the image in your app's `public/` directory.
+  :::
+::
 
 ## Defining slots
 
@@ -223,7 +259,7 @@ schema: [
 ]
 ```
 
-Each fieldset can have a `label`, optional `helpText`, `icon`, and `defaultOpen` (defaults to `true`).
+Each fieldset can have a `label`, optional `helpText`, [`icon`](/apps/app-development/studio-icons), and `defaultOpen` (defaults to `true`).
 
 For the full list of available field types and their options, see [Schema Fields](/apps/app-development/schema-fields).
 

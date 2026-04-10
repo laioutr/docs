@@ -1,6 +1,7 @@
 ---
 title: Schema Fields
 description: Reference for all field types available in section and block definition schemas.
+links: []
 seo:
   title: Schema Fields | Laioutr
   description: Reference for all field types available in section and block definition schemas.
@@ -34,13 +35,20 @@ schema: [
   :::field{name="label" type="string"}
   Panel heading in the Studio sidebar.
   :::
+
   :::field{name="helpText" type="string"}
   Help text shown below the fieldset label.
   :::
-  :::field{name="defaultOpen" type="boolean" defaultValue="false"}
+
+  :::field{name="icon" type="string"}
+  [Studio icon](/apps/app-development/studio-icons) shown next to the fieldset label.
+  :::
+
+  :::field{default-value="false" name="defaultOpen" type="boolean"}
   Whether the panel starts expanded.
   :::
-  :::field{name="fields" type="StudioFieldDefinition[]" required}
+
+  :::field{name="fields" required="true" type="StudioFieldDefinition[]"}
   The fields in this group.
   :::
 ::
@@ -50,18 +58,22 @@ schema: [
 Every field type shares these properties:
 
 ::field-group
-  :::field{name="type" type="string" required}
+  :::field{name="type" required="true" type="string"}
   The field type (e.g. `'text'`, `'select'`, `'media'`).
   :::
-  :::field{name="name" type="string" required}
+
+  :::field{name="name" required="true" type="string"}
   Property name on the component's props. Must be unique within the definition.
   :::
+
   :::field{name="label" type="string"}
   Display label in the sidebar.
   :::
+
   :::field{name="default" type="varies"}
   Initial value applied when an editor **creates** a new section or block in Studio. See [Default values and runtime fallbacks](#default-values-and-runtime-fallbacks).
   :::
+
   :::field{name="description" type="string"}
   Help text shown below the field.
   :::
@@ -81,15 +93,15 @@ The `default` property and the runtime fallback serve different purposes. Unders
 
 The fallback is **not** the `default` value. It is a type-appropriate zero value determined by the field type:
 
-| Field type | Fallback |
-|---|---|
-| `text`, `textarea`, `richtext` | `''` (empty string) |
-| `checkbox` | `false` (`true` for [visibility decorators](#visibility-toggles)) |
-| `select`, `radio`, `toggle_button` | First option's value |
-| `object` | Object with fallbacks applied recursively to each nested field |
-| `array` | `[]` |
-| `json` | `null` |
-| `number`, `icon`, `media`, `link`, `query`, `color` | `undefined` |
+| Field type                                          | Fallback                                                          |
+| --------------------------------------------------- | ----------------------------------------------------------------- |
+| `text`, `textarea`, `richtext`                      | `''` (empty string)                                               |
+| `checkbox`                                          | `false` (`true` for [visibility decorators](#visibility-toggles)) |
+| `select`, `radio`, `toggle_button`                  | First option's value                                              |
+| `object`                                            | Object with fallbacks applied recursively to each nested field    |
+| `array`                                             | `[]`                                                              |
+| `json`                                              | `null`                                                            |
+| `number`, `icon`, `media`, `link`, `query`, `color` | `undefined`                                                       |
 
 String fields like `text` and `textarea` always resolve to a string, so you can use them without null checks. Fields that fall back to `undefined` need a guard in your template.
 
@@ -107,12 +119,13 @@ Single-line text input.
   :::field{name="placeholder" type="string"}
   Placeholder text shown when the field is empty.
   :::
+
   :::field{name="maxLength" type="number"}
   Maximum character count.
   :::
 ::
 
-**Prop type:** `string` &middot; **Fallback:** `''`
+**Prop type:** `string` · **Fallback:** `''`
 
 ---
 
@@ -128,12 +141,13 @@ Multi-line plain text input.
   :::field{name="placeholder" type="string"}
   Placeholder text.
   :::
+
   :::field{name="maxLength" type="number"}
   Maximum character count.
   :::
 ::
 
-**Prop type:** `string` &middot; **Fallback:** `''`
+**Prop type:** `string` · **Fallback:** `''`
 
 ---
 
@@ -149,21 +163,25 @@ Numeric input with optional constraints.
   :::field{name="min" type="number"}
   Minimum allowed value.
   :::
+
   :::field{name="max" type="number"}
   Maximum allowed value.
   :::
+
   :::field{name="step" type="number"}
   Increment step.
   :::
+
   :::field{name="prefix" type="string"}
   Text shown before the input (e.g. `'$'`).
   :::
+
   :::field{name="suffix" type="string"}
   Text shown after the input (e.g. `'px'`).
   :::
 ::
 
-**Prop type:** `number | undefined` &middot; **Fallback:** `undefined`
+**Prop type:** `number | undefined` · **Fallback:** `undefined`
 
 ---
 
@@ -177,7 +195,7 @@ Boolean toggle.
 
 A checkbox can also act as a [visibility decorator](#visibility-toggles) to control whether another field is shown in the sidebar.
 
-**Prop type:** `boolean` &middot; **Fallback:** `false`
+**Prop type:** `boolean` · **Fallback:** `false`
 
 ---
 
@@ -200,12 +218,17 @@ Dropdown with predefined options.
 ```
 
 ::field-group
-  :::field{name="options" type="{ value: string; label: string }[]" required}
+  :::field
+  ---
+  name: options
+  required: "true"
+  type: "{ value: string; label: string }[]"
+  ---
   At least one option is required.
   :::
 ::
 
-**Prop type:** `string` &middot; **Fallback:** first option's value
+**Prop type:** `string` · **Fallback:** first option's value
 
 ---
 
@@ -228,18 +251,23 @@ Radio button group. Same data shape as `select`, different UI.
 ```
 
 ::field-group
-  :::field{name="options" type="{ value: string; label: string }[]" required}
+  :::field
+  ---
+  name: options
+  required: "true"
+  type: "{ value: string; label: string }[]"
+  ---
   At least one option is required.
   :::
 ::
 
-**Prop type:** `string` &middot; **Fallback:** first option's value
+**Prop type:** `string` · **Fallback:** first option's value
 
 ---
 
-### toggle_button
+### toggle\_button
 
-Segmented button group. Each option can have an icon.
+Segmented button group. Each option can have a [Studio icon](/apps/app-development/studio-icons).
 
 ```ts
 {
@@ -248,19 +276,24 @@ Segmented button group. Each option can have an icon.
   label: 'Style',
   default: 'full-width',
   options: [
-    { label: 'Full', value: 'full-width', icon: 'i-heroicons-arrows-pointing-out' },
-    { label: 'Boxed', value: 'boxed', icon: 'i-heroicons-square-2-stack' },
+    { label: 'Full', value: 'full-width', icon: 'boxOutline' },
+    { label: 'Boxed', value: 'boxed', icon: 'boxSolid' },
   ],
 }
 ```
 
 ::field-group
-  :::field{name="options" type="{ value: string; label: string; icon?: string }[]" required}
-  At least one option is required. Icons are optional per option.
+  :::field
+  ---
+  name: options
+  required: "true"
+  type: "{ value: string; label: string; icon?: string }[]"
+  ---
+  At least one option is required. Icons are optional per option. See [Studio icons](/apps/app-development/studio-icons) for available names.
   :::
 ::
 
-**Prop type:** `string` &middot; **Fallback:** first option's value
+**Prop type:** `string` · **Fallback:** first option's value
 
 ---
 
@@ -274,7 +307,7 @@ Icon picker. Lets editors choose from available icon sets.
 
 No type-specific properties.
 
-**Prop type:** `string | undefined` &middot; **Fallback:** `undefined`
+**Prop type:** `string | undefined` · **Fallback:** `undefined`
 
 ---
 
@@ -310,7 +343,7 @@ Rich text editor with formatting (bold, italic, links, headings, lists, etc.).
   :::
 ::
 
-The field value is an HTML string. Render it with the [`RichContent`](/laioutr-ui/ui-kit/typography/rich-content) component from the UI Kit to get consistent typography for headings, lists, blockquotes, tables, links, and images:
+The field value is an HTML string. Render it with the `RichContent` component from the UI Kit to get consistent typography for headings, lists, blockquotes, tables, links, and images:
 
 ```vue
 <template>
@@ -320,7 +353,7 @@ The field value is an HTML string. Render it with the [`RichContent`](/laioutr-u
 
 Using `v-html` directly works but skips these styles.
 
-**Prop type:** `string` &middot; **Fallback:** `''`
+**Prop type:** `string` · **Fallback:** `''`
 
 ---
 
@@ -336,12 +369,13 @@ Color picker. Supports theme colors and optional custom color input.
   :::field{name="allowCustom" type="boolean"}
   Allow editors to enter a custom hex/rgba value.
   :::
+
   :::field{name="allowAlpha" type="boolean"}
   Allow alpha (transparency) values.
   :::
 ::
 
-**Prop type:** `ColorFieldValue | undefined` &middot; **Fallback:** `undefined`
+**Prop type:** `ColorFieldValue | undefined` · **Fallback:** `undefined`
 
 ---
 
@@ -357,15 +391,17 @@ Media picker for images and videos from the media library.
   :::field{name="allowedTypes" type="('image' | 'video')[]"}
   Restrict to specific media types. If omitted, both images and videos are allowed.
   :::
+
   :::field{name="allowResponsive" type="boolean"}
   Allow responsive image variants (separate sources for mobile and desktop).
   :::
+
   :::field{name="allowFocalPoint" type="boolean"}
   Allow setting a focal point on images.
   :::
 ::
 
-The field value is a `Media` object containing source URLs, dimensions, and alt text. Render it with the [`Media`](/laioutr-ui/ui-kit/general/media) component from the UI Kit:
+The field value is a `Media` object containing source URLs, dimensions, and alt text. Render it with the `Media` component from the UI Kit:
 
 ```vue
 <template>
@@ -375,7 +411,7 @@ The field value is a `Media` object containing source URLs, dimensions, and alt 
 
 When `allowedTypes` is set to `['image']`, the prop type narrows to `MediaImage`.
 
-**Prop type:** `MediaImage | MediaVideo | undefined` &middot; **Fallback:** `undefined`
+**Prop type:** `MediaImage | MediaVideo | undefined` · **Fallback:** `undefined`
 
 ---
 
@@ -391,13 +427,13 @@ No type-specific properties.
 
 The field value is a `Link` object. The link type depends on what the editor selected:
 
-| Link variant | Description |
-|---|---|
-| `reference` | A link to a product, category, or blog post by slug |
-| `url` | An external URL |
-| `anchor` | A same-page anchor (e.g. `#features`) |
-| `page` | A link to a specific page by ID |
-| `pageType` | A link to a page type with parameters |
+| Link variant | Description                                         |
+| ------------ | --------------------------------------------------- |
+| `reference`  | A link to a product, category, or blog post by slug |
+| `url`        | An external URL                                     |
+| `anchor`     | A same-page anchor (e.g. `#features`)               |
+| `page`       | A link to a specific page by ID                     |
+| `pageType`   | A link to a page type with parameters               |
 
 Resolve a `Link` to a URL string with `linkResolver.resolve()` and pass it to an anchor or `NuxtLink`:
 
@@ -409,7 +445,7 @@ Resolve a `Link` to a URL string with `linkResolver.resolve()` and pass it to an
 </template>
 ```
 
-**Prop type:** `Link | undefined` &middot; **Fallback:** `undefined`
+**Prop type:** `Link | undefined` · **Fallback:** `undefined`
 
 ---
 
@@ -441,7 +477,7 @@ Groups nested fields into a single prop. The nested `schema` uses the same field
 
 Access nested properties on the prop directly:
 
-```vue twoslash
+```vue
 <script setup lang="ts">
 // ---cut---
 const { badge } = defineProps<{
@@ -458,7 +494,7 @@ const { badge } = defineProps<{
 
 An `object` field can also act as a [style decorator](#style-objects) to attach styling controls to another field.
 
-**Prop type:** `Object` (shape determined by nested schema) &middot; **Fallback:** object with fallbacks applied recursively to each nested field
+**Prop type:** `Object` (shape determined by nested schema) · **Fallback:** object with fallbacks applied recursively to each nested field
 
 ---
 
@@ -490,12 +526,15 @@ Repeatable list of items. Each item has its own set of fields defined by a neste
   :::field{name="schema" type="StudioFieldsetDefinition[]"}
   Fields for each array item.
   :::
+
   :::field{name="labelSingular" type="string"}
-  Label used for the "Add [labelSingular]" button.
+  Label used for the "Add [labelSingular] " button.
   :::
+
   :::field{name="max" type="number"}
   Maximum number of items.
   :::
+
   :::field{name="itemLabelProperty" type="string"}
   Field name whose value is used as the item label in the list view.
   :::
@@ -503,7 +542,7 @@ Repeatable list of items. Each item has its own set of fields defined by a neste
 
 Each array item receives a stable `.id` property generated by Studio. Use it as the `:key` in `v-for` loops:
 
-```vue twoslash
+```vue
 <script setup lang="ts">
 // ---cut---
 const { features } = defineProps<{
@@ -521,7 +560,7 @@ const { features } = defineProps<{
 </template>
 ```
 
-**Prop type:** `Array` (each item shaped by the nested schema, plus an `id` property) &middot; **Fallback:** `[]`
+**Prop type:** `Array` (each item shaped by the nested schema, plus an `id` property) · **Fallback:** `[]`
 
 ---
 
@@ -550,7 +589,7 @@ A query field that fetches a list of products for a product slider:
 
 When `singleEntity` is not set (or `false`), the prop contains a `ClientEntitySet` with an `entities` array. Iterate over it in your template:
 
-```vue twoslash
+```vue
 <script setup lang="ts">
 import type { ClientEntitySet } from '@laioutr-core/orchestr/types';
 // ---cut---
@@ -589,7 +628,7 @@ Set `singleEntity: true` when the component expects exactly one entity (e.g. a p
 }
 ```
 
-```vue twoslash
+```vue
 <script setup lang="ts">
 import type { ClientEntity } from '@laioutr-core/orchestr/types';
 // ---cut---
@@ -611,15 +650,18 @@ const { product } = defineProps<{
 ```
 
 ::field-group
-  :::field{name="entityType" type="string" required}
+  :::field{name="entityType" required="true" type="string"}
   The canonical entity type to query (e.g. `'Product'`, `'Category'`, `'BlogPost'`). Must match an entity type with registered [Orchestr query handlers](/frontend/orchestr/queries).
   :::
+
   :::field{name="singleEntity" type="boolean"}
   When `true`, the prop resolves to a single `ClientEntity` object. When `false` (the default), the prop resolves to a `ClientEntitySet` with an `entities` array.
   :::
+
   :::field{name="components" type="EntityComponentToken[]"}
   [Entity components](/frontend/orchestr/component-resolvers) to include in the response. Each token declares a slice of entity data (e.g. base info, pricing, images) that your component needs.
   :::
+
   :::field{name="links" type="FieldDefinitionQueryFetchLinks"}
   Related entities to resolve alongside the main query result. See [Query links](#query-links).
   :::
@@ -647,15 +689,18 @@ links: {
 ```
 
 ::field-group
-  :::field{name="entityType" type="string" required}
+  :::field{name="entityType" required="true" type="string"}
   The entity type of the linked entities.
   :::
+
   :::field{name="components" type="EntityComponentToken[]"}
   Entity components to fetch for each linked entity.
   :::
+
   :::field{name="limit" type="number"}
   Maximum number of linked entities to return. Use this to avoid fetching more data than the component needs (e.g. only the first 5 product variants).
   :::
+
   :::field{name="links" type="FieldDefinitionQueryFetchLinks"}
   Nested links. A linked entity can declare its own links to fetch further related data (e.g. variants of a product that itself was linked from a collection). Nesting is limited to two levels; Orchestr rejects deeper chains with a `LinkRecursionError`.
   :::
@@ -667,7 +712,7 @@ Every link you add increases the amount of data Orchestr has to resolve per requ
 
 In your component, access linked entities through the `links` property of each entity:
 
-```vue twoslash
+```vue
 <script setup lang="ts">
 import type { ClientEntity } from '@laioutr-core/orchestr/types';
 // ---cut---
@@ -688,7 +733,7 @@ const { product } = defineProps<{
 </template>
 ```
 
-**Prop type:** `ClientEntitySet | ClientEntity | undefined` (depends on `singleEntity`) &middot; **Fallback:** `undefined`
+**Prop type:** `ClientEntitySet | ClientEntity | undefined` (depends on `singleEntity`) · **Fallback:** `undefined`
 
 ---
 
@@ -706,7 +751,7 @@ Raw JSON editor. Use this for advanced configuration that does not fit other fie
   :::
 ::
 
-**Prop type:** `JSONType | null` &middot; **Fallback:** `null`
+**Prop type:** `JSONType | null` · **Fallback:** `null`
 
 ## Field decorators
 
