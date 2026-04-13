@@ -106,6 +106,15 @@ export default defineNuxtPlugin((nuxtApp) => {
 });
 ```
 
+### URL Query Parameters
+
+Two hooks control how Orchestr reads and writes URL query parameters (pagination, sorting, filters). See [URL Query Parameters](/frontend/orchestr/url-query-params#hooks) for the full reference with examples.
+
+| Hook                              | Arguments                                          | When it fires                                                |
+| --------------------------------- | -------------------------------------------------- | ------------------------------------------------------------ |
+| `orchestr:query-params:parsed`    | `{ params, queryPrefixes, route }`                 | After parsing the URL, before reading pagination/sort/filter |
+| `orchestr:navigate-query:build`   | `{ params, query, path, queryString }`             | At the end of `buildQueryUrl()`, before returning the URL    |
+
 ### Client Environment
 
 The `orchestr:client-env:modify` hook fires **synchronously** every time orchestr builds the `clientEnv` object before sending an action request. Use it to set locale, currency, or custom fields based on the current frontend state.
