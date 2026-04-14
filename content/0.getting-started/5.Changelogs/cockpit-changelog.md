@@ -19,6 +19,10 @@ All notable changes to **Cockpit (Studio)** — the visual editor and project ma
 ### Added
 
 - **Hosting**: Deployment detail page now auto-refreshes and auto-scrolls to the latest build log entries.
+- **Studio**: Expanded the StudioIcon set with 50+ new icons covering pages (calendar, plane, video, cart, heart), alignment (justify, layout-align, distribute), borders, box styles (margin, padding, none), and more.
+- **Studio**: Added typography icons (heading1–6, bold, italic, case variants), layout column/row icons, aspect ratio icons (1x1, 16x9, etc.), image fit icons, and corner radius icons.
+- **Studio**: Query fields in the section editor now highlight which queries are bound to page-level queries, making data wiring more visible.
+- **Studio**: The locale switcher now works correctly on routes that include dynamic path parameters.
 
 ### Fixed
 

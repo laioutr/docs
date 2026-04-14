@@ -6,13 +6,19 @@ seo:
   description: Changelog for @laioutr-core/orchestr-devtools following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/orchestr-devtools-changelog
-  lastmod: 2026-04-08
+  lastmod: 2026-04-14
   changefreq: monthly
   priority: 1.0
 
 ---
 
 All notable changes to **Orchestr Devtools** (`@laioutr-core/orchestr-devtools`), the browser devtools panel for inspecting Orchestr queries and data flow, will be documented in this file.
+
+## [1.7.0]
+
+### Changed
+
+- **Orchestr Devtools**: Moved to a dedicated Nuxt Devtools tab for a cleaner development experience, replacing the previous standalone overlay panel.
 
 ## [1.6.0]
 

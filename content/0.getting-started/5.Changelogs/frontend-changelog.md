@@ -6,7 +6,7 @@ seo:
   description: Changelog for the Laioutr frontend product following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/frontend-changelog
-  lastmod: 2026-04-09
+  lastmod: 2026-04-14
   changefreq: monthly
   priority: 1.0
 
@@ -19,6 +19,8 @@ All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend
 ### Fixed
 
 - **Frontend Core**: Fixed `PageRenderer` crashing when the Nuxt instance is unavailable by removing the hook registration guard safely.
+- **Frontend Core**: Fixed the page-variant selection hook in `PageRenderer` not correctly resolving the selected variant in all cases.
+- **Frontend Core**: Fixed incorrect port displayed in the CLI startup banner.
 
 ## [0.28.12]
 
