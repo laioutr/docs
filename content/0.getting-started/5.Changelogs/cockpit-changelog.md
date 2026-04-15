@@ -6,7 +6,7 @@ seo:
   description: Changelog for the Laioutr Cockpit (Studio) product following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/cockpit-changelog
-  lastmod: 2026-04-10
+  lastmod: 2026-04-15
   changefreq: monthly
   priority: 1.0
 
@@ -23,6 +23,8 @@ All notable changes to **Cockpit (Studio)** — the visual editor and project ma
 - **Studio**: Added typography icons (heading1–6, bold, italic, case variants), layout column/row icons, aspect ratio icons (1x1, 16x9, etc.), image fit icons, and corner radius icons.
 - **Studio**: Query fields in the section editor now highlight which queries are bound to page-level queries, making data wiring more visible.
 - **Studio**: The locale switcher now works correctly on routes that include dynamic path parameters.
+- **Studio**: Real-time preview now uses `valtio-json-patch` for more reliable state synchronization during live editing, replacing `fast-json-patch`.
+- **Studio**: Common built-in listing page types (product listing, product search, blog) now use root queries by default, so newly created pages get cleaner URL params (e.g., `?p=2` instead of `?queryId[p]=2`) out of the box.
 
 ### Fixed
 

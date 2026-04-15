@@ -6,13 +6,23 @@ seo:
   description: Changelog for @laioutr-core/orchestr following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/orchestr-changelog
-  lastmod: 2026-04-08
+  lastmod: 2026-04-15
   changefreq: monthly
   priority: 1.0
 
 ---
 
 All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data-fetching and query orchestration layer, will be documented in this file.
+
+## [0.28.14]
+
+### Added
+
+- **Orchestr**: Queries now respect URL aliases and the `isRoot` configuration. Root queries use prefix-less URL params (e.g., `?p=2` instead of `?queryId[p]=2`), resulting in cleaner URLs for listing and search pages.
+
+### Fixed
+
+- **Orchestr**: Patch values from valtio state changes are now always plain, serializable objects. Live proxy references and raw valtio targets are no longer leaked into patches, preventing serialization errors via `structuredClone` or `postMessage`.
 
 ## [0.28.11]
 

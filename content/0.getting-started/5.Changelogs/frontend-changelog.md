@@ -6,13 +6,19 @@ seo:
   description: Changelog for the Laioutr frontend product following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/frontend-changelog
-  lastmod: 2026-04-14
+  lastmod: 2026-04-15
   changefreq: monthly
   priority: 1.0
 
 ---
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
+
+## [0.28.14]
+
+### Fixed
+
+- **Frontend Core**: Fixed `RemoteRender` not caching page data across navigations, preventing redundant data fetches when returning to a previously visited page.
 
 ## [0.28.13]
 
