@@ -58,7 +58,30 @@ Every section definition needs these properties:
 | `studio` | `object` | Metadata shown in the Studio UI. At minimum, provide `label`. |
 | `slots` | `SectionSlotDefinition[]` | Named insertion points for blocks. Pass an empty array if the section has no slots. |
 
-`schema` is optional but present on almost every section.
+`schema` is optional but present on almost every section. `rendering` is optional and controls runtime behavior like [stacking context isolation](/laioutr-ui/getting-started/z-ordering).
+
+## Rendering options
+
+The `rendering` property controls how the section behaves at the CSS level.
+
+```ts twoslash
+import type { SectionDefinition } from '@laioutr-core/core-types/frontend';
+declare const defineSection: <const T extends SectionDefinition>(definition: T) => T;
+// ---cut---
+export const definition = defineSection({
+  component: 'SectionStickyHeader',
+  rendering: { isolate: false },
+  studio: { label: 'Sticky Header', tags: ['Header'] },
+  slots: [],
+  schema: [],
+});
+```
+
+::field-group
+  :::field{name="isolate" type="boolean" default="true"}
+  When `true`, the section gets its own CSS stacking context via `isolation: isolate`. Z-index values inside the section cannot leak out and affect sibling sections. Set to `false` for sections with sticky or fixed elements that must remain visible above subsequent sections. See [Z-Ordering](/laioutr-ui/getting-started/z-ordering) for details.
+  :::
+::
 
 ## The studio object
 

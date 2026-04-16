@@ -36,7 +36,11 @@ export const getTypeName = (s: JSONSchema, mode: SchemaMode = 'json'): string =>
   if (s.allOf?.length) return s.allOf.map((v) => getTypeName(v, mode)).join(' & ');
 
   const variants = getUnionVariants(s);
-  if (variants) return variants.map((v) => getTypeName(v, mode)).join(' | ');
+  if (variants) {
+    const id = getSchemaId(s);
+    if (id) return id;
+    return variants.map((v) => getTypeName(v, mode)).join(' | ');
+  }
 
   if (s.type === 'object') {
     if (mode === 'javascript' && !s.properties && typeof s.additionalProperties === 'object') {
@@ -249,6 +253,10 @@ export const getTypeSummary = (s: JSONSchema, { expanded = false, mode = 'json' 
     }
     return isArray ? `${props}[]` : props;
   }
+
+  // Named union (e.g. Media, Link): show id instead of expanding variant labels
+  const id = getSchemaId(s) ?? (s.type === 'array' ? getSchemaId(getArrayItems(s)!) : undefined);
+  if (id) return s.type === 'array' ? `${id}[]` : id;
 
   // Array of unions: (T1 | T2)[]
   if (s.type === 'array') {
