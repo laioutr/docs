@@ -6,13 +6,24 @@ seo:
   description: Changelog for Laioutr UI and UI Kit following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/ui-changelog
-  lastmod: 2026-04-08
+  lastmod: 2026-04-16
   changefreq: monthly
   priority: 1.0
 
 ---
 
 All notable changes to **Laioutr UI**, **UI Kit**, and related component libraries will be documented in this file.
+
+## [1.33.0]
+
+### Added
+
+- **UI App**: `Pagination` component now accepts a `scrollToTop` prop (defaults to `true`) that scrolls the viewport to the top when navigating between pages.
+
+### Fixed
+
+- **UI App**: Fixed `Button` component not emitting `click` events on the `NuxtLink` branch and not forwarding `$attrs` on both root elements, enabling reka-ui `as-child` to work correctly.
+- **UI App**: Fixed `SectionBlogPostListing` to use reactive computed properties for client-side pagination so the displayed page updates correctly on navigation.
 
 ## [1.32.5]
 

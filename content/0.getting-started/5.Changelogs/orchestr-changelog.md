@@ -22,6 +22,7 @@ All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data
 
 ### Fixed
 
+- **Orchestr**: Fixed query results not updating on client-side navigation. A `markRaw` optimization on the orchestr store's `queryResults` prevented Vue from detecting when queries transitioned from loading to resolved; the store now replaces the inner reference after streaming completes to trigger reactivity correctly.
 - **Orchestr**: Patch values from valtio state changes are now always plain, serializable objects. Live proxy references and raw valtio targets are no longer leaked into patches, preventing serialization errors via `structuredClone` or `postMessage`.
 
 ## [0.28.11]
