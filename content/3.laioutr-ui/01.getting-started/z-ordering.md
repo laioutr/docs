@@ -26,16 +26,15 @@ Section z-index values (like the hero slider's `z-index: 10`) are trapped inside
 
 ## Z-index tokens
 
-For sticky or fixed elements, use the provided CSS custom properties instead of hardcoded z-index values:
+Use the provided CSS custom properties instead of hardcoded z-index values:
 
-| Token               | Value  | Use case                                |
-| ------------------- | ------ | --------------------------------------- |
-| `--z-index-sticky`  | `100`  | Sticky headers, fixed filter bars       |
-| `--z-index-overlay` | `1300` | Sheet and dialog backdrops              |
-| `--z-index-modal`   | `1400` | Sheet content, dialog content, lightbox |
-| `--z-index-popover` | `1500` | Dropdown menus, select menus, popovers  |
-| `--z-index-tooltip` | `1600` | Tooltips                                |
-| `--z-index-toast`   | `1700` | Toast notifications                     |
+| Token               | Value  | Use case                                          |
+| ------------------- | ------ | ------------------------------------------------- |
+| `--z-index-sticky`  | `100`  | Sticky headers, fixed filter bars                 |
+| `--z-index-modal`   | `1400` | Sheet, dialog, alert dialog (overlay and content) |
+| `--z-index-popover` | `1500` | Dropdown menus, select menus, popovers            |
+| `--z-index-tooltip` | `1600` | Tooltips                                          |
+| `--z-index-toast`   | `1700` | Toast notifications                               |
 
 ```css
 .my-sticky-bar {
@@ -44,6 +43,10 @@ For sticky or fixed elements, use the provided CSS custom properties instead of 
   z-index: var(--z-index-sticky);
 }
 ```
+
+### Why modals share one z-index
+
+Modal overlays (backdrops) and modal content use the same `--z-index-modal` value. When multiple modals stack (e.g. an alert dialog on top of a sheet), DOM order determines which appears on top — later portals paint above earlier ones. A separate overlay z-index would cause the second modal's backdrop to slip behind the first modal's content.
 
 ## Opting out of isolation
 
