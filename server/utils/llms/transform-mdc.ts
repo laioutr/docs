@@ -1,5 +1,6 @@
 import { renderAction, renderEntityComponent, renderEntityOverview, renderError, renderPageType, renderQuery } from './render-reflected';
 import { renderUiComponentMeta } from './render-ui-meta';
+import { renderExcalidrawDiagram } from './render-excalidraw';
 import reflected from '@laioutr-core/canonical-types/reflection';
 import '@laioutr-core/canonical-types/autoload';
 import { pageTypeTokenRegistry } from '@laioutr-core/core-types/frontend';
@@ -7,7 +8,7 @@ import { canonicalErrors } from '#shared/utils/canonical-errors';
 
 type MinimarkNode = [string, Record<string, unknown>, ...any[]] | string;
 
-const KNOWN_COMPONENTS = new Set(['action-meta', 'query-meta', 'entity-component-meta', 'entity-overview', 'component-meta', 'page-type-meta', 'error-meta']);
+const KNOWN_COMPONENTS = new Set(['action-meta', 'query-meta', 'entity-component-meta', 'entity-overview', 'component-meta', 'page-type-meta', 'error-meta', 'excalidraw-diagram']);
 
 function isElement(node: MinimarkNode): node is [string, Record<string, unknown>, ...any[]] {
   return Array.isArray(node) && typeof node[0] === 'string';
@@ -45,6 +46,11 @@ async function resolveComponent(tag: string, props: Record<string, unknown>): Pr
       const err = canonicalErrors.find((e) => e.code === props.code);
       if (!err) return null;
       return renderError(err);
+    }
+    case 'excalidraw-diagram': {
+      const src = props.src as string;
+      if (!src) return null;
+      return renderExcalidrawDiagram(src, props.alt as string | undefined);
     }
     case 'component-meta': {
       try {

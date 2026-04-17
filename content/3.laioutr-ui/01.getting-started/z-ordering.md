@@ -19,7 +19,8 @@ The Nuxt app root (`#__nuxt`) also receives `isolation: isolate`. This creates a
 
 ### How it fits together
 
-![Section isolation and portaling architecture](/images/z-ordering-architecture.svg)
+::excalidraw-diagram{src="/images/z-ordering-architecture.excalidraw" alt="Section isolation and portaling architecture"}
+::
 
 Section z-index values (like the hero slider's `z-index: 10`) are trapped inside their section's stacking context. Portaled elements sit at `<body>` level with z-index values from the token scale, above the entire `#__nuxt` app.
 
@@ -27,13 +28,14 @@ Section z-index values (like the hero slider's `z-index: 10`) are trapped inside
 
 For sticky or fixed elements, use the provided CSS custom properties instead of hardcoded z-index values:
 
-| Token               | Value        | Use case                                |
-| ------------------- | ------------ | --------------------------------------- |
-| `--z-index-sticky`  | `100`        | Sticky headers, fixed filter bars       |
-| `--z-index-overlay` | `1000`       | Sheet and dialog backdrops              |
-| `--z-index-modal`   | `1100`       | Sheet content, dialog content, lightbox |
-| `--z-index-popover` | `1200`       | Dropdown menus, select menus, popovers  |
-| `--z-index-toast`   | `2147483647` | Toast notifications                     |
+| Token               | Value  | Use case                                |
+| ------------------- | ------ | --------------------------------------- |
+| `--z-index-sticky`  | `100`  | Sticky headers, fixed filter bars       |
+| `--z-index-overlay` | `1300` | Sheet and dialog backdrops              |
+| `--z-index-modal`   | `1400` | Sheet content, dialog content, lightbox |
+| `--z-index-popover` | `1500` | Dropdown menus, select menus, popovers  |
+| `--z-index-tooltip` | `1600` | Tooltips                                |
+| `--z-index-toast`   | `1700` | Toast notifications                     |
 
 ```css
 .my-sticky-bar {
