@@ -4,14 +4,12 @@ const props = defineProps<{
   alt?: string;
 }>();
 
-const apiUrl = computed(() => {
-  const base = props.src.replace(/\.excalidraw$/, '');
-  return `/api/excalidraw${base}.svg`;
-});
+const svgUrl = computed(() => props.src.replace(/\.excalidraw$/, '.svg'));
 
-const { data: svgContent, error } = await useFetch<string>(apiUrl, {
+const { data: svgContent, error } = await useFetch<string>(svgUrl, {
   key: `excalidraw-${props.src}`,
   responseType: 'text',
+  transform: (raw) => stripEmbeddedFonts(raw),
 });
 </script>
 

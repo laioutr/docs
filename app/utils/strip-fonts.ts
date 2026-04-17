@@ -12,7 +12,6 @@ export function stripEmbeddedFonts(svg: string): string {
   for (const [name, generic] of Object.entries(FONT_REPLACEMENTS)) {
     svg = svg.replaceAll(name, generic);
   }
-  // Collapse duplicate generic families (e.g. "monospace, monospace" → "monospace")
   svg = svg.replace(/(\b(?:monospace|cursive|sans-serif)\b)(?:,\s*\1)+/g, '$1');
   return svg;
 }
