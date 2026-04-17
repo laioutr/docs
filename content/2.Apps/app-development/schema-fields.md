@@ -50,7 +50,7 @@ schema: [
   [Studio icon](/apps/app-development/studio-icons) shown next to the fieldset label.
   :::
 
-  :::field{default-value="false" name="defaultOpen" type="boolean"}
+  :::field{default-value="true" name="defaultOpen" type="boolean"}
   Whether the panel starts expanded.
   :::
 

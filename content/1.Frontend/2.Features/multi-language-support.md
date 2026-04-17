@@ -27,18 +27,18 @@ Configuration is centralized in Cockpit ([Translations](https://cockpit.laioutr.
 ### Key types
 
 - **`RcLanguage`**: `id`, `code` (BCP 47), `name`, `fallbacks` (ordered list of language codes for content resolution).
-- **`RenderLanguage`**: derived from `RcLanguage` by `buildI18nConfig()`; adds `languageCode`, `regionCode`, `direction` (ltr/rtl), `endonym`, `measurementSystem` (metric/imperial), `localeChain` (`[code, ...fallbacks, '*']`), and `marketDomains`.
-- **`LocalizedValue<T>`**: object keyed by language code (e.g. `{ "de": "/produkte", "fr": "/produits" }`). The `'*'` key is a universal fallback. Existing content stored under `'*'` works without migration.
+- **`RenderLanguage`**: derived from `RcLanguage` by `buildI18nConfig()`; adds `languageCode`, `regionCode`, `direction` (ltr/rtl), `endonym`, `measurementSystem` (metric/imperial), `localeChain` (`[code, ...fallbacks]`), and `marketDomains`.
+- **`LocalizedValue<T>`**: object keyed by language code (e.g. `{ "de": "/produkte", "fr": "/produits" }`).
 
 ### Content resolution
 
-`unlocalize(value, language.localeChain)` resolves a `LocalizedValue<T>` to a single value for a given `RenderLanguage`. It walks the language's `localeChain` and returns the first match. For example, `de-CH` tries `de-CH` → `de-DE` → `de` → `*` → first available value.
+`unlocalize(value, language.localeChain)` resolves a `LocalizedValue<T>` to a single value for a given `RenderLanguage`. It walks the chain and returns the first match, or `undefined` if no locale in the chain has a value. For example, with `de-CH` configured with fallbacks `['de-DE', 'de']`, it tries `de-CH` → `de-DE` → `de` → `undefined`.
 
 ```ts
 import { unlocalize } from '#imports'
 
 const path = unlocalize(page.paths, language.value.localeChain)
-// de-CH → de-DE → de → '*' → first available
+// de-CH → de-DE → de → undefined
 ```
 
 ### Integration with nuxt-i18n

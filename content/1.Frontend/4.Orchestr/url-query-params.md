@@ -32,7 +32,7 @@ For pages with a single primary query, you can drop the prefix entirely by marki
 
 :orchestr-url{url="/shoes?p=3&s=price:asc&f[color]=red"}
 
-Root queries set `isRootQuery: true` on the query identity. See [Query URL Identity](#query-url-identity) below.
+Root queries set `isRoot: true` on the query identity. See [Query URL Identity](#query-url-identity) below.
 
 ### Link prefixes
 
@@ -89,7 +89,7 @@ Every query declares its URL behavior through a `QueryUrlIdentity` object:
 interface QueryUrlIdentity {
   urlQueryPrefix: string;
   urlQueryAcceptedPrefixes: string[];
-  isRootQuery?: boolean;
+  isRoot?: boolean;
 }
 ```
 
@@ -102,7 +102,7 @@ interface QueryUrlIdentity {
   All prefixes that should be **read** when parsing the URL. The first entry is typically the same as `urlQueryPrefix`. Additional entries let you accept old or alternative prefixes for backward compatibility.
   :::
 
-  :::field{name="isRootQuery" type="boolean"}
+  :::field{name="isRoot" type="boolean"}
   When `true`, parameters are written without a prefix (`?p=2` instead of `?products[p]=2`). Accepted prefixes still work for reading, so existing prefixed URLs continue to resolve.
   :::
 ::
