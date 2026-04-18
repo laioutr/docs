@@ -6,13 +6,27 @@ seo:
   description: Changelog for Laioutr UI and UI Kit following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/ui-changelog
-  lastmod: 2026-04-16
+  lastmod: 2026-04-18
   changefreq: monthly
   priority: 1.0
 
 ---
 
 All notable changes to **Laioutr UI**, **UI Kit**, and related component libraries will be documented in this file.
+
+## [1.34.0]
+
+### Added
+
+- **UI Kit**: New structured z-index token scale: `--z-index-sticky` (100), `--z-index-modal` (1400), `--z-index-popover` (1500), `--z-index-tooltip` (1600), `--z-index-toast` (1700). Modal overlays and content share a single token so stacked modals layer correctly via DOM order.
+- **Frontend Core**: New editor z-index tokens (`--z-index-editor-block-hover/focus`, `--z-index-editor-section-hover/focus`, `--z-index-editor-actions`) for the Studio editor overlay system.
+- **Frontend Core**: Section definitions now support `rendering.isolate: false` to opt out of CSS containment/isolation, enabling sticky and fixed positioning to work correctly on header and overlay sections.
+
+### Changed
+
+- **UI Kit**: All portaled components (`Dialog`, `Sheet`, `AlertDialog`, `DropdownMenu`, `Select`, `Tooltip`, `MediaLightbox`) now explicitly apply z-index via their content class using the new token scale for predictable stacking behavior.
+- **UI App**: Header sections opt out of section isolation so their sticky/fixed chrome stays visible above subsequent sections.
+- **UI App**: `FilterBar` now teleports its scroll-triggered fixed bar to `<body>` to escape section isolation, and replaces hardcoded scroll thresholds with an `IntersectionObserver` tied to the inline bar's visibility.
 
 ## [1.33.0]
 
