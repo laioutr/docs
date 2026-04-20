@@ -4,19 +4,22 @@ const props = defineProps<{
   alt?: string;
 }>();
 
-const svgUrl = computed(() => props.src.replace(/\.excalidraw$/, '.svg'));
+const name = props.src.split('/').pop()!.replace(/\.(excalidraw|svg)$/, '');
 
-const { data: svgContent, error } = await useFetch<string>(svgUrl, {
-  key: `excalidraw-${props.src}`,
-  responseType: 'text',
-  transform: (raw) => stripEmbeddedFonts(raw),
-});
+let svgContent: string | null = null;
+let loadError: unknown = null;
+try {
+  const mod = await import(`../../assets/diagrams/${name}.svg?raw`);
+  svgContent = prepareInlineSvg(mod.default as string);
+} catch (e) {
+  loadError = e;
+}
 </script>
 
 <template>
   <figure class="excalidraw-diagram" role="img" :aria-label="alt">
-    <div v-if="svgContent" v-html="svgContent" class="excalidraw-svg" />
-    <div v-else-if="error" class="excalidraw-error">
+    <div v-if="svgContent" class="excalidraw-svg" v-html="svgContent" />
+    <div v-else-if="loadError" class="excalidraw-error">
       Failed to load diagram: {{ src }}
     </div>
   </figure>
