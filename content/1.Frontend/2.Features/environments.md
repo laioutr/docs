@@ -20,11 +20,11 @@ You are building a new product listing design, a seasonal campaign page, or a st
 
 ## What works today
 
-Laioutr Cloud handles **production deployments** end to end. When you click "Publish" in Studio, the platform builds your Nuxt application and deploys it to your configured [hosting adapter](/hosting/hosting-adapters). For previewing work-in-progress changes at the code level, **Vercel preview deployments** are the recommended path.
+Laioutr Cloud handles **production deployments** end to end. When you click "Publish" in Studio, the platform builds your Nuxt application and deploys it to your configured [hosting adapter](/hosting/hosting-adapter). For previewing work-in-progress changes at the code level, **Vercel preview deployments** are the recommended path.
 
 ### Vercel preview deployments
 
-If your project uses the [Vercel adapter](/hosting/hosting-adapters/vercel-adapter), every branch push automatically generates a **preview deployment** with its own URL. This lets developers and stakeholders review frontend changes before merging to the main branch.
+If your project uses the [Vercel adapter](/hosting/hosting-adapter/vercel-adapter), every branch push automatically generates a **preview deployment** with its own URL. This lets developers and stakeholders review frontend changes before merging to the main branch.
 
 ::steps
 
@@ -80,8 +80,8 @@ Multi-environment data configuration is not yet available. The information above
 
 | Capability | Status | How |
 |---|---|---|
-| Production deployments | Available | Laioutr Cloud + [hosting adapters](/hosting/hosting-adapters) |
-| Branch preview deployments | Available | [Vercel adapter](/hosting/hosting-adapters/vercel-adapter) |
+| Production deployments | Available | Laioutr Cloud + [hosting adapters](/hosting/hosting-adapter) |
+| Branch preview deployments | Available | [Vercel adapter](/hosting/hosting-adapter/vercel-adapter) |
 | Preview content on production | Workaround | Rule engine with secret URL parameter |
 | Environment-specific data configs | Coming soon | Planned multi-environment support |
 
