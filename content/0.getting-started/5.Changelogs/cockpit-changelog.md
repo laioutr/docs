@@ -28,6 +28,7 @@ All notable changes to **Cockpit (Studio)** — the visual editor and project ma
 
 ### Fixed
 
+- **Security**: Mitigated three minor security vulnerabilities — an open-redirect bypass via `//`-prefixed URLs, an organization deletion endpoint that previously accepted a full org object instead of a plain ID, and an incorrect last-admin check that could allow an organization to be left without any admin.
 - **Hosting**: Fixed broken snackbar link after triggering a deployment from Studio.
 - **Studio**: Fixed duplicate sections appearing in the section list.
 - **Studio**: Improved search in the Studio section/block picker.
