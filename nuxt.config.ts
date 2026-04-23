@@ -31,6 +31,16 @@ export default defineNuxtConfig({
     // and restoring the mdc:configSources and app:resolve hooks from git history.
   },
 
+  docus: {
+    assistant: {
+      // AI model (uses AI SDK Gateway format)
+      model: 'google/gemini-3-flash',
+
+      // MCP server (path or URL)
+      mcpServer: '/mcp'
+    }
+  },
+
   site: {
     name: 'Laioutr Docs',
     // Required for @nuxtjs/sitemap absolute <loc> URLs. Override per env (e.g. Cloudflare build: NUXT_SITE_URL).
