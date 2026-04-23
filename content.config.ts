@@ -1,6 +1,5 @@
-import { defineCollection, defineContentConfig } from '@nuxt/content'
+import { defineCollection, defineContentConfig, z } from '@nuxt/content'
 import { schema as sitemapSchema } from '@nuxtjs/sitemap/content'
-import { z } from 'zod'
 
 export default defineContentConfig({
   collections: {
