@@ -1,14 +1,10 @@
-import { defineCollection, defineContentConfig, z } from '@nuxt/content'
-import { schema as sitemapSchema } from '@nuxtjs/sitemap/content'
+import { defineCollection, defineContentConfig } from '@nuxt/content'
 
 export default defineContentConfig({
   collections: {
     docs: defineCollection({
       type: 'page',
       source: '**/*.md',
-      schema: z.object({
-        sitemap: sitemapSchema.shape.sitemap,
-      }),
     }),
   },
 })

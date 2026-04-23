@@ -9,7 +9,7 @@
     "@laioutr-core/canonical-types": "^0.22.7",
     "@laioutr-core/core-types": "^0.28.3",
     "@laioutr-core/ui-component-meta": "^1.28.2",
-    "@nuxt/content": "3.9.0",
+    "@nuxt/content": "3.13.0",
     "@nuxtjs/mdc": "0.19.1",
     "@nuxtjs/sitemap": "^7.6.0",
     "@vue-flow/core": "^1.48.2",
@@ -24,7 +24,8 @@
     "nuxt-studio": "1.1.1",
     "twoslash": "^0.3.6",
     "unist-util-visit": "^5.1.0",
-    "zod-to-json-schema": "^3.25.2"
+    "zod": "^3",
+    "zod-to-json-schema": "^3"
   },
   "devDependencies": {
     "@ebec/http": "^2.3.0",
