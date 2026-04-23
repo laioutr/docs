@@ -23,7 +23,8 @@
     "nuxt-content-twoslash": "^0.3.0",
     "nuxt-studio": "1.1.1",
     "twoslash": "^0.3.6",
-    "unist-util-visit": "^5.1.0"
+    "unist-util-visit": "^5.1.0",
+    "zod-to-json-schema": "^3.25.2"
   },
   "devDependencies": {
     "@ebec/http": "^2.3.0",
@@ -40,6 +41,6 @@
     "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "^5.9.3",
     "vue": "3.5.25",
-    "zod": "^4.3.6"
+    "zod": "^3.25.76"
   }
 }
