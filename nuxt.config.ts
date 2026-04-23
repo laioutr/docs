@@ -123,18 +123,6 @@ export default defineNuxtConfig({
     ],
   },
 
-  docus: {
-    assistant: {
-      model: 'google/gemini-2.5-flash',
-    },
-    
-    // MCP server (path or URL)
-    mcpServer: '/mcp',
-
-    // API endpoint path
-    apiPath: '/__docus__/assistant'
-  },
-
   ogImage: {
     defaults: {
       component: 'Laioutr',
