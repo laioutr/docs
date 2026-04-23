@@ -133,6 +133,18 @@ export default defineNuxtModule<ModuleOptions>({
 - **orchestr-helper:** Put pure mapping and helper logic in `runtime/server/orchestr-helper/` (e.g. cart helpers, product mappers, localized getters) so handlers stay thin and testable.
 - **mappers:** Put backend-to-canonical mappers (e.g. filters, media) in `runtime/server/mappers/` and import them in resolvers or handlers.
 
+## Section and block naming
+
+Sections and blocks are registered as **global Vue components** when Laioutr loads your app. All apps in a project share one global component registry, so names must be **unique across every section and block in the project**, including those from other installed apps. If two apps register a `HeroBanner` component, whichever loads last silently overwrites the other.
+
+To avoid collisions:
+
+- Prefix section components with `Section` (e.g. `SectionHeroBanner`, `SectionProductGrid`).
+- Prefix block components with `Block` (e.g. `BlockTestimonial`, `BlockCarouselSlide`).
+- Keep the `component` value in the definition identical to the filename: `SectionHeroBanner.vue` registers as `'SectionHeroBanner'`.
+
+The prefix also makes it clear in Studio and in Vue devtools whether a component is a top-level section or a slot-level block.
+
 ## Runtime layout
 
 - **Server-only** code lives under `src/runtime/server/`: `client/` (API/SDK factory), `const/` (keys, tokens), `mappers/`, `middleware/` (orchestr defineOrchestr), `orchestr/`, `orchestr-helper/`, `utils/`.

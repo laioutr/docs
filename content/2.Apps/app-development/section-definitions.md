@@ -54,7 +54,7 @@ Every section definition needs these properties:
 
 | Property | Type | Purpose |
 |---|---|---|
-| `component` | `string` | The globally registered Vue component name. Must match the component's filename (e.g., `SectionHeroBanner.vue` registers as `'SectionHeroBanner'`). |
+| `component` | `string` | The globally registered Vue component name. Must match the component's filename (e.g., `SectionHeroBanner.vue` registers as `'SectionHeroBanner'`). See [Section and block naming](/apps/app-development/coding-standards#section-and-block-naming) for why the `Section` prefix matters. |
 | `studio` | `object` | Metadata shown in the Studio UI. At minimum, provide `label`. |
 | `slots` | `SectionSlotDefinition[]` | Named insertion points for blocks. Pass an empty array if the section has no slots. |
 

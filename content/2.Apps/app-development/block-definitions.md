@@ -51,7 +51,7 @@ Editors place blocks into section slots through Studio. The section's [slot defi
 
 | Property | Type | Purpose |
 |---|---|---|
-| `component` | `string` | The globally registered Vue component name. Must match the component's filename. |
+| `component` | `string` | The globally registered Vue component name. Must match the component's filename (e.g., `BlockTestimonial.vue` registers as `'BlockTestimonial'`). See [Section and block naming](/apps/app-development/coding-standards#section-and-block-naming) for why the `Block` prefix matters. |
 | `studio` | `object` | Metadata for Studio's block picker. At minimum, provide `label`. |
 
 `schema` and `isStandalone` are optional.
