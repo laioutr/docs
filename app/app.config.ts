@@ -63,6 +63,47 @@ export default defineAppConfig({
       },
     ],
   },
+  assistant: {
+    // Show the floating input on documentation pages
+    floatingInput: true,
+    // Show the "Explain with AI" button in the sidebar
+    explainWithAi: true,
+    // Keyboard shortcuts
+    shortcuts: {
+      focusInput: 'meta_k'
+    },
+    // Custom icons
+    icons: {
+      trigger: 'i-lucide-sparkles',
+      explain: 'i-lucide-brain'
+    },
+    faqQuestions: [
+      {
+        category: 'Getting Started',
+        items: [
+          'How do I create my first section?',
+          'How do I connect Laioutr to commercetools?',
+          'What is the difference between a Section and a Block?',
+        ],
+      },
+      {
+        category: 'Orchestr & Data',
+        items: [
+          'How does the Orchestr data layer work?',
+          'How do I fetch data from multiple backends?',
+          'What are Client Entities and how do I use them?',
+        ],
+      },
+      {
+        category: 'Studio & Cockpit',
+        items: [
+          'How do I make a component editable in Studio?',
+          'How do I deploy my storefront to Laioutr Cloud?',
+        ],
+      },
+    ],
+  },
+
   toc: {
     title: 'Table of Contents',
     bottom: {
