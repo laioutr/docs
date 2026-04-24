@@ -189,5 +189,8 @@ export default defineNuxtConfig({
     rollupConfig: {
       external: ['@laioutr-core/ui-component-meta'],
     },
+    externals: {
+      inline: [/^zod(\/|$)/],
+    },
   },
 });
