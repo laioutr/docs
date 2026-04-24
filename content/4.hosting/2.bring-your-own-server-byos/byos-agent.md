@@ -18,7 +18,7 @@ The [`@laioutr/byos-agent`](https://www.npmjs.com/package/@laioutr/byos-agent) p
 
 The agent runs an HTTP server that:
 
-- Receives signed [webhooks](/hosting/bring-your-own-server-(byos)/webhook-config) from the Cockpit
+- Receives signed [webhooks](/hosting/bring-your-own-server-byos/webhook-config) from the Cockpit
 - Verifies signatures using the [Standard Webhooks](https://www.standardwebhooks.com/) specification
 - Executes configurable shell scripts for each event type
 - Reports deployment status back via callbacks
@@ -63,4 +63,4 @@ Both examples support preview deployments and promotion to production. See the [
 ## Resources
 
 - [GitHub Repository](https://github.com/laioutr/byos-agent) -- Full documentation, configuration reference, and examples
-- [Webhook Configuration](/hosting/bring-your-own-server-(byos)/webhook-config) -- Event types, payload structure, and callback format
+- [Webhook Configuration](/hosting/bring-your-own-server-byos/webhook-config) -- Event types, payload structure, and callback format

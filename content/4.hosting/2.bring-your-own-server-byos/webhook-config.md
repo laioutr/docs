@@ -25,7 +25,7 @@ Integrate your own hosting solution into Laioutr by setting up a webhook. Cockpi
 You provide a URL that Cockpit will call for each of these actions.
 
 ::tip
-The [`@laioutr/byos-agent`](https://github.com/laioutr/byos-agent) handles webhook verification, script execution, and status callbacks out of the box. See the [BYOS Agent documentation](/hosting/bring-your-own-server-(byos)/byos-agent) to get started quickly, including deployment examples for Docker and PM2.
+The [`@laioutr/byos-agent`](https://github.com/laioutr/byos-agent) handles webhook verification, script execution, and status callbacks out of the box. See the [BYOS Agent documentation](/hosting/bring-your-own-server-byos/byos-agent) to get started quickly, including deployment examples for Docker and PM2.
 ::
 
 # Authentication (Standard Webhooks)
