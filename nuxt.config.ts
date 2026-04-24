@@ -37,7 +37,10 @@ export default defineNuxtConfig({
       model: 'google/gemini-3-flash',
 
       // MCP server (path or URL)
-      mcpServer: '/mcp'
+      mcpServer: '/mcp',
+
+            // API endpoint path
+      apiPath: '/__docus__/assistant'
     }
   },
 
