@@ -13,3 +13,5 @@ registry=https://registry.npmjs.org/
 # Laioutrs private npm registry auth
 //npm.laioutr.cloud/:_authToken=${LAIOUTR_NPM_TOKEN}
 //npm.laioutr.cloud/:always-auth=true
+
+shamefully-hoist=true

@@ -4,9 +4,7 @@ export default defineNuxtConfig({
   extends: ['docus'],
   app: {
     head: {
-      meta: [
-        { name: 'google-site-verification', content: 'qwFXebMaXjyk7RdnQpI5g2nft5v4CnxXKgkNEF7Y2Lo' },
-      ],
+      meta: [{ name: 'google-site-verification', content: 'qwFXebMaXjyk7RdnQpI5g2nft5v4CnxXKgkNEF7Y2Lo' }],
     },
   },
   modules: [
@@ -27,8 +25,19 @@ export default defineNuxtConfig({
         ctx.content.path = withoutTrailingSlash(permalink);
       }
     },
+    'nitro:config'(nitroConfig) {
+      // @nuxt/content 3.13 registers its own /raw/**:slug.md handler that skips
+      // our transformMdcBody step. Drop it so server/routes/raw/[...slug].md.get.ts
+      // is the one that serves /raw/*.md.
+      nitroConfig.handlers = (nitroConfig.handlers || []).filter(
+        (h) => !h || !(h.route === '/raw/**:slug.md' && /content\/dist\/features\/llms/.test(String(h.handler)))
+      );
+    },
     // twoslash is temporarily disabled — re-enable by uncommenting the module
     // and restoring the mdc:configSources and app:resolve hooks from git history.
+  },
+  mcp: {
+    name: 'Laioutr Documentation MCP',
   },
 
   docus: {
@@ -39,9 +48,9 @@ export default defineNuxtConfig({
       // MCP server (path or URL)
       mcpServer: '/mcp',
 
-            // API endpoint path
-      apiPath: '/__docus__/assistant'
-    }
+      // API endpoint path
+      apiPath: '/__docus__/assistant',
+    },
   },
 
   site: {
@@ -56,9 +65,7 @@ export default defineNuxtConfig({
   },
 
   robots: {
-    groups: process.env.NODE_ENV === 'production'
-      ? [{ userAgent: ['*'], allow: ['/'] }]
-      : [{ userAgent: ['*'], disallow: ['/'] }],
+    groups: process.env.NODE_ENV === 'production' ? [{ userAgent: ['*'], allow: ['/'] }] : [{ userAgent: ['*'], disallow: ['/'] }],
     sitemap: ['/sitemap.xml'],
   },
 
@@ -188,9 +195,6 @@ export default defineNuxtConfig({
     // These files contain JSON-like data with JS code strings that Rollup can't parse
     rollupConfig: {
       external: ['@laioutr-core/ui-component-meta'],
-    },
-    externals: {
-      inline: [/^zod(\/|$)/],
     },
   },
 });

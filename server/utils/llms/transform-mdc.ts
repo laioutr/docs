@@ -1,6 +1,7 @@
 import { renderAction, renderEntityComponent, renderEntityOverview, renderError, renderPageType, renderQuery } from './render-reflected';
 import { renderUiComponentMeta } from './render-ui-meta';
 import { renderExcalidrawDiagram } from './render-excalidraw';
+import { renderComponentCode } from './render-component-code';
 import reflected from '@laioutr-core/canonical-types/reflection';
 import '@laioutr-core/canonical-types/autoload';
 import { pageTypeTokenRegistry } from '@laioutr-core/core-types/frontend';
@@ -8,13 +9,13 @@ import { canonicalErrors } from '#shared/utils/canonical-errors';
 
 type MinimarkNode = [string, Record<string, unknown>, ...any[]] | string;
 
-const KNOWN_COMPONENTS = new Set(['action-meta', 'query-meta', 'entity-component-meta', 'entity-overview', 'component-meta', 'page-type-meta', 'error-meta', 'excalidraw-diagram']);
+const KNOWN_COMPONENTS = new Set(['action-meta', 'query-meta', 'entity-component-meta', 'entity-overview', 'component-meta', 'page-type-meta', 'error-meta', 'excalidraw-diagram', 'component-code']);
 
 function isElement(node: MinimarkNode): node is [string, Record<string, unknown>, ...any[]] {
   return Array.isArray(node) && typeof node[0] === 'string';
 }
 
-async function resolveComponent(tag: string, props: Record<string, unknown>): Promise<MinimarkNode[] | null> {
+async function resolveComponent(tag: string, props: Record<string, unknown>, children: MinimarkNode[]): Promise<MinimarkNode[] | null> {
   switch (tag) {
     case 'action-meta': {
       const action = reflected.actions.find((a: any) => a.name === props.name);
@@ -62,6 +63,9 @@ async function resolveComponent(tag: string, props: Record<string, unknown>): Pr
         return null;
       }
     }
+    case 'component-code': {
+      return renderComponentCode(props, children);
+    }
     default:
       return null;
   }
@@ -91,7 +95,7 @@ async function walkAndReplace(nodes: MinimarkNode[]): Promise<void> {
       const childText = extractChildText(children);
 
       try {
-        const replacement = await resolveComponent(tag, normalizedProps);
+        const replacement = await resolveComponent(tag, normalizedProps, children);
         if (replacement) {
           // Preserve children text as a leading paragraph
           if (childText) {

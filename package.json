@@ -22,6 +22,7 @@
     "nuxt-component-meta": "^0.15.0",
     "nuxt-content-twoslash": "^0.3.0",
     "nuxt-studio": "1.1.1",
+    "satori": "^0.26.0",
     "twoslash": "^0.3.6",
     "unist-util-visit": "^5.1.0",
     "zod": "^3",
