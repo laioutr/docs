@@ -6,7 +6,7 @@ seo:
   description: Developer documentation for the Laioutr Cookiebot app package. Add Cookiebot cookie consent management to your Nuxt…
 sitemap:
   loc: /apps/app-docs/cookiebot
-  lastmod: 2026-04-08
+  lastmod: 2026-04-27
   changefreq: monthly
   priority: 1.0
 
@@ -14,9 +14,9 @@ sitemap:
 
 ## Overview
 
-The **@laioutr-app/cookiebot** package integrates [Cookiebot](https://www.cookiebot.com/) into a Laioutr-powered Nuxt app for cookie consent management. It does not register any orchestr handlers; instead it adds a **client plugin** that registers a **CookiebotAdapter** with the Laioutr consent store (from **@laioutr-core/frontend-core**). The adapter loads the Cookiebot script, reads the consent cookie, maps Cookiebot’s categories to Laioutr’s **ConsentManagementState**, and exposes methods to show/renew the consent overlay and to check or react to consent changes.
+The `@laioutr-app/cookiebot` package wires [Cookiebot](https://www.cookiebot.com/) into a Laioutr-powered Nuxt app as a [consent adapter](/frontend/features/consent-management). On install, a client plugin registers a `CookiebotAdapter` with `useConsentStore()` from `@laioutr-core/frontend-core`. The adapter injects the Cookiebot script, reads the `CookieConsent` cookie, maps Cookiebot's four categories to Laioutr's `ConsentManagementState`, and forwards consent changes to the store.
 
-Configuration is minimal: **cbid** (Cookiebot domain group ID) is required; **consentMode** and **consentModeDefaults** are optional and control Google Consent Mode v2 integration. All options are exposed in **public** runtime config so the client plugin can read them. The module installs **@laioutr-core/frontend-core** on prepare.
+Only `cbid` is required. `consentMode` and `consentModeDefaults` toggle Google Consent Mode v2 integration. The module installs `@laioutr-core/frontend-core` on prepare.
 
 ## Configuration requirements
 
@@ -27,8 +27,8 @@ The module expects configuration under the key **`@laioutr-app/cookiebot`** in `
 | Option | Type | Description |
 |--------|------|-------------|
 | **`cbid`** | `string` | Cookiebot domain group ID (CBID). Used to load the Cookiebot script from `https://consent.cookiebot.com/uc.js?cbid={cbid}`. Find it in your Cookiebot dashboard. |
-| **`consentMode`** | `boolean` | Enable Google Consent Mode v2. When `true`, the script tag gets `data-consentmode` (Cookiebot default). When `false`, the script gets `data-consentmode="disabled"`. Default: `true`. |
-| **`consentModeDefaults`** | `boolean` | Enable default consent state for Google Consent Mode. When `true`, Cookiebot default applies. When `false`, the script gets `data-consentmode-defaults="disabled"`. Default: `true`. |
+| **`consentMode`** | `boolean` | Enable Google Consent Mode v2. When `true`, the script attribute is omitted and Cookiebot's default behaviour applies (Consent Mode active). When `false`, the script tag gets `data-consentmode="disabled"`. Default: `true`. |
+| **`consentModeDefaults`** | `boolean` | Enable Cookiebot's default Consent Mode state. When `true`, the script attribute is omitted and Cookiebot's default applies. When `false`, the script tag gets `data-consentmode-defaults="disabled"`. Default: `true`. |
 
 ### Example configuration
 
@@ -46,30 +46,24 @@ export default defineNuxtConfig({
 
 Use an environment variable for **cbid** in production if you prefer not to hardcode it; the value is public so it can be exposed to the client.
 
-### Runtime behavior
+### Runtime behaviour
 
-- **Plugin**  
-  The package adds a Nuxt plugin that runs on the client: it reads public runtime config for `@laioutr-app/cookiebot`, creates a **CookiebotAdapter** with that config, registers it with **useConsentStore()**, and activates it. The consent store is from **@laioutr-core/frontend-core**; other adapters or UI can use the same store.
+The client plugin reads `runtimeConfig.public['@laioutr-app/cookiebot']`, instantiates `CookiebotAdapter`, and activates it with `useConsentStore()`. On `init()` the adapter injects the Cookiebot script via `useHead` (with `data-blockingmode="auto"`), sets up `useCookie('CookieConsent')`, and on the client listens for `CookiebotOnLoad` to forward consent updates.
 
-- **Adapter init**  
-  When the adapter is initialised it: (1) Injects the Cookiebot script via **useHead** with `data-blockingmode="auto"` and optional `data-consentmode` / `data-consentmode-defaults`. (2) Sets up **useCookie** for the **CookieConsent** cookie (decode parses Cookiebot’s JSON shape). (3) On the client, listens for **CookiebotOnLoad** and maps **window.Cookiebot.consent** to **ConsentManagementState** and notifies registered callbacks.
+Cookiebot's categories map to Laioutr's `ConsentManagementState` as follows: `necessary` → `necessary`, `preferences` → `functional`, `statistics` → `statistics`, `marketing` → `marketing`. `unclassified` is always `false`. Because the cookie is readable through `useCookie`, `getConsentState()` works on the server and the first SSR render reflects the user's choice with no flash.
 
-- **Consent mapping**  
-  Cookiebot categories are mapped to Laioutr’s consent state: **necessary** → necessary, **preferences** → functional, **statistics** → statistics, **marketing** → marketing; **unclassified** is set to `false`. **getConsentState()** returns this shape from the cookie or from **window.Cookiebot.consent** when available.
+`showConsentOverlay()` and `renewConsent()` call `window.Cookiebot.show()` and `window.Cookiebot.renew()`. For the full adapter contract and how to wire equivalent methods for another CMP, see the [Consent Adapters](/apps/app-development/consent-adapters) guide.
 
-- **Adapter methods**  
-  **showConsentOverlay()** calls **window.Cookiebot.show()**. **renewConsent()** calls **window.Cookiebot.renew()**. **hasCategoryConsent(category)** returns whether the given category is granted. **onConsentChange(callback)** registers a callback that is invoked when consent is updated (e.g. after CookiebotOnLoad).
+## What it integrates with
 
-## Capabilities
+The Cookiebot script renders the consent banner and stores the user's choices in the `CookieConsent` cookie. Once the adapter is active, anything that reads `useConsentStore()` respects those choices: your own `hasCategoryConsent('statistics')` checks, the [tracking store's](/frontend/features/tracking) per-adapter `consentCategories` gate, and the [GTM app's](/apps/app-docs/gtm) Google Consent Mode `gtag('consent', 'update', ...)` calls.
 
-This package does not provide orchestr queries, actions, links, or resolvers. It only adds Cookiebot as a **consent adapter** for the Laioutr consent store.
-
-- **Consent management** – The Cookiebot script displays the consent banner and stores the user’s choices in the **CookieConsent** cookie. The adapter exposes consent state (necessary, functional, statistics, marketing) so other parts of your app (e.g. analytics, marketing scripts) can respect it. Use the consent store’s **hasCategoryConsent** or the adapter’s **showConsentOverlay** / **renewConsent** as needed.
+For the consumer-facing API (`useConsentStore`, `showConsentOverlay`, `onConsentChange`) see the [Consent Management feature](/frontend/features/consent-management).
 
 ## Backend requirements
 
-- **Cookiebot account** – Sign up at [Cookiebot](https://www.cookiebot.com/) and add your domain. Obtain the **CBID** (domain group ID) from the dashboard and configure the scanner/banner as needed.
-- **@laioutr-core/frontend-core** – The consent store and **ConsentAdapter** type come from frontend-core; ensure the app has this module so the adapter can register and be used by other features (e.g. GTM, analytics).
+- A Cookiebot account at [cookiebot.com](https://www.cookiebot.com/), with your domain configured and a CBID issued for it.
+- `@laioutr-core/frontend-core` installed in the host app (the Cookiebot module installs it on prepare, so just ensure the app does not strip it).
 
 ## Cookies and context
 

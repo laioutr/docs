@@ -6,44 +6,44 @@ seo:
   description: Developer documentation for the Laioutr CCM19 app package. Add CCM19 cookie consent management to your Nuxt app via the Laioutr consent store.
 sitemap:
   loc: /apps/app-docs/ccm19
-  lastmod: 2026-04-08
+  lastmod: 2026-04-27
   changefreq: monthly
-  priority: 1.0
-
+  priority: 1
 ---
 
 ## Overview
 
-The **@laioutr-app/ccm19** package integrates [CCM19](https://www.ccm19.de/) into a Laioutr-powered Nuxt app for cookie consent management. It does not register any orchestr handlers; instead it adds a **client plugin** that registers a **CCM19Adapter** with the Laioutr consent store (from **@laioutr-core/frontend-core**). The adapter loads the CCM19 script, listens to CCM19's widget events, maps CCM19's purpose-based consent model to Laioutr's **ConsentManagementState**, and exposes methods to show/renew the consent overlay and to check or react to consent changes.
+The `@laioutr-app/ccm19` package wires [CCM19](https://www.ccm19.de/) into a Laioutr-powered Nuxt app as a [consent adapter](/frontend/features/consent-management). On install, a client plugin registers a `CCM19Adapter` with `useConsentStore()` from `@laioutr-core/frontend-core`. The adapter loads the CCM19 widget, listens to its consent events, and translates CCM19's purpose IDs into Laioutr's `ConsentManagementState`.
 
-Unlike Cookiebot, CCM19 uses user-defined **purposes** (configured in the CCM19 dashboard) rather than fixed consent categories. The adapter provides a configurable **purposeMapping** to translate CCM19 purpose names to Laioutr's five consent categories. Sensible defaults for common German and English purpose names are included.
+CCM19 organises consent by **purposes** rather than fixed categories. Each purpose has a 7-character hex ID (visible in the CCM19 admin UI or on `event.detail.purpose` in the widget's events). The adapter ships with a `purposeMapping` for CCM19's standard built-in purposes, override it to handle admin-defined purposes.
 
 ## Configuration requirements
 
-The module expects configuration under the key **`@laioutr-app/ccm19`** in `nuxt.config.ts` (or via `runtimeConfig`). Three options are required; two have defaults.
+The module expects configuration under the key `@laioutr-app/ccm19` in `nuxt.config.ts` (or via `runtimeConfig`). Three options are required. Two have defaults.
 
 ### Module options
 
-| Option | Type | Description |
-|--------|------|-------------|
-| **`serverUrl`** | `string` | The CCM19 server URL. For cloud-hosted instances this is typically `https://cloud.ccm19.de`; for self-hosted installations use your own server URL. |
-| **`apiKey`** | `string` | The API key from the CCM19 dashboard. Find it in the integration/embed code section of your CCM19 domain configuration. |
-| **`domainId`** | `string` | The domain-specific ID number from CCM19. Also found in the integration/embed code section. |
-| **`lang`** | `string \| undefined` | Optional locale override (e.g. `de_DE`, `en_US`). If omitted, CCM19 auto-detects the language. Default: `undefined`. |
-| **`purposeMapping`** | `Record<string, ConsentCategory>` | Mapping from CCM19 purpose names to Laioutr consent categories. Keys are purpose strings (case-insensitive matching). Values are one of `necessary`, `functional`, `statistics`, `marketing`, `unclassified`. See default mapping below. |
+| Option           | Type                              | Description                                                                                                                                                                                                                                                                       |
+| ---------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `serverUrl`      | `string`                          | The CCM19 server URL. For cloud-hosted instances this is typically `https://cloud.ccm19.de`; for self-hosted installations use your own server URL.                                                                                                                               |
+| `apiKey`         | `string`                          | The API key from the CCM19 dashboard. Find it in the integration/embed code section of your CCM19 domain configuration.                                                                                                                                                           |
+| `domainId`       | `string`                          | The domain-specific ID number from CCM19. Also found in the integration/embed code section.                                                                                                                                                                                       |
+| `lang`           | `string | undefined`              | Optional locale override (e.g. `de_DE`, `en_US`). If omitted, CCM19 auto-detects the language. Default: `undefined`.                                                                                                                                                              |
+| `purposeMapping` | `Record<string, ConsentCategory>` | Mapping from CCM19 **purpose IDs** (7-char hex) to Laioutr consent categories. Direct lookup, no case folding. Values are one of `necessary`, `functional`, `statistics`, `marketing`, `unclassified`. The default mapping covers CCM19's built-in standard purposes (see below). |
 
 ### Default purpose mapping
 
-The module ships with defaults that cover common German and English CCM19 purpose names:
+The module ships with the canonical IDs of CCM19's built-in standard purposes (stable across CCM19 versions):
 
-| CCM19 Purpose | Laioutr Category |
-|---------------|-----------------|
-| Technisch notwendig / Essential / Essentiell | `necessary` |
-| Funktional / Functional | `functional` |
-| Statistik / Statistics | `statistics` |
-| Marketing | `marketing` |
+| CCM19 Purpose ID | CCM19 Purpose | Laioutr Category |
+| ---------------- | ------------- | ---------------- |
+| `41ba25c`        | Necessary     | `necessary`      |
+| `7c19e32`        | Preference    | `functional`     |
+| `a717ff5`        | Statistics    | `statistics`     |
+| `6cd2721`        | Marketing     | `marketing`      |
+| `15c61c3`        | Unclassified  | `unclassified`   |
 
-Purposes not found in the mapping are treated as `unclassified`. Override **purposeMapping** if your CCM19 dashboard uses custom purpose names.
+Purposes whose IDs are not in the mapping flip Laioutr's `unclassified` to `true`. To map admin-defined purposes from your CCM19 dashboard, find the ID on `event.detail.purpose` and add an entry to `purposeMapping`.
 
 ### Example configuration
 
@@ -56,58 +56,61 @@ export default defineNuxtConfig({
     apiKey: process.env.CCM19_API_KEY!,
     domainId: process.env.CCM19_DOMAIN_ID!,
     lang: 'de_DE',
-    // Override purpose mapping if your CCM19 dashboard uses custom names:
+    // Override or extend purpose mapping for admin-defined purposes:
     // purposeMapping: {
-    //   'Notwendig': 'necessary',
-    //   'Analyse': 'statistics',
-    //   'Werbung': 'marketing',
+    //   '41ba25c': 'necessary',  // built-in (kept as default)
+    //   'abc1234': 'statistics', // your custom purpose ID
     // },
   },
 });
 ```
 
-Use environment variables for **serverUrl**, **apiKey**, and **domainId** in production; the values are public so they can be exposed to the client.
+Use environment variables for `serverUrl`, `apiKey`, and `domainId` in production; the values are public so they can be exposed to the client.
 
-### Runtime behavior
+::warning
+Setting `purposeMapping` replaces the default mapping. To extend rather than replace, copy the default IDs from the table above into your override.
+::
 
-- **Plugin**
-  The package adds a Nuxt plugin that runs on the client: it reads public runtime config for `@laioutr-app/ccm19`, creates a **CCM19Adapter** with that config, registers it with **useConsentStore()**, and activates it. The consent store is from **@laioutr-core/frontend-core**; other adapters or UI can use the same store.
+### Runtime behaviour
 
-- **Adapter init**
-  When the adapter is initialised it: (1) Injects the CCM19 script via **useHead** with `referrerpolicy="origin"`. The script URL follows the pattern `{serverUrl}/app.js?apiKey={apiKey}&domain={domainId}&lang={lang}`. (2) On the client, listens for **ccm19WidgetLoaded** (initial consent state), **ccm19WidgetClosed** (consent saved), **ccm19CookieAccepted**, and **ccm19EmbeddingAccepted** events. (3) Handles late initialization if **window.CCM** is already available when the plugin runs.
+The client plugin reads `runtimeConfig.public['@laioutr-app/ccm19']`, instantiates `CCM19Adapter`, and activates it with `useConsentStore()`. On `init()` the adapter:
 
-- **Consent mapping**
-  CCM19 uses purpose-based consent rather than fixed categories. The adapter collects accepted purposes from **ccm19CookieAccepted** and **ccm19EmbeddingAccepted** event details and from **window.CCM.acceptedEmbeddings**. Each purpose is matched (case-insensitive) against **purposeMapping** to produce Laioutr's consent state. If **window.CCM.fullConsentGiven** is `true`, all categories are granted. Unmatched purposes set `unclassified` to `true`.
+1. Injects an inline bootstrap script into the SSR `<head>` (with `tagPriority: 1`) that runs at HTML parse and accumulates purpose IDs from `ccm19CookieAccepted` and `ccm19EmbeddingAccepted` events into `window.__CCM19Purposes`. This catches the event storm CCM19 fires during its own init, before any client-side plugin can attach.
+2. Injects the CCM19 script (`{serverUrl}/app.js?apiKey=...&domain=...&lang=...`) with `referrerpolicy="origin"`.
+3. On the client, listens to `ccm19WidgetLoaded` and `ccm19WidgetClosed` and pushes the current state to registered consent-change callbacks.
 
-- **Adapter methods**
-  **showConsentOverlay()** calls **window.CCM.openWidget()**. **renewConsent()** calls **window.CCM.openControlPanel()** (the detailed purpose selection dialog). **hasCategoryConsent(category)** returns whether the given category is granted. **onConsentChange(callback)** registers a callback that is invoked when consent is updated. **destroy()** cleans up all event listeners.
+`getConsentState()` reads `window.__CCM19Purposes`, looks each ID up in `purposeMapping`, and grants the matching category (or `unclassified` for unmapped IDs). If `window.CCM.fullConsentGiven` is `true`, all categories are granted. On the server, where neither `window.CCM` nor the cookie is parseable, `getConsentState()` returns the denied baseline (`necessary: true`, others `false`).
 
-- **Server-side rendering**
-  CCM19's cookie format is not publicly documented, so the adapter does not parse cookies for SSR. On the server, **getConsentState()** returns the default denied state (`necessary: true`, all others `false`). The consent state is updated on the client after CCM19 loads.
+`showConsentOverlay()` calls `window.CCM.openWidget()`. `renewConsent()` calls `window.CCM.openControlPanel()` (the granular preferences dialog). `destroy()` removes all event listeners and clears callbacks.
 
-## Capabilities
+For the full adapter contract and how to wire equivalent methods for another CMP, see the [Consent Adapters](/apps/app-development/consent-adapters) guide.
 
-This package does not provide orchestr queries, actions, links, or resolvers. It only adds CCM19 as a **consent adapter** for the Laioutr consent store.
+## What it integrates with
 
-- **Consent management** – The CCM19 script displays the consent banner/widget and stores the user's choices. The adapter exposes consent state (necessary, functional, statistics, marketing, unclassified) so other parts of your app (e.g. analytics, marketing scripts) can respect it. Use the consent store's **hasCategoryConsent** or the adapter's **showConsentOverlay** / **renewConsent** as needed.
+The CCM19 widget renders the consent banner and stores the user's choices server-side under a UCID. Once the adapter is active, anything that reads `useConsentStore()` respects those choices: your own `hasCategoryConsent('statistics')` checks, the [tracking store's](/frontend/features/tracking) per-adapter `consentCategories` gate, and the [GTM app's](/apps/app-docs/gtm) Google Consent Mode `gtag('consent', 'update', ...)` calls.
+
+For the consumer-facing API (`useConsentStore`, `showConsentOverlay`, `onConsentChange`) see the [Consent Management feature](/frontend/features/consent-management).
 
 ## Backend requirements
 
-- **CCM19 account** – Sign up at [CCM19](https://www.ccm19.de/) (cloud or self-hosted). Add your domain, configure the cookie scanner and consent widget, and obtain the **server URL**, **API key**, and **domain ID** from the embed code section.
-- **@laioutr-core/frontend-core** – The consent store and **ConsentAdapter** type come from frontend-core; ensure the app has this module so the adapter can register and be used by other features (e.g. GTM, analytics).
+- A CCM19 account at [ccm19.de](https://www.ccm19.de/) (cloud or self-hosted), with your domain configured and an API key + domain ID issued for it.
+- `@laioutr-core/frontend-core` installed in the host app (the CCM19 module installs it on prepare, so just ensure the app does not strip it).
 
 ## Google Consent Mode v2
 
-Unlike Cookiebot, Google Consent Mode v2 for CCM19 is configured **directly in the CCM19 dashboard**, not via module options. Enable the relevant consent types (`ad_storage`, `analytics_storage`, `ad_user_data`, `ad_personalization`) in the CCM19 embedding settings for your Google integrations. The Laioutr module does not need additional configuration for this.
+CCM19's Google Consent Mode integration is configured **directly in the CCM19 dashboard**, not via module options. Enable the relevant consent types (`ad_storage`, `analytics_storage`, `ad_user_data`, `ad_personalization`) in the CCM19 embedding settings for your Google integrations.
+
+## Server-side rendering
+
+The first SSR render uses the denied baseline. The client overrides it once CCM19 reports in.
 
 ## Summary checklist
 
-- Add **@laioutr-app/ccm19** to Nuxt modules.
-- Set **serverUrl**, **apiKey**, and **domainId** (and optionally **lang**, **purposeMapping**) under `@laioutr-app/ccm19` (e.g. from env).
-- Ensure your CCM19 domain is configured and the embed code credentials match.
-- Review the purpose names in your CCM19 dashboard and adjust **purposeMapping** if they differ from the defaults.
-- Use the consent store (e.g. **useConsentStore()**, **hasCategoryConsent**) in your app or in other apps (e.g. GTM) to gate scripts based on consent.
+- Add `@laioutr-app/ccm19` to Nuxt modules.
+- Set `serverUrl`, `apiKey`, and `domainId` (and optionally `lang`, `purposeMapping`) under `@laioutr-app/ccm19`, ideally from env.
+- If your CCM19 dashboard defines custom purposes, find their IDs (`event.detail.purpose` or the admin UI) and extend `purposeMapping`.
+- Use `useConsentStore()` and `hasCategoryConsent()` to gate behaviour; see the [Consent Management feature](/frontend/features/consent-management) for the consumer-facing API.
 
 ## Changelog
 
-All changelogs are managed in **`CHANGELOG.md`** in the package’s GitHub repository. This app does not currently have a [public repository under the Laioutr organization](https://github.com/orgs/laioutr/repositories?q=&type=public); when it is published there, use that repo’s **`CHANGELOG.md`** for release notes.
+The package's `CHANGELOG.md` is the source of truth for release notes. There is no public repository under the [Laioutr GitHub organisation](https://github.com/orgs/laioutr/repositories?q=&type=public) yet; once one is published, that repo's `CHANGELOG.md` will be the canonical reference.
