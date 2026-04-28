@@ -69,7 +69,7 @@ Every field type shares these properties:
   :::
 
   :::field{name="name" required="true" type="string"}
-  Property name on the component's props. Must be unique within the definition.
+  Property name on the component's props. Must be unique within the definition. A small set of names is [reserved](#reserved-names) and cannot be used.
   :::
 
   :::field{name="label" type="string"}
@@ -84,6 +84,60 @@ Every field type shares these properties:
   Help text shown below the field.
   :::
 ::
+
+## Naming rules
+
+Field `name` values become props on the rendered Vue component. They must be `camelCase` and avoid the names below.
+
+### Reserved names
+
+These names cannot be used as a top-level field `name`:
+
+| `name` | Why it's reserved |
+| ------ | ----------------- |
+| `style`, `class` | Vue attribute-bindings. Merge into the root element via `inheritAttrs` instead of arriving as props. |
+| `key`, `ref` | Consumed by Vue's renderer (list-render key, template ref); never reach `props`. |
+| `is` | Vue's `<component :is>` prop. |
+| `slot` | Reserved for named-slot routing in Vue Custom Elements. Currently safe; avoid for forward compatibility. |
+| `slots` | Section-only. Frontend Core injects a `slots` prop carrying slot data from the parent page; a field named `slots` is overwritten. |
+| `refFor`, `refKey` | Vue 3 compiler internals for template refs inside `v-for`. Vue's source spells these `ref_for` / `ref_key`; the camelCase form is what you'd write as a `name`. |
+
+::warning
+Using a reserved name does not produce a TypeScript or build error. The field appears in Studio and the editor can configure it, but the value is silently consumed by Vue and never reaches your component's `props`. The bug only surfaces at runtime when nothing changes despite the configured value.
+::
+
+### camelCase only
+
+Dash-case names (`my-field`, `data-foo`) are not supported. Vue normalises dash-case template attributes to `camelCase` for prop lookup, so a prop literally named `'my-field'` cannot be addressed from a parent template and the value never flows through.
+
+### What's allowed
+
+Compound names that contain a reserved token are fine; only the bare names are forbidden:
+
+```ts
+// ❌ reserved; value never reaches props
+{ type: 'select', name: 'style', options: [...] }
+
+// ✅ compound names are allowed
+{ type: 'object', name: 'headingStyle', as: 'style', for: 'heading', schema: [...] }
+{ type: 'text', name: 'productKey' }
+```
+
+`type`, `data-*`, and `aria-*` are not Vue-special and can be used as `name` values (camelCased: `dataFoo`, `ariaLabel`). Nested fields inside an `object` schema also don't collide with the reserved list, since their `name` becomes a key on the parent's value rather than a direct prop.
+
+For the most common case (a top-level visual variant selector), use `variant`:
+
+```ts
+{
+  type: 'toggle_button',
+  name: 'variant',
+  label: 'Style',
+  options: [
+    { label: 'Default', value: 'default' },
+    { label: 'Compact', value: 'compact' },
+  ],
+}
+```
 
 ## Default values and runtime fallbacks
 
