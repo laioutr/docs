@@ -28,6 +28,7 @@ All notable changes to **Cockpit (Studio)** — the visual editor and project ma
 
 ### Fixed
 
+- **i18n Settings**: Fixed a permissions issue where users with the `projectMarketsManagement` role could not create, update, or delete markets — the market management endpoints were incorrectly requiring the broader `projects` permission instead of the more specific `projectMarketsManagement` permission.
 - **Security**: Mitigated three minor security vulnerabilities — an open-redirect bypass via `//`-prefixed URLs, an organization deletion endpoint that previously accepted a full org object instead of a plain ID, and an incorrect last-admin check that could allow an organization to be left without any admin.
 - **Hosting**: Fixed a Safari incompatibility in duration formatting — duration values are now displayed correctly in Safari, which does not support the `Temporal` API.
 - **Hosting**: Fixed broken snackbar link after triggering a deployment from Studio.
