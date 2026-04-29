@@ -18,8 +18,8 @@ export default defineNitroPlugin((nitroApp) => {
         // Only rewrite links under our own domain
         if (domain && !link.href.startsWith(domain)) continue;
         const path = link.href.slice(domain.length);
-        // Skip non-content links (e.g. /llms-full.txt)
-        if (path.includes('.')) continue;
+        // Skip root and non-content links (e.g. / or /llms-full.txt)
+        if (path === '/' || !path || path.includes('.')) continue;
         link.href = `${domain}/raw${path}.md`;
       }
     }

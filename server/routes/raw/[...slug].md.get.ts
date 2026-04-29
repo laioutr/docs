@@ -21,7 +21,7 @@ export default eventHandler(async (event) => {
     throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true });
   }
 
-  const path = withLeadingSlash(slug.replace('.md', ''));
+  const path = withLeadingSlash(slug.replace('.md', '')).replace(/\/index$/, '') || '/';
 
   const page = await queryCollection(event, 'docs' as keyof Collections).path(path).first();
   if (!page) {
