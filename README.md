@@ -35,4 +35,4 @@ This site comes pre-configured with:
 
 ## 🚀 Deployment
 
-Automatic deployment to Cloudflare Pages is configured.
+Automatic deployment to Vercel is configured.
