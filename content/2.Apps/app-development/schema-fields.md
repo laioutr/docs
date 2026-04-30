@@ -165,6 +165,21 @@ The fallback is **not** the `default` value. It is a type-appropriate zero value
 
 String fields like `text` and `textarea` always resolve to a string, so you can use them without null checks. Fields that fall back to `undefined` need a guard in your template.
 
+## Translatability
+
+Some field types store a separate value per language; others store a single value shared across all languages. When an editor switches the active language in Studio, only translatable fields show a per-language input. The rest stay the same.
+
+By default:
+
+- **Translatable**: `text`, `textarea`, `richtext`, `link`, `media`.
+- **Not translatable**: `number`, `checkbox`, `select`, `radio`, `toggle_button`, `icon`, `info`, `color`, `object`, `array`, `query`, `json`.
+
+The defaults match what is typical to localize: copy, the destination of a CTA, and the image in a hero. Layout choices, colors, and entity queries stay shared across languages.
+
+For a `text` or `richtext` field, switching the language in Studio swaps the editor input. For a `media` field, the editor can pick a different image per language (useful when the visual contains text). For a `link` field, the resolved URL can point to a different target per language.
+
+Editors manage available languages and fallbacks in [Cockpit → Translations](/cockpit/features/translations).
+
 ## Primitive fields
 
 ### text
