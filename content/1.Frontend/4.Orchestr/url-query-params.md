@@ -94,11 +94,11 @@ interface QueryUrlIdentity {
 ```
 
 ::field-group
-  :::field{name="urlQueryPrefix" required="true" type="string"}
+  :::field{name="urlQueryPrefix" :required="true" type="string"}
   The canonical prefix used when **writing** parameters to the URL.
   :::
 
-  :::field{name="urlQueryAcceptedPrefixes" required="true" type="string[]"}
+  :::field{name="urlQueryAcceptedPrefixes" :required="true" type="string[]"}
   All prefixes that should be **read** when parsing the URL. The first entry is typically the same as `urlQueryPrefix`. Additional entries let you accept old or alternative prefixes for backward compatibility.
   :::
 
@@ -203,6 +203,8 @@ const url = buildQueryUrl(query, { resetFilters: true });
 ### Automatic page reset
 
 Changing the sort, limit, or filters resets the page to 1 (by removing the `p` parameter). This prevents users from landing on an empty page after narrowing results. Set `preventPageReset: true` to disable this behavior.
+
+For the typical block or section pattern (reading current state from the resolved query field and dispatching changes through `buildQueryUrl`), see [Consuming Query Fields](/apps/app-development/consuming-query-fields).
 
 ## Hooks
 

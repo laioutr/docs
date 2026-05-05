@@ -79,11 +79,11 @@ A multi-query or multi-link handler describes the facets available for the curre
 All variants share the same base:
 
 ::field-group
-  :::field{name="id" required="true" type="string"}
+  :::field{name="id" :required="true" type="string"}
   Stable identifier for this filter. Used as the key in the `filter` request and in URL query params.
   :::
 
-  :::field{name="label" required="true" type="string"}
+  :::field{name="label" :required="true" type="string"}
   Human-readable name for the filter, shown in the UI.
   :::
 
@@ -131,7 +131,7 @@ const colorFilter: AvailableFilter = {
   Rendering hint: text labels or visual swatches. Values without a `swatch` field are allowed but may render blank.
   :::
 
-  :::field{name="values" required="true" type="AvailableFilterListValue[]"}
+  :::field{name="values" :required="true" type="AvailableFilterListValue[]"}
   The selectable values.
   :::
 ::
@@ -139,11 +139,11 @@ const colorFilter: AvailableFilter = {
 Each list value has the following shape:
 
 ::field-group
-  :::field{name="values[].id" required="true" type="string"}
+  :::field{name="values[].id" :required="true" type="string"}
   The value passed back in the `filter` request when selected.
   :::
 
-  :::field{name="values[].label" required="true" type="string"}
+  :::field{name="values[].label" :required="true" type="string"}
   The label shown in the UI.
   :::
 
@@ -339,6 +339,10 @@ return {
   availableFilters: mapFacetsToAvailableFilters(data.facet_counts),
 };
 ```
+
+## Consuming in a block or section
+
+For how blocks and sections read `availableFilters` / `availableSortings` and update the URL when the user picks one, see [Consuming Query Fields](/apps/app-development/consuming-query-fields).
 
 ## Related
 

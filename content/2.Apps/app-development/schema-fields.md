@@ -1,16 +1,15 @@
 ---
 title: Schema Fields
 description: Reference for all field types available in section and block definition schemas.
-links: []
 seo:
   title: Schema Fields | Laioutr
   description: Reference for all field types available in section and block definition schemas.
+links: []
 sitemap:
   loc: /apps/app-development/schema-fields
   lastmod: 2026-04-08
   changefreq: monthly
-  priority: 1.0
-
+  priority: 1
 ---
 
 The `schema` property of a [section](/apps/app-development/section-definitions) or [block](/apps/app-development/block-definitions) definition controls the sidebar editor in Studio. It is an array of **fieldsets**, where each fieldset groups related fields into a collapsible panel.
@@ -54,7 +53,7 @@ schema: [
   Whether the panel starts expanded.
   :::
 
-  :::field{name="fields" required="true" type="StudioFieldDefinition[]"}
+  :::field{required name="fields" type="StudioFieldDefinition[]"}
   The fields in this group.
   :::
 ::
@@ -64,11 +63,11 @@ schema: [
 Every field type shares these properties:
 
 ::field-group
-  :::field{name="type" required="true" type="string"}
+  :::field{required name="type" type="string"}
   The field type (e.g. `'text'`, `'select'`, `'media'`).
   :::
 
-  :::field{name="name" required="true" type="string"}
+  :::field{required name="name" type="string"}
   Property name on the component's props. Must be unique within the definition. A small set of names is [reserved](#reserved-names) and cannot be used.
   :::
 
@@ -93,13 +92,13 @@ Field `name` values become props on the rendered Vue component. They must be `ca
 
 These names cannot be used as a top-level field `name`:
 
-| `name` | Why it's reserved |
-| ------ | ----------------- |
-| `style`, `class` | Vue attribute-bindings. Merge into the root element via `inheritAttrs` instead of arriving as props. |
-| `key`, `ref` | Consumed by Vue's renderer (list-render key, template ref); never reach `props`. |
-| `is` | Vue's `<component :is>` prop. |
-| `slot` | Reserved for named-slot routing in Vue Custom Elements. Currently safe; avoid for forward compatibility. |
-| `slots` | Section-only. Frontend Core injects a `slots` prop carrying slot data from the parent page; a field named `slots` is overwritten. |
+| `name`             | Why it's reserved                                                                                                                                               |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `style`, `class`   | Vue attribute-bindings. Merge into the root element via `inheritAttrs` instead of arriving as props.                                                            |
+| `key`, `ref`       | Consumed by Vue's renderer (list-render key, template ref); never reach `props`.                                                                                |
+| `is`               | Vue's `<component :is>` prop.                                                                                                                                   |
+| `slot`             | Reserved for named-slot routing in Vue Custom Elements. Currently safe; avoid for forward compatibility.                                                        |
+| `slots`            | Section-only. Frontend Core injects a `slots` prop carrying slot data from the parent page; a field named `slots` is overwritten.                               |
 | `refFor`, `refKey` | Vue 3 compiler internals for template refs inside `v-for`. Vue's source spells these `ref_for` / `ref_key`; the camelCase form is what you'd write as a `name`. |
 
 ::warning
@@ -725,7 +724,7 @@ const { product } = defineProps<{
 ```
 
 ::field-group
-  :::field{name="entityType" required="true" type="string"}
+  :::field{required name="entityType" type="string"}
   The canonical entity type to query (e.g. `'Product'`, `'Category'`, `'BlogPost'`). Must match an entity type with registered [Orchestr query handlers](/frontend/orchestr/queries).
   :::
 
@@ -764,7 +763,7 @@ links: {
 ```
 
 ::field-group
-  :::field{name="entityType" required="true" type="string"}
+  :::field{required name="entityType" type="string"}
   The entity type of the linked entities.
   :::
 
@@ -809,6 +808,8 @@ const { product } = defineProps<{
 ```
 
 **Prop type:** `ClientEntitySet | ClientEntity | undefined` (depends on `singleEntity`) · **Fallback:** `undefined`
+
+The resolved entity set also exposes `availableFilters`, `availableSortings`, the user's current `filter` and `sorting`, and `pagination` state. For reading those and updating the URL when the user picks a filter, sort, or page, see [Consuming Query Fields](/apps/app-development/consuming-query-fields).
 
 ---
 
