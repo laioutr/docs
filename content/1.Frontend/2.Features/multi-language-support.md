@@ -115,25 +115,9 @@ Both resolve the correct localized path for the current page, including dynamic 
 
 ### Link resolution
 
-`linkResolver.resolve(link)` converts a `Link` object (reference, URL, anchor, page, or page type) into a path string. It is auto-imported and can be used directly in templates:
+`linkResolver.resolve(link)` converts a [`Link`](/frontend/api-reference/common-types/link) object into a path string for the active language and market. `useResolvedLink(link)` is the reactive wrapper for use outside templates and `computed()`. Both are auto-imported.
 
-```vue
-<template>
-  <NuxtLink :to="linkResolver.resolve(item.link)">
-    {{ item.label }}
-  </NuxtLink>
-</template>
-```
-
-::warning
-`linkResolver.resolve()` reads the current language and market domain to resolve localized paths. When called bare in `setup()`, the result is a static string that will **not** update when the language changes — the same reactivity caveat that applies to nuxt-i18n's `$t()` outside of templates and `computed()`. Use `useResolvedLink()` when you need a reactive result.
-::
-
-**`useResolvedLink(link)`** wraps `linkResolver.resolve()` in a `computed()` so the resolved path re-evaluates automatically when the language or market changes:
-
-```ts
-const link = useResolvedLink(props.link) // ComputedRef<string>
-```
+See the [Link reference page](/frontend/api-reference/common-types/link#resolving-links) for the full API, reactivity caveats, and how to override resolution with hooks.
 
 ### SEO: hreflang and canonical
 

@@ -28,7 +28,9 @@ withDefaults(
     </span>
     <span class="font-semibold text-primary">{{ name }}</span>
     <div class="flex min-w-0 flex-1 items-center gap-1.5 text-xs">
-      <span class="truncate rounded-sm bg-elevated px-1.5 py-0.5 text-toned">{{ type }}</span>
+      <span class="truncate rounded-sm bg-elevated px-1.5 py-0.5 text-toned">
+        <LinkedTypeName :type="type" />
+      </span>
       <span v-if="required" class="shrink-0 rounded-sm bg-error/10 px-1.5 py-0.5 text-error">required</span>
       <span v-if="deprecated" class="shrink-0 rounded-sm bg-warning/10 px-1.5 py-0.5 text-warning">deprecated</span>
     </div>

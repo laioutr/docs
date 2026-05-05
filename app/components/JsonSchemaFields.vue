@@ -122,7 +122,9 @@ const resolvedProperties = computed(() => {
     <template v-else-if="schema.type === 'array'">
       <!-- Primitive array (string[], number[], etc.): show as single type -->
       <div v-if="!getExpandableVariants(schema) && typeof schema.items === 'object' && !Array.isArray(schema.items) && (schema.items as JSONSchema).type && (schema.items as JSONSchema).type !== 'object' && (schema.items as JSONSchema).type !== 'array'">
-        <ProseCode>{{ getTypeName(schema, mode) }}</ProseCode>
+        <ProseCode>
+          <LinkedTypeName :type="getTypeName(schema, mode)" />
+        </ProseCode>
         <div v-if="getConstraints(schema, mode).length" class="mt-1.5 flex flex-wrap gap-1">
           <span
             v-for="c in getConstraints(schema, mode)"
@@ -169,7 +171,9 @@ const resolvedProperties = computed(() => {
 
     <!-- Primitive type -->
     <div v-else>
-      <ProseCode>{{ getTypeName(schema, mode) }}</ProseCode>
+      <ProseCode>
+        <LinkedTypeName :type="getTypeName(schema, mode)" />
+      </ProseCode>
       <div v-if="getConstraints(schema, mode).length" class="mt-1.5 flex flex-wrap gap-1">
         <span
           v-for="c in getConstraints(schema, mode)"

@@ -499,7 +499,7 @@ Link picker. Editors can choose between internal pages, external URLs, page anch
 
 No type-specific properties.
 
-The field value is a `Link` object. The link type depends on what the editor selected:
+The field value is a [`Link`](/frontend/api-reference/common-types/link) object. The link type depends on what the editor selected:
 
 | Link variant | Description                                         |
 | ------------ | --------------------------------------------------- |
