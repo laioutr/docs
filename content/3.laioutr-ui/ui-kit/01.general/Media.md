@@ -30,7 +30,7 @@ Pro-Tip from Larry: Set separate mobile and desktop aspect ratios so images look
 
 ## Usage
 
-Uses [nuxt-image](https://image.nuxt.com/) to render responsive images.
+Uses [nuxt-image](https://image.nuxt.com/) to render responsive images. The component takes a [`Media`](/frontend/api-reference/common-types/media) value (the canonical discriminated union returned by connectors and produced by the `media` schema field) and reads its sources to pick the right variant for the current viewport.
 
 ::component-code{:name="Media" story-id="ui-kit-media--default"}
 ::
