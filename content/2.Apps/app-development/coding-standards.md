@@ -114,7 +114,7 @@ export default defineNuxtModule<ModuleOptions>({
 
 ### Handler implementation
 
-- **Queries:** Default export = `defineXQuery(CanonicalQuery, async ({ context, input, clientEnv, filter, sorting, pagination, passthrough }) => { ... })`. Return the shape expected by the canonical type (e.g. `{ id }`, `{ ids, total, availableFilters, availableSortings }`).
+- **Queries:** Default export = `defineXQuery(CanonicalQuery, async ({ context, input, clientEnv, filter, sorting, pagination, passthrough }) => { ... })`. Return the shape expected by the canonical type (e.g. `{ id }`, `{ ids, total, availableFilters, availableSortings }`). For the filter request and `availableFilters` response shapes, see [Filters](/frontend/orchestr/filters).
 - **Actions:** Default export = `defineXAction(CanonicalAction, async ({ context, input, clientEnv }) => { ... })`. Perform side effects and return the canonical action result.
 - **Links:** Default export = `defineXLink(CanonicalLink, async ({ entityIds, context, passthrough }) => { ... })`. Return `{ links: [{ sourceId, targetIds }] }`.
 - **Resolvers:** Default export = `defineXComponentResolver({ entityType, label, provides: [...], resolve: async ({ entityIds, context, clientEnv, $entity, passthrough }) => { ... } })`. Use `$entity({ id, base: () => ({...}), ... })` to build entities; return `{ entities }`.

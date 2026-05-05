@@ -30,7 +30,7 @@ The module expects configuration under the key **`@laioutr-app/emporix`** in `nu
 | **`clientId`** | `string` | API client ID. Sent as `client_id` and used for anonymous login and admin token. |
 | **`clientSecret`** | `string` | API client secret (e.g. for admin client_credentials). Keep this secret and only use it on the server. |
 | **`tenant`** | `string` | Emporix tenant identifier. Default: `laioutr`. Used in all API paths. |
-| **`availableFilters`** | `Array<AvailableFilter>` | Filters offered for product listing (from `@laioutr-core/orchestr/types`). Passed through to query results. |
+| **`availableFilters`** | `Array<AvailableFilter>` | Filters offered for product listing (from `@laioutr-core/orchestr/types`, see [Filters](/frontend/orchestr/filters)). Passed through to query results. |
 | **`availableSortings`** | `Array<AvailableSorting>` | Sort options for product listing. Passed through to query results. |
 
 ### Example configuration

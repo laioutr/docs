@@ -55,7 +55,7 @@ const url = buildQueryUrl(reviewsLink, { page: 2 });
 
 ## Filter types
 
-Filters appear under the `f` key and support three value types.
+Filters appear under the `f` key and support three value types. This section describes the URL encoding; for the shape your query handler receives and returns (including the `availableFilters` response), see [Filters](/frontend/orchestr/filters).
 
 ### List filters (multi-select)
 

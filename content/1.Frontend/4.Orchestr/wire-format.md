@@ -99,6 +99,8 @@ The top-level result for a query. Contains entity IDs (not full entities), pagin
 }
 ```
 
+`availableSortings` and `availableFilters` carry the facet metadata returned by the query handler. See [Filters](/frontend/orchestr/filters) for the full shape of each variant.
+
 ### `entity`
 
 A single entity with its resolved components. Entities are deduplicated across queries; the same entity ID appears only once.

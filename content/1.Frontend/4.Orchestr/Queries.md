@@ -181,6 +181,8 @@ return {
 };
 ```
 
+Each `availableSortings` entry is `{ key: string, label?: string }`, where `key` is the value passed back in the `sorting` request. For the shape of the `filter` argument and the four `availableFilters` variants (list, boolean, range, intervals), see [Filters](/frontend/orchestr/filters).
+
 ## Links
 
 A **link** defines a relationship between two entity types — for example, a Product has Variants, or a Category has Products. Links resolve to a list of target entity IDs for each source entity.
@@ -264,6 +266,8 @@ return {
   ],
 };
 ```
+
+Each multi-link entry can also include `availableSortings` and `availableFilters` for that specific source (using the same shape as multi-query responses). See [Filters](/frontend/orchestr/filters) for the filter format.
 
 **Single links** return `{ sourceId, targetId }` (singular) per entry:
 
