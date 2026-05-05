@@ -61,5 +61,5 @@ items:
 
 ## API Reference
 
-::component-meta{:name="ProductSlider"}
+::component-meta{:name="LuiProductSlider"}
 ::

@@ -61,5 +61,5 @@ items:
 
 ## API Reference
 
-::component-meta{:name="ProductTileBasic"}
+::component-meta{:name="LuiProductTileBasic"}
 ::
