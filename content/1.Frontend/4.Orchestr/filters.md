@@ -217,7 +217,7 @@ const priceFilter: AvailableFilter = {
   required: true
   type: "number | Money | Measurement"
   ---
-  Lower bound of the range. Use `Money` for currency-denominated ranges and `Measurement` for physical quantities (weight, length, volume).
+  Lower bound of the range. Use [`Money`](/frontend/api-reference/common-types/money) for currency-denominated ranges and [`Measurement`](/frontend/api-reference/common-types/measurement) for physical quantities (weight, length, volume).
   :::
 
   :::field

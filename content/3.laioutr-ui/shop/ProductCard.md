@@ -20,7 +20,7 @@ sitemap:
 
 ## Overview
 
-The ProductTile component serves as the primary building block for product listings across category pages, search results, and promotional sliders. It maintains consistent height regardless of content variations for grid alignment. Focus order follows accessibility best practices. The tile emits events rather than handling cart logic internally for flexible commerce backend integration. Internationalized price formatting uses the $money helper for proper locale handling.
+The ProductTile component serves as the primary building block for product listings across category pages, search results, and promotional sliders. It maintains consistent height regardless of content variations for grid alignment. Focus order follows accessibility best practices. The tile emits events rather than handling cart logic internally for flexible commerce backend integration. Internationalized price formatting uses the [`$money`](/frontend/api-reference/common-types/money#formatting-with-money) helper for proper locale handling.
 
 ## Key Business & UX Benefits
 

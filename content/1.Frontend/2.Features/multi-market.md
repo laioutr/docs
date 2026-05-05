@@ -73,9 +73,9 @@ Use `useI18nConfig()` when you need the full list of markets and languages, for 
 
 Use `useMarketPath()` when you need to prepend the current domain's path prefix to a URL (e.g. turning `/products` into `/fr/products` on a French-prefixed domain).
 
-**Currency**: use `useCurrency()` when passing the currency code to APIs. For displaying prices, use the [`$money` formatter](/frontend/features/currencies) directly — it reads the currency from the `Money` object, not from `useCurrency()`.
+**Currency**: use `useCurrency()` when passing the currency code to APIs. For displaying prices, use the [`$money` formatter](/frontend/api-reference/common-types/money#formatting-with-money) directly; it reads the currency from the `Money` object, not from `useCurrency()`.
 
-**Region / measurement**: use `useLanguage().value.measurementSystem` (metric/imperial) or `useMarket().value.regionCodes` for region-specific behaviour.
+**Region / measurement**: use `useLanguage().value.measurementSystem` (metric/imperial) or `useMarket().value.regionCodes` for region-specific behaviour. See the [`Measurement` reference](/frontend/api-reference/common-types/measurement#metric-and-imperial) for how to pick the unit you emit based on the active language.
 
 ### Page-level market scope
 

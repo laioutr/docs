@@ -49,7 +49,7 @@ story-id: molecules-pricing-pricingcard--enterprise-plan-offer
 items:
   - Strikethrough pricing for annual billing discounts
   - Included and excluded feature lists with icon indicators
-  - Localized money formatting with I18nMoney
+  - Localized money formatting via the [`$money`](/frontend/api-reference/common-types/money#formatting-with-money) helper
   - CTA button with customizable text and link
 ---
 ::

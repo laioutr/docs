@@ -44,14 +44,16 @@ The UI Kit provides a global `$money` formatter:
 </template>
 ```
 
-`$money` accepts a `Money` object (`{ amount: number, currency: string }`) and optional `Intl.NumberFormatOptions`. The `amount` is in the **smallest currency unit** (e.g. cents), so `10012` with currency `USD` renders as `$100.12`. The locale for number formatting comes from the active language, so the same CHF amount renders differently in a German vs French locale.
+`$money` accepts a [`Money`](/frontend/api-reference/common-types/money) object (`{ amount: number, currency: string }`) and optional `Intl.NumberFormatOptions`. The `amount` is in the **smallest currency unit** (e.g. cents), so `10012` with currency `USD` renders as `$100.12`. The locale for number formatting comes from the active language, so the same CHF amount renders differently in a German vs French locale.
+
+See the [Money reference page](/frontend/api-reference/common-types/money) for the full type, the `$money` signature and options, the related [`UnitPrice`](/frontend/api-reference/common-types/money#unitprice) type, and the connector authoring rules (including zero-decimal currencies like JPY).
 
 ### The Money type
 
-Laioutr uses `@screeny05/ts-money` for money arithmetic. The `Money` interface from `@laioutr-core/core-types` matches ts-money's `CommonMoney`:
+Laioutr uses `@screeny05/ts-money` for money arithmetic. The `Money` interface from `@laioutr-core/core-types/common` matches ts-money's `CommonMoney`:
 
 ```ts
-import { Money } from '@laioutr-core/core-types'
+import { Money } from '@laioutr-core/core-types/common'
 
 const price: Money = { amount: 14900, currency: 'CHF' } // CHF 149.00
 ```

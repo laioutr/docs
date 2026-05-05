@@ -24,4 +24,14 @@ export const WELL_KNOWN_TYPES: Record<string, string> = {
   MediaSourceImage: '/frontend/api-reference/common-types/media#mediasourceimage',
   MediaSourceVideo: '/frontend/api-reference/common-types/media#mediasourcevideo',
   MediaSourcePlaceholder: '/frontend/api-reference/common-types/media#mediasourceplaceholder',
+
+  // Money
+  Money: '/frontend/api-reference/common-types/money',
+
+  // UnitPrice
+  UnitPrice: '/frontend/api-reference/common-types/unit-price',
+
+  // Measurement
+  Measurement: '/frontend/api-reference/common-types/measurement',
+  MeasurementUnit: '/frontend/api-reference/common-types/measurement#unit',
 };
