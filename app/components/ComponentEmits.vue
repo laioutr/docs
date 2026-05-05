@@ -1,31 +1,19 @@
 <script setup lang="ts">
 import type { ComponentData } from 'nuxt-component-meta';
+import { componentEventsToJsonSchema } from '../lib/json-schema/component-meta-adapter';
 
 const props = defineProps<{
   component: ComponentData;
-  prose?: boolean;
 }>();
+
+const events = computed(() => props.component?.meta?.events ?? []);
+const schema = computed(() => componentEventsToJsonSchema(events.value));
 </script>
 
 <template>
-  <ProseTable v-if="component?.meta?.events?.length">
-    <ProseThead>
-      <ProseTr>
-        <ProseTh> Event </ProseTh>
-        <ProseTh> Type </ProseTh>
-      </ProseTr>
-    </ProseThead>
-    <ProseTbody>
-      <ProseTr v-for="event in component?.meta?.events || []" :key="event.name">
-        <ProseTd>
-          <ProseCode>
-            {{ event.name }}
-          </ProseCode>
-        </ProseTd>
-        <ProseTd>
-          <HighlightInlineType v-if="event.type" :type="event.type" />
-        </ProseTd>
-      </ProseTr>
-    </ProseTbody>
-  </ProseTable>
+  <JsonSchemaPropTable
+    v-if="events.length"
+    :schema="schema"
+    name-label="Event"
+  />
 </template>

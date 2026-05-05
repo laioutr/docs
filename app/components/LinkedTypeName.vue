@@ -11,7 +11,11 @@ interface Token {
 }
 
 const tokens = computed<Token[]>(() => {
-  const parts = props.type.split(/(\b[A-Za-z_$][A-Za-z0-9_$]*\b)/);
+  const value = typeof props.type === 'string' ? props.type : String(props.type ?? '');
+  if (import.meta.dev && typeof props.type !== 'string') {
+    console.warn('[LinkedTypeName] expected string, got', typeof props.type, props.type);
+  }
+  const parts = value.split(/(\b[A-Za-z_$][A-Za-z0-9_$]*\b)/);
   return parts
     .filter((p) => p.length > 0)
     .map((p) => {

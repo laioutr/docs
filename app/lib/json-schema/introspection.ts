@@ -34,6 +34,8 @@ export const getTypeName = (s: JSONSchema, mode: SchemaMode = 'json'): string =>
   if (s.const !== undefined) return JSON.stringify(s.const);
   if (s.enum) return s.enum.map((v) => JSON.stringify(v)).join(' | ');
   if (s.allOf?.length) return s.allOf.map((v) => getTypeName(v, mode)).join(' & ');
+  // JSON Schema permits `type` as an array of strings (nullable types like `['string', 'null']`).
+  if (Array.isArray(s.type)) return s.type.join(' | ');
 
   const variants = getUnionVariants(s);
   if (variants) {
@@ -67,6 +69,12 @@ export const getTypeName = (s: JSONSchema, mode: SchemaMode = 'json'): string =>
       if (jsType) return jsType;
     }
     if (s.type === 'integer') return 'number';
+  }
+
+  if (!s.type) {
+    const id = getSchemaId(s);
+    if (id) return id;
+    if (s.title) return s.title;
   }
 
   return s.type ?? 'unknown';
@@ -242,15 +250,27 @@ export const getTypeSummary = (s: JSONSchema, { expanded = false, mode = 'json' 
   const variants = getExpandableVariants(s);
   if (!variants) return getTypeName(s, mode);
 
-  // Single variant: show id + property summary
+  // Single variant: show id + property summary. When the wrapping schema is a union
+  // wrapper around the variant (e.g. "CtaBannerButton | undefined"), splice the summary
+  // after the variant's name so it visually attaches to the right type.
   if (variants.length === 1) {
     const v = variants[0]!;
-    const id = getSchemaId(v.schema);
+    const outerId = getSchemaId(s);
+    const innerId = getSchemaId(v.schema);
     const isArray = v.label.endsWith('[]');
     const props = expanded ? '{ }' : summarizeProps(v.schema) || '{ }';
-    if (id) {
-      return isArray ? `${id}[] ${props}` : `${id} ${props}`;
+
+    if (outerId && innerId && outerId !== innerId) {
+      // Split the outer id by union pipes (preserving separators) and inject the props
+      // after the matching inner id token.
+      const tokens = outerId.split(/(\s*\|\s*)/);
+      if (tokens.includes(innerId)) {
+        return tokens.map((t) => (t === innerId ? `${innerId}${isArray ? '[]' : ''} ${props}` : t)).join('');
+      }
     }
+
+    const id = outerId ?? innerId;
+    if (id) return isArray ? `${id}[] ${props}` : `${id} ${props}`;
     return isArray ? `${props}[]` : props;
   }
 
