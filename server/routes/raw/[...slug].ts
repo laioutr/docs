@@ -16,12 +16,12 @@ function pre(node: any, state: any) {
 }
 
 export default eventHandler(async (event) => {
-  const slug = getRouterParams(event)['slug.md'];
-  if (!slug?.endsWith('.md')) {
+  const slug = getRouterParams(event).slug;
+  if (!slug) {
     throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true });
   }
 
-  const path = withLeadingSlash(slug.replace('.md', '')).replace(/\/index$/, '') || '/';
+  const path = withLeadingSlash(slug.replace(/\.md$/, '')).replace(/\/index$/, '') || '/';
 
   const page = await queryCollection(event, 'docs' as keyof Collections).path(path).first();
   if (!page) {
