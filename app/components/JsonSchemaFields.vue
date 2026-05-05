@@ -3,10 +3,13 @@ import type { SchemaMode } from '../lib/json-schema/introspection';
 import type { JSONSchema } from '@laioutr-core/core-types/common';
 import {
   getConstraints,
+  getConstValues,
+  getEscapeHatchTypes,
   getExpandableVariants,
   getFieldDescriptionHtml,
   getTypeName,
   getTypeSummary,
+  isExpandableLiteralUnion,
   isFieldDescriptionFromObject,
 } from '../lib/json-schema/introspection';
 import { nullOrEmpty } from '../lib/json-schema/nullOrEmpty';
@@ -158,6 +161,21 @@ const resolvedProperties = computed(() => {
         <template v-else-if="typeof schema.items === 'object' && !Array.isArray(schema.items)">
           <JsonSchemaFields :schema="schema.items" dereferenced />
         </template>
+      </div>
+    </template>
+
+    <!-- Named const-only union: render the accepted values as a wrapped row of code chips. -->
+    <template v-else-if="isExpandableLiteralUnion(schema)">
+      <p class="text-muted mt-2 text-xs">Accepts one of the following:</p>
+      <div class="mt-2 flex flex-wrap items-center gap-1.5">
+        <ProseCode v-for="value in getConstValues(schema)" :key="String(value)">{{ JSON.stringify(value) }}</ProseCode>
+        <span v-if="getEscapeHatchTypes(schema).length" class="text-muted flex flex-wrap items-center gap-1 text-xs">
+          <span>or any</span>
+          <template v-for="(t, i) in getEscapeHatchTypes(schema)" :key="t">
+            <ProseCode>{{ t }}</ProseCode>
+            <span v-if="i < getEscapeHatchTypes(schema).length - 1">/</span>
+          </template>
+        </span>
       </div>
     </template>
 

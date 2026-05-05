@@ -2,8 +2,14 @@ import { renderDescription } from './renderDescription';
 import { resolveSchema } from './resolveSchema';
 import type { JSONSchema } from '@laioutr-core/core-types/common';
 
-/** Access the custom `id` field added by canonical-types reflection. */
-export const getSchemaId = (s: JSONSchema): string | undefined => (s as Record<string, unknown>).id as string | undefined;
+/**
+ * JSON Schema with the custom `id` field added by canonical-types reflection (and stamped by
+ * `component-meta-adapter`). Use this in this folder to avoid `as Record<string, unknown>` reads
+ * and `as JSONSchema` writes for the `id` key.
+ */
+export type DocsJSONSchema = JSONSchema & { id?: string };
+
+export const getSchemaId = (s: JSONSchema): string | undefined => (s as DocsJSONSchema).id;
 
 /** Get the preferred display name: id over title. */
 export const getSchemaName = (s: JSONSchema): string => getSchemaId(s) ?? s.title ?? 'object';
@@ -30,9 +36,14 @@ const FORMAT_TO_JS_TYPE: Record<string, string> = {
   'date-time': 'Date',
 };
 
+const PRIMITIVE_TYPE_NAMES = new Set(['boolean', 'string', 'number', 'integer', 'bigint']);
+
 export const getTypeName = (s: JSONSchema, mode: SchemaMode = 'json'): string => {
   if (s.const !== undefined) return JSON.stringify(s.const);
   if (s.enum) return s.enum.map((v) => JSON.stringify(v)).join(' | ');
+  // `resolveSchema` unwraps single-element `allOf` (zod's `$ref` codegen). What remains here is
+  // a real multi-element intersection — those rarely carry a useful id, so showing `A & B` is
+  // more informative than the (usually missing) alias.
   if (s.allOf?.length) return s.allOf.map((v) => getTypeName(v, mode)).join(' & ');
   // JSON Schema permits `type` as an array of strings (nullable types like `['string', 'null']`).
   if (Array.isArray(s.type)) return s.type.join(' | ');
@@ -52,8 +63,20 @@ export const getTypeName = (s: JSONSchema, mode: SchemaMode = 'json'): string =>
   }
   if (s.type === 'array') {
     if (Array.isArray(s.items)) {
-      const minItems = typeof s.minItems === 'number' ? s.minItems : s.items.length;
-      const parts = s.items.map((item, i) => {
+      const items = s.items;
+      // Re-apply the `[type, value]` labels TypeScript drops on labelled tuples.
+      const head = items[0];
+      if (
+        items.length === 2 &&
+        typeof head === 'object' && head !== null && !Array.isArray(head) &&
+        head.const !== undefined
+      ) {
+        const tag = JSON.stringify(head.const);
+        const value = typeof items[1] === 'object' ? getTypeName(items[1] as JSONSchema, mode) : 'unknown';
+        return `[type: ${tag}, value: ${value}]`;
+      }
+      const minItems = typeof s.minItems === 'number' ? s.minItems : items.length;
+      const parts = items.map((item, i) => {
         const name = typeof item === 'object' ? getTypeName(item, mode) : 'unknown';
         return i >= minItems ? `${name}?` : name;
       });
@@ -148,6 +171,8 @@ export interface ExpandableVariant {
   summary: string;
   descriptionHtml: string;
   schema: JSONSchema;
+  /** Placeholder shown in the type cell when the variant is open. Defaults to `{ }`. */
+  openPlaceholder?: string;
 }
 
 const getVariantDescriptionHtml = (s: JSONSchema): string => {
@@ -159,11 +184,126 @@ const getVariantDescriptionHtml = (s: JSONSchema): string => {
   return desc ? `${titleHtml} — ${desc}` : titleHtml;
 };
 
+const isPrimitiveType = (v: JSONSchema): boolean =>
+  typeof v.type === 'string' && PRIMITIVE_TYPE_NAMES.has(v.type);
+
+/**
+ * Whether `s` is a literal-suggestion union worth rendering as an expandable list of values:
+ * named (e.g. `FallbackVariant`) or unnamed-but-long (e.g. `'s'|'xs'|'sm'|'md'|'lg'|'xl'|number`).
+ * Variants may include primitive escape hatches (`(string & {})`, `number`, etc.).
+ */
+export const isExpandableLiteralUnion = (s: JSONSchema): boolean => {
+  const variants = getUnionVariants(s);
+  if (!variants || variants.length < 2) return false;
+  if (!variants.every((v) => v.const !== undefined || isPrimitiveType(v))) return false;
+  const constCount = variants.filter((v) => v.const !== undefined).length;
+  if (constCount < 1) return false;
+  const id = getSchemaId(s);
+  if (!id) return false;
+  if (PRIMITIVE_TYPE_NAMES.has(id)) return false;
+  // Clean alias name (e.g. `FallbackVariant`): always worth expanding.
+  if (/^[A-Za-z_$][A-Za-z0-9_$]*$/.test(id)) return true;
+  // No clean alias: expand only when the literal list is long enough that inline crowds the cell.
+  return constCount >= 4;
+};
+
+/** Extract the const values from a const-only union (skips the escape-hatch primitives if present). */
+export const getConstValues = (s: JSONSchema): unknown[] =>
+  (getUnionVariants(s) ?? []).filter((v) => v.const !== undefined).map((v) => v.const);
+
+/**
+ * Build a parenthesised inline summary of a const-only union: `("foo" | "bar" | "qux" | 210 more)`.
+ * Values fit greedily within `budgetChars`; escape-hatch types (e.g. `string`) are included after consts.
+ * Mirrors the object-summary pattern (`{ a, b, c, 4 more }`) but for literal-suggestion unions.
+ */
+export const summarizeConstValues = (s: JSONSchema, budgetChars = 50): string => {
+  const formatted = [
+    ...getConstValues(s).map((v) => JSON.stringify(v)),
+    ...getEscapeHatchTypes(s),
+  ];
+  if (formatted.length === 0) return '';
+  const allInline = formatted.join(' | ');
+  if (allInline.length <= budgetChars) return `(${allInline})`;
+
+  const shown: string[] = [];
+  let length = 0;
+  const reserveForMore = 11; // " | NNN more"
+  for (const item of formatted) {
+    const sep = shown.length > 0 ? ' | ' : '';
+    // Always show at least the first value, even if it exceeds the budget on its own.
+    if (shown.length > 0 && length + sep.length + item.length > budgetChars - reserveForMore) break;
+    shown.push(item);
+    length += sep.length + item.length;
+  }
+  const remaining = formatted.length - shown.length;
+  return remaining > 0 ? `(${shown.join(' | ')} | ${remaining} more)` : `(${shown.join(' | ')})`;
+};
+
+/** Return the primitive types of the escape-hatch branches in a const-or-primitive union (deduped). */
+export const getEscapeHatchTypes = (s: JSONSchema): string[] => {
+  const variants = getUnionVariants(s);
+  if (!variants) return [];
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const v of variants) {
+    if (v.const !== undefined) continue;
+    if (!isPrimitiveType(v)) continue;
+    const t = v.type as string;
+    if (seen.has(t)) continue;
+    seen.add(t);
+    out.push(t);
+  }
+  return out;
+};
+
+/**
+ * Recognise a discriminated 2-tuple `[type: 'X', value: Y]` and return the bits the renderer
+ * needs: a synthetic `{ type, value }` object schema for expansion, plus the pre-extracted
+ * discriminant tag (`'"X"'`) and value type name (`'Y'`) for the inline tuple-form summary.
+ * Returning everything in one call avoids re-asserting the tuple shape in the caller.
+ */
+interface TupleVariantParts {
+  synthetic: DocsJSONSchema;
+  tag: string;
+  valueName: string;
+}
+
+const tupleVariantToParts = (s: JSONSchema): TupleVariantParts | undefined => {
+  if (s.type !== 'array' || !Array.isArray(s.items) || s.items.length !== 2) return undefined;
+  const head = s.items[0];
+  const value = s.items[1];
+  if (typeof head !== 'object' || head === null || Array.isArray(head) || head.const === undefined) return undefined;
+  if (typeof value !== 'object' || value === null || Array.isArray(value)) return undefined;
+  const id = getSchemaId(s);
+  return {
+    synthetic: {
+      type: 'object',
+      ...(id ? { id, title: s.title ?? id } : {}),
+      properties: { type: head, value },
+      required: ['type', 'value'],
+    },
+    tag: JSON.stringify(head.const),
+    valueName: getTypeName(value, 'json'),
+  };
+};
+
 const variantFromSchema = (s: JSONSchema, arrayPrefix = false): ExpandableVariant | undefined => {
   if (isObjectWithProps(s)) {
     const name = getSchemaName(s);
     const label = arrayPrefix ? `${name}[]` : name;
     return { label, summary: summarizeProps(s), descriptionHtml: getVariantDescriptionHtml(s), schema: s };
+  }
+  const tuple = tupleVariantToParts(s);
+  if (tuple) {
+    const name = getSchemaName(tuple.synthetic);
+    const label = arrayPrefix ? `${name}[]` : name;
+    return {
+      label,
+      summary: `[type: ${tuple.tag}, value: ${tuple.valueName}]`,
+      descriptionHtml: getVariantDescriptionHtml(tuple.synthetic),
+      schema: tuple.synthetic,
+      openPlaceholder: '[ ]',
+    };
   }
   const items = getArrayItems(s);
   if (items && isObjectWithProps(items)) {
@@ -207,7 +347,22 @@ const enrichWithDiscriminant = (results: ExpandableVariant[]): void => {
   }
 };
 
-export const getExpandableVariants = (s: JSONSchema): ExpandableVariant[] | undefined => {
+/**
+ * Memoise per schema reference. Templates call `getExpandableVariants(field)` 3-4× per row
+ * (`v-if` trigger, `length === 1` check, `getTypeSummary` call). The schema is the same
+ * object reference across calls within a single render, so a WeakMap pins the result for free.
+ * `null` means "computed and is undefined" (distinguished from "not yet computed").
+ */
+const expandableVariantsCache = new WeakMap<object, ExpandableVariant[] | null>();
+
+const computeExpandableVariants = (s: JSONSchema): ExpandableVariant[] | undefined => {
+  // Expandable literal union: synthesize one variant so JsonSchemaPropTable wraps the row.
+  // The expand body is rendered specially by JsonSchemaFields; this variant only exists to
+  // signal expandability.
+  if (isExpandableLiteralUnion(s)) {
+    return [{ label: 'values', summary: '', descriptionHtml: '', schema: s }];
+  }
+
   const direct = variantFromSchema(s);
   if (direct) return [direct];
 
@@ -236,17 +391,40 @@ export const getExpandableVariants = (s: JSONSchema): ExpandableVariant[] | unde
   return undefined;
 };
 
+export const getExpandableVariants = (s: JSONSchema): ExpandableVariant[] | undefined => {
+  if (typeof s !== 'object' || s === null) return undefined;
+  const cached = expandableVariantsCache.get(s);
+  if (cached !== undefined) return cached ?? undefined;
+  const result = computeExpandableVariants(s);
+  expandableVariantsCache.set(s, result ?? null);
+  return result;
+};
+
 /**
  * Whether the field's description belongs to the expanded object rather than the property.
  * If true, description should only show when expanded.
  */
 export const isFieldDescriptionFromObject = (s: JSONSchema): boolean => {
+  if (isExpandableLiteralUnion(s)) return false;
   const variants = getExpandableVariants(s);
   if (!variants || variants.length !== 1) return false;
   return variants[0]!.schema === s;
 };
 
 export const getTypeSummary = (s: JSONSchema, { expanded = false, mode = 'json' as SchemaMode } = {}): string => {
+  // Expandable literal unions: alias + a peek of the values when collapsed (mirrors the object-summary
+  // pattern), alias only when expanded (the panel below shows the full list).
+  if (isExpandableLiteralUnion(s)) {
+    const id = getSchemaId(s)!;
+    if (expanded) return id;
+    // Joined-form ids (e.g. `number | BreakpointName | (string & {})`) already convey structure;
+    // appending a `("a" | "b" | …)` summary would visually muddle the type expression.
+    const isCleanAlias = /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(id);
+    if (!isCleanAlias) return id;
+    const summary = summarizeConstValues(s);
+    return summary ? `${id} ${summary}` : id;
+  }
+
   const variants = getExpandableVariants(s);
   if (!variants) return getTypeName(s, mode);
 
@@ -262,15 +440,22 @@ export const getTypeSummary = (s: JSONSchema, { expanded = false, mode = 'json' 
 
     if (outerId && innerId && outerId !== innerId) {
       // Split the outer id by union pipes (preserving separators) and inject the props
-      // after the matching inner id token.
+      // after the matching inner id token. The token match assumes inner ids are atomic
+      // (no `|` of their own); if that assumption breaks, we fall through to plain id+props.
       const tokens = outerId.split(/(\s*\|\s*)/);
       if (tokens.includes(innerId)) {
         return tokens.map((t) => (t === innerId ? `${innerId}${isArray ? '[]' : ''} ${props}` : t)).join('');
       }
     }
 
+    // At this point either outerId === innerId, or one is missing, or the splice didn't apply;
+    // pick whichever is set (they're known equivalent enough for display).
     const id = outerId ?? innerId;
-    if (id) return isArray ? `${id}[] ${props}` : `${id} ${props}`;
+    // Anonymous inline object types get their structural form as the id
+    // (e.g. `{ href: string; text: string }`). That already encodes the property names with types,
+    // so adding `{ href, text }` on top duplicates the info. Show just the property summary.
+    const isStructuralId = id !== undefined && id.trim().startsWith('{');
+    if (id && !isStructuralId) return isArray ? `${id}[] ${props}` : `${id} ${props}`;
     return isArray ? `${props}[]` : props;
   }
 

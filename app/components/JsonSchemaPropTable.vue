@@ -84,7 +84,7 @@ const rows = computed<Row[]>(() => {
         <ProseTd class="align-top">
           <UCollapsible v-if="getExpandableVariants(row.field)">
             <template #default="{ open }">
-              <button type="button" class="group/typecell flex w-full cursor-pointer items-center gap-1.5">
+              <div class="group/typecell flex w-full cursor-pointer items-center gap-1.5">
                 <UIcon
                   name="lucide:chevron-right"
                   class="size-3 shrink-0 text-muted transition-transform"
@@ -93,7 +93,7 @@ const rows = computed<Row[]>(() => {
                 <ProseCode>
                   <LinkedTypeName :type="getTypeSummary(row.field, { expanded: open, mode: 'javascript' })" />
                 </ProseCode>
-              </button>
+              </div>
             </template>
             <template #content>
               <div class="mt-2 pl-4">

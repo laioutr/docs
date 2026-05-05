@@ -13,7 +13,7 @@ const props = defineProps<{
   <ProseFieldGroup class="border-default !my-0 border-l-2 border-dashed pl-4">
     <UCollapsible v-for="(variant, i) in variants" :key="i" class="my-5">
       <template #default="{ open }">
-        <JsonSchemaFieldRow :name="variant.label" :type="open ? '{ }' : variant.summary" expandable :open="open" />
+        <JsonSchemaFieldRow :name="variant.label" :type="open ? (variant.openPlaceholder ?? '{ }') : variant.summary" expandable :open="open" />
       </template>
       <template #content>
         <div class="pl-6">
