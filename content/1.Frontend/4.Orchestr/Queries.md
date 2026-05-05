@@ -74,6 +74,10 @@ export const StoreSearchQuery = defineQueryToken('store-locator/store/search', {
 });
 ```
 
+::warning
+The `input` schema is for query-specific parameters only (slugs, search terms). Don't include `page`, `limit`, `sort`, or filter selections. Orchestr injects those as separate `pagination`, `sorting`, and `filter` arguments to your handler. See [Handler arguments](#handler-arguments).
+::
+
 #### Query token fields
 
 | Field          | Required | Description                                                                                     |
@@ -240,6 +244,10 @@ export default defineMyAppLink(
   },
 );
 ```
+
+::warning
+Make a single batched API call for all `entityIds`, not one call per id. Most backends support a list filter (e.g. `?id[]=1&id[]=2` for REST or `where: { id_in: [...] }` for GraphQL); use it. Per-id calls turn one product listing into N+1 backend round-trips and dominate response time.
+::
 
 Like query handlers, link handlers also support the object form with `{ implements, run, cache }` for additional configuration.
 

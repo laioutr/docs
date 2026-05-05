@@ -209,15 +209,15 @@ Volatile data like prices or stock can use a shorter TTL while stable data like 
 
 ## Using Passthrough Data
 
-When a **query handler** or **link handler** already fetched raw data from the backend, it can pass that data to component resolvers via **passthrough** — avoiding a redundant API call.
+When a **query handler** or **link handler** already fetched raw data from the backend, pass that data to component resolvers via **passthrough** instead of refetching.
 
 ```ts
 // In your resolver
 resolve: async ({ entityIds, passthrough, $entity }) => {
-  // Try to use data already fetched by the query handler
+  // Read data the query handler already fetched
   const cached = passthrough.get(myDataToken);
 
-  // Fall back to a direct API call if not available
+  // Fall back to a direct API call when passthrough is empty (cache restore)
   const products = cached ?? await fetchProducts(entityIds);
 
   return {
@@ -226,7 +226,12 @@ resolve: async ({ entityIds, passthrough, $entity }) => {
 }
 ```
 
-This is an optimization — your resolver should always handle the case where passthrough data is not available.
+For connectors whose backend list endpoints already return full entity data, treat passthrough as the default path. Skipping it forces every component resolver in the chain to refetch the same entities, which is the single largest source of slow connector responses.
+
+The fallback still matters. Passthrough can be empty in two situations:
+
+- **Cross-app composition.** The query or link handler that ran before your resolver may live in a different app. For example, a Findologic app may resolve `product/search` while a Shopify app resolves the `Product` components. The Shopify resolver receives no passthrough because Findologic never set the Shopify token.
+- **Cache restore.** Cached query results restored from the cache do not include passthrough data unless the query handler opts in via `includePassthrough: true`. See [Caching](/frontend/orchestr/caching).
 
 ## Creating a New Entity Type
 

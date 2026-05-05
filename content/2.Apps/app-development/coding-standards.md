@@ -92,7 +92,7 @@ export default defineNuxtModule<ModuleOptions>({
 ### Middleware (defineOrchestr)
 
 - **Location:** Typically `src/runtime/server/middleware/` (e.g. `defineCommercetools.ts` or `index.ts`).
-- **Pattern:** Create a base orchestr with `defineOrchestr.meta({ app: name }).extendRequest(...)`. In `extendRequest`, build any client/context (e.g. API client, auth, facets) and return `{ context: { ... } }`. Use `name` from `package.json`.
+- **Pattern:** Create a base orchestr with `defineOrchestr.meta({ app: name, label, logoUrl }).extendRequest(...)`. The meta block identifies your app for Orchestr DevTools and other tooling: pass `app` (the package name from `package.json`), `label` (a human-readable display name like `'Shopware'`), and `logoUrl` (an absolute path to a logo image served from your app's public assets, e.g. `/app-shopware/shopware-logo.svg`). In `extendRequest`, build any client/context (API client, auth, facets) and return `{ context: { ... } }`.
 - **Exports:** Re-export the handler factories from the base orchestr:
   - `defineXQuery` = base `.queryHandler`
   - `defineXAction` = base `.actionHandler`
@@ -100,6 +100,16 @@ export default defineNuxtModule<ModuleOptions>({
   - `defineXComponentResolver` = base `.componentResolver`
   - `defineXQueryTemplateProvider` = base `.queryTemplateProvider` (if used)
 - Handlers in the orchestr dir then import these (e.g. `defineCommercetoolsQuery`, `defineEmporixAction`) and use the canonical types from `@laioutr-core/canonical-types`.
+
+### API client
+
+Connectors typically wrap a backend HTTP/REST or GraphQL API. Generate a typed client from the backend's schema instead of writing fetch calls by hand:
+
+- **REST/OpenAPI:** Use [`openapi-typescript`](https://openapi-ts.dev/) to generate types from the backend's OpenAPI spec, paired with [`openapi-fetch`](https://openapi-ts.dev/openapi-fetch/) for a typed `fetch` wrapper. Commit the generated `schema.ts` under `src/runtime/server/client/` and add a `pnpm openapi:generate` script that refreshes it from the upstream spec URL.
+- **GraphQL:** Use [GraphQL Code Generator](https://the-guild.dev/graphql/codegen) to produce typed operations from `.graphql` documents.
+- **Vendor SDK:** If the backend ships its own typed SDK (e.g. commercetools), use that and skip codegen.
+
+Construct the client inside `extendRequest` so each request gets its own instance with the right auth, locale, and currency derived from `clientEnv`.
 
 ### File and folder naming
 
@@ -119,6 +129,7 @@ export default defineNuxtModule<ModuleOptions>({
 - **Links:** Default export = `defineXLink(CanonicalLink, async ({ entityIds, context, passthrough }) => { ... })`. Return `{ links: [{ sourceId, targetIds }] }`.
 - **Resolvers:** Default export = `defineXComponentResolver({ entityType, label, provides: [...], resolve: async ({ entityIds, context, clientEnv, $entity, passthrough }) => { ... } })`. Use `$entity({ id, base: () => ({...}), ... })` to build entities; return `{ entities }`.
 - **Canonical types:** Import queries, actions, links, and entity parts from `@laioutr-core/canonical-types` (e.g. `ecommerce`, `entity/cart`, `entity/product`). Do not invent new variable or entity shapes; extend the canonical model if needed via the proper channels.
+- **Cookies and response headers:** Set them inside `extendRequest` (runs before streaming) or inside an action (single non-streamed response). Query, link, and component-resolver handlers cannot set headers because the response stream has already started. See [Setting cookies and response headers](/frontend/orchestr/middleware#setting-cookies-and-response-headers).
 
 ### Errors
 
@@ -129,7 +140,8 @@ export default defineNuxtModule<ModuleOptions>({
 
 ### Passthrough and helpers
 
-- **Passthrough tokens:** Use `createPassthroughToken<T>(key)` from the orchestr for data that should be shared between a query/link and a resolver in the same request (e.g. categories, products, variants). Set and get via `passthrough.set(token, value)` and `passthrough.get(token)`.
+- **Passthrough tokens:** Use `createPassthroughToken<T>(key)` from the orchestr for data that should be shared between a query/link and a resolver in the same request (e.g. categories, products, variants). Set and get via `passthrough.set(token, value)` and `passthrough.get(token)`. Treat passthrough as the default path when your list query already returns full entity data; without it, every resolver in the chain refetches the same entities.
+- **Userland cache:** Use `useUserlandCache<T>('myapp/concern')` from `#imports` for data that should survive across requests but lives outside query/link/resolver results (e.g. resolved auth tokens, system config, aggregated counts). The cache is cleared together with the orchestr cache. See [Userland cache](/frontend/orchestr/caching#userland-cache).
 - **orchestr-helper:** Put pure mapping and helper logic in `runtime/server/orchestr-helper/` (e.g. cart helpers, product mappers, localized getters) so handlers stay thin and testable.
 - **mappers:** Put backend-to-canonical mappers (e.g. filters, media) in `runtime/server/mappers/` and import them in resolvers or handlers.
 

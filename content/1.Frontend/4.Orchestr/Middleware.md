@@ -62,6 +62,10 @@ export const defineShopwareLink = defineShopware.linkHandler;
 
 The callback receives `event` (the H3 request event) and `clientEnv` (locale, currency, and other client environment data). The returned `context` object is merged into every handler's arguments.
 
+::note
+`clientEnv.locale` and `clientEnv.currency` are guaranteed populated on every request. Read them directly; do not write fallback defaults like `clientEnv.currency ?? 'USD'`.
+::
+
 You can chain multiple `extendRequest` calls. Each one extends the context further:
 
 ```typescript twoslash
@@ -77,6 +81,15 @@ const defineMyPackage = defineOrchestr
 ::note
 `extendRequest` runs for **every** incoming request, regardless of whether the current app handles it. Keep initialization lightweight or use caching for expensive operations like fetching system configuration. See [Caching](/frontend/orchestr/caching).
 ::
+
+## Setting cookies and response headers
+
+Query, link, and component-resolver responses are streamed as turbo-stream chunks; response headers are flushed before any of those handlers run. Two places remain where you can mutate the HTTP response:
+
+- **Inside `extendRequest`** for read-side requests. It runs once at the start of the request, before streaming begins. Use it for session cookies that need to be set on initial render or for `Set-Cookie` headers derived from incoming auth state.
+- **Inside an [action handler](/frontend/orchestr/actions)** for write-side requests. Action responses are a single non-streamed payload, so cookies and headers set in an action reach the browser normally. Use this for login, logout, and anything else that mutates the session.
+
+Header and cookie writes from query handlers, link handlers, component resolvers, or `use` middleware fail (Nitro logs a "Cannot set headers after they are sent" error) because the response stream has already started.
 
 ## `use` — Per-Handler Middleware
 
@@ -112,7 +125,7 @@ const defineMyPackage = defineOrchestr.use((args, next) => {
 ```
 
 ::warning
-Do not write to response headers or cookies inside `use` — headers may already have been sent. Use `extendRequest` for anything that modifies the HTTP response.
+Do not write to response headers or cookies inside `use`. The response stream has already started by the time `use` runs. See [Setting cookies and response headers](#setting-cookies-and-response-headers).
 ::
 
 ## Which One to Use
