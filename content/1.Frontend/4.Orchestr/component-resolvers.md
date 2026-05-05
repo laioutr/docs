@@ -58,7 +58,7 @@ export const ProductLoyalty = defineEntityComponentToken('loyalty', {
 The first argument (`'loyalty'`) becomes the component name — the key the frontend uses when requesting this data. The `entityType` ties it to the `Product` entity.
 
 ::tip
-If you are building a [Laioutr app](/apps/app-development/app-starter), place tokens in `src/runtime/shared/` so both server and client code can import them.
+Place token files in `src/runtime/shared/` so both server handlers and frontend code can import the same token reference. See [Runtime layout](/apps/app-development/coding-standards#runtime-layout) for the full directory convention.
 ::
 
 ## Writing a Component Resolver

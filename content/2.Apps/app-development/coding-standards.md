@@ -159,8 +159,9 @@ The prefix also makes it clear in Studio and in Vue devtools whether a component
 
 ## Runtime layout
 
-- **Server-only** code lives under `src/runtime/server/`: `client/` (API/SDK factory), `const/` (keys, tokens), `mappers/`, `middleware/` (orchestr defineOrchestr), `orchestr/`, `orchestr-helper/`, `utils/`.
-- **Client or shared** code lives under `src/runtime/app/`: `components/`, `sections/`, `blocks/`, and optionally `image/` (providers), `public/`.
+- **Server-only** code lives under `src/runtime/server/`: `client/` (API/SDK factory), `const/` (keys, passthrough tokens), `mappers/`, `middleware/` (orchestr defineOrchestr), `orchestr/`, `orchestr-helper/`, `utils/`.
+- **Client-only** code lives under `src/runtime/app/`: `components/`, `sections/`, `blocks/`, and optionally `image/` (providers), `public/`.
+- **Shared (server + client)** code lives under `src/runtime/shared/`. This is where orchestr token files belong: `defineActionToken`, `defineQueryToken`, `defineLinkToken`, and `defineEntityComponentToken` declarations all need to be importable from both your server handlers and your frontend components, so they cannot live under `server/` or `app/`. The convention is `src/runtime/shared/tokens/<feature>.ts`.
 - **Transpile:** The module must add `resolve("./runtime")` to `nuxt.options.build.transpile` so the runtime is compiled by the consuming app.
 
 ## TypeScript

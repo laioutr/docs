@@ -82,6 +82,10 @@ const defineMyPackage = defineOrchestr
 `extendRequest` runs for **every** incoming request, regardless of whether the current app handles it. Keep initialization lightweight or use caching for expensive operations like fetching system configuration. See [Caching](/frontend/orchestr/caching).
 ::
 
+::tip
+For backends that need vendor-internal IDs (Shopware's `sw-language-id`, sales-channel UUIDs) instead of standard locale or currency codes, see the [System bootstrap in extendRequest](/frontend/orchestr/recipes/system-bootstrap) recipe for the fetch-cache-resolve pattern.
+::
+
 ## Setting cookies and response headers
 
 Query, link, and component-resolver responses are streamed as turbo-stream chunks; response headers are flushed before any of those handlers run. Two places remain where you can mutate the HTTP response:
@@ -90,6 +94,10 @@ Query, link, and component-resolver responses are streamed as turbo-stream chunk
 - **Inside an [action handler](/frontend/orchestr/actions)** for write-side requests. Action responses are a single non-streamed payload, so cookies and headers set in an action reach the browser normally. Use this for login, logout, and anything else that mutates the session.
 
 Header and cookie writes from query handlers, link handlers, component resolvers, or `use` middleware fail (Nitro logs a "Cannot set headers after they are sent" error) because the response stream has already started.
+
+::tip
+For the read-or-create-and-set pattern used for cart, session, and visitor IDs (with guidance on which slot to pick), see the [Identity cookies](/frontend/orchestr/recipes/identity-cookies) recipe.
+::
 
 ## `use` — Per-Handler Middleware
 

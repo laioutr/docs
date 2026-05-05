@@ -48,6 +48,10 @@ export const CustomAction = defineActionToken('my-package/newsletter/custom-acti
 });
 ```
 
+::tip
+Place token files in `src/runtime/shared/` so both server handlers and frontend code can import the same token reference. See [Runtime layout](/apps/app-development/coding-standards#runtime-layout) for the full directory convention.
+::
+
 ## Action Handler
 
 Orchestr actions are defined using the `defineOrchestr.actionHandler` method. This method takes an action-token for type-safety and a handler function that will be called when the action is executed. The handler function will receive the input-data of the action-token and must return the output-data of the action-token.
@@ -105,6 +109,10 @@ export default defineActionHandler(CartAddItemsAction, async ({ input }) => {
 ```
 
 For custom actions, you can also create your own error-classes using the [`ebec`](https://github.com/tada5hi/ebec/tree/master/packages/ebec) or supplementary [`@ebec/http`](https://github.com/tada5hi/ebec/tree/master/packages/http) package.
+
+::tip
+For the pattern of mapping raw backend errors (Shopify `userErrors`, Shopware error payloads) into canonical Laioutr errors before throwing, see the [Translating vendor errors](/frontend/orchestr/recipes/translating-vendor-errors) recipe.
+::
 
 ::code-group
 ```typescript [ActionHandler.ts] twoslash

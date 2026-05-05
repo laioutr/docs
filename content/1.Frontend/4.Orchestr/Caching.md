@@ -169,3 +169,7 @@ export const getCategoryTotal = async (
 The cache prefix keeps keys organized per app and concern. Since this is a standard unstorage instance, you have access to `getItem`, `setItem`, `removeItem`, `getKeys`, and all other [unstorage methods](https://unstorage.unjs.io/usage).
 
 For function-level caching with automatic key management, you can also use Nitro's `defineCachedFunction` with `base: ORCHESTR_CACHE_KEY_USERLAND`.
+
+::tip
+For two patterns that come up across every connector (fire-and-forget background writes via `event.waitUntil`, and multi-tenant cache key composition), see the [Userland cache patterns](/frontend/orchestr/recipes/userland-cache-patterns) recipe.
+::

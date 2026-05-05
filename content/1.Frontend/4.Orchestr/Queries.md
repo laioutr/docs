@@ -56,6 +56,10 @@ export const StoreBySlugQuery = defineQueryToken('store-locator/store/by-slug', 
 });
 ```
 
+::tip
+Place token files in `src/runtime/shared/` so both server handlers and frontend code can import the same token reference. See [Runtime layout](/apps/app-development/coding-standards#runtime-layout) for the full directory convention.
+::
+
 For queries that return lists, set `type: 'multi'` and optionally provide a `defaultLimit` for pagination:
 
 ```ts twoslash
@@ -375,6 +379,53 @@ If your query handler declares `provides: [StoreLocationBase]` but the frontend 
 
 Use this when your backend already returns component data as part of the query response (e.g. a search endpoint that includes product names and prices). If the data requires a separate API call per entity, let component resolvers handle it instead.
 
+::tip
+For the pattern of providing one ephemeral component (search-position, attribution token) inline from a query handler while resolvers continue providing everything else, see the [Analytics components from query handlers](/frontend/orchestr/recipes/analytics-from-query-handlers) recipe.
+::
+
+### Inline Entity Data on Links
+
+Link handlers can return entity component data inline too. Declare the components your link provides via `provides`, then return `entities` (with synthetic IDs and the `$entity` helper) per source mapping. The breadcrumb pattern is the canonical use case: each breadcrumb item is a one-shot projection of the source product, so there is no point indirecting through a component resolver.
+
+```ts
+import { ProductBreadcrumbLink } from '@laioutr-core/canonical-types/ecommerce';
+import { BreadcrumbItemBase } from '@laioutr-core/canonical-types/entity/breadcrumb-item';
+
+export default defineMyAppLink({
+  implements: ProductBreadcrumbLink,
+  provides: [BreadcrumbItemBase],
+  run: async ({ entityIds, context, $entity }) => {
+    const products = await context.api.getProductsWithCategory(entityIds);
+
+    return {
+      links: products.map((product) => ({
+        sourceId: product.id,
+        entities: [
+          $entity({
+            id: `breadcrumb:${product.category.id}`,
+            base: () => ({
+              name: product.category.name,
+              link: { type: 'reference', reference: { type: 'Category', slug: product.category.slug, id: product.category.id } },
+            }),
+          }),
+          $entity({
+            id: `breadcrumb:${product.id}`,
+            base: () => ({
+              name: product.title,
+              link: { type: 'reference', reference: { type: 'Product', slug: product.slug, id: product.id } },
+            }),
+          }),
+        ],
+      })),
+    };
+  },
+});
+```
+
+Prefix the synthetic IDs with the source token (e.g. `breadcrumb:${sourceId}`) so they cannot collide with real entity IDs.
+
+When the linked entities are real and reusable elsewhere (variants, related products, items in a list), return `targetIds` instead and let component resolvers populate them. That path benefits from the component cache and lets other queries reuse the same entities.
+
 ### Passthrough Data
 
 **Passthrough** lets query handlers forward raw backend data to component resolvers and link handlers, avoiding duplicate API calls. Data flows one way: query handler sets it, downstream handlers read it.
@@ -415,6 +466,26 @@ The `PassthroughStore` exposes four methods:
 | `get`     | Retrieve the value, or `undefined` if not set. |
 | `require` | Retrieve the value, or throw if not set.       |
 | `has`     | Check whether a token has been set.            |
+
+#### Where to define passthrough tokens
+
+Place every `createPassthroughToken` call your app makes in one file (e.g. `server/const/passthroughTokens.ts`) and namespace each token with your app's package id. The built-in connectors use `@laioutr-app/<app-name>/<token-name>`:
+
+```ts
+// src/runtime/server/const/passthroughTokens.ts
+import { createPassthroughToken } from '#imports';
+import type { ProductFragment, CartFragment } from '../types/storefront.generated';
+
+export const productsFragmentToken = createPassthroughToken<ProductFragment[]>(
+  '@laioutr-app/shopify/productsFragment',
+);
+
+export const cartFragmentToken = createPassthroughToken<CartFragment>(
+  '@laioutr-app/shopify/cartFragment',
+);
+```
+
+Centralizing the tokens stops two handlers from declaring the same token with different types. The namespace prefix prevents id collisions when several connector apps run in the same project.
 
 ### The `shouldLoad` helper
 
