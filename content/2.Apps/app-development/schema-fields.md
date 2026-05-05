@@ -475,7 +475,7 @@ Media picker for images and videos from the media library.
   :::
 ::
 
-The field value is a `Media` object containing source URLs, dimensions, and alt text. Render it with the `Media` component from the UI Kit:
+The field value is a [`Media`](/frontend/api-reference/common-types/media) object containing source URLs, dimensions, and alt text. Render it with the `Media` component from the UI Kit:
 
 ```vue
 <template>

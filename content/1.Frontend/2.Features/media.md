@@ -38,12 +38,7 @@ So: **you implement a provider** that talks to your asset system and speaks the 
 
 ### Media (canonical shape)
 
-Assets are stored and passed around as **Media** from **@laioutr-core/core-types/common**. It is a discriminated union:
-
-- **image** – **sources**: array of **MediaSourceImage** (provider, src, width, height, responsive, focalPoint), optional **alt**, optional **placeholder**.
-- **video** – **sources**: array of **MediaSourceVideo** (provider, src, width, height, length, format, responsive), optional **preview** image.
-
-**provider** is the Nuxt Image provider name (e.g. `shopify`, `raw`); **src** is the URL or identifier your frontend uses to resolve the image or video. Your provider must return **Media** objects that match this shape so the frontend can render them correctly.
+Assets are stored and passed around as the canonical [`Media`](/frontend/api-reference/common-types/media) type from `@laioutr-core/core-types/common`. Your provider must return `Media` objects (with the right `provider` field on each source so nuxt-image can fetch them) so the frontend can render them through the [`<Media>`](/laioutr-ui/ui-kit/general/media) component. See the [Media reference page](/frontend/api-reference/common-types/media) for the full type, source variants, responsive sources, focal points, and placeholder formats.
 
 ### Media library provider (your adapter)
 

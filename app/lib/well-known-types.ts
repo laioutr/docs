@@ -9,10 +9,19 @@
  * to the URL below; surrounding syntax is left as plain text.
  */
 export const WELL_KNOWN_TYPES: Record<string, string> = {
+  // Link union and its variants
   Link: '/frontend/api-reference/common-types/link',
   LinkReference: '/frontend/api-reference/common-types/link#linkreference',
   LinkUrl: '/frontend/api-reference/common-types/link#linkurl',
   LinkAnchor: '/frontend/api-reference/common-types/link#linkanchor',
   LinkPage: '/frontend/api-reference/common-types/link#linkpage',
   LinkPageType: '/frontend/api-reference/common-types/link#linkpagetype',
+
+  // Media union and its variants
+  Media: '/frontend/api-reference/common-types/media',
+  MediaImage: '/frontend/api-reference/common-types/media#mediaimage',
+  MediaVideo: '/frontend/api-reference/common-types/media#mediavideo',
+  MediaSourceImage: '/frontend/api-reference/common-types/media#mediasourceimage',
+  MediaSourceVideo: '/frontend/api-reference/common-types/media#mediasourcevideo',
+  MediaSourcePlaceholder: '/frontend/api-reference/common-types/media#mediasourceplaceholder',
 };
