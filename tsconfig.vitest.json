@@ -1,0 +1,11 @@
+{
+  "extends": "./.nuxt/tsconfig.app.json",
+  "compilerOptions": {
+    "types": ["node"]
+  },
+  "include": [
+    "vitest.config.ts",
+    "app/**/*.test.ts",
+    "app/lib/json-schema/__fixtures__/**/*"
+  ]
+}

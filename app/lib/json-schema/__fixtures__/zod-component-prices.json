@@ -1,0 +1,106 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "price": {
+      "$ref": "#/definitions/Money"
+    },
+    "strikethroughPrice": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Money"
+        }
+      ]
+    },
+    "isOnSale": {
+      "description": "If true, indicates that the product is discounted from its original price. See `strikethroughPrice` for the original price and `savingsPercent` for the percentage of discount.",
+      "type": "boolean"
+    },
+    "savingsPercent": {
+      "description": "Percentage of discount from the `strikethroughPrice`.",
+      "type": "number"
+    },
+    "isStartingFrom": {
+      "description": "If true, indicates that there are multiple variants with different prices. Can be used in the frontend to indicate a starting-from price, e.g. \"from 100 EUR\".",
+      "type": "boolean"
+    },
+    "unitPrice": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/UnitPrice"
+        }
+      ]
+    }
+  },
+  "required": [
+    "price",
+    "isOnSale",
+    "isStartingFrom"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "Money": {
+      "description": "A Money object describes a monetary value. You can use e.g. `@screeny05/ts-money` to create and manipulate Money objects more elegantly.",
+      "title": "Money",
+      "id": "Money",
+      "type": "object",
+      "properties": {
+        "amount": {
+          "description": "Amount in smallest unit of currency. E.g. cents, pence, etc.",
+          "type": "number"
+        },
+        "currency": {
+          "description": "ISO 4217 currency code. E.g. 'USD', 'EUR', 'GBP', etc.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "additionalProperties": false
+    },
+    "UnitPrice": {
+      "description": "This object descibes a unit-price, e.g. 13.99 EUR / 100g",
+      "title": "UnitPrice",
+      "id": "UnitPrice",
+      "type": "object",
+      "properties": {
+        "price": {
+          "$ref": "#/definitions/Money"
+        },
+        "quantity": {
+          "$ref": "#/definitions/Measurement"
+        },
+        "reference": {
+          "$ref": "#/definitions/Measurement"
+        }
+      },
+      "required": [
+        "price",
+        "quantity",
+        "reference"
+      ],
+      "additionalProperties": false
+    },
+    "Measurement": {
+      "description": "A value-object representing a measurement of a physical quantity. E.g. length, weight, etc.",
+      "title": "Measurement",
+      "id": "Measurement",
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "string"
+        },
+        "value": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "unit",
+        "value"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

@@ -3,7 +3,9 @@
   "scripts": {
     "build": "NODE_OPTIONS='--max-old-space-size=8192' nuxt build",
     "dev": "nuxt dev",
-    "setup": "infisical run -- npx --yes npmrc-replace-env"
+    "setup": "infisical run -- npx --yes npmrc-replace-env",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@laioutr-core/canonical-types": "^0.22.20",
@@ -42,6 +44,7 @@
     "prettier": "^3.7.4",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "^5.9.3",
+    "vitest": "^3.2.4",
     "vue": "3.5.25"
   }
 }

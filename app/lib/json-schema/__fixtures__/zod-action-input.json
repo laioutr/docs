@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "An array of items to add to the cart.",
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/CartAddItemInput"
+  },
+  "definitions": {
+    "CartAddItemInput": {
+      "description": "Union of all possible items that can be added to the cart. If you find yourself in a situation where you need to add items which are not products or discount-codes, you should create a custom action for that or use the type `custom`.",
+      "id": "CartAddItemInput",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/CartAddItemProductInput"
+        },
+        {
+          "$ref": "#/definitions/CartAddItemDiscountCodeInput"
+        },
+        {
+          "$ref": "#/definitions/CartAddItemCustomInput"
+        }
+      ]
+    },
+    "CartAddItemProductInput": {
+      "description": "A product to be added to the cart.",
+      "title": "Product Line Item Input",
+      "id": "CartAddItemProductInput",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "product"
+        },
+        "productId": {
+          "type": "string"
+        },
+        "variantId": {
+          "type": "string"
+        },
+        "quantity": {
+          "default": 1,
+          "type": "number"
+        },
+        "customFields": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CustomFields"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "productId",
+        "variantId"
+      ]
+    },
+    "CustomFields": {
+      "description": "Custom fields are a way for implementations to pass arbitrary data to actions, queries, etc.",
+      "title": "CustomFields",
+      "id": "CustomFields",
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {}
+    },
+    "CartAddItemDiscountCodeInput": {
+      "description": "A discount code to be added to the cart.",
+      "title": "Discount Code Line Item Input",
+      "id": "CartAddItemDiscountCodeInput",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "discount-code"
+        },
+        "code": {
+          "type": "string"
+        },
+        "customFields": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CustomFields"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "code"
+      ]
+    },
+    "CartAddItemCustomInput": {
+      "description": "A custom item to be added to the cart. Use this for your custom implementations.",
+      "title": "Custom Line Item Input",
+      "id": "CartAddItemCustomInput",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "custom"
+        },
+        "customFields": {
+          "$ref": "#/definitions/CustomFields"
+        }
+      },
+      "required": [
+        "type",
+        "customFields"
+      ]
+    }
+  }
+}

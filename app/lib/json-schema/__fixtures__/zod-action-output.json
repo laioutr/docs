@@ -1,0 +1,298 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "customer": {
+      "description": "A customer is a person who has an account with the shop.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+        },
+        "phone": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PhoneNumber"
+            }
+          ]
+        },
+        "displayName": {
+          "description": "The least common denominator of how to address the customer.",
+          "type": "string"
+        },
+        "person": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PersonName"
+            }
+          ]
+        },
+        "avatar": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/MediaImage"
+            }
+          ]
+        },
+        "addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MailingAddress"
+          }
+        },
+        "defaultShippingAddress": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/MailingAddress"
+            }
+          ]
+        },
+        "defaultBillingAddress": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/MailingAddress"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "displayName",
+        "addresses"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "customer"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "PhoneNumber": {
+      "description": "Represents a phone number. Formatted as a {@link https://en.wikipedia.org/wiki/E.164 | E.164} number.",
+      "title": "PhoneNumber",
+      "id": "PhoneNumber",
+      "examples": [
+        "\"+4915756789013\""
+      ],
+      "type": "string",
+      "pattern": "^\\+?[1-9]\\d{1,14}$"
+    },
+    "PersonName": {
+      "description": "Describes the way a person can be addressed.",
+      "title": "PersonName",
+      "id": "PersonName",
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "$ref": "#/definitions/__schema0"
+        },
+        "lastName": {
+          "$ref": "#/definitions/__schema1"
+        },
+        "salutation": {
+          "$ref": "#/definitions/__schema2"
+        },
+        "title": {
+          "$ref": "#/definitions/__schema3"
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName"
+      ],
+      "additionalProperties": false
+    },
+    "__schema0": {
+      "description": "The first name(s) of a person.",
+      "examples": [
+        "Stephen"
+      ],
+      "type": "string"
+    },
+    "__schema1": {
+      "description": "The last name(s) of a person.",
+      "examples": [
+        "Hawking"
+      ],
+      "type": "string"
+    },
+    "__schema2": {
+      "description": "Salutation of a person as lowercase key.",
+      "examples": [
+        "ms , \"mr\", \"mx\", \"none\", etc."
+      ],
+      "type": "string"
+    },
+    "__schema3": {
+      "description": "Title of a person as lowercase key.",
+      "examples": [
+        "dr , \"prof\", etc."
+      ],
+      "type": "string"
+    },
+    "MediaImage": {
+      "description": "A MediaImage describes an image to be displayed in the browser. An image consists of one or more MediaSourceImage and additional metadata.",
+      "title": "MediaImage",
+      "id": "MediaImage",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "image"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MediaSourceImage"
+          }
+        },
+        "alt": {
+          "type": "string"
+        },
+        "meta": {},
+        "placeholder": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string",
+              "enum": [
+                "solid",
+                "thumbhash"
+              ]
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "sources"
+      ],
+      "additionalProperties": false
+    },
+    "MediaSourceImage": {
+      "description": "A MediaSourceImage is a single source for an image.",
+      "title": "MediaSourceImage",
+      "id": "MediaSourceImage",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "src": {
+          "type": "string"
+        },
+        "width": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "responsive": {
+          "type": "string",
+          "enum": [
+            "static",
+            "mobile",
+            "desktop"
+          ]
+        },
+        "focalPoint": {
+          "type": "array",
+          "items": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": [
+        "provider",
+        "src"
+      ],
+      "additionalProperties": false
+    },
+    "MailingAddress": {
+      "description": "Represents a mailing address for customers and shipping. If you are looking for just a location address, use {@link LocationAddress} instead.",
+      "title": "MailingAddress",
+      "id": "MailingAddress",
+      "type": "object",
+      "properties": {
+        "address1": {
+          "description": "The first line of the address. E.g. the street address or PO Box number.",
+          "type": "string"
+        },
+        "address2": {
+          "description": "The second line of the address. E.g. the number of the apartment, suite, or unit.",
+          "type": "string"
+        },
+        "city": {
+          "description": "The name of the city, district, village, or town.",
+          "type": "string"
+        },
+        "countryCode": {
+          "description": "The country code of the address. In {@link https://www.iso.org/glossary-for-iso-3166.html | ISO 3166-1 (alpha-2)} format",
+          "type": "string"
+        },
+        "postalCode": {
+          "description": "The zip or postal code of the address.",
+          "type": "string"
+        },
+        "provinceCode": {
+          "description": "The region/province code of the address. In {@link https://www.iso.org/glossary-for-iso-3166.html | ISO 3166-2} format, without the country code.",
+          "type": "string"
+        },
+        "latitude": {
+          "description": "The geographic latitude of the address. Assumes the address is in the GPS (WGS84) coordinate system.",
+          "type": "number"
+        },
+        "longitude": {
+          "description": "The geographic longitude of the address. Assumes the address is in the GPS (WGS84) coordinate system.",
+          "type": "number"
+        },
+        "firstName": {
+          "$ref": "#/definitions/__schema0"
+        },
+        "lastName": {
+          "$ref": "#/definitions/__schema1"
+        },
+        "salutation": {
+          "$ref": "#/definitions/__schema2"
+        },
+        "title": {
+          "$ref": "#/definitions/__schema3"
+        },
+        "company": {
+          "description": "The name of the company or organization of the address.",
+          "type": "string"
+        },
+        "phone": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PhoneNumber"
+            }
+          ]
+        }
+      },
+      "required": [
+        "address1",
+        "city",
+        "countryCode",
+        "postalCode",
+        "firstName",
+        "lastName"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

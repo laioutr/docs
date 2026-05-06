@@ -3,8 +3,15 @@ import type { DocsJSONSchema } from './introspection';
 
 type PropertyMetaSchema = PropertyMeta['schema'];
 
-const isDeprecated = (m: { tags?: Array<{ name: string }> }): boolean =>
-  !!m.tags?.some((t) => t.name === 'deprecated');
+/**
+ * Check for `@deprecated` JSDoc tag. Accepts any meta shape because vue-component-meta's
+ * `SlotMeta` type lacks a `tags` field entirely, so a strict structural parameter type
+ * fails TypeScript's "no properties in common" check at the call sites.
+ */
+const isDeprecated = (m: unknown): boolean => {
+  const tags = (m as { tags?: Array<{ name: string }> }).tags;
+  return !!tags?.some((t) => t.name === 'deprecated');
+};
 
 /** Mirror of nuxt-component-meta's parseDefaultValue without its other side effects. */
 const parseDefault = (raw: string | undefined): unknown => {
