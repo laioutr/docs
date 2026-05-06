@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { SchemaMode } from '../lib/json-schema/introspection';
 import type { JSONSchema } from '@laioutr-core/core-types/common';
+import { classify } from '../lib/json-schema/classify';
 import {
   getConstraints,
   getConstValues,
@@ -12,7 +13,6 @@ import {
   isExpandableLiteralUnion,
   isFieldDescriptionFromObject,
 } from '../lib/json-schema/introspection';
-import { nullOrEmpty } from '../lib/json-schema/nullOrEmpty';
 import { resolveSchema } from '../lib/json-schema/resolveSchema';
 import { ProseCode, UCollapsible, UIcon } from '#components';
 
@@ -32,6 +32,8 @@ provide(SCHEMA_MODE_KEY, mode);
 /** Resolved once: deref + unwrap allOf. All helpers work on this. */
 const schema = computed(() => resolveSchema(props.schema, { dereferenced: props.dereferenced }));
 
+const kind = computed(() => classify(schema.value));
+
 /** Pre-resolve all property fields so the template works with clean schemas. */
 const resolvedProperties = computed(() => {
   if (schema.value.type !== 'object' || !schema.value.properties) return [];
@@ -42,12 +44,12 @@ const resolvedProperties = computed(() => {
 </script>
 
 <template>
-  <template v-if="nullOrEmpty(schema)">
+  <template v-if="kind.kind === 'empty'">
     <UIcon name="lucide:minus" class="text-gray-400" />
   </template>
   <template v-else>
     <!-- Object with properties -->
-    <ProseFieldGroup v-if="schema.type === 'object'" class="border-default !my-0 border-l-2 border-dashed pl-4">
+    <ProseFieldGroup v-if="kind.kind === 'object'" class="border-default !my-0 border-l-2 border-dashed pl-4">
       <template v-for="{ name: fieldName, field } in resolvedProperties" :key="fieldName">
         <!-- Expandable field -->
         <UCollapsible v-if="getExpandableVariants(field)" class="my-5">
@@ -104,7 +106,12 @@ const resolvedProperties = computed(() => {
 
         <!-- Simple field -->
         <div v-else class="my-5">
-          <JsonSchemaFieldRow :name="fieldName" :type="getTypeSummary(field, { mode })" :required="schema.required?.includes(fieldName)" :deprecated="field.deprecated" />
+          <JsonSchemaFieldRow
+            :name="fieldName"
+            :type="getTypeSummary(field, { mode })"
+            :required="schema.required?.includes(fieldName)"
+            :deprecated="field.deprecated"
+          />
           <!-- eslint-disable-next-line vue/no-v-html -->
           <p v-if="getFieldDescriptionHtml(field)" class="text-muted mt-1 text-sm" v-html="getFieldDescriptionHtml(field)" />
           <div v-if="getConstraints(field, mode).length" class="mt-1.5 flex flex-wrap gap-1">
@@ -121,10 +128,19 @@ const resolvedProperties = computed(() => {
       </template>
     </ProseFieldGroup>
 
-    <!-- Root-level array: chip legend on the border -->
-    <template v-else-if="schema.type === 'array'">
+    <!-- Root-level array, tuple, or discriminated tuple: chip legend on the border -->
+    <template v-else-if="kind.kind === 'array' || kind.kind === 'tuple' || kind.kind === 'discriminated-tuple'">
       <!-- Primitive array (string[], number[], etc.): show as single type -->
-      <div v-if="!getExpandableVariants(schema) && typeof schema.items === 'object' && !Array.isArray(schema.items) && (schema.items as JSONSchema).type && (schema.items as JSONSchema).type !== 'object' && (schema.items as JSONSchema).type !== 'array'">
+      <div
+        v-if="
+          !getExpandableVariants(schema) &&
+          typeof schema.items === 'object' &&
+          !Array.isArray(schema.items) &&
+          (schema.items as JSONSchema).type &&
+          (schema.items as JSONSchema).type !== 'object' &&
+          (schema.items as JSONSchema).type !== 'array'
+        "
+      >
         <ProseCode>
           <LinkedTypeName :type="getTypeName(schema, mode)" />
         </ProseCode>
@@ -141,7 +157,9 @@ const resolvedProperties = computed(() => {
       </div>
       <!-- Complex array: expandable items -->
       <div v-else>
-        <span class="bg-primary/10 text-primary dark:bg-primary/15 mb-2 inline-block rounded-sm px-1.5 py-0.5 font-mono text-xs font-medium">
+        <span
+          class="bg-primary/10 text-primary dark:bg-primary/15 mb-2 inline-block rounded-sm px-1.5 py-0.5 font-mono text-xs font-medium"
+        >
           array
         </span>
         <div v-if="getConstraints(schema, mode).length" class="mb-2 flex flex-wrap gap-1">
@@ -165,7 +183,7 @@ const resolvedProperties = computed(() => {
     </template>
 
     <!-- Named const-only union: render the accepted values as a wrapped row of code chips. -->
-    <template v-else-if="isExpandableLiteralUnion(schema)">
+    <template v-else-if="kind.kind === 'literal-union' && isExpandableLiteralUnion(schema)">
       <p class="text-muted mt-2 text-xs">Accepts one of the following:</p>
       <div class="mt-2 flex flex-wrap items-center gap-1.5">
         <ProseCode v-for="value in getConstValues(schema)" :key="String(value)">{{ JSON.stringify(value) }}</ProseCode>

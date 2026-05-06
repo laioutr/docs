@@ -1,40 +1,40 @@
-import { describe, it, test, expect } from 'vitest';
+import { describe, expect, it, test } from 'vitest';
 import {
-  getTypeName,
-  getConstraints,
-  isExpandableLiteralUnion,
-  getEscapeHatchTypes,
-  getConstValues,
-  summarizeConstValues,
-  getExpandableVariants,
-  getTypeSummary,
-} from './introspection';
-import {
-  PRIM_STRING,
-  PRIM_INTEGER,
-  STRING_DATE_TIME,
-  STRING_EMAIL,
-  STRING_WITH_PATTERN,
-  NUMBER_WITH_RANGE,
-  ARRAY_OF_STRING,
-  ARRAY_WITH_LENGTH,
-  TUPLE_THREE,
-  TUPLE_DISCRIMINATED,
-  CONST_STRING,
-  CONST_NUMBER,
-  ENUM_STRINGS,
-  OBJECT_SIMPLE,
   ALL_OF_INTERSECTION,
   ANY_OF_OBJECTS,
-  READ_ONLY_STRING,
-  WRITE_ONLY_STRING,
-  STRING_WITH_DEFAULT,
-  LITERAL_UNION_NAMED,
-  LITERAL_UNION_LONG_WITH_ESCAPE,
+  ARRAY_OF_STRING,
+  ARRAY_WITH_LENGTH,
+  CONST_NUMBER,
+  CONST_STRING,
+  ENUM_STRINGS,
   LITERAL_UNION_JOINED_FORM,
   LITERAL_UNION_JOINED_TOO_SHORT,
+  LITERAL_UNION_LONG_WITH_ESCAPE,
   LITERAL_UNION_MULTI_ESCAPE,
+  LITERAL_UNION_NAMED,
+  NUMBER_WITH_RANGE,
+  OBJECT_SIMPLE,
+  PRIM_INTEGER,
+  PRIM_STRING,
+  READ_ONLY_STRING,
+  STRING_DATE_TIME,
+  STRING_EMAIL,
+  STRING_WITH_DEFAULT,
+  STRING_WITH_PATTERN,
+  TUPLE_DISCRIMINATED,
+  TUPLE_THREE,
+  WRITE_ONLY_STRING,
 } from './__fixtures__';
+import {
+  getConstraints,
+  getConstValues,
+  getEscapeHatchTypes,
+  getExpandableVariants,
+  getTypeName,
+  getTypeSummary,
+  isExpandableLiteralUnion,
+  summarizeConstValues,
+} from './introspection';
 
 describe('getTypeName', () => {
   describe('primitives', () => {
@@ -117,6 +117,14 @@ describe('getTypeName', () => {
 
     it('joins type-array with |', () => {
       expect(getTypeName({ type: ['string', 'null'] } as any)).toBe('string | null');
+    });
+
+    it('renders bare type:null as "null"', () => {
+      expect(getTypeName({ type: 'null' })).toBe('null');
+    });
+
+    it('renders bare type:object (no properties) as "object"', () => {
+      expect(getTypeName({ type: 'object' })).toBe('object');
     });
   });
 
