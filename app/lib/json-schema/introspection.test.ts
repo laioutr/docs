@@ -1,6 +1,7 @@
 import { describe, expect, it, test } from 'vitest';
 import {
   ALL_OF_INTERSECTION,
+  ANY_OF_DISCRIMINATED_TUPLES_UNNAMED,
   ANY_OF_OBJECTS,
   ARRAY_OF_STRING,
   ARRAY_WITH_LENGTH,
@@ -24,6 +25,14 @@ import {
   TUPLE_DISCRIMINATED,
   TUPLE_THREE,
   WRITE_ONLY_STRING,
+  ZOD_ARRAY_OF_NAMED_OBJECT,
+  ZOD_ARRAY_OF_NAMED_UNION,
+  ZOD_ARRAY_OF_UNNAMED_UNION,
+  ZOD_INLINE_OBJECT_WITH_REFS,
+  ZOD_NAMED_DISCRIMINATED_UNION,
+  ZOD_OPEN_RECORD_NAMED,
+  ZOD_PRIMITIVE_UNION,
+  ZOD_TUPLE_ENUM_HEAD,
 } from './__fixtures__';
 import {
   getConstraints,
@@ -32,7 +41,9 @@ import {
   getExpandableVariants,
   getTypeName,
   getTypeSummary,
+  getVariantListDescriptionHtml,
   isExpandableLiteralUnion,
+  isFieldDescriptionFromObject,
   summarizeConstValues,
 } from './introspection';
 
@@ -336,6 +347,25 @@ describe('getExpandableVariants', () => {
     ]);
   });
 
+  it('uses tuple-shaped labels for an unnamed union of discriminated tuples', () => {
+    // Without the originKind branch, `enrichWithDiscriminant` would overwrite each tuple
+    // variant's label with the object-shaped `{ type: "color" }` fallback, misrepresenting
+    // the underlying tuple. Mirroring with `[type: "color"]` parallels the object form
+    // and stays distinct from the per-variant `summary` (`[type: "color", value: string]`)
+    // shown alongside it in the variant-list row.
+    const variants = getExpandableVariants(ANY_OF_DISCRIMINATED_TUPLES_UNNAMED);
+    expect(variants!.map((v) => v.label)).toEqual([
+      '[type: "color"]',
+      '[type: "colors"]',
+      '[type: "gradient"]',
+    ]);
+    expect(variants!.map((v) => v.summary)).toEqual([
+      '[type: "color", value: string]',
+      '[type: "colors", value: string[]]',
+      '[type: "gradient", value: string[]]',
+    ]);
+  });
+
   it('returns the same array on repeat calls (WeakMap cache)', () => {
     const a = getExpandableVariants(OBJECT_SIMPLE);
     const b = getExpandableVariants(OBJECT_SIMPLE);
@@ -426,6 +456,19 @@ describe('getTypeSummary', () => {
     expect(result).toBe('Wrapper<Foo> { x }');
   });
 
+  it('collapses an unnamed union of discriminated tuples into a compact head-merged form', () => {
+    // Reproduction of the canonical-types `Swatch` regression. Two prior shapes, both wrong:
+    // - object form: `{ type: "color" } | { type: "colors" } | { type: "gradient" }` (misrepresents
+    //   the tuple), and
+    // - per-variant tuple form: `[type: "color", value: string] | [type: "colors", value: string[]] | …`
+    //   (correct, but too verbose for a row summary).
+    // Final: merge the discriminant constants and elide the value slot — full detail is still in
+    // the expanded variant list.
+    expect(getTypeSummary(ANY_OF_DISCRIMINATED_TUPLES_UNNAMED)).toBe(
+      '[type: "color" | "colors" | "gradient", value]'
+    );
+  });
+
   it('renders Cta[]-style array of named union (uses items id)', () => {
     // Array whose items have a top-level id and are a union: rendered as `Id[]`,
     // not `(T1 | T2)[]`. Hits the "Named union" branch at introspection.ts ~line 463.
@@ -441,6 +484,149 @@ describe('getTypeSummary', () => {
   });
 });
 
+describe('getVariantListDescriptionHtml', () => {
+  it('returns the items description for a `Foo[]` field (so the union description survives the array wrap)', () => {
+    const field = {
+      description: 'All media: images, videos, …',
+      type: 'array' as const,
+      items: { id: 'Media', description: 'A Media object describes …', anyOf: [{ const: 'image' }, { const: 'video' }] },
+    };
+    expect(getVariantListDescriptionHtml(field)).toContain('A Media object describes');
+  });
+
+  it('returns empty for a direct-union field — its description is already on the field row', () => {
+    const field = { id: 'Link', description: 'A Link can be …', anyOf: [{ const: 'url' }, { const: 'page' }] };
+    expect(getVariantListDescriptionHtml(field)).toBe('');
+  });
+
+  it('returns empty for arrays whose items have no description', () => {
+    const field = { type: 'array' as const, items: { id: 'X', anyOf: [{ const: 'a' }, { const: 'b' }] } };
+    expect(getVariantListDescriptionHtml(field)).toBe('');
+  });
+
+  it('returns empty for tuples (items is an array, not a single schema)', () => {
+    const tuple = { type: 'array' as const, items: [{ const: 'a' }, { type: 'string' as const }] };
+    expect(getVariantListDescriptionHtml(tuple)).toBe('');
+  });
+});
+
+describe('isFieldDescriptionFromObject', () => {
+  it('treats a single-variant named object field as belonging to the type (so the field row stays clean and the description shows on expand)', () => {
+    // Mirrors `MediaSourceVideo.length: Duration` — the deref'd `length` schema *is* `Duration`,
+    // and we don't want Duration's description leaking onto the `length` field row.
+    const lengthField = {
+      id: 'Duration',
+      title: 'Duration',
+      description: 'ISO 8601 duration string',
+      type: 'object' as const,
+      properties: { duration: { type: 'string' as const } },
+      required: ['duration'],
+    };
+    expect(isFieldDescriptionFromObject(lengthField)).toBe(true);
+  });
+
+  it('treats an inline single-variant object as the property\'s own description', () => {
+    const inline = {
+      description: 'A property described inline',
+      type: 'object' as const,
+      properties: { x: { type: 'number' as const } },
+    };
+    expect(isFieldDescriptionFromObject(inline)).toBe(false);
+  });
+
+  it('returns false for multi-variant unions — the description belongs above "Accepts one of …"', () => {
+    const union = {
+      id: 'Media',
+      description: 'A Media object …',
+      anyOf: [
+        { type: 'object' as const, properties: { type: { const: 'image' } } },
+        { type: 'object' as const, properties: { type: { const: 'video' } } },
+      ],
+    };
+    expect(isFieldDescriptionFromObject(union)).toBe(false);
+  });
+
+  it('returns false for non-expandable fields (no variants → field-row description is the only place it can show)', () => {
+    const primitive = { id: 'ColorString', type: 'string' as const, description: 'A CSS color string' };
+    expect(isFieldDescriptionFromObject(primitive)).toBe(false);
+  });
+});
+
+// --- Characterization tests for shipped reflection shapes ---
+//
+// These pin the rendered output for shapes that actually appear in
+// `@laioutr-core/canonical-types/reflection`. Synthesized to keep the suite hermetic — when the
+// real schema changes, the failing test points at the divergence. Each test asserts both the
+// row-level summary (`getTypeSummary`) and the variant labels shown in the expanded panel
+// (`getExpandableVariants`), since those are the two surfaces a user sees per field.
+
+describe('shipped reflection shapes (characterization)', () => {
+  it('Media — named discriminated union of named objects', () => {
+    expect(getTypeSummary(ZOD_NAMED_DISCRIMINATED_UNION)).toBe('Media');
+    const variants = getExpandableVariants(ZOD_NAMED_DISCRIMINATED_UNION);
+    expect(variants!.map((v) => v.label)).toEqual(['MediaImage', 'MediaVideo']);
+    expect(variants!.map((v) => v.summary)).toEqual([
+      '{ type, sources, alt }',
+      '{ type, sources, poster }',
+    ]);
+  });
+
+  it('MediaImage[] — array of a single named object: name + property peek (current UX, slightly ambiguous)', () => {
+    // The trailing `{...}` describes the *items*, not the array itself, but the rendered string
+    // doesn't make that scoping explicit. Pinning current behavior; revisit if it confuses readers.
+    expect(getTypeSummary(ZOD_ARRAY_OF_NAMED_OBJECT)).toBe('MediaImage[] { type, sources, alt }');
+    const variants = getExpandableVariants(ZOD_ARRAY_OF_NAMED_OBJECT);
+    expect(variants!.map((v) => v.label)).toEqual(['MediaImage[]']);
+  });
+
+  it('Media[] — array of a named discriminated union (uses items id, no peek)', () => {
+    expect(getTypeSummary(ZOD_ARRAY_OF_NAMED_UNION)).toBe('Media[]');
+    const variants = getExpandableVariants(ZOD_ARRAY_OF_NAMED_UNION);
+    expect(variants!.map((v) => v.label)).toEqual(['MediaImage', 'MediaVideo']);
+  });
+
+  it('placeholder — tuple with an enum head (not discriminated)', () => {
+    // Head is an enum, not a single `const`, so `classify` returns `tuple`, not
+    // `discriminated-tuple`. Output: `[("solid" | "thumbhash"), string]`.
+    expect(getTypeName(ZOD_TUPLE_ENUM_HEAD)).toBe('["solid" | "thumbhash", string]');
+    expect(getTypeSummary(ZOD_TUPLE_ENUM_HEAD)).toBe('["solid" | "thumbhash", string]');
+  });
+
+  it('LocationQueryRaw value — anonymous union of primitives renders as joined types', () => {
+    expect(getTypeName(ZOD_PRIMITIVE_UNION)).toBe('string | number | null');
+    expect(getTypeSummary(ZOD_PRIMITIVE_UNION)).toBe('string | number | null');
+    expect(getExpandableVariants(ZOD_PRIMITIVE_UNION)).toBeUndefined();
+  });
+
+  it('CustomFields — open record renders as `Record<string, unknown>` in javascript mode', () => {
+    expect(getTypeName(ZOD_OPEN_RECORD_NAMED, 'javascript')).toBe('Record<string, unknown>');
+    expect(getTypeSummary(ZOD_OPEN_RECORD_NAMED, { mode: 'javascript' })).toBe('Record<string, unknown>');
+    // In json mode the record falls back to its id (or `'object'` if anonymous).
+    expect(getTypeName(ZOD_OPEN_RECORD_NAMED, 'json')).toBe('CustomFields');
+  });
+
+  it('Array<X | Y> — wraps anonymous-union items in parens so `[]` does not bind tighter than `|`', () => {
+    // Without the wrap, `Array<string | number>` renders as `string | number[]`, which TS
+    // reads as `string | (number[])` — a different type. Named unions stay unwrapped because
+    // they collapse to a single token via their `id` (e.g., `Media[]`).
+    expect(getTypeName(ZOD_ARRAY_OF_UNNAMED_UNION)).toBe('(string | number)[]');
+    expect(getTypeSummary(ZOD_ARRAY_OF_UNNAMED_UNION)).toBe('(string | number)[]');
+    // Sanity: named-union items keep the unwrapped form.
+    expect(getTypeName({ type: 'array' as const, items: { ...ANY_OF_OBJECTS, id: 'Node' } as any })).toBe('Node[]');
+  });
+
+  it('shipping — anonymous inline object: row shows just the property peek', () => {
+    // No `id`/`title` on the wrapper — `getTypeSummary` drops the leading id and shows just
+    // the property summary. The variant-list label still falls back to the literal `'object'`,
+    // which is generic; pinning so a future "carry the property name" enhancement is an
+    // explicit choice rather than an accidental change.
+    expect(getTypeSummary(ZOD_INLINE_OBJECT_WITH_REFS)).toBe('{ total, isEstimated }');
+    const variants = getExpandableVariants(ZOD_INLINE_OBJECT_WITH_REFS);
+    expect(variants!.map((v) => v.label)).toEqual(['object']);
+    expect(variants!.map((v) => v.summary)).toEqual(['{ total, isEstimated }']);
+  });
+});
+
 // --- Known gaps ---
 //
 // These are documented limitations of the current renderer. Each entry corresponds to
@@ -452,11 +638,15 @@ describe('getTypeSummary', () => {
 
 describe('known gaps (documented limitations)', () => {
   test.todo('schema booleans: properties with `true`/`false` value');
-  test.todo('multi-type: type: ["string", "null"] renders both branches in the field row');
+  test('multi-type: type: ["string", "null"] renders both branches in the field row', () => {
+    expect(getTypeSummary({ type: ['string', 'null'] } as any)).toBe('string | null');
+  });
   test.todo('prefixItems (Draft 2020-12 tuples)');
   test.todo('if/then/else conditional schemas');
   test.todo('not');
-  test.todo('nullable: true (OpenAPI 3.0)');
+  test('nullable: true (OpenAPI 3.0) renders as "T | null"', () => {
+    expect(getTypeSummary({ type: 'string', nullable: true } as any)).toBe('string | null');
+  });
   test.todo('additionalProperties as schema with sibling properties — render as "any other key" row');
   test.todo('examples (array) — render as an expandable list separate from default');
   test.todo('exclusiveMinimum/Maximum as boolean (Draft 4 form) — currently prints "true"/"false"');
@@ -464,4 +654,16 @@ describe('known gaps (documented limitations)', () => {
   test.todo('resolveSchema: recursive allOf unwrap (currently shallow — downstream callers must re-resolve at each descent)');
   test.todo('boolean-const union with clean alias renders expanded instead of collapsing to `boolean`');
   test.todo('deprecated annotation is not emitted as a constraint chip (only shown as field-row badge)');
+  // Layer 2 (hygiene): `classify` re-derefs via `resolveSchema(input, { dereferenced: false })`,
+  // which klones every input. All current callsites pass already-resolved schemas, so the work
+  // is wasted AND it breaks reference-equality checks in downstream heuristics (this is exactly
+  // how `isFieldDescriptionFromObject`'s identity check silently failed). Make the contract
+  // explicit (input must be resolved), drop the re-deref, keep only the defensive allOf unwrap.
+  test.todo('classify: assume resolved input, drop the implicit klone, preserve identity for downstream identity-based heuristics');
+  // Layer 3 (semantics): per Draft 7, `dereferenceSync` replaces `{ $ref, description: "own" }`
+  // with the target — losing the property's own description. Draft 2020-12 / OpenAPI 3.1 merge
+  // siblings instead. Switch to merge semantics so a property can override the type's description
+  // (and so `isFieldDescriptionFromObject` could distinguish "type-level" from "property-level"
+  // without relying on `id` as a proxy).
+  test.todo('resolveSchema: merge $ref siblings onto the resolved target so property-level overrides survive (Draft 2020-12 / OpenAPI 3.1 semantics)');
 });

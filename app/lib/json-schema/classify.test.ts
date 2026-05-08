@@ -164,6 +164,18 @@ describe('classify — happy path per kind', () => {
     expect(k.kind).toBe('opaque');
     if (k.kind === 'opaque') expect(k.name).toBe('SomeType');
   });
+
+  it('multi-type: { type: ["string", "null"] } → multi-type', () => {
+    const k = classify({ type: ['string', 'null'] } as any);
+    expect(k.kind).toBe('multi-type');
+    if (k.kind === 'multi-type') expect(k.types).toEqual(['string', 'null']);
+  });
+
+  it('multi-type: { type: "string", nullable: true } (OpenAPI 3.0) → multi-type with [type, "null"]', () => {
+    const k = classify({ type: 'string', nullable: true } as any);
+    expect(k.kind).toBe('multi-type');
+    if (k.kind === 'multi-type') expect(k.types).toEqual(['string', 'null']);
+  });
 });
 
 describe('classify — dispatch order edges', () => {

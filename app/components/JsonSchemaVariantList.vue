@@ -5,10 +5,14 @@ import { UCollapsible } from '#components';
 const props = defineProps<{
   variants: ExpandableVariant[];
   array?: boolean;
+  /** HTML description shown above the "Accepts one of …" line — typically the parent union's own description. */
+  descriptionHtml?: string;
 }>();
 </script>
 
 <template>
+  <!-- eslint-disable-next-line vue/no-v-html -->
+  <p v-if="props.descriptionHtml" class="text-muted mt-2 text-sm" v-html="props.descriptionHtml" />
   <p class="text-muted mt-2 text-xs">{{ props.array ? 'Accepts an array of the following:' : 'Accepts one of the following:' }}</p>
   <ProseFieldGroup class="border-default !my-0 border-l-2 border-dashed pl-4">
     <UCollapsible v-for="(variant, i) in variants" :key="i" class="my-5">

@@ -17,6 +17,28 @@ const FORMAT_TO_JS_TYPE: Record<string, string> = {
   'date-time': 'Date',
 };
 
+/**
+ * Whether the items of an array need parentheses when stringified inside `T[]`. The TS
+ * postfix `[]` binds tighter than `|` and `&`, so `Array<X | Y>` would render as
+ * `X | Y[]` and read as `X | (Y[])` — a different type. Named unions/intersections
+ * collapse to a single token via their `id`, so they don't need wrapping.
+ */
+const needsParensInArrayContext = (k: SchemaKind): boolean => {
+  switch (k.kind) {
+    case 'union':
+    case 'literal-union':
+      return !k.id;
+    case 'intersection':
+      return k.parts.length > 1;
+    case 'enum':
+      return k.values.length > 1;
+    case 'multi-type':
+      return k.types.length > 1;
+    default:
+      return false;
+  }
+};
+
 export const getTypeName = (s: JSONSchema, mode: SchemaMode = 'json'): string => {
   const k = classify(s);
   switch (k.kind) {
@@ -39,6 +61,8 @@ export const getTypeName = (s: JSONSchema, mode: SchemaMode = 'json'): string =>
       return k.values.map((v) => JSON.stringify(v)).join(' | ');
     case 'intersection':
       return k.parts.map((p) => getTypeName(p, mode)).join(' & ');
+    case 'multi-type':
+      return k.types.join(' | ');
     case 'literal-union':
     case 'union': {
       if (k.id) return k.id;
@@ -53,8 +77,10 @@ export const getTypeName = (s: JSONSchema, mode: SchemaMode = 'json'): string =>
     case 'record':
       if (mode === 'javascript') return `Record<string, ${getTypeName(k.valueSchema, mode)}>`;
       return k.id ?? k.schema.title ?? 'object';
-    case 'array':
-      return `${getTypeName(k.items, mode)}[]`;
+    case 'array': {
+      const name = getTypeName(k.items, mode);
+      return needsParensInArrayContext(classify(k.items)) ? `(${name})[]` : `${name}[]`;
+    }
     case 'tuple': {
       const parts = k.items.map((item, i) => {
         const name = getTypeName(item, mode);
@@ -70,9 +96,6 @@ export const getTypeName = (s: JSONSchema, mode: SchemaMode = 'json'): string =>
     case 'opaque':
       return k.name;
     case 'unknown':
-      // JSON Schema permits `type` as an array of strings (nullable types like `['string', 'null']`).
-      // `classify` does not have a dedicated kind for this yet, so handle it here to preserve behavior.
-      if (Array.isArray(k.schema.type)) return k.schema.type.join(' | ');
       return (typeof k.schema.type === 'string' ? k.schema.type : undefined) ?? 'unknown';
     default: {
       const _exhaustive: never = k;
@@ -142,6 +165,19 @@ export const getFieldDescriptionHtml = (s: JSONSchema): string => {
   return renderDescription(parts.join(' '));
 };
 
+/**
+ * Description to surface immediately above an expanded variant list. For `Foo[]`-style fields
+ * the union sits on `items`, so the property's own description ("All media: …") takes the field
+ * row and the union's own description ("A Media object describes …") would otherwise be lost.
+ * Returns empty for direct-union fields, where the description is already on the field row above.
+ */
+export const getVariantListDescriptionHtml = (field: JSONSchema): string => {
+  if (field.type === 'array' && typeof field.items === 'object' && !Array.isArray(field.items)) {
+    return getFieldDescriptionHtml(field.items);
+  }
+  return '';
+};
+
 // --- Expandability ---
 
 export interface ExpandableVariant {
@@ -151,6 +187,12 @@ export interface ExpandableVariant {
   schema: JSONSchema;
   /** Placeholder shown in the type cell when the variant is open. Defaults to `{ }`. */
   openPlaceholder?: string;
+  /**
+   * The `SchemaKind` the variant was synthesised from. Lets downstream callers (e.g.
+   * `enrichWithDiscriminant`) make shape-aware decisions without inspecting `schema`,
+   * which for `discriminated-tuple` is a render-only `{type, value}` shim.
+   */
+  originKind?: SchemaKind['kind'];
 }
 
 const getVariantDescriptionHtml = (s: JSONSchema): string => {
@@ -233,7 +275,13 @@ export const getEscapeHatchTypes = (s: JSONSchema): string[] => {
 const variantFromKind = (k: SchemaKind): ExpandableVariant | undefined => {
   if (k.kind === 'object') {
     const name = getSchemaName(k.schema);
-    return { label: name, summary: summarizeProps(k.schema), descriptionHtml: getVariantDescriptionHtml(k.schema), schema: k.schema };
+    return {
+      label: name,
+      summary: summarizeProps(k.schema),
+      descriptionHtml: getVariantDescriptionHtml(k.schema),
+      schema: k.schema,
+      originKind: 'object',
+    };
   }
   if (k.kind === 'discriminated-tuple') {
     const synthetic: DocsJSONSchema = {
@@ -249,13 +297,20 @@ const variantFromKind = (k: SchemaKind): ExpandableVariant | undefined => {
       descriptionHtml: getVariantDescriptionHtml(synthetic),
       schema: synthetic,
       openPlaceholder: '[ ]',
+      originKind: 'discriminated-tuple',
     };
   }
   if (k.kind === 'array') {
     const itemsKind = classify(k.items);
     if (itemsKind.kind === 'object') {
       const name = getSchemaName(k.items);
-      return { label: `${name}[]`, summary: summarizeProps(k.items), descriptionHtml: getVariantDescriptionHtml(k.items), schema: k.items };
+      return {
+        label: `${name}[]`,
+        summary: summarizeProps(k.items),
+        descriptionHtml: getVariantDescriptionHtml(k.items),
+        schema: k.items,
+        originKind: 'array',
+      };
     }
   }
   return undefined;
@@ -289,8 +344,14 @@ const enrichWithDiscriminant = (results: ExpandableVariant[]): void => {
     if (getSchemaId(variant.schema)) continue;
     const prop = variant.schema.properties?.[disc];
     if (!prop || typeof prop !== 'object' || prop.const === undefined) continue;
+    // Mirror the object form (`{ disc: const }`) with the tuple form (`[disc: const]`) so the
+    // shape is preserved and the row's left cell stays distinct from the per-variant `summary`
+    // (`[type: "color", value: string]`) shown in the right cell.
     const isArray = variant.label.endsWith('[]');
-    const base = `{ ${disc}: ${JSON.stringify(prop.const)} }`;
+    const base =
+      variant.originKind === 'discriminated-tuple' ?
+        `[${disc}: ${JSON.stringify(prop.const)}]`
+      : `{ ${disc}: ${JSON.stringify(prop.const)} }`;
     variant.label = isArray ? `${base}[]` : base;
   }
 };
@@ -349,14 +410,41 @@ export const getExpandableVariants = (s: JSONSchema): ExpandableVariant[] | unde
 };
 
 /**
+ * Compact summary for an unnamed union of discriminated tuples: collapses the per-variant
+ * `[type: "color", value: string] | [type: "colors", value: string[]] | …` into a single
+ * `[type: "color" | "colors" | …, value]`. The full per-variant detail still shows in the
+ * expanded view; this just keeps the row summary scannable.
+ */
+const summarizeDiscriminatedTupleUnion = (variants: ExpandableVariant[]): string | undefined => {
+  if (variants.length < 2) return undefined;
+  if (!variants.every((v) => v.originKind === 'discriminated-tuple')) return undefined;
+  const tags: string[] = [];
+  const seen = new Set<string>();
+  for (const v of variants) {
+    const tag = v.schema.properties?.type;
+    if (!tag || typeof tag !== 'object' || tag.const === undefined) return undefined;
+    const formatted = JSON.stringify(tag.const);
+    if (seen.has(formatted)) continue;
+    seen.add(formatted);
+    tags.push(formatted);
+  }
+  return `[type: ${tags.join(' | ')}, value]`;
+};
+
+/**
  * Whether the field's description belongs to the expanded object rather than the property.
  * If true, description should only show when expanded.
+ *
+ * A field whose schema has a stamped `id` came in via a `$ref` to a named definition, which means
+ * any description on the resolved schema came with the type — we surface it inside the expansion
+ * instead of next to the property name. Only applies when there's exactly one expandable variant
+ * (multi-variant unions show the union's own description on the field row).
  */
 export const isFieldDescriptionFromObject = (s: JSONSchema): boolean => {
   if (isExpandableLiteralUnion(s)) return false;
   const variants = getExpandableVariants(s);
   if (!variants || variants.length !== 1) return false;
-  return variants[0]!.schema === s;
+  return !!getSchemaId(s);
 };
 
 export const getTypeSummary = (s: JSONSchema, { expanded = false, mode = 'json' as SchemaMode } = {}): string => {
@@ -398,6 +486,11 @@ export const getTypeSummary = (s: JSONSchema, { expanded = false, mode = 'json' 
   // Named union (e.g. Media, Link)
   const id = getSchemaId(s) ?? (k.kind === 'array' ? getSchemaId(k.items) : undefined);
   if (id) return k.kind === 'array' ? `${id}[]` : id;
+
+  // Anonymous union of discriminated tuples: render the compact `[type: "a" | "b", value]` form
+  // instead of joining `[type: "a", value: …] | [type: "b", value: …] | …`.
+  const tupleSummary = summarizeDiscriminatedTupleUnion(variants);
+  if (tupleSummary) return k.kind === 'array' ? `(${tupleSummary})[]` : tupleSummary;
 
   if (k.kind === 'array') {
     const names = variants.map((v) => v.label.replace(/\[\]$/, ''));

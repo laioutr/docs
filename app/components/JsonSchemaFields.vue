@@ -10,6 +10,7 @@ import {
   getFieldDescriptionHtml,
   getTypeName,
   getTypeSummary,
+  getVariantListDescriptionHtml,
   isExpandableLiteralUnion,
   isFieldDescriptionFromObject,
 } from '../lib/json-schema/introspection';
@@ -93,13 +94,24 @@ const resolvedProperties = computed(() => {
                   class="text-muted mt-2 text-sm"
                   v-html="getFieldDescriptionHtml(field)"
                 />
+                <!-- Items-level description for `Foo[]`-style fields: only when expanded -->
+                <!-- eslint-disable-next-line vue/no-v-html -->
+                <p
+                  v-if="getVariantListDescriptionHtml(field)"
+                  class="text-muted mt-2 text-sm"
+                  v-html="getVariantListDescriptionHtml(field)"
+                />
                 <div class="mt-2">
                   <JsonSchemaFields :schema="getExpandableVariants(field)![0]!.schema" dereferenced />
                 </div>
               </template>
 
               <!-- Multiple variants -->
-              <JsonSchemaVariantList v-else :variants="getExpandableVariants(field)!" />
+              <JsonSchemaVariantList
+                v-else
+                :variants="getExpandableVariants(field)!"
+                :description-html="getVariantListDescriptionHtml(field)"
+              />
             </div>
           </template>
         </UCollapsible>
@@ -175,7 +187,12 @@ const resolvedProperties = computed(() => {
         <template v-if="getExpandableVariants(schema)?.length === 1">
           <JsonSchemaFields :schema="getExpandableVariants(schema)![0]!.schema" dereferenced />
         </template>
-        <JsonSchemaVariantList v-else-if="getExpandableVariants(schema)" :variants="getExpandableVariants(schema)!" array />
+        <JsonSchemaVariantList
+          v-else-if="getExpandableVariants(schema)"
+          :variants="getExpandableVariants(schema)!"
+          array
+          :description-html="getVariantListDescriptionHtml(schema)"
+        />
         <template v-else-if="typeof schema.items === 'object' && !Array.isArray(schema.items)">
           <JsonSchemaFields :schema="schema.items" dereferenced />
         </template>

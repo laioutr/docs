@@ -101,6 +101,20 @@ export const TUPLE_DISCRIMINATED: DocsJSONSchema = {
   ],
 };
 
+/**
+ * Anonymous union of discriminated 2-tuples — mirrors the shape `@laioutr-core/canonical-types`
+ * ships for the `Swatch` type once references are inlined: the wrapper `id` is gone, the inner
+ * tuples have no ids, but the variants share a discriminant. The renderer should join these as
+ * tuple forms (`[type: "color", …] | [type: "colors", …]`), not object forms.
+ */
+export const ANY_OF_DISCRIMINATED_TUPLES_UNNAMED: DocsJSONSchema = {
+  anyOf: [
+    { type: 'array', items: [{ const: 'color' }, { type: 'string' }] },
+    { type: 'array', items: [{ const: 'colors' }, { type: 'array', items: { type: 'string' } }] },
+    { type: 'array', items: [{ const: 'gradient' }, { type: 'array', items: { type: 'string' } }] },
+  ],
+};
+
 // --- Literal unions (anyOf with consts, possibly with primitive escape hatches) ---
 
 /** Named clean alias — always expandable. */

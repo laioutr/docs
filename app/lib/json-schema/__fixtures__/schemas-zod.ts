@@ -113,6 +113,99 @@ export const RECURSIVE_REF: DocsJSONSchema = {
   $ref: '#/$defs/Tree',
 };
 
+/**
+ * Named discriminated union of named objects — `Media` shape from canonical-types after deref.
+ * Each variant is an object with its own `id` and a `const` discriminant on `type`.
+ */
+export const ZOD_NAMED_DISCRIMINATED_UNION: DocsJSONSchema = {
+  id: 'Media',
+  title: 'Media',
+  description: 'A Media object describes a media asset to be displayed in the browser.',
+  anyOf: [
+    {
+      id: 'MediaImage',
+      type: 'object',
+      properties: {
+        type: { type: 'string', const: 'image' },
+        sources: { type: 'array', items: { type: 'string' } },
+        alt: { type: 'string' },
+      },
+      required: ['type', 'sources'],
+    },
+    {
+      id: 'MediaVideo',
+      type: 'object',
+      properties: {
+        type: { type: 'string', const: 'video' },
+        sources: { type: 'array', items: { type: 'string' } },
+        poster: { type: 'string' },
+      },
+      required: ['type', 'sources'],
+    },
+  ],
+};
+
+/** Array of a single named object — `MediaImage[]` shape from `Product.media.images`. */
+export const ZOD_ARRAY_OF_NAMED_OBJECT: DocsJSONSchema = {
+  type: 'array',
+  items: ZOD_NAMED_DISCRIMINATED_UNION.anyOf![0] as DocsJSONSchema,
+};
+
+/** Array of a named discriminated union — `Media[]` shape from `Product.media.media`. */
+export const ZOD_ARRAY_OF_NAMED_UNION: DocsJSONSchema = {
+  type: 'array',
+  items: ZOD_NAMED_DISCRIMINATED_UNION,
+};
+
+/**
+ * Tuple whose head is an enum (not a single `const`) — `MediaImage.placeholder` shape:
+ * `[("solid" | "thumbhash"), string]`. Classifies as a plain `tuple`, not `discriminated-tuple`.
+ */
+export const ZOD_TUPLE_ENUM_HEAD: DocsJSONSchema = {
+  type: 'array',
+  items: [
+    { type: 'string', enum: ['solid', 'thumbhash'] },
+    { type: 'string' },
+  ],
+};
+
+/**
+ * Anonymous union of primitives — the shape canonical-types stamps as `__schemaN` for an
+ * unnamed `string | number | null` (vue-router LocationQueryRaw value). After deref the inner
+ * `id` is absent, so the renderer joins the variant types directly.
+ */
+export const ZOD_PRIMITIVE_UNION: DocsJSONSchema = {
+  anyOf: [{ type: 'string' }, { type: 'number' }, { type: 'null' }],
+};
+
+/** Open record (`Record<string, unknown>`) — `CustomFields` shape. */
+export const ZOD_OPEN_RECORD_NAMED: DocsJSONSchema = {
+  id: 'CustomFields',
+  title: 'CustomFields',
+  type: 'object',
+  additionalProperties: {},
+};
+
+/**
+ * Anonymous array whose items are an anonymous union — exercises the operator-precedence
+ * concern in the type expression: `Array<X | Y>` should print as `(X | Y)[]`, not `X | Y[]`.
+ * `getTypeSummary` already parenthesises this case; `getTypeName` does not (see the `.todo`).
+ */
+export const ZOD_ARRAY_OF_UNNAMED_UNION: DocsJSONSchema = {
+  type: 'array',
+  items: { anyOf: [{ type: 'string' }, { type: 'number' }] },
+};
+
+/** Anonymous inline object built from typed properties — `Cart.cost.shipping` shape. */
+export const ZOD_INLINE_OBJECT_WITH_REFS: DocsJSONSchema = {
+  type: 'object',
+  properties: {
+    total: { id: 'Money', type: 'object', properties: { amount: { type: 'number' }, currency: { type: 'string' } } },
+    isEstimated: { type: 'boolean' },
+  },
+  required: ['total', 'isEstimated'],
+};
+
 /** Definitions stamped with id by withDefinitionIds. */
 export const DEFS_NEEDS_STAMPING: DocsJSONSchema = {
   $defs: {

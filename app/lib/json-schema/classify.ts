@@ -32,6 +32,7 @@ export type SchemaKind =
   | { kind: 'literal-union'; consts: unknown[]; escapeHatches: string[]; id?: string; schema: JSONSchema }
   | { kind: 'union'; variants: JSONSchema[]; id?: string; schema: JSONSchema }
   | { kind: 'intersection'; parts: JSONSchema[]; schema: JSONSchema }
+  | { kind: 'multi-type'; types: string[]; schema: JSONSchema }
   | { kind: 'object'; properties: Record<string, JSONSchema>; required: string[]; id?: string; schema: JSONSchema }
   | { kind: 'record'; valueSchema: JSONSchema; id?: string; schema: JSONSchema }
   | { kind: 'array'; items: JSONSchema; id?: string; schema: JSONSchema }
@@ -78,6 +79,14 @@ export const classify = (input: JSONSchema): SchemaKind => {
       return { kind: 'literal-union', consts, escapeHatches, id: getId(s), schema: s };
     }
     return { kind: 'union', variants, id: getId(s), schema: s };
+  }
+
+  if (Array.isArray(s.type)) {
+    const types = s.type.filter((t): t is string => typeof t === 'string');
+    return { kind: 'multi-type', types, schema: s };
+  }
+  if (s.nullable === true && typeof s.type === 'string') {
+    return { kind: 'multi-type', types: [s.type, 'null'], schema: s };
   }
 
   if (s.type === 'object') {
