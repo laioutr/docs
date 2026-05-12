@@ -6,13 +6,29 @@ seo:
   description: Changelog for the Laioutr Cockpit (Studio) product following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/cockpit-changelog
-  lastmod: 2026-04-15
+  lastmod: 2026-05-12
   changefreq: monthly
   priority: 1.0
 
 ---
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
+
+## [2026-05]
+
+### Added
+
+- **Studio**: Migration batcher — a Studio debug UI that plans and runs batches of section/block migrations and surfaces per-op results in a BatchReport.
+- **Studio**: Read-only data view for sections and blocks that have no registered Studio definition. The bare "No schema found" alert is now paired with a collapsible inspector that walks the stored prop tree (static / static-localized / object / array / entity-set, including link, media, color, and JSON subtypes) and offers a "Show as JSON" toggle.
+- **Studio Devtools**: New host picker for connecting the editor to arbitrary URLs and deployments — supports remote hosts, localhost, recent successful deployments, or any pasted URL. Replaces the previous localhost-only override and routes Studio error-screen host swaps through the same modal.
+
+### Fixed
+
+- **Studio**: Block and section names are now preserved after cloning.
+- **Studio**: Publish button is disabled while an autosave is pending (`syncStatus === 'changed'`), preventing stale snapshots from being shipped to the deployment pipeline. It re-enables once the save reaches `'synced'`.
+- **Studio**: Adding a section via the preview iframe now lands at the visible click target even when hidden sections or global-section references sit between siblings. The visible `atIndex` reported by the preview is translated to the full-list index before insertion.
+- **Studio Devtools**: Replace and Batch Replace now preserve the target's slot instead of appending the copy to the end of the destination.
+- **Studio**: Migration walker isolates per-iteration errors so partial migrations now surface in the BatchReport. A throw inside a visitor (validation crash, malformed node, expression-eval bug) used to silently abort every later op and page within the failing walk; failures are now captured with the offending `nodeId` in the op's report and iteration continues.
 
 ## [2026-04]
 

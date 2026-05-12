@@ -6,13 +6,23 @@ seo:
   description: Changelog for Laioutr UI and UI Kit following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/ui-changelog
-  lastmod: 2026-04-18
+  lastmod: 2026-05-12
   changefreq: monthly
   priority: 1.0
 
 ---
 
 All notable changes to **Laioutr UI**, **UI Kit**, and related component libraries will be documented in this file.
+
+## [1.34.1]
+
+### Changed
+
+- **UI Kit & UI**: Elevation shadows now route through the `--shadow-s` / `--shadow-m` / `--shadow-l` design tokens instead of hardcoded `box-shadow` values, so theme overrides actually take effect on `Card`, `NavigationMenuContent`, `Select`, `ContextMenu`, `DropdownMenu`, `AlertDialog`, `Toast`, `ThemeEditor`, the suggest-input dropdown, `PlanCard`, `PersonaQuote`, `SearchAutoSuggest`, and the variant-selector controls. Default-theme rendering is unchanged.
+
+### Fixed
+
+- **UI**: Reverted `HeroSlider` height behaviour to v1.
 
 ## [1.34.0]
 
