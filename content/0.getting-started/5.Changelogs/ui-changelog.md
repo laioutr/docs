@@ -14,6 +14,26 @@ sitemap:
 
 All notable changes to **Laioutr UI**, **UI Kit**, and related component libraries will be documented in this file.
 
+## [1.35.0]
+
+### Added
+
+- **UI**: `BannerBasic` gains optional `size` (`s` / `m` / `l`, default `m`) and `aspectRatio` props — `size` scales the text stack (heading one step above body); `aspectRatio` applies a CSS `aspect-ratio` to the banner root.
+- **UI**: `CategoryCardSlider` gains an optional `cta` prop (`{ text, link, variant }`), rendered as a button in the slider's heading area via the existing `SwiperChrome.buttons` slot.
+- **UI App**: New `BlockBannerBasic`, `BlockBannerIntegrated`, and `BlockBannerShowcase` blocks — first-class block versions of the banner trio (previously only available as `SectionBanner*`).
+- **UI App**: `BlockBannerBasic` exposes an optional `aspectRatio` schema field (e.g. `1/1`, `16/9`).
+- **UI App**: `SectionCategoryCardSlider` exposes an optional `cta` schema field (with a `ctaVisible` visibility decorator), routed through to the underlying `CategoryCardSlider`.
+- **UI App**: `SectionProductSliderShowcase` re-adds the `bannerTextSize` schema field (`s` / `m` / `l`, default `m`), routed to the inner `BannerBasic.size`.
+- **UI App**: `SectionContentGrid`, `SectionContentSlider`, `SectionCategoryCardGrid`, `SectionQuoteCardSlider`, and the shared `overlay` field group now use schema `if` rules to hide controls that aren't meaningful for the current configuration.
+
+### Changed
+
+- **UI App**: `SectionContentSlider` no longer hardcodes a `surface-tone="'light'"` binding. The underlying `ContentSlider` did not consume the prop, so rendering is unchanged; surface tone now derives from the outer `Backdrop` as intended.
+
+### Fixed
+
+- **UI**: Fixed `TopBar` items' surface-tone rendering.
+
 ## [1.34.1]
 
 ### Changed

@@ -6,7 +6,7 @@ seo:
   description: Changelog for the Laioutr CLI following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/cli-changelog
-  lastmod: 2026-04-08
+  lastmod: 2026-05-12
   changefreq: monthly
   priority: 1.0
 
@@ -19,6 +19,10 @@ All notable changes to the **Laioutr CLI** (the `laioutr` command-line tool) wil
 ### Added
 
 - CLI: New `laioutr app release` command for publishing app releases via the Cockpit API (uses API key authentication).
+
+### Fixed
+
+- CLI: `--project` flag now accepts inputs that include a `/p/` segment (e.g. when copy-pasted from a Cockpit URL) — the prefix is stripped before splitting the organization and project slugs. Failed `fetch-rc` calls also include the HTTP status text in the error message for easier debugging.
 
 ## [0.3.0] – 2025-11-25
 
