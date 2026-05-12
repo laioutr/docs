@@ -4,12 +4,12 @@ description: Reference for all field types available in section and block defini
 seo:
   title: Schema Fields | Laioutr
   description: Reference for all field types available in section and block definition schemas.
-links: []
 sitemap:
   loc: /apps/app-development/schema-fields
   lastmod: 2026-04-08
   changefreq: monthly
   priority: 1
+links: []
 ---
 
 The `schema` property of a [section](/apps/app-development/section-definitions) or [block](/apps/app-development/block-definitions) definition controls the sidebar editor in Studio. It is an array of **fieldsets**, where each fieldset groups related fields into a collapsible panel.
@@ -53,7 +53,16 @@ schema: [
   Whether the panel starts expanded.
   :::
 
-  :::field{required name="fields" type="StudioFieldDefinition[]"}
+  :::field{name="if" type="SchemaCondition"}
+  JSON expression that controls whether the fieldset is shown in Studio. See [Conditional visibility](#conditional-visibility).
+  :::
+
+  :::field
+  ---
+  required: true
+  name: fields
+  type: StudioFieldDefinition[]
+  ---
   The fields in this group.
   :::
 ::
@@ -63,11 +72,21 @@ schema: [
 Every field type shares these properties:
 
 ::field-group
-  :::field{required name="type" type="string"}
+  :::field
+  ---
+  required: true
+  name: type
+  type: string
+  ---
   The field type (e.g. `'text'`, `'select'`, `'media'`).
   :::
 
-  :::field{required name="name" type="string"}
+  :::field
+  ---
+  required: true
+  name: name
+  type: string
+  ---
   Property name on the component's props. Must be unique within the definition. A small set of names is [reserved](#reserved-names) and cannot be used.
   :::
 
@@ -81,6 +100,10 @@ Every field type shares these properties:
 
   :::field{name="description" type="string"}
   Help text shown below the field.
+  :::
+
+  :::field{name="if" type="SchemaCondition"}
+  JSON expression that controls whether the field is shown in Studio. See [Conditional visibility](#conditional-visibility).
   :::
 ::
 
@@ -724,7 +747,12 @@ const { product } = defineProps<{
 ```
 
 ::field-group
-  :::field{required name="entityType" type="string"}
+  :::field
+  ---
+  required: true
+  name: entityType
+  type: string
+  ---
   The canonical entity type to query (e.g. `'Product'`, `'Category'`, `'BlogPost'`). Must match an entity type with registered [Orchestr query handlers](/frontend/orchestr/queries).
   :::
 
@@ -763,7 +791,12 @@ links: {
 ```
 
 ::field-group
-  :::field{required name="entityType" type="string"}
+  :::field
+  ---
+  required: true
+  name: entityType
+  type: string
+  ---
   The entity type of the linked entities.
   :::
 
@@ -831,11 +864,11 @@ Raw JSON editor. Use this for advanced configuration that does not fit other fie
 
 ## Field decorators
 
-Some fields can be linked to other fields to change their presentation in the Studio sidebar. Decorators do not affect the data model; both the decorator and the target field are passed as separate props.
+Some fields can be linked to other fields to group them visually in the Studio sidebar. Decorators do not affect the data model; both the decorator and the target field are passed as separate props.
 
 ### Visibility toggles
 
-A `checkbox` with `for` and `as: 'visibility'` controls whether another field is visible in the sidebar.
+A `checkbox` with `for` and `as: 'visibility'` pairs a sidebar checkbox with another field. Studio groups the checkbox visually with the target field so editors see a single labelled toggle next to the content they're toggling.
 
 ```ts
 // The text field
@@ -844,7 +877,7 @@ A `checkbox` with `for` and `as: 'visibility'` controls whether another field is
 { type: 'checkbox', name: 'subtitleVisible', for: 'subtitle', as: 'visibility', default: true },
 ```
 
-When the editor unchecks the toggle, the `subtitle` field hides in the sidebar. Both values are still passed as props to your component. Your component can use the checkbox value to conditionally render the field:
+The toggle does **not** hide the target field from the sidebar. Both fields are always editable in Studio, and both values are passed as props to your component. The component template reads the checkbox value to decide whether to render the target on the frontend:
 
 ```vue
 <template>
@@ -854,6 +887,10 @@ When the editor unchecks the toggle, the `subtitle` field hides in the sidebar. 
 
 ::tip
 Visibility-decorator checkboxes fall back to `true` (visible) instead of the normal `false` for regular checkboxes.
+::
+
+::note
+A visibility decorator is a **frontend render-time toggle** expressed through a sidebar control. To hide a sidebar control based on other schema values (without affecting frontend rendering), use [Conditional visibility](#conditional-visibility) instead. The two are not alternatives. A field can have both.
 ::
 
 ### Style objects
@@ -887,3 +924,135 @@ The style object is passed as a separate prop. Apply it in your template:
   <h1 :style="{ color: headingStyle?.color }">{{ heading }}</h1>
 </template>
 ```
+
+## Conditional visibility
+
+::since-version{version="0.30.0" packages="@laioutr-core/frontend-core" changelog="frontend"}
+::
+
+Both fieldsets and individual fields accept an optional `if` property: a JSON expression that controls whether the fieldset or field is shown in the Studio sidebar. When the expression evaluates to a falsy value, Studio hides the control. The configured value is **not** removed from storage and the prop is still passed to your component at render time. Only the sidebar control disappears.
+
+```ts
+{
+  type: 'color',
+  name: 'customBackground',
+  label: 'Background Color',
+  // Only show this control when `background === 'custom'`
+  if: ['==', ['get', 'background'], 'custom'],
+}
+```
+
+The same property is valid on a fieldset:
+
+```ts
+{
+  label: 'Custom colors',
+  if: ['==', ['get', 'background'], 'custom'],
+  fields: [
+    { type: 'color', name: 'customBackground', label: 'Background Color' },
+    { type: 'color', name: 'customAccent', label: 'Accent Color' },
+  ],
+}
+```
+
+### What the expression sees
+
+The expression evaluates against an **unwrapped** view of the section or block values, derived from the schema. For most field types this is identical to the prop value your component receives:
+
+- `text`, `textarea`, `richtext`: the active locale's string.
+- `checkbox`: a boolean.
+- `select`, `radio`, `toggle_button`: the option's string value.
+- `number`: a number, or `undefined` when unset.
+- `icon`: the icon name string, or `undefined`.
+- `color`, `link`, `media`: the same plain object your component receives (`ColorFieldValue`, `Link`, `MediaImage | MediaVideo`).
+- `json`: the parsed JSON value or `null`.
+- `object`: a plain object whose keys are the nested field names, unwrapped recursively.
+- `array`: an array of unwrapped item objects (without the `id` property the component receives).
+
+One case is different from the prop value:
+
+- `query`: the expression sees the **query reference**, not the resolved data. The shape is `{ type: 'entity-set', queryId, link?, limit? }`. At render time, your component instead receives the [Orchestr](/frontend/orchestr/queries)-resolved `ClientEntitySet` or `ClientEntity`. `if` expressions on `query` fields can therefore test whether a query is configured, but cannot inspect entity data.
+
+Missing entries fall back to the per-type runtime fallback documented in [Default values and runtime fallbacks](#default-values-and-runtime-fallbacks). You can rely on stable values in `if` expressions even when a field was added to the schema after the section was placed on a page. The expression language has no `undefined` literal; for the field types whose fallback is `undefined` (`number`, `icon`, `media`, `link`, `query`, `color`), test "is unset" with `['!', ['get', 'x']]` (`!` is JS truthy coercion) or compare against the fallback documented for the field's type.
+
+### Path syntax
+
+Inside a nested `object` or `array` field, scope is the **innermost enclosing object** or array item. Reach further out with prefixes:
+
+| Path                     | Resolves from               |
+| ------------------------ | --------------------------- |
+| `['get', 'foo']`         | Current scope               |
+| `['get', '^foo']`        | Parent scope (one level up) |
+| `['get', '^^foo']`       | Grandparent scope           |
+| `['get', '/foo']`        | Section or block root       |
+| `['get', 'obj.nested']`  | Nested key inside scope     |
+| `['get', 'arr[0].name']` | Array indexing inside scope |
+
+### Common patterns
+
+```ts
+// Mode-switch dependent: show only when `mode === 'grid'`
+if: ['==', ['get', 'mode'], 'grid']
+
+// Boolean checkbox: bare get is enough
+if: ['get', 'showProductAmount']
+
+// Negation
+if: ['!=', ['get', 'background'], 'none']
+
+// Truthy check; meaningful "is set" only for fields whose unset fallback is falsy
+if: ['bool', ['get', 'icon']]
+
+// Set membership; `[[…]]` is the literal-array escape
+if: ['in', [['basic', 'compact']], ['get', 'variant']]
+```
+
+### Canonical "unset" checks per field type
+
+The expression engine always sees the per-type fallback when a field has no configured value. Use these patterns to test whether a field is unset:
+
+| Field type                                          | Fallback     | Canonical "unset" check                  |
+| --------------------------------------------------- | ------------ | ---------------------------------------- |
+| `text`, `textarea`, `richtext`                      | `''`         | `['!', ['get', 'x']]`                    |
+| `checkbox`                                          | `false`      | `['!', ['get', 'x']]`                    |
+| `select`, `radio`, `toggle_button`                  | First option | `['==', ['get', 'x'], '<first option>']` |
+| `array`                                             | `[]`         | `['==', ['get', 'x'], [[]]]`             |
+| `json`                                              | `null`       | `['==', ['get', 'x'], null]`             |
+| `number`, `icon`, `media`, `link`, `query`, `color` | `undefined`  | `['!', ['get', 'x']]`                    |
+
+`['bool', ['get', 'x']]` is the explicit form of "is `x` truthy". At `if`-toplevel it's equivalent to the bare `['get', 'x']` because the engine coerces the result to a boolean either way; the explicit form is useful when you need a true `true`/`false` value inside a larger expression. As a truthy-based "is set" check it answers correctly for every field type except `select`/`radio`/`toggle_button` and `array`, whose fallbacks are truthy.
+
+### Available operators
+
+Studio registers `defaultOperators` plus the `array` and `type` operator bundles from [`@laioutr/expression`](https://www.npmjs.com/package/@laioutr/expression). See the package's [Operators section](https://www.npmjs.com/package/@laioutr/expression#operators) for each operator's aliases, operand counts, and semantics, and the [Evaluation rules](https://www.npmjs.com/package/@laioutr/expression#evaluation-rules) section for how the engine interprets array and literal forms.
+
+Aliases in parentheses.
+
+| Category   | Operators                                                                  |
+| ---------- | -------------------------------------------------------------------------- |
+| Input      | `get` (`$`), `get?` (`$?`), `?get` (`?$`)                                  |
+| Logical    | `and` (`&&`), `or` (`\|\|`), `not` (`!`), `coalesce` (`??`)                |
+| Comparison | `eq` (`==`), `ne` (`!=`), `gt` (`>`), `ge` (`>=`), `lt` (`<`), `le` (`<=`) |
+| Branching  | `if` (`?`), `cond`                                                         |
+| Container  | `len`, `member` (`[]`)                                                     |
+| Array      | `in`, `arr-of`, `slice`, `join`, `map`                                     |
+| Type       | `bool`, `num`, `str`, `type`                                               |
+
+`bool` (`!!x`) is plain JavaScript truthy coercion. See the note above the per-type fallbacks table for which fields it gives a meaningful "is set" answer for.
+
+::warning
+A raw array inside an expression is interpreted by the engine, not used as data: `[]` resolves to `undefined`, `[x]` resolves to `x` (the literal escape), `[op, …]` is an operator call. There is no `undefined` literal. To pass a literal array as data, wrap it in an extra `[…]` (e.g. `[[1, 2, 3]]`) or build it with `arr-of`.
+::
+
+::tip
+The `if` expression is **fail-open**: any thrown error (typo, missing path, malformed shape) returns `true` and logs a warning to the Studio browser console. A shown-but-broken control is loud, but a silently-hidden control would be invisible. Don't rely on `if` for security since it's a sidebar UX optimization, not a render-time guard.
+::
+
+### Relationship to visibility decorators
+
+`if` and the [visibility decorator](#visibility-toggles) answer different questions and are not alternatives:
+
+- **Visibility decorator** (`checkbox` with `as: 'visibility'`) renders a sidebar checkbox grouped with the target field. The component template reads the checkbox value and gates **frontend rendering** of the target's value.
+- **`if`** hides a field's sidebar control based on other schema values. It has no effect on stored data or on frontend rendering.
+
+A field can have both. Editors see the control only when `if` is true, and the visibility checkbox separately gates frontend render.
