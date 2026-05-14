@@ -78,7 +78,7 @@ A multi-query or multi-link handler describes the facets available for the curre
 
 All variants share the same base:
 
-::field-group
+::field-group{title="Common filter properties"}
   :::field{name="id" :required="true" type="string"}
   Stable identifier for this filter. Used as the key in the `filter` request and in URL query params.
   :::
@@ -121,7 +121,7 @@ const colorFilter: AvailableFilter = {
 };
 ```
 
-::field-group
+::field-group{title="List filter options"}
   :::field
   ---
   name: presentation
@@ -138,7 +138,7 @@ const colorFilter: AvailableFilter = {
 
 Each list value has the following shape:
 
-::field-group
+::field-group{title="List value structure"}
   :::field{name="values[].id" :required="true" type="string"}
   The value passed back in the `filter` request when selected.
   :::
@@ -175,7 +175,7 @@ const inStockFilter: AvailableFilter = {
 };
 ```
 
-::field-group
+::field-group{title="Boolean filter properties"}
   :::field{name="trueLabel" type="string"}
   Label for the true state, when "yes" needs different wording than the filter's main label.
   :::
@@ -210,7 +210,7 @@ const priceFilter: AvailableFilter = {
 };
 ```
 
-::field-group
+::field-group{title="Range filter bounds"}
   :::field
   ---
   name: min
@@ -252,7 +252,7 @@ const priceBucketsFilter: AvailableFilter = {
 };
 ```
 
-::field-group
+::field-group{title="Interval configuration"}
   :::field
   ---
   name: intervals

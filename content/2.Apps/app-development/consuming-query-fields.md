@@ -19,7 +19,7 @@ For declaring the schema field itself (`type: 'query'`, `singleEntity`, `compone
 
 A `query` field (without `singleEntity`) resolves to a `ClientEntitySet`. The display side (`entities`, nested `links`) is documented under [schema fields](/apps/app-development/schema-fields#query); the parts relevant for interactive UI are:
 
-::field-group
+::field-group{title="ClientEntitySet properties"}
   :::field{name="availableFilters" type="AvailableFilter[]"}
   Facets the handler offers for the current result set. See [Filters](/frontend/orchestr/filters) for the four variants.
   :::

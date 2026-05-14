@@ -93,7 +93,7 @@ interface QueryUrlIdentity {
 }
 ```
 
-::field-group
+::field-group{title="QueryUrlIdentity properties"}
   :::field{name="urlQueryPrefix" :required="true" type="string"}
   The canonical prefix used when **writing** parameters to the URL.
   :::
@@ -158,7 +158,7 @@ const url = buildQueryUrl(query, { resetFilters: true });
 
 ### Modifier reference
 
-::field-group
+::field-group{title="buildQueryUrl() modifiers"}
   :::field{name="page" type="number"}
   Set the page number. Page 1 is omitted from the URL.
   :::

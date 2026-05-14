@@ -36,7 +36,7 @@ schema: [
 
 ## Fieldset properties
 
-::field-group
+::field-group{title="Fieldset definition schema"}
   :::field{name="label" type="string"}
   Panel heading in the Studio sidebar.
   :::
@@ -71,7 +71,7 @@ schema: [
 
 Every field type shares these properties:
 
-::field-group
+::field-group{title="Field Base Properties"}
   :::field
   ---
   required: true
