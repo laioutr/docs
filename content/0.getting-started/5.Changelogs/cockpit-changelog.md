@@ -6,7 +6,7 @@ seo:
   description: Changelog for the Laioutr Cockpit (Studio) product following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/cockpit-changelog
-  lastmod: 2026-05-12
+  lastmod: 2026-05-14
   changefreq: monthly
   priority: 1.0
 
@@ -25,6 +25,7 @@ All notable changes to **Cockpit (Studio)** — the visual editor and project ma
 
 ### Fixed
 
+- **Hosting**: Deployments now respect the UI app version selected for the project. Generated `package.json` files pin `@laioutr-core/ui` and `@laioutr-core/ui-kit` to the version configured under `@laioutr-app/ui` in `apps_enabled`, instead of always using `latest`.
 - **Studio**: Block and section names are now preserved after cloning.
 - **Studio**: Publish button is disabled while an autosave is pending (`syncStatus === 'changed'`), preventing stale snapshots from being shipped to the deployment pipeline. It re-enables once the save reaches `'synced'`.
 - **Studio**: Adding a section via the preview iframe now lands at the visible click target even when hidden sections or global-section references sit between siblings. The visible `atIndex` reported by the preview is translated to the full-list index before insertion.
