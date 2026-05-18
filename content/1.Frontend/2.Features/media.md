@@ -14,7 +14,7 @@ sitemap:
 
 ## What is the media library?
 
-In Laioutr, **media** (images, videos) are used in sections and blocks—hero banners, product tiles, content blocks, and so on. Editors configure these in **Cockpit** (Studio) by picking assets from a **media library**. The library is not a single source: it is an **abstraction** over one or more **backends**. Each connected backend (e.g. Shopify Files, Shopware Media, your own DAM or CMS) is exposed as a **media library provider**. The editor selects a library (e.g. “Shopify”), browses or searches assets, and picks one; the chosen asset is stored as Laioutr’s canonical **Media** type (image or video with sources, alt, optional placeholder) and rendered on the frontend.
+In Laioutr, **media** (images, videos, audio) are used in sections and blocks: hero banners, product tiles, content blocks, podcast players, and so on. Editors configure these in **Cockpit** (Studio) by picking assets from a **media library**. The library is not a single source: it is an **abstraction** over one or more **backends**. Each connected backend (e.g. Shopify Files, Shopware Media, your own DAM or CMS) is exposed as a **media library provider**. The editor selects a library (e.g. “Shopify”), browses or searches assets, and picks one; the chosen asset is stored as Laioutr’s canonical **Media** type (image, video, or audio with sources, alt, optional placeholder or poster) and rendered on the frontend.
 
 This gives you:
 
@@ -191,7 +191,7 @@ Your **list** (and **upload**) must return **Media** that the frontend can rende
 - **sources**: at least one **MediaSourceImage** with **provider** (your Nuxt Image provider name, or `'raw'` for plain URLs), **src** (URL or id), and optionally **width**, **height**, **responsive**, **focalPoint**.
 - **alt** optional.
 
-For video, use **type: 'video'** and **sources** as **MediaSourceVideo[]**. If your backend has thumbnails, you can set **preview** on the video media.
+For video, use **type: 'video'** and **sources** as **MediaSourceVideo[]**. If your backend has a thumbnail, set **poster** on the video media so the player can show it before playback starts. For audio assets, use **type: 'audio'** and **sources** as **MediaSourceAudio[]**; set **cover** if you have album art or a podcast cover.
 
 Ensure your frontend has a Nuxt Image provider for the **provider** value you use (e.g. a custom provider that resolves **src** to your DAM URL), or use **raw** and pass a full URL as **src**.
 
