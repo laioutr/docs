@@ -1,6 +1,6 @@
 ---
 title: Field
-description: Form field wrapper providing label, help text, and validation message around an input control.
+description: Form field wrapper that adds label, description, and error message around any input control.
 jiraIssueId: LUI-132
 links:
   - label: Figma
@@ -9,10 +9,10 @@ links:
     target: _blank
 seo:
   title: Field | Laioutr
-  description: Form field wrapper providing label, help text, and validation message around an input control.
+  description: Form field wrapper that adds label, description, and error message around any input control.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/field
-  lastmod: 2026-04-08
+  lastmod: 2026-05-13
   changefreq: monthly
   priority: 1.0
 
@@ -20,43 +20,57 @@ sitemap:
 
 ## Overview
 
-The Field component wraps form controls with a label, optional description, and error message. It provides consistent layout and accessibility (e.g. linking label to control) for inputs, selects, and custom controls.
+Field wraps a form control with a label, optional description, and error message. It provides consistent layout and accessibility (label-to-control association, error announcement) for inputs, selects, and custom controls.
+
+Pass `errorMessage` and Field will derive `invalid` for you, so error styling stays in sync with the displayed message. Pass `invalid` explicitly only when you need the error state without a message.
+
+Descendants pick up Field state (`id`, `disabled`, `readonly`, `required`, `invalid`, `errorMessage`) via context, so you can set `disabled` once on the Field instead of on every nested control.
 
 ## Key Business & UX Benefits
 
-- Keeps labels, descriptions, and errors aligned and accessible.
-- One wrapper for any control so forms look and behave consistently.
-- Clear error display improves completion and reduces support.
-- Required indicator and description support complex forms.
+- Centralising label, description, and error association in one wrapper cuts the time to ship new forms and keeps accessibility audits clean across the whole product.
+- Auto-derived `invalid` state from `errorMessage` keeps validation visuals and announced text in sync, so customers see and hear the same problem and recover faster.
+- Setting `disabled` once on the Field instead of every child eliminates a common class of bugs where one nested control stays interactive during a submit.
+- Consistent error layout reduces visual noise on sign-up and checkout forms, which protects conversion when users hit a validation issue.
 
 :::tip
-Pro-Tip from Larry: Use Field for every form control so labels and errors are always linked correctly.
+Pro-Tip from Larry: Pass `errorMessage` and let Field derive `invalid` for you; no need to bind both.
 :::
 
 ## Usage
 
 ::component-code
 ---
-name: Field
+name: LField
 story-height: 140px
-story-id: ui-kit-field--label-and-description
+story-id: ui-kit-molecules-field--label-and-description
 ---
 ```vue-template
-<Field label="Label And Description" description="This is a default description.">
-  <Input placeholder="Input placeholder" />
-</Field>
+<LField label="Label And Description" description="This is a default description.">
+  <LInput placeholder="Input placeholder" />
+</LField>
 ```
 ::
+
+### With Error Message
+
+```vue-template
+<LField label="Email" error-message="Please enter a valid email address">
+  <LInput type="email" />
+</LField>
+```
 
 ## Feature List
 
 ::features
 ---
 items:
-  - "Label and optional description for form controls"
-  - "Error message display with accessible association"
-  - "Required indicator support"
-  - "Consistent layout for inputs, selects, and custom controls"
+  - "Wraps any control with consistent label-to-control association and error announcement, no per-control ARIA wiring needed"
+  - "Auto-derives `invalid` from `errorMessage`, so validation visuals and announced text stay in sync"
+  - "Publishes `id`, `disabled`, `readonly`, `required`, `invalid`, and `errorMessage` to descendants via context, so child controls inherit field state"
+  - "Setting `disabled` once on the Field disables every nested control, removing a common bug where one input stays interactive during submit"
+  - "Optional `description` prop adds helper copy with its own ARIA association, so screen readers announce help text alongside the label"
+  - "Pass `invalid` explicitly without `errorMessage` for the error visual without a displayed message"
 ---
 ::
 

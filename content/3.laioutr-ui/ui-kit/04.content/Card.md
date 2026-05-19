@@ -1,13 +1,13 @@
 ---
 title: Card
-description: Flexible content card block with multiple styles and media support.
+description: Flexible content card with mixed media and text for marketing tiles, editorial highlights, and feature callouts.
 jiraIssueId: LUI-253
 seo:
   title: Card | Laioutr
-  description: Flexible content card block with multiple styles and media support.
+  description: Flexible content card with mixed media and text for marketing tiles, editorial highlights, and feature callouts.
 sitemap:
   loc: /laioutr-ui/ui-kit/content/card
-  lastmod: 2026-04-08
+  lastmod: 2026-05-13
   changefreq: monthly
   priority: 1.0
 
@@ -15,32 +15,50 @@ sitemap:
 
 ## Overview
 
-The Card block provides a versatile content container in Studio for displaying mixed media and text. It offers three visual styles (plain, outline, haptic) to match different design contexts. Image display settings control the ratio and orientation independently of the source media, allowing consistent card layouts. Content areas include heading, body text, optional button, and text link. When any interactive element is added, the entire card surface becomes clickable for improved usability.
+Card is a content container that pairs an image (or any media slot) with text: caption, heading, subline, description, icon, and an optional call-to-action. When you set `href`, the whole tile becomes a single click target.
+
+Pick a variant by the role the card plays in the layout:
+
+| `variant`   | When to use                                                                                          |
+| ----------- | ---------------------------------------------------------------------------------------------------- |
+| `'plain'`   | Borderless layout for editorial grids and mixed-media collections.                                   |
+| `'outline'` | Soft border that gains a gradient ring on hover or focus. The standard interactive card.             |
+| `'haptic'`  | Elevated card with a shadow that deepens on hover. Best for hero placements that should feel tappable. |
+
+Pass `aspectRatio` (`'16/9'`, `'4:3'`, or a numeric ratio) so card grids stay aligned across cards with different image dimensions.
+
+Related content tiles:
+
+- [`LinkTile`](/laioutr-ui/ui-kit/content/link-tile) — category-promoting tile with basic, compact, and big layouts.
+- [`ProductTileBasic`](/laioutr-ui/shop/product-tile-basic) — the product-listing tile with pricing, swatches, and add-to-cart.
 
 ## Key Business & UX Benefits
 
-- Presents mixed media and text in a consistent, scannable block.
-- Three styles (plain, outline, haptic) fit different layouts and emphasis.
-- Configurable image ratio keeps card grids aligned across content.
-- Full-card click target improves usability when a link or button is present.
+- One component covers marketing tiles, feature callouts, and editorial highlights without per-block CSS or bespoke layouts.
+- Three visual variants and a single `aspectRatio` prop keep card grids aligned and on-brand across breakpoints, even when imagery comes from different sources.
+- Full-card click target with built-in hover and focus states improves usability on touch, mouse, and keyboard alike.
+- Editors compose card blocks in Studio without dev help, so marketing teams ship campaigns faster.
 
 :::tip
-Pro-Tip from Larry: Add a button or link so the whole card is clickable and easier to tap.
+Pro-Tip from Larry: Set `aspectRatio` on every card in a grid so columns line up even when the images come from different sources.
 :::
 
 ## Usage
 
-:component-code{name="Card" story-id="ui-kit-card--default-plain-card-1-to-1" story-height="500px"}
+::component-code{name="LCard" story-id="ui-kit-molecules-card--default" story-height="500px"}
+::
 
 ## Feature List
 
 ::features
 ---
 items:
-  - "Multiple style options (plain, outline, haptic)"
-  - "Configurable image ratio (1:1, 4:3, 16:9) and orientation"
-  - "Media support with fallback color"
-  - "Entire card becomes clickable when button or link added"
+  - "Three variants ('plain', 'outline', 'haptic') for editorial grids, standard tiles, and tappable hero placements"
+  - "Single aspectRatio prop keeps every card in a grid aligned across mixed-media sources"
+  - "Full-card click target with built-in hover and focus states when href is set"
+  - "Inline CardCta with its own variant, size, and icon props for tailored call-to-action treatment"
+  - "Configurable in Studio (variants, copy, CTA, media) so marketing teams swap content without dev help"
+  - "Themed via design tokens and a BEM root class for per-card overrides"
 ---
 ::
 

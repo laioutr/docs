@@ -1,13 +1,13 @@
 ---
 title: Checkbox
-description: Checkbox group wrapper managing state, validation, and ARIA grouping for multiple related checkbox inputs.
+description: Checkbox control for single-choice consent and multi-select groups, with tri-state support.
 jiraIssueId: LUI-126
 seo:
   title: Checkbox | Laioutr
-  description: Checkbox group wrapper managing state, validation, and ARIA grouping for multiple related checkbox inputs.
+  description: Checkbox control for single-choice consent and multi-select groups, with tri-state support.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/checkbox
-  lastmod: 2026-04-08
+  lastmod: 2026-05-13
   changefreq: monthly
   priority: 1.0
 
@@ -15,41 +15,49 @@ sitemap:
 
 ## Overview
 
-Checkbox Group provides a wrapper component that manages the state and behavior of multiple related checkbox inputs. It handles value collection, validation, and accessibility requirements like proper ARIA grouping. Commonly used for multi-select filter options, preference settings, or any form context requiring selection of multiple non-exclusive options.
+Checkbox is the bare-bones control used for single-checkbox consent (terms, opt-ins) and multi-select groupings (filters, preferences). It supports a tri-state value: pass `'indeterminate'` to render the mixed state used in parent/child checkbox patterns.
+
+Checkbox picks up its `id` from a surrounding `Label`'s `forIdFromLabel` injection, but it does not read the wider Field context: `disabled`, `required`, and validation state must be passed as props directly. For a checkbox that integrates with `<LField>` label / description / error association, use [`InputCheckbox`](/laioutr-ui/ui-kit/form/input-checkbox) instead.
 
 ## Key Business & UX Benefits
 
-- Lets users select multiple options without excluding others (e.g. filters).
-- ARIA grouping and labels keep checkboxes accessible and understandable.
-- Single component manages value collection and validation for the group.
-- Fits filter panels, preferences, and any multi-select form context.
+- Tri-state support handles parent/child grouping out of the box, so filter trees and "select all" patterns stay coherent for shoppers and admins alike.
+- One control covers consent rows, multi-select filters, and preference grids, so teams ship new flows without commissioning a new checkbox treatment each time.
+- Pairs cleanly with `<Label>` for accessible labelling, and stays small enough that consumers compose validation around it however the form demands.
 
 :::tip
-Pro-Tip from Larry: Use Checkbox Group for filters so users can select multiple options at once.
+Pro-Tip from Larry: For a labelled, Field-aware checkbox with built-in error wiring, reach for [`InputCheckbox`](/laioutr-ui/ui-kit/form/input-checkbox) and keep `Checkbox` for the bare control.
 :::
 
 ## Usage
 
 ::component-code
 ---
-name: Checkbox
+name: LCheckbox
 story-height: 60px
-story-id: ui-kit-checkbox--unchecked
+story-id: ui-kit-atoms-checkbox--unchecked
 ---
 ```vue-template
-<Checkbox />
+<LCheckbox v-model="agreed" />
 ```
 ::
+
+### Indeterminate
+
+```vue-template
+<LCheckbox v-model="state" :default-checked="'indeterminate'" />
+```
 
 ## Feature List
 
 ::features
 ---
 items:
-  - "Manages state and value collection for multiple checkboxes"
-  - "Proper ARIA grouping and labelling for accessibility"
-  - "Validation support for form integration"
-  - "Suitable for multi-select filters and preference settings"
+  - "Tri-state value: pass `'indeterminate'` to render the mixed state for parent/child checkbox patterns"
+  - "Picks up `id` from a surrounding `Label`'s `forIdFromLabel` injection, so wrapping with `<LLabel>` is the simplest wiring"
+  - "Deliberately bare: ignores Field context so consumers can compose validation, layout, and error wiring however the form demands"
+  - "Pairs with `InputCheckbox` when full `<LField>` label, description, and error association is wanted"
+  - "v-model with two-way value type makes the tri-state usable as a normal Vue model without external state machines"
 ---
 ::
 

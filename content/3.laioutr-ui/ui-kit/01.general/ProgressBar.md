@@ -12,7 +12,7 @@ seo:
   description: A progress indicator displaying task or operation completion status.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/progressbar
-  lastmod: 2026-04-08
+  lastmod: 2026-05-13
   changefreq: monthly
   priority: 1.0
 
@@ -20,38 +20,44 @@ sitemap:
 
 ## Overview
 
-The Progress component visualizes completion status of tasks, operations, or goals through a horizontal bar indicator. It accepts a value representing current progress and optionally displays percentage text. Commonly used for file uploads, checkout steps, free shipping thresholds, and any workflow where users benefit from understanding how much progress has been made toward a goal.
+ProgressBar visualizes how far along a task is with a horizontal bar. It accepts a `value` and a `max`; the indicator width is `value / max`, clamped to `[0,100]`, so it works for percentage progress and for non-percentage scales like file size in bytes or step counts.
+
+Useful for uploads, checkout steps, free-shipping thresholds, and any linear process where seeing the remaining distance reduces anxiety.
 
 ## Key Business & UX Benefits
 
-- Shows how much is done so users know how far they are in a flow.
-- Reduces anxiety during waits by making progress visible.
-- Drives completion for goals like free shipping or checkout steps.
-- Works for uploads, steps, and any linear process.
+- Free-shipping progress bars are one of the highest-impact AOV levers in ecommerce; this primitive ships them without bespoke styling.
+- Visible checkout progress reduces cart abandonment by showing shoppers how close they are to finishing the flow.
+- Configurable `max` makes the bar work for percentages, byte counts, and step counters with the same primitive and the same accessibility behavior.
 
 :::tip
-Pro-Tip from Larry: Use it for free-shipping thresholds so customers see how close they are to the goal.
+Pro-Tip from Larry: Set `:max` for non-percentage progress (e.g. file size in bytes) so the bar scales to your domain values.
 :::
 
 ## Usage
 
 ::component-code
 ---
-:name: Progress Bar
+:name: LProgressBar
 story-height: 100px
-story-id: ui-kit-progressbar--default
+story-id: ui-kit-atoms-progressbar--default
 ---
 ::
+
+```vue-template
+<LProgressBar :value="42" :max="100" />
+```
 
 ## Feature List
 
 ::features
 ---
 items:
-  - "Horizontal bar with configurable value and max"
-  - "Optional percentage or label text"
-  - "Theme-aligned styling for light and dark modes"
-  - "Accessible with proper ARIA attributes"
+  - "`value` and `max` (default 100) drive the fill, clamped to `[0,100]` so passing 150 of 100 still renders a full bar"
+  - "Built on reka-ui's `ProgressRoot`, so `aria-valuenow` and `aria-valuemax` are emitted for screen readers"
+  - "Non-percentage scales work directly: pass byte counts or step counts as `value` and `max` without normalizing"
+  - "Single `.progress-bar` root class anchors theme overrides for fill color, height, and radius"
+  - "Stateless prop surface keeps the bar a pure indicator, leaving completion logic in the consumer"
 ---
 ::
 

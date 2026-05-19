@@ -1,13 +1,13 @@
 ---
 title: Label
-description: Form label component with optional required indicator, linked to a control for accessibility.
+description: Form label with an optional required indicator, accessibly linked to its control.
 jiraIssueId: LUI-91
 seo:
   title: Label | Laioutr
-  description: Form label component with optional required indicator, linked to a control for accessibility.
+  description: Form label with an optional required indicator.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/label
-  lastmod: 2026-04-08
+  lastmod: 2026-05-13
   changefreq: monthly
   priority: 1.0
 
@@ -15,18 +15,13 @@ sitemap:
 
 ## Overview
 
-The Label component displays a form label (and optional required indicator) associated with a control. It ensures the label is linked for accessibility and supports different sizes for compact and standard layouts.
+Label displays a form label and an optional required indicator, linked to its control via `for` so screen readers and click-to-focus work as expected. Most forms get labels for free through `<LField>`; reach for Label directly when you need a label outside a Field (e.g. above a custom composite control).
 
 ## Key Business & UX Benefits
 
-- Accessible label-to-control association for screen readers and click-to-focus.
-- Required indicator makes mandatory fields clear without extra markup.
-- Size variants fit compact and standard form layouts.
-- Consistent styling with Field and other form components.
-
-:::tip
-Pro-Tip from Larry: Use Label with every form control so the label is always associated for accessibility.
-:::
+- Explicit `for` association makes labels click-to-focus targets, expanding the tap area on mobile and lifting form completion on small screens.
+- A single label primitive keeps required indicators and typography consistent across the product, so users learn the visual language once.
+- Pairing with `<LField>` covers most forms automatically; the standalone control is there for the edge cases without forcing a fork of the styling.
 
 ## Usage
 
@@ -34,25 +29,25 @@ Pro-Tip from Larry: Use Label with every form control so the label is always ass
 
 ::component-code
 ---
-:name: Label
+:name: LLabel
 :story-height: 80px
-story-id: ui-kit-label--small
+story-id: ui-kit-atoms-label--small
 title: Label Small
 ---
 ```vue-template
-<Label />
+<LLabel size="s">First name</LLabel>
 ```
 ::
 
 ::component-code
 ---
-:name: Label
+:name: LLabel
 :story-height: 80px
-story-id: ui-kit-label--medium
+story-id: ui-kit-atoms-label--medium
 title: Label Medium
 ---
 ```vue-template
-<Label size="medium" />
+<LLabel size="m">First name</LLabel>
 ```
 ::
 
@@ -60,25 +55,25 @@ title: Label Medium
 
 ::component-code
 ---
-:name: Label
+:name: LLabel
 :story-height: 80px
-story-id: ui-kit-label--required-small
+story-id: ui-kit-atoms-label--required-small
 title: Label Small Required
 ---
 ```vue-template
-<Label isRequired />
+<LLabel size="s" required>First name</LLabel>
 ```
 ::
 
 ::component-code
 ---
-:name: Label
+:name: LLabel
 :story-height: 80px
-story-id: ui-kit-label--required-medium
+story-id: ui-kit-atoms-label--required-medium
 title: Label Medium Required
 ---
 ```vue-template
-<Label size="medium" isRequired />
+<LLabel size="m" required>First name</LLabel>
 ```
 ::
 
@@ -87,10 +82,12 @@ title: Label Medium Required
 ::features
 ---
 items:
-  - "Form label with accessible association to control"
-  - "Required indicator support"
-  - "Small and medium size variants"
-  - "Consistent styling with Field and form components"
+  - "Two sizes ('s', 'm', default 's') match the Input and Field typography scale"
+  - "`required` boolean appends a `*` indicator with its own `.label__required` styling hook"
+  - "`forId` prop sets the `for` attribute, so click-to-focus works as a wider tap target on mobile"
+  - "Reads `<LField>` `disabled` and `invalid` state, adding `label--disabled` and `label--invalid` modifier classes"
+  - "Renders a semantic `<label>`, so screen readers announce the association automatically"
+  - "Used inside `<LField>` for most forms; reach for it directly when labelling custom composite controls"
 ---
 ::
 

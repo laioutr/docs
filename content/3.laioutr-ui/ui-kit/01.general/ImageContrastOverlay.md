@@ -1,13 +1,13 @@
 ---
 title: Image Contrast Overlay
-description: A utility component that enhances text readability over images through customizable gradient or solid color overlays with adjustable opacity.
+description: Gradient or solid overlay that keeps text readable over images.
 jiraIssueId: LUI-22
 seo:
   title: Image Contrast Overlay | Laioutr
-  description: A utility component that enhances text readability over images through customizable gradient or solid color overlays…
+  description: Gradient or solid overlay that keeps text readable over images.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/imagecontrastoverlay
-  lastmod: 2026-04-08
+  lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
 
@@ -15,14 +15,15 @@ sitemap:
 
 ## Overview
 
-Centralizes overlay logic for all CTA banner variants, maintaining accessibility standards while preserving visual appeal. Darkens bright or busy background images to improve headline readability. Creates subtle gradient effects that draw attention to text without fully obscuring imagery. Ensures consistent text visibility across dynamically uploaded marketing images. Marketing teams can confidently use diverse imagery knowing the overlay system will maintain readability.
+ImageContrastOverlay darkens the area behind a headline or CTA so text stays readable on bright or busy background images. It is the overlay used by banners, hero slides, and cards.
+
+Pick `gradient` for a top-to-bottom fade, `gradient-bottom` for a bottom-heavy fade that focuses the wash on the lower portion of the image, `color` for a constant tint, or `off` to disable the overlay without removing the markup. Opacity is configurable so the overlay matches the design.
 
 ## Key Business & UX Benefits
 
-- Keeps headlines and CTAs readable on any image with gradient or solid overlays.
-- Lets marketing use varied imagery without sacrificing accessibility or legibility.
-- Keeps overlay behavior consistent across all CTA banners.
-- Gives fine control over opacity so overlays match the design.
+- Keeps headlines and CTAs readable over user-uploaded campaign imagery, so marketing can ship banners without per-asset retouching.
+- Protects WCAG contrast compliance on hero areas where the background varies by campaign, market, or season.
+- One overlay primitive covers banners, hero slides, and cards, so contrast behavior stays consistent across every featured placement.
 
 :::tip
 Pro-Tip from Larry: Use the gradient overlay so text pops without fully hiding the image.
@@ -32,8 +33,8 @@ Pro-Tip from Larry: Use the gradient overlay so text pops without fully hiding t
 
 ::component-code
 ---
-:name: ImageContrastOverlay
-story-id: ui-kit-imagecontrastoverlay--gradient-overlay
+:name: LImageContrastOverlay
+story-id: ui-kit-atoms-imagecontrastoverlay--gradient-overlay
 ---
 ::
 
@@ -42,10 +43,11 @@ story-id: ui-kit-imagecontrastoverlay--gradient-overlay
 ::features
 ---
 items:
-  - "Multiple overlay styles: off (disabled), gradient, or solid color"
-  - "Adjustable opacity for precise contrast tuning"
-  - "Gradient option with smooth bottom-to-top fade effect"
-  - "Reusable across all CTA banner components"
+  - "Four variants ('off', 'gradient', 'gradient-bottom', 'color') cover full hero washes, bottom-heavy fades, flat tints, and a no-op disable state"
+  - "`opacity` prop (default 0.4) binds straight to CSS, so designers tune intensity per placement without writing styles"
+  - "Variant 'off' returns nothing, so the same component can be left in markup and toggled off when imagery already has built-in contrast"
+  - "Built on `--overlay-always-black-alpha-*` tokens so the overlay reads identically across themes and brand refreshes"
+  - "`aria-hidden=\"true\"` keeps the decorative layer out of screen-reader output"
 ---
 ::
 

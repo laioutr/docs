@@ -7,7 +7,7 @@ seo:
   description: A icon list component
 sitemap:
   loc: /laioutr-ui/ui-kit/typography/iconlist
-  lastmod: 2026-04-08
+  lastmod: 2026-05-13
   changefreq: monthly
   priority: 1.0
 
@@ -15,14 +15,15 @@ sitemap:
 
 ## Overview
 
-The Icon List component displays a list of items with an icon beside each entry. It keeps lists scannable and consistent for features, steps, or bullet-style content.
+IconList renders a list of items with a leading icon on each row. It keeps feature lists, step lists, and bullet-style content scannable and visually aligned, and supports nesting for hierarchical content. Sizes are `'xs'`, `'s'`, and `'m'` (default `'m'`) so the same component fits dense secondary lists, body content, and large feature blocks.
+
+Stick to one icon style per list so the list reads as a single unit instead of competing rows.
 
 ## Key Business & UX Benefits
 
-- Makes lists easier to scan with icons that reinforce each item.
-- Keeps layout and alignment consistent across the app.
-- Supports nested lists for hierarchical content.
-- Fits feature lists, steps, and other icon-plus-text patterns.
+- Feature lists with icons scan faster than plain bullets, so shoppers retain the value props that drive add-to-cart decisions.
+- Three sizes cover dense secondary lists, body content, and large feature blocks with the same primitive, keeping spacing consistent.
+- Nesting support lets product teams build hierarchical content like spec lists or comparison tables without bespoke list markup.
 
 :::tip
 Pro-Tip from Larry: Use one icon style per list so the list reads as a single unit.
@@ -32,31 +33,39 @@ Pro-Tip from Larry: Use one icon style per list so the list reads as a single un
 
 ::component-code
 ---
-:name: IconList
-story-id: ui-kit-iconlist--nested-x-small-style
+:name: LIconList
+story-id: ui-kit-molecules-iconlist--nested-x-small-style
 ---
 ::
+
+```vue-template
+<LIconList size="s">
+  <LIconListItem icon="actions/check">Fast checkout</LIconListItem>
+  <LIconListItem icon="actions/check">Free returns</LIconListItem>
+</LIconList>
+```
 
 ## Feature List
 
 ::features
 ---
 items:
-  - "Icon plus text per list item with consistent alignment"
-  - "Nested list support for hierarchical content"
-  - "Configurable icon size and spacing"
-  - "Theme-aligned styling for light and dark modes"
+  - "Three sizes ('xs', 's', 'm') drive both row padding and font-size tokens, so dense secondary lists and large feature blocks share one component"
+  - "Parent `icon` prop publishes a default via Vue provide; child `IconListItem` can override per row"
+  - "Default icon (`arrows/arrow-right`) ensures rows never render iconless even when consumers forget to set one"
+  - "`<ul>` and `<li>` markup keeps lists semantic for screen readers and SEO"
+  - "Nesting supported because the context only provides the icon, not list state, so nested lists stay independent"
 ---
 ::
 
 ## API Reference
 
-### IconList
+### LIconList
 
 ::component-meta{:name="IconList"}
 ::
 
-### IconListItem
+### LIconListItem
 
 ::component-meta{:name="IconListItem"}
 ::

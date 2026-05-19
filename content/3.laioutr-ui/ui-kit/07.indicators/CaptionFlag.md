@@ -1,13 +1,13 @@
 ---
 title: Caption Flag
-description: A caption flag component
+description: Small promotional or status label that sits above or beside content without dominating the layout.
 links: []
 seo:
   title: Caption Flag | Laioutr
   description: A caption flag component
 sitemap:
   loc: /laioutr-ui/ui-kit/indicators/captionflag
-  lastmod: 2026-04-08
+  lastmod: 2026-05-13
   changefreq: monthly
   priority: 1.0
 
@@ -15,26 +15,22 @@ sitemap:
 
 ## Overview
 
-The Caption Flag component displays a small promotional or status label above or beside content, such as “New” or “Sale,” to draw attention without dominating the layout.
+Caption Flag is a small promotional or status label ("New", "Sale", and similar) that sits above or beside content. It is intentionally low-chrome so it draws attention without competing with the surrounding caption or tile.
 
 ## Key Business & UX Benefits
 
-- Highlights promotions or status in a compact, recognizable way.
-- Keeps layout clean with a small, themed badge.
-- Fits captions, cards, and product tiles.
-- Theme-aligned styling for light and dark modes.
-
-:::tip
-Pro-Tip from Larry: Use Caption Flag for “New” or “Sale” so promotions are visible without clutter.
-:::
+- Low-chrome styling adds promotional context without stealing focus from the product or content, which protects the existing visual hierarchy on busy grids.
+- A single caption flag pattern keeps "New", "Sale", and similar callouts consistent across editorial tiles, category cards, and content blocks.
+- Merchandisers can flag fresh stock or campaigns through Studio without raising a design ticket each time inventory turns over.
+- Predictable placement above or beside the caption avoids the layout shift that ad-hoc badges cause on responsive grids.
 
 ## Usage
 
 ::component-code
 ---
-:name: CaptionFlag
+:name: LCaptionFlag
 story-height: 100px
-story-id: ui-kit-captionflag--default
+story-id: ui-kit-atoms-captionflag--default
 ---
 ::
 
@@ -43,10 +39,11 @@ story-id: ui-kit-captionflag--default
 ::features
 ---
 items:
-  - "Promotional or status label for captions and cards"
-  - "Theme-aligned variants and sizing"
-  - "Compact display for product tiles and content"
-  - "Configurable content via slot or prop"
+  - "Two `variant` values ('plain', 'boxed') cover low-chrome inline labels and stronger box-styled callouts"
+  - "Seven `colorScheme` values ('primary', 'accent', 'grey', 'neutral', 'success', 'error', 'warning') apply only in the boxed variant for semantic flags"
+  - "Caption size auto-shifts between caption-s (plain) and caption-xs (boxed), keeping the flag proportional to the surrounding tile"
+  - "Uppercase text transform reads as a flag at a glance without bespoke typography overrides"
+  - "Predictable above-or-beside placement avoids the layout shift ad-hoc badges cause on responsive grids"
 ---
 ::
 

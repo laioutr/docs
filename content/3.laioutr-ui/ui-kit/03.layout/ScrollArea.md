@@ -15,17 +15,16 @@ sitemap:
 
 ## Overview
 
-The Scroll Area component wraps content in a scrollable region with consistent scrollbar styling and optional overflow control. It is used for sidebars, modals, and fixed-height panels.
+Scroll Area wraps content in a bounded scrollable region with consistent scrollbar styling, keyboard navigation, and overflow control. Use it for sidebars, modals, navigation panels, and any fixed-height container where the inner content can exceed the visible space.
 
 ## Key Business & UX Benefits
 
-- Keeps long content in a bounded area so the rest of the layout stays stable.
-- Applies consistent scrollbar styling across the app.
-- Works with keyboard and focus for accessible scrolling.
-- Fits sidebars, modals, and panels with a fixed height.
+- Custom scrollbar styling replaces the inconsistent native scrollbar look across browsers, keeping mini-carts and filter panels on-brand.
+- Keyboard navigation comes built in, so filter dialogs and mega-menus stay accessible without per-instance keyboard handlers.
+- Bounded scrolling inside modals and sidebars prevents the body-scroll bug that disorients users when they try to close a panel.
 
 :::tip
-Pro-Tip from Larry: Use it in sidebars and modals so long content scrolls inside a clear boundary.
+Pro-Tip from Larry: Set a `max-height` rather than a fixed `height` so the area only scrolls when it actually overflows. A fixed height shows a scrollbar even when content fits.
 :::
 
 ## Usage
@@ -34,7 +33,7 @@ Pro-Tip from Larry: Use it in sidebars and modals so long content scrolls inside
 ---
 :name: ScrollArea
 story-height: 600px
-story-id: ui-kit-scrollarea--default
+story-id: ui-kit-organisms-scrollarea--default
 ---
 ::
 
@@ -43,10 +42,11 @@ story-id: ui-kit-scrollarea--default
 ::features
 ---
 items:
-  - "Scrollable region with configurable height or max-height"
-  - "Consistent scrollbar styling for light and dark themes"
-  - "Keyboard and focus support for accessible scrolling"
-  - "Suitable for sidebars, modals, and fixed-height panels"
+  - "Four `type` modes ('auto', 'scroll', 'hover', 'always', default 'hover') control when the custom scrollbar is visible"
+  - "Both axes covered: separate vertical and horizontal `ScrollAreaScrollbar` instances with `data-orientation` styling hooks"
+  - "Built on reka-ui's `ScrollAreaRoot`, so keyboard navigation and ARIA semantics ship without per-use wiring"
+  - "Themable thumb (`.scroll-area__scrollbar-thumb`) with a 4px `--scrollbar-size` default that consumers can override per surface"
+  - "Bounded scrolling inside modals and sidebars prevents the body-scroll bug when users try to close a panel"
 ---
 ::
 

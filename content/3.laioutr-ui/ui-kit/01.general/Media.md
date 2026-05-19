@@ -1,38 +1,40 @@
 ---
 title: Media
-description: A responsive image block component with optional lightbox functionality, customizable aspect ratios, and device-specific sizing controls.
-jiraIssueId: LUI-28
+description: Low-level responsive image primitive backed by `nuxt-image`.
 seo:
   title: Media | Laioutr
-  description: A responsive image block component with optional lightbox functionality, customizable aspect ratios, and…
+  description: Low-level responsive image primitive.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/media
-  lastmod: 2026-04-08
+  lastmod: 2026-05-13
   changefreq: monthly
   priority: 1.0
-
 ---
 
 ## Overview
 
-Enables content editors to insert and manage responsive images within page layouts. Creates visually engaging content that adapts seamlessly across all device sizes. Display product images, hero banners, or editorial photography with consistent styling. Configure different sizing for mobile versus desktop to optimize visual presentation. Add captions and accessibility descriptions for improved user experience. Leverages Radix Vue Dialog for accessible lightbox implementation.
+`Media` is the low-level responsive image primitive. It takes a [`Media`](/frontend/api-reference/common-types/media) value and uses `nuxt-image` to pick the right variant for the current viewport, handling `<picture>` source selection, custom `aspectRatio` (boolean, string, or number), and breakpoint-aware `sizes` strings. The bonus `cmw` (content-max-width) unit makes `sizes` strings inside constrained containers easier to write.
+
+Reach for [`MediaPreview`](/laioutr-ui/ui-kit/general/media-preview) when you also want lightbox interaction, surface-tone awareness, and cross-image navigation. Use `Media` directly only when you do not want the lightbox shell.
 
 ## Key Business & UX Benefits
 
-- Delivers the right image size per device for fast load and good quality.
-- Engages users with lightbox zoom and pan for detailed viewing.
-- Gives editors control over aspect ratio and mobile vs desktop sizing.
-- Keeps images accessible with captions and descriptions.
-
-:::tip
-Pro-Tip from Larry: Set separate mobile and desktop aspect ratios so images look great on every screen.
-:::
+- Backed by nuxt-image, so every storefront image ships in the right format and size for the device, cutting bandwidth costs and load times.
+- A single discriminated `Media` value covers images, video posters, and CDN variants, so connector code stays simple as new sources are added.
+- The `cmw` unit makes `sizes` strings inside constrained containers easy to write, so the layout engine picks the smallest correct asset.
 
 ## Usage
 
-Uses [nuxt-image](https://image.nuxt.com/) to render responsive images. The component takes a [`Media`](/frontend/api-reference/common-types/media) value (the canonical discriminated union returned by connectors and produced by the `media` schema field) and reads its sources to pick the right variant for the current viewport.
-
-::component-code{:name="Media" story-id="ui-kit-media--default"}
+::component-code
+---
+:name: LMedia
+:story-height: 200px
+story-id: ui-kit-atoms-media--default
+title: Media Default
+---
+```vue-template
+<Media :media="image" :aspect-ratio="true" sizes="100vw sm:50vw md:400px" />
+```
 ::
 
 ## Feature List
@@ -40,12 +42,15 @@ Uses [nuxt-image](https://image.nuxt.com/) to render responsive images. The comp
 ::features
 ---
 items:
-  - "Lightbox with zoom and pan using Radix Vue Dialog and Swiper"
-  - "Cross-image navigation in lightbox across all enabled media on the page"
-  - "Custom aspect ratios with separate mobile and desktop values"
-  - "Fixed height option with responsive values that overrides aspect ratio"
+  - "Backed by nuxt-image, so every storefront asset ships in the right format and size for the current device"
+  - "Single typed `Media` value (discriminated union) covers images, video posters, and CDN variants from connectors"
+  - "`aspectRatio` accepts boolean, string, or number, so callers pick between intrinsic, square, and named ratios from the same prop"
+  - "Breakpoint-aware `sizes` strings hint the browser to pick the smallest correct variant, cutting bandwidth on mobile"
+  - "Custom `cmw` (content-max-width) unit in `sizes` strings is honored inside constrained containers"
+  - "Handles `<picture>` source selection so AVIF, WebP, and JPEG fallbacks are emitted correctly"
 ---
 ::
+
 
 ## API Reference
 

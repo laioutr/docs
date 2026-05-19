@@ -1,32 +1,33 @@
 ---
 title: Placeholder
+aliases: []
 description: A placeholder component
-links: []
 seo:
   title: Placeholder | Laioutr
   description: A placeholder component
 sitemap:
   loc: /laioutr-ui/ui-kit/general/placeholder
-  lastmod: 2026-04-08
+  lastmod: 2026-05-15
   changefreq: monthly
-  priority: 1.0
-
+  priority: 1
+  videos: []
+  images: []
+links: []
 ---
 
 ## Overview
 
-The Placeholder component reserves space in the layout while content is loading or missing. Sizing is controlled via CSS so it fits grids, cards, or custom layouts without extra markup.
+Placeholder is a development-time stand-in for missing or in-progress content: a dashed purple border with a centered refresh emoji. Drop it in to mark a slot that needs real content before ship, or to make missing-content states visually obvious during review. It is not a production skeleton, just a debug marker. Sizing is owned by the consumer via CSS.
 
 ## Key Business & UX Benefits
 
-- Reduces layout shift by reserving space before content loads.
-- Keeps grids and lists aligned while images or data load. This is especially useful for lazy loading images or data.
-- Gives designers a simple block to size and style with CSS.
-- Works as a fallback when content is missing or failed to load.
+- A dashed-purple, refresh-emoji marker is visually loud enough that nobody ships an empty layout slot by accident.
+- Zero props and CSS-driven sizing mean designers and developers can drop the marker into any grid, card, or column without scaffolding.
+- The marker reads the same on light and dark backgrounds, so it stays obvious during reviews regardless of theme.
 
-:::tip
-Pro-Tip from Larry: Match placeholder size to the final content so the layout does not jump when it loads.
-:::
+::tip
+Pro-Tip from Larry: Reach for `LPlaceholder` to mark a slot that still needs real content before ship; it is a debug marker, not a production skeleton.
+::
 
 ## Usage
 
@@ -34,12 +35,12 @@ Use css for sizing the placeholder.
 
 ::component-code
 ---
-:name: Placeholder
+:name: LPlaceholder
 story-height: 110px
-story-id: ui-kit-placeholder--default
+story-id: ui-kit-atoms-placeholder--default
 ---
 ```vue-template
-<Placeholder class="w-100px h-100px" />
+<LPlaceholder class="w-100px h-100px" />
 ```
 ::
 
@@ -48,10 +49,16 @@ story-id: ui-kit-placeholder--default
 ::features
 ---
 items:
-  - "CSS-controlled sizing for flexible layouts"
-  - "Reserves space to prevent layout shift"
-  - "Theme-aligned background and styling"
-  - "Suitable for images, cards, or custom blocks"
+  - "Zero props: sizing is owned by the consumer via CSS, so the same marker
+    fits any grid, card, or column"
+  - Fills 100% of its container by default, so it slots into flex and grid cells
+    without dimension props
+  - Dashed border (`--laioutr-purple-10`) and centered refresh-emoji icon make
+    missing-content slots visually loud during development
+  - "Dev-time debug marker, not a production skeleton: ship real content before
+    release"
+  - "`placeholder` and `placeholder__icon` BEM classes give consumers hooks to
+    restyle the marker if the default purple clashes"
 ---
 ::
 

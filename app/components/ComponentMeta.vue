@@ -8,7 +8,8 @@ const props = defineProps<{
   name: string;
 }>();
 
-const component = componentMeta[props.name as NuxtComponentMetaNames] as ComponentData | undefined;
+const component = (componentMeta[props.name as NuxtComponentMetaNames]
+  ?? componentMeta[`L${props.name}` as NuxtComponentMetaNames]) as ComponentData | undefined;
 
 const didYouMeanThing = useDidYouMean(
   props.name,

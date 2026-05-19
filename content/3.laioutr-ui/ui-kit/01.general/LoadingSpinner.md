@@ -7,7 +7,7 @@ seo:
   description: An animated spinner indicating loading or processing state.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/loadingspinner
-  lastmod: 2026-04-08
+  lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
 
@@ -15,17 +15,18 @@ sitemap:
 
 ## Overview
 
-The Loading Spinner component shows an accessible loading indicator so users know that content or an action is in progress. It supports different sizes and can be used for buttons, cards, or full-page loading states.
+LoadingSpinner is the loading indicator used inside buttons, on top of pending content, and as a full-page loader. `variant` picks the shape (row or round), `colorScheme` matches the spinner color to the button tone it sits inside, and `size` is the canonical `'s'` / `'l'` scale with `'l'` as the default.
+
+The component renders pure visual chrome; the consumer is responsible for any `role="status"` or `aria-live` wrapper that announces the loading state to assistive tech.
 
 ## Key Business & UX Benefits
 
-- Reduces uncertainty by showing that the system is working.
-- Keeps interactions accessible with proper labels and semantics.
-- Fits different contexts with configurable sizes.
-- Matches common patterns so users recognize loading at a glance.
+- Inline feedback on add-to-cart and checkout buttons prevents double-submits, the single biggest source of duplicate-order support tickets.
+- Color schemes that match button tones keep brand consistency on every action surface, from primary CTAs to secondary utilities.
+- One indicator covers inline, overlay, and full-page loading patterns, so perceived wait time stays consistent across the flow.
 
 :::tip
-Pro-Tip from Larry: Use the right size for the context so the spinner is visible but not distracting.
+Pro-Tip from Larry: Match `colorScheme` to the surrounding action so a primary button's inline spinner reads as primary too.
 :::
 
 ## Usage
@@ -34,27 +35,27 @@ Pro-Tip from Larry: Use the right size for the context so the spinner is visible
 
 ::component-code
 ---
-:name: LoadingSpinner
+:name: LLoadingSpinner
 :story-height: 75px
-story-id: ui-kit-loaderspinner--primary-loader-spinner
+story-id: ui-kit-atoms-loadingspinner--primary-loader-spinner
 title: Loading Spinner Primary
 ---
 ```vue-template
-<LoadingSpinner />
+<LLoadingSpinner variant="round" color-scheme="primary" size="l" />
 ```
 ::
 
-### Primary
+### Secondary
 
 ::component-code
 ---
-:name: LoadingSpinner
+:name: LLoadingSpinner
 :story-height: 75px
-story-id: ui-kit-loaderspinner--secondary-loader-spinner
-title: Loading Spinner Primary
+story-id: ui-kit-atoms-loadingspinner--secondary-loader-spinner
+title: Loading Spinner Secondary
 ---
 ```vue-template
-<LoadingSpinner />
+<LLoadingSpinner variant="round" color-scheme="secondary" size="l" />
 ```
 ::
 
@@ -63,10 +64,11 @@ title: Loading Spinner Primary
 ::features
 ---
 items:
-  - "Different sizes for buttons, cards, or full-page use"
-  - "Accessible with proper ARIA and label support"
-  - "Optional required and non-required flags for forms"
-  - "Theme-aligned styling for light and dark modes"
+  - "Two variants ('row', 'round') cover inline-text spinners and full-area loaders from one component"
+  - "`colorScheme` typed as `ButtonVariant`, so the spinner inside a Button picks up the matching tone automatically"
+  - "Two sizes ('s', 'l') with 'l' as the default for full-area placements and 's' for inline-text use"
+  - "BEM token-driven dots and circles (`round-spinner__small-dots--{variant}--{size}`) expose hooks for per-tone overrides"
+  - "Renders pure SVG and CSS so it stays responsive to button width without layout shift"
 ---
 ::
 

@@ -7,7 +7,7 @@ seo:
   description: A grid fill component
 sitemap:
   loc: /laioutr-ui/ui-kit/layout/gridfill
-  lastmod: 2026-04-08
+  lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
 
@@ -15,17 +15,24 @@ sitemap:
 
 ## Overview
 
-The Grid Fill component lays out items in a grid and lets one or more cells grow to fill remaining space. Sizing modes control whether the first or last item expands, so product grids and dashboards stay aligned.
+Grid Fill lays out items in a flex row and lets one cell grow to absorb the remaining space. Set the `--cols` CSS custom property (per breakpoint if needed) so the component knows how many columns to size against; `--gap` (or the explicit `--gap-x` and `--gap-y`) controls spacing. Pick the sizing mode by which item should claim the slack:
+
+| `sizing`         | When to use                                                                          |
+| ---------------- | ------------------------------------------------------------------------------------ |
+| `'fixed'`        | Default. Every cell gets the same width based on `--cols`.                           |
+| `'greedy-first'` | First-row items expand via flex-grow with `order` reversal. Hard cap of 20 items.    |
+| `'greedy-last'`  | Last item expands. Useful when the trailing tile is a "view all" or summary.         |
+
+`greedy-first` is the special case: it flips flex order so the first row of items expands instead of the last, but the CSS hard-caps at 20 items. Beyond that, extra items fall outside the order chain and the visual layout breaks.
 
 ## Key Business & UX Benefits
 
-- Fills available space so grids look balanced on any viewport.
-- Keeps one primary item (e.g. hero or featured) flexible while others stay fixed.
-- Reduces custom CSS for common fill patterns.
-- Works for product grids, dashboards, and card layouts.
+- Greedy sizing lets the hero or "view all" tile take visual priority without bespoke CSS for every grid variant.
+- Three sizing modes cover the common merchandising patterns: even grid, feature-led, and summary-led, without flexbox math at the call site.
+- One layout primitive replaces dozens of hand-rolled grids, so brand refreshes update spacing once instead of touching each section.
 
 :::tip
-Pro-Tip from Larry: Use greedy-first or greedy-last so the hero or featured item gets the extra space.
+Pro-Tip from Larry: Use `greedy-first` or `greedy-last` so the hero or featured item gets the extra space, instead of distributing whitespace evenly across cells.
 :::
 
 ## Usage
@@ -34,7 +41,7 @@ Pro-Tip from Larry: Use greedy-first or greedy-last so the hero or featured item
 ---
 name: GridFill Fixed
 story-height: 430px
-story-id: ui-kit-gridfill--default
+story-id: ui-kit-atoms-gridfill--default
 ---
 ```vue-template
 <GridFill />
@@ -45,7 +52,7 @@ story-id: ui-kit-gridfill--default
 ---
 name: GridFill Greedy First
 story-height: 430px
-story-id: ui-kit-gridfill--greedy-first
+story-id: ui-kit-atoms-gridfill--greedy-first
 ---
 ```vue-template
 <GridFill sizing="greedy-first" />
@@ -56,7 +63,7 @@ story-id: ui-kit-gridfill--greedy-first
 ---
 name: GridFill Greedy Last
 story-height: 430px
-story-id: ui-kit-gridfill--greedy-last
+story-id: ui-kit-atoms-gridfill--greedy-last
 ---
 ```vue-template
 <GridFill sizing="greedy-last" />
@@ -68,10 +75,12 @@ story-id: ui-kit-gridfill--greedy-last
 ::features
 ---
 items:
-  - "Fixed grid with equal cell sizing"
-  - "Greedy-first: first item expands to fill remaining space"
-  - "Greedy-last: last item expands to fill remaining space"
-  - "Configurable columns and gap for responsive layouts"
+  - "Three sizing modes ('fixed', 'greedy-first', 'greedy-last') cover even grids, hero-led grids, and trailing summary tiles from one component"
+  - "Requires a `--cols` CSS custom property (per-breakpoint via utility classes) to drive the flex-basis math"
+  - "`gapX` and `gapY` numeric props bind to `--gap-x` and `--gap-y` CSS custom properties so consumers can also override with utility classes per breakpoint"
+  - "`--cols` and `--gap` custom-property layering lets templates set defaults on a parent and override per breakpoint without prop drilling"
+  - "Greedy modes use `flex-grow` to pull slack into the first or last cell; `greedy-first` flips `order` with a hard cap of 20 items"
+  - "Single layout primitive replaces hand-rolled grids, so brand refreshes update spacing in one place"
 ---
 ::
 

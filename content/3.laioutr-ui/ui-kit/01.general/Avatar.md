@@ -12,7 +12,7 @@ seo:
   description: Avatar component for displaying user images, initials, or icons with size and color variants.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/avatar
-  lastmod: 2026-04-08
+  lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
 
@@ -20,38 +20,43 @@ sitemap:
 
 ## Overview
 
-The Avatar component provides flexible user representation across the UI through profile images, auto-generated initials, or icon fallbacks. It intelligently extracts initials from names by taking the first letter of the first and last words (e.g., "Sebastian Kurt Langer" becomes "SL"). Four size variants (small, medium, large, extra large) use theme-controlled border radius values, while pale and solid color variants apply distinct background, icon, and text colors. Each theme provides custom placeholder images ensuring visual consistency when no user image is available.
+Avatar represents a user through a profile image, auto-generated initials, or an icon fallback. The `fallbackVariant` prop (default `'initials'`) picks which fallback shows when no image is available; `'icon'` swaps in the glyph named by `fallbackIcon` (default `essentials/user`), and `'image'` falls through to the theme placeholder. Initials are pulled from the first letter of the first and last word of the name (e.g. "Sebastian Kurt Langer" becomes "SL"), and each theme ships its own placeholder image so the fallback chain never lands on a broken state.
+
+Pass a `media` value when you have a `Media` object; it renders through the `<LMedia>` pipeline so video posters and image variants behave consistently with the rest of the system. Without `media`, the component walks `src`, then the configured fallback chain.
 
 ## Key Business & UX Benefits
 
-- Builds trust and recognition by showing who is behind content or actions.
-- Keeps layouts consistent with theme-aligned sizes and colors.
-- Works without images via initials and placeholders so no broken states.
-- Scales from comments to headers with one component.
+- Layered fallbacks (image, initials, themed placeholder) mean account areas never render a broken icon, even when a profile photo fails to load.
+- Personalized account chrome makes returning customers feel recognized, which lifts repeat-visit engagement on logged-in pages.
+- Initials are derived automatically from the name, so customer service tools and member areas show consistent avatars without extra data.
+- The `<LMedia>` pipeline serves the right image variant for each viewport, keeping account pages fast on mobile.
 
 :::tip
-Pro-Tip from Larry: Rely on initials and placeholders so avatars never look broken when images fail to load.
+Pro-Tip from Larry: Pass a `media` value when you have a Media object so it goes through `<LMedia>` for free.
 :::
 
 ## Usage
 
-:component-code{name="Avatar" story-height="100px" story-id="ui-kit-avatar--medium-fallback-icon"}
+:component-code{name="LAvatar" story-height="100px" story-id="ui-kit-atoms-avatar--medium-fallback-icon"}
 
 ## Feature List
 
 ::features
 ---
 items:
-  - "Multiple sizes with theme-specific border radius"
-  - "Pale and solid color variants with theme colors"
-  - "Auto-generated initials from user name"
-  - "Theme-specific placeholder images"
+  - "Four sizes ('s', 'm', 'l', 'xl') with icon size auto-derived per avatar size"
+  - "`fallbackVariant` ('icon', 'initials', 'image', default 'initials') and `fallbackIcon` (default 'essentials/user') let consumers pick the fallback shape per surface"
+  - "Three-step fallback chain (media or src, then name-derived initials, then themed placeholder image) keeps account chrome from breaking"
+  - "Initials auto-computed from first letter of first and last word of `name`, no extra data needed"
+  - "`media` prop renders through `<LMedia>` so video posters and image variants stay consistent with the rest of the system"
+  - "Localized alt text via i18n keys `avatar.namedAlt` and `avatar.defaultAlt` covers screen readers in every market"
+  - "BEM root class (`avatar--{size}`, `avatar--{color}`) gives instance-level theming hooks"
 ---
 ::
 
 ## API Reference
 
-### Avatar
+### LAvatar
 
 ::component-meta{:name="Avatar"}
 ::

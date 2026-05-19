@@ -1,13 +1,13 @@
 ---
 title: Badge
-description: Badges of different kind to be used for several purposes.
+description: Small label or count for status, notifications, and categories in headers, navigation, and cards.
 links: []
 seo:
   title: Badge | Laioutr
   description: Badges of different kind to be used for several purposes.
 sitemap:
   loc: /laioutr-ui/ui-kit/indicators/badge
-  lastmod: 2026-04-08
+  lastmod: 2026-05-13
   changefreq: monthly
   priority: 1.0
 
@@ -15,38 +15,39 @@ sitemap:
 
 ## Overview
 
-The Badge component displays a small label or count for status, notifications, or categories. It supports multiple variants and fits headers, navigation, and cards.
+Badge is a compact label for status, counts, and category tags. It works as a cart count, a "new" marker, a discount indicator (via `leftIcon` plus slot text), or any other inline annotation that needs to read at a glance. Toggle `rounded` for pill versus rectangular shape depending on the surrounding chrome.
 
 ## Key Business & UX Benefits
 
-- Surfaces counts (e.g. cart) or status (e.g. new) in a compact way.
-- Themed variants keep badges consistent and on-brand.
-- Small footprint fits nav, headers, and list items.
-- Accessible with proper semantics for counts and status.
-
-:::tip
-Pro-Tip from Larry: Use badges for cart count and notification counts so users see them at a glance.
-:::
+- One badge primitive handles cart counts, status pills, and category tags, so every small label across the app shares the same look and tone.
+- The pill versus rectangular toggle adapts to surrounding chrome (header, card, nav), keeping visual hierarchy clean without bespoke variants per location.
+- A clear cart count badge is a proven conversion lever; the built-in styling ensures it always reads at a glance, even at small sizes on mobile.
+- Icon-plus-text composition lets teams build discount, status, or attention indicators without reaching for a second component.
 
 ## Usage
 
 ::component-code
 ---
-:name: Badge
+:name: LBadge
 :story-height: 100px
-story-id: ui-kit-badge--accent
+story-id: ui-kit-atoms-badge--accent
 ---
 ::
+
+```vue-template
+<LBadge rounded variant="accent">New</LBadge>
+```
 
 ## Feature List
 
 ::features
 ---
 items:
-  - "Multiple variants for status, count, and accent"
-  - "Theme-aligned colors and sizing"
-  - "Compact display for nav and cards"
-  - "Accessible label and count semantics"
+  - "Four `variant` values ('default', 'primary', 'accent', 'positive') drive separate text and icon color tokens per role"
+  - "`rounded` boolean toggles between pill and rectangular shape, so the same primitive fits header chrome and card chrome"
+  - "`iconLeft` and `iconRight` props place small icons either side of the slot text, useful for status badges and discount tags"
+  - "Built-in xs subline typography keeps cart counts and category tags legible at small sizes on mobile"
+  - "Per-variant token bindings (`--badge-{variant}-text`, `--badge-{variant}-icon`) give themes precise color hooks"
 ---
 ::
 

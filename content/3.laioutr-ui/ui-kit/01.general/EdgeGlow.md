@@ -7,7 +7,7 @@ seo:
   description: A edge glow component
 sitemap:
   loc: /laioutr-ui/ui-kit/general/edgeglow
-  lastmod: 2026-04-08
+  lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
 
@@ -15,25 +15,24 @@ sitemap:
 
 ## Overview
 
-The Edge Glow component adds a subtle gradient or glow along the edges of a container to suggest scrollable content, depth, or focus and to improve visual hierarchy.
+Edge Glow is a decorative top-edge glow: a single static radial gradient pinned to the top of its container that fades into the page below. It is purely visual chrome with no Vue props, used to give hero sections and section-tops a soft brand-coloured halo.
 
 ## Key Business & UX Benefits
 
-- Hints that more content is available without cluttering the layout.
-- Adds depth and polish so the UI feels refined and intentional.
-- Draws attention to key areas like carousels or cards.
-- Keeps the effect subtle so it supports rather than dominates the design.
+- A soft top-edge halo gives hero and section tops a finished, branded feel without dropping a full background image into the markup.
+- The glow is driven by `--primary-2` and `--primary-4`, so brand recolours flow through with no per-section overrides.
+- A zero-prop primitive replaces hand-rolled radial-gradient CSS scattered across hero sections.
 
 :::tip
-Pro-Tip from Larry: Use edge glow on carousels to signal that users can scroll for more.
+Pro-Tip from Larry: Drop `LEdgeGlow` into the top of a hero section when you want a subtle brand-tinted halo without a background image.
 :::
 
 ## Usage
 
 ::component-code
 ---
-:name: EdgeGlow
-story-id: ui-kit-edgeglow--default
+:name: LEdgeGlow
+story-id: ui-kit-atoms-edgeglow--default
 ---
 ::
 
@@ -42,10 +41,11 @@ story-id: ui-kit-edgeglow--default
 ::features
 ---
 items:
-  - "Configurable glow or gradient along container edges"
-  - "Supports horizontal and vertical orientations"
-  - "Theme-aware styling for light and dark modes"
-  - "Lightweight so it does not affect performance"
+  - "Pure-CSS pseudo-element renders the gradient with no Vue props, keeping the primitive zero-config to drop in"
+  - "Theme tokens `--primary-2` and `--primary-4` drive the fade and glow colors so brand refreshes flow through unchanged"
+  - "Tunable via `--bg-fadeout-size`, `--bg-glow-size`, `--bg-fadeout-color`, and `--bg-glow-color` CSS custom properties for per-section overrides"
+  - "Radial-plus-linear gradient stack produces a centered top glow that fades vertically without dominating the layout"
+  - "Standalone `.edge-glow` class composes inside any container, replacing hand-rolled radial-gradient CSS in hero and section tops"
 ---
 ::
 

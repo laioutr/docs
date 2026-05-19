@@ -46,7 +46,7 @@ Use the provided CSS custom properties instead of hardcoded z-index values:
 
 ### Why modals share one z-index
 
-Modal overlays (backdrops) and modal content use the same `--z-index-modal` value. When multiple modals stack (e.g. an alert dialog on top of a sheet), DOM order determines which appears on top — later portals paint above earlier ones. A separate overlay z-index would cause the second modal's backdrop to slip behind the first modal's content.
+Modal overlays (backdrops) and modal content use the same `--z-index-modal` value. When multiple modals stack (e.g. an alert dialog on top of a sheet), DOM order determines which appears on top, since later portals paint above earlier ones. A separate overlay z-index would cause the second modal's backdrop to slip behind the first modal's content.
 
 ## Opting out of isolation
 

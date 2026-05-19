@@ -12,7 +12,7 @@ seo:
   description: Slide-in panel surface for overlaying content such as carts, filters, or detail views without leaving the page.
 sitemap:
   loc: /laioutr-ui/ui-kit/surfaces/sheet
-  lastmod: 2026-04-08
+  lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
 
@@ -20,37 +20,44 @@ sitemap:
 
 ## Overview
 
-The Cart Sheet provides shoppers a non-disruptive way to review and modify their cart contents through a slide-in overlay triggered by cart interactions. It consolidates essential cart management features including real-time quantity adjustments with optimistic updates, coupon code application via an expandable accordion, and a dynamic free shipping progress indicator. The component displays a complete cost breakdown with localized currency formatting and prominently shows accepted payment methods, enabling confident purchase decisions without navigating away from the current browsing context.
+Sheet is a slide-in overlay surface for carts, filters, detail views, and any flow that should not yank the user off the page. Pair it with `SheetHeader`, `SheetContent`, and `SheetFooter` for a predictable three-part layout. The whole sheet body scrolls as one region; header and footer use sticky positioning inside it.
+
+Pick the slide direction with the `position` prop (`'left'`, `'right'`, `'top'`, `'bottom'`; default `'right'`). On left/right sheets, `menuWidth` overrides the desktop width (the value goes into the `--sheet-width-sm` CSS variable). The component renders inside a Reka dialog portal with focus trap and `Escape`-to-close handling out of the box.
+
+Accessibility is wired through `a11yTitle` and `a11yDescription`: both feed visually hidden `DialogTitle` and `DialogDescription` nodes so screen readers announce the sheet correctly even when the visible header is purely visual. Always pass `a11yTitle` on every sheet.
+
+When the body scrolls past `scrollThreshold` pixels (default `10`), the sheet card gains a `--fixed` modifier class. Style your `SheetHeader::before` against `.sheet__card--fixed .sheet-header::before` to fade in a blurred backdrop on the sticky header as the user scrolls.
 
 ## Key Business & UX Benefits
 
-- Lets users review and edit the cart without leaving the page.
-- Keeps header, content, and footer in one predictable layout.
-- Supports scrollable content so long lists don’t overflow the viewport.
-- Slide-in pattern is familiar and works well on mobile and desktop.
-
-:::tip
-Pro-Tip from Larry: Use Sheet for cart and filters so users can peek and close without losing context.
-:::
+- Slide-in surfaces keep shoppers on the page during cart, filter, and detail flows, protecting scroll position and lifting conversion versus full-page transitions.
+- Header and footer slots enforce a predictable three-part layout, so every sheet on the site (mini-cart, filters, quick view) feels part of the same product.
+- Scroll-threshold-driven sticky-header blur tells users the header is pinned without bespoke scroll listeners on the call site.
+- Built-in focus trap and `a11yTitle`/`a11yDescription` slots make every sheet accessible by default, which compliance audits reward and screen-reader users rely on.
 
 ## Usage
 
-::component-code{:name="Sheet" story-id="ui-kit-sheet--default"}
+::component-code{:name="LSheet" story-id="ui-kit-organisms-sheet--default"}
 ```vue-template
-<Button variant="primary" @click="toggleSheet">Open Sheet</Button>
-<Sheet v-bind="args" v-model:open="isOpen">
-  <SheetHeader>
+<LButton variant="primary" @click="toggleSheet">Open Sheet</LButton>
+<LSheet
+  v-model:open="isOpen"
+  position="right"
+  a11y-title="Cart"
+  a11y-description="Items in your shopping cart"
+>
+  <LSheetHeader>
     <h2>Sheet Title</h2>
-    <SheetClose />
-  </SheetHeader>
-  <SheetContent>
+    <LSheetClose />
+  </LSheetHeader>
+  <LSheetContent>
     <p>Some random content here...</p>
     <p style="height: 1000px;">More content...</p>
-  </SheetContent>
-  <SheetFooter>
+  </LSheetContent>
+  <LSheetFooter>
     <p>Footer content</p>
-  </SheetFooter>
-</Sheet>
+  </LSheetFooter>
+</LSheet>
 ```
 ::
 
@@ -59,36 +66,38 @@ Pro-Tip from Larry: Use Sheet for cart and filters so users can peek and close w
 ::features
 ---
 items:
-  - "Line item display with quantity selector and remove action"
-  - "Free shipping progress bar with success state"
-  - "Coupon code accordion with apply functionality"
-  - "Payment method logos and checkout button"
+  - "Four `position` values ('left', 'right', 'top', 'bottom', default 'right') pick the slide direction without separate components"
+  - "Three-part composition (`SheetHeader`, `SheetContent`, `SheetFooter`) gives a predictable scroll region with sticky chrome"
+  - "Required `a11yTitle` feeds visually hidden `DialogTitle`, with optional `a11yDescription` for `DialogDescription`, so screen readers announce every sheet"
+  - "Built on reka-ui dialog portal with focus trap and Escape-to-close out of the box"
+  - "Scroll-threshold modifier (`sheet__card--fixed`) toggles past `scrollThreshold` pixels (default 10), so consumers can fade in a blurred backdrop on the sticky header"
+  - "`menuWidth` overrides the desktop width on left/right sheets via `--sheet-width-sm`, so cart drawers and filter rails get distinct widths"
 ---
 ::
 
 ## API Reference
 
-### Sheet
+### LSheet
 
 ::component-meta{:name="Sheet"}
 ::
 
-### SheetClose
+### LSheetClose
 
 ::component-meta{:name="SheetClose"}
 ::
 
-### SheetContent
+### LSheetContent
 
 ::component-meta{:name="SheetContent"}
 ::
 
-### SheetHeader
+### LSheetHeader
 
 ::component-meta{:name="SheetHeader"}
 ::
 
-### SheetFooter
+### LSheetFooter
 
 ::component-meta{:name="SheetFooter"}
 ::

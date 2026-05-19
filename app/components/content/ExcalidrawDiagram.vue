@@ -34,7 +34,10 @@ try {
   height: auto;
   border-radius: 0.5rem;
 }
-:global(.dark) .excalidraw-svg {
+</style>
+
+<style>
+:root.dark .excalidraw-svg {
   background: #f8fafc;
   border-radius: 0.5rem;
   padding: 1rem;

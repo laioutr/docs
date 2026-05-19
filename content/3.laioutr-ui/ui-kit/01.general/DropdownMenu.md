@@ -12,7 +12,7 @@ seo:
   description: Dropdown menu component with custom trigger, selectable items, and active selection indicator.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/dropdownmenu
-  lastmod: 2026-04-08
+  lastmod: 2026-05-13
   changefreq: monthly
   priority: 1.0
 
@@ -20,14 +20,18 @@ sitemap:
 
 ## Overview
 
-Acts like a native select element but uses the custom dropdown component for enhanced styling. Opens via the Sort button on filter bar. Only one option can be selected at a time with immediate product order update. Similar to Nuxt UI select component pattern. Uses LuiDropdownMenu internally.
+DropdownMenu is a custom-styled menu surface for sort, filter, and contextual-action UIs. It opens from a configurable trigger and supports text items, checkbox items, icon items, radio groups, and separators.
+
+Set `position` (`'left'` / `'right'` / `'top'` / `'bottom'`) to anchor the menu against the trigger. On viewports below the `sm` breakpoint, position auto-switches to `'bottom'` so the menu doesn't get cut off on phones. `width` and `maxHeight` control the panel size and overflow scroll.
+
+Pair the dropdown with a visible label (e.g. "Sort by") so users understand what the menu controls.
 
 ## Key Business & UX Benefits
 
-- Matches brand and layout with a custom-styled dropdown instead of native select.
-- Makes the current sort choice obvious with a clear active indicator.
-- Updates results immediately so users see the effect of their choice.
-- Supports keyboard use and accessibility with standard patterns.
+- One menu handles sort, filter, account actions, and contextual menus, so the storefront only ships one tested surface for every dropdown interaction.
+- Auto-switch to bottom placement on mobile prevents the off-screen menu bug that drops mobile-tablet conversion on listing pages.
+- Checkbox, radio, icon, and text item types make complex sort and filter UIs declarative, with keyboard and screen-reader support handled by the primitive.
+- Type-safe item composition lets product teams add new sort options in minutes without re-implementing the menu shell.
 
 :::tip
 Pro-Tip from Larry: Pair the dropdown with a visible label so users know they're changing sort order.
@@ -35,58 +39,60 @@ Pro-Tip from Larry: Pair the dropdown with a visible label so users know they're
 
 ## Usage
 
-:component-code{name="DropdownMenu" story-id="ui-kit-dropdownmenu--has-indicator"}
+:component-code{name="LDropdownMenu" story-id="ui-kit-molecules-dropdownmenu--has-indicator"}
 
 ## Feature List
 
 ::features
 ---
 items:
-  - "Single selection with visual active indicator"
-  - "v-model support for two-way binding"
-  - "Dropdown menu with customizable option list"
-  - "Keyboard navigation with arrow keys and Enter"
+  - "Four positions ('left', 'right', 'top', 'bottom') anchor the panel against the trigger"
+  - "Below the `sm` breakpoint position auto-switches to `'bottom'` so the panel never clips off-screen on phones"
+  - "`width` and `maxHeight` control panel size and overflow scroll for long sort or filter lists"
+  - "Six item subcomponents (Headline, TextItem, CheckboxItem, IconItem, RadioGroup, RadioItem, Separator) cover text, multi-select, single-select, and grouped menus"
+  - "Configurable trigger slot adapts the same menu to sort buttons, icon buttons, and user-account chrome"
+  - "Keyboard navigation and screen-reader semantics ship with the primitive, no per-use wiring"
 ---
 ::
 
 ## API Reference
 
-### DropdownMenu
+### LDropdownMenu
 
 ::component-meta{:name="DropdownMenu"}
 ::
 
-### DropdownMenuHeadline
+### LDropdownMenuHeadline
 
 ::component-meta{:name="DropdownMenuHeadline"}
 ::
 
-### DropdownMenuCheckboxItem
+### LDropdownMenuCheckboxItem
 
 ::component-meta{:name="DropdownMenuCheckboxItem"}
 ::
 
-### DropdownMenuIconItem
+### LDropdownMenuIconItem
 
 ::component-meta{:name="DropdownMenuIconItem"}
 ::
 
-### DropdownMenuRadioGroup
+### LDropdownMenuRadioGroup
 
 ::component-meta{:name="DropdownMenuRadioGroup"}
 ::
 
-### DropdownMenuRadioItem
+### LDropdownMenuRadioItem
 
 ::component-meta{:name="DropdownMenuRadioItem"}
 ::
 
-### DropdownMenuSeparator
+### LDropdownMenuSeparator
 
 ::component-meta{:name="DropdownMenuSeparator"}
 ::
 
-### DropdownMenuTextItem
+### LDropdownMenuTextItem
 
 ::component-meta{:name="DropdownMenuTextItem"}
 ::

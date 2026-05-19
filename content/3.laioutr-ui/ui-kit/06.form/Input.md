@@ -1,13 +1,13 @@
 ---
 title: Input
-description: Styled text input for forms and search with optional icon or button addons and variant support.
+description: Styled text field with optional icon or button addons and Field integration for labels and errors.
 jiraIssueId: LUI-136
 seo:
   title: Input | Laioutr
-  description: Styled text input for forms and search with optional icon or button addons and variant support.
+  description: Styled text field with optional icon or button addons and Field integration for labels and errors.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/input
-  lastmod: 2026-04-08
+  lastmod: 2026-05-13
   changefreq: monthly
   priority: 1.0
 
@@ -15,17 +15,21 @@ sitemap:
 
 ## Overview
 
-The Input component provides a styled text field for forms and search. It supports optional addons (icons or buttons) on the left or right via slots, outline and other variants, and integrates with Field for labels and validation.
+Input is the styled text field for forms and search. It accepts optional addons (icons or buttons) on either side via slots, and several visual variants.
+
+Wrap an Input in `<LField>` and pass `errorMessage` on the Field. The Field's `errorMessage` automatically derives `invalid` on the Input, so you rarely need to set `invalid` directly.
+
+For composed groups (currency symbols, action buttons), use [`InputGroup`](/laioutr-ui/ui-kit/form/input-group) with `InputGroupAddon` and `InputGroupButton`.
 
 ## Key Business & UX Benefits
 
-- Consistent look and behavior for text fields across the app.
-- Addon slots support search icons, clear buttons, and custom actions.
-- Works with Field for labels and errors so forms stay accessible.
-- Outline and other variants fit different layouts and emphasis.
+- One text-field primitive powers every form on the site, so account, checkout, and search inputs share the exact same look, feel, and error behaviour.
+- Addon slots cover currency, units, and inline action buttons without nesting hacks, so teams can launch new pricing or search experiences quickly.
+- Field-driven `invalid` state means a single source of truth for validation, reducing the chance that an error message and a field's styling get out of sync mid-flow.
+- Consistent focus and error styling matches assistive-tech expectations, supporting accessibility compliance and reducing form abandonment from confused users.
 
 :::tip
-Pro-Tip from Larry: Use addon slots for search icon and clear button so the input is self-contained.
+Pro-Tip from Larry: Wrap inputs in `<LField>` and pass `errorMessage`; `invalid` is derived automatically.
 :::
 
 ## Usage
@@ -34,12 +38,12 @@ Pro-Tip from Larry: Use addon slots for search icon and clear button so the inpu
 
 ::component-code
 ---
-:name: Input
+:name: LInput
 story-height: 90px
-story-id: ui-kit-input--outline
+story-id: ui-kit-molecules-input--outline
 ---
 ```vue-template
-<Input placeholder="Optional placeholder" />
+<LInput placeholder="Optional placeholder" />
 ```
 ::
 
@@ -47,35 +51,42 @@ story-id: ui-kit-input--outline
 
 ::component-code
 ---
-:name: LuiInputGroup
+:name: LInputGroup
 story-height: 90px
-story-id: ui-kit-input--with-addons
+story-id: ui-kit-molecules-input--with-addons
 ---
 ```vue-template
-<Input placeholder="Input placeholder">
+<LInput placeholder="Input placeholder">
   <template #addon-left>
-    <InputGroupAddon>
-      <Icon name="actions/zoom-out" />
-    </InputGroupAddon>
+    <LInputGroupAddon>
+      <LIcon name="actions/zoom-out" />
+    </LInputGroupAddon>
   </template>
   <template #addon-right>
-    <InputGroupButton>
-      <Icon name="actions/zoom-in" />
-    </InputGroupButton>
+    <LInputGroupButton>
+      <LIcon name="actions/zoom-in" />
+    </LInputGroupButton>
   </template>
-</Input>
+</LInput>
 ```
 ::
+
+### Invalid State
+
+```vue-template
+<LInput :invalid="hasError" placeholder="Email" />
+```
 
 ## Feature List
 
 ::features
 ---
 items:
-  - "Styled text input with outline and other variants"
-  - "Optional addon slots for icons or buttons left and right"
-  - "Integration with Field for label and error display"
-  - "Placeholder and disabled state support"
+  - "Two slot addons (`#addon-left`, `#addon-right`) accept `InputGroupAddon` and `InputGroupButton` for currency, units, and inline actions"
+  - "Auto-derives `invalid` from `<LField>`'s `errorMessage`, so callers rarely set `invalid` directly"
+  - "Inherits `id`, `disabled`, `readonly`, `required`, and `errorMessage` from the surrounding `<LField>` context"
+  - "Single primitive shared by account, checkout, and search inputs, so error and focus chrome stay consistent storefront-wide"
+  - "Pair with `InputGroup` plus `InputGroupAddon`/`InputGroupButton` when composed groups need flush-mounted decoration"
 ---
 ::
 

@@ -14,17 +14,16 @@ sitemap:
 
 ## Overview
 
-The Separator component draws a horizontal or vertical line between content sections to create clear visual hierarchy and improve readability.
+Separator draws a horizontal or vertical line between content sections to create visual hierarchy. Use a horizontal separator between content blocks, and a vertical one inside tight inline groups (utility rows, breadcrumbs, sidebars) where you need to divide items without adding margin.
 
 ## Key Business & UX Benefits
 
-- Divides sections clearly so users can scan and find content faster.
-- Keeps spacing and alignment consistent without custom borders.
-- Supports horizontal and vertical orientation for lists and sidebars.
-- Uses theme styling so separators match the rest of the UI.
+- Clear visual boundaries between sections help shoppers parse dense pages like checkout, account, and product detail at a glance.
+- Vertical separators replace ad-hoc bullet characters in utility rows and breadcrumbs, keeping the chrome typography clean.
+- One token-driven line color updates across the whole storefront when the brand palette changes, instead of dozens of bespoke borders.
 
 :::tip
-Pro-Tip from Larry: Use horizontal separators between sections and vertical ones in tight lists or sidebars.
+Pro-Tip from Larry: Don't use a separator where margin would do. They're for cases where two related sections need a visible boundary, not for every gap between blocks.
 :::
 
 ## Usage
@@ -33,7 +32,7 @@ Pro-Tip from Larry: Use horizontal separators between sections and vertical ones
 ---
 :name: Separator Horizontal
 story-height: 75px
-story-id: ui-kit-separator--horizontal-separator
+story-id: ui-kit-atoms-separator--horizontal-separator
 ---
 ```vue-template
 <Separator />
@@ -44,7 +43,7 @@ story-id: ui-kit-separator--horizontal-separator
 ---
 :name: Separator Vertical
 story-height: 75px
-story-id: ui-kit-separator--vertical-separator
+story-id: ui-kit-atoms-separator--vertical-separator
 ---
 ```vue-template
 <Separator orientation="vertical" />
@@ -56,10 +55,11 @@ story-id: ui-kit-separator--vertical-separator
 ::features
 ---
 items:
-  - "Horizontal and vertical orientation"
-  - "Theme-aligned color and thickness"
-  - "Accessible with decorative role when non-interactive"
-  - "Consistent spacing for section division"
+  - "`orientation` of `'horizontal'` (default) or `'vertical'` covers section dividers and inline utility-row dividers from one component"
+  - "Emits semantic `<hr>` with `role=\"separator\"` and matching `aria-orientation`, keeping the divider announceable when relevant"
+  - "BEM modifier (`separator--{orientation}`) anchors per-orientation theme overrides for length, thickness, and color"
+  - "Token-driven line color updates across the storefront when brand palette tokens change, no per-divider edits"
+  - "Replaces ad-hoc bullet characters in breadcrumbs and utility rows, keeping chrome typography clean"
 ---
 ::
 

@@ -6,7 +6,7 @@ seo:
   description: A navigation bullets component
 sitemap:
   loc: /laioutr-ui/ui-kit/general/navigationbullets
-  lastmod: 2026-04-08
+  lastmod: 2026-05-13
   changefreq: monthly
   priority: 1.0
 
@@ -14,14 +14,15 @@ sitemap:
 
 ## Overview
 
-The Navigation Bullets component shows a row of bullet indicators so users can see their position in a carousel, stepper, or multi-step flow and jump to a specific step or slide.
+NavigationBullets shows a row of bullet indicators for carousels, steppers, and multi-step flows. Users see where they are and can jump to any step or slide by clicking the matching bullet.
+
+The bullets do not animate on initial mount; an `--animating` modifier gates the keyframes so the tick only fires when the user actually moves between slides.
 
 ## Key Business & UX Benefits
 
-- Shows progress and position so users know where they are in a flow.
-- Lets users jump to any step or slide with a single click. 
-- Keeps layouts clean with a compact, recognizable pattern.
-- Works with carousels and steppers for consistent navigation.
+- Showing total slide count and current position encourages shoppers to view every carousel item instead of stopping after the first.
+- Bullets are clickable jump targets, which is faster than swiping through long product carousels and lifts engagement on hero sliders.
+- Gated entry animation prevents the distracting tick on page load, keeping the first impression of campaign hero carousels calm.
 
 :::tip
 Pro-Tip from Larry: Use bullets with carousels so users see how many slides there are and can jump to one.
@@ -31,8 +32,8 @@ Pro-Tip from Larry: Use bullets with carousels so users see how many slides ther
 
 ::component-code
 ---
-:name: NavigationBullets
-story-id: ui-kit-navigationbullets--primary
+:name: LNavigationBullets
+story-id: ui-kit-molecules-navigationbullets--primary
 ---
 ::
 
@@ -41,10 +42,11 @@ story-id: ui-kit-navigationbullets--primary
 ::features
 ---
 items:
-  - "Bullet indicators for carousel or stepper position"
-  - "Clickable bullets to jump to a specific slide or step"
-  - "Active state for current position"
-  - "Theme-aligned styling for light and dark modes"
+  - "`count` plus `activeIndices` props drive the bullet row, supporting single-active carousels and multi-select stepper UIs from one component"
+  - "`@click` emits the clicked index, leaving slide selection in the parent so it stays in sync with Swiper or external state"
+  - "`useSurfaceTone()` picks the matching tone variant automatically, so bullets read on light, dark, and white chrome without manual swaps"
+  - "Animating modifier (`navigation-bullets__item--animating`) is gated to actual index changes, so bullets don't tick on initial mount"
+  - "Localized `aria-label` per bullet via `navigationBullets.navigateToItem`, keeping screen-reader output sensible in every market"
 ---
 ::
 

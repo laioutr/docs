@@ -1,6 +1,6 @@
 ---
 title: Select
-description: A dropdown select component for choosing a single option from a list.
+description: Dropdown select for choosing a single option from a predefined list.
 jiraIssueId: LUI-134
 links:
   - label: Figma
@@ -9,10 +9,10 @@ links:
     target: _blank
 seo:
   title: Select | Laioutr
-  description: A dropdown select component for choosing a single option from a list.
+  description: Dropdown select for choosing a single option from a predefined list.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/select
-  lastmod: 2026-04-08
+  lastmod: 2026-05-13
   changefreq: monthly
   priority: 1.0
 
@@ -20,32 +20,35 @@ sitemap:
 
 ## Overview
 
-The Select component provides a dropdown interface for choosing a single option from a predefined list. It renders a trigger button that opens a floating options panel with keyboard navigation support. Built with proper ARIA semantics, it's suitable for form fields where users must select exactly one value from a known set of options, such as country selection, sorting preferences, or category filters.
+Select renders a trigger button that opens a floating panel of options with keyboard navigation. Use it when the user must pick exactly one value from a known set: country, sort key, category filter, currency. For short, fully visible lists (three or four options), [`InputRadio`](/laioutr-ui/ui-kit/form/input-radio) usually reads better.
+
+Trigger styling lives on the nested `trigger` config rather than a top-level prop, so set the size with `:trigger="{ size: 's' }"`. Pass `prioritizePosition` to keep the dropdown anchored to a specific edge of the trigger.
 
 ## Key Business & UX Benefits
 
-- One control for single-choice from a list (country, sort, filter).
-- Keyboard navigation and ARIA keep it accessible.
-- Customizable trigger icon and text fit headers and forms.
-- Fits sort dropdowns, country selectors, and filter bars.
+- A single dropdown primitive covers country, sort, currency, and filter pickers, so every "choose one" surface in the product behaves the same way.
+- Keyboard navigation and typeahead are built in, which keeps power users (and accessibility audits) happy without per-screen tuning.
+- Position pinning prevents the floating panel from flipping over critical content, protecting visibility of the option list on dense layouts.
+- A single trigger styling contract keeps catalog tools and account screens visually coherent, reducing the bespoke select treatments that creep in over time.
 
 :::tip
-Pro-Tip from Larry: Use Select for sort and filters so users pick one option without leaving the page.
+Pro-Tip from Larry: Set the trigger size via `:trigger="{ size: 's' }"`.
 :::
 
 ## Usage
 
 ::component-code
 ---
-:name: Select
-story-height: 100px
-story-id: ui-kit-select--sort
+:name: LSelect
+story-height: 250px
+story-id: ui-kit-molecules-select--sort
 ---
 ```vue-template
-<Select
-  triggerIcon="actions/sort"
-  triggerText="Sort by"
-  modelValue="price"
+<LSelect
+  trigger-icon="actions/sort"
+  trigger-text="Sort by"
+  v-model="value"
+  :trigger="{ size: 's' }"
   :items="[
     { label: 'Price', value: 'price' },
     { label: 'Name', value: 'name' },
@@ -60,10 +63,12 @@ story-id: ui-kit-select--sort
 ::features
 ---
 items:
-  - "Dropdown for single selection from a list"
-  - "Customizable trigger icon and text"
-  - "Keyboard navigation and ARIA support"
-  - "Suitable for sort, country, and filter forms"
+  - "`items` accepts `{ label, value }` objects, so country, sort, currency, and filter pickers all share one data shape"
+  - "Nested `trigger` config (e.g. `:trigger=\"{ size: 's' }\"`) sets trigger styling without flooding the top-level prop list"
+  - "`triggerIcon` and `triggerText` configure the resting state separately from the selected value, useful for 'Sort by' patterns"
+  - "`prioritizePosition` anchors the dropdown to a specific edge of the trigger, so panels don't flip over critical content"
+  - "Built on reka-ui, so keyboard navigation, typeahead, and focus return ship with the primitive"
+  - "v-model holds the option's `value`, so consumers store a plain string instead of the option object"
 ---
 ::
 

@@ -1,6 +1,6 @@
 ---
 title: Switch
-description: Toggle switch component for binary on/off choices in forms and settings.
+description: Toggle switch for binary on/off choices in forms and settings.
 jiraIssueId: LUI-4
 links:
   - label: Figma
@@ -9,10 +9,10 @@ links:
     target: _blank
 seo:
   title: Switch | Laioutr
-  description: Toggle switch component for binary on/off choices in forms and settings.
+  description: Toggle switch for binary on/off choices in forms and settings.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/switch
-  lastmod: 2026-04-08
+  lastmod: 2026-05-13
   changefreq: monthly
   priority: 1.0
 
@@ -20,17 +20,16 @@ sitemap:
 
 ## Overview
 
-Enables users to compare monthly versus annual pricing options easily. Toggle the entire pricing page between billing views. Display strikethrough prices when annual billing shows discounts. Persists billing preference in localStorage so it remains selected during navigation. Communicates savings visually to encourage annual subscription commitments.
+Switch is a binary on/off toggle for forms, settings, and inline preferences. Wrap it in `<LField>` to pick up shared `disabled`, `required`, and error state without prop-drilling. Pair `invalid` with `Field`'s `errorMessage` for accessible error styling.
 
 ## Key Business & UX Benefits
 
-- Lets users switch between monthly and annual billing in one place.
-- Savings display encourages annual commitment without pressure.
-- Persisted preference keeps the choice across navigation.
-- Small and medium sizes fit headers and pricing blocks.
+- Clear on/off affordance signals that a change applies immediately, which is what users expect for preferences and notification settings.
+- Field integration covers required, disabled, and error states without extra wiring, so toggles in checkout (gift wrap, paper-free billing) stay accessible.
+- Consistent sizing (s/m) and motion make every Switch on the site feel like the same control, which reduces the learning curve across account, settings, and forms.
 
 :::tip
-Pro-Tip from Larry: Show savings on the annual option so users see the benefit at a glance.
+Pro-Tip from Larry: Use Switch for state that takes effect immediately (a setting). For confirm-then-apply choices in a form, reach for Checkbox.
 :::
 
 ## Usage
@@ -39,25 +38,25 @@ Pro-Tip from Larry: Show savings on the annual option so users see the benefit a
 
 ::component-code
 ---
-:name: LuiSwitch
+:name: LSwitch
 :story-height: 75px
-story-id: ui-kit-switch--small
+story-id: ui-kit-atoms-switch--small
 title: Switch Small
 ---
 ```vue-template
-<LuiSwitch />
+<LSwitch v-model="enabled" size="s" />
 ```
 ::
 
 ::component-code
 ---
-:name: LuiSwitch
+:name: LSwitch
 :story-height: 75px
-story-id: ui-kit-switch--medium
+story-id: ui-kit-atoms-switch--medium
 title: Switch Medium
 ---
 ```vue-template
-<LuiSwitch />
+<LSwitch v-model="enabled" size="m" />
 ```
 ::
 
@@ -65,13 +64,13 @@ title: Switch Medium
 
 ::component-code
 ---
-:name: LuiSwitch
+:name: LSwitch
 :story-height: 75px
-story-id: ui-kit-switch--checked
+story-id: ui-kit-atoms-switch--checked
 title: Switch checked
 ---
 ```vue-template
-<LuiSwitch />
+<LSwitch v-model="enabled" />
 ```
 ::
 
@@ -79,25 +78,25 @@ title: Switch checked
 
 ::component-code
 ---
-:name: LuiSwitch
+:name: LSwitch
 :story-height: 75px
-story-id: ui-kit-switch--disabled
+story-id: ui-kit-atoms-switch--disabled
 title: Switch Unchecked Disabled
 ---
 ```vue-template
-<LuiSwitch />
+<LSwitch v-model="enabled" disabled />
 ```
 ::
 
 ::component-code
 ---
-:name: LuiSwitch
+:name: LSwitch
 :story-height: 75px
-story-id: ui-kit-switch--disabled-checked
+story-id: ui-kit-atoms-switch--disabled-checked
 title: Switch Checked Disabled
 ---
 ```vue-template
-<LuiSwitch />
+<LSwitch v-model="enabled" disabled />
 ```
 ::
 
@@ -106,10 +105,11 @@ title: Switch Checked Disabled
 ::features
 ---
 items:
-  - "Toggle between monthly and annual billing cycles"
-  - "Display savings percentage or amount for annual billing"
-  - "Synchronized update of all pricing cards when toggled"
-  - "Persisted preference via localStorage using useStorage"
+  - "Two sizes ('s', 'm') keep the toggle in proportion with form, settings, and inline preference rows"
+  - "Boolean v-model with checked/unchecked plus disabled and `:focus-visible` states, so the control fits accessibility audits without extra wiring"
+  - "Inherits `<LField>` `disabled`, `required`, and `invalid` state so wrapped switches pick up form chrome automatically"
+  - "Used internally by `HighlightToggle`, so promotional toggles stay consistent with regular preference switches"
+  - "Plain semantic toggle: pairs cleanly with Label for click-to-toggle association on the entire row"
 ---
 ::
 

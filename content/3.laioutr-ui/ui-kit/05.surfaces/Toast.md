@@ -1,6 +1,6 @@
 ---
 title: Toast
-description: Non-intrusive toast notification component for displaying transient messages with auto-dismiss and queue management.
+description: Non-intrusive notification component for transient messages with auto-dismiss and queue management.
 jiraIssueId: LUI-106
 links:
   - label: Figma
@@ -12,7 +12,7 @@ seo:
   description: Non-intrusive toast notification component for displaying transient messages with auto-dismiss and queue management.
 sitemap:
   loc: /laioutr-ui/ui-kit/surfaces/toast
-  lastmod: 2026-04-08
+  lastmod: 2026-05-13
   changefreq: monthly
   priority: 1.0
 
@@ -20,38 +20,42 @@ sitemap:
 
 ## Overview
 
-Delivers lightweight, non-blocking notifications about application events. Uses global state store pattern with createGlobalState for centralized queue management, enabling programmatic triggering from anywhere. Supports rich content through HTML or component slots. Includes ARIA roles (status/alert), aria-live regions, and keyboard navigation for accessibility. Transition animations match positioning direction with smooth 200-300ms timing.
+Toast surfaces lightweight, non-blocking feedback (success, warning, error, neutral) without interrupting the flow. A global state store created with `createGlobalState` owns the queue, so any part of the app can trigger a toast without prop drilling. Each toast auto-dismisses on a timer with a progress bar that pauses on hover.
+
+Toasts ship the accessibility pieces you would expect: `role="status"` or `role="alert"` depending on severity, an `aria-live` region, and keyboard access for dismissal.
 
 ## Key Business & UX Benefits
 
-- Surfaces success, warning, or error feedback without blocking the flow.
-- Auto-dismiss and progress bar keep notifications from piling up.
-- Stackable toasts with queue limit keep the UI from getting noisy.
-- Accessible with live regions and keyboard so everyone gets the message.
-
-:::tip
-Pro-Tip from Larry: Use semantic variants (success, warning, error) so users understand the message at a glance.
-:::
+- Non-blocking feedback lets shoppers continue browsing after "Added to cart" or "Saved for later", protecting session length and AOV.
+- Global queue management prevents toast pile-ups when several actions resolve at once, so the screen never turns into an alert dump.
+- Hover-to-pause and progress-bar timing give users a real chance to read longer messages, which reduces "wait, what just happened" support tickets.
+- ARIA live regions and severity-aware roles route the right message to screen readers, keeping the experience inclusive without extra dev work.
 
 ## Usage
 
 ::component-code
 ---
-:name: Toast
+:name: LToast
 story-height: 200px
-story-id: ui-kit-toaster--neutral
+story-id: ui-kit-organisms-toaster--neutral
 ---
 ::
+
+```vue-template
+<LToast :open="visible" variant="success">Saved!</LToast>
+```
 
 ## Feature List
 
 ::features
 ---
 items:
-  - "Multiple semantic variants: neutral, success, warning, error with variant-specific icons"
-  - "Auto-dismiss with progress bar and pause-on-hover"
-  - "Stackable notifications with optional queue limit"
-  - "Mobile-responsive positioning and spacing adaptations"
+  - "Four `variant` values ('neutral', 'success', 'warning', 'error') drive role, aria-live, icon, and gradient color tokens together"
+  - "`role` and `aria-live` switch on severity ('error' uses `role=\"alert\"` and assertive; others use `role=\"status\"` and polite)"
+  - "Built-in progress bar tied to `duration` (default 5000ms) with per-variant gradient tokens (`--toast-{variant}-progress-timer-gradient-color-{1,2}`)"
+  - "`ctas` array (text plus typed `ToastAwareButtonVariant` plus `href`) renders inline action buttons resolved through `theme.toastAwareButtonVariants`"
+  - "Six `position` values cover top-left through bottom-right placements, configurable per toast"
+  - "Two `orientation` values ('vertical', 'horizontal') swap the title-subline-action layout for compact and stacked toasts"
 ---
 ::
 
