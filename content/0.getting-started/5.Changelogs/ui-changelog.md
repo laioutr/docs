@@ -6,13 +6,46 @@ seo:
   description: Changelog for Laioutr UI and UI Kit following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/ui-changelog
-  lastmod: 2026-05-12
+  lastmod: 2026-05-21
   changefreq: monthly
   priority: 1.0
 
 ---
 
 All notable changes to **Laioutr UI**, **UI Kit**, and related component libraries will be documented in this file.
+
+## [2.2.0]
+
+### Added
+
+- **UI App**: `SectionBannerBasic`, `SectionBannerShowcase`, and `SectionBannerIntegrated` now expose `margin` and `padding` in Design → Layout (via the shared `marginField` / `paddingField` presets) and `background` + `customBackground` in Design → Styling. Editors can pick `none` / `pale` / `solid` / `default` / `custom`. Each section now wraps its banner in a `<Backdrop>` that forwards the resolved background, block margin, inner padding, and container style — replacing the legacy `class="{ container: ... }"` workaround. Mirrors the `SectionContainer` background-handling pattern.
+- **UI App**: Studio block-picker previews (`previewSrc`) added for 31 blocks plus 2 refreshes — including `BlockAccordion`, `BlockBannerBasic` / `BlockBannerIntegrated` / `BlockBannerShowcase`, `BlockCategoryCard`, `BlockFilterBar`, `BlockFooterMenu`, `BlockHeroSliderSlide`, `BlockIframe`, `BlockMegaMenu`, `BlockMenuBasic`, `BlockMenuSideBySide`, `BlockMobileMenuBasic` / `BlockMobileMenuShop`, `BlockPagination`, `BlockPersonaQuote`, `BlockPlanCard`, the `BlockProductDetail*` family, `BlockProductsListing`, `BlockSocialShare`, `BlockText`, and `BlockUspBannerItem`. Editors browsing the block picker now see a representative illustration for each placeable element.
+- **UI App**: New per-CTA `size` selector (`xs` / `s` / `m` / `l`, default `m`) across every section and block that surfaces a button — exposed via `buttonFields` and a new `buttonSizeOptions` shared field (mirrors `buttonVariantOptions`). The banner family, product/category/content sliders, hero slider, header, page-not-found, plan-card slider, and the corresponding standalone blocks all respect editor-chosen sizes. `PlanCard` exposes new optional `ctaVariant` / `ctaSize` props; `SwiperChrome.buttons[]` accepts `size?: ButtonSize`.
+- **UI App**: Heading and subline HTML-element selectors now live directly next to the field on every section and block with configurable text, via the existing `as: 'style'` decorator popup. Newly available on 13 sections (`SectionBannerBasic`, `SectionBannerShowcase`, `SectionBannerIntegrated`, `SectionBrandHero`, `SectionCategoryCardSlider`, `SectionCategoryCardGrid`, `SectionContentGrid`, `SectionContentSlider`, `SectionEditorialGrid`, `SectionLogoGrid`, `SectionLogoSlider`, `SectionNewsletterRegistration`, `SectionPageHero`, `SectionPageNotFound`) and 7 blocks (`BlockBannerBasic`, `BlockBannerShowcase`, `BlockBannerIntegrated`, `BlockCard`, `BlockHeroSliderSlide`, `BlockProductDetailVariantSelectionConfigurator`, `BlockText`). Heading options: `H1`–`H6` / `DIV`; Subline options: `P` / `H1`–`H6` / `DIV`. Section defaults: heading → `h2`, subline → `div`. Block defaults: heading → `h3`, subline → `h4`.
+- **UI App**: `BlockHeroSliderSlide` exposes per-element text-shadow controls (`captionVariant.textShadow`, `headingStyle.textShadow`, `sublineStyle.textShadow`) with `none` / `soft` / `strong` options (default `none`), plus per-slide heading/subline size controls (`headingStyle.size`, `sublineStyle.size`) using the canonical `sizeOptions` S/M/L. Existing slides render unchanged. `SectionHeroSlider` forwards the values to `HeroSlide`'s new `headingSize` / `sublineSize` / heading/subline `textShadow` props.
+- **UI App**: `SectionFooter` exposes new Design → Layout fields — **Logo Position** (`top` / `bottom`, default `top`) and **Logo Alignment** (`left` / `center` / `right`, default `left`, gated by `if: logoPosition === 'bottom'`). Defaults preserve current rendering.
+- **UI App**: New Section Background field-pair (`sectionBackground` + `customSectionBackground`) on 17 sections — `SectionCategoryCardGrid`, `SectionCategoryCardSlider`, `SectionContainer`, `SectionContentGrid`, `SectionContentSlider`, `SectionFooter`, `SectionLogoGrid`, `SectionLogoSlider`, `SectionMediaText`, `SectionNewsletterRegistration`, `SectionPageHero`, `SectionPersonaQuoteSlider`, `SectionPlanComparisonTable`, `SectionProductListing`, `SectionProductReviews`, `SectionSearchResultHero`, `SectionUspBanner`. Paints the edge-to-edge band surrounding the boxed container, visible only when `containerStyle === 'boxed'`. Exported as `sectionBackgroundField` / `customSectionBackgroundField` / `sectionBackgroundFields` from `shared-fields/sectionBackground.ts`.
+- **UI App**: `BlockButton` gains a `width` toggle (`hug` / `fill`, default `hug`) controlling whether the button hugs its content or fills the container.
+- **UI App**: `SectionContentSlider` slot now accepts the three banner blocks (`BlockBannerBasic`, `BlockBannerIntegrated`, `BlockBannerShowcase`) and `BlockText` alongside `BlockCard` and `BlockMedia` — editors can place full banners or text blocks between cards for category teasers, promotional slides, and editorial copy.
+- **UI App**: `SectionProductSlider` exposes the standard `background` and `customBackground` controls in Design → Styling — preset (`none` / `pale` / `solid` / `default`) or custom color, applied via the section's `Backdrop`.
+- **UI App**: `SectionNewsletterRegistration` gains `caption` (text) and `body` (richtext) Content-panel fields matching `BlockText`. `caption` lands above `heading`; `body` lands between `subline` and the media area.
+
+### Changed
+
+- **UI Kit & UI**: `TextGroup` prop rename `headingTag` → `headingAs`, `sublineTag` → `sublineAs`; type rename `TextGroupHeadingTag` → `TextGroupHeadingAs`, `TextGroupSublineTag` → `TextGroupSublineAs`. `TextGroupSublineAs` widened to include `'h1'` so editors can override a subline to a page-level heading when SEO requires it. `SwiperChrome` and `Card` follow the same prop rename and forward to their internal `TextGroup`. `AlertDialog` gains optional `titleAs` / `descriptionAs` props (forwarded from `DialogStore.DialogOptions`). External consumers that import `TextGroupHeadingTag` / `TextGroupSublineTag` or bind `:heading-tag` / `:subline-tag` directly must update to the new names.
+- **UI App**: `HeaderBasicMenu` renamed to `MenuBasic` and moved out of the `HeaderBasic/` folder into its own `MenuBasic/` folder, since the component was a generic basic navigation menu used by both `SectionHeaderBasic` and `SectionHeaderShop`. Type rename `HeaderProps` → `MenuBasicProps`, `MenuItem` → `MenuBasicItem`; CSS class `.header-basic-menu` → `.menu-basic`. The wrapping block `BlockMenuHeaderBasic` → `BlockMenuBasic`; Studio label `'Basic Header Menu'` → `'Basic Menu'`. **Stored project configurations that reference this block by name need a one-time migration**.
+- **UI App**: **Breaking** — `BlockButton`'s single `icon` field is replaced by `iconLeft` and `iconRight` (both optional). Stored configs using the old `icon` key must migrate to `iconRight` to preserve the original right-aligned visual. Schema is reorganized into Content (text, link, iconLeft, iconRight) and Design (variant, size, width) panels.
+- **UI App**: **Breaking** — `SectionNewsletterRegistration`'s static `media` schema field (`type: 'media'`) is replaced with a `media` block-slot accepting `BlockMedia`, `BlockText`, `BlockCard`, or `BlockButton`. Stored configs that used the old `media: { ... }` value will not auto-migrate. Adopters should drop the legacy image fallback (was `theme.image('newsletterRegistrationTeaser')`) — if no block is placed, the content side spans the full section width.
+- **UI App**: `SectionProductSlider` and `SectionProductSliderShowcase` lose their dedicated "SEO" fieldset; `headingElement` is now stored at `headingStyle.element` (nested decorator path) instead of top-level `headingElement`. **Action required**: anyone with stored `headingElement` values on these two sections must re-pick the heading element in Studio once.
+- **UI App**: Studio `label`, `description`, and `tags` rewritten for all 36 sections and all 37 blocks to read naturally to UX designers and e-commerce managers — removed implementation jargon ("renders", "binds", "configurator/definition", "place blocks manually"), filled missing descriptions and tags, and gave several blocks more meaningful labels (e.g. `BlockIframe` → "Embedded Page", `BlockMedia` → "Image or Video", `BlockProductDetailCartButton` → "Add to Cart", `BlockProductDetailStockInfo` → "Stock Availability", `BlockSortModes` → "Sort Selector", `BlockText` → "Text Block"). Em-dashes in descriptions normalised to plain sentences. Schema, components, slots, and `previewSrc` unchanged — no runtime behavior change.
+
+### Fixed
+
+- **UI App**: `SectionMediaText` custom background now renders. The section was passing the resolved CSS color string to a non-existent `containerBackground` prop on `<MediaText>` while keeping `background="none"`, so when an editor picked a custom color nothing rendered. The custom color is now resolved into `background` directly via `Backdrop`'s `BackdropBackground = 'none' | 'pale' | 'solid' | 'default' | (string & {})`. Preset values keep working unchanged.
+
+### Removed
+
+- **UI App**: Removed the `strawberry-field` theme.
 
 ## [1.35.0]
 

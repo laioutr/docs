@@ -6,13 +6,38 @@ seo:
   description: Changelog for the Laioutr frontend product following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/frontend-changelog
-  lastmod: 2026-04-15
+  lastmod: 2026-05-21
   changefreq: monthly
   priority: 1.0
 
 ---
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
+
+## [0.30.1]
+
+### Added
+
+- **Frontend Core**: New `laioutr:beforeModuleRegister` Nuxt hook fires before the ui-kit module registers each upstream module, with `{ name, key, options }`. Consumers can mutate `options` to override defaults applied by `registerModule`.
+
+### Fixed
+
+- **Frontend Core**: Section `slots` prop now retains structural typing of block props at consumer call sites. The previous wrapper used deep `SimplifyDeep`, which past a certain schema depth tripped TypeScript's 50-level instantiation limit and surfaced as `TS2589: Type instantiation is excessively deep and possibly infinite` in sections that mapped over their slot blocks. Bounded `Simplify` is now applied at the slot-map / block / `props` boundaries. Sections that previously needed an `as unknown as ReadonlyArray<{ props: Record<string, any> }>` cast on `props.slots.*` can drop the cast and access `block.props.<field>` with full type inference. No runtime or API change.
+
+## [0.29.0]
+
+### Added
+
+- **Frontend Core**: 8 missing discriminated event types added to `tracking.types.ts` — `RemoveFromCart`, `AddToWishlist`, `RemoveFromWishlist`, `ViewCart`, `AddShippingInfo`, `AddPaymentInfo`, `Login`, `SignUp`. Trackers in `trackingActions.ts` now construct the correct types instead of falling through to mismatched ones (e.g. `ViewItem` for `ADD_TO_WISHLIST`), which previously broke the `Analytics` discriminated union silently.
+- **Frontend Core**: Re-exported the `DefinitionToProps` type from `#frontend/types` so consumers can derive prop types from a section/block definition without reaching into internal paths.
+
+### Fixed
+
+- **Frontend Core**: Reordered the `undefined` check in `validateI18nConfig` to happen before indexing `market.domains`. `FieldDefinitionToProp` generic constraint widened from `StudioFieldDefinition` to `BaseFieldDefinitionBase` so the type-parameter chain is consistent with `FieldDefinitionToType` and `FindFieldWithName`.
+
+### Removed
+
+- **Frontend Core**: Removed the unused `InvisibleBlock` component. It had no source consumers — only auto-generated `.nuxt/components.d.ts` references that regenerate on the next build. Its placeholder UI was leftover from an earlier editor experiment and was not used anywhere in the runtime tree.
 
 ## [0.28.14]
 
