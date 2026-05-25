@@ -6,13 +6,38 @@ seo:
   description: Changelog for Laioutr UI and UI Kit following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/ui-changelog
-  lastmod: 2026-05-21
+  lastmod: 2026-05-25
   changefreq: monthly
   priority: 1.0
 
 ---
 
 All notable changes to **Laioutr UI**, **UI Kit**, and related component libraries will be documented in this file.
+
+## [2.2.1]
+
+### Added
+
+- **UI Kit & UI App**: New `Sizer` primitive in `ui-kit` and matching `sizingField` shared schema in `ui-app`. Banner blocks (`BlockBannerBasic`, `BlockBannerIntegrated`, `BlockBannerShowcase`) plus `BlockMedia` and `BlockIframe` now route outer-box sizing through `Sizer` instead of bespoke per-block fields. Banner blocks also gain vertical content alignment (2D on Basic, vertical-only on Integrated). `Placeholder` accepts an optional `text` prop.
+- **UI App**: Caption styling on `BannerBasic` — plain/boxed variant, colour scheme, and text-shadow controls, replacing the previous colour-only override. New `captionVariantField` shared field in `@laioutr-app/ui` bundles the controls into a single sidebar group on `BlockBannerBasic` and `SectionProductSliderShowcase`.
+
+### Changed
+
+- **UI**: `Container` no longer strips border-radius from CTA banners in full-width containers — banners now own their own radius.
+- **UI**: **Breaking** — `BannerBasic` replaces `captionColor: string` with `captionVariant: Omit<CaptionFlagProps, 'text'>`. Migrate `<BannerBasic :caption="caption" caption-color="#ff0000" />` to `<BannerBasic :caption="caption" :caption-variant="{ variant: 'plain', textShadow: 'none' }" />`.
+- **UI App**: **Breaking** — `SectionProductSliderShowcase` schema replaces `captionStyle.color` with `captionVariant`. Existing pages with values stored under `captionStyle` silently drop them on next save — re-author the caption styling via the new Variant panel in Studio.
+- **UI**: **Breaking** — `BannerBasic` no longer accepts `sizing` / `aspectRatio` props. Wrap in `<Sizer>` in the consuming Block.
+- **UI Kit**: **Breaking** — `MediaPreview` no longer accepts `aspectRatio`, `height`, or `orientation`. Wrap in `<Sizer :sizing="…">` (or any parent that provides a definite height) and let `MediaPreview` fill it. Portrait-orientation behavior is now done by typing a portrait `aspect-ratio` directly in the schema (e.g. `3/4`).
+- **UI App**: **Breaking** — `BlockMedia` drops `aspectRatio`, `height`, and `orientation` schema fields; `BlockIframe` drops `desktopHeight` and `mobileHeight`. Existing pages with values stored under these names silently drop them on next save — author the desired height via the new `sizing` field in Studio.
+
+### Fixed
+
+- **UI**: `ProductSliderShowcase` padding and width — slider no longer reserves bleed padding on the wrapper (relied on full-bleed parent), banner respects its container, and the slider fills the remaining row width on desktop.
+- **UI Kit**: Fixed `SwiperChrome` mobile navigation positioning.
+
+### Removed
+
+- **UI Kit**: **Breaking** — `Iframe` component removed from `@laioutr-core/ui-kit`. Consumers wrapped it for a single iframe with fixed mobile/desktop heights — inline an `<iframe class="…" :src :title />` directly and let `Sizer` (in your Block) drive the height.
 
 ## [2.2.0]
 
