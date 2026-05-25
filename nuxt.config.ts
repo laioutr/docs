@@ -60,6 +60,10 @@ export default defineNuxtConfig({
     indexable: process.env.NODE_ENV === 'production',
   },
 
+  routeRules: {
+    '/offering/compliance/fair-usage-policy': { redirect: { to: '/offering/policies/fair-usage-policy', statusCode: 301 } },
+  },
+
   sitemap: {
     sources: ['/__sitemap__/nuxt-content-urls.json'],
   },
