@@ -6,7 +6,7 @@ seo:
   description: Changelog for @laioutr-core/orchestr following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/orchestr-changelog
-  lastmod: 2026-04-15
+  lastmod: 2026-05-27
   changefreq: monthly
   priority: 1.0
 
@@ -30,6 +30,12 @@ All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data
 ### Added
 
 - **Orchestr**: Exported `OrchestrBuilder` types so apps can re-export their builders with correct TypeScript types.
+
+## [0.28.9]
+
+### Fixed
+
+- **Orchestr**: Fixed `useRoute()` returning stale route data in studio preview. Preview mode has no `<NuxtPage>`, so the `page:finish` hook that syncs Nuxt's internal route ref never fired. Preview now emits `page:finish` after each navigation to keep `useRoute()` current.
 
 ## [0.28.7]
 
