@@ -3,6 +3,7 @@ import { stringify } from 'minimark/stringify';
 import { queryCollection } from '@nuxt/content/server';
 import type { Collections } from '@nuxt/content';
 import { transformMdcBody } from '../../utils/llms/transform-mdc';
+import { injectPlaygroundSection } from '../../utils/llms/inject-playground';
 
 // Custom pre handler that fixes minimark bug: missing space between language and meta
 // Without this, "```ts twoslash" becomes "```tstwoslash"
@@ -30,6 +31,9 @@ export default eventHandler(async (event) => {
 
   // Transform MDC component nodes before stringification
   await transformMdcBody(page.body);
+
+  // Surface playground frontmatter (Storybook story) — it only renders client-side otherwise
+  injectPlaygroundSection(page.body, (page as any).playground);
 
   // Add title and description to the top if missing
   if (page.body.value[0]?.[0] !== 'h1') {

@@ -57,10 +57,13 @@ async function resolveComponent(tag: string, props: Record<string, unknown>, chi
     }
     case 'component-meta': {
       try {
-        const componentMeta = await import('@laioutr-core/ui-component-meta').then((m) => m.default);
-        const data = componentMeta[props.name as string];
+        const componentMeta = await import('@laioutr-core/ui-component-meta').then(
+          (m) => m.default as Record<string, unknown>,
+        );
+        const name = props.name as string;
+        const data = componentMeta[name] ?? componentMeta[`L${name}`];
         if (!data) return null;
-        return renderUiComponentMeta(props.name as string, data);
+        return renderUiComponentMeta(name, data);
       } catch {
         return null;
       }
