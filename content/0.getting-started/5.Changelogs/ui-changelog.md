@@ -6,13 +6,24 @@ seo:
   description: Changelog for Laioutr UI and UI Kit following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/ui-changelog
-  lastmod: 2026-05-26
+  lastmod: 2026-05-28
   changefreq: monthly
   priority: 1.0
 
 ---
 
 All notable changes to **Laioutr UI**, **UI Kit**, and related component libraries will be documented in this file.
+
+## [2.2.2]
+
+### Added
+
+- **UI App**: New `backgroundAwareButtonFields` shared field exposes three `Adaptive *` CTA-variant options alongside the existing literal `ButtonVariant` options. Every section and block with a CTA now uses this field — banner sections, the sliders, `BlockButton`, `BlockCard`, `BlockText`, and now also the header, footer email button, 404 page, and pricing-plan card, whose CTAs newly adapt to their surrounding surface tone. Editors opt into per-surface remapping by picking an `Adaptive *` option.
+
+### Changed
+
+- **UI**: **Breaking** — `BackgroundAwareButton`'s adaptive lookup variants renamed to `adaptive-primary` / `adaptive-secondary` / `adaptive-ghost` (previously `primary` / `secondary` / `ghost`), so they no longer shadow `Button`'s literal `primary` / `secondary` variants. The pass-through variants (`tertiary`, `secondary-white`, `ghost-*`, `glass-*`, `subtle`, `info`, `positive`, `danger`, `close-*`) are unchanged. Custom themes overriding `backgroundAwareButtons` in `defineTheme` / `extendTheme` need their map keys renamed accordingly (e.g. `light:light:primary` → `light:light:adaptive-primary`, same for `secondary` and `ghost` across all `light|dark` × `light|dark|bright` combos).
+- **UI App**: **Breaking** — Stored Studio CTAs where an editor previously picked "Primary" or "Secondary" will, after upgrade, render as the literal Button variant on the storefront — the per-surface remap is no longer applied unless the editor re-selects an `Adaptive *` option.
 
 ## [2.2.1]
 

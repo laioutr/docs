@@ -6,13 +6,19 @@ seo:
   description: Changelog for the Laioutr frontend product following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/frontend-changelog
-  lastmod: 2026-05-21
+  lastmod: 2026-05-28
   changefreq: monthly
   priority: 1.0
 
 ---
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
+
+## [0.30.2]
+
+### Added
+
+- **Frontend Core**: URL redirects configured for the project are now honored at runtime. Visiting a redirect source path — exact match or `:param` pattern — sends the user to the configured target, with `isPermanent: true` returning 301 and `isPermanent: false` returning 302. Works for direct hits, hard reloads, and SPA navigations via `<NuxtLink>` or `router.push`, including on storefronts that define a custom `core/404` page. Query strings are preserved; targets can be absolute URLs for external redirects.
 
 ## [0.30.1]
 
