@@ -1,6 +1,11 @@
 ---
 title: Dropdown Menu
 description: Dropdown menu component with custom trigger, selectable items, and active selection indicator.
+playground:
+  name: DropdownMenu
+  base: ui-kit-molecules-dropdownmenu
+  defaultStory: has-indicator
+  height: 460px
 jiraIssueId: LUI-81
 links:
   - label: Figma

@@ -1,6 +1,11 @@
 ---
 title: Navigation Bullets
 description: A navigation bullets component
+playground:
+  name: NavigationBullets
+  base: ui-kit-molecules-navigationbullets
+  defaultStory: primary
+  height: 460px
 seo:
   title: Navigation Bullets | Laioutr
   description: A navigation bullets component
@@ -27,15 +32,6 @@ The bullets do not animate on initial mount; an `--animating` modifier gates the
 :::tip
 Pro-Tip from Larry: Use bullets with carousels so users see how many slides there are and can jump to one.
 :::
-
-## Usage
-
-::component-code
----
-:name: LNavigationBullets
-story-id: ui-kit-molecules-navigationbullets--primary
----
-::
 
 ## Feature List
 

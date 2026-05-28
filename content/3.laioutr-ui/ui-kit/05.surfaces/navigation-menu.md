@@ -1,6 +1,11 @@
 ---
 title: Navigation Menu
 description: Compound navigation primitive with text-link triggers, content columns, headlines, separators, and an optional logo or icon item.
+playground:
+  name: NavigationMenu
+  base: ui-kit-organisms-navigationmenu
+  defaultStory: single-text-dark
+  height: 460px
 seo:
   title: Navigation Menu | Laioutr
   description: Compound navigation primitive with content columns and headlines.

@@ -1,6 +1,11 @@
 ---
 title: Swatch Summary
 description: Compact swatch summary for product tiles with overflow indicator.
+playground:
+  name: SwatchSummary
+  base: ui-kit-molecules-swatchsummary
+  defaultStory: default
+  height: 460px
 seo:
   title: Swatch Summary | Laioutr
   description: Compact swatch summary for product tiles.
@@ -23,20 +28,6 @@ For the underlying single-color primitive, see [`Swatch`](/laioutr-ui/ui-kit/gen
 - Overflow indicator means a product with twenty colors still fits neatly inside a tile without breaking grid alignment.
 - Configurable visible count lets merchandising tune density per breakpoint without bespoke styling on each listing variant.
 
-## Usage
-
-::component-code
----
-:name: LSwatchSummary
-:story-height: 200px
-story-id: ui-kit-molecules-swatchsummary--default
-title: SwatchSummary Default
----
-```vue-template
-<SwatchSummary :swatches="product.colorSwatches" :limit="4" />
-```
-::
-
 ## Feature List
 
 ::features
@@ -49,7 +40,6 @@ items:
   - "Overflow indicator keeps grid alignment clean on products with 20+ variants, where listing layouts otherwise break"
 ---
 ::
-
 
 ## API Reference
 

@@ -1,6 +1,11 @@
 ---
 title: Amount Pill
 description: Compact numeric pill for cart counts, notification badges, and inline counters.
+playground:
+  name: AmountPill
+  base: ui-kit-atoms-amountpill
+  defaultStory: small-number
+  height: 460px
 seo:
   title: Amount Pill | Laioutr
   description: Compact numeric pill for cart counts and notification badges.
@@ -21,20 +26,6 @@ sitemap:
 - Three named variants align the pill with filter chips, cart badges, and variant-selection counters without per-call CSS.
 - One small primitive covers cart badges, inbox counts, and filter tags, so chrome reads consistently across the storefront.
 
-## Usage
-
-::component-code
----
-:name: LAmountPill
-:story-height: 200px
-story-id: ui-kit-atoms-amountpill--small-number
-title: AmountPill Default
----
-```vue-template
-<AmountPill :amount="cartCount" />
-```
-::
-
 ## Feature List
 
 ::features
@@ -47,7 +38,6 @@ items:
   - "BEM root class (`amount-pill--{variant}`) exposes a per-pill theming hook for chrome overrides"
 ---
 ::
-
 
 ## API Reference
 

@@ -1,6 +1,11 @@
 ---
 title: Tabs
 description: Reka-UI-backed tab compound with accessible tab list and panels.
+playground:
+  name: Tabs
+  base: ui-kit-molecules-tabs
+  defaultStory: default
+  height: 460px
 seo:
   title: Tabs | Laioutr
   description: Reka-UI-backed tabs primitive.
@@ -22,27 +27,6 @@ sitemap:
 - Default-value support makes deep-linking tabs straightforward, so marketing can drive traffic to a specific section (reviews, shipping) from email and ads.
 - Lazy panel content keeps initial render light, protecting Core Web Vitals on PDP and other tab-heavy pages.
 
-## Usage
-
-::component-code
----
-:name: LTabs
-:story-height: 400px
-story-id: ui-kit-molecules-tabs--default
-title: Tabs Default
----
-```vue-template
-<Tabs default-value="overview">
-    <TabsList>
-      <TabsTrigger value="overview">Overview</TabsTrigger>
-      <TabsTrigger value="reviews">Reviews</TabsTrigger>
-    </TabsList>
-    <TabsContent value="overview">Overview content</TabsContent>
-    <TabsContent value="reviews">Reviews content</TabsContent>
-  </Tabs>
-```
-::
-
 ## Feature List
 
 ::features
@@ -55,7 +39,6 @@ items:
   - "Four-part composition (`Tabs`, `TabsList`, `TabsTrigger`, `TabsContent`) keeps the structure explicit and lazy-renders inactive panels"
 ---
 ::
-
 
 ## API Reference
 

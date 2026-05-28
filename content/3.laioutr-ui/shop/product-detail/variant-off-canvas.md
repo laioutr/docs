@@ -1,6 +1,11 @@
 ---
 title: Variant Off Canvas
 description: Off-canvas sheet for multi-attribute variant selection.
+playground:
+  name: VariantOffCanvas
+  base: ui-features-variantoffcanvas
+  defaultStory: default
+  height: 460px
 seo:
   title: Variant Off Canvas | Laioutr
   description: Off-canvas sheet for multi-attribute variant selection.
@@ -25,26 +30,6 @@ Auto-import tag: `<LVariantOffCanvas>`.
 - Full-grid presentation makes variant trade-offs visible at once, so shoppers see "this color isn't in your size" before they hit add-to-cart.
 - Off-canvas pattern keeps shoppers on the PDP throughout the picking flow, avoiding the conversion drop of a redirect to a configuration page.
 - Touch-friendly sheet sized for mobile keeps multi-dimension picking workable on the device where most commerce traffic now lands.
-
-## Usage
-
-::component-code
----
-:name: LVariantOffCanvas
-:story-height: 400px
-story-id: ui-features-variantoffcanvas--default
-title: VariantOffCanvas Default
----
-```vue-template
-<VariantOffCanvas
-  v-model:open="open"
-  :grouped-variants="groupedVariants"
-  :group-by="groupBy"
-  :selected-variant-id="selectedVariantId"
-  @selected="onVariantPicked"
-/>
-```
-::
 
 ## Feature List
 

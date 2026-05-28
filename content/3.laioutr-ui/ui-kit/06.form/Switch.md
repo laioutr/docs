@@ -1,6 +1,11 @@
 ---
 title: Switch
 description: Toggle switch for binary on/off choices in forms and settings.
+playground:
+  name: Switch
+  base: ui-kit-atoms-switch
+  defaultStory: small
+  height: 460px
 jiraIssueId: LUI-4
 links:
   - label: Figma
@@ -32,21 +37,7 @@ Switch is a binary on/off toggle for forms, settings, and inline preferences. Wr
 Pro-Tip from Larry: Use Switch for state that takes effect immediately (a setting). For confirm-then-apply choices in a form, reach for Checkbox.
 :::
 
-## Usage
-
 ### Different Sizes
-
-::component-code
----
-:name: LSwitch
-:story-height: 75px
-story-id: ui-kit-atoms-switch--small
-title: Switch Small
----
-```vue-template
-<LSwitch v-model="enabled" size="s" />
-```
-::
 
 ::component-code
 ---

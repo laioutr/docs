@@ -1,6 +1,11 @@
 ---
 title: Badge
 description: Small label or count for status, notifications, and categories in headers, navigation, and cards.
+playground:
+  name: Badge
+  base: ui-kit-atoms-badge
+  defaultStory: default
+  height: 460px
 links: []
 seo:
   title: Badge | Laioutr

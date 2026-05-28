@@ -1,6 +1,11 @@
 ---
 title: Category Card Slider
 description: Horizontal slider of category tiles for listing pages and category browsing.
+playground:
+  name: CategoryCardSlider
+  base: ui-sections-categorycardslider
+  defaultStory: basic
+  height: 460px
 jiraIssueId: LUI-38
 seo:
   title: Category Card Slider | Laioutr
@@ -41,15 +46,6 @@ Auto-import tag: `<LCategoryCardSlider>`.
 :::tip
 Pro-Tip from Larry: Use `compact` for dense subcategory strips under listing titles; `big` for hero-grade tiles on landing pages.
 :::
-
-## Usage
-
-::component-code
----
-:name: LCategoryCardSlider
-story-id: ui-sections-categorycardslider--basic
----
-::
 
 ## Feature List
 

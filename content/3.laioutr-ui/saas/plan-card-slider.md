@@ -1,6 +1,11 @@
 ---
 title: Plan Card Slider
 description: A responsive grid of Plan Cards on desktop with a mobile swipe carousel.
+playground:
+  name: PlanCardSlider
+  base: ui-sections-plancardslider
+  defaultStory: default
+  height: 800px
 links:
   - label: Figma
     icon: i-simple-icons-figma
@@ -35,16 +40,6 @@ Wrap the slider with a `HighlightToggle` so the user can flip every card between
 :::tip
 Pro-Tip from Larry: Put the `HighlightToggle` above the slider, not inside it, so the control stays visible while the user pans through cards on mobile.
 :::
-
-## Usage
-
-::component-code
----
-:name: LPlanCardSlider
-:story-height: 800px
-story-id: ui-sections-plancardslider--default
----
-::
 
 ## Feature List
 

@@ -1,6 +1,11 @@
 ---
 title: PopUp Promotion
 description: Promotional popup content preset with heading, body, embedded CouponBox, and a primary CTA. Slots into PopUp.
+playground:
+  name: PopUpPromotion
+  base: ui-blocks-popuppromotion
+  defaultStory: default
+  height: 460px
 seo:
   title: PopUp Promotion | Laioutr
   description: Promotional popup content preset with embedded coupon.
@@ -21,38 +26,6 @@ sitemap:
 - The embedded `CouponBox` handles code copy in one tap, cutting the friction that loses redemptions between popup and checkout.
 - Seasonal promos ship from Studio, so growth teams launch Black Friday, Easter, or flash sales without waiting on engineering deploys.
 - Inherits `PopUp` shell semantics for focus and keyboard handling, keeping the offer popup accessible by default.
-
-## Usage
-
-::component-code
----
-:name: LPopUpPromotion
-:story-height: 600px
-story-id: ui-blocks-popuppromotion--default
-title: PopUpPromotion Default
----
-```vue-template
-<LPopUp v-model:open="showPromo" :media="image">
-    <LPopUpPromotion
-      heading="20% off your first order"
-      body="Your welcome discount is waiting."
-      :coupon="{
-        text: 'Use code at checkout',
-        code: 'WELCOME20',
-        action: 'copy',
-      }"
-      cta-text="Shop now"
-      cta-href="/shop"
-      hint="One-time use. Excludes sale items."
-      @apply-coupon="onCouponApplied"
-    >
-      <template #countdown>
-        <CountdownBanner :ends-at="endsAt" />
-      </template>
-    </LPopUpPromotion>
-  </LPopUp>
-```
-::
 
 ## Feature List
 

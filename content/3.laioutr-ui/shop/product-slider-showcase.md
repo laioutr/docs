@@ -1,6 +1,11 @@
 ---
 title: Product Slider Showcase
 description: Premium product slider paired with a banner.
+playground:
+  name: ProductSliderShowcase
+  base: ui-sections-productslidershowcase
+  defaultStory: default
+  height: 460px
 seo:
   title: Product Slider Showcase | Laioutr
   description: Premium product slider paired with a banner.
@@ -9,6 +14,11 @@ sitemap:
   lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
+links:
+  - label: Figma
+    icon: i-simple-icons-figma
+    to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=12175-374053&t=kWl7opPn708GdN7H-4
+    target: _blank
 ---
 
 ## Overview
@@ -25,20 +35,6 @@ Auto-import tag: `<LProductSliderShowcase>`.
 - Same horizontal-scroll mechanics as the base slider mean shoppers transfer the gesture from listing pages to campaign sliders without relearning.
 - Drop-in upgrade from `ProductSlider` for campaign blocks, so teams ship promotional content without forking the product-collection pattern.
 - Surface-tone awareness keeps the slider legible on light and dark campaign backgrounds.
-
-## Usage
-
-::component-code
----
-:name: LProductSliderShowcase
-:story-height: 400px
-story-id: ui-sections-productslidershowcase--default
-title: ProductSliderShowcase Default
----
-```vue-template
-<ProductSliderShowcase :products="products" :banner="campaignBanner" />
-```
-::
 
 ## Feature List
 

@@ -1,6 +1,11 @@
 ---
 title: Toaster
 description: Root-level container that renders Toast notifications driven by the global toaster store.
+playground:
+  name: Toaster
+  base: ui-kit-organisms-toaster
+  defaultStory: neutral
+  height: 460px
 links: []
 seo:
   title: Toaster | Laioutr

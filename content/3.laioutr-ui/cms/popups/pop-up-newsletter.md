@@ -1,6 +1,11 @@
 ---
 title: PopUp Newsletter
 description: Newsletter signup popup content preset with headline, body, and an embedded EmailInputForm. Slots into PopUp.
+playground:
+  name: PopUpNewsletter
+  base: ui-blocks-popupnewsletter
+  defaultStory: default
+  height: 460px
 seo:
   title: PopUp Newsletter | Laioutr
   description: Newsletter signup popup content preset for the PopUp shell.
@@ -21,28 +26,6 @@ sitemap:
 - Bundles media, copy, and the embedded signup form into one preset, so launching a new acquisition popup is a Studio task, not a sprint.
 - Inherits focus management and keyboard support from the `PopUp` shell, keeping accessibility solid even on a high-traffic surface.
 - Editors run seasonal hooks ("early access", "welcome offer") through the same component, keeping voice and design consistent across campaigns.
-
-## Usage
-
-::component-code
----
-:name: LPopUpNewsletter
-:story-height: 600px
-story-id: ui-blocks-popupnewsletter--default
-title: PopUpNewsletter Default
----
-```vue-template
-<LPopUp v-model:open="showNewsletter" :media="image">
-    <LPopUpNewsletter
-      heading="Get our weekly digest"
-      body="Curated drops, sent every Friday"
-      email-placeholder="you@example.com"
-      :email-button="{ text: 'Subscribe' }"
-      hint="By signing up, you agree to our privacy policy."
-    />
-  </LPopUp>
-```
-::
 
 ## Feature List
 

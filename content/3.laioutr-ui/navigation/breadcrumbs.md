@@ -3,6 +3,11 @@ title: Breadcrumbs
 aliases:
   - /laioutr-ui/navigation/breadcrumb
 description: Hierarchical breadcrumb navigation with clickable levels and per-item dropdowns.
+playground:
+  name: Breadcrumbs
+  base: ui-sections-breadcrumbs
+  defaultStory: default
+  height: 460px
 seo:
   title: Breadcrumbs | Laioutr
   description: Hierarchical breadcrumb navigation with clickable levels.

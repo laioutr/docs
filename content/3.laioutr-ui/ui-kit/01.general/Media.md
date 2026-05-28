@@ -1,6 +1,11 @@
 ---
 title: Media
 description: Low-level responsive image primitive backed by `nuxt-image`.
+playground:
+  name: Media
+  base: ui-kit-atoms-media
+  defaultStory: default
+  height: 460px
 seo:
   title: Media | Laioutr
   description: Low-level responsive image primitive.
@@ -23,20 +28,6 @@ Reach for [`MediaPreview`](/laioutr-ui/ui-kit/general/media-preview) when you al
 - A single discriminated `Media` value covers images, video posters, and CDN variants, so connector code stays simple as new sources are added.
 - The `cmw` unit makes `sizes` strings inside constrained containers easy to write, so the layout engine picks the smallest correct asset.
 
-## Usage
-
-::component-code
----
-:name: LMedia
-:story-height: 200px
-story-id: ui-kit-atoms-media--default
-title: Media Default
----
-```vue-template
-<Media :media="image" :aspect-ratio="true" sizes="100vw sm:50vw md:400px" />
-```
-::
-
 ## Feature List
 
 ::features
@@ -50,7 +41,6 @@ items:
   - "Handles `<picture>` source selection so AVIF, WebP, and JPEG fallbacks are emitted correctly"
 ---
 ::
-
 
 ## API Reference
 

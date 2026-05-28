@@ -1,6 +1,11 @@
 ---
 title: Checkbox
 description: Checkbox control for single-choice consent and multi-select groups, with tri-state support.
+playground:
+  name: Checkbox
+  base: ui-kit-atoms-checkbox
+  defaultStory: unchecked
+  height: 460px
 jiraIssueId: LUI-126
 seo:
   title: Checkbox | Laioutr
@@ -28,19 +33,6 @@ Checkbox picks up its `id` from a surrounding `Label`'s `forIdFromLabel` injecti
 :::tip
 Pro-Tip from Larry: For a labelled, Field-aware checkbox with built-in error wiring, reach for [`InputCheckbox`](/laioutr-ui/ui-kit/form/input-checkbox) and keep `Checkbox` for the bare control.
 :::
-
-## Usage
-
-::component-code
----
-name: LCheckbox
-story-height: 60px
-story-id: ui-kit-atoms-checkbox--unchecked
----
-```vue-template
-<LCheckbox v-model="agreed" />
-```
-::
 
 ### Indeterminate
 

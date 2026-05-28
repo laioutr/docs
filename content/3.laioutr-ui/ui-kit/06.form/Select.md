@@ -1,6 +1,11 @@
 ---
 title: Select
 description: Dropdown select for choosing a single option from a predefined list.
+playground:
+  name: Select
+  base: ui-kit-molecules-select
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-134
 links:
   - label: Figma

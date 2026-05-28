@@ -1,6 +1,11 @@
 ---
 title: Media Stage
 description: Bare media + content stage primitive that derives surface tone from the configured background color.
+playground:
+  name: MediaStage
+  base: ui-kit-molecules-mediastage
+  defaultStory: default
+  height: 460px
 seo:
   title: Media Stage | Laioutr
   description: Bare media + content stage primitive.
@@ -32,22 +37,6 @@ When `backgroundColor` is a hex value, `MediaStage` runs it through `colorToSurf
 - Automatic surface-tone derivation keeps headline and CTA text legible when marketing recolors a banner background mid-campaign.
 - Clean separation of media, content slot, and chrome lets product teams compose custom heroes without rewriting positioning logic.
 
-## Usage
-
-::component-code
----
-:name: LMediaStage
-:story-height: 200px
-story-id: ui-kit-molecules-mediastage--default
-title: MediaStage Default
----
-```vue-template
-<MediaStage :media="media" background-color="#EFEFEF">
-    <TextGroup caption="..." heading="..." subline="..." />
-  </MediaStage>
-```
-::
-
 ## Feature List
 
 ::features
@@ -61,7 +50,6 @@ items:
   - "Border radius left to the call site (`.radius-contained` utility), keeping the primitive composable inside cards, banners, and heros"
 ---
 ::
-
 
 ## API Reference
 

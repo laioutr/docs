@@ -1,6 +1,11 @@
 ---
 title: Newsletter Registration
 description: Full-width newsletter subscription section with status messages, customizable copy, and an optional image prop.
+playground:
+  name: NewsletterRegistration
+  base: ui-sections-newsletterregistration
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-214
 seo:
   title: Newsletter Registration | Laioutr
@@ -30,15 +35,6 @@ Background colors and text adapt to the surrounding surface tone via `<OnSurface
 :::tip
 Pro-Tip from Larry: Place `NewsletterRegistration` above the footer so signup is visible without separate-page navigation.
 :::
-
-## Usage
-
-::component-code
----
-:name: LNewsletterRegistration
-story-id: ui-sections-newsletterregistration--default
----
-::
 
 ## Feature List
 

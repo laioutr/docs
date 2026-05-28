@@ -1,6 +1,11 @@
 ---
 title: Loading Spinner
 description: An animated spinner indicating loading or processing state.
+playground:
+  name: LoadingSpinner
+  base: ui-kit-atoms-loadingspinner
+  defaultStory: primary-loader-spinner
+  height: 460px
 links: []
 seo:
   title: Loading Spinner | Laioutr
@@ -28,22 +33,6 @@ The component renders pure visual chrome; the consumer is responsible for any `r
 :::tip
 Pro-Tip from Larry: Match `colorScheme` to the surrounding action so a primary button's inline spinner reads as primary too.
 :::
-
-## Usage
-
-### Primary
-
-::component-code
----
-:name: LLoadingSpinner
-:story-height: 75px
-story-id: ui-kit-atoms-loadingspinner--primary-loader-spinner
-title: Loading Spinner Primary
----
-```vue-template
-<LLoadingSpinner variant="round" color-scheme="primary" size="l" />
-```
-::
 
 ### Secondary
 

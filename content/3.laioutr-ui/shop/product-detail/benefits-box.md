@@ -1,6 +1,11 @@
 ---
 title: Benefits Box
 description: Compact list of product benefits or USPs such as delivery, returns, and warranty.
+playground:
+  name: BenefitsBox
+  base: ui-blocks-benefitsbox
+  defaultStory: without-free-delivery
+  height: 460px
 seo:
   title: Benefits Box | Laioutr
   description: Compact list of product benefits.
@@ -22,24 +27,6 @@ Auto-import tag: `<LBenefitsBox>`.
 - Reinforces purchase confidence at the moment of decision by repeating shipping, returns, and warranty signals right next to the buy button.
 - Icon-led entries are scannable in two seconds, so the USPs land even when shoppers don't read product copy.
 - Driven by data, so policy changes (extended returns, new shipping cutoffs) ship without a content rebuild.
-
-## Usage
-
-::component-code
----
-:name: LBenefitsBox
-:story-height: 400px
-story-id: ui-blocks-benefitsbox--without-free-delivery
-title: BenefitsBox Default
----
-```vue-template
-<BenefitsBox
-  :delivery-benefit="product.deliveryBenefit"
-  :is-free-delivery="product.isFreeDelivery"
-  :benefits="product.benefits"
-/>
-```
-::
 
 ## Feature List
 

@@ -3,6 +3,11 @@ title: Header Shop
 aliases:
   - /laioutr-ui/navigation/shopheader
 description: E-commerce header with mega-menu, side-by-side, or dropdown navigation plus cart, account, wishlist, and search.
+playground:
+  name: HeaderShop
+  base: ui-sections-headershop
+  defaultStory: default
+  height: 460px
 seo:
   title: Header Shop | Laioutr
   description: E-commerce header with mega menu / side-by-side / dropdown navigation, cart, account, wishlist, and search.

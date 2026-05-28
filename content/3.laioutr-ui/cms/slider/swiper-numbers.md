@@ -1,6 +1,11 @@
 ---
 title: Swiper Numbers
 description: Slider position indicator showing current slide and total count (e.g. "1 / 5").
+playground:
+  name: SwiperNumbers
+  base: ui-kit-molecules-swipernumbers
+  defaultStory: default
+  height: 460px
 seo:
   title: Swiper Numbers | Laioutr
   description: Slider position indicator showing current slide and total count.
@@ -23,15 +28,6 @@ aliases:
 - Multi-step flows (onboarding, tutorial, checkout step recap) gain clarity when total count is visible up front.
 - Surface-tone awareness keeps the readout legible against any backdrop, removing the contrast issues that disable position indicators.
 - The compact display avoids the bullet-row sprawl that becomes unreadable in long slide sets.
-
-## Usage
-
-::component-code
----
-:name: LSwiperNumbers
-story-id: ui-kit-molecules-swipernumbers--default
----
-::
 
 ## Feature List
 

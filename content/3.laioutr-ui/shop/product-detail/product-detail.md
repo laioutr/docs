@@ -1,6 +1,11 @@
 ---
 title: Product Detail
 description: Two-column gallery and content layout for product detail pages.
+playground:
+  name: ProductDetail
+  base: ui-sections-productdetail
+  defaultStory: default
+  height: 460px
 seo:
   title: Product Detail | Laioutr
   description: Two-column gallery + content layout for product detail pages.
@@ -23,30 +28,6 @@ Auto-import tag: `<LProductDetail>`.
 - Slot-based composition lets each PDP mix the right blocks (gallery, title, price, benefits, add-to-cart) per category without forking the layout.
 - Responsive structure scales the same blocks from mobile single-column to desktop two-column, removing the cost of running separate templates.
 - Backend-agnostic shell composes with any commerce data source, so PDPs for ecommerce, marketplace, and B2B variants share one layout system.
-
-## Usage
-
-::component-code
----
-:name: LProductDetail
-:story-height: 400px
-story-id: ui-sections-productdetail--default
-title: ProductDetail Default
----
-```vue-template
-<ProductDetail>
-    <template #gallery>
-      <ProductImageGallery :media="product.media" />
-    </template>
-    <template #content>
-      <ProductTitle v-bind="product" />
-      <PriceInfo :price="product.price" />
-      <BenefitsBox :benefits="product.benefits" />
-      <AddToCart :loading="addLoading" @add-to-cart="add" />
-    </template>
-  </ProductDetail>
-```
-::
 
 ## Feature List
 

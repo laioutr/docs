@@ -1,6 +1,11 @@
 ---
 title: Review Form
 description: Form for submitting product ratings and written reviews, with star rating, short summary, and full review fields.
+playground:
+  name: ReviewForm
+  base: ui-blocks-reviewform
+  defaultStory: default
+  height: 460px
 seo:
   title: Review Form | Laioutr
   description: Form for submitting product ratings and written reviews.
@@ -29,17 +34,6 @@ Field labels and placeholders are rendered from `$tl()` translation keys (for ex
 :::tip
 Pro-Tip from Larry: Use `ReviewForm` inside `Review` on PDPs so customers can submit reviews without leaving the product page.
 :::
-
-## Usage
-
-::component-code
----
-:name: LReviewForm
-:story-height: 500px
-story-id: ui-blocks-reviewform--default
-title: Review Form Default
----
-::
 
 ## Feature List
 

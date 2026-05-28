@@ -1,6 +1,11 @@
 ---
 title: Brand Hero
 description: Hero section that surfaces a brand identity with background media, brand name, description, and optional logo.
+playground:
+  name: BrandHero
+  base: ui-sections-brandhero
+  defaultStory: default
+  height: 460px
 seo:
   title: Brand Hero | Laioutr
   description: Hero section that surfaces a brand identity.
@@ -9,6 +14,11 @@ sitemap:
   lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
+links:
+  - label: Figma
+    icon: i-simple-icons-figma
+    to: https://www.figma.com/design/iOpGWO38HkhnTYkEeEq8Oz/Laioutr-Basic?node-id=89-298202&t=WsyhlVHQyGVajZ9T-4
+    target: _blank
 ---
 
 ## Overview
@@ -21,25 +31,6 @@ sitemap:
 - One configurable hero ships across every brand landing page, so marketing scales coverage without commissioning bespoke designs.
 - The `colorMode` switch keeps the brand name and description readable on light, dark, and plain backdrops without re-cutting assets per brand.
 - Editors swap hero media and copy per brand in Studio, freeing the design team for higher-impact work.
-
-## Usage
-
-::component-code
----
-:name: LBrandHero
-:story-height: 400px
-story-id: ui-sections-brandhero--default
-title: BrandHero Default
----
-```vue-template
-<BrandHero
-    :name="brand.name"
-    :background="brand.heroImage"
-    :description="brand.tagline"
-    color-mode="on-light"
-  />
-```
-::
 
 ## Feature List
 

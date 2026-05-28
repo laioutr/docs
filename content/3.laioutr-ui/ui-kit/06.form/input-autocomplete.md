@@ -1,6 +1,11 @@
 ---
 title: Input Autocomplete
 description: Single-select autocomplete input driven by an options array.
+playground:
+  name: InputAutocomplete
+  base: ui-kit-molecules-inputautocomplete
+  defaultStory: default
+  height: 460px
 seo:
   title: Input Autocomplete | Laioutr
   description: Single-select autocomplete input.
@@ -23,22 +28,6 @@ For multi-select pickers and custom display formatters, use [`InputCombobox`](/l
 - Disabled-option support lets the picker show what exists but is currently unavailable, so customers self-serve answers like "ships to my country?" without contacting support.
 - Field integration keeps label, required, and error state in one place, so a misspelled country code surfaces inline rather than failing silently on submit.
 
-## Usage
-
-::component-code
----
-:name: LInputAutocomplete
-:story-height: 150px
-story-id: ui-kit-molecules-inputautocomplete--default
-title: InputAutocomplete Default
----
-```vue-template
-<Field label="Country" :error-message="error">
-    <InputAutocomplete v-model="value" :options="countries" />
-  </Field>
-```
-::
-
 ## Feature List
 
 ::features
@@ -51,7 +40,6 @@ items:
   - "Pair with `InputCombobox` when multi-select or custom display formatters are needed"
 ---
 ::
-
 
 ## API Reference
 

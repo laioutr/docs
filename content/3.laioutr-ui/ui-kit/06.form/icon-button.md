@@ -1,6 +1,11 @@
 ---
 title: Icon Button
 description: Icon-only button atom with a required accessible label rendered as aria-label.
+playground:
+  name: IconButton
+  base: ui-kit-atoms-iconbutton
+  defaultStory: default
+  height: 460px
 seo:
   title: Icon Button | Laioutr
   description: Icon-only button atom.
@@ -27,20 +32,6 @@ sitemap:
 Pro-Tip from Larry: Set `label="Close"` (not `"X"`) so screen readers announce intent rather than the glyph.
 :::
 
-## Usage
-
-::component-code
----
-:name: LIconButton
-:story-height: 150px
-story-id: ui-kit-atoms-iconbutton--default
-title: IconButton Default
----
-```vue-template
-<IconButton label="Close" icon="x-mark" variant="ghost-black" />
-```
-::
-
 ## Feature List
 
 ::features
@@ -53,7 +44,6 @@ items:
   - "Pair with `Tooltip` for hover hints, so the on-screen label complements the announced `aria-label`"
 ---
 ::
-
 
 ## API Reference
 

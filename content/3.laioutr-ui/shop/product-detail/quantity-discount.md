@@ -1,6 +1,11 @@
 ---
 title: Quantity Discount
 description: Tiered quantity-discount display, for example "buy 3+ for 10% off".
+playground:
+  name: QuantityDiscount
+  base: ui-blocks-quantitydiscount
+  defaultStory: two-items
+  height: 460px
 seo:
   title: Quantity Discount | Laioutr
   description: Tiered quantity-discount display.
@@ -22,20 +27,6 @@ Auto-import tag: `<LQuantityDiscount>`.
 - Visible tier ladder is a direct AOV lever, nudging shoppers to add one more unit to clear the next discount threshold.
 - A clear savings-percent flag per row removes the math friction that stops shoppers from comparing bulk options on their own.
 - Data-driven `prices` array lets promotions and B2B price lists ship without touching PDP code, so merchandising owns the lever directly.
-
-## Usage
-
-::component-code
----
-:name: LQuantityDiscount
-:story-height: 400px
-story-id: ui-blocks-quantitydiscount--two-items
-title: QuantityDiscount Default
----
-```vue-template
-<QuantityDiscount :prices="product.quantityDiscounts" />
-```
-::
 
 ## Feature List
 

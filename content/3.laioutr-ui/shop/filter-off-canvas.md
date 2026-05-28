@@ -1,6 +1,16 @@
 ---
 title: Filter Off Canvas
 description: Off-canvas filter sheet for product listing pages with accordion-grouped checkbox lists, swatch lists, range sliders, and switches.
+links:
+  - label: Figma
+    icon: i-simple-icons-figma
+    to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=15055-191628&t=JdNx9y5r0PDJX6eC-4
+    target: _blank
+playground:
+  name: FilterOffCanvas
+  base: ui-features-filteroffcanvas
+  defaultStory: default-filter-off-canvas
+  height: 460px
 seo:
   title: Filter Off Canvas | Laioutr
   description: Off-canvas filter sheet for product listing pages.
@@ -39,15 +49,6 @@ Auto-import tag: `<LFilterOffCanvas>`.
 Pro-Tip from Larry: Define your filter shape once via the `AvailableFilter` union; `FilterOffCanvas` picks the right inner control automatically per filter type.
 :::
 
-## Usage
-
-::component-code
----
-:name: LFilterOffCanvas
-story-id: ui-features-filteroffcanvas--default-filter-off-canvas
----
-::
-
 ## Feature List
 
 ::features
@@ -62,8 +63,6 @@ items:
   - "Composable from named inner primitives (AccordionItem, CheckboxList, SwatchList, RangeSlider, SwitchItem) for custom sheets"
 ---
 ::
-
-## API Reference
 
 ### LFilterOffCanvas
 

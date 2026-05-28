@@ -1,6 +1,11 @@
 ---
 title: Quote Card Slider
 description: Slider wrapping multiple `QuoteCard` items.
+playground:
+  name: QuoteCardSlider
+  base: ui-sections-quotecardslider
+  defaultStory: without-scrollbar
+  height: 460px
 seo:
   title: Quote Card Slider | Laioutr
   description: Slider wrapping multiple QuoteCard items.
@@ -23,25 +28,6 @@ For testimonials that lead with a profile picture, reach for [`PersonaQuoteSlide
 - Star-rated quotes inside a slider provide the same trust lift as a full review section in a fraction of the space.
 - Editors curate the rotation in Studio, so the strongest reviews always lead while older ones cycle in over time.
 - One slider drives both review carousels and brand testimonial walls, keeping the rotation pattern consistent across pages.
-
-## Usage
-
-::component-code
----
-:name: LQuoteCardSlider
-:story-height: 400px
-story-id: ui-sections-quotecardslider--without-scrollbar
-title: QuoteCardSlider Default
----
-```vue-template
-<QuoteCardSlider
-    :slides="quotes"
-    :has-logo="true"
-    :has-rating="true"
-    navigation-style="navigation-buttons"
-  />
-```
-::
 
 ## Feature List
 

@@ -1,6 +1,11 @@
 ---
 title: OnSurface
 description: Sets the surface tone (`light` / `dark` / `bright`) for descendant components and rebinds the matching CSS custom properties.
+playground:
+  name: OnSurface
+  base: ui-kit-atoms-onsurface
+  defaultStory: light
+  height: 460px
 seo:
   title: OnSurface | Laioutr
   description: Sets the surface tone for descendant components.
@@ -22,24 +27,6 @@ For the conceptual treatment of `SurfaceTone`, the `useSurfaceTone()` composable
 - One wrapper guarantees text and icons stay legible inside any colored section, eliminating the WCAG contrast issues that surface in QA right before launch.
 - Idempotent wrapping means designers can nest sections freely without each one needing manual tone configuration.
 - Decouples component color from the surrounding background, so the same `Card` or `Text` renders correctly on light, dark, and bright surfaces.
-
-## Usage
-
-### Light tone
-
-::component-code
----
-:name: LOnSurface
-:story-height: 200px
-story-id: ui-kit-atoms-onsurface--light
-title: OnSurface Light
----
-```vue-template
-<OnSurface tone="light">
-  <Text>Light surface, black text by default.</Text>
-</OnSurface>
-```
-::
 
 ### Dark tone
 
@@ -69,7 +56,6 @@ items:
   - "Single public surface for tone, so QA can audit contrast at the boundary rather than per-component"
 ---
 ::
-
 
 ## API Reference
 

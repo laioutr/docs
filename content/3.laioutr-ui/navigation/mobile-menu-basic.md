@@ -1,6 +1,11 @@
 ---
 title: Mobile Menu (Basic)
 description: Mobile off-canvas drawer paired with `HeaderBasic`, hosting links, a social row, locale selector, and dark-mode toggle.
+playground:
+  name: MobileMenuBasic
+  base: ui-features-mobilemenubasic
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-65
 links:
   - label: Figma

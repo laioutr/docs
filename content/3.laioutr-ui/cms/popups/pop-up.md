@@ -1,6 +1,11 @@
 ---
 title: PopUp
 description: Reka-UI Dialog wrapper with a media slot and content stack. The shell behind all popup presets.
+playground:
+  name: PopUp
+  base: ui-features-popup
+  defaultStory: info
+  height: 460px
 seo:
   title: PopUp | Laioutr
   description: Reka-UI Dialog wrapper with media slot and content stack.
@@ -37,27 +42,6 @@ The shell exposes the dismiss and layout knobs presets inherit:
 - Reka-UI Dialog semantics deliver focus traps, escape handling, and ARIA roles out of the box, removing the accessibility risk that popups usually carry.
 - The media slot plus content stack gives designers a clean canvas for custom popups when no preset fits.
 - Builds the foundation for `PopUpInfo`, `PopUpNewsletter`, and `PopUpPromotion`, keeping one accessibility audit valid across every variant.
-
-## Usage
-
-::component-code
----
-:name: LPopUp
-:story-height: 600px
-story-id: ui-features-popup--info
-title: PopUp Default
----
-```vue-template
-<PopUp v-model:open="showModal">
-    <template #media>
-      <MediaPreview :media="popupImage" />
-    </template>
-    <TextGroup heading="..." subline="..." />
-    <Button>CTA</Button>
-    <!-- Or drop in a preset: <PopUpInfo ... /> -->
-  </PopUp>
-```
-::
 
 ## Feature List
 

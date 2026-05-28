@@ -1,6 +1,11 @@
 ---
 title: Sort Modes
 description: Sort selector for product listing pages, wrapping a select of named sort modes.
+playground:
+  name: SortModes
+  base: ui-blocks-sortmodes
+  defaultStory: default
+  height: 460px
 seo:
   title: Sort Modes | Laioutr
   description: Sort selector for product listing pages.
@@ -22,20 +27,6 @@ Auto-import tag: `<LSortModes>`.
 - Named sort modes (Newest, Price ascending, Price descending, Best sellers) match the way shoppers actually think about listings, lifting the rate at which they re-order results.
 - A single select with a clear label is far less error-prone than custom column-header sorting, which protects mobile usability where most shopping now happens.
 - Defining sort options as data on `available-sortings` lets merchandising add or rename modes (Editor's pick, Most reviewed) without touching listing code.
-
-## Usage
-
-::component-code
----
-:name: LSortModes
-:story-height: 400px
-story-id: ui-blocks-sortmodes--default
-title: SortModes Default
----
-```vue-template
-<SortModes v-model:active-sorting="currentSort" :available-sortings="sortOptions" />
-```
-::
 
 ## Feature List
 

@@ -1,6 +1,11 @@
 ---
 title: Footer Menu
 description: Single column of footer links with a heading and an ordered link list.
+playground:
+  name: FooterMenu
+  base: ui-blocks-footermenu
+  defaultStory: default
+  height: 460px
 seo:
   title: Footer Menu | Laioutr
   description: Single column of footer links.
@@ -22,20 +27,6 @@ Props are `title: string`, optional `titleHref?: string`, and `items: NavLinkIte
 - A single column primitive backs every footer group, so help, legal, and company sections stay visually aligned without bespoke CSS per market.
 - Editors add and rearrange links in Studio without touching code, which means policy changes and seasonal links ship the same day they are decided.
 - Consistent heading and row spacing across every column protects the brand on a page that search engines crawl heavily for site structure.
-
-## Usage
-
-::component-code
----
-:name: LFooterMenu
-:story-height: 400px
-story-id: ui-blocks-footermenu--default
-title: FooterMenu Default
----
-```vue-template
-<FooterMenu title="Help" :items="helpLinks" />
-```
-::
 
 ## Feature List
 

@@ -1,6 +1,11 @@
 ---
 title: Banner Integrated
 description: A horizontal call-to-action banner with an optional icon and up to two CTA buttons.
+playground:
+  name: BannerIntegrated
+  base: ui-sections-bannerintegrated
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-20
 seo:
   title: Banner Integrated | Laioutr
@@ -30,15 +35,6 @@ Both CTAs render as `BackgroundAwareButton`, so they pick up standard button var
 :::tip
 Pro-Tip from Larry: Reserve the secondary CTA for the lower-commitment option (for example, "Learn more") so the primary stays the obvious next step.
 :::
-
-## Usage
-
-::component-code
----
-:name: LBannerIntegrated
-story-id: ui-sections-bannerintegrated--default
----
-::
 
 ## Feature List
 

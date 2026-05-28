@@ -1,6 +1,11 @@
 ---
 title: Icon
 description: Size-optimized icon variants with automatic resolution ensuring recognizability at small, medium, and large sizes.
+playground:
+  name: Icon
+  base: ui-kit-atoms-icon
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-41
 links:
   - label: Figma

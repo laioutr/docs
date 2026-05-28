@@ -1,6 +1,11 @@
 ---
 title: USP Banner
 description: A slim Swiper-driven trust strip that cycles unique selling propositions across breakpoints.
+playground:
+  name: UspBanner
+  base: ui-sections-uspbanner
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-31
 seo:
   title: USP Banner | Laioutr
@@ -30,20 +35,6 @@ Items are passed as a flat array via the `usps` prop, so editors author each USP
 :::tip
 Pro-Tip from Larry: Position the USP banner above or below the header so trust signals are visible without scrolling.
 :::
-
-## Usage
-
-::component-code
----
-:name: LUspBanner
-:story-height: 200px
-story-id: ui-sections-uspbanner--default
-title: USP Banner Default
----
-```vue-template
-<LUspBanner :usps="usps" />
-```
-::
 
 ## Feature List
 

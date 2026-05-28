@@ -1,6 +1,11 @@
 ---
 title: Scroll Area
 description: A scroll area component
+playground:
+  name: ScrollArea
+  base: ui-kit-organisms-scrollarea
+  defaultStory: default
+  height: 460px
 links: []
 seo:
   title: Scroll Area | Laioutr
@@ -26,16 +31,6 @@ Scroll Area wraps content in a bounded scrollable region with consistent scrollb
 :::tip
 Pro-Tip from Larry: Set a `max-height` rather than a fixed `height` so the area only scrolls when it actually overflows. A fixed height shows a scrollbar even when content fits.
 :::
-
-## Usage
-
-::component-code
----
-:name: ScrollArea
-story-height: 600px
-story-id: ui-kit-organisms-scrollarea--default
----
-::
 
 ## Feature List
 

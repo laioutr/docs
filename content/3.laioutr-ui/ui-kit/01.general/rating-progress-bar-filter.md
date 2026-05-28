@@ -1,6 +1,11 @@
 ---
 title: Rating Progress Bar Filter
 description: Star-rating progress bar that doubles as a clickable filter control inside the `Review` section.
+playground:
+  name: RatingProgressBarFilter
+  base: ui-kit-molecules-ratingprogressbarfilter
+  defaultStory: default
+  height: 460px
 seo:
   title: Rating Progress Bar Filter | Laioutr
   description: Star-rating progress bar / filter.
@@ -23,24 +28,6 @@ For the aggregate score above the bars, use [`RatingSummary`](/laioutr-ui/ui-kit
 - Two-in-one display and filter pattern saves vertical space on PDPs, where review density already competes with conversion-critical content.
 - Visual rating distribution at a glance helps users gauge product quality without reading every review, speeding up purchase decisions.
 
-## Usage
-
-::component-code
----
-:name: LRatingProgressBarFilter
-:story-height: 200px
-story-id: ui-kit-molecules-ratingprogressbarfilter--default
-title: RatingProgressBarFilter Default
----
-```vue-template
-<RatingProgressBarFilter
-    :rating-levels="ratingLevels"
-    :total-count="totalReviews"
-    @set-filter-option="(rating) => setRatingFilter(rating)"
-  />
-```
-::
-
 ## Feature List
 
 ::features
@@ -53,7 +40,6 @@ items:
   - "BEM child classes (`__level-stars`, `__level-count`) expose hooks to restyle individual rows without touching the bar"
 ---
 ::
-
 
 ## API Reference
 

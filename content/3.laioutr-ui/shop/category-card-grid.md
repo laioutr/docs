@@ -1,6 +1,11 @@
 ---
 title: Category Card Grid
 description: Responsive grid of category tiles for entry pages and category browsing.
+playground:
+  name: CategoryCardGrid
+  base: ui-sections-categorycardgrid
+  defaultStory: basic
+  height: 460px
 jiraIssueId: LUI-37
 seo:
   title: Category Card Grid | Laioutr
@@ -41,15 +46,6 @@ Auto-import tag: `<LCategoryCardGrid>`.
 :::tip
 Pro-Tip from Larry: Use `variant="big"` on hero placements where imagery does the work; reach for `compact` inside dense category lists.
 :::
-
-## Usage
-
-::component-code
----
-:name: LCategoryCardGrid
-story-id: ui-sections-categorycardgrid--basic
----
-::
 
 ## Feature List
 

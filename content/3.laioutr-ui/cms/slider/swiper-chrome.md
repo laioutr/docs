@@ -1,6 +1,11 @@
 ---
 title: Swiper Chrome
 description: Composition that pairs a text group with Swiper-chrome controls (navigation, scrollbar, action buttons).
+playground:
+  name: SwiperChrome
+  base: ui-kit-molecules-swiperchrome
+  defaultStory: default
+  height: 460px
 seo:
   title: Swiper Chrome | Laioutr
   description: Text and Swiper-chrome composition.
@@ -21,29 +26,6 @@ sitemap:
 - Configurable navigation position and toggles let designers tune the chrome per section without writing per-slider code.
 - Caption, heading, and subline pair with action buttons to drive readers from a rotation into a deeper landing page.
 - One chrome composition wraps any `CommonSwiper`, removing the drift that creeps in when each slider styles its own header.
-
-## Usage
-
-::component-code
----
-:name: LSwiperChrome
-:story-height: 400px
-story-id: ui-kit-molecules-swiperchrome--default
-title: SwiperChrome Default
----
-```vue-template
-<SwiperChrome
-    caption="Featured"
-    heading="New arrivals"
-    subline="Just in this week"
-    navigation-position="top"
-    :show-scrollbar="true"
-    :swiper-config="swiperConfig"
-  >
-    <!-- slides go directly here -->
-  </SwiperChrome>
-```
-::
 
 ## Feature List
 

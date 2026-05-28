@@ -1,6 +1,11 @@
 ---
 title: Input Radio
 description: Group of radio buttons where exactly one option can be selected at a time.
+playground:
+  name: InputRadio
+  base: ui-kit-molecules-inputradio
+  defaultStory: vertical
+  height: 460px
 links: []
 seo:
   title: Input Radio | Laioutr
@@ -33,14 +38,6 @@ Pro-Tip from Larry: Use `InputRadio` when the user must pick exactly one option 
 ::component-code
 ---
 :name: LInputRadio
-story-height: 160px
-story-id: ui-kit-molecules-inputradio--vertical
----
-::
-
-::component-code
----
-:name: LInputRadio
 story-height: 100px
 story-id: ui-kit-molecules-inputradio--horizontal
 ---
@@ -59,8 +56,6 @@ items:
   - "BEM modifiers (`input-radio--{orientation}`, `--{variant}`, `--invalid`) give per-state theme hooks"
 ---
 ::
-
-## API Reference
 
 ### LInputRadio
 

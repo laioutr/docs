@@ -1,6 +1,11 @@
 ---
 title: Input Slider
 description: Single-thumb or multi-thumb range slider for numeric input and range filters.
+playground:
+  name: InputSlider
+  base: ui-kit-molecules-inputslider
+  defaultStory: default
+  height: 460px
 seo:
   title: Input Slider | Laioutr
   description: Single-thumb or multi-thumb range slider.
@@ -24,22 +29,6 @@ Useful when:
 Switch to `orientation="vertical"` for sliders that read top-to-bottom (column controls, vertical filter panels). `step` snaps the value to integer multiples, so set it to match the catalog's price grain or size grid.
 
 `InputSlider` is Field-aware: inherit `disabled` and `invalid` from a surrounding `<LField>` instead of prop-drilling.
-
-## Usage
-
-### Single thumb
-
-::component-code
----
-:name: LInputSlider
-:story-height: 150px
-story-id: ui-kit-molecules-inputslider--default
-title: InputSlider Default
----
-```vue-template
-<InputSlider v-model="volume" :default-value="[50]" :min="0" :max="100" :step="1" />
-```
-::
 
 ### Range (two thumbs)
 
@@ -110,7 +99,6 @@ items:
   - "Field-aware: inherits `<LField>` `disabled` and `invalid` state, so wrapped sliders pick up form chrome automatically"
 ---
 ::
-
 
 ## API Reference
 

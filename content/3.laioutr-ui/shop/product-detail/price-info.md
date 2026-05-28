@@ -1,6 +1,11 @@
 ---
 title: Price Info
 description: PDP price display with strikethrough original, savings indicator, and reference price.
+playground:
+  name: PriceInfo
+  base: ui-blocks-priceinfo
+  defaultStory: default
+  height: 460px
 seo:
   title: Price Info | Laioutr
   description: PDP price display with strikethrough original.
@@ -9,6 +14,11 @@ sitemap:
   lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
+links:
+  - label: Figma
+    icon: i-simple-icons-figma
+    to: https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-224223&t=wABQtnJ0GubOC0US-4
+    target: _blank
 ---
 
 ## Overview
@@ -23,25 +33,6 @@ Auto-import tag: `<LPriceInfo>`.
 - Unit and reference price display meets EU price-indication rules and helps shoppers compare across pack sizes, a known driver of repeat purchase.
 - Locale-aware currency, symbol position, and decimal separator render correctly per market with no per-country code paths.
 - Single price component keeps the PDP, tile, and cart in visual sync, so shoppers see the same price story from browse to buy.
-
-## Usage
-
-::component-code
----
-:name: LPriceInfo
-:story-height: 400px
-story-id: ui-blocks-priceinfo--default
-title: PriceInfo Default
----
-```vue-template
-<PriceInfo
-  :price="product.price"
-  :strikethrough-price="product.strikethroughPrice"
-  :unit-price="product.unitPrice"
-  :saving-percentage="product.savingPercentage"
-/>
-```
-::
 
 ## Feature List
 

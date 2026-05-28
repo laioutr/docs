@@ -1,6 +1,11 @@
 ---
 title: Option Tile (Image)
 description: Image-driven variant tile for product option selection, typically color or material.
+playground:
+  name: OptionTileImage
+  base: ui-kit-molecules-optiontileimage
+  defaultStory: default
+  height: 460px
 seo:
   title: Option Tile (Image) | Laioutr
   description: Image-driven variant tile for product option selection.
@@ -23,30 +28,6 @@ For text-labelled options (sizes, configurations), use the sibling [`OptionTileT
 - The `unavailable` state with a tooltip preserves the visual catalog while explaining why a variant can't be picked, so customers ask less and convert more.
 - One image-tile primitive keeps swatch grids consistent across PDP, search results, and gift guides, which protects the brand's visual rhythm.
 
-## Usage
-
-::component-code
----
-:name: LOptionTileImage
-:story-height: 150px
-story-id: ui-kit-molecules-optiontileimage--default
-title: OptionTileImage Default
----
-```vue-template
-<OptionTileImage
-    v-for="option in colorOptions"
-    :key="option.id"
-    :id="option.id"
-    :label="option.label"
-    :media="option.media"
-    :selected="selected === option.id"
-    :unavailable="!option.inStock"
-    unavailable-tooltip="Out of stock"
-    @select="selected = option.id"
-  />
-```
-::
-
 ## Feature List
 
 ::features
@@ -59,7 +40,6 @@ items:
   - "Single tile primitive keeps swatch grids consistent across PDP, search, and gift guides"
 ---
 ::
-
 
 ## API Reference
 

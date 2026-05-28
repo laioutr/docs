@@ -1,6 +1,11 @@
 ---
 title: Cart Sheet
 description: Off-canvas mini-cart sheet that composes line items, summary, free-delivery progress, and the coupon accordion.
+playground:
+  name: CartSheet
+  base: ui-features-cartsheet
+  defaultStory: default
+  height: 460px
 seo:
   title: Cart Sheet | Laioutr
   description: Off-canvas mini-cart sheet.
@@ -23,39 +28,6 @@ Auto-import tag: `<LCartSheet>`.
 - Bundles free-delivery progress, coupon entry, and totals in one sheet so shoppers see every lever for raising basket value before they check out.
 - Automatic empty-state swap with a shop-now CTA recovers traffic that would otherwise hit a dead-end cart and bounce.
 - Single mini-cart contract covers desktop and mobile, removing the need for separate cart UIs and the QA cost that comes with them.
-
-## Usage
-
-::component-code
----
-:name: LCartSheet
-:story-height: 700px
-story-id: ui-features-cartsheet--default
-title: CartSheet Default
----
-```vue-template
-<CartSheet
-    v-model:open="cartOpen"
-    :cart-content="{
-      freeDeliveryProgress: {
-        totalPrice: { amount: 42, currency: 'EUR' },
-        maxPrice: { amount: 50, currency: 'EUR' },
-      },
-      cartListItems: cart.lineItems,
-      summaryBox: {
-        subtotalPrice: { amount: 42, currency: 'EUR' },
-        totalPrice: { amount: 42, currency: 'EUR' },
-      },
-      paymentLogos: cart.paymentLogos,
-    }"
-    :empty-state="{}"
-    @item-delete="onItemDelete"
-    @item-quantity-change="onQuantityChange"
-    @apply-coupon-code="onApplyCoupon"
-    @remove-discount="onRemoveDiscount"
-  />
-```
-::
 
 ## Feature List
 

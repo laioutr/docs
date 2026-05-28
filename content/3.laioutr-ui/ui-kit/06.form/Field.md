@@ -1,6 +1,11 @@
 ---
 title: Field
 description: Form field wrapper that adds label, description, and error message around any input control.
+playground:
+  name: Field
+  base: ui-kit-molecules-field
+  defaultStory: label-and-input
+  height: 460px
 jiraIssueId: LUI-132
 links:
   - label: Figma

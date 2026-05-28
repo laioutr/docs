@@ -1,6 +1,11 @@
 ---
 title: Input Search
 description: Search input with a pre-configured search icon, clear button, and searchTerm v-model.
+playground:
+  name: InputSearch
+  base: ui-kit-molecules-inputsearch
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-59
 links:
   - label: Figma
@@ -34,16 +39,6 @@ For the autocomplete-driven header search molecule with suggestions, use [`Searc
 :::tip
 Pro-Tip from Larry: Place search in the main nav so users can find products without digging through menus.
 :::
-
-## Usage
-
-::component-code
----
-:name: LInputSearch
-story-height: 90px
-story-id: ui-kit-molecules-inputsearch--default
----
-::
 
 ## Feature List
 

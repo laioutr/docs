@@ -1,6 +1,16 @@
 ---
 title: Page Not Found
 description: 404 page composition with illustration, heading, subline, and a back-to-home call to action.
+links:
+  - label: Figma
+    icon: i-simple-icons-figma
+    to: https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=1429-308738&t=vF1TziFkO1YsXgqq-4
+    target: _blank
+playground:
+  name: PageNotFound
+  base: ui-sections-pagenotfound
+  defaultStory: default-background-images
+  height: 460px
 seo:
   title: Page Not Found | Laioutr
   description: 404 page composition.
@@ -20,25 +30,6 @@ sitemap:
 - A dead-end becomes a recovery path, with a clear back-to-home CTA that pulls otherwise-lost traffic back into the funnel instead of bouncing.
 - Branded illustration and copy turn an error state into an on-brand moment, softening a frustrating experience for the visitor.
 - `surfaceTone` matches the page background, so the 404 reads correctly inside dark themes, light themes, and seasonal campaigns without one-off styling.
-
-## Usage
-
-::component-code
----
-:name: LPageNotFound
-:story-height: 600px
-story-id: ui-sections-pagenotfound--default-background-images
-title: PageNotFound Default
----
-```vue-template
-<PageNotFound
-  headline="Page not found"
-  subline="The page you were looking for has moved or never existed."
-  surface-tone="light"
-  :cta="{ text: 'Back to home', href: '/' }"
-/>
-```
-::
 
 ## Feature List
 

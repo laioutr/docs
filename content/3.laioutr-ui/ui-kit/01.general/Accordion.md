@@ -1,6 +1,11 @@
 ---
 title: Accordion
 description: A group of togglable entries
+playground:
+  name: Accordion
+  base: ui-kit-molecules-accordion
+  defaultStory: simple-style
+  height: 460px
 seo:
   title: Accordion | Laioutr
   description: A group of togglable entries

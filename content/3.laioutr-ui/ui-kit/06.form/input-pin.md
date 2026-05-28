@@ -1,6 +1,11 @@
 ---
 title: Input Pin
 description: Row of single-character cells for OTP, PIN, or confirmation-code entry.
+playground:
+  name: InputPin
+  base: ui-kit-molecules-inputpin
+  defaultStory: default
+  height: 460px
 seo:
   title: Input Pin | Laioutr
   description: Row of single-character cells for OTP / PIN entry.
@@ -21,22 +26,6 @@ sitemap:
 - Sharing Input styling means OTP screens match the rest of the form system, which keeps verification steps from looking like a separate app.
 - Field-driven errors surface "wrong code" inline, so customers can retry without losing context about which step of the flow they're on.
 
-## Usage
-
-::component-code
----
-:name: LInputPin
-:story-height: 150px
-story-id: ui-kit-molecules-inputpin--default
-title: InputPin Default
----
-```vue-template
-<Field label="Verification code">
-    <InputPin v-model="code" :length="6" />
-  </Field>
-```
-::
-
 ## Feature List
 
 ::features
@@ -50,7 +39,6 @@ items:
   - "Inherits `<LField>` state, so 'wrong code' errors surface inline with the rest of the form"
 ---
 ::
-
 
 ## API Reference
 

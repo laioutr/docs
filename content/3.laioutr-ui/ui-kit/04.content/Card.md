@@ -1,6 +1,11 @@
 ---
 title: Card
 description: Flexible content card with mixed media and text for marketing tiles, editorial highlights, and feature callouts.
+playground:
+  name: Card
+  base: ui-kit-molecules-card
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-253
 seo:
   title: Card | Laioutr

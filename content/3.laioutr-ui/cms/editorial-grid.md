@@ -1,6 +1,11 @@
 ---
 title: Editorial Grid
 description: Editorial-style grid of cards with optional featured-card emphasis, driven by a cards array.
+playground:
+  name: EditorialGrid
+  base: ui-sections-editorialgrid
+  defaultStory: default
+  height: 460px
 seo:
   title: Editorial Grid | Laioutr
   description: Editorial-style grid of cards with featured emphasis.
@@ -23,20 +28,6 @@ An optional grid-level header (`caption`, `heading`, `subline`) sits above the r
 - `featuredCount` gives editors a built-in spotlight for hero stories, so the top picks always get the visual weight they need.
 - A single `cards` array drives the whole layout, so editors stage rotations in Studio without authoring per-card markup.
 - The grid-level header pairs a caption, heading, and subline with the row layout, providing editorial context without a separate section.
-
-## Usage
-
-::component-code
----
-:name: LEditorialGrid
-:story-height: 400px
-story-id: ui-sections-editorialgrid--default
-title: EditorialGrid Default
----
-```vue-template
-<EditorialGrid :cards="cards" :featured-count="1" />
-```
-::
 
 ## Feature List
 

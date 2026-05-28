@@ -1,6 +1,11 @@
 ---
 title: Filter Bar
 description: Inline filter strip for product listing pages with current filters, sort, count, and an open-all-filters trigger.
+playground:
+  name: FilterBar
+  base: ui-blocks-filterbar
+  defaultStory: default
+  height: 460px
 seo:
   title: Filter Bar | Laioutr
   description: Inline filter strip for product listing pages.
@@ -11,6 +16,11 @@ sitemap:
   priority: 1.0
 aliases:
   - /laioutr-ui/shop/filters
+links:
+  - label: Figma
+    icon: i-simple-icons-figma
+    to: https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=82-217205&m=dev
+    target: _blank
 ---
 
 ## Overview
@@ -31,15 +41,6 @@ Auto-import tag: `<LFilterBar>`.
 :::tip
 Pro-Tip from Larry: Pair `FilterBar` (inline summary) with `FilterOffCanvas` (the off-canvas sheet) so casual filtering happens inline and deep filtering happens in the sheet.
 :::
-
-## Usage
-
-::component-code
----
-:name: LFilterBar
-story-id: ui-blocks-filterbar--default
----
-::
 
 ## Feature List
 

@@ -1,6 +1,11 @@
 ---
 title: Input Combobox
 description: Single or multi-select combobox with a custom display formatter for the chosen value.
+playground:
+  name: InputCombobox
+  base: ui-kit-molecules-inputcombobox
+  defaultStory: default
+  height: 460px
 seo:
   title: Input Combobox | Laioutr
   description: Single or multi-select combobox.
@@ -23,22 +28,6 @@ Wrap it in `<LField>` to inherit `id`, `disabled`, `required`, `invalid`, and `e
 - One combobox primitive handles both single and multi-select, which means the same component can ship customer-facing pickers and admin tooling without divergence.
 - Field-driven validation means a required tag picker surfaces its error inline, preventing the silent failures that frustrate users mid-form.
 
-## Usage
-
-::component-code
----
-:name: LInputCombobox
-:story-height: 150px
-story-id: ui-kit-molecules-inputcombobox--default
-title: InputCombobox Default
----
-```vue-template
-<Field label="Tags">
-    <InputCombobox v-model="tags" multiple :options="tagOptions" />
-  </Field>
-```
-::
-
 ## Feature List
 
 ::features
@@ -51,7 +40,6 @@ items:
   - "v-model carries a single value or an array depending on `multiple`, so consumers don't switch components for the two modes"
 ---
 ::
-
 
 ## API Reference
 

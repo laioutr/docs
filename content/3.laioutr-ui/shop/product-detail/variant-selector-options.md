@@ -1,6 +1,11 @@
 ---
 title: Variant Selector Options
 description: Multi-attribute variant selector that picks the right option tile per attribute (text tiles for size and material, image grid or slider for color).
+playground:
+  name: VariantSelectorOptions
+  base: ui-blocks-variantselectoroptions
+  defaultStory: default
+  height: 460px
 seo:
   title: Variant Selector Options | Laioutr
   description: Multi-attribute variant selector with per-attribute option tiles.
@@ -29,59 +34,6 @@ Auto-import tag: `<LVariantSelectorOptions>`.
 - Automatic swap to image grid (desktop) or slider (mobile) for the `color` attribute gives swatches the visual treatment shoppers expect, without extra wiring.
 - Unavailable values stay visible and clearly marked, so shoppers see the full attribute set and understand why a combination is blocked instead of seeing options disappear.
 - `v-model` plus `Field` wrapper plays nicely with form validation, so required-variant errors surface inline before the add-to-cart click fails.
-
-## Usage
-
-::component-code
----
-:name: LVariantSelectorOptions
-:story-height: 400px
-story-id: ui-blocks-variantselectoroptions--default
-title: VariantSelectorOptions Default
----
-```vue-template
-<script setup lang="ts">
-import { ref } from 'vue';
-
-const selected = ref<Record<string, string>>({});
-
-const options = [
-  {
-    id: 'opt-size',
-    name: 'Size',
-    values: [
-      { id: 'val-s', value: 'S' },
-      { id: 'val-m', value: 'M' },
-      { id: 'val-l', value: 'L' },
-    ],
-  },
-  {
-    id: 'opt-color',
-    name: 'Color',
-    values: [
-      { id: 'val-red', value: 'Red', media: { type: 'image', url: '/red.jpg' } },
-      { id: 'val-blue', value: 'Blue', media: { type: 'image', url: '/blue.jpg' } },
-    ],
-  },
-];
-
-const variants = [
-  {
-    id: 'v1',
-    availableForSale: true,
-    selectedOptions: [
-      { name: 'Size', value: 'M' },
-      { name: 'Color', value: 'Red' },
-    ],
-  },
-];
-</script>
-
-<template>
-  <VariantSelectorOptions v-model="selected" :options="options" :variants="variants" />
-</template>
-```
-::
 
 ## Feature List
 

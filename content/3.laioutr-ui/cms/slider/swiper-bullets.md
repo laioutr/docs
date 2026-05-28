@@ -1,6 +1,11 @@
 ---
 title: Swiper Bullets
 description: Bullet pagination indicator for sliders.
+playground:
+  name: SwiperBullets
+  base: ui-kit-molecules-swiperbullets
+  defaultStory: default
+  height: 460px
 seo:
   title: Swiper Bullets | Laioutr
   description: Bullet pagination indicator for sliders.
@@ -23,15 +28,6 @@ aliases:
 - Direct-jump behaviour lets visitors land on the slide that matches their interest, raising click-through on hero rotations.
 - Surface-tone aware styling keeps the bullets legible on any backdrop, so designers freely match the slider to its page.
 - One indicator component covers hero, product, and content sliders, keeping the rotation pattern consistent across the site.
-
-## Usage
-
-::component-code
----
-:name: LSwiperBullets
-story-id: ui-kit-molecules-swiperbullets--default
----
-::
 
 ## Feature List
 

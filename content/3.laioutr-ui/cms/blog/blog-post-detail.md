@@ -1,6 +1,11 @@
 ---
 title: Blog Post Detail
 description: Blog article view rendering a hero media, title, rich body, and a social-share row.
+playground:
+  name: BlogPostDetail
+  base: ui-sections-blogpostdetail
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-116
 seo:
   title: Blog Post Detail | Laioutr

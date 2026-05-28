@@ -1,6 +1,11 @@
 ---
 title: Backdrop
 description: Painted background surface that publishes its surface tone to descendants.
+playground:
+  name: Backdrop
+  base: ui-kit-atoms-backdrop
+  defaultStory: default
+  height: 460px
 links: []
 seo:
   title: Backdrop | Laioutr

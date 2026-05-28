@@ -1,6 +1,11 @@
 ---
 title: Tooltip
 description: Reka-UI-backed tooltip primitive with a configurable arrow width and side offset.
+playground:
+  name: Tooltip
+  base: ui-kit-molecules-tooltip
+  defaultStory: default
+  height: 460px
 seo:
   title: Tooltip | Laioutr
   description: Reka-UI-backed tooltip primitive.
@@ -21,22 +26,6 @@ sitemap:
 - Surfacing icon-button labels on hover and focus keeps the dense chrome (mini-cart, filters, account utility row) discoverable for new users.
 - Configurable arrow width, side offset, and delay duration let designers tune the tooltip per surface without forking the primitive.
 
-## Usage
-
-::component-code
----
-:name: LTooltip
-:story-height: 200px
-story-id: ui-kit-molecules-tooltip--default
-title: Tooltip Default
----
-```vue-template
-<Tooltip label="More info">
-    <IconButton label="Info" icon="info" />
-  </Tooltip>
-```
-::
-
 ## Feature List
 
 ::features
@@ -49,7 +38,6 @@ items:
   - "Hoverable content disabled (`disable-hoverable-content`), so the tip dismisses when the trigger loses hover, matching native chrome"
 ---
 ::
-
 
 ## API Reference
 

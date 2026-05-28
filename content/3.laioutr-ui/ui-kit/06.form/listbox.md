@@ -1,6 +1,11 @@
 ---
 title: Listbox
 description: Reka-UI-backed listbox primitive for single or multi-select option lists.
+playground:
+  name: Listbox
+  base: ui-kit-molecules-listbox
+  defaultStory: default
+  height: 460px
 seo:
   title: Listbox | Laioutr
   description: Reka-UI-backed listbox primitive.
@@ -24,24 +29,6 @@ aliases:
 - Predictable v-model binding lets product teams wire complex selection flows without writing custom state machines.
 - A shared listbox visual style means filter UX feels the same on PLP, search, and checkout, which reduces shopper friction at every step of the funnel.
 
-## Usage
-
-::component-code
----
-:name: LListbox
-:story-height: 400px
-story-id: ui-kit-molecules-listbox--default
-title: Listbox Default
----
-```vue-template
-<Listbox v-model="selected">
-    <ListboxItem v-for="opt in options" :key="opt.value" :value="opt.value">
-      {{ opt.label }}
-    </ListboxItem>
-  </Listbox>
-```
-::
-
 ## Feature List
 
 ::features
@@ -55,7 +42,6 @@ items:
   - "Field-aware `aria-required` and `aria-invalid` plumbing means listboxes work inside `<LField>` with no extra props"
 ---
 ::
-
 
 ## API Reference
 

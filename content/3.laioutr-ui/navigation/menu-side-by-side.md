@@ -1,6 +1,11 @@
 ---
 title: Menu Side by Side
 description: Desktop side-by-side off-canvas category menu with slide-in transitions between hierarchical levels.
+playground:
+  name: MenuSideBySide
+  base: ui-blocks-menusidebyside
+  defaultStory: initial
+  height: 460px
 jiraIssueId: LUI-96
 links:
   - label: Figma
@@ -38,15 +43,6 @@ Reuse the same category data on [`MobileMenuShop`](/laioutr-ui/navigation/mobile
 Pro-Tip from Larry: Pass the same `navigationMenuItems` to `MobileMenuShop` so the desktop drill-down and mobile menu reflect the same catalog.
 :::
 
-## Usage
-
-::component-code
----
-:name: LMenuSideBySide
-story-id: ui-blocks-menusidebyside--initial
----
-::
-
 ## Feature List
 
 ::features
@@ -60,8 +56,6 @@ items:
   - "Familiar mobile-app browsing pattern on desktop shortens the learning curve for app-first audiences"
 ---
 ::
-
-## API Reference
 
 ### LMenuSideBySide
 

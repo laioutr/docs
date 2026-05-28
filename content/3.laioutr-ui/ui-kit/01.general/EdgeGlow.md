@@ -1,6 +1,11 @@
 ---
 title: Edge Glow
 description: A edge glow component
+playground:
+  name: EdgeGlow
+  base: ui-kit-atoms-edgeglow
+  defaultStory: default
+  height: 460px
 links: []
 seo:
   title: Edge Glow | Laioutr
@@ -26,15 +31,6 @@ Edge Glow is a decorative top-edge glow: a single static radial gradient pinned 
 :::tip
 Pro-Tip from Larry: Drop `LEdgeGlow` into the top of a hero section when you want a subtle brand-tinted halo without a background image.
 :::
-
-## Usage
-
-::component-code
----
-:name: LEdgeGlow
-story-id: ui-kit-atoms-edgeglow--default
----
-::
 
 ## Feature List
 

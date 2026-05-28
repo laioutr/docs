@@ -1,6 +1,11 @@
 ---
 title: Search Auto-Suggest
 description: Responsive header search with real-time autocomplete suggestions, mounted once via `HeaderShop`.
+playground:
+  name: SearchAutoSuggest
+  base: ui-features-searchautosuggest
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-109
 links:
   - label: Figma
@@ -36,15 +41,6 @@ Suggestion data is supplied externally, so the component composes cleanly with a
 Pro-Tip from Larry: Treat `SearchAutoSuggest` as the single header search entry point. `HeaderShop` mounts it once, so you do not need to recompose it per page.
 :::
 
-## Usage
-
-::component-code
----
-:name: LSearchAutoSuggest
-story-id: ui-features-searchautosuggest--default
----
-::
-
 ## Feature List
 
 ::features
@@ -58,8 +54,6 @@ items:
   - "Pairs `LSearchAutoSuggest` with `LSearchAutoSuggestItem` for per-row composition"
 ---
 ::
-
-## API Reference
 
 ### LSearchAutoSuggest
 

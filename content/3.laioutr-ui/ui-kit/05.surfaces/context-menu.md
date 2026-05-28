@@ -1,6 +1,11 @@
 ---
 title: Context Menu
 description: Reka-UI-backed primitive for right-click and long-press menus.
+playground:
+  name: ContextMenu
+  base: ui-kit-molecules-contextmenu
+  defaultStory: default
+  height: 460px
 seo:
   title: Context Menu | Laioutr
   description: Reka-UI-backed context menu primitive.
@@ -24,28 +29,6 @@ The kit ships the `ContextMenu`, `ContextMenuTrigger`, `ContextMenuContent`, and
 - Per-item `disabled` and `textValue` props give the keyboard-typeahead and dimmed-state behaviour teams expect from a native context menu, without extra wiring.
 - One consistent contextual pattern across the app reduces the learning curve for new operators and shortens onboarding for support teams.
 
-## Usage
-
-::component-code
----
-:name: LContextMenu
-:story-height: 400px
-story-id: ui-kit-molecules-contextmenu--default
-title: ContextMenu Default
----
-```vue-template
-<ContextMenu>
-    <ContextMenuTrigger>
-      <div>Right-click me</div>
-    </ContextMenuTrigger>
-    <ContextMenuContent>
-      <ContextMenuItem>Copy</ContextMenuItem>
-      <ContextMenuItem>Paste</ContextMenuItem>
-    </ContextMenuContent>
-  </ContextMenu>
-```
-::
-
 ## Feature List
 
 ::features
@@ -58,7 +41,6 @@ items:
   - "Auto-imports as `<LContextMenu>`, so no manual import boilerplate per page"
 ---
 ::
-
 
 ## API Reference
 

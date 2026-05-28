@@ -1,6 +1,11 @@
 ---
 title: Lightbox
 description: Modal media viewer with zoom, pan, and cross-image navigation.
+playground:
+  name: Lightbox
+  base: ui-kit-organisms-lightbox
+  defaultStory: default
+  height: 460px
 seo:
   title: Lightbox | Laioutr
   description: Modal media viewer with zoom, pan, and cross-image navigation.
@@ -23,20 +28,6 @@ Most pages drive the lightbox indirectly through `MediaPreview` or `MediaGallery
 - Cross-image navigation keeps customers exploring the gallery instead of bouncing back to the listing after viewing one shot.
 - Focus management from reka-ui Dialog semantics protects accessibility compliance on every product page that uses the gallery.
 
-## Usage
-
-::component-code
----
-:name: LLightbox
-:story-height: 600px
-story-id: ui-kit-organisms-lightbox--default
-title: Lightbox Default
----
-```vue-template
-<MediaPreview :media="image" lightbox />
-```
-::
-
 ## Feature List
 
 ::features
@@ -49,7 +40,6 @@ items:
   - "Keyboard navigation from Swiper covers arrow-key paging, escape to close, and zoom controls"
 ---
 ::
-
 
 ## API Reference
 

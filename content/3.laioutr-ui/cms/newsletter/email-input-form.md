@@ -1,6 +1,11 @@
 ---
 title: Email Input Form
 description: Email field and submit button for newsletter signup. Generic enough for footers, popups, or dedicated newsletter sections.
+playground:
+  name: EmailInputForm
+  base: ui-kit-molecules-emailinputform
+  defaultStory: default
+  height: 460px
 seo:
   title: Email Input Form | Laioutr
   description: Email field and submit button for newsletter signup.
@@ -30,15 +35,6 @@ aliases:
 Pro-Tip from Larry: Drop `EmailInputForm` in the footer so signup is always available without a separate page.
 :::
 
-## Usage
-
-::component-code
----
-:name: LEmailInputForm
-story-id: ui-kit-molecules-emailinputform--default
----
-::
-
 ## Feature List
 
 ::features
@@ -51,8 +47,6 @@ items:
   - "Editors place the form anywhere in Studio without engineering tickets"
 ---
 ::
-
-## API Reference
 
 ### LEmailInputForm
 

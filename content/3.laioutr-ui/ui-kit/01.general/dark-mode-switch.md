@@ -1,6 +1,11 @@
 ---
 title: Dark Mode Switch
 description: Light / dark theme toggle for the top bar or header. Persists the preference.
+playground:
+  name: DarkModeSwitch
+  base: ui-kit-molecules-darkmodeswitch
+  defaultStory: default
+  height: 460px
 seo:
   title: Dark Mode Switch | Laioutr
   description: Light / dark theme toggle for the top bar or header.

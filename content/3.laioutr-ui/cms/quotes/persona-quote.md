@@ -1,6 +1,11 @@
 ---
 title: Persona Quote
 description: A testimonial component pairing a profile picture with a quote, personal details, and optional company branding.
+playground:
+  name: PersonaQuote
+  base: ui-blocks-personaquote
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-24
 links:
   - label: Figma
@@ -35,15 +40,6 @@ For multiple testimonials, wrap several `PersonaQuote`s with [`PersonaQuoteSlide
 :::tip
 Pro-Tip from Larry: Choose the speech-bubble profile style when the testimonial sits inside a story-driven layout; round or square work better in grids.
 :::
-
-## Usage
-
-::component-code
----
-:name: LPersonaQuote
-story-id: ui-blocks-personaquote--default
----
-::
 
 ## Feature List
 

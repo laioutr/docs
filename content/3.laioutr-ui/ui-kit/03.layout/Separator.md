@@ -1,6 +1,11 @@
 ---
 title: Separator
 description: Visually divides content sections, so that a clear visual hierarchy is generated and improves content readability.
+playground:
+  name: Separator
+  base: ui-kit-atoms-separator
+  defaultStory: horizontal-separator
+  height: 460px
 seo:
   title: Separator | Laioutr
   description: Visually divides content sections, so that a clear visual hierarchy is generated and improves content readability.
@@ -27,17 +32,6 @@ Pro-Tip from Larry: Don't use a separator where margin would do. They're for cas
 :::
 
 ## Usage
-
-::component-code
----
-:name: Separator Horizontal
-story-height: 75px
-story-id: ui-kit-atoms-separator--horizontal-separator
----
-```vue-template
-<Separator />
-```
-::
 
 ::component-code
 ---

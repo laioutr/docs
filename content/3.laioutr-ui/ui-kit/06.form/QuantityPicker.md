@@ -1,6 +1,11 @@
 ---
 title: Quantity Picker
 description: Stepper input for product quantity with increment / decrement buttons and direct keyboard entry.
+playground:
+  name: QuantityPicker
+  base: ui-kit-molecules-quantitypicker
+  defaultStory: increment-value-one
+  height: 460px
 jiraIssueId: LUI-92
 seo:
   title: Quantity Picker | Laioutr
@@ -29,19 +34,6 @@ Set `withDeleteButton` to swap the decrement icon to a trash icon once the value
 :::tip
 Pro-Tip from Larry: Bind `maximumValue` to available stock so the picker physically prevents customers from ordering more than inventory allows, and listen for `@delete` to remove the line item when the user clicks decrement at the minimum.
 :::
-
-## Usage
-
-::component-code
----
-:name: LQuantityPicker
-:story-height: 100px
-story-id: ui-kit-molecules-quantitypicker--increment-value-one
----
-```vue-template
-<LQuantityPicker />
-```
-::
 
 ## Feature List
 

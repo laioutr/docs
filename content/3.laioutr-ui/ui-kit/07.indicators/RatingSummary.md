@@ -1,6 +1,11 @@
 ---
 title: Rating Summary
 description: Aggregate review rating (stars plus count) for product cards and product detail pages.
+playground:
+  name: RatingSummary
+  base: ui-kit-molecules-ratingsummary
+  defaultStory: default
+  height: 460px
 links: []
 seo:
   title: Rating Summary | Laioutr

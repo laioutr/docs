@@ -1,6 +1,11 @@
 ---
 title: Energy Label
 description: EU energy efficiency label image with lightbox preview and data-sheet link.
+playground:
+  name: EnergyLabel
+  base: ui-blocks-energylabel
+  defaultStory: default
+  height: 460px
 seo:
   title: Energy Label | Laioutr
   description: EU energy efficiency label image with lightbox and data-sheet link.
@@ -25,24 +30,6 @@ Auto-import tag: `<LEnergyLabel>`.
 - Lightbox preview lets shoppers read the full label without leaving the PDP, which keeps energy-conscious shoppers engaged at the decision point.
 - Direct link to the product data sheet keeps regulatory artifacts one click away, so shoppers and auditors find them without contacting support.
 - Drop-in placement on any PDP means new markets entering EU energy scope can ship without a custom integration per product.
-
-## Usage
-
-::component-code
----
-:name: LEnergyLabel
-:story-height: 400px
-story-id: ui-blocks-energylabel--default
-title: EnergyLabel Default
----
-```vue-template
-<EnergyLabel
-  :label-preview="product.energyLabelPreview"
-  :label-fullsize="product.energyLabelFullsize"
-  :data-sheet-link="product.energyDataSheetUrl"
-/>
-```
-::
 
 ## Feature List
 

@@ -1,6 +1,11 @@
 ---
 title: Link Tile
 description: Category-promoting tile that routes to a Basic, Compact, or Big internal layout based on the `variant` prop.
+playground:
+  name: LinkTile
+  base: ui-kit-molecules-linktile
+  defaultStory: basic
+  height: 460px
 jiraIssueId: LUI-36
 links:
   - label: Figma

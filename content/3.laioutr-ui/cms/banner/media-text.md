@@ -1,6 +1,11 @@
 ---
 title: Media + Text
 description: Responsive section pairing a large image or video with text content in flexible proportions.
+playground:
+  name: MediaText
+  base: ui-sections-mediatext
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-218
 seo:
   title: Media + Text | Laioutr
@@ -30,15 +35,6 @@ Chrome is surface-tone aware so it stays legible on light, dark, and bright back
 :::tip
 Pro-Tip from Larry: Use `MediaText` for storytelling blocks where the image carries the visual weight; reach for a `BannerBasic` or `BannerShowcase` when the call-to-action is the focus.
 :::
-
-## Usage
-
-::component-code
----
-:name: LMediaText
-story-id: ui-sections-mediatext--default
----
-::
 
 ## Feature List
 

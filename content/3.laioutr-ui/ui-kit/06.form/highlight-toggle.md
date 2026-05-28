@@ -1,6 +1,11 @@
 ---
 title: Highlight Toggle
 description: Two-way toggle with label and optional badge for binary choices where one side carries emphasis.
+playground:
+  name: HighlightToggle
+  base: ui-kit-molecules-highlighttoggle
+  defaultStory: default
+  height: 460px
 links: []
 seo:
   title: Highlight Toggle | Laioutr
@@ -28,16 +33,6 @@ Highlight Toggle is a generic two-way `v-model` switch with a label and an optio
 :::tip
 Pro-Tip from Larry: For pricing pages, render a `Save 20%` badge on the annual side so the benefit is visible at a glance.
 :::
-
-## Usage
-
-::component-code
----
-:name: LHighlightToggle
-:story-height: 100px
-story-id: ui-kit-molecules-highlighttoggle--default
----
-::
 
 ## Feature List
 
