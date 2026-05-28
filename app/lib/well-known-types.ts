@@ -34,4 +34,9 @@ export const WELL_KNOWN_TYPES: Record<string, string> = {
   // Measurement
   Measurement: '/frontend/api-reference/common-types/measurement',
   MeasurementUnit: '/frontend/api-reference/common-types/measurement#unit',
+
+  // Opening hours
+  OpeningHours: '/frontend/api-reference/common-types/opening-hours',
+  OpeningWindow: '/frontend/api-reference/common-types/opening-hours#openingwindow',
+  Weekday: '/frontend/api-reference/common-types/opening-hours#weekday',
 };
