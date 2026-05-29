@@ -1,6 +1,11 @@
 ---
 title: Cart Coupon Code Accordion
 description: Collapsible coupon-code input inside the cart.
+playground:
+  name: CartCouponCodeAccordion
+  base: ui-blocks-cartcouponcodeaccordion
+  defaultStory: default
+  height: 460px
 seo:
   title: Cart Coupon Code Accordion | Laioutr
   description: Collapsible coupon-code input inside the cart.
@@ -26,20 +31,6 @@ Auto-import tag: `<LCartCouponCodeAccordion>`.
 - The `disabled` prop lets the parent lock the input during an in-flight apply call without re-rendering the accordion.
 - Reusable input primitive lets you place coupon entry on cart, checkout, or any custom flow without duplicating field logic.
 
-## Usage
-
-::component-code
----
-:name: LCartCouponCodeAccordion
-:story-height: 400px
-story-id: ui-blocks-cartcouponcodeaccordion--default
-title: CartCouponCodeAccordion Default
----
-```vue-template
-<CartCouponCodeAccordion :disabled="isApplying" @apply-coupon-code="applyCode" />
-```
-::
-
 ## Feature List
 
 ::features
@@ -52,8 +43,6 @@ items:
   - "Standalone CartCouponCodeAccordionInput primitive available when you need just the field outside the accordion shell"
 ---
 ::
-
-## API Reference
 
 ### LCartCouponCodeAccordion
 

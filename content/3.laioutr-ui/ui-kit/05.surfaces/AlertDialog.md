@@ -1,6 +1,11 @@
 ---
 title: Alert Dialog
 description: Modal dialog for confirming critical actions with focus trap and keyboard navigation.
+playground:
+  name: AlertDialog
+  base: ui-kit-organisms-alertdialog
+  defaultStory: manual-dialog
+  height: 460px
 jiraIssueId: LUI-107
 links:
   - label: Figma

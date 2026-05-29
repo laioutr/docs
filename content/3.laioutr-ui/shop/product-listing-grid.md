@@ -1,6 +1,11 @@
 ---
 title: Product Listing Grid
 description: Responsive grid of product tiles for category, search, and brand listing pages.
+playground:
+  name: ProductListingGrid
+  base: ui-blocks-productlistinggrid
+  defaultStory: default
+  height: 460px
 seo:
   title: Product Listing Grid | Laioutr
   description: Responsive grid of product tiles.
@@ -9,6 +14,11 @@ sitemap:
   lastmod: 2026-05-13
   changefreq: monthly
   priority: 1.0
+links:
+  - label: Figma
+    icon: i-simple-icons-figma
+    to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14795-155216&t=D15GraY4m5o14KTa-4
+    target: _blank
 ---
 
 ## Overview
@@ -22,20 +32,6 @@ Auto-import tag: `<LProductListingGrid>`.
 - Responsive column logic keeps tiles aligned from phone to wide desktop, so the listing always feels intentional rather than reflowed.
 - One grid powers category, search, and brand pages, removing the cost of running three near-identical listing templates.
 - Pairs directly with filter and sort components, so the full listing chrome composes from a small set of well-defined building blocks.
-
-## Usage
-
-::component-code
----
-:name: LProductListingGrid
-:story-height: 400px
-story-id: ui-blocks-productlistinggrid--default
-title: ProductListingGrid Default
----
-```vue-template
-<ProductListingGrid :products="products" />
-```
-::
 
 ## Feature List
 

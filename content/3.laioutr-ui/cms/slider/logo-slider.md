@@ -1,6 +1,11 @@
 ---
 title: Logo Slider
 description: Animated slider of brand, partner, or supplier logos.
+playground:
+  name: LogoSlider
+  base: ui-sections-logoslider
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-215
 seo:
   title: Logo Slider | Laioutr

@@ -1,6 +1,11 @@
 ---
 title: Media Gallery
 description: Fullscreen lightbox dialog for multi-image viewing with zoom, navigation, and a thumbnail strip.
+playground:
+  name: MediaGallery
+  base: ui-features-mediagallery
+  defaultStory: default
+  height: 460px
 seo:
   title: Media Gallery | Laioutr
   description: Fullscreen lightbox dialog for multi-image viewing.
@@ -25,24 +30,6 @@ Use it from a parent component (article view, brand page, product gallery) that 
 - Optional zoom plus pan reveals fine detail on textiles, materials, and editorial photography, raising buyer confidence.
 - The thumbnail strip inside the dialog keeps orientation across long image sets, so readers do not lose their place mid-browse.
 - Editors maintain the image array in Studio, so creative teams refresh galleries on launch day without code changes.
-
-## Usage
-
-::component-code
----
-:name: LMediaGallery
-:story-height: 400px
-story-id: ui-features-mediagallery--default
-title: MediaGallery Default
----
-```vue-template
-<MediaGallery
-    v-model:open="open"
-    title="Spring lookbook"
-    :medias="postImages"
-  />
-```
-::
 
 ## Feature List
 

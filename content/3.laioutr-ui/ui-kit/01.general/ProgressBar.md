@@ -1,6 +1,11 @@
 ---
 title: Progress Bar
 description: A progress indicator displaying task or operation completion status.
+playground:
+  name: ProgressBar
+  base: ui-kit-atoms-progressbar
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-133
 links:
   - label: Figma
@@ -35,14 +40,6 @@ Pro-Tip from Larry: Set `:max` for non-percentage progress (e.g. file size in by
 :::
 
 ## Usage
-
-::component-code
----
-:name: LProgressBar
-story-height: 100px
-story-id: ui-kit-atoms-progressbar--default
----
-::
 
 ```vue-template
 <LProgressBar :value="42" :max="100" />

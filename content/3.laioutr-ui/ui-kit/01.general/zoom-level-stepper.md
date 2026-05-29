@@ -1,6 +1,11 @@
 ---
 title: Zoom Level (Stepper)
 description: Stepper control for image zoom level on desktop, typically inside `Lightbox`.
+playground:
+  name: ZoomLevelStepper
+  base: ui-kit-molecules-zoomlevelstepper
+  defaultStory: default
+  height: 460px
 seo:
   title: Zoom Level (Stepper) | Laioutr
   description: Stepper control for image zoom level on desktop.
@@ -21,25 +26,6 @@ sitemap:
 - Discrete steps make it predictable how far the next click will zoom, which avoids the overshoot frustration of free-form zoom controls.
 - Shares the lightbox shell with the mobile segmented variant, so the experience stays cohesive when shoppers move between devices.
 
-## Usage
-
-::component-code
----
-:name: LZoomLevelStepper
-:story-height: 200px
-story-id: ui-kit-molecules-zoomlevelstepper--default
-title: ZoomLevelStepper Default
----
-```vue-template
-<ZoomLevelStepper
-    v-model:current-zoom-level="zoomLevel"
-    variant="white"
-    :min-level="1"
-    :max-level="4"
-  />
-```
-::
-
 ## Feature List
 
 ::features
@@ -52,7 +38,6 @@ items:
   - "Shares the lightbox shell with the mobile segmented variant, so desktop and phone shoppers see a cohesive experience"
 ---
 ::
-
 
 ## API Reference
 

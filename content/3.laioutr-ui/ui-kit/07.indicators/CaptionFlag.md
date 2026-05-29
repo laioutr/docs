@@ -1,6 +1,11 @@
 ---
 title: Caption Flag
 description: Small promotional or status label that sits above or beside content without dominating the layout.
+playground:
+  name: CaptionFlag
+  base: ui-kit-atoms-captionflag
+  defaultStory: default
+  height: 460px
 links: []
 seo:
   title: Caption Flag | Laioutr
@@ -23,16 +28,6 @@ Caption Flag is a small promotional or status label ("New", "Sale", and similar)
 - A single caption flag pattern keeps "New", "Sale", and similar callouts consistent across editorial tiles, category cards, and content blocks.
 - Merchandisers can flag fresh stock or campaigns through Studio without raising a design ticket each time inventory turns over.
 - Predictable placement above or beside the caption avoids the layout shift that ad-hoc badges cause on responsive grids.
-
-## Usage
-
-::component-code
----
-:name: LCaptionFlag
-story-height: 100px
-story-id: ui-kit-atoms-captionflag--default
----
-::
 
 ## Feature List
 

@@ -1,6 +1,11 @@
 ---
 title: Grid Masonry
 description: A grid masonry component
+playground:
+  name: GridMasonry
+  base: ui-kit-atoms-gridmasonry
+  defaultStory: default
+  height: 460px
 links: []
 seo:
   title: Grid Masonry | Laioutr
@@ -26,23 +31,6 @@ Grid Masonry arranges items in a Pinterest-style layout: every column shares the
 :::tip
 Pro-Tip from Larry: Reach for [`GridFill`](/laioutr-ui/ui-kit/layout/gridfill) when every row should align horizontally. Use masonry only when staggered heights are the point.
 :::
-
-## Usage
-
-::component-code
----
-name: GridMasonry
-story-height: 430px
-story-id: ui-kit-atoms-gridmasonry--default
----
-```vue-template
-<GridMasonry :items="cards" :column-width="240" :gap="16">
-  <template #default="{ item, column, row, index }">
-    <Card :data="item" :data-row="row" :data-column="column" :data-index="index" />
-  </template>
-</GridMasonry>
-```
-::
 
 ## Feature List
 

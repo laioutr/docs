@@ -1,6 +1,11 @@
 ---
 title: Load More
 description: Explicit-click pagination control that pairs a Load More button with a loaded-vs-total progress indicator and a back-to-top link.
+playground:
+  name: LoadMore
+  base: ui-kit-molecules-loadmore
+  defaultStory: default-case
+  height: 460px
 jiraIssueId: LUI-70
 seo:
   title: Load More | Laioutr
@@ -29,15 +34,6 @@ The button and progress bar hide automatically when `loadedCount >= totalCount`.
 :::tip
 Pro-Tip from Larry: Wire `@load-more` to your store's fetch action and pass `loading` through to disable the button while the request is in flight.
 :::
-
-## Usage
-
-::component-code
----
-:name: LLoadMore
-story-id: ui-kit-molecules-loadmore--default-case
----
-::
 
 ## Feature List
 

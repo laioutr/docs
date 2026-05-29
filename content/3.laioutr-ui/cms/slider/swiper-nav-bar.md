@@ -2,6 +2,11 @@
 title: Swiper Nav Bar
 description: Compact slider navigation strip with arrows plus bullets or numbers, surface-tone aware.
 jiraIssueId: LUI-19
+playground:
+  name: SwiperNavBar
+  base: ui-kit-molecules-swipernavbar
+  defaultStory: default
+  height: 460px
 seo:
   title: Swiper Nav Bar | Laioutr
   description: Compact slider navigation strip with arrows, bullets or numbers.
@@ -30,15 +35,6 @@ Reach for `navigationStyle="numbers"` on multi-step flows where slide count carr
 :::tip
 Pro-Tip from Larry: Use `navigationStyle="numbers"` on multi-step flows where slide count carries meaning; default to bullets for purely visual sliders.
 :::
-
-## Usage
-
-::component-code
----
-:name: LSwiperNavBar
-story-id: ui-kit-molecules-swipernavbar--default
----
-::
 
 ## Feature List
 

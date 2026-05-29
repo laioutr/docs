@@ -1,6 +1,11 @@
 ---
 title: Plan Card
 description: A pricing card displaying subscription plan details with strikethrough pricing for discounts.
+playground:
+  name: PlanCard
+  base: ui-blocks-plancard
+  defaultStory: basic-plan
+  height: 460px
 links:
   - label: Figma
     icon: i-simple-icons-figma

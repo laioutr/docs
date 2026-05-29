@@ -1,6 +1,11 @@
 ---
 title: Image Contrast Overlay
 description: Gradient or solid overlay that keeps text readable over images.
+playground:
+  name: ImageContrastOverlay
+  base: ui-kit-atoms-imagecontrastoverlay
+  defaultStory: no-overlay
+  height: 460px
 jiraIssueId: LUI-22
 seo:
   title: Image Contrast Overlay | Laioutr

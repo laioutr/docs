@@ -1,6 +1,11 @@
 ---
 title: Mobile Menu (Shop)
 description: Mobile off-canvas drawer paired with `HeaderShop`, hosting a root grid plus a drill-in child menu, login, and locale.
+playground:
+  name: MobileMenuShop
+  base: ui-features-mobilemenushop
+  defaultStory: default
+  height: 460px
 seo:
   title: Mobile Menu (Shop) | Laioutr
   description: Mobile off-canvas drawer for the shop header.
@@ -27,15 +32,6 @@ Pass items, social links, locale select, and the mode switcher as props on `Mobi
 :::tip
 Pro-Tip from Larry: Share `navigationMenuItems` across `MenuSideBySide` (desktop) and `MobileMenuShop` (mobile) so a category change ships to both breakpoints at once.
 :::
-
-## Usage
-
-::component-code
----
-:name: LMobileMenuShop
-story-id: ui-features-mobilemenushop--default
----
-::
 
 ## Feature List
 

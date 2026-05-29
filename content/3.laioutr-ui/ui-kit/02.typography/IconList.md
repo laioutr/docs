@@ -1,6 +1,11 @@
 ---
 title: Icon List
 description: A icon list component
+playground:
+  name: IconList
+  base: ui-kit-molecules-iconlist
+  defaultStory: nested-x-small-style
+  height: 460px
 links: []
 seo:
   title: Icon List | Laioutr
@@ -31,13 +36,6 @@ Pro-Tip from Larry: Use one icon style per list so the list reads as a single un
 
 ## Usage
 
-::component-code
----
-:name: LIconList
-story-id: ui-kit-molecules-iconlist--nested-x-small-style
----
-::
-
 ```vue-template
 <LIconList size="s">
   <LIconListItem icon="actions/check">Fast checkout</LIconListItem>
@@ -57,8 +55,6 @@ items:
   - "Nesting supported because the context only provides the icon, not list state, so nested lists stay independent"
 ---
 ::
-
-## API Reference
 
 ### LIconList
 

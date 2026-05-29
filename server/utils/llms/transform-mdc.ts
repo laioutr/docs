@@ -2,6 +2,7 @@ import { renderAction, renderEntityComponent, renderEntityOverview, renderError,
 import { renderUiComponentMeta } from './render-ui-meta';
 import { renderExcalidrawDiagram } from './render-excalidraw';
 import { renderComponentCode } from './render-component-code';
+import { renderComponentPlayground } from './render-component-playground';
 import { renderSinceVersion } from './render-since-version';
 import reflected from '@laioutr-core/canonical-types/reflection';
 import '@laioutr-core/canonical-types/autoload';
@@ -10,7 +11,7 @@ import { canonicalErrors } from '#shared/utils/canonical-errors';
 
 type MinimarkNode = [string, Record<string, unknown>, ...any[]] | string;
 
-const KNOWN_COMPONENTS = new Set(['action-meta', 'query-meta', 'entity-component-meta', 'entity-overview', 'component-meta', 'page-type-meta', 'error-meta', 'excalidraw-diagram', 'component-code', 'since-version']);
+const KNOWN_COMPONENTS = new Set(['action-meta', 'query-meta', 'entity-component-meta', 'entity-overview', 'component-meta', 'component-playground', 'page-type-meta', 'error-meta', 'excalidraw-diagram', 'component-code', 'since-version']);
 
 function isElement(node: MinimarkNode): node is [string, Record<string, unknown>, ...any[]] {
   return Array.isArray(node) && typeof node[0] === 'string';
@@ -56,16 +57,22 @@ async function resolveComponent(tag: string, props: Record<string, unknown>, chi
     }
     case 'component-meta': {
       try {
-        const componentMeta = await import('@laioutr-core/ui-component-meta').then((m) => m.default);
-        const data = componentMeta[props.name as string];
+        const componentMeta = await import('@laioutr-core/ui-component-meta').then(
+          (m) => m.default as Record<string, unknown>,
+        );
+        const name = props.name as string;
+        const data = componentMeta[name] ?? componentMeta[`L${name}`];
         if (!data) return null;
-        return renderUiComponentMeta(props.name as string, data);
+        return renderUiComponentMeta(name, data);
       } catch {
         return null;
       }
     }
     case 'component-code': {
       return renderComponentCode(props, children);
+    }
+    case 'component-playground': {
+      return renderComponentPlayground(props);
     }
     case 'since-version': {
       return renderSinceVersion(props);

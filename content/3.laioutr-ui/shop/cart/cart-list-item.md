@@ -1,6 +1,11 @@
 ---
 title: Cart List Item
 description: Single line item row inside the cart with image, title, quantity picker, price, and remove action.
+playground:
+  name: CartListItem
+  base: ui-blocks-cartlistitem
+  defaultStory: default
+  height: 460px
 seo:
   title: Cart List Item | Laioutr
   description: Single line item row inside the cart.
@@ -25,31 +30,6 @@ Auto-import tag: `<LCartListItem>`.
 - Strikethrough and unit-price slots help shoppers confirm exactly what they're paying for, lowering returns from misread prices.
 - Single row component slots into mini-cart sheets, dedicated cart pages, and order summaries, so cart UI stays consistent everywhere shoppers see it.
 - Inline discount and voucher badges show applied promotions on the line itself, keeping the savings story attached to the product.
-
-## Usage
-
-::component-code
----
-:name: LCartListItem
-:story-height: 400px
-story-id: ui-blocks-cartlistitem--default
-title: CartListItem Default
----
-```vue-template
-<CartListItem
-  v-for="line in cart.items"
-  :key="line.itemId"
-  :item-id="line.itemId"
-  :image="line.image"
-  :title="line.title"
-  :price="line.price"
-  :quantity="line.quantity"
-  :quantity-loading="loading[line.itemId]"
-  @item-quantity-change="updateQty(line.itemId, $event)"
-  @item-delete="remove(line.itemId)"
-/>
-```
-::
 
 ## Feature List
 

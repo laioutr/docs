@@ -1,6 +1,11 @@
 ---
 title: Brand List
 description: A-Z grouped text-link directory of brands for "shop by brand" entry points.
+playground:
+  name: BrandList
+  base: ui-sections-brandlist
+  defaultStory: default
+  height: 460px
 seo:
   title: Brand List | Laioutr
   description: A-Z grouped text-link directory of brands.
@@ -9,6 +14,11 @@ sitemap:
   lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
+links:
+  - label: Figma
+    icon: i-simple-icons-figma
+    to: https://www.figma.com/design/iOpGWO38HkhnTYkEeEq8Oz/Laioutr-Basic?node-id=89-298202&t=WsyhlVHQyGVajZ9T-4
+    target: _blank
 ---
 
 ## Overview
@@ -21,20 +31,6 @@ sitemap:
 - A-Z grouping with locale-aware sorting helps shoppers scan a long brand list without scrolling endlessly.
 - Optional per-brand counts hint at catalogue depth, nudging shoppers toward brands with more on offer.
 - Editors maintain the brand array in Studio, so directories stay current as partnerships evolve.
-
-## Usage
-
-::component-code
----
-:name: LBrandList
-:story-height: 400px
-story-id: ui-sections-brandlist--default
-title: BrandList Default
----
-```vue-template
-<BrandList :brands="brands" />
-```
-::
 
 ## Feature List
 

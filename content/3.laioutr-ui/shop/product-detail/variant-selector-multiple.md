@@ -1,6 +1,11 @@
 ---
 title: Variant Selector (Multiple)
 description: Multi-attribute variant selector that opens an off-canvas sheet to pick across several dimensions at once.
+playground:
+  name: VariantSelectorMultiple
+  base: ui-blocks-variantselectormultiple
+  defaultStory: default
+  height: 460px
 seo:
   title: Variant Selector (Multiple) | Laioutr
   description: Multi-attribute variant selector.
@@ -9,6 +14,11 @@ sitemap:
   lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
+links:
+  - label: Figma
+    icon: i-simple-icons-figma
+    to: https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-223391&t=wABQtnJ0GubOC0US-4
+    target: _blank
 ---
 
 ## Overview
@@ -27,20 +37,6 @@ Auto-import tag: `<LVariantSelectorMultiple>`.
 - Sheet handoff to the full variant grid is the cleanest way to handle two-plus dimensions on mobile, where most variant decisions now happen.
 - Companion trigger and availability components let teams tailor the entry point for category-specific buy-boxes (footwear sizing, electronics specs) without forking the picker.
 - Availability sits in a `VariantSelectorMultipleAvailability` row directly beneath the trigger, setting expectations before shoppers open the sheet and cutting the frustration of opening a picker only to see everything sold out.
-
-## Usage
-
-::component-code
----
-:name: LVariantSelectorMultiple
-:story-height: 400px
-story-id: ui-blocks-variantselectormultiple--default
-title: VariantSelectorMultiple Default
----
-```vue-template
-<VariantSelectorMultiple v-model:open="open" :variants="product.variants" />
-```
-::
 
 ## Feature List
 

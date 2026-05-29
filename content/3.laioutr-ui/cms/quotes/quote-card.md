@@ -1,6 +1,11 @@
 ---
 title: Quote Card
 description: Compact testimonial card with optional star rating, author info, and company logo, with left or center alignment.
+playground:
+  name: QuoteCard
+  base: ui-blocks-quotecard
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-25
 links:
   - label: Figma
@@ -35,15 +40,6 @@ Reach for `QuoteCard` when profile pictures aren't available or when a simpler p
 :::tip
 Pro-Tip from Larry: Use `QuoteCard` for review sliders (`QuoteCardSlider`); use `PersonaQuote` when the testimonial benefits from a large profile image.
 :::
-
-## Usage
-
-::component-code
----
-:name: LQuoteCard
-story-id: ui-blocks-quotecard--default
----
-::
 
 ## Feature List
 

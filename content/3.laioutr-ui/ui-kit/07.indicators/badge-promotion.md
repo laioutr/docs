@@ -1,6 +1,11 @@
 ---
 title: Badge Promotion
 description: Promotional badge atom for product tiles and pricing with promo, sale, new, and icon variants.
+playground:
+  name: BadgePromotion
+  base: ui-kit-atoms-badgepromotion
+  defaultStory: default
+  height: 460px
 links: []
 seo:
   title: Badge Promotion | Laioutr

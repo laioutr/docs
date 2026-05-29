@@ -1,6 +1,11 @@
 ---
 title: Plan Comparison Table
 description: A feature-by-feature comparison table for subscription plans, with sticky headers and differences-only filtering.
+playground:
+  name: PlanComparisonTable
+  base: ui-sections-plancomparisontable
+  defaultStory: default
+  height: 460px
 links:
   - label: Figma
     icon: i-simple-icons-figma
@@ -36,15 +41,6 @@ The component is composed from five primitives that you can use directly when yo
 Pro-Tip from Larry: Pair the comparison table with a `PlanCardSlider` near the top of the page. The cards give a quick-glance comparison; the table is for prospects who want to scan every feature.
 :::
 
-## Usage
-
-::component-code
----
-:name: LPlanComparisonTable
-story-id: ui-sections-plancomparisontable--default
----
-::
-
 ## Feature List
 
 ::features
@@ -59,8 +55,6 @@ items:
   - "highlight flag on a row value renders the title as rainbow gradient text to call out flagship capabilities"
 ---
 ::
-
-## API Reference
 
 ### LPlanComparisonTable
 

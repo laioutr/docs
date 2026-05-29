@@ -1,6 +1,11 @@
 ---
 title: Media Preview
 description: Responsive image block with optional lightbox, custom aspect ratios, and device-specific sizing.
+playground:
+  name: MediaPreview
+  base: ui-kit-molecules-mediapreview
+  defaultStory: single-without-lightbox
+  height: 460px
 jiraIssueId: LUI-28
 seo:
   title: Media Preview | Laioutr

@@ -1,6 +1,11 @@
 ---
 title: Link
 description: A link component
+playground:
+  name: Link
+  base: ui-kit-atoms-link
+  defaultStory: primary
+  height: 460px
 links: []
 seo:
   title: Link | Laioutr
@@ -28,16 +33,6 @@ When `href` points to a different origin than the current page, the component au
 :::tip
 Pro-Tip from Larry: When `href` crosses origins, Link automatically renders the external-link icon, so users see the off-site cue without any extra prop.
 :::
-
-## Usage
-
-::component-code
----
-:name: LLink
-story-height: 80px
-story-id: ui-kit-atoms-link--primary
----
-::
 
 ## Feature List
 

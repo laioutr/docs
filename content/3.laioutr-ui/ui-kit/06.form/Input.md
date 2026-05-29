@@ -1,6 +1,11 @@
 ---
 title: Input
 description: Styled text field with optional icon or button addons and Field integration for labels and errors.
+playground:
+  name: Input
+  base: ui-kit-molecules-input
+  defaultStory: outline
+  height: 460px
 jiraIssueId: LUI-136
 seo:
   title: Input | Laioutr
@@ -31,21 +36,6 @@ For composed groups (currency symbols, action buttons), use [`InputGroup`](/laio
 :::tip
 Pro-Tip from Larry: Wrap inputs in `<LField>` and pass `errorMessage`; `invalid` is derived automatically.
 :::
-
-## Usage
-
-### Regular Input
-
-::component-code
----
-:name: LInput
-story-height: 90px
-story-id: ui-kit-molecules-input--outline
----
-```vue-template
-<LInput placeholder="Optional placeholder" />
-```
-::
 
 ### Input with Addons
 
@@ -89,8 +79,6 @@ items:
   - "Pair with `InputGroup` plus `InputGroupAddon`/`InputGroupButton` when composed groups need flush-mounted decoration"
 ---
 ::
-
-## API Reference
 
 ### Input
 

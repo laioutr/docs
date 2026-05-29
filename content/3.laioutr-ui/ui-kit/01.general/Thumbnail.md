@@ -1,6 +1,11 @@
 ---
 title: Thumbnail
 description: A thumbnail component
+playground:
+  name: Thumbnail
+  base: ui-kit-atoms-thumbnail
+  defaultStory: default
+  height: 460px
 links: []
 seo:
   title: Thumbnail | Laioutr
@@ -26,30 +31,6 @@ Thumbnail displays a small square image for use in product lists, galleries, and
 :::tip
 Pro-Tip from Larry: Use thumbnails in product grids so customers scan many options quickly.
 :::
-
-## Usage
-
-::component-code
----
-:name: LThumbnail
-story-height: 100px
-story-id: ui-kit-atoms-thumbnail--default
---- 
-::
-
-## Feature List
-
-::features
----
-items:
-  - "Renders as a `<button>` and emits `click` and `hover`, so PDP galleries can swap the main image on tap and pre-fetch on hover"
-  - "Typed `media` prop drives a square `<LMedia>` at 100x100 with `sizes=\"100px\"`, so the right CDN variant ships per device"
-  - "`selected` modifier (`thumbnail--selected`) applies the active-border token across default, hover, pressed, and focus-visible states"
-  - "Border tokens (`--pdp-image-gallery-thumbnail-selected-*`) let themes match the brand without touching consumer code"
-  - "Fixed 1:1 aspect ratio keeps thumbnail grids aligned regardless of source-asset dimensions"
-  - "Sizing owned by the consumer via CSS, so density tunes per breakpoint without touching component props"
----
-::
 
 ## API Reference
 

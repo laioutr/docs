@@ -1,6 +1,11 @@
 ---
 title: Blog Post Listing
 description: Featured post and paginated grid of blog cards, with an optional title and subline above the listing.
+playground:
+  name: BlogPostListing
+  base: ui-sections-blogpostlisting
+  defaultStory: default
+  height: 460px
 seo:
   title: Blog Post Listing | Laioutr
   description: Featured post and paginated grid of blog cards.
@@ -9,6 +14,11 @@ sitemap:
   lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
+links:
+  - label: Figma
+    icon: i-simple-icons-figma
+    to: https://www.figma.com/design/iOpGWO38HkhnTYkEeEq8Oz/Laioutr-Basic?node-id=44-112670&t=bEXX3iWukUFWihvM-4
+    target: _blank
 ---
 
 ## Overview
@@ -27,15 +37,6 @@ The companion article view is [`BlogPostDetail`](/laioutr-ui/cms/blog/blog-post-
 :::tip
 Pro-Tip from Larry: Pin a featured story per season; `BlogPostListing` surfaces it above the grid so it gets a clear hero treatment.
 :::
-
-## Usage
-
-::component-code
----
-:name: LBlogPostListing
-story-id: ui-sections-blogpostlisting--default
----
-::
 
 ## Feature List
 

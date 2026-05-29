@@ -1,6 +1,11 @@
 ---
 title: Product Image Gallery
 description: Product detail image gallery with main stage, thumbnail strip, and fullscreen lightbox.
+playground:
+  name: ProductImageGallery
+  base: ui-sections-productimagegallery
+  defaultStory: default
+  height: 460px
 seo:
   title: Product Image Gallery | Laioutr
   description: Product detail image gallery with main stage, thumbnails, and fullscreen lightbox.
@@ -9,6 +14,11 @@ sitemap:
   lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
+links:
+  - label: Figma
+    icon: i-simple-icons-figma
+    to: https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=134-218700&t=wABQtnJ0GubOC0US-4
+    target: _blank
 ---
 
 ## Overview
@@ -22,20 +32,6 @@ Auto-import tag: `<LProductImageGallery>`.
 - Rich media exploration with thumbnail strip and fullscreen lightbox raises shopper engagement on the PDP, the single strongest predictor of add-to-cart.
 - Cross-image lightbox lets shoppers compare details (texture, fit, color shifts) without leaving the page, which lowers returns from wrong-look purchases.
 - The `images` prop accepts any commerce backend's `Media[]` shape, so onboarding new catalogs needs no UI rework.
-
-## Usage
-
-::component-code
----
-:name: LProductImageGallery
-:story-height: 400px
-story-id: ui-sections-productimagegallery--default
-title: ProductImageGallery Default
----
-```vue-template
-<ProductImageGallery :images="product.images" />
-```
-::
 
 ## Feature List
 

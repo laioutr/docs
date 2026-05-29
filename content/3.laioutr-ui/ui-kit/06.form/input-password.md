@@ -1,6 +1,11 @@
 ---
 title: Input Password
 description: Password text field with an optional show / hide toggle so users can verify their entry.
+playground:
+  name: InputPassword
+  base: ui-kit-molecules-inputpassword
+  defaultStory: default
+  height: 460px
 links: []
 seo:
   title: Input Password | Laioutr
@@ -35,16 +40,6 @@ Set `intent` to feed the underlying `autocomplete` attribute so password manager
 :::tip
 Pro-Tip from Larry: Set `intent="new-password"` on sign-up forms so password managers suggest a strong unique password, and `intent="current-password"` on login forms so they autofill the saved one.
 :::
-
-## Usage
-
-::component-code
----
-:name: LInputPassword
-story-height: 90px
-story-id: ui-kit-molecules-inputpassword--default
----
-::
 
 ## Feature List
 

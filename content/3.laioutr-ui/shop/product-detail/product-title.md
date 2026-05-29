@@ -1,6 +1,11 @@
 ---
 title: Product Title
 description: PDP product title block with brand line, product name, and optional brand logo.
+playground:
+  name: ProductTitle
+  base: ui-blocks-producttitle
+  defaultStory: default
+  height: 460px
 seo:
   title: Product Title | Laioutr
   description: PDP product title block with brand and product name.
@@ -9,6 +14,11 @@ sitemap:
   lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
+links:
+  - label: Figma
+    icon: i-simple-icons-figma
+    to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=17908-139941&t=UMVYiwKBxFSENScG-4
+    target: _blank
 ---
 
 ## Overview
@@ -22,20 +32,6 @@ Auto-import tag: `<LProductTitle>`.
 - Brand line and clear product name match the way shoppers scan PDPs, putting the recognizable signal above the line where it earns trust.
 - Optional brand logo lets premium and licensed catalogues show provenance at a glance, supporting conversion on branded categories.
 - Heading hierarchy is tuned for SEO and screen readers, so the same component handles search ranking and accessibility together.
-
-## Usage
-
-::component-code
----
-:name: LProductTitle
-:story-height: 400px
-story-id: ui-blocks-producttitle--default
-title: ProductTitle Default
----
-```vue-template
-<ProductTitle :brand-title="product.brand" :title="product.title" :brand-logo="product.brandLogo" />
-```
-::
 
 ## Feature List
 

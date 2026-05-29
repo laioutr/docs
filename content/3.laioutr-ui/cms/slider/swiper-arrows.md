@@ -1,6 +1,11 @@
 ---
 title: Swiper Arrows
 description: Previous and next arrow controls for sliders, with optional fadeout backgrounds.
+playground:
+  name: SwiperArrows
+  base: ui-kit-molecules-swiperarrows
+  defaultStory: default
+  height: 460px
 seo:
   title: Swiper Arrows | Laioutr
   description: Previous and next arrow controls for sliders.
@@ -21,23 +26,6 @@ sitemap:
 - The fadeout background keeps arrows visible over busy slide imagery, removing the "where are the controls" moment that breaks engagement.
 - A reusable control drops into any `CommonSwiper`, saving engineering from re-skinning arrow controls per slider type.
 - Keyboard-reachable navigation supports power users and assistive tech, broadening the audience the slider serves.
-
-## Usage
-
-::component-code
----
-:name: LSwiperArrows
-:story-height: 400px
-story-id: ui-kit-molecules-swiperarrows--default
-title: SwiperArrows Default
----
-```vue-template
-<CommonSwiper>
-    <!-- slides -->
-    <SwiperArrows :fadeout="true" />
-  </CommonSwiper>
-```
-::
 
 ## Feature List
 

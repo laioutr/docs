@@ -1,6 +1,11 @@
 ---
 title: Swiper Scrollbar
 description: Custom scrollbar control for sliders, sits below the slide track.
+playground:
+  name: SwiperScrollbar
+  base: ui-kit-molecules-swiperscrollbar
+  defaultStory: horizontal
+  height: 460px
 seo:
   title: Swiper Scrollbar | Laioutr
   description: Custom scrollbar control for sliders.
@@ -21,23 +26,6 @@ sitemap:
 - Pairs with arrow and bullet controls to give every audience the navigation model they prefer (drag, click, tap).
 - Custom styling sits below the track without intruding on slide content, keeping focus on the product or story.
 - Drops into any `CommonSwiper`, so adding scroll progress to long carousels is a one-line addition.
-
-## Usage
-
-::component-code
----
-:name: LSwiperScrollbar
-:story-height: 400px
-story-id: ui-kit-molecules-swiperscrollbar--horizontal
-title: SwiperScrollbar Default
----
-```vue-template
-<CommonSwiper>
-    <!-- slides -->
-    <SwiperScrollbar />
-  </CommonSwiper>
-```
-::
 
 ## Feature List
 

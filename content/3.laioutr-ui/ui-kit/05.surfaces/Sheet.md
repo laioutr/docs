@@ -1,6 +1,11 @@
 ---
 title: Sheet
 description: Slide-in panel surface for overlaying content such as carts, filters, or detail views without leaving the page.
+playground:
+  name: Sheet
+  base: ui-kit-organisms-sheet
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-104
 links:
   - label: Figma

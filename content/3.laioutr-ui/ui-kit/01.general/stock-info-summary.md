@@ -1,6 +1,11 @@
 ---
 title: Stock Info Summary
 description: Compact stock availability indicator with size variants.
+playground:
+  name: StockInfoSummary
+  base: ui-kit-molecules-stockinfosummary
+  defaultStory: check-mark-positive
+  height: 460px
 seo:
   title: Stock Info Summary | Laioutr
   description: Compact stock availability indicator.
@@ -21,25 +26,6 @@ sitemap:
 - Showing out-of-stock state on listings, not just PDPs, saves shoppers a wasted click and reduces post-add disappointment.
 - The `text` prop is a plain string, so the indicator localizes naturally through the consumer's i18n layer without per-surface forks.
 
-## Usage
-
-::component-code
----
-:name: LStockInfoSummary
-:story-height: 200px
-story-id: ui-kit-molecules-stockinfosummary--check-mark-positive
-title: StockInfoSummary Default
----
-```vue-template
-<StockInfoSummary
-    text="In stock"
-    icon="essentials/check-circle"
-    color="positive"
-    size="m"
-  />
-```
-::
-
 ## Feature List
 
 ::features
@@ -52,7 +38,6 @@ items:
   - "Compact layout suits product tiles, PDP rows, and cart lines without per-surface overrides"
 ---
 ::
-
 
 ## API Reference
 

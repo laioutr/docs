@@ -1,6 +1,11 @@
 ---
 title: Header Basic
 description: Compact, slot-based header with a frosted-glass effect on scroll, sticky option, light/dark logo variants, and CTA buttons.
+playground:
+  name: HeaderBasic
+  base: ui-sections-headerbasic
+  defaultStory: sticky
+  height: 460px
 jiraIssueId: LUI-213
 links:
   - label: Figma

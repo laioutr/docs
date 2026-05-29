@@ -1,6 +1,11 @@
 ---
 title: Text
 description: Typography primitives for body, heading, subline, and caption with a consistent scale of sizes.
+playground:
+  name: Text
+  base: ui-kit-atoms-text
+  defaultStory: body
+  height: 460px
 jiraIssueId: LUI-137
 seo:
   title: Text | Laioutr
@@ -30,26 +35,6 @@ Pro-Tip from Larry: Wrap text-heavy regions in `<LOnSurface :tone="...">` to swi
 :::
 
 ## Usage
-
-::component-code
----
-:name: Body
-:story-height: 600px
-story-id: ui-kit-atoms-text--body
----
-```vue-template
-<LText size="xs">body-xs</LText>
-<LText size="s">body-s</LText>
-<LText size="sm">body-sm</LText>
-<LText size="m">body-m</LText>
-<LText size="ml">body-ml</LText>
-<LText size="l">body-l</LText>
-<LText size="xl">body-xl</LText>
-<LText size="2xl">body-2xl</LText>
-<LText size="3xl">body-3xl</LText>
-<LText size="4xl">body-4xl</LText>
-```
-::
 
 ::component-code
 ---

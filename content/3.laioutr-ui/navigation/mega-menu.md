@@ -1,6 +1,11 @@
 ---
 title: Mega Menu
 description: Desktop mega-menu compound built from `MegaMenu`, `MegaMenuTrigger`, and `MegaMenuContent` with auto-picked promo layouts.
+playground:
+  name: MegaMenu
+  base: ui-blocks-megamenu
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-66
 links:
   - label: Figma

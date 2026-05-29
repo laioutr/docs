@@ -2,6 +2,11 @@
 title: Placeholder
 aliases: []
 description: A placeholder component
+playground:
+  name: Placeholder
+  base: ui-kit-atoms-placeholder
+  defaultStory: default
+  height: 460px
 seo:
   title: Placeholder | Laioutr
   description: A placeholder component
@@ -32,17 +37,6 @@ Pro-Tip from Larry: Reach for `LPlaceholder` to mark a slot that still needs rea
 ## Usage
 
 Use css for sizing the placeholder.
-
-::component-code
----
-:name: LPlaceholder
-story-height: 110px
-story-id: ui-kit-atoms-placeholder--default
----
-```vue-template
-<LPlaceholder class="w-100px h-100px" />
-```
-::
 
 ## Feature List
 

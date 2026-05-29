@@ -2,6 +2,11 @@
 title: Button
 aliases: []
 description: Themed call-to-action control with size, variant, icon, link, and loading state support.
+playground:
+  name: Button
+  base: ui-kit-atoms-button
+  defaultStory: default
+  height: 460px
 seo:
   title: Button | Laioutr
   description: Themed call-to-action control with size, variant, icon, link, and loading state support.
@@ -48,8 +53,6 @@ For icon-only controls, use the dedicated [`IconButton`](/laioutr-ui/ui-kit/form
 Pro-Tip from Larry: Use the `loading` prop on submit buttons so users know the action is in progress.
 ::
 
-## Usage
-
 ### Primary Button
 
 ::component-code
@@ -75,44 +78,6 @@ title: Secondary Button
 ---
 ```vue-template
 <LButton variant="secondary" size="m">Cancel</LButton>
-```
-::
-
-### Button Sizes
-
-::component-code
----
-:name: LButton
-:story-height: 100px
-story-id: ui-kit-atoms-button--default
-title: Button Primary Small
----
-```vue-template
-<LButton variant="primary" size="s">Small</LButton>
-```
-::
-
-::component-code
----
-:name: LButton
-:story-height: 100px
-story-id: ui-kit-atoms-button--default
-title: Button Primary Medium
----
-```vue-template
-<LButton variant="primary" size="m">Medium</LButton>
-```
-::
-
-::component-code
----
-:name: LButton
-:story-height: 100px
-story-id: ui-kit-atoms-button--default
-title: Button Primary Large
----
-```vue-template
-<LButton variant="primary" size="l">Large</LButton>
 ```
 ::
 

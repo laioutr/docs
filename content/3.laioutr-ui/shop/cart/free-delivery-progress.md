@@ -1,6 +1,11 @@
 ---
 title: Free Delivery Progress
 description: Progress bar showing how close the cart is to the free-delivery threshold.
+playground:
+  name: FreeDeliveryProgress
+  base: ui-blocks-freedeliveryprogress
+  defaultStory: in-progress
+  height: 460px
 seo:
   title: Free Delivery Progress | Laioutr
   description: Progress bar showing how close the cart is to the free-delivery threshold.
@@ -25,23 +30,6 @@ Auto-import tag: `<LFreeDeliveryProgress>`.
 - Animated fill state and completed milestone give shoppers a small win at the moment they cross the threshold, reinforcing the buy decision.
 - One configurable threshold per market means promotions and shipping zones can shift without touching cart UI code.
 - Inline placement inside the cart sheet keeps the upsell prompt right where shoppers decide whether to add one more item or check out.
-
-## Usage
-
-::component-code
----
-:name: LFreeDeliveryProgress
-:story-height: 400px
-story-id: ui-blocks-freedeliveryprogress--in-progress
-title: FreeDeliveryProgress Default
----
-```vue-template
-<FreeDeliveryProgress
-    :total-price="{ amount: 42, currency: 'EUR' }"
-    :max-price="{ amount: 50, currency: 'EUR' }"
-  />
-```
-::
 
 ## Feature List
 

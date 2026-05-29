@@ -1,6 +1,11 @@
 ---
 title: Input Rating
 description: Star rating input for capturing review scores and ratings.
+playground:
+  name: InputRating
+  base: ui-kit-molecules-inputrating
+  defaultStory: default
+  height: 460px
 seo:
   title: Input Rating | Laioutr
   description: Star rating input.
@@ -23,22 +28,6 @@ For display-only ratings, reach for [`StarsRating`](/laioutr-ui/ui-kit/indicator
 - Wrapping in `<LField>` surfaces the parent Field's `errorMessage` when a rating is missing, so customers see why the form failed instead of guessing.
 - Reusing the same control inside `ReviewForm` and standalone rating flows keeps the visual signal consistent everywhere shoppers see ratings.
 
-## Usage
-
-::component-code
----
-:name: LInputRating
-:story-height: 150px
-story-id: ui-kit-molecules-inputrating--default
-title: InputRating Default
----
-```vue-template
-<Field label="Rating" required>
-    <InputRating v-model="rating" :max-rating="5" />
-  </Field>
-```
-::
-
 ## Feature List
 
 ::features
@@ -51,7 +40,6 @@ items:
   - "Wraps cleanly in `<LField>`, so 'rating required' errors surface inline rather than failing silently"
 ---
 ::
-
 
 ## API Reference
 

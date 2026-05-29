@@ -1,6 +1,11 @@
 ---
 title: Popover
 description: Reka-UI-backed anchored panel for filter dropdowns, profile menus, and focused interactions tied to a trigger.
+playground:
+  name: Popover
+  base: ui-kit-molecules-popover
+  defaultStory: default
+  height: 460px
 seo:
   title: Popover | Laioutr
   description: Reka-UI-backed popover primitive.
@@ -24,27 +29,6 @@ The wrapper forwards `defaultOpen`, `open`, and `modal` to Reka's `PopoverRoot`.
 - Reka UI ships keyboard and click-outside dismissal, so teams skip the bug class around stuck overlays and ship faster.
 - Drop-in trigger and content composition lets product teams attach a contextual panel to almost any element without restructuring the surrounding layout.
 
-## Usage
-
-::component-code
----
-:name: LPopover
-:story-height: 400px
-story-id: ui-kit-molecules-popover--default
-title: Popover Default
----
-```vue-template
-<Popover>
-    <PopoverTrigger>
-      <Button>Open</Button>
-    </PopoverTrigger>
-    <PopoverContent>
-      Panel content here.
-    </PopoverContent>
-  </Popover>
-```
-::
-
 ## Feature List
 
 ::features
@@ -57,7 +41,6 @@ items:
   - "Auto-imports as `<LPopover>`, paired with `<LPopoverTrigger>` and `<LPopoverContent>` for each instance"
 ---
 ::
-
 
 ## API Reference
 

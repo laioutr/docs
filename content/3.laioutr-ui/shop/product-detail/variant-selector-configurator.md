@@ -1,6 +1,11 @@
 ---
 title: Variant Selector Configurator
 description: Wizard-style variant configurator with accordion sections, options lists, and swatch lists.
+playground:
+  name: VariantSelectorConfigurator
+  base: ui-blocks-variantselectorconfigurator
+  defaultStory: default
+  height: 460px
 seo:
   title: Variant Selector Configurator | Laioutr
   description: Wizard-style variant configurator.
@@ -9,6 +14,11 @@ sitemap:
   lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
+links:
+  - label: Figma
+    icon: i-simple-icons-figma
+    to: https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=1587-118248&t=DbsEktYWA8Dj8jGj-4
+    target: _blank
 ---
 
 ## Overview
@@ -25,23 +35,6 @@ Auto-import tag: `<LVariantSelectorConfigurator>`.
 - Per-attribute control type (options list or swatch list) matches each step to the right input pattern, so shoppers don't fight the UI on color vs. size choices.
 - Configurable bundles ship with a single component, removing the need for per-category custom configurators that are expensive to build and maintain.
 - Progressive disclosure keeps the buy-box compact until the shopper engages, which protects PDP scanability for the majority who don't customize.
-
-## Usage
-
-::component-code
----
-:name: LVariantSelectorConfigurator
-:story-height: 400px
-story-id: ui-blocks-variantselectorconfigurator--default
-title: VariantSelectorConfigurator Default
----
-```vue-template
-<VariantSelectorConfigurator
-  :options="product.configurableOptions"
-  @update:model-value="onOptionChange"
-/>
-```
-::
 
 ## Feature List
 

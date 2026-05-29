@@ -1,6 +1,11 @@
 ---
 title: Avatar
 description: Avatar component for displaying user images, initials, or icons with size and color variants.
+playground:
+  name: Avatar
+  base: ui-kit-atoms-avatar
+  defaultStory: small-initials
+  height: 460px
 jiraIssueId: LUI-122
 links:
   - label: Figma

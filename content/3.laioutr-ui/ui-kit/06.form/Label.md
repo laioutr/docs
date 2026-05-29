@@ -1,6 +1,11 @@
 ---
 title: Label
 description: Form label with an optional required indicator, accessibly linked to its control.
+playground:
+  name: Label
+  base: ui-kit-atoms-label
+  defaultStory: small
+  height: 460px
 jiraIssueId: LUI-91
 seo:
   title: Label | Laioutr
@@ -23,21 +28,7 @@ Label displays a form label and an optional required indicator, linked to its co
 - A single label primitive keeps required indicators and typography consistent across the product, so users learn the visual language once.
 - Pairing with `<LField>` covers most forms automatically; the standalone control is there for the edge cases without forcing a fork of the styling.
 
-## Usage
-
 ### Different sizes
-
-::component-code
----
-:name: LLabel
-:story-height: 80px
-story-id: ui-kit-atoms-label--small
-title: Label Small
----
-```vue-template
-<LLabel size="s">First name</LLabel>
-```
-::
 
 ::component-code
 ---

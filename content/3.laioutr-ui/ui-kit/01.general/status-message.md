@@ -1,6 +1,11 @@
 ---
 title: Status Message
 description: Icon-led message composition for confirmation, success, warning, and error states.
+playground:
+  name: StatusMessage
+  base: ui-kit-molecules-statusmessage
+  defaultStory: default
+  height: 460px
 seo:
   title: Status Message | Laioutr
   description: Icon-led message composition.
@@ -23,25 +28,6 @@ Because the icon is required, the message always carries a visual cue alongside 
 - Required icon means every status message carries a visual cue, so users with text-skimming patterns still see the state at a glance.
 - Token-driven status colors (`--success-9`, `--warning-9`, `--error-9`) keep semantic meaning consistent across the storefront and admin areas.
 
-## Usage
-
-::component-code
----
-:name: LStatusMessage
-:story-height: 200px
-story-id: ui-kit-molecules-statusmessage--default
-title: StatusMessage Default
----
-```vue-template
-<StatusMessage
-    icon="essentials/check-circle"
-    status="success"
-    heading="Order received"
-    description="Thanks, we sent a confirmation email."
-  />
-```
-::
-
 ## Feature List
 
 ::features
@@ -54,7 +40,6 @@ items:
   - "Pairs with `Toaster` and inline form chrome, so confirmation messaging stays visually consistent across surfaces"
 ---
 ::
-
 
 ## API Reference
 

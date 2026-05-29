@@ -1,6 +1,11 @@
 ---
 title: Footer
 description: Responsive site footer with menu columns, contact rows, social links, and an optional email CTA.
+playground:
+  name: Footer
+  base: ui-sections-footer
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-221
 links:
   - label: Figma

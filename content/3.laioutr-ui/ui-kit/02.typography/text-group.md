@@ -1,6 +1,11 @@
 ---
 title: Text Group
 description: Caption, heading, and subline composition with configurable semantic tags, size tiers, alignment, and optional icon.
+playground:
+  name: TextGroup
+  base: ui-kit-molecules-textgroup
+  defaultStory: default
+  height: 460px
 seo:
   title: Text Group | Laioutr
   description: Caption, heading, and subline composition.
@@ -23,26 +28,6 @@ For one-off campaign treatments, the `captionColor`, `headingColor`, `sublineCol
 - Configurable semantic tags keep the SEO outline correct: hero stays `<h1>`-led, cards stay `<h3>`-led, without rewriting visual markup.
 - Per-line color override props give marketing a precise repaint hook for seasonal banners without touching theme tokens.
 
-## Usage
-
-::component-code
----
-:name: LTextGroup
-:story-height: 150px
-story-id: ui-kit-molecules-textgroup--default
-title: TextGroup Default
----
-```vue-template
-<TextGroup
-    caption="Featured"
-    heading="New collection"
-    heading-tag="h2"
-    subline="Spring/Summer drop"
-    size="l"
-  />
-```
-::
-
 ## Feature List
 
 ::features
@@ -56,7 +41,6 @@ items:
   - "`gap` prop ('xs', 's', 'sm', 'm', 'l') tunes vertical rhythm between the caption, heading, and subline"
 ---
 ::
-
 
 ## API Reference
 

@@ -1,6 +1,11 @@
 ---
 title: Persona Quote Slider
 description: Slider wrapping multiple `PersonaQuote` items.
+playground:
+  name: PersonaQuoteSlider
+  base: ui-sections-personaquoteslider
+  defaultStory: default
+  height: 460px
 seo:
   title: Persona Quote Slider | Laioutr
   description: Slider wrapping multiple PersonaQuote items.
@@ -9,6 +14,11 @@ sitemap:
   lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
+links:
+  - label: Figma
+    icon: i-simple-icons-figma
+    to: https://www.figma.com/design/fU79c88OUWKPwScoPQ0Yag/laioutr-CMS?node-id=8-91386&t=Jrv2rLSlTUcbWqdM-4
+    target: _blank
 ---
 
 ## Overview
@@ -23,20 +33,6 @@ When profile imagery isn't available or the layout calls for a more compact card
 - Pairs face-led testimonials with smooth slide transitions, building trust on landing and brand pages that drive consideration.
 - One slider component covers homepage walls and category-level "what customers say" sections from a single configuration.
 - Editors order and curate testimonials in Studio, keeping the rotation fresh as new reviews come in.
-
-## Usage
-
-::component-code
----
-:name: LPersonaQuoteSlider
-:story-height: 400px
-story-id: ui-sections-personaquoteslider--default
-title: PersonaQuoteSlider Default
----
-```vue-template
-<PersonaQuoteSlider :persona-quotes="testimonials" />
-```
-::
 
 ## Feature List
 

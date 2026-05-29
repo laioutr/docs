@@ -1,6 +1,11 @@
 ---
 title: Grid Fill
 description: A grid fill component
+playground:
+  name: GridFill
+  base: ui-kit-atoms-gridfill
+  defaultStory: default
+  height: 460px
 links: []
 seo:
   title: Grid Fill | Laioutr
@@ -36,17 +41,6 @@ Pro-Tip from Larry: Use `greedy-first` or `greedy-last` so the hero or featured 
 :::
 
 ## Usage
-
-::component-code
----
-name: GridFill Fixed
-story-height: 430px
-story-id: ui-kit-atoms-gridfill--default
----
-```vue-template
-<GridFill />
-```
-::
 
 ::component-code
 ---

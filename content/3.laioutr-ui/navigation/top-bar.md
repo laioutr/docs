@@ -1,6 +1,11 @@
 ---
 title: Top Bar
 description: Desktop-only utility strip above the header with locale selector, dark-mode toggle, and information links.
+playground:
+  name: TopBar
+  base: ui-sections-topbar
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-60
 links:
   - label: Figma

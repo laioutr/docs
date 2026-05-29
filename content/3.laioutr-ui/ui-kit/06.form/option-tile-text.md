@@ -1,6 +1,11 @@
 ---
 title: Option Tile (Text)
 description: Text-labelled variant tile for product option selection with selected and unavailable states.
+playground:
+  name: OptionTileText
+  base: ui-kit-molecules-optiontiletext
+  defaultStory: default
+  height: 460px
 links: []
 seo:
   title: Option Tile (Text) | Laioutr
@@ -29,16 +34,6 @@ For image-driven variant choices (color, material), use the sibling [`OptionTile
 :::tip
 Pro-Tip from Larry: Mark out-of-stock variants `unavailable` with an explanatory tooltip instead of hiding them. Customers can still see which variants exist and know what to ask for.
 :::
-
-## Usage
-
-::component-code
----
-:name: LOptionTileText
-story-height: 100px
-story-id: ui-kit-molecules-optiontiletext--default
----
-::
 
 ## Feature List
 

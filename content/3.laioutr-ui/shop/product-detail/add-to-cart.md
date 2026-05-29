@@ -1,6 +1,11 @@
 ---
 title: Add to Cart
 description: Add-to-cart button with quantity, loading, and disabled states.
+playground:
+  name: AddToCart
+  base: ui-blocks-addtocart
+  defaultStory: default
+  height: 460px
 seo:
   title: Add to Cart | Laioutr
   description: Add-to-cart button with quantity, loading, and disabled states.
@@ -9,6 +14,11 @@ sitemap:
   lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
+links:
+  - label: Figma
+    icon: i-simple-icons-figma
+    to: https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=925-101184&t=lyLXOO9i864GgV9v-4
+    target: _blank
 ---
 
 ## Overview
@@ -23,25 +33,6 @@ Auto-import tag: `<LAddToCart>`.
 - Built-in loading state prevents double-submits and matches optimistic cart updates, removing a common source of duplicate-line complaints.
 - Disabled when `isSoldOut` so shoppers don't click into a dead-end. Missing `variantId` makes the click a no-op rather than visually disabling the button.
 - Event-only contract keeps cart logic in your store, so analytics, A/B tests, and custom checkout flows hook in without forking the button.
-
-## Usage
-
-::component-code
----
-:name: LAddToCart
-:story-height: 400px
-story-id: ui-blocks-addtocart--default
-title: AddToCart Default
----
-```vue-template
-<AddToCart
-    :loading="loading"
-    :product-id="product.id"
-    :variant-id="selectedVariant?.id"
-    @add-to-cart="add"
-  />
-```
-::
 
 ## Feature List
 

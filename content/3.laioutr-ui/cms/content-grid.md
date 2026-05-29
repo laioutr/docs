@@ -1,6 +1,11 @@
 ---
 title: Content Grid
 description: Generic responsive grid for cards, tiles, and other slotted content.
+playground:
+  name: ContentGrid
+  base: ui-sections-contentgrid
+  defaultStory: default
+  height: 460px
 seo:
   title: Content Grid | Laioutr
   description: Generic responsive grid for cards, tiles, and other slotted content.
@@ -20,22 +25,6 @@ sitemap:
 - A single responsive grid covers card collections, feature rows, and blog excerpt strips, so teams stop forking grid components per use case.
 - Responsive defaults keep cards aligned on every viewport, removing the broken-grid look that erodes trust on small screens.
 - A grid that takes any slot content means the same primitive backs hand-curated rows and query-driven rows without per-use-case logic baked into the grid itself.
-
-## Usage
-
-::component-code
----
-:name: LContentGrid
-:story-height: 400px
-story-id: ui-sections-contentgrid--default
-title: ContentGrid Default
----
-```vue-template
-<ContentGrid>
-    <Card v-for="card in cards" :key="card.id" v-bind="card" />
-  </ContentGrid>
-```
-::
 
 ## Feature List
 

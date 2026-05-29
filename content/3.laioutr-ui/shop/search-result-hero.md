@@ -1,6 +1,11 @@
 ---
 title: Search Result Hero
 description: Search results hero with the matched search term and a result-count pill.
+playground:
+  name: SearchResultHero
+  base: ui-sections-searchresulthero
+  defaultStory: default
+  height: 460px
 seo:
   title: Search Result Hero | Laioutr
   description: Search results hero with the matched search term and a result-count pill.
@@ -9,6 +14,11 @@ sitemap:
   lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
+links:
+  - label: Figma
+    icon: i-simple-icons-figma
+    to: https://www.figma.com/design/iOpGWO38HkhnTYkEeEq8Oz/Laioutr-Basic?node-id=17-69657
+    target: _blank
 ---
 
 ## Overview
@@ -22,20 +32,6 @@ Auto-import tag: `<LSearchResultHero>`.
 - Echoing the search term confirms what the engine actually matched, cutting the "did it understand me?" doubt that pushes shoppers back to the search bar.
 - The result-count pill sets correct expectations before scrolling, helping shoppers decide between refining the query or filtering down.
 - A single hero block anchors the page with the active search context above the listing grid.
-
-## Usage
-
-::component-code
----
-:name: LSearchResultHero
-:story-height: 400px
-story-id: ui-sections-searchresulthero--default
-title: SearchResultHero Default
----
-```vue-template
-<SearchResultHero :search-term="query" :amount="results.length" />
-```
-::
 
 ## Feature List
 

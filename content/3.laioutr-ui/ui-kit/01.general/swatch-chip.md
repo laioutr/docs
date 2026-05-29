@@ -3,6 +3,11 @@ title: Swatch Chip
 aliases:
   - /laioutr-ui/ui-kit/general/colorswatch
 description: Compact color chip for displaying product color variants on tiles, with multi-color gradients and overflow handling.
+playground:
+  name: SwatchChip
+  base: ui-kit-atoms-swatchchip
+  defaultStory: single-color
+  height: 460px
 seo:
   title: Swatch Chip | Laioutr
   description: Compact color chip for displaying product color variants on tiles.
@@ -35,22 +40,6 @@ It builds on the [`Swatch`](/laioutr-ui/ui-kit/general/swatch) primitive and add
 
 ::tip
 Pro-Tip from Larry: Reach for `SwatchSummary` when you need a row of chips with overflow handling; `SwatchChip` is the single-chip primitive.
-::
-
-## Usage
-
-### Single Color
-
-::component-code
----
-:name: LSwatchChip
-:story-height: 50px
-story-id: ui-kit-atoms-swatchchip--single-color
-title: Single Color
----
-```vue-template
-<LSwatchChip />
-```
 ::
 
 ### Multiple Colors

@@ -1,6 +1,11 @@
 ---
 title: Nav Section Heading
 description: Generic navigation list heading primitive that renders as a `NuxtLink` when `href` is set.
+playground:
+  name: NavSectionHeading
+  base: ui-kit-molecules-navsectionheading
+  defaultStory: default
+  height: 460px
 seo:
   title: Nav Section Heading | Laioutr
   description: Generic navigation list heading primitive.
@@ -21,20 +26,6 @@ sitemap:
 - One section-label primitive across footer and menu surfaces keeps typography and weight consistent without per-menu CSS.
 - The link-or-static split keeps the right element in the DOM for the role, so navigable labels are real `NuxtLink`s and static ones stay non-interactive.
 
-## Usage
-
-::component-code
----
-:name: LNavSectionHeading
-:story-height: 200px
-story-id: ui-kit-molecules-navsectionheading--default
-title: NavSectionHeading Default
----
-```vue-template
-<NavSectionHeading href="/help">Help</NavSectionHeading>
-```
-::
-
 ## Feature List
 
 ::features
@@ -47,7 +38,6 @@ items:
   - "Underpins FooterMenu and the mobile and side-by-side menus, keeping section labels tappable when a link target is available"
 ---
 ::
-
 
 ## API Reference
 

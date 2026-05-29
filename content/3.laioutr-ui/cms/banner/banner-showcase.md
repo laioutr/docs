@@ -1,6 +1,11 @@
 ---
 title: Banner Showcase
 description: A side-by-side promotional banner pairing a media image with a copy block and a single CTA.
+playground:
+  name: BannerShowcase
+  base: ui-sections-bannershowcase
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-21
 seo:
   title: Banner Showcase | Laioutr
@@ -30,15 +35,6 @@ The `mediaAspectRatio` prop picks a single ratio for the image (`16/9`, `4/3`, o
 :::tip
 Pro-Tip from Larry: Pick the aspect ratio that matches your asset library so the media never crops awkwardly between breakpoints.
 :::
-
-## Usage
-
-::component-code
----
-:name: LBannerShowcase
-story-id: ui-sections-bannershowcase--default
----
-::
 
 ## Feature List
 

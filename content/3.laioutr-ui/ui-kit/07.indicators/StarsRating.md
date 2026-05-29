@@ -1,6 +1,11 @@
 ---
 title: Stars Rating
 description: Star graphic with optional text for displaying a numeric rating on products, reviews, or any rating context.
+playground:
+  name: StarsRating
+  base: ui-kit-atoms-starsrating
+  defaultStory: size-m
+  height: 460px
 links: []
 seo:
   title: Stars Rating | Laioutr

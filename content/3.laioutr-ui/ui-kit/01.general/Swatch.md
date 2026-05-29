@@ -3,6 +3,11 @@ title: Swatch
 aliases:
   - /laioutr-ui/ui-kit/general/swatchpreview
 description: Bare swatch primitive for rendering colors, gradients, and thumbnails.
+playground:
+  name: Swatch
+  base: ui-kit-atoms-swatch
+  defaultStory: swatch-color
+  height: 460px
 seo:
   title: Swatch | Laioutr
   description: Bare swatch primitive for rendering colors, gradients, and thumbnails.

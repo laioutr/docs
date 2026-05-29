@@ -1,6 +1,11 @@
 ---
 title: Coupon Box
 description: Coupon-code display widget with applied state, copy-to-clipboard, and success toast feedback.
+playground:
+  name: CouponBox
+  base: ui-blocks-couponbox
+  defaultStory: discount-text-copy-action
+  height: 460px
 seo:
   title: Coupon Box | Laioutr
   description: Coupon-code copy / display widget.
@@ -9,6 +14,11 @@ sitemap:
   lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
+links:
+  - label: Figma
+    icon: i-simple-icons-figma
+    to: https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=98-245816&t=edNTmchAoqmIS03q-4
+    target: _blank
 ---
 
 ## Overview
@@ -25,20 +35,6 @@ Auto-import tag: `<LCouponBox>`.
 - Applied-state presentation confirms the discount is live, removing the "did it work?" doubt that pushes shoppers to chat or email support.
 - Success toast confirms the copy landed in the clipboard, so shoppers know they can paste it into the checkout field.
 - Themeable icon color via CSS custom property lets brand teams match the box to seasonal campaign palettes without component overrides.
-
-## Usage
-
-::component-code
----
-:name: LCouponBox
-:story-height: 400px
-story-id: ui-blocks-couponbox--discount-text-copy-action
-title: CouponBox Default
----
-```vue-template
-<CouponBox code="SAVE20" :applied="appliedCoupons.includes('SAVE20')" />
-```
-::
 
 ## Feature List
 

@@ -1,6 +1,11 @@
 ---
 title: PopUp Info
 description: Informational popup content preset with icon, caption, heading, body, and a primary CTA. Slots into PopUp.
+playground:
+  name: PopUpInfo
+  base: ui-blocks-popupinfo
+  defaultStory: default
+  height: 460px
 seo:
   title: PopUp Info | Laioutr
   description: Informational popup content preset for the PopUp shell.
@@ -21,30 +26,6 @@ sitemap:
 - A single CTA keeps the message focused, so customers act on the notice instead of dismissing a busy popup.
 - Editors fire announcements through Studio when policy or operations change, removing the engineering bottleneck on time-sensitive comms.
 - Built on the shared `PopUp` shell, so it inherits focus management and keyboard interaction with no extra accessibility work.
-
-## Usage
-
-::component-code
----
-:name: LPopUpInfo
-:story-height: 600px
-story-id: ui-blocks-popupinfo--default
-title: PopUpInfo Default
----
-```vue-template
-<LPopUp v-model:open="showInfo" :media="image">
-    <LPopUpInfo
-      icon="essentials/info"
-      caption="Service update"
-      heading="Heads up"
-      body="We've updated our terms."
-      cta-text="Read more"
-      cta-href="/terms"
-      alignment="left"
-    />
-  </LPopUp>
-```
-::
 
 ## Feature List
 

@@ -1,6 +1,11 @@
 ---
 title: Product Tile Flag
 description: Visual flag for product tiles that highlights promotional labels like sale, promo, and new.
+playground:
+  name: ProductTileFlag
+  base: ui-kit-atoms-producttileflag
+  defaultStory: sale-flag
+  height: 460px
 jiraIssueId: LUI-52
 links:
   - label: Figma
@@ -28,21 +33,6 @@ Product Tile Flag is the badge that overlays a product tile to call out a discou
 - Variants enforce a fixed promo hierarchy, so sale, promo, and new arrivals stay readable side-by-side even when several campaigns run at once.
 - The default slot accepts localized text out of the box, so "-25%" or "-25 %" each render correctly in every market without engineering touch-ups.
 - Designed-in placement over the tile avoids layout shift and keeps imagery the hero, protecting brand polish on flagship category pages.
-
-## Usage
-
-::component-code
----
-:name: LProductTileFlag
-story-height: 100px
-story-id: ui-kit-atoms-producttileflag--sale-flag
----
-```vue-template
-<LProductTileFlag variant="sale">
-  -25%
-</LProductTileFlag>
-```
-::
 
 ## Feature List
 

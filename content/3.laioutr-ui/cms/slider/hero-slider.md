@@ -1,6 +1,11 @@
 ---
 title: Hero Slider
 description: A flexible hero that works as a static block or an interactive slider with full-width backgrounds.
+playground:
+  name: HeroSlider
+  base: ui-sections-heroslider
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-11
 seo:
   title: Hero Slider | Laioutr
@@ -12,6 +17,11 @@ sitemap:
   priority: 1.0
 aliases:
   - /laioutr-ui/cms/slider/heroslider
+links:
+  - label: Figma
+    icon: i-simple-icons-figma
+    to: https://www.figma.com/design/QgRgNtTxBTCAxpTe1rriHM/Studio-v1.0?node-id=917-103219&t=5VvNTXN86PoYsZCc-4
+    target: _blank
 ---
 
 ## Overview

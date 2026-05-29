@@ -1,6 +1,11 @@
 ---
 title: Language Switcher
 description: Locale (and optionally currency/region) switcher for the top bar or header. Persists the selection.
+playground:
+  name: LanguageSwitcher
+  base: ui-kit-molecules-languageswitcher
+  defaultStory: default
+  height: 460px
 seo:
   title: Language Switcher | Laioutr
   description: Locale switcher for the top bar or header.
@@ -27,23 +32,6 @@ aliases:
 Pro-Tip from Larry: Place `LanguageSwitcher` in the `TopBar` so users can change language without digging into the menu.
 :::
 
-## Usage
-
-::component-code
----
-:name: LLanguageSwitcher
-story-id: ui-kit-molecules-languageswitcher--default
-title: LanguageSwitcher
----
-```vue-template
-<LanguageSwitcher
-    :current-locale="currentLocale"
-    :available-locales="availableLocales"
-    @change="(locale) => switchTo(locale)"
-  />
-```
-::
-
 ## Feature List
 
 ::features
@@ -56,8 +44,6 @@ items:
   - "Paired `LanguageSwitcherDisplay` subcomponent renders the trigger so the switcher composes inside menus or top bars"
 ---
 ::
-
-## API Reference
 
 ### LLanguageSwitcher
 

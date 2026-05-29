@@ -1,6 +1,11 @@
 ---
 title: Zoom Level (Segmented)
 description: Segmented control for image zoom level on mobile, typically inside `Lightbox`.
+playground:
+  name: ZoomLevelSegmented
+  base: ui-kit-molecules-zoomlevelsegmented
+  defaultStory: default
+  height: 460px
 seo:
   title: Zoom Level (Segmented) | Laioutr
   description: Segmented control for image zoom level on mobile.
@@ -21,24 +26,6 @@ sitemap:
 - Discrete zoom levels are easier to use than free-form pinch on small screens, especially for older devices and assistive-touch users.
 - Pairs with the lightbox primitive so PDPs get the same inspection experience across the entire catalog without per-product wiring.
 
-## Usage
-
-::component-code
----
-:name: LZoomLevelSegmented
-:story-height: 200px
-story-id: ui-kit-molecules-zoomlevelsegmented--default
-title: ZoomLevelSegmented Default
----
-```vue-template
-<ZoomLevelSegmented
-    v-model:current-zoom-level="zoomLevel"
-    :levels="3"
-    variant="white"
-  />
-```
-::
-
 ## Feature List
 
 ::features
@@ -51,7 +38,6 @@ items:
   - "Designed for one-thumb operation inside `Lightbox`, providing predictable zoom on phones where pinch is unreliable"
 ---
 ::
-
 
 ## API Reference
 

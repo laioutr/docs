@@ -1,6 +1,11 @@
 ---
 title: Pagination
 description: Page navigation control with arrows or numbered jumps for splitting large data sets.
+playground:
+  name: Pagination
+  base: ui-kit-molecules-pagination
+  defaultStory: default
+  height: 460px
 links: []
 seo:
   title: Pagination | Laioutr

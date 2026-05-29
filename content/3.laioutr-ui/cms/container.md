@@ -1,6 +1,11 @@
 ---
 title: Container
 description: Layout primitive that wraps a backdrop with grid, alignment, and media-sizes configuration.
+playground:
+  name: Container
+  base: ui-sections-container
+  defaultStory: default
+  height: 460px
 seo:
   title: Container | Laioutr
   description: Backdrop + grid + alignment + media-sizes composition.
@@ -29,27 +34,6 @@ Reach for `Container` whenever you need to host slot-based content with a backdr
 :::tip
 Pro-Tip from Larry: Use `Container` whenever you need to host slot-based content with a backdrop; sections that don't need slots can compose `Backdrop` directly.
 :::
-
-## Usage
-
-::component-code
----
-:name: LContainer
-:story-height: 400px
-story-id: ui-sections-container--default
-title: Container Default
----
-```vue-template
-<Container
-    :columns-desktop="3"
-    :columns-mobile="1"
-    container-style="boxed"
-    background="solid"
-  >
-    <slot />
-  </Container>
-```
-::
 
 ## Feature List
 

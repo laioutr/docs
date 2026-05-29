@@ -1,6 +1,11 @@
 ---
 title: Empty State
 description: Empty state component for product listing pages with friendly messaging when no products are available.
+playground:
+  name: EmptyState
+  base: ui-kit-molecules-emptystate
+  defaultStory: with-cta
+  height: 460px
 jiraIssueId: LUI-82
 links:
   - label: Figma

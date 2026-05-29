@@ -1,6 +1,11 @@
 ---
 title: Social Share
 description: Row of platform share buttons that open web intent URLs for Facebook, X, LinkedIn, Pinterest, and email.
+playground:
+  name: SocialShare
+  base: ui-blocks-socialshare
+  defaultStory: default
+  height: 460px
 seo:
   title: Social Share | Laioutr
   description: Row of platform share buttons.
@@ -21,20 +26,6 @@ sitemap:
 - Web intent URLs land in each platform's recognizable share UI, so readers complete the action instead of bouncing off a custom widget.
 - Web intents work without third-party SDKs, keeping the page light and free of additional consent or privacy review.
 - One row covers the major social platforms plus email, so editorial pages get full distribution from a single block.
-
-## Usage
-
-::component-code
----
-:name: LSocialShare
-:story-height: 400px
-story-id: ui-blocks-socialshare--default
-title: SocialShare Default
----
-```vue-template
-<SocialShare :url="canonicalUrl" :title="post.title" />
-```
-::
 
 ## Feature List
 

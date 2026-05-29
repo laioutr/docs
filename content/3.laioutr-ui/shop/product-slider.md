@@ -1,6 +1,11 @@
 ---
 title: Product Slider
 description: Section-level horizontally scrollable product collection with optional headline, scrollbar, and CTA.
+playground:
+  name: ProductSlider
+  base: ui-sections-productslider
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-200
 links:
   - label: Figma
@@ -37,16 +42,6 @@ Auto-import tag: `<LProductSlider>`.
 :::tip
 Pro-Tip from Larry: Use `ProductSlider` for cross-sells and related products so collections are visible without a full grid.
 :::
-
-## Usage
-
-::component-code
----
-:name: LProductSlider
-:story-height: 600px
-story-id: ui-sections-productslider--default
----
-::
 
 ## Feature List
 

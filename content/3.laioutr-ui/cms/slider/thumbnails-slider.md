@@ -1,6 +1,11 @@
 ---
 title: Thumbnails Slider
 description: Thumbnail slider that pairs with a primary slider, used by `ProductImageGallery` and the `Lightbox`.
+playground:
+  name: ThumbnailsSlider
+  base: ui-kit-molecules-thumbnailsslider
+  defaultStory: default
+  height: 460px
 seo:
   title: Thumbnails Slider | Laioutr
   description: Thumbnail slider that pairs with a primary slider.
@@ -23,26 +28,6 @@ It's used by `ProductImageGallery` for product-image navigation and inside `Medi
 - The `centered` option keeps the active thumbnail in view as customers browse, removing the disorientation of off-screen position.
 - One thumbnail strip powers both product galleries and lightboxes, so the navigation feel is identical across surfaces.
 - Editors swap product imagery in Studio and the thumbnail strip updates automatically, with no per-product styling work.
-
-## Usage
-
-::component-code
----
-:name: LThumbnailsSlider
-:story-height: 400px
-story-id: ui-kit-molecules-thumbnailsslider--default
-title: ThumbnailsSlider Default
----
-```vue-template
-<ThumbnailsSlider
-    :thumbnails="thumbnails"
-    orientation="horizontal"
-    :selected-index="activeIndex"
-    centered
-    @select="activeIndex = $event"
-  />
-```
-::
 
 ## Feature List
 

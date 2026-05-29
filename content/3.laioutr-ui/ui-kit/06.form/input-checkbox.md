@@ -1,6 +1,11 @@
 ---
 title: Input Checkbox
 description: Labelled checkbox combining Checkbox and Label, with built-in required indicator.
+playground:
+  name: InputCheckbox
+  base: ui-kit-molecules-inputcheckbox
+  defaultStory: unchecked
+  height: 460px
 links: []
 seo:
   title: Input Checkbox | Laioutr
@@ -28,19 +33,6 @@ For multi-select groups inside a `Field`, use [`Checkbox`](/laioutr-ui/ui-kit/fo
 :::tip
 Pro-Tip from Larry: Use InputCheckbox when you need a labelled checkbox so the label is always associated.
 :::
-
-## Usage
-
-::component-code
----
-name: LInputCheckbox
-story-height: 60px
-story-id: ui-kit-molecules-inputcheckbox--unchecked
----
-```vue-template
-<LInputCheckbox label="Label" required />
-```
-::
 
 ## Feature List
 

@@ -1,6 +1,11 @@
 ---
 title: Logo Grid
 description: Static grid of brand, partner, or supplier logos.
+playground:
+  name: LogoGrid
+  base: ui-sections-logogrid
+  defaultStory: default
+  height: 460px
 seo:
   title: Logo Grid | Laioutr
   description: Static grid of brand logos.
@@ -23,20 +28,6 @@ For longer logo lists that benefit from rotation, switch to [`LogoSlider`](/laio
 - A static grid loads instantly with no rotation, perfect for trust strips where every logo should be visible at a glance.
 - Sharing the `slides` shape with `LogoSlider` means teams can swap layouts based on logo count without re-authoring data.
 - Editors keep the partner list current in Studio, so directory pages reflect new relationships without an engineering ticket.
-
-## Usage
-
-::component-code
----
-:name: LLogoGrid
-:story-height: 400px
-story-id: ui-sections-logogrid--default
-title: LogoGrid Default
----
-```vue-template
-<LogoGrid heading="Trusted by" :slides="logos" orientation="center" />
-```
-::
 
 ## Feature List
 

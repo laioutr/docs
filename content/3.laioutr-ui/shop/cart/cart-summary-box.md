@@ -1,6 +1,11 @@
 ---
 title: Cart Summary Box
 description: Subtotal, shipping, and total summary block for the cart.
+playground:
+  name: CartSummaryBox
+  base: ui-blocks-cartsummarybox
+  defaultStory: default
+  height: 460px
 seo:
   title: Cart Summary Box | Laioutr
   description: Subtotal, shipping, and total summary block.
@@ -25,27 +30,6 @@ Auto-import tag: `<LCartSummaryBox>`.
 - "VAT included" label sits next to the total so shoppers in tax-inclusive markets see at a glance that the price is final.
 - Locale-aware formatting renders the right currency symbol and decimal separator per market without per-country code paths.
 - Shared totals component keeps the mini-cart, cart page, and checkout in sync, removing the risk of a price mismatch that erodes trust at the final step.
-
-## Usage
-
-::component-code
----
-:name: LCartSummaryBox
-:story-height: 400px
-story-id: ui-blocks-cartsummarybox--default
-title: CartSummaryBox Default
----
-```vue-template
-<CartSummaryBox
-  :subtotal-price="cart.subtotal"
-  :shipping-price="cart.shipping"
-  :total-price="cart.total"
-  :discount="cart.discount"
-  :cart-href="checkoutUrl"
-  @remove-discount="removeDiscount"
-/>
-```
-::
 
 ## Feature List
 

@@ -1,6 +1,11 @@
 ---
 title: Review
 description: Product review display section with rating summary, sort and filter controls, and a Write a Review dialog.
+playground:
+  name: Review
+  base: ui-sections-review
+  defaultStory: default
+  height: 460px
 jiraIssueId: LUI-153
 seo:
   title: Review | Laioutr
@@ -31,17 +36,6 @@ Sort options cover Newest, Oldest, Rating low-to-high, and Rating high-to-low. F
 Pro-Tip from Larry: Use `Review` on PDP so customers can read and write reviews in one place.
 :::
 
-## Usage
-
-::component-code
----
-:name: LReview
-:story-height: 500px
-story-id: ui-sections-review--default
-title: Review Default
----
-::
-
 ## Feature List
 
 ::features
@@ -54,8 +48,6 @@ items:
   - "ReviewItem renders each review with consistent layout and metadata"
 ---
 ::
-
-## API Reference
 
 ### LReview
 

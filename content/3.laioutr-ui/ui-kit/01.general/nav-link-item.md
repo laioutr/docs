@@ -1,6 +1,11 @@
 ---
 title: Nav Link Item
 description: Generic navigation list-row link primitive used by footer, mobile, and side-by-side menus.
+playground:
+  name: NavLinkItem
+  base: ui-kit-molecules-navlinkitem
+  defaultStory: default
+  height: 460px
 seo:
   title: Nav Link Item | Laioutr
   description: Generic navigation list-row link primitive.
@@ -21,20 +26,6 @@ sitemap:
 - `NuxtLink` integration means prefetching and route transitions work for free, keeping menu taps fast on the mobile devices that drive most traffic.
 - Optional leading icons make help, account, and policy links scannable without bespoke layout work in each menu.
 
-## Usage
-
-::component-code
----
-:name: LNavLinkItem
-:story-height: 200px
-story-id: ui-kit-molecules-navlinkitem--default
-title: NavLinkItem Default
----
-```vue-template
-<NavLinkItem href="/help" icon="question-circle">Help</NavLinkItem>
-```
-::
-
 ## Feature List
 
 ::features
@@ -47,7 +38,6 @@ items:
   - "Underpins Footer, MobileMenuBasic, MobileMenuShop, and MenuSideBySide so navigation rhythm stays consistent across entry points"
 ---
 ::
-
 
 ## API Reference
 

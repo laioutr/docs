@@ -1,6 +1,11 @@
 ---
 title: Content Slider
 description: Slot-driven slider for promotional banners and content slides, with touch and keyboard navigation.
+playground:
+  name: ContentSlider
+  base: ui-sections-contentslider
+  defaultStory: default
+  height: 460px
 seo:
   title: Content Slider | Laioutr
   description: Slot-driven slider for promotional banners and content slides.

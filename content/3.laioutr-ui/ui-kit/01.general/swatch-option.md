@@ -1,6 +1,11 @@
 ---
 title: Swatch Option
 description: Single selectable swatch with selected, hover, and focus states.
+playground:
+  name: SwatchOption
+  base: ui-kit-molecules-swatchoption
+  defaultStory: single-color
+  height: 460px
 seo:
   title: Swatch Option | Laioutr
   description: Single selectable swatch with selected, hover, and focus states.
@@ -23,28 +28,6 @@ For non-interactive listings use [`SwatchChip`](/laioutr-ui/ui-kit/general/swatc
 - One row primitive across filter UIs and buybox swatches means the interaction model stays consistent wherever shoppers pick a color.
 - Keyboard focus states keep filter forms usable for assistive-technology users, protecting accessibility compliance on listing pages.
 
-## Usage
-
-::component-code
----
-:name: LSwatchOption
-:story-height: 200px
-story-id: ui-kit-molecules-swatchoption--single-color
-title: SwatchOption Default
----
-```vue-template
-<SwatchOption
-    :id="option.id"
-    :label="option.label"
-    :swatch="option.swatch"
-    :count="option.count"
-    :selected="option.id === selected"
-    size="m"
-    @click="select(option.id)"
-  />
-```
-::
-
 ## Feature List
 
 ::features
@@ -57,7 +40,6 @@ items:
   - "`@click` emit leaves selection state in the consumer, so the option works equally inside off-canvas filters and PDP swatch rows"
 ---
 ::
-
 
 ## API Reference
 

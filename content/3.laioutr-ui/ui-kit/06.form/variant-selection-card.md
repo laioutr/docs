@@ -1,6 +1,11 @@
 ---
 title: Variant Selection Card
 description: Card-shaped variant tile combining image, option attributes, price, and a savings indicator.
+playground:
+  name: VariantSelectionCard
+  base: ui-kit-organisms-variantselectioncard
+  defaultStory: default
+  height: 460px
 seo:
   title: Variant Selection Card | Laioutr
   description: Card-shaped variant tile.
@@ -23,31 +28,6 @@ For single-axis variants (color, size), use [`OptionTileImage`](/laioutr-ui/ui-k
 - Combining image, option attributes, and price in one tile gives subscription and bundle pickers the density they need without forcing shoppers to read fine print.
 - The locale-driven `Save {percent}%` string keeps the savings message localized for every market without per-country template work.
 
-## Usage
-
-::component-code
----
-:name: LVariantSelectionCard
-:story-height: 150px
-story-id: ui-kit-organisms-variantselectioncard--default
-title: VariantSelectionCard Default
----
-```vue-template
-<RadioGroup v-model="selectedPlanId">
-    <VariantSelectionCard
-      v-for="plan in plans"
-      :key="plan.id"
-      :id="plan.id"
-      :image="plan.image"
-      :price="plan.price"
-      :selected-options="plan.options"
-      :saving-percentage="plan.savings"
-      @selected="(payload) => onPlanSelected(payload)"
-    />
-  </RadioGroup>
-```
-::
-
 ## Feature List
 
 ::features
@@ -61,7 +41,6 @@ items:
   - "`savingPercentage` is opt-in: omit it for variants without a saving, and the tile collapses the badge automatically"
 ---
 ::
-
 
 ## API Reference
 
