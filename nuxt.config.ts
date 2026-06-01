@@ -62,6 +62,17 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/offering/compliance/fair-usage-policy': { redirect: { to: '/offering/policies/fair-usage-policy', statusCode: 301 } },
+    // Hosting: Hosting Adapter → Hyperscaler / Native Hosting (301)
+    '/hosting/hosting-adapter': { redirect: { to: '/hosting/hyperscaler', statusCode: 301 } },
+    '/hosting/hosting-adapter/vercel-adapter': { redirect: { to: '/hosting/hyperscaler/vercel-adapter', statusCode: 301 } },
+    '/hosting/hosting-adapter/aws-adapter': { redirect: { to: '/hosting/hyperscaler/aws-adapter', statusCode: 301 } },
+    '/hosting/hosting-adapter/azure-adapter': { redirect: { to: '/hosting/hyperscaler/azure-adapter', statusCode: 301 } },
+    '/hosting/hosting-adapter/google-adapter': { redirect: { to: '/hosting/hyperscaler/google-adapter', statusCode: 301 } },
+    '/hosting/hosting-adapter/netlify-adapter': { redirect: { to: '/hosting/hyperscaler/netlify-adapter', statusCode: 301 } },
+    '/hosting/hosting-adapter/akamai-adapter': { redirect: { to: '/hosting/hyperscaler/akamai-adapter', statusCode: 301 } },
+    '/hosting/hosting-adapter/scale-commerce-adapter': {
+      redirect: { to: '/hosting/native-hosting-providers/scale-commerce', statusCode: 301 },
+    },
   },
 
   sitemap: {
@@ -104,7 +115,7 @@ export default defineNuxtConfig({
       },
       {
         title: 'Hosting',
-        description: 'Laioutr Cloud, hosting adapters, and bring-your-own-server.',
+        description: 'Laioutr Cloud, hyperscaler integrations, managed hosting providers, and bring-your-own-server.',
         contentCollection: 'docs',
         contentFilters: [{ field: 'path', operator: 'LIKE', value: '/hosting%' }],
       },

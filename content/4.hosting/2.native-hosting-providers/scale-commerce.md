@@ -1,15 +1,21 @@
 ---
-title: Scale Commerce Adapter
-description: The Scale Commerce Adapter is a pre-built integration that connects the Laioutr Cockpit directly with Scale Commerce. It allows you to trigger deployments and manage frontend delivery through Scale Commerce services.
+title: ScaleCommerce
+description: Integration with ScaleCommerce—managed Performance-as-a-Service for E-Commerce shops and high-traffic web applications.
+aliases:
+  - /hosting/hosting-adapter/scale-commerce-adapter
 seo:
-  title: Scale Commerce Adapter | Laioutr
-  description: The Scale Commerce Adapter is a pre-built integration that connects the Laioutr Cockpit directly with Scale Commerce.…
+  title: ScaleCommerce | Laioutr
+  description: Connect the Laioutr Cockpit with ScaleCommerce for managed E-Commerce hosting and frontend delivery.
 sitemap:
-  loc: /hosting/hosting-adapter/scale-commerce-adapter
-  lastmod: 2026-04-08
+  loc: /hosting/native-hosting-providers/scale-commerce
+  lastmod: 2026-05-31
   changefreq: monthly
   priority: 1.0
 
 ---
 
-# Scale Commerce Adapter
+# ScaleCommerce
+
+[ScaleCommerce](https://scale.sc/) offers a **Performance-as-a-Service** platform for E-Commerce and demanding web applications. The stack combines fast hosting with application know-how, best-practice tooling, and support for Shopware, Magento, Sylius, OXID, and other shop systems.
+
+The Laioutr integration lets you trigger deployments and manage frontend delivery on ScaleCommerce from the Cockpit—aligned with your shop’s existing ScaleCommerce environment.

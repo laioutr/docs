@@ -1,11 +1,13 @@
 ---
 title: Akamai Adapter
 description: The Akamai Adapter is a planned integration to connect the Laioutr Cockpit with Akamai-hosted delivery and deployment setups. This page documents the intended scope and configuration shape ahead of release.
+aliases:
+  - /hosting/hosting-adapter/akamai-adapter
 seo:
   title: Akamai Adapter | Laioutr
   description: The Akamai Adapter is a planned integration to connect the Laioutr Cockpit with Akamai-hosted delivery and deployment setups.…
 sitemap:
-  loc: /hosting/hosting-adapter/akamai-adapter
+  loc: /hosting/hyperscaler/akamai-adapter
   lastmod: 2026-05-27
   changefreq: monthly
   priority: 0.6
