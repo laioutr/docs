@@ -1,4 +1,11 @@
+import { fileURLToPath } from 'node:url';
 import { withoutTrailingSlash } from 'ufo';
+import { aliasRouteRules } from './app/lib/alias-redirects';
+
+// Resolve old page URLs (the `aliases:` frontmatter) to their canonical paths
+// at build time, so 301s are handled by the edge/platform layer instead of a
+// per-request Nitro function. See app/lib/alias-redirects.ts for the why.
+const aliasRedirects = aliasRouteRules(fileURLToPath(new URL('./content', import.meta.url)));
 
 export default defineNuxtConfig({
   extends: ['docus'],
@@ -73,6 +80,7 @@ export default defineNuxtConfig({
     '/hosting/hosting-adapter/scale-commerce-adapter': {
       redirect: { to: '/hosting/native-hosting-providers/scale-commerce', statusCode: 301 },
     },
+    ...aliasRedirects,
   },
 
   sitemap: {
