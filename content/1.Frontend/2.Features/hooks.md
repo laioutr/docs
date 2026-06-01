@@ -17,7 +17,7 @@ These hooks run on the client. Register them in a Nuxt plugin with [`nuxtApp.hoo
 
 Three hooks let you customize how `linkResolver` resolves links, switches locale paths, and switches market URLs. They come in two shapes.
 
-The `resolve` hook is a **filter**. It runs *after* a link is resolved, with `result.value` pre-seeded with the resolved URL or path. Read that value and transform it (for example, append a query parameter) for any link type. Leave `result.value` untouched to keep the resolved value. When several plugins register this hook, each receives the previous one's output.
+The `resolve` hook is a **filter**. It runs *after* a link is resolved, with `result.value` pre-seeded with the resolved URL or path. Your handler can transform that value (for example, append a query parameter), replace it outright (route a reference to an external URL), or leave it untouched to keep the default. This works for any link type. When several plugins register this hook, each receives the previous one's output.
 
 The two `switch-*` hooks are **overrides**. They run *before* the default logic, with `result.value` starting empty. Set it to take over locale or market switching, including cases the default cannot resolve. Leave it unset to fall back to the default.
 
@@ -31,6 +31,13 @@ For `resolve`, `result` has the shape `{ value: string }`, pre-seeded with the r
 
 ```ts [app/plugins/custom-link-resolver.ts]
 export default defineNuxtPlugin((nuxtApp) => {
+  // Replace: resolve product references to an external catalog URL
+  nuxtApp.hook('frontend-core:link-resolver:resolve', ({ link, result }) => {
+    if (link.type === 'reference' && link.reference.type === 'Product') {
+      result.value = `https://catalog.example.com/p/${link.reference.slug}`;
+    }
+  });
+
   // Filter: append a tracking param to outbound links to a partner domain
   nuxtApp.hook('frontend-core:link-resolver:resolve', ({ link, result }) => {
     if (link.type === 'url' && result.value.includes('://partner.example.com')) {
