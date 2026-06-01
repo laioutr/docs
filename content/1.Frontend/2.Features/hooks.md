@@ -15,26 +15,31 @@ These hooks run on the client. Register them in a Nuxt plugin with [`nuxtApp.hoo
 
 ### Link Resolver
 
-Three hooks let you override how `linkResolver` resolves links, switches locale paths, and switches market URLs. If your hook sets `result.value`, the default resolution is skipped entirely.
+Three hooks let you customize how `linkResolver` resolves links, switches locale paths, and switches market URLs. They come in two shapes.
+
+The `resolve` hook is a **filter**. It runs *after* a link is resolved, with `result.value` pre-seeded with the resolved URL or path. Read that value and transform it (for example, append a query parameter) for any link type. Leave `result.value` untouched to keep the resolved value. When several plugins register this hook, each receives the previous one's output.
+
+The two `switch-*` hooks are **overrides**. They run *before* the default logic, with `result.value` starting empty. Set it to take over locale or market switching, including cases the default cannot resolve. Leave it unset to fall back to the default.
 
 | Hook                                             | Arguments                                                       | When it fires                                                  |
 | ------------------------------------------------ | --------------------------------------------------------------- | -------------------------------------------------------------- |
-| `frontend-core:link-resolver:resolve`            | `{ link: Link, result }`                                        | On every call to `linkResolver.resolve()`                      |
+| `frontend-core:link-resolver:resolve`            | `{ link: Link, result }`                                        | After every call to `linkResolver.resolve()`                   |
 | `frontend-core:link-resolver:switch-locale-path` | `{ targetLanguageId: string, result }`                          | When switching the current page to another language            |
 | `frontend-core:link-resolver:switch-market-url`  | `{ targetMarketId: string, targetLanguageId?: string, result }` | When switching to a different market (may include host change) |
 
-In all three cases, `result` has the shape `{ value: string | undefined }` and can be used to override the default resolution.
+For `resolve`, `result` has the shape `{ value: string }`, pre-seeded with the resolved value. For the two `switch-*` hooks, it is `{ value: string | undefined }`, empty until you set it.
 
 ```ts [app/plugins/custom-link-resolver.ts]
 export default defineNuxtPlugin((nuxtApp) => {
-  // Resolve product references to an external catalog URL
+  // Filter: append a tracking param to outbound links to a partner domain
   nuxtApp.hook('frontend-core:link-resolver:resolve', ({ link, result }) => {
-    if (link.type === 'reference' && link.reference.type === 'Product') {
-      result.value = `https://catalog.example.com/p/${link.reference.slug}`;
+    if (link.type === 'url' && result.value.includes('://partner.example.com')) {
+      const separator = result.value.includes('?') ? '&' : '?';
+      result.value = `${result.value}${separator}ref=laioutr`;
     }
   });
 
-  // Override locale switching for a specific market
+  // Override: take over locale switching for a specific market
   nuxtApp.hook('frontend-core:link-resolver:switch-locale-path', ({ targetLanguageId, result }) => {
     if (targetLanguageId === 'fr-CH') {
       result.value = `/fr-ch${useRoute().path}`;
