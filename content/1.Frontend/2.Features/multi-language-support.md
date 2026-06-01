@@ -71,6 +71,7 @@ The UI Kit registers global formatters that respect the active locale:
 | `$money(money)` | [`{ amount, currency }`](/frontend/api-reference/common-types/money) | `CHF 149.00` / `149,00 €` |
 | `$timespan(timespan)` | `{ min?, max? }` (Date) | `1. – 15. März 2025` |
 | `$measurement(measurement)` | [`{ value, unit }`](/frontend/api-reference/common-types/measurement) | `100 cm` / `10 m²` |
+| `$unitPrice(unitPrice)` | [`{ price, quantity, reference }`](/frontend/api-reference/common-types/unit-price) | `13,99 € / 100 ml` |
 | `$duration(duration)` | `{ duration }` (ISO 8601) | `1h 30m` |
 
 Available in any template: `{{ $money(price) }}`. See [Currencies](/frontend/features/currencies) for the developer-facing summary, and the [`Money` reference](/frontend/api-reference/common-types/money) for the full `$money` signature and options.
