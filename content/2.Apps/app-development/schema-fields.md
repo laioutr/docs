@@ -320,7 +320,7 @@ Dropdown with predefined options.
   :::field
   ---
   name: options
-  required: "true"
+  required: true
   type: "{ value: string; label: string }[]"
   ---
   At least one option is required.
@@ -353,7 +353,7 @@ Radio button group. Same data shape as `select`, different UI.
   :::field
   ---
   name: options
-  required: "true"
+  required: true
   type: "{ value: string; label: string }[]"
   ---
   At least one option is required.
@@ -385,7 +385,7 @@ Segmented button group. Each option can have a [Studio icon](/apps/app-developme
   :::field
   ---
   name: options
-  required: "true"
+  required: true
   type: "{ value: string; label: string; icon?: string }[]"
   ---
   At least one option is required. Icons are optional per option. See [Studio icons](/apps/app-development/studio-icons) for available names.
