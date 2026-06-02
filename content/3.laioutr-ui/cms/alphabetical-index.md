@@ -16,6 +16,8 @@ sitemap:
   priority: 1.0
 aliases:
   - /laioutr-ui/cms/brand-list
+changelogKeys:
+  - AlphabeticalIndex
 links:
   - label: Figma
     icon: i-simple-icons-figma

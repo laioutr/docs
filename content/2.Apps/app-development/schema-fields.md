@@ -10,6 +10,8 @@ sitemap:
   changefreq: monthly
   priority: 1
 links: []
+changelogKeys:
+  - SchemaCondition
 ---
 
 The `schema` property of a [section](/apps/app-development/section-definitions) or [block](/apps/app-development/block-definitions) definition controls the sidebar editor in Studio. It is an array of **fieldsets**, where each fieldset groups related fields into a collapsible panel.

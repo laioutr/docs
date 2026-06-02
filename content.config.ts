@@ -30,9 +30,18 @@ export default defineContentConfig({
                 height: z.string().optional(),
               })
               .optional(),
+            changelogKeys: z.array(z.string()).optional(),
           })
           .passthrough(),
       }),
     ),
+    // Per-API changelog entries, keyed by API identifier (component / composable /
+    // helper / action name). A single YAML file whose top-level keys spread onto
+    // one data document — see shared/changelog.ts for the entry shape.
+    changelog: defineCollection({
+      type: 'data',
+      source: 'changelog.yml',
+      schema: z.object({}).passthrough(),
+    }),
   },
 })

@@ -1,12 +1,14 @@
-import { transformMdcBody } from '../utils/llms/transform-mdc';
-import { stripTwoslashCuts } from '../utils/llms/strip-twoslash-cuts';
+import { getChangelogData, injectChangelogSection } from '../utils/llms/inject-changelog';
 import { injectPlaygroundSection } from '../utils/llms/inject-playground';
+import { stripTwoslashCuts } from '../utils/llms/strip-twoslash-cuts';
+import { transformMdcBody } from '../utils/llms/transform-mdc';
 
 export default defineNitroPlugin((nitroApp) => {
   // Transform MDC component nodes in doc.body before llms-full.txt stringification
-  nitroApp.hooks.hook('content:llms:generate:document', async (_event, doc, _options) => {
+  nitroApp.hooks.hook('content:llms:generate:document', async (event, doc, _options) => {
     await transformMdcBody(doc.body);
     injectPlaygroundSection(doc.body, (doc as any).playground);
+    injectChangelogSection(doc.body, (doc as any).changelogKeys, await getChangelogData(event));
     stripTwoslashCuts(doc.body);
   });
 

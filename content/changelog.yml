@@ -1,0 +1,73 @@
+AlphabeticalIndex:
+  - version: 2.3.0
+    type: changed
+    breaking: true
+    changelog: ui
+    note: Renamed from `BrandList` and generalized beyond brands — pass any `items` and a `heading` instead of `brands`.
+    migration: |
+      Import from the new component, rename the `brands` prop to `items`, and
+      pass `heading` explicitly — the old built-in `"Brands"` translation no
+      longer renders automatically.
+
+      ```ts
+      // Before
+      interface BrandListProps {
+        brands: { name: string; href: string; count?: number }[];
+      }
+
+      // After
+      interface AlphabeticalIndexProps {
+        heading?: string;
+        items: { name: string; href: string; count?: number }[];
+      }
+      ```
+
+Media:
+  - version: 0.30.1
+    type: added
+    changelog: frontend
+    note: >-
+      Added an [`audio`](/frontend/api-reference/common-types/media#mediaaudio)
+      variant, plus [text tracks](/frontend/api-reference/common-types/media#text-tracks)
+      and [streaming formats](/frontend/api-reference/common-types/media#streaming-formats)
+      for video. Studio `media` fields can restrict to it with
+      `allowedTypes: ['audio']`.
+  - version: 0.30.1
+    type: changed
+    breaking: true
+    changelog: frontend
+    note: '`MediaVideo.preview` was renamed to `MediaVideo.poster` to match the HTML `<video poster>` attribute.'
+    migration: |
+      Rename the field on every `MediaVideo` you construct or read.
+
+      ```ts
+      // Before
+      const video: MediaVideo = { type: 'video', sources, preview: posterImage };
+      // After
+      const video: MediaVideo = { type: 'video', sources, poster: posterImage };
+      ```
+  - version: 0.30.1
+    type: changed
+    breaking: true
+    changelog: frontend
+    note: The `Media` union was widened to include `MediaAudio`, so `media.type` can now be `'audio'`.
+    migration: |
+      Any exhaustive `switch (media.type)` without a `default` branch must add an
+      `'audio'` case, or TypeScript reports a non-exhaustive switch.
+
+      ```ts
+      switch (media.type) {
+        case 'image': return renderImage(media);
+        case 'video': return renderVideo(media);
+        case 'audio': return renderAudio(media); // new
+      }
+      ```
+
+SchemaCondition:
+  - version: 0.30.0
+    type: added
+    changelog: frontend
+    note: >-
+      Field and fieldset definitions gained an optional `if` expression that
+      hides a control in the Studio sidebar — see
+      [Conditional visibility](/apps/app-development/schema-fields#conditional-visibility).

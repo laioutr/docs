@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { kebabCase } from 'scule';
-import type { ContentNavigationItem, Collections, DocsCollectionItem } from '@nuxt/content';
 import { findPageHeadline } from '@nuxt/content/utils';
+import { kebabCase } from 'scule';
+import type { Collections, ContentNavigationItem, DocsCollectionItem } from '@nuxt/content';
 
 definePageMeta({
   layout: 'docs',
@@ -17,11 +17,9 @@ const collectionName = computed(() => isEnabled.value ? `docs_${locale.value}` :
 
 const [{ data: page }, { data: surround }] = await Promise.all([
   useAsyncData(kebabCase(route.path), () => queryCollection(collectionName.value as keyof Collections).path(route.path).first() as Promise<DocsCollectionItem>),
-  useAsyncData(`${kebabCase(route.path)}-surround`, () => {
-    return queryCollectionItemSurroundings(collectionName.value as keyof Collections, route.path, {
+  useAsyncData(`${kebabCase(route.path)}-surround`, () => queryCollectionItemSurroundings(collectionName.value as keyof Collections, route.path, {
       fields: ['description'],
-    });
-  }),
+    })),
 ]);
 
 if (!page.value) {
@@ -87,6 +85,17 @@ const playground = computed<PlaygroundFrontmatter | null>(() => {
 
 const tocLinks = computed(() => page.value?.body?.toc?.links || []);
 const contentTocVariants = useUIConfig('contentToc');
+
+// Changelog block (rendered at the bottom of the content from the `changelogKeys`
+// frontmatter). Push a matching entry into the page TOC so it shows up alongside
+// the real headings — both TOC render paths read `page.body.toc.links`.
+const changelogKeys = computed<string[]>(() => (page.value as any)?.changelogKeys ?? []);
+watchEffect(() => {
+  const toc = page.value?.body?.toc;
+  if (!toc?.links || !changelogKeys.value.length) return;
+  if (toc.links.at(-1)?.id === 'changelog') return;
+  toc.links.push({ id: 'changelog', text: 'Changelog', depth: 2 });
+});
 </script>
 
 <template>
@@ -150,6 +159,10 @@ const contentTocVariants = useUIConfig('contentToc');
         <ContentRenderer
           v-if="page"
           :value="page"
+        />
+        <ApiChangelog
+          v-if="changelogKeys.length"
+          :keys="changelogKeys"
         />
       </div>
 
@@ -215,6 +228,11 @@ const contentTocVariants = useUIConfig('contentToc');
     grid-column: 1;
     grid-row: 1;
     min-width: 0;
+  }
+  /* The changelog block follows the content in column 1 rather than stacking
+     into the same cell (which would overlap the rendered content). */
+  .playground-page-body > .api-changelog {
+    grid-row: 2;
   }
 }
 </style>

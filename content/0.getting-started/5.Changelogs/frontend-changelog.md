@@ -25,10 +25,22 @@ All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend
 ### Added
 
 - **Frontend Core**: New `laioutr:beforeModuleRegister` Nuxt hook fires before the ui-kit module registers each upstream module, with `{ name, key, options }`. Consumers can mutate `options` to override defaults applied by `registerModule`.
+- **Common Types**: `Media` gained an `audio` variant. `MediaAudio` carries `sources: MediaSourceAudio[]`, an optional `cover` (album art / podcast cover), and optional `tracks`. The new `MediaTextTrack` type backs timed text tracks (subtitles, captions, chapters) for both audio and video, and `MediaVideo` now accepts `tracks` plus a `streaming` delivery format (`progressive | hls | dash`). Studio `media` fields can restrict to audio with `allowedTypes: ['audio']`.
+
+### Changed
+
+- **Common Types** (breaking): `MediaVideo.preview` was renamed to `MediaVideo.poster`, matching the HTML `<video poster>` attribute. Rename the field on every `MediaVideo` you construct or read.
+- **Common Types** (breaking): the `Media` union now includes `MediaAudio`, so `media.type` can be `'audio'`. Exhaustive `switch (media.type)` blocks without a `default` branch must add an `'audio'` case.
 
 ### Fixed
 
 - **Frontend Core**: Section `slots` prop now retains structural typing of block props at consumer call sites. The previous wrapper used deep `SimplifyDeep`, which past a certain schema depth tripped TypeScript's 50-level instantiation limit and surfaced as `TS2589: Type instantiation is excessively deep and possibly infinite` in sections that mapped over their slot blocks. Bounded `Simplify` is now applied at the slot-map / block / `props` boundaries. Sections that previously needed an `as unknown as ReadonlyArray<{ props: Record<string, any> }>` cast on `props.slots.*` can drop the cast and access `block.props.<field>` with full type inference. No runtime or API change.
+
+## [0.30.0]
+
+### Added
+
+- **Common Types**: Studio field and fieldset definitions accept an optional `if: SchemaCondition` — a JSON expression (typed via `@laioutr/expression`) that hides the control in the Studio sidebar when it evaluates to a falsy value. The stored value is kept and still passed to your component at render time; only the sidebar control disappears. Example: `if: ['==', ['get', 'background'], 'custom']`.
 
 ## [0.29.0]
 

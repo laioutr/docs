@@ -14,6 +14,12 @@ sitemap:
 
 All notable changes to **Laioutr UI**, **UI Kit**, and related component libraries will be documented in this file.
 
+## [2.3.0]
+
+### Changed
+
+- **UI**: **Breaking** — `BrandList` is replaced by the generic `AlphabeticalIndex` component. `AlphabeticalIndex` is an A-Z grouped link list with a configurable `heading` and an optional per-item `count`, usable for brands, glossaries, and similar indexes. Migrate by importing the new component, renaming the `brands` prop to `items`, and passing `heading` explicitly — the old built-in `"Brands"` translation no longer renders automatically.
+
 ## [2.2.2]
 
 ### Added
