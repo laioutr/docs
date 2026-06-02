@@ -544,6 +544,8 @@ Resolve a `Link` to a URL string with `linkResolver.resolve()` and pass it to an
 </template>
 ```
 
+Outside a template or `computed()`, use [`useResolvedLink()`](/frontend/api-reference/common-types/link#resolving-links) instead. A bare `linkResolver.resolve()` call won't react to locale changes or [link resolver hooks](/frontend/features/hooks#link-resolver).
+
 **Prop type:** `Link | undefined` · **Fallback:** `undefined`
 
 ---
