@@ -6,13 +6,29 @@ seo:
   description: Changelog for the Laioutr frontend product following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/frontend-changelog
-  lastmod: 2026-05-28
+  lastmod: 2026-06-03
   changefreq: monthly
   priority: 1.0
 
 ---
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
+
+## [0.30.3]
+
+### Added
+
+- **Frontend Core**: Render pipeline now supports `RcPropValueEntityProperty`. Seeds are gathered, query paths are resolved via the new shared `resolveEntityPath` helper, and resolved values are coerced through `coerceFieldValue` — so e.g. a string URL bound to a media field becomes a `Media` object. The dynamic-string render branch now also routes through `resolveEntityPath`, unifying the two query-bound paths.
+- **Frontend Core**: Reflect endpoint now exposes `installedApps: Record<string, AppRuntimeMeta>` — every `registerLaioutrApp` caller (including frontend-core itself) keyed by name, with its `version` and `pageWrapper`. Backed by a new server-only virtual file `#laioutr/installed-apps`, populated lazily from `laioutrAppRegistry.getAllMetas()` so apps registered later in module setup are still captured.
+- **Frontend Core**: `frontend-core:link-resolver:resolve` is now a filter hook. It runs after a link is resolved, with `result.value` pre-seeded with the resolved URL or path. Handlers receive the resolved value and may transform it (e.g. append query params) for any link type, and the value is threaded across multiple handlers. Existing handlers that overwrite `result.value` keep working unchanged.
+
+### Changed
+
+- **Frontend Core**: `rcPropValueToRender` now treats unknown `RcPropValue.type` values as "no value" (returns `undefined`) and emits a deduplicated `console.warn`, instead of leaking the raw value object to downstream renderers. Lets newer studio configs degrade gracefully on older frontend-core deployments rather than crashing.
+
+### Fixed
+
+- **Frontend Core**: `frontend-core:link-resolver:*` and `frontend-core:page-renderer:select-page-variant` hooks now actually take effect — handler-set `result.value` is read synchronously. Previously the result was read before Nuxt's deferred handlers ran, so every registered handler's output was silently dropped.
 
 ## [0.30.2]
 
