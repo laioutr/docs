@@ -210,8 +210,11 @@ Editors manage available languages and fallbacks in [Cockpit → Translations](/
 
 Single-line text input.
 
+::screenshot{src="/assets/img/schema-fields/text.png" alt="A text field in the Studio sidebar: a single-line input labelled Headline." width="550" height="168" scale="0.75" background="white"}
+::
+
 ```ts
-{ type: 'text', name: 'heading', label: 'Heading', placeholder: 'Enter a heading' }
+{ type: 'text', name: 'headline', label: 'Headline', placeholder: 'Enter a headline' }
 ```
 
 ::field-group
@@ -232,8 +235,11 @@ Single-line text input.
 
 Multi-line plain text input.
 
+::screenshot{src="/assets/img/schema-fields/textarea.png" alt="A textarea field in the Studio sidebar: a multi-line input labelled Description." width="550" height="252" scale="0.75" background="white"}
+::
+
 ```ts
-{ type: 'textarea', name: 'excerpt', label: 'Excerpt', maxLength: 200 }
+{ type: 'textarea', name: 'description', label: 'Description', maxLength: 200 }
 ```
 
 ::field-group
@@ -254,8 +260,11 @@ Multi-line plain text input.
 
 Numeric input with optional constraints.
 
+::screenshot{src="/assets/img/schema-fields/number.png" alt="A number field in the Studio sidebar: a stepper input labelled Star rating." width="550" height="96" scale="0.75" background="white"}
+::
+
 ```ts
-{ type: 'number', name: 'columns', label: 'Columns', default: 3, min: 1, max: 6, step: 1 }
+{ type: 'number', name: 'starRating', label: 'Star Rating', default: 3, min: 1, max: 5, step: 0.5 }
 ```
 
 ::field-group
@@ -288,8 +297,11 @@ Numeric input with optional constraints.
 
 Boolean toggle.
 
+::screenshot{src="/assets/img/schema-fields/checkbox.png" alt="A checkbox field in the Studio sidebar: a toggle switch labelled Scrollbar." width="550" height="80" scale="0.75" background="white"}
+::
+
 ```ts
-{ type: 'checkbox', name: 'showPrice', label: 'Show Price', default: true }
+{ type: 'checkbox', name: 'showScrollbar', label: 'Scrollbar', default: true }
 ```
 
 A checkbox can also act as a [visibility decorator](#visibility-toggles) to control whether another field is shown in the sidebar.
@@ -302,16 +314,19 @@ A checkbox can also act as a [visibility decorator](#visibility-toggles) to cont
 
 Dropdown with predefined options.
 
+::screenshot{src="/assets/img/schema-fields/select.png" alt="A select field in the Studio sidebar: a dropdown labelled Background." width="550" height="96" scale="0.75" background="white"}
+::
+
 ```ts
 {
   type: 'select',
-  name: 'layout',
-  label: 'Layout',
-  default: 'full-width',
+  name: 'background',
+  label: 'Background',
+  default: 'pale',
   options: [
-    { label: 'Full Width', value: 'full-width' },
-    { label: 'Boxed', value: 'boxed' },
-    { label: 'Centered', value: 'centered' },
+    { label: 'Pale', value: 'pale' },
+    { label: 'White', value: 'white' },
+    { label: 'Dark', value: 'dark' },
   ],
 }
 ```
@@ -368,15 +383,19 @@ Radio button group. Same data shape as `select`, different UI.
 
 Segmented button group. Each option can have a [Studio icon](/apps/app-development/studio-icons).
 
+::screenshot{src="/assets/img/schema-fields/toggle_button.png" alt="A toggle_button field in the Studio sidebar: a segmented control labelled Style." width="550" height="96" scale="0.75" background="white"}
+::
+
 ```ts
 {
   type: 'toggle_button',
-  name: 'sectionStyle',
+  name: 'coverStyle',
   label: 'Style',
   default: 'full-width',
   options: [
-    { label: 'Full', value: 'full-width', icon: 'boxOutline' },
-    { label: 'Boxed', value: 'boxed', icon: 'boxSolid' },
+    { label: 'None', value: 'none' },
+    { label: 'Gradient', value: 'gradient', icon: 'boxGradient' },
+    { label: 'Solid', value: 'solid', icon: 'boxSolid' },
   ],
 }
 ```
@@ -400,6 +419,9 @@ Segmented button group. Each option can have a [Studio icon](/apps/app-developme
 
 Icon picker. Lets editors choose from available icon sets.
 
+::screenshot{src="/assets/img/schema-fields/icon.png" alt="An icon field in the Studio sidebar: a picker with a Select Icon dropdown." width="550" height="154" scale="0.75" background="white"}
+::
+
 ```ts
 { type: 'icon', name: 'icon', label: 'Icon' }
 ```
@@ -412,17 +434,20 @@ No type-specific properties.
 
 ### info
 
-Displays a read-only heading or help text inside the sidebar. Not a data field; it does not produce a prop value.
+Displays a read-only heading or help text inside the sidebar. Not a data field, so it does not produce a prop value. It still requires a `name` however.
+
+::screenshot{src="/assets/img/schema-fields/info.png" alt="An info field in the Studio sidebar: a read-only Tiles styling heading with help text." width="550" height="145" scale="0.75" background="white"}
+::
 
 ```ts
-{ type: 'info', name: 'designInfo', label: 'Use these settings to customize the appearance.', heading: 'Design Options' }
+{ type: 'info', name: 'tilesInfo', label: 'Tiles styling', description: 'These are global settings. However, you can customize each tile individually.' }
 ```
 
-::field-group
+<!-- ::field-group
   :::field{name="heading" type="string"}
   Heading text shown above the label/description.
   :::
-::
+:: -->
 
 **Prop type:** none (not passed as a prop)
 
@@ -432,8 +457,11 @@ Displays a read-only heading or help text inside the sidebar. Not a data field; 
 
 Rich text editor with formatting (bold, italic, links, headings, lists, etc.).
 
+::screenshot{src="/assets/img/schema-fields/richtext.png" alt="A richtext field in the Studio sidebar: a Quote editor with a bold/italic/underline/link toolbar above the text." width="550" height="438" scale="0.75" background="white"}
+::
+
 ```ts
-{ type: 'richtext', name: 'body', label: 'Body Text', placeholder: 'Write something...' }
+{ type: 'richtext', name: 'quote', label: 'Quote', placeholder: 'Write something...' }
 ```
 
 ::field-group
@@ -460,8 +488,11 @@ Using `v-html` directly works but skips these styles.
 
 Color picker. Supports theme colors and optional custom color input.
 
+::screenshot{src="/assets/img/schema-fields/color.png" alt="A color field in the Studio sidebar: a swatch labelled Fallback Color showing the theme color purple-9." width="550" height="96" scale="0.75" background="white"}
+::
+
 ```ts
-{ type: 'color', name: 'backgroundColor', label: 'Background Color', allowCustom: true }
+{ type: 'color', name: 'fallbackColor', label: 'Fallback Color' }
 ```
 
 ::field-group
@@ -482,8 +513,11 @@ Color picker. Supports theme colors and optional custom color input.
 
 Media picker for images and videos from the media library.
 
+::screenshot{src="/assets/img/schema-fields/media.png" alt="A media field in the Studio sidebar: a Media picker with a Static/Responsive toggle, mobile and desktop image previews, and an alt text input." width="550" height="937" scale="0.75" background="white"}
+::
+
 ```ts
-{ type: 'media', name: 'heroImage', label: 'Hero Image', allowedTypes: ['image'] }
+{ type: 'media', name: 'heroImage', label: 'Media', allowedTypes: ['image'] }
 ```
 
 ::field-group
@@ -518,8 +552,11 @@ When `allowedTypes` is set to `['image']`, the prop type narrows to `MediaImage`
 
 Link picker. Editors can choose between internal pages, external URLs, page anchors, and entity references (products, categories, etc.).
 
+::screenshot{src="/assets/img/schema-fields/link.png" alt="A link field in the Studio sidebar: a Link picker showing the selected target Contact." width="550" height="156" scale="0.75" background="white"}
+::
+
 ```ts
-{ type: 'link', name: 'ctaLink', label: 'Button Link' }
+{ type: 'link', name: 'link', label: 'Link' }
 ```
 
 No type-specific properties.
@@ -554,6 +591,9 @@ Outside a template or `computed()`, use [`useResolvedLink()`](/frontend/api-refe
 
 Groups nested fields into a single prop. The nested `schema` uses the same fieldset structure as the top-level definition schema.
 
+::screenshot{src="/assets/img/schema-fields/object.png" alt="An object field in the Studio sidebar: a Button group bordering its nested Label, Link, and Variant fields." width="550" height="462" scale="0.75" background="white"}
+::
+
 ```ts
 {
   type: 'object',
@@ -562,8 +602,16 @@ Groups nested fields into a single prop. The nested `schema` uses the same field
   schema: [
     {
       fields: [
-        { type: 'text', name: 'text', label: 'Badge Text' },
-        { type: 'color', name: 'color', label: 'Badge Color' },
+        { type: 'text', name: 'label', label: 'Label' },
+        {
+          type: 'select',
+          name: 'variant',
+          label: 'Variant',
+          options: [
+            { label: 'Primary', value: 'primary' },
+            { label: 'Secondary', value: 'secondary' }
+          ],
+        },
       ],
     },
   ],
@@ -603,20 +651,22 @@ An `object` field can also act as a [style decorator](#style-objects) to attach 
 
 Repeatable list of items. Each item has its own set of fields defined by a nested schema.
 
+::screenshot{src="/assets/img/schema-fields/array.png" alt="An array field in the Studio sidebar: a USPs list of repeated Text items with an Add item button." width="550" height="426" scale="0.75" background="white"}
+::
+
+
 ```ts
 {
   type: 'array',
-  name: 'features',
-  label: 'Features',
-  labelSingular: 'Feature',
-  max: 6,
-  itemLabelProperty: 'title',
+  name: 'usps',
+  label: 'USPs',
+  labelSingular: 'USP',
+  max: 3,
   schema: [
     {
       fields: [
-        { type: 'text', name: 'title', label: 'Title' },
+        { type: 'text', name: 'text', label: 'Text' },
         { type: 'icon', name: 'icon', label: 'Icon' },
-        { type: 'textarea', name: 'description', label: 'Description' },
       ],
     },
   ],
@@ -668,6 +718,9 @@ const { features } = defineProps<{
 ### query
 
 Connects a section or block to entity data from [Orchestr](/frontend/orchestr/queries). In Studio, editors configure which entities the component displays. At render time, Frontend Core resolves the configured query through Orchestr and passes the result to your component.
+
+::screenshot{src="/assets/img/schema-fields/query.png" alt="A query field in the Studio sidebar: a Product picker bound to a Shopify Product by slug query." width="550" height="179" scale="0.75" background="white"}
+::
 
 A query field that fetches a list of products for a product slider:
 
@@ -854,8 +907,11 @@ The resolved entity set also exposes `availableFilters`, `availableSortings`, th
 
 Raw JSON editor. Use this for advanced configuration that does not fit other field types.
 
+::screenshot{src="/assets/img/schema-fields/json.png" alt="A json field in the Studio sidebar: a Raw Data editor containing an empty object." width="550" height="546" scale="0.75" background="white"}
+::
+
 ```ts
-{ type: 'json', name: 'customConfig', label: 'Custom Configuration', placeholder: '{ "key": "value" }' }
+{ type: 'json', name: 'rawData', label: 'Raw Data', placeholder: '{ "key": "value" }' }
 ```
 
 ::field-group
@@ -874,11 +930,14 @@ Some fields can be linked to other fields to group them visually in the Studio s
 
 A `checkbox` with `for` and `as: 'visibility'` pairs a sidebar checkbox with another field. Studio groups the checkbox visually with the target field so editors see a single labelled toggle next to the content they're toggling.
 
+::screenshot{src="/assets/img/schema-fields/visibility-decorator.png" alt="A visibility decorator in the Studio sidebar: an Email field with a Toggle visibility eye control in its header." width="550" height="176" scale="0.75" background="white"}
+::
+
 ```ts
 // The text field
-{ type: 'text', name: 'subtitle', label: 'Subtitle' },
+{ type: 'text', name: 'email', label: 'Email' },
 // The visibility toggle
-{ type: 'checkbox', name: 'subtitleVisible', for: 'subtitle', as: 'visibility', default: true },
+{ type: 'checkbox', name: 'showEmail', for: 'email', as: 'visibility', default: true },
 ```
 
 The toggle does **not** hide the target field from the sidebar. Both fields are always editable in Studio, and both values are passed as props to your component. The component template reads the checkbox value to decide whether to render the target on the frontend:
@@ -901,20 +960,23 @@ A visibility decorator is a **frontend render-time toggle** expressed through a 
 
 An `object` with `for` and `as: 'style'` attaches styling controls to another field. Studio renders the style panel inline below the target field.
 
+::screenshot{src="/assets/img/schema-fields/styling-decorator.png" alt="A style decorator in the Studio sidebar: a Phone field with an inline Style panel containing a Color control." width="550" height="256" scale="0.75" background="white"}
+::
+
 ```ts
 // The text field
-{ type: 'text', name: 'heading', label: 'Heading' },
+{ type: 'text', name: 'phone', label: 'Phone' },
 // The style object
 {
   type: 'object',
-  name: 'headingStyle',
-  label: 'Heading Style',
-  for: 'heading',
+  name: 'phoneStyle',
+  label: 'Style',
+  for: 'phone',
   as: 'style',
   schema: [
     {
       fields: [
-        { type: 'color', name: 'color', label: 'Text Color' },
+        { type: 'color', name: 'color', label: 'Color' },
       ],
     },
   ],
@@ -925,7 +987,7 @@ The style object is passed as a separate prop. Apply it in your template:
 
 ```vue
 <template>
-  <h1 :style="{ color: headingStyle?.color }">{{ heading }}</h1>
+  <h1 :style="{ color: phoneStyle?.color }">{{ phone }}</h1>
 </template>
 ```
 
