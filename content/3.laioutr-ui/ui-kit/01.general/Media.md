@@ -1,6 +1,10 @@
 ---
 title: Media
-description: Low-level responsive image primitive backed by `nuxt-image`.
+aliases: []
+changelogKeys:
+  - MediaComponent
+description: The dispatcher that renders a `Media` value. Images render through `nuxt-image`; video and audio render with built-in native players you can override.
+links: []
 playground:
   name: Media
   base: ui-kit-atoms-media
@@ -8,24 +12,32 @@ playground:
   height: 460px
 seo:
   title: Media | Laioutr
-  description: Low-level responsive image primitive.
+  description: The dispatcher that renders a Media value through nuxt-image (images) and built-in native players (video, audio) you can override with your own renderer.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/media
-  lastmod: 2026-05-13
+  lastmod: 2026-06-04
   changefreq: monthly
-  priority: 1.0
+  priority: 1
+  videos: []
+  images: []
 ---
 
 ## Overview
 
-`Media` is the low-level responsive image primitive. It takes a [`Media`](/frontend/api-reference/common-types/media) value and uses `nuxt-image` to pick the right variant for the current viewport, handling `<picture>` source selection, custom `aspectRatio` (boolean, string, or number), and breakpoint-aware `sizes` strings. The bonus `cmw` (content-max-width) unit makes `sizes` strings inside constrained containers easier to write.
+`Media` takes a `Media` value and renders it. The value is a discriminated union, so a single `<Media :media>` call site can receive an image, a video, or an audio asset. `Media` looks at `media.type` and dispatches:
 
-Reach for [`MediaPreview`](/laioutr-ui/ui-kit/general/media-preview) when you also want lightbox interaction, surface-tone awareness, and cross-image navigation. Use `Media` directly only when you do not want the lightbox shell.
+- **Images** render with the built-in renderer, backed by `nuxt-image`. It picks the right variant for the current viewport and handles `<picture>` source selection, custom `aspectRatio` (boolean, string, or number), and breakpoint-aware `sizes` strings. The bonus `cmw` (content-max-width) unit makes `sizes` strings inside constrained containers easier to write.
+- **Video and audio** render with built-in native players (`<video>` / `<audio>`). Playback is set with props on `<Media>`. Register your own renderer to override the built-in for a type (for example a Vidstack wrapper for adaptive streaming). See [Rendering video and audio](#rendering-video-and-audio).
+
+The image prop surface is unchanged from when `Media` was image-only, so every existing `<Media :media>` call site keeps working. A call site that passes an image renders exactly as before; the same call site now also plays a video or audio asset, with no per-call-site change.
+
+Reach for `MediaPreview` when you also want lightbox interaction, surface-tone awareness, and cross-image navigation. Use `Media` directly only when you do not want the lightbox shell.
 
 ## Key Business & UX Benefits
 
 - Backed by nuxt-image, so every storefront image ships in the right format and size for the device, cutting bandwidth costs and load times.
-- A single discriminated `Media` value covers images, video posters, and CDN variants, so connector code stays simple as new sources are added.
+- A single discriminated `Media` value covers images, video, and audio, so connector and block code routes any asset through one component instead of hand-writing type branches.
+- Video and audio play out of the box with native players, and a one-line registration swaps in your own player for streaming or custom UI without forking the component.
 - The `cmw` unit makes `sizes` strings inside constrained containers easy to write, so the layout engine picks the smallest correct asset.
 
 ## Feature List
@@ -33,14 +45,198 @@ Reach for [`MediaPreview`](/laioutr-ui/ui-kit/general/media-preview) when you al
 ::features
 ---
 items:
-  - "Backed by nuxt-image, so every storefront asset ships in the right format and size for the current device"
-  - "Single typed `Media` value (discriminated union) covers images, video posters, and CDN variants from connectors"
-  - "`aspectRatio` accepts boolean, string, or number, so callers pick between intrinsic, square, and named ratios from the same prop"
-  - "Breakpoint-aware `sizes` strings hint the browser to pick the smallest correct variant, cutting bandwidth on mobile"
-  - "Custom `cmw` (content-max-width) unit in `sizes` strings is honored inside constrained containers"
-  - "Handles `<picture>` source selection so AVIF, WebP, and JPEG fallbacks are emitted correctly"
+  - Backed by nuxt-image, so every storefront image ships in the right format
+    and size for the current device
+  - Single typed `Media` value (discriminated union) renders images, video, and
+    audio through one component
+  - Video and audio play out of the box with built-in native players; register
+    your own renderer to override a type for streaming or custom UI
+  - Playback props (`controls`, `autoplay`, `muted`, `loop`, `playsinline`) map
+    1:1 to native HTML and are set per placement, not stored on the asset
+  - "`aspectRatio` accepts boolean, string, or number, so callers pick between
+    intrinsic, square, and named ratios from the same prop"
+  - Breakpoint-aware `sizes` strings hint the browser to pick the smallest
+    correct variant, cutting bandwidth on mobile
+  - Custom `cmw` (content-max-width) unit in `sizes` strings is honored inside
+    constrained containers
+  - Handles `<picture>` source selection so AVIF, WebP, and JPEG fallbacks are
+    emitted correctly
 ---
 ::
+
+## Sizing images with the `sizes` prop
+
+Without a hint, the browser assumes an image fills the whole viewport and downloads the largest variant that could fit, even when the image occupies only part of the screen. The `sizes` prop tells the browser how wide the image actually renders at each breakpoint, so nuxt-image generates a matching `srcset` and the browser picks the smallest adequate file.
+
+```vue
+<template>
+  <Media :media="product.cover" sizes="100vw sm:50vw md:400px" />
+</template>
+```
+
+Read that as: the image is `100vw` wide by default, `50vw` from the `sm` breakpoint up, and a fixed `400px` from `md` up.
+
+### The format
+
+`sizes` is a space-separated list of `breakpoint:width` pairs built on the laioutr-ui theme breakpoints (`xs`, `s`, `sm`, `md`, `lg`, `xl`, `xxl`):
+
+- A value with no breakpoint prefix is the base size, applied from the smallest viewport up.
+- Each prefixed pair applies from its breakpoint upward and overrides the previous one (mobile-first).
+- Widths accept any unit a CSS `sizes` attribute understands, such as `vw` and `px`.
+
+`sizes="100vw md:50vw xl:600px"` is `100vw` below `md`, `50vw` from `md` to just under `xl`, and `600px` from `xl` up.
+
+A single viewport-relative value is shorthand for that width on every breakpoint. `sizes="50vw"` becomes 50vw across all viewports.
+
+### The `cmw` unit
+
+`cmw` (content-max-width) expresses a width as a percentage of the theme's content max-width at that breakpoint instead of the full viewport. Reach for it when the image sits inside a width-constrained container, such as the main content column, rather than bleeding to the screen edge.
+
+```vue
+<template>
+  <Media :media="article.hero" sizes="100vw md:50cmw" />
+</template>
+```
+
+`50cmw` resolves to half of the content max-width configured for that breakpoint. `Media` looks up the breakpoint's content max-width in your theme and rewrites the `cmw` value to the equivalent `px` before handing the string to nuxt-image; with the default theme, `md:50cmw` becomes roughly `640px`.
+
+### High-density screens
+
+`Media` serves `1x`-density images by default. Set `retina` to also emit `2x` variants for high-DPI screens:
+
+```vue
+<template>
+  <Media :media="product.cover" sizes="md:400px" retina />
+</template>
+```
+
+### Providing a default `sizes` to a subtree
+
+Instead of repeating `sizes` on every call site, wrap a subtree in `MediaSizesProvider` and set one default. Every `<Media>` rendered inside it inherits that value. The provider takes the sizes as a ref through its `value` prop:
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue';
+import { MediaSizesProvider } from '#ui-kit/components/Media/MediaSizesProvider';
+
+const sizes = ref('100vw md:50cmw');
+</script>
+
+<template>
+  <MediaSizesProvider :value="sizes">
+    <slot />
+  </MediaSizesProvider>
+</template>
+```
+
+A provided value overrides the `sizes` prop on the `<Media>` elements below it. So once `MediaSizesProvider` sets sizes, setting `sizes` on an individual descendant has no effect; change the provided value, or render that `<Media>` outside the provider.
+
+## Rendering video and audio
+
+:since-version{changelog="ui" packages="@laioutr-core/ui-kit" version="2.3.0"}
+
+`<Media>` plays video and audio out of the box with built-in native players: `type: 'video'` renders a native `<video>`, `type: 'audio'` a native `<audio>`. Pick a video in Studio and it plays, with no wiring. For adaptive streaming or a custom player UI, register your own renderer to override the built-in for that type.
+
+### Playback
+
+Playback behavior is set with props on `<Media>`, each mapped 1:1 to the native HTML attribute:
+
+| Prop          | Default | Effect                                                           |
+| ------------- | ------- | ---------------------------------------------------------------- |
+| `controls`    | `true`  | Show the browser's native playback controls                      |
+| `autoplay`    | `false` | Start playback automatically (the browser also requires `muted`) |
+| `muted`       | `false` | Mute the media                                                   |
+| `loop`        | `false` | Restart when playback ends                                       |
+| `playsinline` | `false` | Play inline on iOS instead of going fullscreen (video only)      |
+
+These are deliberately not part of the `Media` value. A `Media` object describes the asset; whether a placement is a controllable player or a muted background loop is an editorial decision, so the calling component sets it. A controllable player needs no extra props:
+
+```vue
+<template>
+  <Media :media="episode.audio" />
+</template>
+```
+
+A muted, looping background video drops the controls and turns on the autoplay set:
+
+```vue
+<template>
+  <Media :media="hero.video" autoplay muted loop playsinline :controls="false" />
+</template>
+```
+
+`autoplay` only takes effect when the media is also `muted`; browsers block sound-on autoplay. Set both.
+
+### What the built-in players handle
+
+The built-in `<video>` shows the `poster` image before playback, resolved through nuxt-image so provider-bound posters (Shopify, Cloudinary) work as expected. The built-in `<audio>` has no native poster, so it renders the `cover` image above the player. Both emit a `<source>` per source and a `<track>` per entry in `media.tracks` for captions and chapters.
+
+The native elements play progressive sources (a self-contained MP4, WebM, or MP3). They do not switch responsive sources per viewport or demux adaptive streaming (HLS, DASH); that needs a JavaScript player, which is what a custom renderer is for. See [Streaming formats](/frontend/api-reference/common-types/media#streaming-formats).
+
+### Overriding with a custom renderer
+
+Register a renderer for a media type to replace the built-in with a streaming player, a branded UI, or anything the native element cannot do. A registered renderer takes precedence over the built-in for its type. Register it from a Nuxt plugin at app root with `provideMediaRenderers`:
+
+```ts [plugins/media-renderers.ts]
+import { defineNuxtPlugin } from '#imports';
+import { provideMediaRenderers } from '#ui-kit/components/Media/MediaRenderersProvider';
+import VidstackMedia from '../components/VidstackMedia.vue';
+
+export default defineNuxtPlugin((nuxtApp) => {
+  provideMediaRenderers(nuxtApp.vueApp, {
+    video: VidstackMedia,
+  });
+});
+```
+
+The map is keyed by media type; register only the types you want to override. Here just `video` is registered, so audio keeps the built-in native renderer.
+
+### The renderer contract
+
+A renderer receives the narrowed `media` object as its `media` prop, the five playback props (`controls`, `autoplay`, `muted`, `loop`, `playsinline`), and any fallthrough attributes (`class`, `style`, `data-*`) that the call site put on `<Media>`. A video renderer gets a `MediaVideo`; an audio renderer gets a `MediaAudio`.
+
+Declare the playback props you want to honor and map them onto your player. The `MediaVideoProps` / `MediaAudioProps` types from `#ui-kit/components/Media/types` bundle the playback props with a single-type `media` prop; a renderer that handles both types declares `MediaPlaybackProps` alongside its own `media` union (as in the example below). Any playback prop you do not declare falls through as an attribute onto your renderer's root element. `controls` defaults to `true`, so a player with its own UI should declare it and decide what to do rather than let it land on the root.
+
+Here is a video renderer that wraps [Vidstack](https://vidstack.io), typed with `MediaVideoProps`:
+
+```vue [components/VidstackMedia.vue]
+<script setup lang="ts">
+import type { MediaVideoProps } from '#ui-kit/components/Media/types';
+
+defineProps<MediaVideoProps>();
+</script>
+
+<template>
+  <media-player
+    :autoplay="autoplay"
+    :muted="muted"
+    :loop="loop"
+    :playsinline="playsinline"
+  >
+    <media-provider>
+      <source v-for="source in media.sources" :key="source.src" :src="source.src" />
+    </media-provider>
+    <media-video-layout />
+  </media-player>
+</template>
+```
+
+`controls` is left unforwarded on purpose: Vidstack draws its own UI. A renderer reads what it needs from `media.sources` (and `media.tracks`, `media.streaming`) and decides whether a source plays natively or needs a JavaScript player; see [Streaming formats](/frontend/api-reference/common-types/media#streaming-formats).
+
+Sizing is not the renderer's job. Beyond `media` and the playback props, the renderer receives only fallthrough attributes; the outer box (height, aspect ratio) is set by the Block that wraps `<Media>`.
+
+### Dispatch order
+
+`<Media>` resolves what to render in this order:
+
+| Asset                                        | What renders                  |
+| -------------------------------------------- | ----------------------------- |
+| `image`                                      | The built-in image renderer   |
+| `video` / `audio` with a registered renderer | Your renderer                 |
+| `video`                                      | The built-in native `<video>` |
+| `audio`                                      | The built-in native `<audio>` |
+
+A registered renderer always wins for its type; otherwise the built-in plays. There is no empty-render path: every asset resolves to a player or an image, so a page stays crawlable with no layout shift.
 
 ## API Reference
 

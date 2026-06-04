@@ -63,6 +63,20 @@ Media:
       }
       ```
 
+MediaComponent:
+  - version: 2.3.0
+    type: added
+    changelog: ui
+    note: >-
+      `<Media>` is now a dispatcher that renders video and audio, not only
+      images. Built-in native `<video>` and `<audio>` players handle progressive
+      sources out of the box (the video `poster` and audio `cover` are shown
+      automatically), and playback is set with props on `<Media>` (`controls`,
+      `autoplay`, `muted`, `loop`, `playsinline`). Register a renderer with
+      `provideMediaRenderers` to override the built-in for adaptive streaming
+      (HLS/DASH) or a custom player UI. See
+      [Rendering video and audio](/laioutr-ui/ui-kit/general/media#rendering-video-and-audio).
+
 SchemaCondition:
   - version: 0.30.0
     type: added

@@ -16,6 +16,10 @@ All notable changes to **Laioutr UI**, **UI Kit**, and related component librari
 
 ## [2.3.0]
 
+### Added
+
+- **UI Kit**: `<Media>` is now a dispatcher that renders video and audio, not only images. Built-in native `<video>` and `<audio>` players handle progressive sources out of the box (showing the video `poster` / audio `cover`), with playback controlled by props on `<Media>` (`controls`, `autoplay`, `muted`, `loop`, `playsinline`). Register a renderer with `provideMediaRenderers` to override the built-in for adaptive streaming (HLS/DASH) or a custom player UI. See [Rendering video and audio](/laioutr-ui/ui-kit/general/media#rendering-video-and-audio).
+
 ### Changed
 
 - **UI**: **Breaking** — `BrandList` is replaced by the generic `AlphabeticalIndex` component. `AlphabeticalIndex` is an A-Z grouped link list with a configurable `heading` and an optional per-item `count`, usable for brands, glossaries, and similar indexes. Migrate by importing the new component, renaming the `brands` prop to `items`, and passing `heading` explicitly — the old built-in `"Brands"` translation no longer renders automatically.

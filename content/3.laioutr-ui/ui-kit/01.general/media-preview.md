@@ -15,8 +15,6 @@ sitemap:
   lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
-aliases:
-  - /laioutr-ui/ui-kit/general/media
 ---
 
 ## Overview
