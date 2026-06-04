@@ -58,7 +58,7 @@ Developers integrate Actindo by adding the **`@laioutr/app-actindo`** module to 
 
 ### Module configuration
 
-The module reads its configuration under the key **`'@laioutr/app-actindo'`** (the package name, used as both the Nuxt `configKey` and the private `runtimeConfig` namespace).
+Configuration is delivered through the **Laioutr project config (`laioutrrc.json`)** — the same pattern every standalone connector app uses. You add an entry to the `apps` array; Laioutr's frontend-core injects that entry's `config` into the module under the key **`'@laioutr/app-actindo'`** (the package name, used as both the Nuxt `configKey` and the private `runtimeConfig` namespace).
 
 | Option | Type | Required | Description |
 |--------|------|----------|-------------|
@@ -68,33 +68,26 @@ The module reads its configuration under the key **`'@laioutr/app-actindo'`** (t
 
 The `apiKey` lives in **private** runtime config (`runtimeConfig['@laioutr/app-actindo']`) — never in `runtimeConfig.public`. This connector exposes **no** client-visible configuration.
 
-### Example `nuxt.config.ts`
+### Project config (`laioutrrc.json`)
 
-```ts
-// nuxt.config.ts
-export default defineNuxtConfig({
-  modules: ['@laioutr/app-actindo', '@laioutr-core/orchestr', '@nuxt/image'],
-  '@laioutr/app-actindo': {
-    apiKey: process.env.ACTINDO_API_KEY!,
-    // baseUrl: 'https://laioutr.actindo.com', // optional override
-    localeMap: { de: 'de-DE' },
-  },
-});
+Add the connector to the `apps` array of the project's `laioutrrc.json`:
+
+```json
+{
+  "apps": [
+    {
+      "name": "@laioutr/app-actindo",
+      "version": "latest",
+      "config": {
+        "apiKey": "your-tenant-bearer-token",
+        "localeMap": { "de": "de-DE" }
+      }
+    }
+  ]
+}
 ```
 
-Use environment variables or a secret manager for the API key; never commit it to version control.
-
-### Local development
-
-For local development the key is read from the environment so no secret ends up in committed config. Create a `.env` (gitignored) next to the playground:
-
-```bash
-# .env
-ACTINDO_API_KEY=your-tenant-bearer-token
-# ACTINDO_BASE_URL=https://laioutr.actindo.com   # optional override
-```
-
-The client factory resolves the key from private runtime config first, then falls back to the **`ACTINDO_API_KEY`** environment variable (and **`ACTINDO_BASE_URL`** for the base URL). This env fallback exists because the scoped config key (`@laioutr/app-actindo`) does not map cleanly to a `NUXT_*` override variable, so a deployment can inject the secret without rebuilding.
+`laioutrrc.json` carries project secrets and is **not** committed to version control. In production the Laioutr platform supplies it; for local development you place your project's `laioutrrc.json` next to the playground (the connector reads it the same way).
 
 ### Runtime behavior (high level)
 
