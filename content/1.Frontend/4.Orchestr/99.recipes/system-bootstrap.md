@@ -25,7 +25,7 @@ The pattern: fetch the vendor metadata once on first request, cache it for a day
   storefrontClient.defaultHeaders['sw-currency-id'] = current.currency.id;   // 3. apply to client
   storefrontClient.defaultHeaders['sw-language-id'] = current.locale.languageId;
 
-  return { context: { storefrontClient, current } };
+  return { context: { shopware: { storefrontClient, current } } };  // 4. scope under your app key
 });
 ```
 
@@ -141,7 +141,7 @@ The ladder is sequential, not heuristic. Each rung is a clear rule someone can d
 
 ## Step 4: wire it into extendRequest
 
-The full middleware combines all three pieces. Note that handlers downstream see `current` on `context` and never deal with the raw metadata or the fallback logic:
+The full middleware combines all three pieces. Note that handlers downstream see `current` on `context.shopware` and never deal with the raw metadata or the fallback logic:
 
 ```ts [server/middleware/defineShopware.ts]
 import { defineOrchestr } from '#imports';
@@ -162,15 +162,26 @@ export const defineShopware = defineOrchestr
 
     return {
       context: {
-        storefrontClient,
-        current,
-        swCurrency: current.currency.iso,
+        shopware: {
+          storefrontClient,
+          current,
+        },
       },
     };
   });
 ```
 
-A handler now reads `context.swCurrency` if it needs the ISO code, or `context.current.locale.languageId` for vendor IDs, but it never runs the bootstrap. The cache means only the first request after a TTL eviction pays the network cost; the rest are an in-memory map lookup.
+A handler now reads `context.shopware.current.currency.iso` if it needs the ISO code, or `context.shopware.current.locale.languageId` for vendor IDs, but it never runs the bootstrap. The cache means only the first request after a TTL eviction pays the network cost; the rest are an in-memory map lookup.
+
+### Scope your context under an app key
+
+The context returned from `extendRequest` is shared between every installed app. Orchestr runs all apps' `extendRequest` callbacks on each request and shallow-merges their `context` objects into the single arguments object every handler receives. Two apps that both write a top-level `current` or `storefrontClient` key would clobber each other, and the loser depends on registration order.
+
+Scope everything you contribute under a single app-specific key (`shopware` above) or prefix each key with your app's name (`swStorefrontClient`, `swCurrent`). A nested object is usually cleaner: one namespace to read from in handlers, and no chance of a name collision with another connector.
+
+::warning
+Never write generic top-level context keys like `client`, `current`, `config`, or `settings`. They are the first names another app will pick too, and the collision surfaces as a hard-to-trace bug where one app's client ends up handling another app's request.
+::
 
 ## Cost discipline in extendRequest
 
