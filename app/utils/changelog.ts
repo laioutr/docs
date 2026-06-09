@@ -29,7 +29,7 @@ export interface ResolvedChangelogEntry extends ChangelogEntry {
 }
 
 /** The known central changelog short-names with a page under /getting-started/changelogs/. */
-export const VALID_CHANGELOGS = new Set(['frontend', 'cockpit', 'ui', 'cli', 'orchestr', 'orchestr-devtools', 'figma-kit']);
+export const VALID_CHANGELOGS = new Set(['frontend', 'cockpit', 'core-types', 'canonical-types', 'kit', 'ui', 'ui-kit', 'ui-app', 'cli', 'orchestr', 'orchestr-devtools', 'figma-kit']);
 
 /** Compare two semver-ish strings descending (newest first). Non-numeric segments sort last. */
 export function compareVersionsDesc(a: string, b: string): number {

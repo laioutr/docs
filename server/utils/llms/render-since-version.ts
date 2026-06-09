@@ -1,6 +1,6 @@
 type MinimarkNode = [string, Record<string, unknown>, ...any[]] | string;
 
-const VALID_CHANGELOGS = new Set(['frontend', 'cockpit', 'ui', 'cli', 'orchestr', 'orchestr-devtools', 'figma-kit']);
+const VALID_CHANGELOGS = new Set(['frontend', 'cockpit', 'core-types', 'canonical-types', 'kit', 'ui', 'ui-kit', 'ui-app', 'cli', 'orchestr', 'orchestr-devtools', 'figma-kit']);
 
 /**
  * Render a `::since-version` MDC node as plain markdown suitable for the
