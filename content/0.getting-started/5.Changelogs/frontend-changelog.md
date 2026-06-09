@@ -14,6 +14,12 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.31.0]
+
+### Added
+
+- **Frontend Core**: Pages now render referenced global sections. A referenced global section is dereferenced into the page, its queries are merged into the page's query set, and its configuration is wired through at render time — so a section shared across pages renders consistently wherever it is referenced.
+
 ## [0.30.3]
 
 ### Added
