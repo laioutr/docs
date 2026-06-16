@@ -28,8 +28,13 @@ export interface ResolvedChangelogEntry extends ChangelogEntry {
   key: string;
 }
 
-/** The known central changelog short-names with a page under /getting-started/changelogs/. */
-export const VALID_CHANGELOGS = new Set(['frontend', 'cockpit', 'core-types', 'canonical-types', 'kit', 'ui', 'ui-kit', 'ui-app', 'cli', 'orchestr', 'orchestr-devtools', 'figma-kit']);
+/**
+ * The known central changelog short-names with a page under /getting-started/changelogs/.
+ * Per-package changelogs (kit, core-types, ui-kit, ui-app, orchestr-devtools) were consolidated
+ * into their product pages; `kit`/`core-types` → `frontend`, `ui-kit`/`ui-app` → `ui`,
+ * `orchestr-devtools` → `orchestr` (301 redirects in nuxt.config.ts cover old deep-links).
+ */
+export const VALID_CHANGELOGS = new Set(['frontend', 'ui', 'orchestr', 'cli', 'cockpit', 'canonical-types', 'figma-kit']);
 
 /** Compare two semver-ish strings descending (newest first). Non-numeric segments sort last. */
 export function compareVersionsDesc(a: string, b: string): number {

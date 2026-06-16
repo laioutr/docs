@@ -69,6 +69,22 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/offering/compliance/fair-usage-policy': { redirect: { to: '/offering/policies/fair-usage-policy', statusCode: 301 } },
+    // Per-package changelogs consolidated into their product changelog (301)
+    '/getting-started/changelogs/orchestr-devtools-changelog': {
+      redirect: { to: '/getting-started/changelogs/orchestr-changelog', statusCode: 301 },
+    },
+    '/getting-started/changelogs/kit-changelog': {
+      redirect: { to: '/getting-started/changelogs/frontend-changelog', statusCode: 301 },
+    },
+    '/getting-started/changelogs/core-types-changelog': {
+      redirect: { to: '/getting-started/changelogs/frontend-changelog', statusCode: 301 },
+    },
+    '/getting-started/changelogs/ui-kit-changelog': {
+      redirect: { to: '/getting-started/changelogs/ui-changelog', statusCode: 301 },
+    },
+    '/getting-started/changelogs/ui-app-changelog': {
+      redirect: { to: '/getting-started/changelogs/ui-changelog', statusCode: 301 },
+    },
     // Hosting: Hosting Adapter → Hyperscaler / Native Hosting (301)
     '/hosting/hosting-adapter': { redirect: { to: '/hosting/hyperscaler', statusCode: 301 } },
     '/hosting/hosting-adapter/vercel-adapter': { redirect: { to: '/hosting/hyperscaler/vercel-adapter', statusCode: 301 } },

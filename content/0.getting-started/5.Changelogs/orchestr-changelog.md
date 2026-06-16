@@ -149,3 +149,33 @@ All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data
 
 - **Orchestr**: Added stable-hash for the orchestr pinia-store.
 - **Orchestr**: `templateProviders` for queries are now reflected via the reflect API.
+
+---
+
+## Orchestr Devtools (legacy 1.x)
+
+These entries predate the devtools moving onto the Orchestr version line. Devtools changes now appear in the Orchestr versions above, going forward.
+
+### [1.7.0]
+
+### Changed
+
+- **Orchestr Devtools**: Moved to a dedicated Nuxt Devtools tab for a cleaner development experience, replacing the previous standalone overlay panel.
+
+### [1.6.0]
+
+### Added
+
+- **Orchestr Devtools**: Experimental Sankey diagram visualization for query data flow.
+
+### [1.5.0]
+
+### Added
+
+- **Orchestr Devtools**: Added missing component resolver hint to the devtools panel.
+
+### [1.4.16]
+
+### Added
+
+- **Orchestr Devtools**: `projectSecret` protection can now be disabled via configuration.

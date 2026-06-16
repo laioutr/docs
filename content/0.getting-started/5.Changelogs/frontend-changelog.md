@@ -19,6 +19,11 @@ All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend
 ### Added
 
 - **Frontend Core**: Pages now render referenced global sections. A referenced global section is dereferenced into the page, its queries are merged into the page's query set, and its configuration is wired through at render time — so a section shared across pages renders consistently wherever it is referenced.
+- **Core Types**: `CalendarDate` value type — an ISO `YYYY-MM-DD` calendar date (no time, no timezone), exported from `@laioutr-core/core-types/common`. Use it for whole-day values such as a location's opening/reopening date.
+
+### Changed
+
+- **Core Types**: Aligned `RcGlobalSection` slots and queries to `RcDictionary`, and added an optional `studio.description`.
 
 ## [0.30.3]
 
@@ -27,14 +32,18 @@ All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend
 - **Frontend Core**: Render pipeline now supports `RcPropValueEntityProperty`. Seeds are gathered, query paths are resolved via the new shared `resolveEntityPath` helper, and resolved values are coerced through `coerceFieldValue` — so e.g. a string URL bound to a media field becomes a `Media` object. The dynamic-string render branch now also routes through `resolveEntityPath`, unifying the two query-bound paths.
 - **Frontend Core**: Reflect endpoint now exposes `installedApps: Record<string, AppRuntimeMeta>` — every `registerLaioutrApp` caller (including frontend-core itself) keyed by name, with its `version` and `pageWrapper`. Backed by a new server-only virtual file `#laioutr/installed-apps`, populated lazily from `laioutrAppRegistry.getAllMetas()` so apps registered later in module setup are still captured.
 - **Frontend Core**: `frontend-core:link-resolver:resolve` is now a filter hook. It runs after a link is resolved, with `result.value` pre-seeded with the resolved URL or path. Handlers receive the resolved value and may transform it (e.g. append query params) for any link type, and the value is threaded across multiple handlers. Existing handlers that overwrite `result.value` keep working unchanged.
+- **Core Types**: `RcPropValueEntityProperty` for query-bound prop values — a new variant on the `RcPropValue` union that lets a single prop read its value from a property of a query-result entity (e.g. `{ type: 'entity-property', queryId: 'q1', path: ['components', 'base', 'image'] }`). The composite `path` uses the same `components.*` / `links.*` form as string-template references.
+- **Core Types**: `installedApps: Record<string, AppRuntimeMeta>` on `ProjectFrontendContext` — apps registered in the deployed frontend via `registerLaioutrApp` (including frontend-core itself). Used by the cockpit to gate features that require a specific framework/app version.
 
 ### Changed
 
 - **Frontend Core**: `rcPropValueToRender` now treats unknown `RcPropValue.type` values as "no value" (returns `undefined`) and emits a deduplicated `console.warn`, instead of leaking the raw value object to downstream renderers. Lets newer studio configs degrade gracefully on older frontend-core deployments rather than crashing.
+- **Core Types**: Lifted `RenderQueryReference.queryPath` from `string` to `string[]` and added an `entity-property` variant to the `RenderQueryReference` and `RenderQueryLoadSpecSeed` unions (internal render-pipeline types, consumed only by `@laioutr-core/frontend-core`).
 
 ### Fixed
 
 - **Frontend Core**: `frontend-core:link-resolver:*` and `frontend-core:page-renderer:select-page-variant` hooks now actually take effect — handler-set `result.value` is read synchronously. Previously the result was read before Nuxt's deferred handlers ran, so every registered handler's output was silently dropped.
+- **Core Types**: Fixed silent registry eviction in `applyZodFix` that caused id-less reflection output (e.g. `MediaImage`, `MoneyAmount`, `Link`) on Vercel-deployed Nuxt apps. `applyZodFix` previously evicted the existing registry entry when a schema with the same id was registered a second time; in the dual-bundle case (server bundle + `@vercel/nft`-traced copy of `@laioutr-core/core-types`) this left `zodToJSONSchema` unable to find the schema's metadata, so reflection inlined canonical schemas without an `id` or `$ref` and Studio consumers misclassified Media/Money/Link properties as plain `object`. New behavior: merge the new meta into the existing entry and store the merged record against both schema instances. HMR additive edits to `description`/`title`/`examples` still take effect; removing a meta field requires a dev-server restart (rare).
 
 ## [0.30.2]
 
@@ -71,6 +80,10 @@ All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend
 - **Frontend Core**: 8 missing discriminated event types added to `tracking.types.ts` — `RemoveFromCart`, `AddToWishlist`, `RemoveFromWishlist`, `ViewCart`, `AddShippingInfo`, `AddPaymentInfo`, `Login`, `SignUp`. Trackers in `trackingActions.ts` now construct the correct types instead of falling through to mismatched ones (e.g. `ViewItem` for `ADD_TO_WISHLIST`), which previously broke the `Analytics` discriminated union silently.
 - **Frontend Core**: Re-exported the `DefinitionToProps` type from `#frontend/types` so consumers can derive prop types from a section/block definition without reaching into internal paths.
 
+### Changed
+
+- **Core Types** (breaking): Updated `Media`, `Swatch`, and `coerceFieldValue` to align with the surface-tone type changes in the UI family (`BackgroundBrightness` → `SurfaceTone`). Consumers reading these types should treat the colour-mode field as `'light' | 'dark' | 'bright'`.
+
 ### Fixed
 
 - **Frontend Core**: Reordered the `undefined` check in `validateI18nConfig` to happen before indexing `market.domains`. `FieldDefinitionToProp` generic constraint widened from `StudioFieldDefinition` to `BaseFieldDefinitionBase` so the type-parameter chain is consistent with `FieldDefinitionToType` and `FindFieldWithName`.
@@ -79,7 +92,17 @@ All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend
 
 - **Frontend Core**: Removed the unused `InvisibleBlock` component. It had no source consumers — only auto-generated `.nuxt/components.d.ts` references that regenerate on the next build. Its placeholder UI was leftover from an earlier editor experiment and was not used anywhere in the runtime tree.
 
+## [0.28.15]
+
+### Changed
+
+- **Core Types**: Use `z.object({ ...base.shape, ... })` instead of `base.extend({ ... })` for schema composition so the JSDoc zod-meta plugin resolves field descriptions correctly.
+
 ## [0.28.14]
+
+### Changed
+
+- **Core Types**: Wired `urlAlias` and `isRoot` end-to-end from RC page config through the orchestr store to client-side URL generation. Refactored `QueryParams` so `isRoot` is the single source of truth for root-level URL params — callers no longer need to pass an empty prefix.
 
 ### Fixed
 
@@ -126,6 +149,7 @@ All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend
 - **Frontend Core**: Fixed duplicate section templates in Studio by switching the template registry from an array to a Map, preventing re-registration on repeated SSR renders.
 - **Frontend Core**: Wired mock style tokens into the reflect API so the Studio receives color and icon data instead of empty objects.
 - **Frontend Core**: Fixed `useRoute()` returning stale route data in Studio preview. The preview now emits `page:finish` after each navigation to keep `useRoute()` current.
+- **Kit**: Fixed `useRoute()` returning stale route data in studio preview. In preview mode there is no `<NuxtPage>`, so the `page:finish` hook that syncs Nuxt's internal route ref never fired. The preview now emits `page:finish` after each navigation to keep `useRoute()` current.
 
 ## [0.28.8]
 
@@ -181,11 +205,13 @@ All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend
 - **Core Types**: Enable JSON Schema meta and replace `zodAs` with `z.ZodType`.
 - **Core Types**: Split field definitions into studio and system categories.
 - **Core Types**: Make `RcPage.path` optionally non-localized for pages that don't need per-locale paths.
+- **Core Types**: Multi-market render types: `RenderLanguage`, `RenderMarket`, `RenderI18nConfig`, plus `localizedPaths` and `marketIds` on `MetaPage`.
 
 ### Changed
 
 - **Frontend Core**: Removed `ALL_LOCALES` wildcard in favor of explicit locale codes throughout the frontend codebase.
 - **Frontend Core**: Improved route resolution during navigation.
+- **Core Types** (breaking): Removed the `ALL_LOCALES` (`'*'`) wildcard. The `localeChain` no longer includes `'*'` as a tail element, and `normalizeLocalizedPaths` no longer prefers the `'*'` key as fallback. All localized values must use concrete BCP 47 locale codes.
 - Updated Orchestr, Kit and Core Types to `0.28.0`.
 
 ### Fixed
@@ -228,6 +254,10 @@ All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend
 
 ## [0.27.0]
 
+### Added
+
+- **Core Types**: `createEntityComponentTokenFactory` helper.
+
 ### Changed
 
 - Orchestr: Queries now respect all query aliases on navigation, ensuring correct query reuse when navigating between pages.
@@ -245,13 +275,20 @@ All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend
 ### Added
 
 - Frontend Core: Respect `queryReference.link` while resolving query fields so linked queries behave correctly.
+- **Core Types**: JSON field type.
 
 ### Changed
 
 - Orchestr: Removed input from links and allowed passing entities from links, making link handlers more flexible.
+- **Core Types**: Implemented the most common types as proper TypeScript types.
 - Updated Core Types and related dependencies to `0.26.0`.
 
 ## [0.25.0]
+
+### Added
+
+- **Core Types**: Optional `description` field on `pageTypeToken`.
+- **Core Types**: `WellKnownComponentTag` value `'Blog'`.
 
 ### Changed
 
@@ -262,6 +299,7 @@ All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend
 ### Changed
 
 - Frontend Core & Orchestr: Dependency updates around Core Types `0.24.0` with internal refinements.
+- **Core Types**: Separated `core-types` from the `canonical-types` package.
 
 ## [0.23.1]
 
@@ -369,6 +407,7 @@ All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend
 ### Added
 
 - Initial public versions of **Frontend Core** and **Orchestr**, including:\n  - Base page/section rendering pipeline.\n  - Early section definitions and demo setup.\n  - First integration of media library handling and documentation generation from canonical types.\n  - Migration of base components to the UI Kit.\n  - Shopify demo and early ecommerce flows.\n
+- **Kit**: Media Library upload handling, and improved documentation generation from canonical-types.
 
 ### Changed
 
