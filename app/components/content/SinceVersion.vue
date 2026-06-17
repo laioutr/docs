@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-type ChangelogName = 'frontend' | 'cockpit' | 'ui' | 'cli' | 'orchestr' | 'orchestr-devtools' | 'figma-kit';
+type ChangelogName = 'frontend' | 'cockpit' | 'ui' | 'cli' | 'orchestr' | 'figma-kit';
 
 const props = defineProps<{
   version: string;

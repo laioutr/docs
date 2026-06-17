@@ -17,7 +17,7 @@ Props:
 
 - `version` (required) — the release the feature shipped in (with or without a leading `v`).
 - `packages` (required) — comma-separated list of packages the feature lives in, e.g. `"@laioutr-core/frontend-core, @laioutr-core/orchestr"`.
-- `changelog` (optional) — links the version to the matching changelog page anchor. One of: `frontend`, `cockpit`, `ui`, `cli`, `orchestr`, `orchestr-devtools`, `figma-kit`.
+- `changelog` (optional) — links the version to the matching changelog page anchor. One of: `frontend`, `cockpit`, `ui`, `cli`, `orchestr`, `figma-kit`. (Devtools folds into `orchestr` since the `@laioutr-core/orchestr-devtools` → `@laioutr-core/devtools` rename; there is no separate `orchestr-devtools` value.)
 
 ## Why
 
