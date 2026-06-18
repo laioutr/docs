@@ -6,13 +6,19 @@ seo:
   description: Changelog for Laioutr UI (@laioutr-core/ui) following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/ui-changelog
-  lastmod: 2026-06-09
+  lastmod: 2026-06-18
   changefreq: monthly
   priority: 1.0
 
 ---
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [2.4.0]
+
+### Added
+
+- **UI Kit** — `<Media>` gains a `playback` mode for video and audio. `playback="background"` is a one-switch decorative loop — `autoplay`, `muted`, `loop`, `playsinline`, and `disablePictureInPicture` on, `controls` off — replacing the hand-spelled cluster; `interactive` (the default) is the native player. Each attribute still has its own prop that overrides the mode. `<Media>` now exposes `v-model:paused` so a consumer can render and position its own pause control (WCAG 2.2.2), and it suppresses autoplay under `prefers-reduced-motion: reduce`, seeding the paused state from that decision. `MediaStage` adopts `playback="background"` for video backgrounds; it ships no pause control of its own, so a consumer that needs one renders the background with `<Media>` directly and binds `v-model:paused`. See [Rendering video and audio](/laioutr-ui/ui-kit/general/media#background-video).
 
 ## [2.3.0]
 

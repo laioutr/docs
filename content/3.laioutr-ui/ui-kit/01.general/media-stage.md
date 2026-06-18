@@ -26,10 +26,16 @@ When `backgroundColor` is a hex value, `MediaStage` runs it through `colorToSurf
 
 `MediaStage` exposes a set of inheritable props for components that want a brightness-aware surface as their root:
 
-- `backgroundImage` renders a `<Media>` behind the content slot. `backgroundImageSizes` and `backgroundImageFit` (`'cover'` or `'contain'`) tune how it's sized.
+- `backgroundImage` renders a `<Media>` behind the content slot. `backgroundImageSizes` and `backgroundImageFit` (`'cover'` or `'contain'`) tune how it's sized. The asset can be a video as well as an image — see [Background video](#background-video) below.
 - The `fallbackBackgroundImageDefault`, `fallbackBackgroundImageDark`, and `fallbackBackgroundImageBright` trio kicks in when `backgroundImage` is absent: the resolved surface tone selects which fallback renders, so a single component can ship per-tone artwork.
 - `overlay` accepts an `ImageContrastOverlay` prop bag and is forwarded to the built-in overlay element (rendered above the media, below the content).
 - `surfaceTone` is the manual override; without it the tone derives from `backgroundColor` via `colorToSurfaceTone` (hex only).
+
+## Background video
+
+When `backgroundImage` resolves to a video, `MediaStage` renders it through the `<Media>` component's [`playback="background"`](/laioutr-ui/ui-kit/general/media#background-video) mode: a muted autoplay loop with the native controls off, plus autoplay suppressed for visitors who set `prefers-reduced-motion: reduce`. A picked video plays silently and loops behind the foreground content.
+
+`MediaStage` ships no pause control of its own. Auto-playing motion that runs longer than five seconds needs a pause mechanism ([WCAG 2.2.2](https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html)), so if your hero uses a video background that needs one, build the surface with `<Media playback="background">` directly instead of `MediaStage`'s background prop: bind `v-model:paused` and place your own control where the layout dictates. See [Pausing a background video](/laioutr-ui/ui-kit/general/media#pausing-a-background-video).
 
 ## Key Business & UX Benefits
 

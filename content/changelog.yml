@@ -64,6 +64,17 @@ Media:
       ```
 
 MediaComponent:
+  - version: 2.4.0
+    type: added
+    changelog: ui
+    note: >-
+      `<Media>` gained a `playback` mode for video. `playback="background"` is a
+      one-switch decorative loop (`autoplay`, `muted`, `loop`, `playsinline`,
+      `disablePictureInPicture` on, `controls` off); `interactive` (the default)
+      is the native player. Each attribute still has its own overriding prop.
+      `<Media>` now exposes `v-model:paused` so consumers render their own
+      WCAG 2.2.2 pause control, and suppresses autoplay under reduced motion. See
+      [Background video](/laioutr-ui/ui-kit/general/media#background-video).
   - version: 2.3.0
     type: added
     changelog: ui

@@ -8,8 +8,8 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@laioutr-core/canonical-types": "^0.22.24",
-    "@laioutr-core/core-types": "^0.30.2",
+    "@laioutr-core/canonical-types": "^0.23.0",
+    "@laioutr-core/core-types": "^0.31.0",
     "@laioutr-core/ui-component-meta": "^2.2.2",
     "@nuxt/content": "3.13.0",
     "@nuxtjs/mdc": "0.19.1",
@@ -32,8 +32,8 @@
   },
   "devDependencies": {
     "@ebec/http": "^2.3.0",
-    "@laioutr-core/frontend-core": "^0.30.2",
-    "@laioutr-core/orchestr": "^0.30.2",
+    "@laioutr-core/frontend-core": "^0.31.0",
+    "@laioutr-core/orchestr": "^0.31.0",
     "@laioutr/eslint-config": "^1.8.8",
     "@laioutr/prettier-config": "^1.1.0",
     "@oxc-minify/binding-darwin-arm64": "0.102.0",

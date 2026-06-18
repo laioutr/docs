@@ -51,8 +51,13 @@ items:
     audio through one component
   - Video and audio play out of the box with built-in native players; register
     your own renderer to override a type for streaming or custom UI
-  - Playback props (`controls`, `autoplay`, `muted`, `loop`, `playsinline`) map
-    1:1 to native HTML and are set per placement, not stored on the asset
+  - A `playback` mode (`interactive` default, or `background` for a muted
+    autoplay loop) sets video/audio behavior per placement; the individual
+    `controls` / `autoplay` / `muted` / `loop` / `playsinline` /
+    `disablePictureInPicture` props map 1:1 to native HTML and override the mode
+  - `playback="background"` runs a decorative video loop (autoplay suppressed
+    under reduced motion); `v-model:paused` lets the consumer render and place
+    its own WCAG-compliant pause control
   - "`aspectRatio` accepts boolean, string, or number, so callers pick between
     intrinsic, square, and named ratios from the same prop"
   - Breakpoint-aware `sizes` strings hint the browser to pick the smallest
@@ -139,17 +144,25 @@ A provided value overrides the `sizes` prop on the `<Media>` elements below it. 
 
 ### Playback
 
-Playback behavior is set with props on `<Media>`, each mapped 1:1 to the native HTML attribute:
+Playback behavior is set with props on `<Media>`. The `playback` prop picks the intent; six individual props map 1:1 to the native HTML attributes and override whatever the mode implies.
 
-| Prop          | Default | Effect                                                           |
-| ------------- | ------- | ---------------------------------------------------------------- |
-| `controls`    | `true`  | Show the browser's native playback controls                      |
-| `autoplay`    | `false` | Start playback automatically (the browser also requires `muted`) |
-| `muted`       | `false` | Mute the media                                                   |
-| `loop`        | `false` | Restart when playback ends                                       |
-| `playsinline` | `false` | Play inline on iOS instead of going fullscreen (video only)      |
+| `playback`              | What it renders                                                                                                                            |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `interactive` (default) | A native player: `controls` on, nothing automatic.                                                                                        |
+| `background`            | A decorative muted autoplay loop: `autoplay`, `muted`, `loop`, `playsinline`, and `disablePictureInPicture` on, `controls` off. Video only. |
 
-These are deliberately not part of the `Media` value. A `Media` object describes the asset; whether a placement is a controllable player or a muted background loop is an editorial decision, so the calling component sets it. A controllable player needs no extra props:
+Each attribute also has its own prop. An explicitly set prop always wins; an unset prop takes the mode default, so you reach for these only to deviate from the mode:
+
+| Prop                      | `interactive` | `background` | Effect                                                              |
+| ------------------------- | ------------- | ------------ | ------------------------------------------------------------------ |
+| `controls`                | `true`        | `false`      | Show the browser's native playback controls                        |
+| `autoplay`                | `false`       | `true`       | Start playback automatically (the browser also requires `muted`)   |
+| `muted`                   | `false`       | `true`       | Mute the media                                                      |
+| `loop`                    | `false`       | `true`       | Restart when playback ends                                         |
+| `playsinline`             | `false`       | `true`       | Play inline on iOS instead of going fullscreen (video only)        |
+| `disablePictureInPicture` | `false`       | `true`       | Ask the browser to hide the Picture-in-Picture control (video only; a request, not a guarantee) |
+
+These are deliberately not part of the `Media` value. A `Media` object describes the asset; whether a placement is a controllable player or a muted background loop is an editorial decision, so the calling component sets it. They apply to video (and to audio where meaningful); image media ignores them, and `background` is video-only. A controllable player needs no extra props:
 
 ```vue
 <template>
@@ -157,15 +170,55 @@ These are deliberately not part of the `Media` value. A `Media` object describes
 </template>
 ```
 
-A muted, looping background video drops the controls and turns on the autoplay set:
+`autoplay` only takes effect when the media is also `muted`; browsers block sound-on autoplay. `background` mode turns both on for you.
+
+### Background video
+
+:since-version{changelog="ui" packages="@laioutr-core/ui-kit" version="2.4.0"}
+
+`playback="background"` turns a video into a decorative loop with one switch — `autoplay`, `muted`, `loop`, `playsinline`, and `disablePictureInPicture` on, `controls` off — instead of spelling out the whole cluster at every call site:
 
 ```vue
 <template>
-  <Media :media="hero.video" autoplay muted loop playsinline :controls="false" />
+  <Media :media="hero.video" playback="background" />
 </template>
 ```
 
-`autoplay` only takes effect when the media is also `muted`; browsers block sound-on autoplay. Set both.
+Individual props still override the mode, so a background loop that plays once becomes `<Media :media="hero.video" playback="background" :loop="false" />` — the rest of the cluster stays on.
+
+#### Reduced motion
+
+A muted autoplay loop is decorative motion, so `<Media>` suppresses autoplay for visitors who set `prefers-reduced-motion: reduce`. The video does not start on its own; it settles on its `poster` frame, and the visitor can start it from the pause control you provide.
+
+#### Pausing a background video
+
+Auto-playing motion that runs longer than five seconds needs a pause mechanism ([WCAG 2.2.2](https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html)). `<Media>` ships no pause button of its own — where it sits is a layout decision — so it exposes the paused state through `v-model:paused` and leaves the control to you. Bind a `ref` and render your own button:
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue';
+
+// The consumer owns the paused state; <Media> seeds it on mount and keeps it in sync.
+const paused = ref<boolean>();
+const toggle = () => {
+  paused.value = !(paused.value ?? false);
+};
+</script>
+
+<template>
+  <div style="position: relative">
+    <Media :media="hero.video" playback="background" v-model:paused="paused" />
+    <IconButton
+      style="position: absolute; inset-block-end: 1rem; inset-inline-end: 1rem"
+      :icon="paused ? 'media/play' : 'media/pause'"
+      :label="paused ? 'Play background video' : 'Pause background video'"
+      @click="toggle"
+    />
+  </div>
+</template>
+```
+
+`<Media>` seeds `paused` on mount from the reduced-motion-aware autoplay decision, so the button reflects reality on first paint — it shows "play" when autoplay was suppressed. It also reflects browser-initiated pauses (a data-saver mode, a backgrounded tab) back into the binding, so the icon and label stay truthful.
 
 ### What the built-in players handle
 
@@ -193,9 +246,11 @@ The map is keyed by media type; register only the types you want to override. He
 
 ### The renderer contract
 
-A renderer receives the narrowed `media` object as its `media` prop, the five playback props (`controls`, `autoplay`, `muted`, `loop`, `playsinline`), and any fallthrough attributes (`class`, `style`, `data-*`) that the call site put on `<Media>`. A video renderer gets a `MediaVideo`; an audio renderer gets a `MediaAudio`.
+A renderer receives the narrowed `media` object as its `media` prop, the playback props (`playback`, `controls`, `autoplay`, `muted`, `loop`, `playsinline`, `disablePictureInPicture`), and any fallthrough attributes (`class`, `style`, `data-*`) that the call site put on `<Media>`. A video renderer gets a `MediaVideo`; an audio renderer gets a `MediaAudio`. (`v-model:paused` is wired only to the built-in `<video>`; a custom renderer owns its own playback state.)
 
-Declare the playback props you want to honor and map them onto your player. The `MediaVideoProps` / `MediaAudioProps` types from `#ui-kit/components/Media/types` bundle the playback props with a single-type `media` prop; a renderer that handles both types declares `MediaPlaybackProps` alongside its own `media` union (as in the example below). Any playback prop you do not declare falls through as an attribute onto your renderer's root element. `controls` defaults to `true`, so a player with its own UI should declare it and decide what to do rather than let it land on the root.
+The playback props arrive unresolved: you get the `playback` mode plus whichever overrides were explicitly set, not the expanded attribute cluster. Map them onto your player yourself, or run them through the exported `resolvePlayback` helper (`#ui-kit/components/Media/resolvePlayback`) to get the same mode-default-plus-override precedence the built-in players use.
+
+Declare the playback props you want to honor and map them onto your player. The `MediaVideoProps` / `MediaAudioProps` types from `#ui-kit/components/Media/types` bundle the playback props with a single-type `media` prop; a renderer that handles both types declares `MediaPlaybackProps` alongside its own `media` union (as in the example below). Any playback prop you do not declare falls through as an attribute onto your renderer's root element, so a player with its own UI should declare `controls` and decide what to do with it rather than let the native attribute land on the root.
 
 Here is a video renderer that wraps [Vidstack](https://vidstack.io), typed with `MediaVideoProps`:
 
