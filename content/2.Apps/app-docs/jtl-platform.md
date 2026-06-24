@@ -67,16 +67,18 @@ Developers integrate JTL by adding the **`@laioutr/app-jtl-platform`** module to
 
 ### Module configuration
 
-All connection values are **secret-bearing** and live in **private** runtime config (`runtimeConfig['app-jtl-platform']`) — never in `runtimeConfig.public`. This connector exposes **no** client-visible configuration. Each option also has an environment-variable fallback so secrets can be injected per deployment without rebuilding.
+Configuration is delivered through the **Laioutr project config (`laioutrrc.json`)** — the same pattern every standalone connector app uses. You add an entry to the `apps` array; Laioutr's `frontend-core` injects that entry's `config` into the module under the key **`@laioutr/app-jtl-platform`** (the package name, used as both the Nuxt `configKey` and the private `runtimeConfig` namespace). There is **no** env-based configuration.
 
-| Option | Env fallback | Required | Description |
-|--------|--------------|----------|-------------|
-| **`clientId`** | `JTL_CLIENT_ID` | yes | OAuth2 client id. |
-| **`clientSecret`** | `JTL_CLIENT_SECRET` | yes | OAuth2 client secret. Server-only. |
-| **`tenantId`** | `JTL_TENANT_ID` | yes | Merchant tenant, sent as `X-Tenant-ID`. |
-| **`graphqlUrl`** | `JTL_GRAPHQL_URL` | no | GraphQL endpoint. Defaults to `https://api.jtl-cloud.com/erp/v2/graphql`. |
-| **`tokenUrl`** | `JTL_TOKEN_URL` | no | OAuth2 token endpoint. Defaults to `https://auth.jtl-cloud.com/oauth2/token`. |
-| **`scope`** | `JTL_SCOPE` | no | Optional OAuth2 scope. |
+All connection values are **secret-bearing**: they live in **private** runtime config (`runtimeConfig['@laioutr/app-jtl-platform']`) only — never in `runtimeConfig.public`, never in the client bundle.
+
+| Option | Required | Description |
+|--------|----------|-------------|
+| **`clientId`** | yes | OAuth2 client id. |
+| **`clientSecret`** | yes | OAuth2 client secret. Server-only. |
+| **`tenantId`** | yes | Merchant tenant, sent as the `X-Tenant-ID` header. |
+| **`graphqlUrl`** | no | GraphQL endpoint. Defaults to `https://api.jtl-cloud.com/erp/v2/graphql`. |
+| **`tokenUrl`** | no | OAuth2 token endpoint. Defaults to `https://auth.jtl-cloud.com/oauth2/token`. |
+| **`scope`** | no | Optional OAuth2 scope. |
 
 When **no** credentials are configured, the connector serves **built-in fixtures** so a storefront/playground still renders products end-to-end. Configure real credentials to switch to live data.
 
@@ -100,7 +102,7 @@ Add the connector to the `apps` array of the project's `laioutrrc.json`:
 }
 ```
 
-`laioutrrc.json` carries project secrets and is **not** committed to version control. In production the Laioutr platform supplies it; for local development you can also provide the secrets via the `JTL_*` environment variables (see `.env.example` in the repository).
+`laioutrrc.json` carries project secrets and is **not** committed to version control. In production the Laioutr platform supplies it; for local development you fetch it with `npx @laioutr/cli project fetch-rc` and pass it through the `laioutr` module option (as in app-actindo). Without it, the connector serves fixtures.
 
 ### Runtime behavior (high level)
 
