@@ -14,6 +14,113 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-06-30]
+
+### Fixed
+
+- **Studio**: Studio rejects an invalid dropdown value at write time instead of saving a broken page.
+
+## [2026-06-29]
+
+### Changed
+
+- **Studio**: The buttons for inserting live query data into a page's SEO title, description, and robots are now enabled only when your connected frontend supports it, with an upgrade hint otherwise.
+
+### Fixed
+
+- **Studio**: Props set when adding a section or block now persist instead of rendering empty.
+
+## [2026-06-26]
+
+### Added
+
+- **Studio**: Set a page's robots tag from a preset (index/noindex/nofollow) or bind it to live query data, so a connected system can drive per-page indexability.
+- **Studio**: Insert live query data (like a product title) into a page's SEO title and description as inline variables.
+
+## [2026-06-25]
+
+### Added
+
+- **Studio**: AI agents can now set a page's SEO title and description (and rename a page variant).
+
+## [2026-06-24]
+
+### Added
+
+- **Studio**: A restore point is saved before each translation import, so a bad import can be undone.
+
+### Fixed
+
+- **Studio**: Media fields now survive a translations export and re-import.
+- **Studio**: Importing translations no longer disconnects editors; images now import correctly.
+
+## [2026-06-23]
+
+### Added
+
+- **Studio**: Agents can now place an existing global section onto a page from the Studio MCP server.
+- **Studio**: Agents can now move or reorder a section between header, body, and footer or onto another page from the Studio MCP server.
+- **Studio**: Agents can now move or reorder a block between local sections from the Studio MCP server, keeping its content and settings.
+- **Studio**: AI agents can now discover a project's reusable global sections.
+
+### Fixed
+
+- **Studio**: Section and block reordering is now reflected in the MCP page tree.
+
+## [2026-06-22]
+
+### Added
+
+- **Studio**: Write different translations for several languages in a single edit.
+- **Studio**: AI agents can now add items to list props (slides, cards, rows).
+
+### Fixed
+
+- **Studio**: AI agents connected over MCP can list the Studio tools again, and the tool and data-model descriptions now accurately reflect what the server supports.
+
+## [2026-06-19]
+
+### Added
+
+- **Studio**: MCP mutation results report the catalog version; catalog errors point you at the catalog.
+- **Studio**: AI agents now see one component-catalog entry per project they can access in MCP resources/list, plus the Studio data-model docs entry.
+- **Studio**: AI agents connecting via MCP now receive a Studio primer on initialize and can fetch the deeper data-model reference from laioutr://docs/studio/data-model.
+
+### Changed
+
+- **Studio**: **Breaking:** project_list now lists each project's locales; the locales resource is removed.
+- **Studio**: Setting a translatable field via the MCP server now requires you to specify locales; extra locales on a non-translatable field are ignored with a warning.
+- **Studio**: Editing actions now wait safely during a project restore, with a retryable lock error.
+
+### Fixed
+
+- **Studio**: Retrying a Studio action after a transient error now re-attempts instead of replaying it.
+
+## [2026-06-18]
+
+### Added
+
+- **Studio**: Snapshot and restore project versions from Studio; auto-snapshot before each migration.
+- **Studio**: Add the Studio MCP server panel under Organization → API Keys so AI assistants like Claude Desktop and Cursor can connect.
+
+### Changed
+
+- **Studio**: Translations export now covers only translatable fields and needs a published frontend.
+
+### Fixed
+
+- **Studio**: The studio no longer shows a save when you just open a project.
+
+## [2026-06-17]
+
+### Added
+
+- **Studio**: Import a translations JSON on the Translations page to bulk-update text translations.
+
+### Fixed
+
+- **Studio**: Fix an occasional "statement timeout" error when loading your organizations and projects.
+
 ## [2026-05]
 
 ### Added

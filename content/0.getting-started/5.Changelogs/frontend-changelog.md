@@ -14,6 +14,12 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.32.1] - 2026-06-30
+
+### Patch Changes
+
+- Resolve SEO title/description/robots placeholders against a setup-time snapshot of the page's queries instead of the live, route-reactive query map. `useSeoMeta`'s getters are evaluated during SSR head serialization — after render and outside Nuxt's async context — so reading the live map there rebuilt every query's wire request for nothing (the wire request is only a result-lookup key). The head now reads a stable snapshot; sections keep the live map so client-side filter/sort/pagination still re-fetch.
+
 ## [0.31.0]
 
 ### Added
