@@ -48,7 +48,7 @@ Each action button emits a parameterless event (`navigate`, `call`, `email`) so 
 
 ### LocationInfoList
 
-Vertical list shell for icon-led info rows (address, hours, payment methods, services). It's a thin `<ul>` wrapper with consistent spacing. Compose rows with `LocationInfoListItem` (icon + content) and `LocationInfoListOpeningHours` (a collapsible row that expands to show the weekly schedule via [`OpeningHoursWeeklyTable`](/laioutr-ui/ui-kit/general/opening-hours-weekly-table)).
+Vertical list shell for icon-led info rows (address, hours, payment methods, services). It's a thin `<ul>` wrapper with consistent spacing. Compose rows with `LocationInfoListItem` (icon + content) and `LocationInfoListOpeningHours` (a collapsible row that expands to show the weekly schedule via [`TableOpeningHours`](/laioutr-ui/location/table-opening-hours)).
 
 ::component-meta{:name="LocationInfoList"}
 ::
@@ -83,4 +83,4 @@ A typical detail page composes these pieces inside the `LocationDetail` slot:
 - [`LocationFinder`](/laioutr-ui/location/location-finder): the directory listing this page links from.
 - [`LocationCard`](/laioutr-ui/location/location-card): the card representation used in the finder.
 - [`OpeningStatus`](/laioutr-ui/ui-kit/general/opening-status): the open/closed summary rendered inside the header.
-- [`OpeningHoursWeeklyTable`](/laioutr-ui/ui-kit/general/opening-hours-weekly-table): the weekly schedule rendered inside the collapsed `LocationInfoListOpeningHours` row.
+- [`TableOpeningHours`](/laioutr-ui/location/table-opening-hours): the weekly schedule rendered inside the collapsed `LocationInfoListOpeningHours` row.

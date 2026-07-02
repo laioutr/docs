@@ -14,6 +14,18 @@ sitemap:
 
 All notable changes to **Laioutr Canonical Types** (`@laioutr-core/canonical-types`, the shared TypeScript types for apps built on the platform — canonical entities, their components, and links) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.24.0]
+
+### Added
+
+- **Product**: New `ProductSpecifications` entity component (`specifications` token, `@laioutr-core/canonical-types/entity/product`) — an ordered list of technical specification rows modelled on schema.org [`PropertyValue`](https://schema.org/PropertyValue) (a Product's `additionalProperty`). Each row is `{ wellKnownName?, name, value, wellKnownSectionName?, sectionName? }`:
+  - `wellKnownName?` — canonical, locale-independent property key from the open-vocabulary `WellKnownPropertyName` union (e.g. `material`, `weight`, `dimensions`, `warranty`, `countryOfOrigin`), with a `string` escape hatch. The frontend maps well-known keys to a localized label + icon.
+  - `name` — locale-resolved display name (schema.org `PropertyValue.name`), used as the row label and the fallback when `wellKnownName` is unmapped.
+  - `value` — a **typed** value (`string | number | boolean | Measurement | Money`) rather than a pre-formatted string, so the frontend formats it per locale. Quantities carry their own unit via `Measurement`, prices via `Money`.
+  - `wellKnownSectionName?` / `sectionName?` — optional per-row section grouping, mirroring the key/name pair above (schema.org has no first-class section; Google Merchant `product_detail` carries a per-row `section_name`). Absent ⇒ ungrouped.
+
+  Exports the `WellKnownPropertyName` and `WellKnownSectionName` open-vocabulary unions. Detail-only — resolve on the product detail page, not in listings. Per-connector component resolvers are not included yet. Rendered by [`TableProductSpecifications`](/laioutr-ui/shop/product-detail/product-specifications).
+
 ## [0.23.0]
 
 ### Added
