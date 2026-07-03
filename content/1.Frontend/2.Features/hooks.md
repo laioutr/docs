@@ -79,26 +79,28 @@ export default defineNuxtPlugin((nuxtApp) => {
 
 ### Page Head
 
-Two **filter** hooks let you customize the tags Frontend Core writes to `<head>` on every page. Each runs with `result.value` pre-seeded with Frontend Core's computed head, so your handler can read those values and add, override, or remove tags. When several plugins register a hook, each receives the previous one's output.
+One **filter** hook lets you customize the tags Frontend Core writes to `<head>` on every page. It runs with `result.value` pre-seeded with Frontend Core's computed head, so your handler can read those values and add, override, or remove tags. When several plugins register the hook, each receives the previous one's output.
 
-| Hook                            | Arguments                                | Seeded `result.value`                                                                                            |
-| ------------------------------- | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `frontend-core:page-head:seo`   | `{ page, pageVariant, result }`          | The SEO meta: `title`, `description`, `robots`, and any `og:` / `twitter:` field                                 |
-| `frontend-core:page-head:locale` | `{ metaPage, currentDomain, result }`    | The locale head `{ htmlAttrs, meta, link }` — `<html lang>`, `og:locale`, canonical, and hreflang alternates    |
+| Hook                             | Arguments                                                | Seeded `result.value`                                            |
+| -------------------------------- | -------------------------------------------------------- | --------------------------------------------------------------- |
+| `frontend-core:page-head:resolve` | `{ page, pageVariant, metaPage, currentDomain, result }` | `{ seo, locale }` — the SEO meta and the locale head (see below) |
 
-For `page-head:seo`, `result.value` is a flat SEO-meta object (same shape as [`useSeoMeta`](https://nuxt.com/docs/api/composables/use-seo-meta)). For `page-head:locale`, it is `{ htmlAttrs, meta, link }`, where `meta` and `link` are arrays of tag objects. `currentDomain` is `undefined` when no market domain is resolved (for example, in Studio preview).
+`result.value` has two slots:
+
+- **`seo`** — a flat SEO-meta object (same shape as [`useSeoMeta`](https://nuxt.com/docs/api/composables/use-seo-meta)): `title`, `description`, `robots`, and any `og:` / `twitter:` field.
+- **`locale`** — `{ htmlAttrs, meta, link }`: `<html lang>`, `og:locale`, canonical, and hreflang alternates, where `meta` and `link` are arrays of tag objects.
+
+`currentDomain` is `undefined` when no market domain is resolved (for example, in Studio preview).
 
 ```ts [app/plugins/custom-head.ts]
 export default defineNuxtPlugin((nuxtApp) => {
-  // Append a site name to the resolved title and add a default OG image
-  nuxtApp.hook('frontend-core:page-head:seo', ({ result }) => {
-    result.value.title = `${result.value.title} — Acme`;
-    result.value.ogImage ??= 'https://example.com/og.png';
-  });
+  nuxtApp.hook('frontend-core:page-head:resolve', ({ result }) => {
+    // Append a site name to the resolved title and add a default OG image
+    result.value.seo.title = `${result.value.seo.title} — Acme`;
+    result.value.seo.ogImage ??= 'https://example.com/og.png';
 
-  // Remove the x-default alternate
-  nuxtApp.hook('frontend-core:page-head:locale', ({ result }) => {
-    result.value.link = result.value.link.filter((l) => l.hreflang !== 'x-default');
+    // Remove the x-default alternate
+    result.value.locale.link = result.value.locale.link.filter((l) => l.hreflang !== 'x-default');
   });
 });
 ```

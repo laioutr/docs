@@ -137,21 +137,19 @@ Alternates are automatically restricted to the markets a page belongs to. A page
 
 #### Customizing the head
 
-Two filter [hooks](/frontend/features/hooks) let you add, override, or remove head tags while seeing Frontend Core's computed values:
+A single filter [hook](/frontend/features/hooks), `frontend-core:page-head:resolve`, lets you add, override, or remove head tags while seeing Frontend Core's computed values. Its `result.value` has two slots:
 
-- **`frontend-core:page-head:seo`** — the SEO meta (`title`, `description`, `robots`, and any `og:` / `twitter:` field)
-- **`frontend-core:page-head:locale`** — the locale head (canonical, hreflang alternates, `og:locale`, `<html lang>`)
+- **`seo`** — the SEO meta (`title`, `description`, `robots`, and any `og:` / `twitter:` field)
+- **`locale`** — the locale head (canonical, hreflang alternates, `og:locale`, `<html lang>`)
 
 ```ts
 // e.g. in a Nuxt plugin
 export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.hook('frontend-core:page-head:seo', ({ result }) => {
-    result.value.title = `${result.value.title} — Acme`
-    result.value.ogImage = 'https://example.com/og.png'
-  })
-  nuxtApp.hook('frontend-core:page-head:locale', ({ result }) => {
+  nuxtApp.hook('frontend-core:page-head:resolve', ({ result }) => {
+    result.value.seo.title = `${result.value.seo.title} — Acme`
+    result.value.seo.ogImage = 'https://example.com/og.png'
     // e.g. drop the x-default alternate
-    result.value.link = result.value.link.filter((l) => l.hreflang !== 'x-default')
+    result.value.locale.link = result.value.locale.link.filter((l) => l.hreflang !== 'x-default')
   })
 })
 ```
