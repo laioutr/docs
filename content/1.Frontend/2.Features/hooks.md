@@ -77,6 +77,32 @@ export default defineNuxtPlugin((nuxtApp) => {
 });
 ```
 
+### Page Head
+
+Two **filter** hooks let you customize the tags Frontend Core writes to `<head>` on every page. Each runs with `result.value` pre-seeded with Frontend Core's computed head, so your handler can read those values and add, override, or remove tags. When several plugins register a hook, each receives the previous one's output.
+
+| Hook                            | Arguments                                | Seeded `result.value`                                                                                            |
+| ------------------------------- | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `frontend-core:page-head:seo`   | `{ page, pageVariant, result }`          | The SEO meta: `title`, `description`, `robots`, and any `og:` / `twitter:` field                                 |
+| `frontend-core:page-head:locale` | `{ metaPage, currentDomain, result }`    | The locale head `{ htmlAttrs, meta, link }` — `<html lang>`, `og:locale`, canonical, and hreflang alternates    |
+
+For `page-head:seo`, `result.value` is a flat SEO-meta object (same shape as [`useSeoMeta`](https://nuxt.com/docs/api/composables/use-seo-meta)). For `page-head:locale`, it is `{ htmlAttrs, meta, link }`, where `meta` and `link` are arrays of tag objects. `currentDomain` is `undefined` when no market domain is resolved (for example, in Studio preview).
+
+```ts [app/plugins/custom-head.ts]
+export default defineNuxtPlugin((nuxtApp) => {
+  // Append a site name to the resolved title and add a default OG image
+  nuxtApp.hook('frontend-core:page-head:seo', ({ result }) => {
+    result.value.title = `${result.value.title} — Acme`;
+    result.value.ogImage ??= 'https://example.com/og.png';
+  });
+
+  // Remove the x-default alternate
+  nuxtApp.hook('frontend-core:page-head:locale', ({ result }) => {
+    result.value.link = result.value.link.filter((l) => l.hreflang !== 'x-default');
+  });
+});
+```
+
 ## Orchestr Client Hooks
 
 These hooks fire during client-side action execution. They follow the lifecycle pattern: `before` fires before the request, `success` or `error` after resolution, and `finally` always. All receive a `token` string that identifies the action (e.g. `ecommerce/cart/add-items`).

@@ -48,14 +48,13 @@ nuxt-i18n is configured with `strategy: 'no_prefix'`. It does **not** own routin
 **nuxt-i18n handles:**
 - `$t()` / `useI18n()` for UI string translations
 - `$n()` / `$d()` for number and date formatting
-- `useLocaleHead()` for `<html lang>`, `dir`, `og:locale`
 - Locale message lazy loading
 
 **Frontend Core handles:**
 - Route generation (aliases from market config)
 - Domain → market → language resolution
 - Link resolution (`linkResolver`)
-- hreflang alternates (`useMarketHead`)
+- SEO head — canonical, hreflang alternates, `og:locale`, and `<html lang>` ([emitted automatically](#seo-hreflang-and-canonical))
 - Market/language/domain [composables](/frontend/features/multi-market#composables)
 
 ::warning
@@ -122,35 +121,38 @@ See the [Link reference page](/frontend/api-reference/common-types/link#resolvin
 
 ### SEO: hreflang and canonical
 
-`useMarketHead(pageMarketIds?)` generates `<link>` tags for search engines. It is auto-imported but you must call it yourself, typically in a layout:
-
-```ts
-// In your layout or page
-useMarketHead()
-```
-
-It adds the following to `<head>` via Nuxt's `useHead()`:
+Frontend Core emits SEO head tags **automatically on every page** — you don't need to call anything. On each render it adds to `<head>`:
 
 - **`<link rel="canonical">`** — the current page's URL on the current domain (`https://{host}{prefix}{path}`)
 - **`<link rel="alternate" hreflang="...">`** — one for every domain across all markets where the current page has a localized path. The `hreflang` value is the domain's language code.
 - **`<link rel="alternate" hreflang="x-default">`** — points to the first market's default domain as the fallback for search engines
+- **`og:locale`** and **`og:locale:alternate`** — the current and alternate locales
+- **`<html lang>`** — the current domain's language code
 
-All URLs are built as `https://{domain.host}{domain.path}{localizedPagePath}`, with dynamic route params (e.g. `:slug`) filled from the current route.
-
-Domains where the page has no localized path are silently skipped — no broken alternate links are generated.
+All URLs are built as `https://{domain.host}{domain.path}{localizedPagePath}`, with dynamic route params (e.g. `:slug`) filled from the current route. Domains where the page has no localized path are silently skipped — no broken alternate links are generated.
 
 #### Market-scoped pages
 
-Pass `pageMarketIds` to restrict alternates to specific markets. Markets not in the list are excluded entirely:
+Alternates are automatically restricted to the markets a page belongs to. A page with a `marketIds` constraint only advertises alternates (and `og:locale:alternate`) for those markets — it never points to a market where the page doesn't exist and would 404.
+
+#### Customizing the head
+
+Two filter [hooks](/frontend/features/hooks) let you add, override, or remove head tags while seeing Frontend Core's computed values:
+
+- **`frontend-core:page-head:seo`** — the SEO meta (`title`, `description`, `robots`, and any `og:` / `twitter:` field)
+- **`frontend-core:page-head:locale`** — the locale head (canonical, hreflang alternates, `og:locale`, `<html lang>`)
 
 ```ts
-// Only generate alternates for Switzerland and Germany
-useMarketHead(['mkt_switzerland', 'mkt_germany'])
+// e.g. in a Nuxt plugin
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.hook('frontend-core:page-head:seo', ({ result }) => {
+    result.value.title = `${result.value.title} — Acme`
+    result.value.ogImage = 'https://example.com/og.png'
+  })
+  nuxtApp.hook('frontend-core:page-head:locale', ({ result }) => {
+    // e.g. drop the x-default alternate
+    result.value.link = result.value.link.filter((l) => l.hreflang !== 'x-default')
+  })
+})
 ```
-
-This matches the `marketIds` constraint on pages: a page scoped to certain markets should not advertise alternates in other markets.
-
-::note
-`useMarketHead()` does **not** set `<html lang>`, `dir`, or `og:locale`. Those are handled by nuxt-i18n's `useLocaleHead()`.
-::
 
