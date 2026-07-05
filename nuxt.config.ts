@@ -63,7 +63,7 @@ export default defineNuxtConfig({
   site: {
     name: 'Laioutr Docs',
     // Required for @nuxtjs/sitemap absolute <loc> URLs. Override per env (e.g. Cloudflare build: NUXT_SITE_URL).
-    url: process.env.NUXT_SITE_URL || 'https://docs.laioutr.io',
+    url: process.env.NUXT_SITE_URL || 'https://docs.laioutr.com',
     indexable: process.env.NODE_ENV === 'production',
   },
 
@@ -109,7 +109,7 @@ export default defineNuxtConfig({
   },
 
   llms: {
-    domain: 'https://docs.laioutr.io',
+    domain: 'https://docs.laioutr.com',
     title: 'Laioutr Docs',
     description:
       'Documentation for Laioutr, the Composable Frontend Management Platform. Build performant, scalable eCommerce storefronts with a visual editor, unified data layer, and modular app architecture.',
