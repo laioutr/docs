@@ -136,6 +136,15 @@ Operate your projects in the web app: deployments, Apps, Studio, project setting
 
 ::::card
 ---
+title: API
+icon: i-lucide-plug
+to: /api/
+---
+Content Management, Content Delivery, and Asset Management APIs for programmatic access to your storefront content.
+::::
+
+::::card
+---
 title: Offering
 icon: i-lucide-shield-check
 to: /offering/
