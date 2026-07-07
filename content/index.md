@@ -136,9 +136,9 @@ Operate your projects in the web app: deployments, Apps, Studio, project setting
 
 ::::card
 ---
-title: API
+title: Data API
 icon: i-lucide-plug
-to: /api/
+to: /data-api/
 ---
 Content Management, Content Delivery, and Asset Management APIs for programmatic access to your storefront content.
 ::::
@@ -150,6 +150,15 @@ icon: i-lucide-shield-check
 to: /offering/
 ---
 SLAs, support tiers, and compliance details for teams running Laioutr in production.
+::::
+
+::::card
+---
+title: Agent API
+icon: i-lucide-bot
+to: /agent-api/
+---
+APIs and protocols for AI agents to interact with Laioutr, starting with the Laioutr MCP server.
 ::::
 
 :::
