@@ -14,6 +14,24 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-07-02]
+
+### Changed
+
+- **Hosting**: Project settings now links to your organization API keys for npm registry access.
+- **Hosting**: Expired API keys are now dimmed in the organization API keys table.
+
+## [2026-07-01]
+
+### Added
+
+- **Hosting**: Log in to the npm registry from your terminal with npm login --auth-type=web.
+- **Hosting**: See and revoke your registry web-login sessions from account security settings.
+
+### Changed
+
+- **Hosting**: The npm registry login screen now matches the app's sign-in look.
+
 ## [2026-06-30]
 
 ### Fixed

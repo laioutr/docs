@@ -14,6 +14,17 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.33.1] - 2026-07-06
+
+### Patch Changes
+
+- `content_alignment` field values that fall outside the field's axis-derived set are now healed when resolving render props, instead of passing through. A value already in the set is unchanged. When a field's `axis` was changed after the value was stored, the stored value is projected onto the new axis rather than discarded:
+
+  - **Restrict** (`both` → single axis): the matching component is kept — `top-left` renders as `top` on a vertical field, `left` on a horizontal field.
+  - **Widen** (single axis → `both`): the value is paired with a neutral `center` for the missing axis — `top` becomes `top-center`, `left` becomes `center-left`.
+
+  Only a value with no analog on the new axis (an axis swap, e.g. `top` on a horizontal field) or a malformed value (e.g. `diagonal`) clamps to the field's fallback alignment (`center` / `center-center`). Previously any out-of-range value was discarded and replaced with the fallback, silently losing alignment intent the stored value still carried.
+
 ## [0.32.1] - 2026-06-30
 
 ### Patch Changes

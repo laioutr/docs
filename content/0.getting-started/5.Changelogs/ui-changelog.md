@@ -14,6 +14,26 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.6.0] - 2026-07-07
+
+### Minor Changes
+
+- `openDialog` and `addToast` now accept a ref or getter for their content (`MaybeRefOrGetter<…>`), so a dialog's or toast's title, description, and other fields can stay reactive after it opens — e.g. `openDialog(() => ({ title: t('...'), ... }))` re-renders on locale or prop changes. Passing a plain object works exactly as before.
+
+  `addToast` additionally returns the new toast's `id` (matching `openDialog`), and the toaster store's `toasts` is now a resolved computed rather than a writable ref (it was already only read internally).
+
+- Add `TableOfContents` component (numbered nav list with scroll-spy active-item tracking) and the underlying `useScrollSpy` composable.
+
+- Add the EU withdrawal-button feature to the UI layer: `WithdrawalForm` (`ui`) renders a statutory right-of-withdrawal (Widerruf) dialog form with the three legally-permitted fields (name, order/contract reference, email) and client-side validation; `BlockWithdrawalButton` (`ui-app`) makes it a Studio-configurable button that opens the form in a dialog and dispatches the `ecommerce/legal/withdrawal` action. `Footer` (`ui`) and `SectionFooter` (`ui-app`) gain a `bottomContent` slot so the button (or any block) can be placed in the footer's bottom row. A `withdrawal` locale namespace (en/de) supplies the default labels and validation messages.
+
+- Add an optional, auto-generated table of contents to `ArticleDetail`, built from the body's H2 headings, with a sticky sidebar on desktop and a collapsible accordion on mobile.
+
+- Add a `showTableOfContents` Studio feature flag to `SectionBlogPostDetail`, defaulting to on, to control the new auto-generated table of contents.
+
+### Patch Changes
+
+- Form inputs placed inside `<Field>` now inherit the field's `disabled`, `readonly`, `required`, and `invalid` state. Previously these were silently dropped (only `id` and `errorMessage` propagated), so a control inside `<Field disabled>` or `<Field :invalid>` stayed enabled/valid. A control is now in that state if either its own prop or the surrounding `<Field>` declares it, matching native `<fieldset disabled>`.
+
 ## [2.4.0]
 
 ### Added
