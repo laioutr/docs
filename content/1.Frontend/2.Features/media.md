@@ -14,6 +14,9 @@ changelogKeys:
 
 ---
 
+::since-version{version="0.34.0" packages="@laioutr-core/frontend-core, @laioutr-core/orchestr" changelog="frontend"}
+::
+
 ## What is the media library?
 
 In Laioutr, **media** (images, videos, audio) are used in sections and blocks: hero banners, product tiles, content blocks, podcast players, and so on. Editors configure these in **Cockpit** (Studio) by picking assets from a **media library**. The library is not a single source: it is an **abstraction** over one or more **backends**. Each connected backend (e.g. Shopify Files, Shopware Media, your own DAM or CMS) is exposed as a **media library connector**. The editor selects a library (e.g. “Shopify”), browses, searches, or filters assets, and picks one; the chosen asset is stored as Laioutr’s canonical [`Media`](/frontend/api-reference/common-types/media) type (image, video, or audio with sources, alt, optional placeholder or poster) and rendered on the frontend.
