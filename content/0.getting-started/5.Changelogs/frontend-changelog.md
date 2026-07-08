@@ -14,6 +14,17 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.34.0]
+
+### Changed
+
+- **Breaking:** Media libraries are now connected as an Orchestr integration facet. A connector is declared with `defineX.mediaLibrary(...)` on the app's Orchestr builder instead of the standalone `defineMediaLibraryProvider` factory. Identity (`id`, `label`, `iconSrc`) is derived from the builder's `.meta()`; the connector declares static `capabilities` (search, tags, folders, sorts, upload transfer) and its handlers receive the app's per-request `ctx` as a second argument. Browsing moves to opaque-cursor pagination (`MediaQuery` → `MediaListResult`) with folders folded into `list`, an explicit `type` filter, and a browse-time `status`; upload gains a staged (direct browser→backend) path alongside proxied, both returning per-file results. `ProjectFrontendContext.mediaLibraries` now carries `{ id, label, iconSrc, capabilities }` descriptors. See [Media and Media Library](/frontend/features/media).
+- Every `Media` source gained an optional `origin` (`{ libraryId, externalId? }`) recording the producing library and its stable asset id. It is stamped automatically when an asset is picked from a media library, is management-plane only (the renderer never reads it), and is additive — media stored before it existed remain valid. See [Media](/frontend/api-reference/common-types/media#source-origin).
+
+### Deprecated
+
+- `defineMediaLibraryProvider(...)` is deprecated in favour of `defineX.mediaLibrary(...)`. It keeps working as a compatibility shim so existing connectors register without a rewrite, in a degraded mode (no folder navigation, no staged upload, no declared sorts, no server-side type filtering), and logs a one-time warning at registration.
+
 ## [0.33.1] - 2026-07-06
 
 ### Patch Changes

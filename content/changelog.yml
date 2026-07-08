@@ -23,6 +23,17 @@ AlphabeticalIndex:
       ```
 
 Media:
+  - version: 0.34.0
+    type: added
+    changelog: frontend
+    note: >-
+      Every source gained an optional
+      [`origin`](/frontend/api-reference/common-types/media#source-origin)
+      (`{ libraryId, externalId? }`) recording the media library that produced it
+      and that library's stable asset id. It is stamped automatically when an
+      asset is picked from a media library, and is management-plane only — the
+      renderer never reads it. Additive and optional, so media stored before it
+      existed stay valid.
   - version: 0.30.1
     type: added
     changelog: frontend
@@ -62,6 +73,47 @@ Media:
         case 'audio': return renderAudio(media); // new
       }
       ```
+
+MediaLibrary:
+  - version: 0.34.0
+    type: changed
+    breaking: true
+    changelog: frontend
+    note: >-
+      A media library connector is now declared with `defineX.mediaLibrary(...)`
+      on the app's Orchestr builder instead of the standalone
+      `defineMediaLibraryProvider` factory. Identity comes from the builder's
+      `.meta()`; the connector declares static `capabilities` and its handlers
+      receive the app's per-request `ctx`. Browsing moves to opaque-cursor
+      pagination with folders, an explicit type filter, and per-file upload
+      results (proxied or staged).
+    migration: |
+      Move the connector onto your app's Orchestr builder. Identity moves from
+      the provider's `name`/`label`/`iconSrc` to the builder's `.meta()`,
+      pagination moves from `offset`/`limit` to an opaque `cursor`, and `list`
+      returns a `MediaListResult` and takes `ctx` as a second argument.
+
+      ```ts
+      // Before
+      export default defineMediaLibraryProvider({
+        name: 'my-dam',
+        label: 'My DAM',
+        list: async ({ offset, limit, search, sort }) => ({ items, total, offset, limit }),
+      });
+      // After
+      export default defineMyDam.mediaLibrary({
+        capabilities: { search: true, folders: false, sorts: [] },
+        list: async (query, ctx) => ({ items, nextCursor, total }),
+      });
+      ```
+  - version: 0.34.0
+    type: deprecated
+    changelog: frontend
+    note: >-
+      `defineMediaLibraryProvider(...)` is deprecated in favour of
+      `defineX.mediaLibrary(...)`. It keeps working as a compatibility shim, in a
+      degraded mode (no folders, no staged upload, no declared sorts, no
+      server-side type filtering), and logs a one-time warning at registration.
 
 MediaComponent:
   - version: 2.4.0
