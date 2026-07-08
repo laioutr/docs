@@ -140,7 +140,7 @@ title: Data API
 icon: i-lucide-plug
 to: /data-api
 ---
-Content Management, Content Delivery, and Asset Management APIs for programmatic access to your storefront content.
+Management and Delivery APIs for programmatic access to your storefront content and assets.
 ::::
 
 ::::card
