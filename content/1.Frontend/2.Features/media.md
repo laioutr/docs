@@ -9,6 +9,8 @@ sitemap:
   lastmod: 2026-07-08
   changefreq: monthly
   priority: 1.0
+changelogKeys:
+  - MediaLibrary
 
 ---
 
