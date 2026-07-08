@@ -16,7 +16,7 @@ sitemap:
 ::docs-landing
 
 #description
-Laioutr is the **Composable Frontend Management Platform** built for modern eCommerce teams. It connects your storefront's UI layer, data integration, deployment infrastructure, and AI tooling into one coherent platform — so you can move fast without sacrificing flexibility or control.
+Laioutr is the **Composable Frontend Management Platform** for [Composable Commerce](https://www.laioutr.com), built for modern eCommerce teams. It connects your storefront's UI layer, data integration, deployment infrastructure, and AI tooling into one coherent platform — so you can move fast without sacrificing flexibility or control.
 
 Whether you're building a storefront from scratch, extending an existing one, or migrating away from a monolithic stack, Laioutr gives every team member the right set of tools without forcing anyone into a one-size-fits-all workflow.
 
@@ -66,7 +66,7 @@ icon: i-lucide-sparkles
 ---
 title: Getting Started
 icon: i-lucide-rocket
-to: /getting-started/
+to: /getting-started
 ---
 Get your first storefront running. Covers prerequisites, project setup, and core concepts.
 ::::
@@ -75,7 +75,7 @@ Get your first storefront running. Covers prerequisites, project setup, and core
 ---
 title: Frontend
 icon: i-lucide-code
-to: /frontend/
+to: /frontend
 ---
 The TypeScript frontend framework: sections, blocks, SEO, routing, and the Orchestr data integration layer.
 ::::
@@ -84,7 +84,7 @@ The TypeScript frontend framework: sections, blocks, SEO, routing, and the Orche
 ---
 title: Apps
 icon: i-lucide-puzzle
-to: /apps/
+to: /apps
 ---
 Pre-built connectors for Commercetools, Shopify, Pimcore, and other commerce backends.
 ::::
@@ -93,7 +93,7 @@ Pre-built connectors for Commercetools, Shopify, Pimcore, and other commerce bac
 ---
 title: Laioutr UI
 icon: i-lucide-palette
-to: /laioutr-ui/
+to: /laioutr-ui
 ---
 Accessible, themeable component library. Customize tokens and extend components for your design system.
 ::::
@@ -102,7 +102,7 @@ Accessible, themeable component library. Customize tokens and extend components 
 ---
 title: Hosting
 icon: i-lucide-cloud
-to: /hosting/
+to: /hosting
 ---
 Deploy to Laioutr Cloud, use a platform adapter, or self-host — your infrastructure, your rules.
 ::::
@@ -111,7 +111,7 @@ Deploy to Laioutr Cloud, use a platform adapter, or self-host — your infrastru
 ---
 title: Checkout
 icon: i-lucide-shopping-cart
-to: /checkout/
+to: /checkout
 ---
 Headless checkout flow with payment provider integration, built to work with your storefront.
 ::::
@@ -120,7 +120,7 @@ Headless checkout flow with payment provider integration, built to work with you
 ---
 title: Larry AI
 icon: i-lucide-sparkles
-to: /larry-ai/
+to: /larry-ai
 ---
 Your AI co-pilot for storefront management: generate, edit, and optimize without leaving the platform.
 ::::
@@ -129,7 +129,7 @@ Your AI co-pilot for storefront management: generate, edit, and optimize without
 ---
 title: Cockpit
 icon: i-lucide-layout-dashboard
-to: /cockpit/
+to: /cockpit
 ---
 Operate your projects in the web app: deployments, Apps, Studio, project settings, and your account preferences.
 ::::
@@ -138,7 +138,7 @@ Operate your projects in the web app: deployments, Apps, Studio, project setting
 ---
 title: Data API
 icon: i-lucide-plug
-to: /data-api/
+to: /data-api
 ---
 Content Management, Content Delivery, and Asset Management APIs for programmatic access to your storefront content.
 ::::
@@ -147,7 +147,7 @@ Content Management, Content Delivery, and Asset Management APIs for programmatic
 ---
 title: Offering
 icon: i-lucide-shield-check
-to: /offering/
+to: /offering
 ---
 SLAs, support tiers, and compliance details for teams running Laioutr in production.
 ::::
@@ -156,9 +156,18 @@ SLAs, support tiers, and compliance details for teams running Laioutr in product
 ---
 title: Agent API
 icon: i-lucide-bot
-to: /agent-api/
+to: /agent-api
 ---
 APIs and protocols for AI agents to interact with Laioutr, starting with the Laioutr MCP server.
+::::
+
+::::card
+---
+title: Figma Kit
+icon: i-simple-icons-figma
+to: /figma-kit
+---
+A modular Figma UI Kit with shared variables and strict naming conventions for a 1:1 design-to-code pipeline.
 ::::
 
 :::
