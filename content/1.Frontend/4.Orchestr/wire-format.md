@@ -4,7 +4,7 @@ description: Detailed technical documentation of Laioutr's Orchestr API wire for
 category: Essentials
 order: 4
 seo:
-  title: Orchestr Wire Format | Laioutr
+  title: Orchestr Wire Format
   description: Detailed technical documentation of Laioutr's Orchestr API wire format and data structures
 sitemap:
   loc: /frontend/orchestr/wire-format

@@ -2,7 +2,7 @@
 title: Redirects
 description: How Laioutr applies project redirects on the live site, with exact and pattern matching, permanent and temporary status codes, and query-string forwarding.
 seo:
-  title: Redirects | Laioutr
+  title: Redirects
   description: How Laioutr applies project redirects on the live site, with exact and pattern matching, permanent and temporary status codes, and query-string forwarding.
 sitemap:
   loc: /frontend/features/redirects

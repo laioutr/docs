@@ -7,7 +7,7 @@ playground:
   defaultStory: opens-today
   height: 200px
 seo:
-  title: Opening Status Detail | Laioutr
+  title: Opening Status Detail
   description: One-line "closes at HH:mm" or "opens on Monday at HH:mm" detail atom for opening-hours surfaces. Picks the right message from the next state-change event.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/opening-status-detail

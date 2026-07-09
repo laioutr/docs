@@ -2,7 +2,7 @@
 title: Middleware
 description: Extend Orchestr handlers with shared context, API clients, and cross-cutting logic using extendRequest and use.
 seo:
-  title: Middleware | Laioutr
+  title: Middleware
   description: Extend Orchestr handlers with shared context, API clients, and cross-cutting logic using extendRequest and use.
 sitemap:
   loc: /frontend/orchestr/middleware

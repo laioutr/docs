@@ -2,7 +2,7 @@
 title: Cockpit Changelog
 description: Changelog for the Laioutr Cockpit (Studio) product following Keep a Changelog and Semantic Versioning.
 seo:
-  title: Cockpit Changelog | Laioutr
+  title: Cockpit Changelog
   description: Changelog for the Laioutr Cockpit (Studio) product following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/cockpit-changelog

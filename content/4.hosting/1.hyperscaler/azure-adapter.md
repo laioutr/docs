@@ -4,7 +4,7 @@ description: The Azure Adapter is a pre-built integration that connects the Laio
 aliases:
   - /hosting/hosting-adapter/azure-adapter
 seo:
-  title: Azure Adapter | Laioutr
+  title: Azure Adapter
   description: The Azure Adapter is a pre-built integration that connects the Laioutr Cockpit directly with Microsoft Azure. It…
 sitemap:
   loc: /hosting/hyperscaler/azure-adapter

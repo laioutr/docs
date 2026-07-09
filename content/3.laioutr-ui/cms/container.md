@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Container | Laioutr
+  title: Container
   description: Backdrop + grid + alignment + media-sizes composition.
 sitemap:
   loc: /laioutr-ui/cms/container

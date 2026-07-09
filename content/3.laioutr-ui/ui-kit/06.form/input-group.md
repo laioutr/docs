@@ -2,7 +2,7 @@
 title: Input Group
 description: Composes an Input with leading and trailing addons such as icons, text, or action buttons.
 seo:
-  title: Input Group | Laioutr
+  title: Input Group
   description: Composes an Input with leading and trailing addons.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/input-group

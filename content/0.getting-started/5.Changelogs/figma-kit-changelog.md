@@ -2,7 +2,7 @@
 title: Figma Kit Changelog
 description: Where to read Laioutr Figma Kit release notes—inside the library files, via Figma updates, and on the Laioutr Community profile.
 seo:
-  title: Figma Kit Changelog | Laioutr
+  title: Figma Kit Changelog
   description: How to find Laioutr Figma Kit changelogs in Figma and follow releases on the Laioutr Figma Community profile.
 sitemap:
   loc: /figma-kit/introduction/figma-kit-changelog

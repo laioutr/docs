@@ -8,7 +8,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Placeholder | Laioutr
+  title: Placeholder
   description: A placeholder component
 sitemap:
   loc: /laioutr-ui/ui-kit/general/placeholder

@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Add to Cart | Laioutr
+  title: Add to Cart
   description: Add-to-cart button with quantity, loading, and disabled states.
 sitemap:
   loc: /laioutr-ui/shop/product-detail/add-to-cart

@@ -1,7 +1,7 @@
 ---
 title: Backups
 seo:
-  title: Backups | Laioutr
+  title: Backups
 sitemap:
   loc: /offering/service-level-agreement/backups
   lastmod: 2026-04-08

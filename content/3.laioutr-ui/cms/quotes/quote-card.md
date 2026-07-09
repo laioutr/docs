@@ -13,7 +13,7 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=7409-40884&m=dev
     target: _blank
 seo:
-  title: Quote Card | Laioutr
+  title: Quote Card
   description: Compact testimonial card for sliders, grids, or inline content.
 sitemap:
   loc: /laioutr-ui/cms/quotes/quote-card

@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Content Grid | Laioutr
+  title: Content Grid
   description: Generic responsive grid for cards, tiles, and other slotted content.
 sitemap:
   loc: /laioutr-ui/cms/content-grid

@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Lightbox | Laioutr
+  title: Lightbox
   description: Modal media viewer with zoom, pan, and cross-image navigation.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/lightbox

@@ -2,7 +2,7 @@
 title: System bootstrap in extendRequest
 description: When your backend needs internal IDs for currency, locale, or sales channel that aren't part of clientEnv, fetch and cache the metadata once, then resolve it on each request.
 seo:
-  title: System bootstrap in extendRequest | Laioutr
+  title: System bootstrap in extendRequest
   description: When your backend needs internal IDs for currency, locale, or sales channel that aren't in clientEnv, fetch and cache the metadata once, then resolve it on each request.
 sitemap:
   loc: /frontend/orchestr/recipes/system-bootstrap

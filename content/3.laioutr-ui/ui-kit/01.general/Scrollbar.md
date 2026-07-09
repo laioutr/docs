@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-39
 seo:
-  title: Scrollbar | Laioutr
+  title: Scrollbar
   description: Proportional scrollbar primitive that owns its drag and track-click interaction, driven by a progress and visible-ratio value.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/scrollbar

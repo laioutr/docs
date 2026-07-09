@@ -3,7 +3,7 @@ title: Hooks
 description: Extend frontend-core and orchestr behavior using Nuxt runtime hooks
 links: []
 seo:
-  title: Hooks | Laioutr
+  title: Hooks
   description: Extend frontend-core and orchestr behavior using Nuxt runtime hooks
 ---
 

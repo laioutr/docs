@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Input Rating | Laioutr
+  title: Input Rating
   description: Star rating input.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/input-rating

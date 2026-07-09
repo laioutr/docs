@@ -2,7 +2,7 @@
 title: Retail & Multichannel
 description: Components and patterns for multichannel retail, market-aware storefronts, and scalable merchandising experiences.
 seo:
-  title: Retail & Multichannel | Laioutr
+  title: Retail & Multichannel
   description: Components and patterns for multichannel retail, market-aware storefronts, and scalable merchandising experiences.
 sitemap:
   loc: /figma-kit/kits/multichannel

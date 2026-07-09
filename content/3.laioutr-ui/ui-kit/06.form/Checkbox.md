@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-126
 seo:
-  title: Checkbox | Laioutr
+  title: Checkbox
   description: Checkbox control for single-choice consent and multi-select groups, with tri-state support.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/checkbox

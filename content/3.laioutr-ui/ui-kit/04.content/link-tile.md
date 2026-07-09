@@ -13,7 +13,7 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=10798-228528&t=Ar5LTHJDEX3yaImj-4
     target: _blank
 seo:
-  title: Link Tile | Laioutr
+  title: Link Tile
   description: A category-promoting tile that routes to one of three internal layouts based on the `variant` prop.
 sitemap:
   loc: /laioutr-ui/ui-kit/content/link-tile

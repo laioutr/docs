@@ -2,7 +2,7 @@
 title: Identity cookies (cart and visitor IDs)
 description: Read-or-create-and-set patterns for cart, session, and visitor identity cookies. Where to put the bootstrap depends on when you need the ID.
 seo:
-  title: Identity cookies in Orchestr | Laioutr
+  title: Identity cookies in Orchestr
   description: Read-or-create-and-set patterns for cart, session, and visitor identity cookies in Orchestr.
 sitemap:
   loc: /frontend/orchestr/recipes/identity-cookies

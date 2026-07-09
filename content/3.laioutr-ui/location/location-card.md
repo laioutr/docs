@@ -12,7 +12,7 @@ links:
     to: https://www.figma.com/design/MveNl6Nnpq76pL6yQqibDl/Location-Finder?node-id=8-3466&t=aS72ws8Ne3LJIvnt-0
     target: _blank
 seo:
-  title: Location Card | Laioutr
+  title: Location Card
   description: Card for a single store or location with two layouts. A row-style `list` card for store directories, and a square `mapPopup` card for map markers.
 sitemap:
   loc: /laioutr-ui/location/location-card

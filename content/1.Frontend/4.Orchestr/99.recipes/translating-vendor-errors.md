@@ -2,7 +2,7 @@
 title: Translating vendor errors
 description: Map raw backend errors into canonical Laioutr errors so the storefront UI can render them with no connector-specific code.
 seo:
-  title: Translating vendor errors | Laioutr
+  title: Translating vendor errors
   description: Map raw backend errors into canonical Laioutr errors so the storefront UI can render them with no connector-specific code.
 sitemap:
   loc: /frontend/orchestr/recipes/translating-vendor-errors

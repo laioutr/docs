@@ -2,7 +2,7 @@
 title: Deployments
 description: Deployments overview table, filters, deploy action, and deployment detail with build logs.
 seo:
-  title: Deployments | Cockpit | Laioutr
+  title: Deployments | Cockpit
 sitemap:
   loc: /cockpit/features/deployments
   lastmod: 2026-04-09

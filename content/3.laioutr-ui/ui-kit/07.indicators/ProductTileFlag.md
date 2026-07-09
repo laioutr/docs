@@ -13,7 +13,7 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=11179-50563&t=t5p6T6f67QhRVCAN-4
     target: _blank
 seo:
-  title: Product Tile Flag | Laioutr
+  title: Product Tile Flag
   description: A visual flag component for product tiles highlighting promotional labels like sale, promo, or new items.
 sitemap:
   loc: /laioutr-ui/ui-kit/indicators/producttileflag

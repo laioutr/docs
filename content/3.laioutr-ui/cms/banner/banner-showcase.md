@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-21
 seo:
-  title: Banner Showcase | Laioutr
+  title: Banner Showcase
   description: A side-by-side promotional banner pairing a media image with a copy block and a single CTA.
 sitemap:
   loc: /laioutr-ui/cms/banner/banner-showcase

@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 240px
 seo:
-  title: Highlighted Text | Laioutr
+  title: Highlighted Text
   description: Renders a string with substring matches wrapped in `<mark>`. Diacritic-insensitive, finds every occurrence, and accepts a custom highlight class.
 sitemap:
   loc: /laioutr-ui/ui-kit/utility-components/highlighted-text

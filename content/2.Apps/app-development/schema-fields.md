@@ -2,7 +2,7 @@
 title: Schema Fields
 description: Reference for all field types available in section and block definition schemas.
 seo:
-  title: Schema Fields | Laioutr
+  title: Schema Fields
   description: Reference for all field types available in section and block definition schemas.
 sitemap:
   loc: /apps/app-development/schema-fields

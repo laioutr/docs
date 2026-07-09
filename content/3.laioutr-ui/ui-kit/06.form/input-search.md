@@ -13,7 +13,7 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13084-116873&t=6xBvZNXlqO6bv1Wx-4
     target: _blank
 seo:
-  title: Input Search | Laioutr
+  title: Input Search
   description: Search input with a pre-configured search icon and clear button.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/input-search

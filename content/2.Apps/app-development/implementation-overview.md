@@ -2,7 +2,7 @@
 title: Implementation Overview
 description: What a connector app needs to implement for Laioutr and Laioutr UI compatibility, and what existing connectors already provide.
 seo:
-  title: Implementation Overview | Laioutr
+  title: Implementation Overview
   description: What a connector app needs to implement for Laioutr and Laioutr UI compatibility, and what existing connectors already…
 sitemap:
   loc: /apps/app-development/implementation-overview

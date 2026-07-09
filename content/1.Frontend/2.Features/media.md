@@ -2,7 +2,7 @@
 title: Media and Media Library
 description: Laioutr’s media library abstraction lets business users choose assets from connected backends visually in Cockpit. Implement a media library connector for your asset system so editors can browse, filter, and (optionally) upload media in Studio.
 seo:
-  title: Media and Media Library | Laioutr
+  title: Media and Media Library
   description: Laioutr’s media library abstraction lets business users choose assets from connected backends visually in Cockpit.…
 sitemap:
   loc: /frontend/features/media

@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Popover | Laioutr
+  title: Popover
   description: Reka-UI-backed popover primitive.
 sitemap:
   loc: /laioutr-ui/ui-kit/surfaces/popover

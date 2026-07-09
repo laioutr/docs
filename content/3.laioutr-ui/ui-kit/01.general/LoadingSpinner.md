@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Loading Spinner | Laioutr
+  title: Loading Spinner
   description: An animated spinner indicating loading or processing state.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/loadingspinner

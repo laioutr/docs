@@ -9,7 +9,7 @@ playground:
   defaultStory: swatch-color
   height: 460px
 seo:
-  title: Swatch | Laioutr
+  title: Swatch
   description: Bare swatch primitive for rendering colors, gradients, and thumbnails.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/swatch

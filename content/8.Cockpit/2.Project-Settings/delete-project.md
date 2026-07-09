@@ -2,7 +2,7 @@
 title: Delete a project
 description: Permanently delete a project from the Cockpit settings danger zone with name confirmation.
 seo:
-  title: Delete a project | Cockpit | Laioutr
+  title: Delete a project | Cockpit
 sitemap:
   loc: /cockpit/settings/delete-project
   lastmod: 2026-04-09

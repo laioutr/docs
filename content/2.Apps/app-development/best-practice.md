@@ -2,7 +2,7 @@
 title: Best Practice
 description: Best practices for developing Laioutr apps.
 seo:
-  title: Best Practice | Laioutr
+  title: Best Practice
   description: Best practices for developing Laioutr apps.
 sitemap:
   loc: /apps/app-development/best-practice

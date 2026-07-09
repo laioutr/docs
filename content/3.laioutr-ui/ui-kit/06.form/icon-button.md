@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Icon Button | Laioutr
+  title: Icon Button
   description: Icon-only button atom.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/icon-button

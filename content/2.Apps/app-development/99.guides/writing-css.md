@@ -3,7 +3,7 @@ title: How to write CSS
 aliases: []
 description: A short checklist for writing component CSS in a Laioutr app. Restyleable from the outside, responsive without JavaScript, predictable in SSR.
 seo:
-  title: How to write CSS | Laioutr
+  title: How to write CSS
   description: Conventions for writing component CSS in a Laioutr app.
 sitemap:
   loc: /apps/app-development/guides/writing-css

@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Opening Hours Weekly Table | Laioutr
+  title: Opening Hours Weekly Table
   description: Weekly opening-hours schedule rendered as a `DescriptionList`. Groups consecutive same-hours days into a single row.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/opening-hours-weekly-table

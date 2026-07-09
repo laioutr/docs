@@ -5,7 +5,7 @@ links: []
 aliases:
   - /hosting/hosting-adapter/aws-adapter
 seo:
-  title: AWS Adapter | Laioutr
+  title: AWS Adapter
   description: The AWS Adapter is a pre-built integration that connects the Laioutr Cockpit directly with Amazon Web Services (AWS).…
 sitemap:
   loc: /hosting/hyperscaler/aws-adapter

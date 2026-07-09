@@ -7,7 +7,7 @@ playground:
   defaultStory: single-text-dark
   height: 460px
 seo:
-  title: Navigation Menu | Laioutr
+  title: Navigation Menu
   description: Compound navigation primitive with content columns and headlines.
 sitemap:
   loc: /laioutr-ui/ui-kit/surfaces/navigation-menu

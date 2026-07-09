@@ -7,7 +7,7 @@ playground:
   defaultStory: small-number
   height: 460px
 seo:
-  title: Amount Pill | Laioutr
+  title: Amount Pill
   description: Compact numeric pill for cart counts and notification badges.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/amount-pill

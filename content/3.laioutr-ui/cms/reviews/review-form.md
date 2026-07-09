@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Review Form | Laioutr
+  title: Review Form
   description: Form for submitting product ratings and written reviews.
 sitemap:
   loc: /laioutr-ui/cms/reviews/review-form

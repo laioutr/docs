@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Social Share | Laioutr
+  title: Social Share
   description: Row of platform share buttons.
 sitemap:
   loc: /laioutr-ui/cms/reviews/social-share

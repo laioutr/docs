@@ -2,7 +2,7 @@
 title: UI Changelog
 description: Changelog for Laioutr UI (@laioutr-core/ui) following Keep a Changelog and Semantic Versioning.
 seo:
-  title: UI Changelog | Laioutr
+  title: UI Changelog
   description: Changelog for Laioutr UI (@laioutr-core/ui) following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/ui-changelog

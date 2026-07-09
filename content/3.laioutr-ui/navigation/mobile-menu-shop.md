@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Mobile Menu (Shop) | Laioutr
+  title: Mobile Menu (Shop)
   description: Mobile off-canvas drawer for the shop header.
 sitemap:
   loc: /laioutr-ui/navigation/mobile-menu-shop

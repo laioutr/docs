@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Tabs | Laioutr
+  title: Tabs
   description: Reka-UI-backed tabs primitive.
 sitemap:
   loc: /laioutr-ui/ui-kit/surfaces/tabs

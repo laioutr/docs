@@ -2,7 +2,7 @@
 title: CLI Changelog
 description: Changelog for the Laioutr CLI following Keep a Changelog and Semantic Versioning.
 seo:
-  title: CLI Changelog | Laioutr
+  title: CLI Changelog
   description: Changelog for the Laioutr CLI following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/cli-changelog

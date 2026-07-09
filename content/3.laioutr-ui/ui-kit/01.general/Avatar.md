@@ -13,7 +13,7 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=20345-6874&t=d3lxzSvfCLvDJbv-4
     target: _blank
 seo:
-  title: Avatar | Laioutr
+  title: Avatar
   description: Avatar component for displaying user images, initials, or icons with size and color variants.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/avatar

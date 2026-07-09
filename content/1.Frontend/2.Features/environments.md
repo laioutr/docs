@@ -2,7 +2,7 @@
 title: Environments & Staging
 description: How to preview changes before going live, using Vercel preview deployments and workarounds for environment-specific content.
 seo:
-  title: Environments & Staging | Laioutr
+  title: Environments & Staging
   description: How to preview changes before going live, using Vercel preview deployments and workarounds for environment-specific…
 sitemap:
   loc: /frontend/features/environments

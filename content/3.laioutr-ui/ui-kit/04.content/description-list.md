@@ -7,7 +7,7 @@ playground:
   defaultStory: outlined
   height: 460px
 seo:
-  title: Description List | Laioutr
+  title: Description List
   description: Two-column label/value list built on CSS Grid subgrid. Pairs a `DescriptionList` parent with `DescriptionListItem` rows for opening hours, spec sheets, and key/value summaries.
 sitemap:
   loc: /laioutr-ui/ui-kit/content/description-list

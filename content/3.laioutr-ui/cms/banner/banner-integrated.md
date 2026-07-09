@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-20
 seo:
-  title: Banner Integrated | Laioutr
+  title: Banner Integrated
   description: A horizontal call-to-action banner with an optional icon and up to two CTA buttons.
 sitemap:
   loc: /laioutr-ui/cms/banner/banner-integrated

@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Caption Flag | Laioutr
+  title: Caption Flag
   description: A caption flag component
 sitemap:
   loc: /laioutr-ui/ui-kit/indicators/captionflag

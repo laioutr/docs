@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Thumbnails Slider | Laioutr
+  title: Thumbnails Slider
   description: Thumbnail slider that pairs with a primary slider.
 sitemap:
   loc: /laioutr-ui/cms/slider/thumbnails-slider

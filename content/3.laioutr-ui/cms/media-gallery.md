@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Media Gallery | Laioutr
+  title: Media Gallery
   description: Fullscreen lightbox dialog for multi-image viewing.
 sitemap:
   loc: /laioutr-ui/cms/media-gallery

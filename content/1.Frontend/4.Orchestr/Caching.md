@@ -3,7 +3,7 @@ title: Caching
 description: How Orchestr caches API data — query cache, link cache, and component cache. Configure strategies and cache keys for your own integrations.
 links: []
 seo:
-  title: Caching | Laioutr
+  title: Caching
   description: How Orchestr caches API data — query cache, link cache, and component cache. Configure strategies and cache keys for…
 sitemap:
   loc: /frontend/orchestr/caching

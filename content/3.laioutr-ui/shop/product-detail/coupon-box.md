@@ -7,7 +7,7 @@ playground:
   defaultStory: discount-text-copy-action
   height: 460px
 seo:
-  title: Coupon Box | Laioutr
+  title: Coupon Box
   description: Coupon-code copy / display widget.
 sitemap:
   loc: /laioutr-ui/shop/product-detail/coupon-box

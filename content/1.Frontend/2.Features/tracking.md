@@ -2,7 +2,7 @@
 title: Tracking
 description: Laioutr’s tracking abstraction gives you a single API to send analytics and marketing events. Use one or more tracking adapters (e.g. Google Tag Manager), optionally gated by consent, and implement your own adapters for other tools.
 seo:
-  title: Tracking | Laioutr
+  title: Tracking
   description: Laioutr’s tracking abstraction gives you a single API to send analytics and marketing events. Use one or more tracking…
 sitemap:
   loc: /frontend/features/tracking

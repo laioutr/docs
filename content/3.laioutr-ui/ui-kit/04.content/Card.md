@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-253
 seo:
-  title: Card | Laioutr
+  title: Card
   description: Flexible content card with mixed media and text for marketing tiles, editorial highlights, and feature callouts.
 sitemap:
   loc: /laioutr-ui/ui-kit/content/card

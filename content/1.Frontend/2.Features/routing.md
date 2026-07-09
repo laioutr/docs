@@ -2,7 +2,7 @@
 title: Routing
 description: How Laioutr generates routes from page types, how URL patterns are configured, and how markets affect route resolution.
 seo:
-  title: Routing | Laioutr
+  title: Routing
   description: How Laioutr generates routes from page types, how URL patterns are configured, and how markets affect route resolution.
 sitemap:
   loc: /frontend/features/routing

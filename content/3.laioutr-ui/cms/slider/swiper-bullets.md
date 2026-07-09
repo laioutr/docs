@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Swiper Bullets | Laioutr
+  title: Swiper Bullets
   description: Bullet pagination indicator for sliders.
 sitemap:
   loc: /laioutr-ui/cms/slider/swiper-bullets

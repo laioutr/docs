@@ -2,7 +2,7 @@
 title: Software Requirements
 description: The software requirements for the BYOS approach.
 seo:
-  title: Software Requirements | Laioutr
+  title: Software Requirements
   description: The software requirements for the BYOS approach.
 sitemap:
   loc: /hosting/bring-your-own-server-byos/software

@@ -2,7 +2,7 @@
 title: Platform Dependencies
 description: Nuxt modules and their versions that the Laioutr platform installs. Check this list before adding dependencies to your custom app.
 seo:
-  title: Platform Dependencies | Laioutr
+  title: Platform Dependencies
   description: Nuxt modules and their versions that the Laioutr platform installs. Check this list before adding dependencies to your…
 sitemap:
   loc: /apps/app-development/platform-dependencies

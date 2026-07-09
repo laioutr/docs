@@ -7,7 +7,7 @@ playground:
   defaultStory: primary
   height: 460px
 seo:
-  title: Navigation Bullets | Laioutr
+  title: Navigation Bullets
   description: A navigation bullets component
 sitemap:
   loc: /laioutr-ui/ui-kit/general/navigationbullets

@@ -2,7 +2,7 @@
 title: OXID eShop
 description: Developer documentation for the Laioutr OXID app package. Connect your Nuxt frontend to OXID eShop via the GraphQL API with token-based auth and basket cookie.
 seo:
-  title: OXID eShop | Laioutr
+  title: OXID eShop
   description: Developer documentation for the Laioutr OXID app package. Connect your Nuxt frontend to OXID eShop via the GraphQL API…
 sitemap:
   loc: /apps/app-docs/oxid

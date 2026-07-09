@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Variant Selector Configurator | Laioutr
+  title: Variant Selector Configurator
   description: Wizard-style variant configurator.
 sitemap:
   loc: /laioutr-ui/shop/product-detail/variant-selector-configurator

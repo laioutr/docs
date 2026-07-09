@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Product Slider Showcase | Laioutr
+  title: Product Slider Showcase
   description: Premium product slider paired with a banner.
 sitemap:
   loc: /laioutr-ui/shop/product-slider-showcase

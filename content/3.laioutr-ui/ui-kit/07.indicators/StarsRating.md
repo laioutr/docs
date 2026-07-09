@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Stars Rating | Laioutr
+  title: Stars Rating
   description: Rating gives you a nice way to display a rating both with graphics and through text. This can be used to show the…
 sitemap:
   loc: /laioutr-ui/ui-kit/indicators/starsrating

@@ -2,7 +2,7 @@
 title: NPM
 description: Read-only NPM token on the project settings page for authenticating to the Laioutr npm registry.
 seo:
-  title: NPM registry token | Cockpit | Laioutr
+  title: NPM registry token | Cockpit
 sitemap:
   loc: /cockpit/settings/npm
   lastmod: 2026-04-09

@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-116
 seo:
-  title: Blog Post Detail | Laioutr
+  title: Blog Post Detail
   description: Blog article view with hero media, title, rich body, and social-share row.
 sitemap:
   loc: /laioutr-ui/cms/blog/blog-post-detail

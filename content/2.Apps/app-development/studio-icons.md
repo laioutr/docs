@@ -3,7 +3,7 @@ title: Studio Icons
 description: Reference of all icon names available for page types, fieldsets, and props wizard variants in Studio.
 links: []
 seo:
-  title: Studio Icons | Laioutr
+  title: Studio Icons
   description: Reference of all icon names available for page types, fieldsets, and props wizard variants in Studio.
 ---
 

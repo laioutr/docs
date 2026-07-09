@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-136
 seo:
-  title: Input | Laioutr
+  title: Input
   description: Styled text field with optional icon or button addons and Field integration for labels and errors.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/input

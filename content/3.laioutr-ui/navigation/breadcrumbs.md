@@ -9,7 +9,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Breadcrumbs | Laioutr
+  title: Breadcrumbs
   description: Hierarchical breadcrumb navigation with clickable levels.
 sitemap:
   loc: /laioutr-ui/navigation/breadcrumbs

@@ -2,7 +2,7 @@
 title: Project secret key
 description: The project secret key authenticates requests to your Laioutr project; view it masked on project settings.
 seo:
-  title: Project secret key | Cockpit | Laioutr
+  title: Project secret key | Cockpit
 sitemap:
   loc: /cockpit/settings/project-secret-key
   lastmod: 2026-04-09

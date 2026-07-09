@@ -7,7 +7,7 @@ playground:
   defaultStory: info
   height: 460px
 seo:
-  title: PopUp | Laioutr
+  title: PopUp
   description: Reka-UI Dialog wrapper with media slot and content stack.
 sitemap:
   loc: /laioutr-ui/cms/popups/pop-up

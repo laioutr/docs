@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Logo Grid | Laioutr
+  title: Logo Grid
   description: Static grid of brand logos.
 sitemap:
   loc: /laioutr-ui/cms/slider/logo-grid

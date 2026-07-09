@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Input Combobox | Laioutr
+  title: Input Combobox
   description: Single or multi-select combobox.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/input-combobox

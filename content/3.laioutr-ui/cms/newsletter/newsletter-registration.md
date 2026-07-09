@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-214
 seo:
-  title: Newsletter Registration | Laioutr
+  title: Newsletter Registration
   description: Full-width newsletter subscription section.
 sitemap:
   loc: /laioutr-ui/cms/newsletter/newsletter-registration

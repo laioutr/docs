@@ -2,7 +2,7 @@
 title: General settings
 description: Organization name, read-only slug and ID, danger zone for deleting the organization.
 seo:
-  title: Organization general settings | Cockpit | Laioutr
+  title: Organization general settings | Cockpit
 sitemap:
   loc: /cockpit/organisation/general-settings
   lastmod: 2026-04-09

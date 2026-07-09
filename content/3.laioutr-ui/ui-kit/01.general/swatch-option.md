@@ -7,7 +7,7 @@ playground:
   defaultStory: single-color
   height: 460px
 seo:
-  title: Swatch Option | Laioutr
+  title: Swatch Option
   description: Single selectable swatch with selected, hover, and focus states.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/swatch-option

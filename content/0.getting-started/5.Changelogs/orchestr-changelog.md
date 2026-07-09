@@ -2,7 +2,7 @@
 title: Orchestr Changelog
 description: Changelog for @laioutr-core/orchestr following Keep a Changelog and Semantic Versioning.
 seo:
-  title: Orchestr Changelog | Laioutr
+  title: Orchestr Changelog
   description: Changelog for @laioutr-core/orchestr following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/orchestr-changelog

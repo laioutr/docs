@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Zoom Level (Stepper) | Laioutr
+  title: Zoom Level (Stepper)
   description: Stepper control for image zoom level on desktop.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/zoom-level-stepper

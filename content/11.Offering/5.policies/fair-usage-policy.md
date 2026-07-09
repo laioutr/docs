@@ -1,7 +1,7 @@
 ---
 title: Fair usage policy
 seo:
-  title: Fair usage policy | Laioutr
+  title: Fair usage policy
 sitemap:
   loc: /offering/policies/fair-usage-policy
   lastmod: 2026-05-25

@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-215
 seo:
-  title: Logo Slider | Laioutr
+  title: Logo Slider
   description: Animated slider of brand, partner, or supplier logos.
 sitemap:
   loc: /laioutr-ui/cms/slider/logo-slider

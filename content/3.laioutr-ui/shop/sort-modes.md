@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Sort Modes | Laioutr
+  title: Sort Modes
   description: Sort selector for product listing pages.
 sitemap:
   loc: /laioutr-ui/shop/sort-modes

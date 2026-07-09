@@ -2,7 +2,7 @@
 title: profihost
 description: Integration with profihost—managed hosting for Shopware, OXID, Magento, and Pimcore shops in Germany.
 seo:
-  title: profihost | Laioutr
+  title: profihost
   description: Connect the Laioutr Cockpit with profihost for managed E-Commerce hosting and frontend delivery.
 sitemap:
   loc: /hosting/native-hosting-providers/profihost

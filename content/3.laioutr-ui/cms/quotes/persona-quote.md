@@ -13,7 +13,7 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=7368-32242&t=WmdxQg1pxxyigx8X-4
     target: _blank
 seo:
-  title: Persona Quote | Laioutr
+  title: Persona Quote
   description: A testimonial component pairing a profile picture with a quote and personal details.
 sitemap:
   loc: /laioutr-ui/cms/quotes/persona-quote

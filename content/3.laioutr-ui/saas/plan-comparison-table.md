@@ -13,7 +13,7 @@ links:
     target: _blank
 jiraIssueId: LUI-5
 seo:
-  title: Plan Comparison Table | Laioutr
+  title: Plan Comparison Table
   description: A feature-by-feature comparison table for subscription plans, with sticky headers and differences-only filtering.
 sitemap:
   loc: /laioutr-ui/saas/plan-comparison-table

@@ -2,7 +2,7 @@
 title: Apps
 description: Apps overview with category tabs, integration cards, and the details modal for each app.
 seo:
-  title: Apps | Cockpit | Laioutr
+  title: Apps | Cockpit
 sitemap:
   loc: /cockpit/features/apps
   lastmod: 2026-04-09

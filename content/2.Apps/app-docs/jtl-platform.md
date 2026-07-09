@@ -2,7 +2,7 @@
 title: JTL Platform
 description: How to connect a JTL-Wawi ERP Cloud tenant to Laioutr via the native JTL GraphQL API, and what developers can build on top.
 seo:
-  title: JTL Platform | Laioutr
+  title: JTL Platform
   description: How to connect a JTL-Wawi ERP Cloud tenant to Laioutr via the native JTL GraphQL API, and what developers can build on top.
 sitemap:
   loc: /apps/app-docs/jtl-platform

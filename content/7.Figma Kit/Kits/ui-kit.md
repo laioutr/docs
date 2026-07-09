@@ -2,7 +2,7 @@
 title: UI Kit
 description: Core library with tokens (Figma Variables) and foundational components used by all other kits.
 seo:
-  title: UI Kit | Laioutr
+  title: UI Kit
   description: Core library with tokens (Figma Variables) and foundational components used by all other kits.
 sitemap:
   loc: /figma-kit/kits/ui-kit

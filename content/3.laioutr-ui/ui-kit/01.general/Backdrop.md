@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Backdrop | Laioutr
+  title: Backdrop
   description: Painted background surface that publishes its surface tone to descendants.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/backdrop

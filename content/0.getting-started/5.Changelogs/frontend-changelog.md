@@ -2,7 +2,7 @@
 title: Frontend Changelog
 description: Changelog for the Laioutr frontend product following Keep a Changelog and Semantic Versioning.
 seo:
-  title: Frontend Changelog | Laioutr
+  title: Frontend Changelog
   description: Changelog for the Laioutr frontend product following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/frontend-changelog

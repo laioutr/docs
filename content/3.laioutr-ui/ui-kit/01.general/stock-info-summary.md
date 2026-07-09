@@ -7,7 +7,7 @@ playground:
   defaultStory: check-mark-positive
   height: 460px
 seo:
-  title: Stock Info Summary | Laioutr
+  title: Stock Info Summary
   description: Compact stock availability indicator.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/stock-info-summary

@@ -2,7 +2,7 @@
 title: Preferences
 description: Cockpit language, profile information, and color mode from the account preferences page.
 seo:
-  title: Account preferences | Cockpit | Laioutr
+  title: Account preferences | Cockpit
 sitemap:
   loc: /cockpit/account/preferences
   lastmod: 2026-04-09

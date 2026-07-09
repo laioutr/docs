@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-91
 seo:
-  title: Label | Laioutr
+  title: Label
   description: Form label with an optional required indicator.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/label

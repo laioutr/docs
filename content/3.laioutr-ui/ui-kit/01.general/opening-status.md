@@ -7,7 +7,7 @@ playground:
   defaultStory: open
   height: 240px
 seo:
-  title: Opening Status | Laioutr
+  title: Opening Status
   description: Open/closed pill plus a one-line "closes at HH:mm" or "opens on Monday at HH:mm" detail. Reactive against the shared `useNow()` clock.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/opening-status

@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Product Title | Laioutr
+  title: Product Title
   description: PDP product title block with brand and product name.
 sitemap:
   loc: /laioutr-ui/shop/product-detail/product-title

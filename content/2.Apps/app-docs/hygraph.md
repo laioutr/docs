@@ -2,7 +2,7 @@
 title: Hygraph
 description: Laioutr app package that connects a Nuxt storefront to Hygraph's Content API, Orchestr, Studio media, and Nuxt Image, using a sample content model as a starting point only.
 seo:
-  title: Hygraph | Laioutr
+  title: Hygraph
   description: Laioutr Hygraph app for Content API, Orchestr integration, media library, and Nuxt Image. Customize queries and schema for your project.
 sitemap:
   loc: /apps/app-docs/hygraph

@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-31
 seo:
-  title: USP Banner | Laioutr
+  title: USP Banner
   description: A slim Swiper-driven trust strip for unique selling propositions.
 sitemap:
   loc: /laioutr-ui/cms/banner/usp-banner

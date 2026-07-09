@@ -8,7 +8,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Button | Laioutr
+  title: Button
   description: Themed call-to-action control with size, variant, icon, link, and loading state support.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/button

@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Pagination | Laioutr
+  title: Pagination
   description: Page navigation control for splitting large data sets across multiple pages.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/pagination

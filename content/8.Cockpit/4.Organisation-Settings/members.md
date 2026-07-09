@@ -2,7 +2,7 @@
 title: Members
 description: Invite users, view roles and pending invites, open a member profile, remove members, and leave the organization.
 seo:
-  title: Organization members | Cockpit | Laioutr
+  title: Organization members | Cockpit
 sitemap:
   loc: /cockpit/organisation/members
   lastmod: 2026-04-09

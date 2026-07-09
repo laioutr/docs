@@ -7,7 +7,7 @@ playground:
   defaultStory: without-scrollbar
   height: 460px
 seo:
-  title: Quote Card Slider | Laioutr
+  title: Quote Card Slider
   description: Slider wrapping multiple QuoteCard items.
 sitemap:
   loc: /laioutr-ui/cms/quotes/quote-card-slider

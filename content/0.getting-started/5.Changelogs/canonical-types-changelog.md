@@ -2,7 +2,7 @@
 title: Canonical Types Changelog
 description: Changelog for Laioutr Canonical Types (@laioutr-core/canonical-types) following Keep a Changelog and Semantic Versioning.
 seo:
-  title: Canonical Types Changelog | Laioutr
+  title: Canonical Types Changelog
   description: Changelog for Laioutr Canonical Types (@laioutr-core/canonical-types) following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/canonical-types-changelog

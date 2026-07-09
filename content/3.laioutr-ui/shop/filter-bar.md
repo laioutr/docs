@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Filter Bar | Laioutr
+  title: Filter Bar
   description: Inline filter strip for product listing pages.
 sitemap:
   loc: /laioutr-ui/shop/filter-bar

@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Variant Off Canvas | Laioutr
+  title: Variant Off Canvas
   description: Off-canvas sheet for multi-attribute variant selection.
 sitemap:
   loc: /laioutr-ui/shop/product-detail/variant-off-canvas

@@ -2,7 +2,7 @@
 title: Schema.org
 description: Generate JSON-LD structured data for your Laioutr frontend to enable rich snippets in Google search results. Add structured data for products, organizations, breadcrumbs, and more.
 seo:
-  title: Schema.org | Laioutr
+  title: Schema.org
   description: Generate JSON-LD structured data for your Laioutr frontend to enable rich snippets in Google search results. Add…
 sitemap:
   loc: /frontend/seo/schema-org

@@ -2,7 +2,7 @@
 title: Shopify
 description: How to connect your Shopify store to Laioutr and what developers can build on top.
 seo:
-  title: Shopify | Laioutr
+  title: Shopify
   description: How to connect your Shopify store to Laioutr and what developers can build on top.
 sitemap:
   loc: /apps/app-docs/shopify

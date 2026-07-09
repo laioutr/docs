@@ -8,7 +8,7 @@ playground:
   height: 400px
 jiraIssueId: LUI-39
 seo:
-  title: SwiperScrollbar | Laioutr
+  title: SwiperScrollbar
   description: Adapter that wires a Scrollbar to a Swiper carousel — derives thumb size and position from Swiper state and drives the slider on interaction.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/swiperscrollbar

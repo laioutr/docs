@@ -2,7 +2,7 @@
 title: Link Checker
 description: Automatically scan your Laioutr frontend for broken links and SEO issues during development and build time.
 seo:
-  title: Link Checker | Laioutr
+  title: Link Checker
   description: Automatically scan your Laioutr frontend for broken links and SEO issues during development and build time.
 sitemap:
   loc: /frontend/seo/link-checker

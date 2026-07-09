@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Product Listing Grid | Laioutr
+  title: Product Listing Grid
   description: Responsive grid of product tiles.
 sitemap:
   loc: /laioutr-ui/shop/product-listing-grid

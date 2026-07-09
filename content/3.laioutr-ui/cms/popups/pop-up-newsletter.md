@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: PopUp Newsletter | Laioutr
+  title: PopUp Newsletter
   description: Newsletter signup popup content preset for the PopUp shell.
 sitemap:
   loc: /laioutr-ui/cms/popups/pop-up-newsletter

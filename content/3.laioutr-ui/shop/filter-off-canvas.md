@@ -12,7 +12,7 @@ playground:
   defaultStory: default-filter-off-canvas
   height: 460px
 seo:
-  title: Filter Off Canvas | Laioutr
+  title: Filter Off Canvas
   description: Off-canvas filter sheet for product listing pages.
 sitemap:
   loc: /laioutr-ui/shop/filter-off-canvas

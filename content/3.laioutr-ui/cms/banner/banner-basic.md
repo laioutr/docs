@@ -10,7 +10,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Banner Basic | Laioutr
+  title: Banner Basic
   description: A foundational call-to-action banner with background imagery, headline, subline, and configurable action button.
 sitemap:
   loc: /laioutr-ui/cms/banner/banner-basic

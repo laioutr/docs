@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Cart Summary Box | Laioutr
+  title: Cart Summary Box
   description: Subtotal, shipping, and total summary block.
 sitemap:
   loc: /laioutr-ui/shop/cart/cart-summary-box

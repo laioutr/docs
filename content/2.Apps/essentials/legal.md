@@ -2,7 +2,7 @@
 title: Legal
 description: The Laioutr Legal essentials app provides ready-to-use legal pages and components (imprint, privacy policy, terms) so projects ship compliance-relevant content from day one.
 seo:
-  title: Legal | Laioutr
+  title: Legal
   description: Ready-to-use legal pages and components for Laioutr projects — imprint, privacy policy, terms, and more.
 sitemap:
   loc: /apps/essentials/legal

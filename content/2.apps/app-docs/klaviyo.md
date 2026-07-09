@@ -2,7 +2,7 @@
 title: Klaviyo
 description: Developer documentation for the Laioutr Klaviyo app package. Integrate Klaviyo newsletter signup into your Nuxt app via the Klaviyo Client API.
 seo:
-  title: Klaviyo | Laioutr
+  title: Klaviyo
   description: Developer documentation for the Laioutr Klaviyo app package. Integrate Klaviyo newsletter signup into your Nuxt app…
 sitemap:
   loc: /apps/app-docs/klaviyo

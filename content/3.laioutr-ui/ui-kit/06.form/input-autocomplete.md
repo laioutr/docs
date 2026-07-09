@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Input Autocomplete | Laioutr
+  title: Input Autocomplete
   description: Single-select autocomplete input.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/input-autocomplete

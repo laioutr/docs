@@ -2,7 +2,7 @@
 title: Sylius
 description: Developer documentation for the Laioutr Sylius app package. Connect your Nuxt frontend to a Sylius backend via the Shop API v2.
 seo:
-  title: Sylius | Laioutr
+  title: Sylius
   description: Developer documentation for the Laioutr Sylius app package. Connect your Nuxt frontend to a Sylius backend via the Shop API v2.
 sitemap:
   loc: /apps/app-docs/sylius

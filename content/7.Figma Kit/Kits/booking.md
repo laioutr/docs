@@ -2,7 +2,7 @@
 title: Booking
 description: Booking components for availability, slot selection, scheduling flows, and booking management experiences.
 seo:
-  title: Booking | Laioutr
+  title: Booking
   description: Booking components for availability, slot selection, scheduling flows, and booking management experiences.
 sitemap:
   loc: /figma-kit/kits/booking

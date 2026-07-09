@@ -2,7 +2,7 @@
 title: Section Definitions
 description: How to create and register section definitions that appear in Laioutr Studio.
 seo:
-  title: Section Definitions | Laioutr
+  title: Section Definitions
   description: How to create and register section definitions that appear in Laioutr Studio.
 sitemap:
   loc: /apps/app-development/section-definitions

@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Variant Selection Card | Laioutr
+  title: Variant Selection Card
   description: Card-shaped variant tile.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/variant-selection-card

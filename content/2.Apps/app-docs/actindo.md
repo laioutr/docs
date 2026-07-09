@@ -2,7 +2,7 @@
 title: Actindo
 description: How to connect an Actindo Storefront Data Service tenant to Laioutr and what developers can build on top.
 seo:
-  title: Actindo | Laioutr
+  title: Actindo
   description: How to connect an Actindo Storefront Data Service tenant to Laioutr and what developers can build on top.
 sitemap:
   loc: /apps/app-docs/actindo

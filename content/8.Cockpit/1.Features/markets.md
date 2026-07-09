@@ -2,7 +2,7 @@
 title: Markets
 description: Define storefront markets with name, currency, flag, domains, and default language routing in the Cockpit project settings.
 seo:
-  title: Markets | Cockpit | Laioutr
+  title: Markets | Cockpit
 sitemap:
   loc: /cockpit/features/markets
   lastmod: 2026-04-09

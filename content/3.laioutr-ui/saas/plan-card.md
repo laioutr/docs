@@ -13,7 +13,7 @@ links:
     target: _blank
 jiraIssueId: LUI-2
 seo:
-  title: Plan Card | Laioutr
+  title: Plan Card
   description: A pricing card displaying subscription plan details with strikethrough pricing for discounts.
 sitemap:
   loc: /laioutr-ui/saas/plan-card

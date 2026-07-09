@@ -3,7 +3,7 @@ title: Shared field factories
 aliases: []
 description: When the same field shape appears in three or more sections, promote it to a factory function. The trick is keeping the literal types intact, so definitionToProps still produces narrow prop types.
 seo:
-  title: Shared field factories | Laioutr
+  title: Shared field factories
   description: A pattern for reusing schema fields across sections and blocks without losing literal types.
 sitemap:
   loc: /apps/app-development/guides/shared-field-factories

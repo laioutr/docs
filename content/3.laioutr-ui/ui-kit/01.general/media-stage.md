@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Media Stage | Laioutr
+  title: Media Stage
   description: Bare media + content stage primitive.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/media-stage

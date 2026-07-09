@@ -13,7 +13,7 @@ links:
     to: https://www.figma.com/proto/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=641-133307
     target: _blank
 seo:
-  title: Search Auto-Suggest | Laioutr
+  title: Search Auto-Suggest
   description: Responsive header search with real-time autocomplete suggestions.
 sitemap:
   loc: /laioutr-ui/navigation/search-auto-suggest

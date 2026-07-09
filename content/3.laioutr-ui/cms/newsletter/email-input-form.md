@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Email Input Form | Laioutr
+  title: Email Input Form
   description: Email field and submit button for newsletter signup.
 sitemap:
   loc: /laioutr-ui/cms/newsletter/email-input-form

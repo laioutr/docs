@@ -2,7 +2,7 @@
 title: Roles
 description: Custom organization roles with permissions; create, edit, and delete roles from the Roles tab.
 seo:
-  title: Organization roles | Cockpit | Laioutr
+  title: Organization roles | Cockpit
 sitemap:
   loc: /cockpit/organisation/roles
   lastmod: 2026-04-09
