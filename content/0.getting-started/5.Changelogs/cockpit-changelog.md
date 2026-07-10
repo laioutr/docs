@@ -14,6 +14,22 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-07-10]
+
+### Fixed
+
+- **Studio**: The dynamic data source picker now shows the icon of the app that actually provides each value, even when multiple apps provide the same data.
+
+## [2026-07-09]
+
+### Changed
+
+- **Studio**: **Breaking:** MCP tool studio_set_static_prop is now studio_set_static_props (batch writes).
+
+### Fixed
+
+- **Studio**: The market domain field no longer shows a misleading "www." prefix.
+
 ## [2026-07-02]
 
 ### Changed
