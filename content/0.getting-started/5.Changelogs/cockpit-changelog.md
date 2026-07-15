@@ -14,6 +14,26 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-07-14]
+
+### Fixed
+
+- **Studio**: Media fields show clearer file details and remain reliable across frontend versions.
+- **Studio**: Uploads refresh immediately, failed uploads can be retried, and SVGs render safely.
+- **Studio**: Media picker dropdowns no longer flash a focus ring; nameless libraries show their id.
+
+## [2026-07-13]
+
+### Added
+
+- **Studio**: The focal-point picker now works for video sources, not just images.
+- **Studio**: The media library picker shows each library's icon next to its name.
+
+### Fixed
+
+- **Studio**: SVG media previews now render at their container size instead of collapsing.
+- **Studio**: Logging in from a link to a specific page (such as a Studio URL) now takes you to that page instead of showing a "not found" error.
+
 ## [2026-07-10]
 
 ### Fixed

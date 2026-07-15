@@ -14,6 +14,16 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.7.0] - 2026-07-14
+
+### Minor Changes
+
+- Video sources now support a `focalPoint`, mirroring image sources. The built-in `MediaVideo` renderer applies it as `object-position` (per viewport, with `center center` as the fallback) so the important region stays in frame when the video is cropped by `object-fit: cover`.
+
+### Patch Changes
+
+- Register the `$unitPrice` formatter as an auto-import. It is now available both as the `$unitPrice(...)` template global and from `#imports`, matching the other formatters. Previously it was only wired into the runtime plugin, so consumer typechecks reported `Property '$unitPrice' does not exist` on templates that used it even though it worked at runtime.
+
 ## [2.6.0] - 2026-07-07
 
 ### Minor Changes

@@ -14,6 +14,73 @@ sitemap:
 
 All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data-fetching and query orchestration layer, will be documented in this file.
 
+## [0.35.0] - 2026-07-14
+
+### Minor Changes
+
+- **Breaking:** Media libraries are now connected as an Orchestr integration facet. A connector declares static capabilities (search, tags, folders, sorts, upload transfer) and uses opaque-cursor pagination, explicit type/tag filtering, optional folder navigation, and proxied or staged upload with per-file results. Define one on the app's Orchestr builder instead of the standalone factory:
+
+  ```ts
+  // Before
+  export default defineMediaLibraryProvider({ name, label, iconSrc, list, upload });
+
+  // After
+  export default defineShopify.mediaLibrary({
+    capabilities: { search: true, folders: false, sorts, upload: { transfer: 'staged' } },
+    list,
+    createUploadTargets,
+    finalizeUploads,
+  });
+  ```
+
+  `defineMediaLibraryProvider()` still works as a **deprecated shim** — existing connectors keep registering without a rewrite, in a degraded mode (no folders, no staged upload, no declared sorts). `ProjectFrontendContext.mediaLibraries` now carries descriptors `{ id, label, iconSrc, capabilities }`.
+
+  The Shopify connector uploads via staged targets and blocks until each file is `READY` before returning it (one failed file no longer sinks the batch). The Shopware connector gains folder browsing over the real media-folder tree.
+
+  This frontend-core version is the threshold for the Cockpit `mediaLibraryV2` capability gate; the Cockpit media picker is updated separately to speak the new contract.
+
+  Folder browsing is folded into the single `list` method: `MediaListResult.folders` carries the
+  queried location's subfolders on the first (cursorless) page; the separate `browseFolders`
+  method and `media-folders` route are removed. Every media source now carries an optional
+  `origin` (`{ libraryId, externalId? }`), stamped by the `.mediaLibrary()` wrapper, which also
+  validates all adapter output at the trust boundary (canonical Zod parse, URL-scheme guard —
+  including nested poster/cover images — capability/response agreement) and logs a server-side
+  warning for every dropped item. Browse items may carry a transient `status`
+  (`processing`/`failed`) surfaced in the picker grid.
+
+  Media-library handlers now receive the per-request context built by the app's `extendRequest`
+  initwares as their second argument — `list(query, ctx)` — so adapters use the initware-provided
+  clients instead of constructing their own. `MediaQuery` gains `scope: 'folder' | 'all'` to
+  distinguish a whole-library search from browsing the root level (on Shopware, root holds only
+  unfiled assets), and both bundled adapters now honor `MediaQuery.type` server-side.
+
+## [0.34.0] - 2026-07-13
+
+### Minor Changes
+
+- **Breaking:** The `@laioutr/logger` nuxt module has been removed. It is no longer installed by `frontend-core` or `orchestr`, and the package itself is no longer published. Internal logging now goes through `consola` (Nuxt's standard logger). This removes the pino dependency chain and prepares for an OpenTelemetry-based observability setup.
+
+  What this means for your project:
+
+  - The auto-imported `useLogger()` composable and server util are gone. Use `consola` instead:
+
+    ```ts
+    // Before
+    const logger = useLogger('my-scope');
+
+    // After
+    import { consola } from 'consola';
+    const logger = consola.withTag('my-scope');
+    ```
+
+  - The `$logger` global (`globalThis.$logger`, `event.node.req.log`) is no longer provided.
+  - The `ltrLogger` config key (`logLevelServer`, `logLevelClient`, `logForDevelopment`, `logNitroRequestsVerbose`, `logNitroResponsesVerbose`) is no longer read — remove it from your `nuxt.config.ts`.
+  - Request-id middleware (pino-http request logging, `x-request-id` response header, Sentry request-id tagging) is no longer included.
+
+### Patch Changes
+
+- Component reflection now lists each entity component's resolvers with the effective one first — the resolver `get()` actually selects at runtime (highest `order`, last-registered on ties). They were previously returned in registration order, so tools reading `implementations[0]` to attribute a component to its providing app (e.g. the Studio dynamic-data-source picker) could show the wrong app when several installed apps resolve the same component. The picker now shows the icon of the app that actually provides each value.
+
 ## [0.32.1] - 2026-06-30
 
 ### Patch Changes
