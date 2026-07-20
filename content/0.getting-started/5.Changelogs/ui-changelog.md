@@ -6,7 +6,7 @@ seo:
   description: Changelog for Laioutr UI (@laioutr-core/ui) following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/ui-changelog
-  lastmod: 2026-06-18
+  lastmod: 2026-06-23
   changefreq: monthly
   priority: 1.0
 
@@ -14,11 +14,91 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.0]
+
+### Added
+
+- **UI** — `TableProductSpecifications`, a product specification sheet built on `BasicTable`. Rows carry a `label` and a **typed** `value` (`string | number | boolean | Measurement | Money`) that the new `TableProductSpecificationsValue` subcomponent formats per locale — numbers via `Intl.NumberFormat`, booleans as localized Yes/No (`tableProductSpecifications.{yes,no}`), `Measurement` via `$measurement`, `Money` via `$money`. An optional per-row `sectionName` groups rows into sections (one `BasicTable` per section, first-seen order); absent ⇒ a single ungrouped table. See [Product Specifications Table](/laioutr-ui/shop/product-detail/product-specifications).
+
+- **UI App** — `BlockTableOpeningHours` and `BlockTableProductSpecifications`, two standalone Studio blocks. Each can be filled from a query (a Location's opening hours / a Product's `specifications`) or with manually entered rows, switchable via a **Data Source** toggle, and exposes an `outlined` / `plain` style toggle. `BlockTableProductSpecifications` forwards the product's typed specification values unchanged and supports per-row sections (an optional **Section** field on manual rows) for grouped output.
+
+### Changed
+
+- **UI Kit** — **Breaking:** `DescriptionList` was renamed to `BasicTable` and `DescriptionListItem` to `BasicTableRow`. `BasicTable` now renders as a semantic description list (`<dl>` with `<dt>`/`<dd>` rows) instead of presentational `<div>`s, and the label column is overridable via the public `--basic-table-label-col` custom property. The grid/subgrid layout and the CSS surface (`.basic-table` root class, BEM classes) are unchanged. See [Basic Table](/laioutr-ui/ui-kit/content/basic-table).
+
+  ```diff
+  - import DescriptionList from '#ui-kit/components/DescriptionList/DescriptionList.vue';
+  - import DescriptionListItem from '#ui-kit/components/DescriptionList/DescriptionListItem.vue';
+  + import BasicTable from '#ui-kit/components/BasicTable/BasicTable.vue';
+  + import BasicTableRow from '#ui-kit/components/BasicTable/BasicTableRow.vue';
+  ```
+
+- **UI** — **Breaking:** `OpeningHoursWeeklyTable` moved out of UI Kit into `@laioutr-core/ui` as `TableOpeningHours`, now built on the `BasicTable` primitive and gaining an `outlined` / `plain` `variant`. Its weekday-grouping behavior is unchanged. See [Table Opening Hours](/laioutr-ui/location/table-opening-hours).
+
+  ```diff
+  - import OpeningHoursWeeklyTable from '#ui-kit/components/OpeningHoursWeeklyTable/OpeningHoursWeeklyTable.vue';
+  + import TableOpeningHours from '#ui/components/TableOpeningHours/TableOpeningHours.vue';
+  ```
+
 ## [2.4.0]
 
 ### Added
 
 - **UI Kit** — `<Media>` gains a `playback` mode for video and audio. `playback="background"` is a one-switch decorative loop — `autoplay`, `muted`, `loop`, `playsinline`, and `disablePictureInPicture` on, `controls` off — replacing the hand-spelled cluster; `interactive` (the default) is the native player. Each attribute still has its own prop that overrides the mode. `<Media>` now exposes `v-model:paused` so a consumer can render and position its own pause control (WCAG 2.2.2), and it suppresses autoplay under `prefers-reduced-motion: reduce`, seeding the paused state from that decision. `MediaStage` adopts `playback="background"` for video backgrounds; it ships no pause control of its own, so a consumer that needs one renders the background with `<Media>` directly and binds `v-model:paused`. See [Rendering video and audio](/laioutr-ui/ui-kit/general/media#background-video).
+
+- **UI Kit** — `GridFill` gains `justify` and `align` props (`'start' | 'center' | 'end'`, both default `'start'`) controlling main- and cross-axis item alignment. The values are stated logically: under `sizing="greedy-first"` the component internally reverses its axis to pack growing items into the first row, and un-mirrors the alignment so `start` / `end` still resolve to the intended physical direction (`center` stays symmetric). Consumers never see the reversal.
+
+- **UI Kit** — `Input` gains a `plain` variant alongside `outline` (default) and `subtle`. It paints resting, hover, focus, disabled, and error backgrounds and borders from the `--input-field-plain-*` design tokens, for fields that sit on an already-styled surface and shouldn't carry their own box.
+
+- **UI Kit** — `EmailInputForm` and `EmailInputFormDisplay` gain a forwarded `variant` prop (`'boxed' | 'plain'`). The `plain` value renders the email field with the new plain `Input` styling, so footer and popup signups can sit flush on a colored surface.
+
+- **UI Kit** — `NavigationMenuTextItem` gains an optional `textColor` prop accepting a resolved CSS color string. When set it overrides the surface-tone label color for that item; unset, the item inherits the surrounding surface tone.
+
+- **UI** — `MenuBasicItem` and `MegaMenuItem` gain an optional `textColor` (`ColorFieldValue`) that overrides the surface-tone label color of a top-level menu item or trigger. `NavigationNode` (the `MenuSideBySide` data shape) carries a matching `textColor` field. All three resolve the color via `colorValueToCss()` and fall back to the surface-tone cascade when unset.
+
+- **UI** — `ArticleDetail` gains an optional `showSocialShare` prop (default `false`) that toggles the trailing `SocialShare` row. (`ArticleDetail` is the renamed `BlogPostDetail` — see Changed.)
+
+- **UI App** — `SectionGlossaryDetail`, the reading view for a single glossary entry. It binds the `Glossary` entity's `base` and `content` components and renders them through the shared `ArticleDetail` component (social share off).
+
+- **UI App** — `BlockProductDetailCouponBox`, a non-standalone block placeable in the Product Detail section's content slot. It wraps `CouponBox` with editor-configurable text, code, optional discount badge, and icon, and hard-wires `action="copy"` so shoppers copy the code to the clipboard. A `variant` toggle switches between the default and promotion-code presentations.
+
+- **UI App** — Banner sections gain a Design → Layout **Content Padding** control. `BannerBasic`, `BannerIntegrated`, and `BannerShowcase` take a new `contentPadding` prop (`'default' | 'm' | 's' | 'none'`) with matching `--content-padding-{m,s,none}` modifier classes; an unset value preserves the existing padding.
+
+- **UI App** — `SectionMediaText` gains a Design → Layout **Padding** control (none/S/M/L). `MediaText` takes a new `innerBlockPadding` prop (`'s' | 'm' | 'l'`) forwarded to `Backdrop`; unset defaults to none, so existing sections render unchanged.
+
+- **UI App** — `BlockMenuBasic`, `BlockMenuSideBySide`, and `BlockMegaMenu` expose a per-item text-color picker via an `as: 'style'` decorator on author-typed item titles. The picked color is applied as the item label's `textColor`; entity-driven (CMS query) items do not expose the picker.
+
+### Changed
+
+- **UI** — **Breaking:** `BlogPostDetail` was renamed to `ArticleDetail` and promoted to the shared reading view behind both the Blog Post and Glossary sections. There is no backwards-compatible alias.
+
+  ```diff
+  - import BlogPostDetail from '#ui/components/BlogPostDetail/BlogPostDetail.vue';
+  + import ArticleDetail from '#ui/components/ArticleDetail/ArticleDetail.vue';
+
+  - <LBlogPostDetail :title :media :body />
+  + <LArticleDetail :title :media :body />
+  ```
+
+- **UI App** — **Breaking:** `SectionGlossaryList` was renamed to `SectionGlossaryListing`. The Studio component string changed and **no data migration shipped**, so stored sections must be re-added. `SectionBlogPostDetail` and `SectionGlossaryDetail` both now render through the shared `ArticleDetail` component.
+
+- **UI Kit** — **Breaking:** the `sectionGlossaryList` locale namespace was renamed to `sectionGlossaryListing` (key `sectionGlossaryListing.heading`; EN "Glossary" / DE "Glossar"), matching the section rename. Custom locales overriding the old namespace must rename it.
+
+- **UI App** — `SectionLocationFinder`'s container-style control migrated to the shared `containerStyleField` toggle. The field name (`containerStyle`) and stored values (`'full-width' | 'boxed'`) are unchanged, so the migration is data-safe.
+
+### Fixed
+
+- **UI** — Un-mirrored `Container` alignment under the "Greedy First" sizing mode. `Container` now maps its 2D `alignment` onto `GridFill`'s logical `justify` / `align` props, and the axis-reversal handling moved into `GridFill` itself, so alignment resolves consistently across all sizing modes.
+
+- **UI Kit** — `AlphabeticalIndex` group content is now top-aligned (`align-items: flex-start` instead of `center`), so columns of uneven height line up along their top edge.
+
+- **UI Kit** — `.location-finder--boxed` now clamps to `--container-max-width` and centres with `margin-inline: auto` from the `--lg` breakpoint up, so boxed finders sit centered on desktop instead of stretching full-width.
+
+- **UI App** — `BlockButton` set to Hug width now respects its sizing inside Media & Text; the column's `align-items` changed from `stretch` to `flex-start` so a hug button no longer stretches to the full column width.
+
+- **UI** — `NewsletterRegistration` media column no longer collapses, and its email field now uses the plain `Input` styling.
+
+- **UI Kit** — `LocationFinderMap` pre-bundles `vue3-google-map` via Vite `optimizeDeps`, resolving ESM export failures in dev.
 
 ## [2.3.0]
 

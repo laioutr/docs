@@ -157,6 +157,23 @@ To avoid collisions:
 
 The prefix also makes it clear in Studio and in Vue devtools whether a component is a top-level section or a slot-level block.
 
+## Paths and routes
+
+An app shares one origin with the project's editor-created content pages, the platform's own routes, and every other installed app. Just as global component names must be unique ([Section and block naming](#section-and-block-naming)), **every URL path your app owns must be namespaced** so it can never collide with a content slug or another app.
+
+**Convention: prefix every app-owned path with `/app-<name>/`**, where `<name>` is your app's short name — the app segment of the package name (e.g. `shopware` for `@laioutr-app/shopware`). This is already the de-facto pattern for public assets; apply it uniformly across every path type:
+
+- **Public assets** — place files under `src/runtime/app/public/app-<name>/` so they serve at `/app-<name>/…`. Your `defineOrchestr` `logoUrl` and any image/font/icon your runtime references use this path (e.g. `/app-shopware/shopware-logo.svg`).
+- **Server routes** — when you register a browser- or server-facing route with `addServerHandler`, give it an `/app-<name>/…` path (e.g. the Shopware checkout handoff at `/app-shopware/checkout`).
+- **Custom pages** — any Vue page your app adds to the router lives under `/app-<name>/…`.
+
+Two hard rules:
+
+1. **Never route a browser navigation through `/api/laioutr/*`.** That namespace is guarded by the platform's `laioutrProtectedRoutes` middleware, which requires the project secret in an `Authorization: Bearer …` header. A plain browser navigation — a link click or a redirect — carries no such header and is rejected with `401`. Put anything the browser hits directly under `/app-<name>/…`; reserve `/api/laioutr/*` for authenticated JSON endpoints your own code calls **with** the secret.
+2. **Never use a bare top-level path** (`/checkout`, `/cart`, `/account`). Editors create content pages at arbitrary slugs, so an un-namespaced path can shadow — or be shadowed by — real content.
+
+Keep the `<name>` segment identical everywhere (assets, routes, pages) and identical to the public-assets folder you already ship, so the whole app occupies one predictable path namespace.
+
 ## Runtime layout
 
 - **Server-only** code lives under `src/runtime/server/`: `client/` (API/SDK factory), `const/` (keys, passthrough tokens), `mappers/`, `middleware/` (orchestr defineOrchestr), `orchestr/`, `orchestr-helper/`, `utils/`.

@@ -22,6 +22,8 @@ sitemap:
   priority: 1.0
 aliases:
   - /laioutr-ui/navigation/megamenudesktop
+changelogKeys:
+  - MegaMenu
 ---
 
 ## Overview
@@ -37,6 +39,8 @@ The promo slot picks its layout from the count of slotted children:
 | 3+       | `--grid`              | Grid layout; the first child spans two rows. |
 
 The panel is surface-tone aware, so a dark header gets a panel with matching font and icon colors.
+
+Each top-level trigger can override its label color: `MegaMenuItem` carries an optional `textColor` (`ColorFieldValue`), resolved via `colorValueToCss()` and applied to the trigger label, falling back to the surface-tone cascade when unset. In Studio, `BlockMegaMenu` exposes a per-item color picker through an `as: 'style'` decorator on author-typed titles (entity-driven CMS items don't expose it).
 
 ## Key Business & UX Benefits
 

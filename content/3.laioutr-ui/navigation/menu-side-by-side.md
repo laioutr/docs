@@ -22,6 +22,8 @@ sitemap:
   priority: 1.0
 aliases:
   - /laioutr-ui/navigation/desktopsidebysidemenu
+changelogKeys:
+  - MenuSideBySide
 ---
 
 ## Overview
@@ -31,6 +33,8 @@ aliases:
 The compound is `MenuSideBySide` (root) plus `MenuSideBySideRoot`, `MenuSideBySideChild`, and `MenuSideBySideNode` for the individual nodes.
 
 Reuse the same category data on [`MobileMenuShop`](/laioutr-ui/navigation/mobile-menu-shop) so desktop and mobile menus stay in sync.
+
+Each top-level node can override its label color: the `NavigationNode` shape carries an optional `textColor` (`ColorFieldValue`) applied to the node label, falling back to the surface-tone cascade when unset. In Studio, `BlockMenuSideBySide` (and `BlockMenuBasic`) expose a per-item color picker through an `as: 'style'` decorator on author-typed titles; entity-driven CMS items don't expose it.
 
 ## Key Business & UX Benefits
 

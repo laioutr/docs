@@ -25,7 +25,7 @@ links:
 
 `BlogPostListing` is the blog index: a featured post hero on top, then a paginated grid of cards, with an optional `title` and `subline` rendered as a text group above the listing. Pin a featured story per season and `BlogPostListing` surfaces it above the grid with a hero treatment.
 
-The companion article view is [`BlogPostDetail`](/laioutr-ui/cms/blog/blog-post-detail).
+The companion article view is [`ArticleDetail`](/laioutr-ui/cms/blog/article-detail).
 
 ## Key Business & UX Benefits
 
@@ -47,7 +47,7 @@ items:
   - "Paginated card grid scales from a handful of posts to a full archive without restructuring the page"
   - "Optional title and subline (rendered via LTextGroup) above the listing let one template double as a campaign landing surface"
   - "Editors arrange the listing in Studio while the data layer fills the grid automatically"
-  - "Pairs with BlogPostDetail for a consistent blog structure from index to article"
+  - "Pairs with ArticleDetail for a consistent blog structure from index to article"
 ---
 ::
 

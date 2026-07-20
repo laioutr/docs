@@ -39,4 +39,11 @@ export const WELL_KNOWN_TYPES: Record<string, string> = {
   OpeningHours: '/frontend/api-reference/common-types/opening-hours',
   OpeningWindow: '/frontend/api-reference/common-types/opening-hours#openingwindow',
   Weekday: '/frontend/api-reference/common-types/opening-hours#weekday',
+
+  // Filters (from @laioutr-core/orchestr/types) — documented in the Orchestr filters guide
+  AvailableFilter: '/frontend/orchestr/filters#response-format',
+  AvailableFilterList: '/frontend/orchestr/filters#list-filters',
+  AvailableFilterListValue: '/frontend/orchestr/filters#list-filters',
+  AvailableFilterBoolean: '/frontend/orchestr/filters#boolean-filters',
+  AvailableFilterRange: '/frontend/orchestr/filters#range-filters',
 };

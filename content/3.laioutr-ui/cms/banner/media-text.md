@@ -17,6 +17,8 @@ sitemap:
   priority: 1.0
 aliases:
   - /laioutr-ui/cms/banner/contentwithimageandtext
+changelogKeys:
+  - MediaText
 ---
 
 ## Overview
@@ -24,6 +26,8 @@ aliases:
 `MediaText` creates editorial sections that pair a large image or video with text content. It's the workhorse of CMS storytelling blocks. Three proportion ratios (50/50, 60/40, 70/30) and left or right content positioning fit any layout.
 
 Chrome is surface-tone aware so it stays legible on light, dark, and bright backdrops. Reach for `MediaText` when the image carries the visual weight; reach for `BannerBasic` or `BannerShowcase` when the call-to-action is the focus.
+
+The `innerBlockPadding` prop (`'s' | 'm' | 'l'`), forwarded to the underlying `Backdrop`, adds padding inside the section. It surfaces as the Design → Layout **Padding** control (none/S/M/L) in Studio; unset defaults to none, so existing sections render unchanged.
 
 ## Key Business & UX Benefits
 

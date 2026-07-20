@@ -7,6 +7,8 @@ playground:
   defaultStory: default
   height: 460px
 links: []
+changelogKeys:
+  - GridFill
 seo:
   title: Grid Fill | Laioutr
   description: A grid fill component
@@ -29,6 +31,10 @@ Grid Fill lays out items in a flex row and lets one cell grow to absorb the rema
 | `'greedy-last'`  | Last item expands. Useful when the trailing tile is a "view all" or summary.         |
 
 `greedy-first` is the special case: it flips flex order so the first row of items expands instead of the last, but the CSS hard-caps at 20 items. Beyond that, extra items fall outside the order chain and the visual layout breaks.
+
+### Item alignment
+
+`justify` (main axis) and `align` (cross axis) position items within the grid; both take `'start' | 'center' | 'end'` and default to `'start'`. State them logically — under `sizing="greedy-first"` the component reverses its axis internally to pack growing items into the first row and un-mirrors the alignment, so `start` / `end` still resolve to the physical direction you asked for (`center` stays symmetric). `Container` maps its 2D `alignment` prop onto these two props, which is what keeps Container's alignment from mirroring under "Greedy First".
 
 ## Key Business & UX Benefits
 

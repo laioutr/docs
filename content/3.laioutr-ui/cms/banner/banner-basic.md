@@ -18,6 +18,8 @@ sitemap:
   changefreq: monthly
   priority: 1
 jiraIssueId: LUI-18
+changelogKeys:
+  - BannerBasic
 ---
 
 ## Overview
@@ -25,6 +27,8 @@ jiraIssueId: LUI-18
 `BannerBasic` is the primary promotional banner for driving traffic to landing pages, product details, or signup forms. It pairs a background image with a headline, subline, and call-to-action button, and uses a gradient or solid overlay to keep text readable on any image.
 
 Sizing modes (S, M, L) fit different slots without custom code. Apply the `.radius-contained` utility on a padded parent to round the banner inside a container; leave it off for an edge-to-edge full-bleed treatment.
+
+The `contentPadding` prop (`'default' | 'm' | 's' | 'none'`) tunes the padding around the banner's inner content, surfaced as the Design → Layout **Content Padding** control in Studio. Leave it unset (or `default`) to keep the existing padding.
 
 ## Key Business & UX Benefits
 

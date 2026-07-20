@@ -14,6 +14,8 @@ sitemap:
   lastmod: 2026-05-15
   changefreq: monthly
   priority: 1.0
+changelogKeys:
+  - CouponBox
 links:
   - label: Figma
     icon: i-simple-icons-figma
@@ -28,6 +30,10 @@ links:
 The clear icon picks up the surrounding theme via the `--icon-color` CSS custom property, so you can recolor it without overriding component styles.
 
 Auto-import tag: `<LCouponBox>`.
+
+### On the Product Detail page
+
+`BlockProductDetailCouponBox` wraps `CouponBox` for placement in the [Product Detail](/laioutr-ui/shop/product-detail/product-detail) section's content slot. Editors configure the `text`, `code`, optional discount badge (`discountText`), and `icon`, and a `variant` toggle (`default` / `promotion-code`) switches the presentation. The block hard-wires `action="copy"`, so on the PDP the box always copies the code to the clipboard rather than applying it to the cart.
 
 ## Key Business & UX Benefits
 

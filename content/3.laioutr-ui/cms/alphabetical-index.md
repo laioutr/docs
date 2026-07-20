@@ -27,7 +27,7 @@ links:
 
 ## Overview
 
-`AlphabeticalIndex` renders an A-Z grouped directory of links. Items passed via the `items` prop are sorted with the active locale's collator, then grouped by the first character of each name into alphabetical sections. Each row is a text link with an optional count pill. It is the shared component behind both the Brand List and Glossary List sections, and suits any "shop by brand", glossary, or partner-directory entry point. Pass an optional `heading` to label the index.
+`AlphabeticalIndex` renders an A-Z grouped directory of links. Items passed via the `items` prop are sorted with the active locale's collator, then grouped by the first character of each name into alphabetical sections. Each row is a text link with an optional count pill. It is the shared component behind both the Brand List and [Glossary Listing](/laioutr-ui/cms/glossary/glossary-listing) sections, and suits any "shop by brand", glossary, or partner-directory entry point. Pass an optional `heading` to label the index.
 
 ## Key Business & UX Benefits
 
@@ -46,7 +46,7 @@ items:
   - "Each row is a text link with an optional count pill, sized for dense directories"
   - "Groups appear in alphabetical order with non-alphanumeric entries pushed to the end"
   - "Optional heading labels the index; falls back to a locale-aware default per section"
-  - "Shared by the Brand List and Glossary List sections, and reusable for any index"
+  - "Shared by the Brand List and Glossary Listing sections, and reusable for any index"
   - "Editors maintain the items list in Studio as partnerships and content evolve"
 ---
 ::
