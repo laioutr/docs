@@ -14,6 +14,22 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-07-18]
+
+### Added
+
+- **Studio**: Studio AI agents build more complete pages, guided by production composition patterns.
+
+## [2026-07-17]
+
+### Added
+
+- **Studio**: Add a Section groups sections into package tabs and filters them by kit.
+
+### Fixed
+
+- **Studio**: Missing or broken preview images in the section/block pickers now show a placeholder.
+
 ## [2026-07-14]
 
 ### Fixed
