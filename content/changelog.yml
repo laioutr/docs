@@ -280,17 +280,6 @@ SectionGlossaryDetail:
       `ArticleDetail` reading view, bound to the `Glossary` entity's `base` and
       `content` components.
 
-SectionGlossaryListing:
-  - version: 2.4.0
-    type: changed
-    breaking: true
-    changelog: ui
-    note: >-
-      `SectionGlossaryList` was renamed to `SectionGlossaryListing` to match the
-      renamed Glossary Listing section. The Studio component string changed and no
-      data migration shipped, so stored sections must be re-added. The
-      `sectionGlossaryList` locale namespace likewise became `sectionGlossaryListing`.
-
 SchemaCondition:
   - version: 0.30.0
     type: added
