@@ -167,10 +167,9 @@ An app shares one origin with the project's editor-created content pages, the pl
 - **Server routes** — when you register a browser- or server-facing route with `addServerHandler`, give it an `/app-<name>/…` path (e.g. the Shopware checkout handoff at `/app-shopware/checkout`).
 - **Custom pages** — any Vue page your app adds to the router lives under `/app-<name>/…`.
 
-Two hard rules:
+One hard rule:
 
-1. **Never route a browser navigation through `/api/laioutr/*`.** That namespace is guarded by the platform's `laioutrProtectedRoutes` middleware, which requires the project secret in an `Authorization: Bearer …` header. A plain browser navigation — a link click or a redirect — carries no such header and is rejected with `401`. Put anything the browser hits directly under `/app-<name>/…`; reserve `/api/laioutr/*` for authenticated JSON endpoints your own code calls **with** the secret.
-2. **Never use a bare top-level path** (`/checkout`, `/cart`, `/account`). Editors create content pages at arbitrary slugs, so an un-namespaced path can shadow — or be shadowed by — real content.
+1. **Never use a bare top-level path** (`/checkout`, `/cart`, `/account`). Editors create content pages at arbitrary slugs, so an un-namespaced path can shadow — or be shadowed by — real content.
 
 Keep the `<name>` segment identical everywhere (assets, routes, pages) and identical to the public-assets folder you already ship, so the whole app occupies one predictable path namespace.
 
