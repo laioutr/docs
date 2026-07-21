@@ -6,6 +6,8 @@ withDefaults(
     name: string;
     type: string;
     required?: boolean;
+    /** Muted marker for a non-required field (e.g. optional hook payload fields). */
+    optional?: boolean;
     deprecated?: boolean;
     expandable?: boolean;
     open?: boolean;
@@ -32,6 +34,7 @@ withDefaults(
         <LinkedTypeName :type="type" />
       </span>
       <span v-if="required" class="shrink-0 rounded-sm bg-error/10 px-1.5 py-0.5 text-error">required</span>
+      <span v-if="optional" class="text-muted border-default shrink-0 rounded-sm border px-1.5 py-0.5">optional</span>
       <span v-if="deprecated" class="shrink-0 rounded-sm bg-warning/10 px-1.5 py-0.5 text-warning">deprecated</span>
     </div>
   </div>

@@ -15,6 +15,11 @@ type MinimarkNode = [string, Record<string, unknown>, ...any[]] | string;
 
 const KNOWN_COMPONENTS = new Set(['action-meta', 'query-meta', 'entity-component-meta', 'entity-overview', 'component-meta', 'component-playground', 'page-type-meta', 'error-meta', 'excalidraw-diagram', 'component-code', 'since-version', 'screenshot', 'hook-meta', 'hook-lifecycle', 'cockpit-mcp-workflow']);
 
+// Components whose renderer consumes slot children itself (via
+// renderInlineDataComponent). For these we must NOT also lift default-slot
+// prose into a leading paragraph — the renderer already emits it, in order.
+const CHILD_RENDERING_COMPONENTS = new Set(['hook-meta', 'hook-lifecycle', 'cockpit-mcp-workflow']);
+
 function isElement(node: MinimarkNode): node is [string, Record<string, unknown>, ...any[]] {
   return Array.isArray(node) && typeof node[0] === 'string';
 }
@@ -114,7 +119,7 @@ async function walkAndReplace(nodes: MinimarkNode[]): Promise<void> {
 
     if (KNOWN_COMPONENTS.has(tag)) {
       const normalizedProps = normalizeProps(props);
-      const childText = extractChildText(children);
+      const childText = CHILD_RENDERING_COMPONENTS.has(tag) ? null : extractChildText(children);
 
       try {
         const replacement = await resolveComponent(tag, normalizedProps, children);

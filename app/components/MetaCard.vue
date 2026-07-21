@@ -20,7 +20,7 @@ function copyImport(text: string) {
     <!-- Header: title + token badge -->
     <div class="meta-card__header">
       <h3 :id="title.toLowerCase()" class="meta-card__title">{{ title }}</h3>
-      <code class="meta-card__token">{{ token }}</code>
+      <code v-if="token" class="meta-card__token">{{ token }}</code>
     </div>
 
     <!-- After header (pills, badges, etc.) -->

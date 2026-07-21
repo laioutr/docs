@@ -37,9 +37,31 @@ describe('renderInlineDataComponent', () => {
     expect(String(pre[1].code)).not.toContain('[object Object]');
   });
 
-  it('preserves slotted children after the yaml block', () => {
-    const codeFence = ['pre', { language: 'ts', code: 'x' }, ['code', {}, 'x']];
-    const nodes = renderInlineDataComponent({ name: 'h' }, [codeFence as never], { titleKey: 'name' });
-    expect(nodes[nodes.length - 1]).toBe(codeFence);
+  it('renders default-slot prose before the yaml and named-slot (#example) content after', () => {
+    const description = ['p', {}, 'Transform the link.']; // default slot
+    const example = ['template', { 'v-slot:example': '' }, ['pre', { language: 'ts', code: 'x' }, ['code', {}, 'x']]];
+
+    const nodes = renderInlineDataComponent(
+      { name: 'frontend-core:link-resolver:resolve', kind: 'filter' },
+      [description as never, example as never],
+      { titleKey: 'name' },
+    );
+
+    // order: h3 → description prose → yaml → example code
+    expect((nodes[0] as [string])[0]).toBe('h3');
+    expect(nodes[1]).toBe(description);
+
+    const yaml = nodes[2] as [string, Record<string, unknown>, unknown];
+    expect(yaml[0]).toBe('pre');
+    expect(yaml[1].language).toBe('yaml');
+
+    const last = nodes[nodes.length - 1] as [string, Record<string, unknown>, unknown];
+    expect(last[0]).toBe('pre'); // the example code fence, unwrapped from its template
+    expect(last[1].language).toBe('ts');
+
+    // the raw <template> wrapper must not survive, and the description must not
+    // leak into the yaml props
+    expect(nodes.some((n: unknown) => Array.isArray(n) && n[0] === 'template')).toBe(false);
+    expect(String(yaml[1].code)).not.toContain('Transform the link');
   });
 });
