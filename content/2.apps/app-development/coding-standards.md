@@ -174,6 +174,17 @@ Two hard rules:
 
 Keep the `<name>` segment identical everywhere (assets, routes, pages) and identical to the public-assets folder you already ship, so the whole app occupies one predictable path namespace.
 
+## Extension hooks
+
+When your app runs an effect a consuming project can't otherwise reach — an automatic emission site, or a value your runtime resolves internally — expose it as a **Nitro runtime hook** so the project can plug in without forking your app. Type the hook by augmenting `NitroRuntimeHooks` in `globalExtensions.ts`, fire it with `useNitroApp().hooks.callHook(...)`, and let projects tap it from a `defineNitroPlugin`. Name hooks `namespace:entity:action` (kebab-case) — present tense for before/during, past tense for after.
+
+The Shopware app uses this for external-IdP (SSO) integration, where the project owns login and must supply / mirror the Shopware cart session token:
+
+- `shopware:context-token:resolve` (bail): the project supplies the `sw-context-token` from its own session store; the app's cookie is the fallback.
+- `shopware:context-token:changed` (notification): fired after the token is persisted, so the project can mirror it into its own store.
+
+The hooks only **transport** the token — the app never mints it; establishing the customer session stays the project's responsibility. Full contract: `docs/plans/2026-07-17-shopware-sso-checkout-integration-design.md` in the platform repo.
+
 ## Runtime layout
 
 - **Server-only** code lives under `src/runtime/server/`: `client/` (API/SDK factory), `const/` (keys, passthrough tokens), `mappers/`, `middleware/` (orchestr defineOrchestr), `orchestr/`, `orchestr-helper/`, `utils/`.
