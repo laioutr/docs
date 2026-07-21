@@ -88,7 +88,7 @@ Expected: 7 test files pass, 203 tests pass, and 13 tests remain todo.
 Create `app/components/CockpitMcpWorkflow.test.ts`:
 
 ```ts
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { compileScript, compileTemplate, parse } from 'vue/compiler-sfc';
 import { describe, expect, it } from 'vitest';
@@ -96,6 +96,8 @@ import { describe, expect, it } from 'vitest';
 const filename = fileURLToPath(new URL('./CockpitMcpWorkflow.vue', import.meta.url));
 
 function compileComponent() {
+  expect(existsSync(filename), 'CockpitMcpWorkflow.vue should exist').toBe(true);
+
   const source = readFileSync(filename, 'utf8');
   const parsed = parse(source, { filename });
 
@@ -151,7 +153,7 @@ Run:
 pnpm exec vitest run app/components/CockpitMcpWorkflow.test.ts
 ```
 
-Expected: FAIL with `ENOENT` because `app/components/CockpitMcpWorkflow.vue` does not exist.
+Expected: FAIL with `CockpitMcpWorkflow.vue should exist` because the component does not exist.
 
 - [ ] **Step 4: Create the minimal data-driven Vue component**
 
