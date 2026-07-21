@@ -80,7 +80,7 @@ const sections: Section[] = [
       { label: 'anonymous primitive union (string | number | null)', schema: { anyOf: [{ type: 'string' }, { type: 'number' }, { type: 'null' }] }, note: 'This is the shape canonical-types reflection actually produces — *not* multi-type.' },
       { label: 'named union of objects (id: "Node")', schema: { id: 'Node', anyOf: [TextNode, ImageNode] } as any, note: 'When the union has an id, the field shows the id.' },
       { label: '3-way named discriminated union (Media)', schema: { id: 'Media', anyOf: [ImageNode, { id: 'Video', type: 'object', properties: { type: { const: 'video' }, src: { type: 'string', format: 'uri' } }, required: ['type', 'src'] }, FileNode] } as any },
-      { label: 'mixed object + primitive (Foo | string)', schema: { anyOf: [{ id: 'Foo', type: 'object', properties: { x: { type: 'string' } }, required: ['x'] } as any, { type: 'string' }] },
+      { label: 'mixed object + primitive (Foo | string)', schema: { anyOf: [{ id: 'Foo', type: 'object', properties: { x: { type: 'string' } }, required: ['x'] } as any, { type: 'string' }] } },
       { label: 'array of union ((A | B)[])', schema: { type: 'array', items: { anyOf: [TextNode, ImageNode] } } },
       { label: 'anonymous discriminated tuples (Swatch-shape)', schema: { anyOf: [{ type: 'array', items: [{ const: 'color' }, { type: 'string' }] }, { type: 'array', items: [{ const: 'colors' }, { type: 'array', items: { type: 'string' } }] }, { type: 'array', items: [{ const: 'gradient' }, { type: 'array', items: { type: 'string' } }] }] } },
     ],
