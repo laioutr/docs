@@ -26,7 +26,7 @@ withDefaults(
       <blockquote>{{ prompt }}</blockquote>
     </figcaption>
 
-    <ol class="cockpit-mcp-workflow__trace" aria-label="Cockpit MCP activity">
+    <ol class="cockpit-mcp-workflow__trace" aria-label="Laioutr MCP activity">
       <li v-for="(step, index) in steps" :key="`${step.phase}-${index}`" class="cockpit-mcp-workflow__step">
         <div class="cockpit-mcp-workflow__phase">{{ step.phase }}</div>
         <div class="cockpit-mcp-workflow__activity">

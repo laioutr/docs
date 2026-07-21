@@ -15,7 +15,7 @@ sitemap:
 
 **Studio** is the in-browser editor for your Laioutr storefront. Open it from the project sidebar to work on **pages, sections, and blocks** with a **live preview** of the frontend.
 
-To inspect and edit Studio content from Claude Desktop, ChatGPT, or Cursor, [connect an AI assistant to Cockpit](/cockpit/features/mcp).
+To inspect and edit Studio content from Claude Desktop, ChatGPT, or Cursor, [connect an AI assistant through Laioutr MCP](/agent-api/laioutr-mcp).
 
 ### Layout
 
