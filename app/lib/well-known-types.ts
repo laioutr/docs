@@ -40,6 +40,14 @@ export const WELL_KNOWN_TYPES: Record<string, string> = {
   OpeningWindow: '/frontend/api-reference/common-types/opening-hours#openingwindow',
   Weekday: '/frontend/api-reference/common-types/opening-hours#weekday',
 
+  // Commerce and B2B values
+  ActivityEntry: '/frontend/api-reference/common-types/commerce-values#activityentry',
+  AppliedFee: '/frontend/api-reference/common-types/commerce-values#appliedfee',
+  CartBatchResultItem: '/frontend/api-reference/common-types/commerce-values#cartbatchresultitem',
+  CartSharePermission: '/frontend/api-reference/common-types/commerce-values#cartsharepermission',
+  DocumentType: '/frontend/api-reference/common-types/commerce-values#documenttype',
+  OrderStatus: '/frontend/api-reference/common-types/commerce-values#orderstatus',
+
   // Filters (from @laioutr-core/orchestr/types) — documented in the Orchestr filters guide
   AvailableFilter: '/frontend/orchestr/filters#response-format',
   AvailableFilterList: '/frontend/orchestr/filters#list-filters',
