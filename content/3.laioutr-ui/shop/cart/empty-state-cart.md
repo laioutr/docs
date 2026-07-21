@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Empty State Cart | Laioutr
+  title: Empty State Cart
   description: Empty-state message for the cart.
 sitemap:
   loc: /laioutr-ui/shop/cart/empty-state-cart

@@ -13,7 +13,7 @@ links:
     to: https://www.figma.com/design/Zle03g3Z7ieN700SDq5j77/Component-Examples?node-id=557-224630&t=7pkty4hsIeaPuKYa-4
     target: _blank
 seo:
-  title: Alert Dialog | Laioutr
+  title: Alert Dialog
   description: Modal dialog for confirming critical actions with focus trap and keyboard navigation.
 sitemap:
   loc: /laioutr-ui/ui-kit/surfaces/alertdialog

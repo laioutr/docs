@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-22
 seo:
-  title: Image Contrast Overlay | Laioutr
+  title: Image Contrast Overlay
   description: Gradient or solid overlay that keeps text readable over images.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/imagecontrastoverlay

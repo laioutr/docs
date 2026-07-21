@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Text Group | Laioutr
+  title: Text Group
   description: Caption, heading, and subline composition.
 sitemap:
   loc: /laioutr-ui/ui-kit/typography/text-group

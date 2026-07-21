@@ -7,7 +7,7 @@ playground:
   defaultStory: in-progress
   height: 460px
 seo:
-  title: Free Delivery Progress | Laioutr
+  title: Free Delivery Progress
   description: Progress bar showing how close the cart is to the free-delivery threshold.
 sitemap:
   loc: /laioutr-ui/shop/cart/free-delivery-progress

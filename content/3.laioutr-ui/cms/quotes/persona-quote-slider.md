@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Persona Quote Slider | Laioutr
+  title: Persona Quote Slider
   description: Slider wrapping multiple PersonaQuote items.
 sitemap:
   loc: /laioutr-ui/cms/quotes/persona-quote-slider

@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Cart List Item | Laioutr
+  title: Cart List Item
   description: Single line item row inside the cart.
 sitemap:
   loc: /laioutr-ui/shop/cart/cart-list-item

@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Input Password | Laioutr
+  title: Input Password
   description: Password text field with an optional show / hide toggle.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/input-password

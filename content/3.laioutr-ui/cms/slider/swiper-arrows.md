@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Swiper Arrows | Laioutr
+  title: Swiper Arrows
   description: Previous and next arrow controls for sliders.
 sitemap:
   loc: /laioutr-ui/cms/slider/swiper-arrows

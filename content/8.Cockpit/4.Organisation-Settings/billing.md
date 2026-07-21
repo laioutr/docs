@@ -2,7 +2,7 @@
 title: Billing
 description: Stripe customer portal, subscription details, plan changes, and pricing upsell when no subscription exists.
 seo:
-  title: Organization billing | Cockpit | Laioutr
+  title: Organization billing | Cockpit
 sitemap:
   loc: /cockpit/organisation/billing
   lastmod: 2026-04-09

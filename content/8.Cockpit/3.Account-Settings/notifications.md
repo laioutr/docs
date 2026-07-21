@@ -2,7 +2,7 @@
 title: Notifications
 description: Email and desktop channels, product update emails, and important system emails in Cockpit account notifications.
 seo:
-  title: Account notifications | Cockpit | Laioutr
+  title: Account notifications | Cockpit
 sitemap:
   loc: /cockpit/account/notifications
   lastmod: 2026-04-09

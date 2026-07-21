@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Variant Selector (Multiple) | Laioutr
+  title: Variant Selector (Multiple)
   description: Multi-attribute variant selector.
 sitemap:
   loc: /laioutr-ui/shop/product-detail/variant-selector-multiple

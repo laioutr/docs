@@ -2,7 +2,7 @@
 title: maxcluster
 description: Integration with maxcluster—managed cluster hosting for Shopware, Magento, and enterprise E-Commerce projects.
 seo:
-  title: maxcluster | Laioutr
+  title: maxcluster
   description: Connect the Laioutr Cockpit with maxcluster for scalable managed shop hosting.
 sitemap:
   loc: /hosting/native-hosting-providers/maxcluster

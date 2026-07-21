@@ -3,7 +3,7 @@ title: Separate schema components from UI components
 aliases: []
 description: Split the Studio-facing schema wrapper (defineSection / defineBlock) from the visual Vue component that paints pixels. Two files, two responsibilities, fewer regressions.
 seo:
-  title: Schema components vs UI components | Laioutr
+  title: Schema components vs UI components
   description: Why and how to separate Laioutr schema definitions from the underlying Vue UI components in your app.
 sitemap:
   loc: /apps/app-development/guides/schema-components-vs-ui-components

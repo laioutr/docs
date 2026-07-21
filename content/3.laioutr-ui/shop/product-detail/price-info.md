@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Price Info | Laioutr
+  title: Price Info
   description: PDP price display with strikethrough original.
 sitemap:
   loc: /laioutr-ui/shop/product-detail/price-info

@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Swatch Summary | Laioutr
+  title: Swatch Summary
   description: Compact swatch summary for product tiles.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/swatch-summary

@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 720px
 seo:
-  title: Location Finder | Laioutr
+  title: Location Finder
   description: Store-locator layout combining search, filters, a list panel, and a Google Maps view. Side-by-side at desktop, tabbed at mobile, with a selected-location bottom sheet over the map.
 sitemap:
   loc: /laioutr-ui/location/location-finder

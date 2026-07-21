@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Content Slider | Laioutr
+  title: Content Slider
   description: Slot-driven slider for promotional banners and content slides.
 sitemap:
   loc: /laioutr-ui/cms/slider/content-slider

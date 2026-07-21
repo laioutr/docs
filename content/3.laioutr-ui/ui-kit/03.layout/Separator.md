@@ -7,7 +7,7 @@ playground:
   defaultStory: horizontal-separator
   height: 460px
 seo:
-  title: Separator | Laioutr
+  title: Separator
   description: Visually divides content sections, so that a clear visual hierarchy is generated and improves content readability.
 sitemap:
   loc: /laioutr-ui/ui-kit/layout/separator

@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-218
 seo:
-  title: Media + Text | Laioutr
+  title: Media + Text
   description: Responsive section pairing a large image or video with text content.
 sitemap:
   loc: /laioutr-ui/cms/banner/media-text

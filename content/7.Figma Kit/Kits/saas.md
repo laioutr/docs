@@ -2,7 +2,7 @@
 title: SaaS
 description: Subscription and pricing page components such as pricing cards, plan grids, and feature comparison tables.
 seo:
-  title: SaaS | Laioutr
+  title: SaaS
   description: Subscription and pricing page components such as pricing cards, plan grids, and feature comparison tables.
 sitemap:
   loc: /figma-kit/kits/saas

@@ -2,7 +2,7 @@
 title: Marketplace
 description: Marketplace UI patterns for multi-vendor discovery, listings, and scalable navigation structures.
 seo:
-  title: Marketplace | Laioutr
+  title: Marketplace
   description: Marketplace UI patterns for multi-vendor discovery, listings, and scalable navigation structures.
 sitemap:
   loc: /figma-kit/kits/marketplace

@@ -2,7 +2,7 @@
 title: Mailer
 description: The Laioutr Mailer essentials app provides transactional email sending for Laioutr projects, powered by Nodemailer.
 seo:
-  title: Mailer | Laioutr
+  title: Mailer
   description: Transactional email sending for Laioutr projects, powered by Nodemailer.
 sitemap:
   loc: /apps/essentials/mailer

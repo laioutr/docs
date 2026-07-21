@@ -13,7 +13,7 @@ links:
     to: https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=24-7307&t=6wm3tnzO3UwBzAin-4
     target: _blank
 seo:
-  title: Menu Side by Side | Laioutr
+  title: Menu Side by Side
   description: Desktop side-by-side off-canvas category menu.
 sitemap:
   loc: /laioutr-ui/navigation/menu-side-by-side

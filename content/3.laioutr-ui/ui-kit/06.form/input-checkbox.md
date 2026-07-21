@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Input Checkbox | Laioutr
+  title: Input Checkbox
   description: Labelled checkbox combining Checkbox and Label.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/inputcheckbox

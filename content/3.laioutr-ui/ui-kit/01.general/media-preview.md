@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-28
 seo:
-  title: Media Preview | Laioutr
+  title: Media Preview
   description: Responsive image block with optional lightbox, custom aspect ratios, and device-specific sizing.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/media-preview

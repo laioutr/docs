@@ -7,7 +7,7 @@ playground:
   defaultStory: with-count
   height: 460px
 seo:
-  title: Alphabetical Index | Laioutr
+  title: Alphabetical Index
   description: A-Z grouped text-link directory for brands, glossaries, and similar indexes.
 sitemap:
   loc: /laioutr-ui/cms/alphabetical-index

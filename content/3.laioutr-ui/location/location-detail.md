@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 720px
 seo:
-  title: Location Detail | Laioutr
+  title: Location Detail
   description: Single-location detail layout with a top-of-page Google Maps view and a slot for header, info list, and any other store-detail content.
 sitemap:
   loc: /laioutr-ui/location/location-detail

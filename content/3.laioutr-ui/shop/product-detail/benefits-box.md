@@ -7,7 +7,7 @@ playground:
   defaultStory: without-free-delivery
   height: 460px
 seo:
-  title: Benefits Box | Laioutr
+  title: Benefits Box
   description: Compact list of product benefits.
 sitemap:
   loc: /laioutr-ui/shop/product-detail/benefits-box

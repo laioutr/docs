@@ -2,7 +2,7 @@
 title: Block Definitions
 description: How to create and register block definitions for Laioutr Studio.
 seo:
-  title: Block Definitions | Laioutr
+  title: Block Definitions
   description: How to create and register block definitions for Laioutr Studio.
 sitemap:
   loc: /apps/app-development/block-definitions

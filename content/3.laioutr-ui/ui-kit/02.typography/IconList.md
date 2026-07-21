@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Icon List | Laioutr
+  title: Icon List
   description: A icon list component
 sitemap:
   loc: /laioutr-ui/ui-kit/typography/iconlist

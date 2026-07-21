@@ -13,7 +13,7 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=2899-10340&t=mlUfKppRhGmTxkMG-4
     target: _blank
 seo:
-  title: Mobile Menu (Basic) | Laioutr
+  title: Mobile Menu (Basic)
   description: Mobile off-canvas drawer for the basic header.
 sitemap:
   loc: /laioutr-ui/navigation/mobile-menu-basic

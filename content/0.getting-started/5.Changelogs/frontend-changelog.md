@@ -2,7 +2,7 @@
 title: Frontend Changelog
 description: Changelog for the Laioutr frontend product following Keep a Changelog and Semantic Versioning.
 seo:
-  title: Frontend Changelog | Laioutr
+  title: Frontend Changelog
   description: Changelog for the Laioutr frontend product following Keep a Changelog and Semantic Versioning.
 sitemap:
   loc: /getting-started/changelogs/frontend-changelog
@@ -13,6 +13,89 @@ sitemap:
 ---
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
+
+## [0.35.1] - 2026-07-14
+
+### Patch Changes
+
+- Fix legacy media-library providers being omitted from Cockpit by registering their v2 provider and descriptor with the correct registry arguments.
+
+## [0.35.0] - 2026-07-14
+
+### Minor Changes
+
+- **Breaking:** Media libraries are now connected as an Orchestr integration facet. A connector declares static capabilities (search, tags, folders, sorts, upload transfer) and uses opaque-cursor pagination, explicit type/tag filtering, optional folder navigation, and proxied or staged upload with per-file results. Define one on the app's Orchestr builder instead of the standalone factory:
+
+  ```ts
+  // Before
+  export default defineMediaLibraryProvider({ name, label, iconSrc, list, upload });
+
+  // After
+  export default defineShopify.mediaLibrary({
+    capabilities: { search: true, folders: false, sorts, upload: { transfer: 'staged' } },
+    list,
+    createUploadTargets,
+    finalizeUploads,
+  });
+  ```
+
+  `defineMediaLibraryProvider()` still works as a **deprecated shim** — existing connectors keep registering without a rewrite, in a degraded mode (no folders, no staged upload, no declared sorts). `ProjectFrontendContext.mediaLibraries` now carries descriptors `{ id, label, iconSrc, capabilities }`.
+
+  The Shopify connector uploads via staged targets and blocks until each file is `READY` before returning it (one failed file no longer sinks the batch). The Shopware connector gains folder browsing over the real media-folder tree.
+
+  This frontend-core version is the threshold for the Cockpit `mediaLibraryV2` capability gate; the Cockpit media picker is updated separately to speak the new contract.
+
+  Folder browsing is folded into the single `list` method: `MediaListResult.folders` carries the
+  queried location's subfolders on the first (cursorless) page; the separate `browseFolders`
+  method and `media-folders` route are removed. Every media source now carries an optional
+  `origin` (`{ libraryId, externalId? }`), stamped by the `.mediaLibrary()` wrapper, which also
+  validates all adapter output at the trust boundary (canonical Zod parse, URL-scheme guard —
+  including nested poster/cover images — capability/response agreement) and logs a server-side
+  warning for every dropped item. Browse items may carry a transient `status`
+  (`processing`/`failed`) surfaced in the picker grid.
+
+  Media-library handlers now receive the per-request context built by the app's `extendRequest`
+  initwares as their second argument — `list(query, ctx)` — so adapters use the initware-provided
+  clients instead of constructing their own. `MediaQuery` gains `scope: 'folder' | 'all'` to
+  distinguish a whole-library search from browsing the root level (on Shopware, root holds only
+  unfiled assets), and both bundled adapters now honor `MediaQuery.type` server-side.
+
+- Add the `@laioutr-app/cms` media-library connector and the `RcProject.config.cdn`
+  container it reads. The connector implements the shipped media-library interface
+  against `apps/cdn-api`: cursor browse with folders, staged upload, and baseURL-free
+  Cloudflare providers (image + video poster) on the per-project delivery host.
+  `RcCoreConfig` gains an optional `cdn: { key, deliveryHost }` member (client-stripped
+  via the existing `config` sanitisation).
+
+- Video sources now support a `focalPoint`, mirroring image sources. The built-in `MediaVideo` renderer applies it as `object-position` (per viewport, with `center center` as the fallback) so the important region stays in frame when the video is cropped by `object-fit: cover`.
+
+## [0.34.0]
+
+### Changed
+
+- **Breaking:** Media libraries are now connected as an Orchestr integration facet. A connector is declared with `defineX.mediaLibrary(...)` on the app's Orchestr builder instead of the standalone `defineMediaLibraryProvider` factory. Identity (`id`, `label`, `iconSrc`) is derived from the builder's `.meta()`; the connector declares static `capabilities` (search, tags, folders, sorts, upload transfer) and its handlers receive the app's per-request `ctx` as a second argument. Browsing moves to opaque-cursor pagination (`MediaQuery` → `MediaListResult`) with folders folded into `list`, an explicit `type` filter, and a browse-time `status`; upload gains a staged (direct browser→backend) path alongside proxied, both returning per-file results. `ProjectFrontendContext.mediaLibraries` now carries `{ id, label, iconSrc, capabilities }` descriptors. See [Media and Media Library](/frontend/features/media).
+- Every `Media` source gained an optional `origin` (`{ libraryId, externalId? }`) recording the producing library and its stable asset id. It is stamped automatically when an asset is picked from a media library, is management-plane only (the renderer never reads it), and is additive — media stored before it existed remain valid. See [Media](/frontend/api-reference/common-types/media#source-origin).
+
+### Deprecated
+
+- `defineMediaLibraryProvider(...)` is deprecated in favour of `defineX.mediaLibrary(...)`. It keeps working as a compatibility shim so existing connectors register without a rewrite, in a degraded mode (no folder navigation, no staged upload, no declared sorts, no server-side type filtering), and logs a one-time warning at registration.
+
+## [0.33.1] - 2026-07-06
+
+### Patch Changes
+
+- `content_alignment` field values that fall outside the field's axis-derived set are now healed when resolving render props, instead of passing through. A value already in the set is unchanged. When a field's `axis` was changed after the value was stored, the stored value is projected onto the new axis rather than discarded:
+
+  - **Restrict** (`both` → single axis): the matching component is kept — `top-left` renders as `top` on a vertical field, `left` on a horizontal field.
+  - **Widen** (single axis → `both`): the value is paired with a neutral `center` for the missing axis — `top` becomes `top-center`, `left` becomes `center-left`.
+
+  Only a value with no analog on the new axis (an axis swap, e.g. `top` on a horizontal field) or a malformed value (e.g. `diagonal`) clamps to the field's fallback alignment (`center` / `center-center`). Previously any out-of-range value was discarded and replaced with the fallback, silently losing alignment intent the stored value still carried.
+
+## [0.32.1] - 2026-06-30
+
+### Patch Changes
+
+- Resolve SEO title/description/robots placeholders against a setup-time snapshot of the page's queries instead of the live, route-reactive query map. `useSeoMeta`'s getters are evaluated during SSR head serialization — after render and outside Nuxt's async context — so reading the live map there rebuilt every query's wire request for nothing (the wire request is only a result-lookup key). The head now reads a stable snapshot; sections keep the live map so client-side filter/sort/pagination still re-fetch.
 
 ## [0.31.0]
 

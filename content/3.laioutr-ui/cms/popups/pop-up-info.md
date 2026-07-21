@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: PopUp Info | Laioutr
+  title: PopUp Info
   description: Informational popup content preset for the PopUp shell.
 sitemap:
   loc: /laioutr-ui/cms/popups/pop-up-info

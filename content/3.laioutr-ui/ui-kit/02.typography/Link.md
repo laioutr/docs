@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Link | Laioutr
+  title: Link
   description: A link component
 sitemap:
   loc: /laioutr-ui/ui-kit/typography/link

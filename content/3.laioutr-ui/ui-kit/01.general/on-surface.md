@@ -7,7 +7,7 @@ playground:
   defaultStory: light
   height: 460px
 seo:
-  title: OnSurface | Laioutr
+  title: OnSurface
   description: Sets the surface tone for descendant components.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/on-surface

@@ -9,7 +9,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Header Shop | Laioutr
+  title: Header Shop
   description: E-commerce header with mega menu / side-by-side / dropdown navigation, cart, account, wishlist, and search.
 sitemap:
   loc: /laioutr-ui/navigation/header-shop

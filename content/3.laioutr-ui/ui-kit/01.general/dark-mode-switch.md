@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Dark Mode Switch | Laioutr
+  title: Dark Mode Switch
   description: Light / dark theme toggle for the top bar or header.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/dark-mode-switch

@@ -13,7 +13,7 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=12175-374053&t=kWl7opPn708GdN7H-4
     target: _blank
 seo:
-  title: Product Slider | Laioutr
+  title: Product Slider
   description: Section-level horizontally scrollable product collection.
 sitemap:
   loc: /laioutr-ui/shop/product-slider

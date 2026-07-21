@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Tooltip | Laioutr
+  title: Tooltip
   description: Reka-UI-backed tooltip primitive.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/tooltip

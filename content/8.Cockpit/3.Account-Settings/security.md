@@ -2,7 +2,7 @@
 title: Security
 description: Change email, update password, and request account deletion in Cockpit account security.
 seo:
-  title: Account security | Cockpit | Laioutr
+  title: Account security | Cockpit
 sitemap:
   loc: /cockpit/account/security
   lastmod: 2026-04-09

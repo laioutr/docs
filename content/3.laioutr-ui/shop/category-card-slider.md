@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-38
 seo:
-  title: Category Card Slider | Laioutr
+  title: Category Card Slider
   description: Horizontal slider of category tiles for listing pages and category browsing.
 sitemap:
   loc: /laioutr-ui/shop/category-card-slider

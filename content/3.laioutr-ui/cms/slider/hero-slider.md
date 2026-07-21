@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-11
 seo:
-  title: Hero Slider | Laioutr
+  title: Hero Slider
   description: A flexible hero, static block or interactive slider.
 sitemap:
   loc: /laioutr-ui/cms/slider/hero-slider

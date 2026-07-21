@@ -2,7 +2,7 @@
 title: PWA
 description: Turn your Laioutr frontend into a Progressive Web App—installable on devices, with offline support and an app-like experience—using zero-config defaults and optional customization.
 seo:
-  title: PWA | Laioutr
+  title: PWA
   description: Turn your Laioutr frontend into a Progressive Web App—installable on devices, with offline support and an app-like…
 sitemap:
   loc: /frontend/features/pwa

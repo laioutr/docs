@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-37
 seo:
-  title: Category Card Grid | Laioutr
+  title: Category Card Grid
   description: Responsive grid of category tiles for entry pages and category browsing.
 sitemap:
   loc: /laioutr-ui/shop/category-card-grid

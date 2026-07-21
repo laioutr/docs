@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-92
 seo:
-  title: Quantity Picker | Laioutr
+  title: Quantity Picker
   description: Stepper input for product quantity with increment / decrement buttons and direct entry.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/quantitypicker

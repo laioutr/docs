@@ -2,7 +2,7 @@
 title: Multi-market
 description: Laioutr's multi-market support lets you serve different regions (markets) from one project, each with its own domains, languages, and currency, configured in Cockpit.
 seo:
-  title: Multi-market | Laioutr
+  title: Multi-market
   description: Laioutr's multi-market support lets you serve different regions (markets) from one project, each with its own domains,…
 sitemap:
   loc: /frontend/features/multi-market

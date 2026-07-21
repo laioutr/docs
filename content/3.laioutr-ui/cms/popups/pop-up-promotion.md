@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: PopUp Promotion | Laioutr
+  title: PopUp Promotion
   description: Promotional popup content preset with embedded coupon.
 sitemap:
   loc: /laioutr-ui/cms/popups/pop-up-promotion

@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Highlight Toggle | Laioutr
+  title: Highlight Toggle
   description: Two-way toggle with label and optional badge for binary choices.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/highlight-toggle

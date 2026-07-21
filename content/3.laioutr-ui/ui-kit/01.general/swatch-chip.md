@@ -9,7 +9,7 @@ playground:
   defaultStory: single-color
   height: 460px
 seo:
-  title: Swatch Chip | Laioutr
+  title: Swatch Chip
   description: Compact color chip for displaying product color variants on tiles.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/swatch-chip

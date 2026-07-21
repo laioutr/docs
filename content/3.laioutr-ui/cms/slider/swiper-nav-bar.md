@@ -8,7 +8,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Swiper Nav Bar | Laioutr
+  title: Swiper Nav Bar
   description: Compact slider navigation strip with arrows, bullets or numbers.
 sitemap:
   loc: /laioutr-ui/cms/slider/swiper-nav-bar

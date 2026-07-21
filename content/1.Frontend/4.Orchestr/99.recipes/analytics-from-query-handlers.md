@@ -2,7 +2,7 @@
 title: Analytics components from query handlers
 description: When per-result context exists only in the originating query response (attribution tokens, search position, relevance scores), provide an entity component inline from the query handler and skip writing a resolver for it.
 seo:
-  title: Analytics components from query handlers | Laioutr
+  title: Analytics components from query handlers
   description: Provide entity components inline from query handlers when the data only exists in the originating query response.
 sitemap:
   loc: /frontend/orchestr/recipes/analytics-from-query-handlers

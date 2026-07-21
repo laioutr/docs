@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Language Switcher | Laioutr
+  title: Language Switcher
   description: Locale switcher for the top bar or header.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/language-switcher

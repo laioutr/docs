@@ -2,7 +2,7 @@
 title: Server-Side Rendering (SSR) and Caching
 description: How the Laioutr frontend uses SSR, how to enable CDN caching with route rules, and how to handle multi-market setups and personalized content.
 seo:
-  title: Server-Side Rendering (SSR) and Caching | Laioutr
+  title: Server-Side Rendering (SSR) and Caching
   description: How the Laioutr frontend uses SSR, how to enable CDN caching with route rules, and how to handle multi-market setups…
 sitemap:
   loc: /frontend/features/ssr-and-caching

@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Zoom Level (Segmented) | Laioutr
+  title: Zoom Level (Segmented)
   description: Segmented control for image zoom level on mobile.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/zoom-level-segmented

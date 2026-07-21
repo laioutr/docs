@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Listbox | Laioutr
+  title: Listbox
   description: Reka-UI-backed listbox primitive.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/listbox

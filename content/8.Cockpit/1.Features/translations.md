@@ -2,7 +2,7 @@
 title: Translations
 description: Manage storefront languages, fallback chains, and where each language is used on domains, and export or import all translatable content as a JSON file—in the Cockpit.
 seo:
-  title: Translations | Cockpit | Laioutr
+  title: Translations | Cockpit
 sitemap:
   loc: /cockpit/features/translations
   lastmod: 2026-06-24

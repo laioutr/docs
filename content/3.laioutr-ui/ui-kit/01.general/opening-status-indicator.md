@@ -7,7 +7,7 @@ playground:
   defaultStory: open-now
   height: 200px
 seo:
-  title: Opening Status Indicator | Laioutr
+  title: Opening Status Indicator
   description: The open/closed pill atom on its own. Reads the shared `useNow()` clock and an `OpeningHours` value to color the label green or red.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/opening-status-indicator

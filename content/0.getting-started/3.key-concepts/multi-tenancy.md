@@ -2,7 +2,7 @@
 title: Multi-tenancy
 description: How to structure multiple storefronts, brands, or regions in Laioutr — single project with rule engine vs. multiple projects sharing apps.
 seo:
-  title: Multi-tenancy | Laioutr
+  title: Multi-tenancy
   description: How to structure multiple storefronts, brands, or regions in Laioutr — single project with rule engine vs. multiple…
 sitemap:
   loc: /getting-started/key-concepts/multi-tenancy

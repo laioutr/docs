@@ -13,7 +13,7 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=13096-120401&t=mlUfKppRhGmTxkMG-4
     target: _blank
 seo:
-  title: Top Bar | Laioutr
+  title: Top Bar
   description: Optional top bar above the header.
 sitemap:
   loc: /laioutr-ui/navigation/top-bar

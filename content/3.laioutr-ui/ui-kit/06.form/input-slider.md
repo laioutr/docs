@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Input Slider | Laioutr
+  title: Input Slider
   description: Single-thumb or multi-thumb range slider.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/input-slider

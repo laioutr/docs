@@ -2,7 +2,7 @@
 title: Projects
 description: Organization-level project list, search, open project, create project, and delete from the overflow menu.
 seo:
-  title: Organization projects | Cockpit | Laioutr
+  title: Organization projects | Cockpit
 sitemap:
   loc: /cockpit/organisation/projects
   lastmod: 2026-04-09

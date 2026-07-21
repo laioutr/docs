@@ -2,7 +2,7 @@
 title: Navigation
 description: Global navigation libraries for headers, menus, search entry points, breadcrumbs, and utility switches.
 seo:
-  title: Navigation | Laioutr
+  title: Navigation
   description: Global navigation libraries for headers, menus, search entry points, breadcrumbs, and utility switches.
 sitemap:
   loc: /figma-kit/kits/navigation

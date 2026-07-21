@@ -3,7 +3,7 @@ title: Queries & Links
 description: Queries fetch entities by input (e.g. a slug or search term). Links resolve relationships between entities (e.g. product → variants). Together they form the read-side of Orchestr.
 links: []
 seo:
-  title: Queries & Links | Laioutr
+  title: Queries & Links
   description: Queries fetch entities by input (e.g. a slug or search term). Links resolve relationships between entities (e.g.…
 sitemap:
   loc: /frontend/orchestr/queries

@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Scroll Area | Laioutr
+  title: Scroll Area
   description: A scroll area component
 sitemap:
   loc: /laioutr-ui/ui-kit/layout/scrollarea

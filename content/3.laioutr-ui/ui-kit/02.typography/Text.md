@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-137
 seo:
-  title: Text | Laioutr
+  title: Text
   description: Typography primitives for body, heading, subline, and caption with a consistent scale of sizes.
 sitemap:
   loc: /laioutr-ui/ui-kit/typography/text

@@ -4,7 +4,7 @@ description: Integration with ScaleCommerce—managed Performance-as-a-Service f
 aliases:
   - /hosting/hosting-adapter/scale-commerce-adapter
 seo:
-  title: ScaleCommerce | Laioutr
+  title: ScaleCommerce
   description: Connect the Laioutr Cockpit with ScaleCommerce for managed E-Commerce hosting and frontend delivery.
 sitemap:
   loc: /hosting/native-hosting-providers/scale-commerce

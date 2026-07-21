@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Nav Link Item | Laioutr
+  title: Nav Link Item
   description: Generic navigation list-row link primitive.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/nav-link-item

@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Nav Section Heading | Laioutr
+  title: Nav Section Heading
   description: Generic navigation list heading primitive.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/nav-section-heading

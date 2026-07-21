@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Footer Menu | Laioutr
+  title: Footer Menu
   description: Single column of footer links.
 sitemap:
   loc: /laioutr-ui/navigation/footer-menu

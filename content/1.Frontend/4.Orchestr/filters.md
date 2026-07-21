@@ -2,7 +2,7 @@
 title: Filters
 description: Request and response shapes for filters in query handlers and link handlers, including faceted search and well-known filter names.
 seo:
-  title: Filters | Laioutr
+  title: Filters
   description: Request and response shapes for filters in query handlers and link handlers, including faceted search and well-known filter names.
 sitemap:
   loc: /frontend/orchestr/filters

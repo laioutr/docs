@@ -2,7 +2,7 @@
 title: Redirects
 description: Manage URL redirects for a project environment in Cockpit—source and target paths, permanent vs temporary, bulk edits, CSV import and export.
 seo:
-  title: Redirects | Cockpit | Laioutr
+  title: Redirects | Cockpit
 sitemap:
   loc: /cockpit/features/redirects
   lastmod: 2026-04-09

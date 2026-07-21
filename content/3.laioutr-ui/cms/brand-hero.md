@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Brand Hero | Laioutr
+  title: Brand Hero
   description: Hero section that surfaces a brand identity.
 sitemap:
   loc: /laioutr-ui/cms/brand-hero

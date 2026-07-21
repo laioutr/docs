@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Cart Sheet | Laioutr
+  title: Cart Sheet
   description: Off-canvas mini-cart sheet.
 sitemap:
   loc: /laioutr-ui/shop/cart/cart-sheet

@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Rating Progress Bar Filter | Laioutr
+  title: Rating Progress Bar Filter
   description: Star-rating progress bar / filter.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/rating-progress-bar-filter

@@ -2,7 +2,7 @@
 title: Figma Variables
 description: Figma Variables are the foundation of the Figma Kit.
 seo:
-  title: Figma Variables | Laioutr
+  title: Figma Variables
   description: Figma Variables are the foundation of the Figma Kit.
 sitemap:
   loc: /figma-kit/introduction/figma-variables

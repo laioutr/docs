@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Badge | Laioutr
+  title: Badge
   description: Badges of different kind to be used for several purposes.
 sitemap:
   loc: /laioutr-ui/ui-kit/indicators/badge

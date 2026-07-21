@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Cart Coupon Code Accordion | Laioutr
+  title: Cart Coupon Code Accordion
   description: Collapsible coupon-code input inside the cart.
 sitemap:
   loc: /laioutr-ui/shop/cart/cart-coupon-code-accordion

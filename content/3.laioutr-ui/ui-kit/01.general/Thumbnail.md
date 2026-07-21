@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Thumbnail | Laioutr
+  title: Thumbnail
   description: A thumbnail component
 sitemap:
   loc: /laioutr-ui/ui-kit/general/thumbnail

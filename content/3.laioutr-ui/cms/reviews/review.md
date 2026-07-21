@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-153
 seo:
-  title: Review | Laioutr
+  title: Review
   description: Product review display section with rating summary, sort and filter controls.
 sitemap:
   loc: /laioutr-ui/cms/reviews/review

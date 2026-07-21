@@ -2,7 +2,7 @@
 title: BYOS Agent
 description: Reference implementation for handling BYOS webhooks and executing deployment scripts.
 seo:
-  title: BYOS Agent | Laioutr
+  title: BYOS Agent
   description: Reference implementation for handling BYOS webhooks and executing deployment scripts.
 sitemap:
   loc: /hosting/bring-your-own-server-byos/byos-agent

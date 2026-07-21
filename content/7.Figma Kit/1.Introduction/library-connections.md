@@ -2,7 +2,7 @@
 title: Library Connections
 description: Library Connections are the foundation of the Figma Kit.
 seo:
-  title: Library Connections | Laioutr
+  title: Library Connections
   description: Library Connections are the foundation of the Figma Kit.
 sitemap:
   loc: /figma-kit/introduction/library-connections

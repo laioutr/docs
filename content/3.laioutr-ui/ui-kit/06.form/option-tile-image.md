@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Option Tile (Image) | Laioutr
+  title: Option Tile (Image)
   description: Image-driven variant tile for product option selection.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/option-tile-image

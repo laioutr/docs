@@ -13,7 +13,7 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=14605-394163&t=2VdYnJXHqVZcfASo-4
     target: _blank
 seo:
-  title: Header Basic | Laioutr
+  title: Header Basic
   description: Compact, slot-based header with glass effect on scroll, sticky option, and light/dark logo variants.
 sitemap:
   loc: /laioutr-ui/navigation/header-basic

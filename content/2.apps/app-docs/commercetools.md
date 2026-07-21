@@ -2,7 +2,7 @@
 title: Commercetools
 description: Developer documentation for the Laioutr Commercetools app package. Connect your Nuxt frontend to Commercetools via the Platform API with anonymous or client-credentials auth.
 seo:
-  title: Commercetools | Laioutr
+  title: Commercetools
   description: Developer documentation for the Laioutr Commercetools app package. Connect your Nuxt frontend to Commercetools via the…
 sitemap:
   loc: /apps/app-docs/commercetools

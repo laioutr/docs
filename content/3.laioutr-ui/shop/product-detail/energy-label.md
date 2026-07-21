@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Energy Label | Laioutr
+  title: Energy Label
   description: EU energy efficiency label image with lightbox and data-sheet link.
 sitemap:
   loc: /laioutr-ui/shop/product-detail/energy-label

@@ -2,7 +2,7 @@
 title: SEO
 description: SEO essentials for Laioutr frontends — robots.txt, sitemap, OG image, Schema.org, link checker, and per-page SEO. Built on Nuxt SEO modules and integrated with Studio.
 seo:
-  title: SEO | Laioutr
+  title: SEO
   description: SEO essentials for Laioutr frontends — robots.txt, sitemap, OG image, Schema.org, link checker, and per-page SEO.
 sitemap:
   loc: /apps/essentials/seo

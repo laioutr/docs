@@ -12,7 +12,7 @@ playground:
   defaultStory: default-background-images
   height: 460px
 seo:
-  title: Page Not Found | Laioutr
+  title: Page Not Found
   description: 404 page composition.
 sitemap:
   loc: /laioutr-ui/navigation/page-not-found

@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Option Tile (Text) | Laioutr
+  title: Option Tile (Text)
   description: Text-labelled variant tile for product option selection.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/option-tile-text

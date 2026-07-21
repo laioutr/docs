@@ -13,7 +13,7 @@ links:
     to: https://www.figma.com/design/L5EsT6m0VoOXsqqDHXtCe3/laioutr-SHOP?node-id=103-223391&t=wABQtnJ0GubOC0US-4
     target: _blank
 seo:
-  title: Select | Laioutr
+  title: Select
   description: Dropdown select for choosing a single option from a predefined list.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/select

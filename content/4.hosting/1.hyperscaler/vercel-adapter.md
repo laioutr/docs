@@ -4,7 +4,7 @@ description: The Vercel Adapter is a pre-built integration that connects the Lai
 aliases:
   - /hosting/hosting-adapter/vercel-adapter
 seo:
-  title: Vercel Adapter | Laioutr
+  title: Vercel Adapter
   description: The Vercel Adapter is a pre-built integration that connects the Laioutr Cockpit with Vercel. It allows you to deploy…
 sitemap:
   loc: /hosting/hyperscaler/vercel-adapter

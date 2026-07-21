@@ -2,7 +2,7 @@
 title: Userland cache patterns
 description: Pre-warm caches without blocking responses, and isolate cache entries across tenants and locales using cache key composition. Two patterns the built-in connectors hit constantly.
 seo:
-  title: Userland cache patterns | Laioutr
+  title: Userland cache patterns
   description: Pre-warm caches without blocking responses, and isolate cache entries across tenants and locales using cache key composition.
 sitemap:
   loc: /frontend/orchestr/recipes/userland-cache-patterns

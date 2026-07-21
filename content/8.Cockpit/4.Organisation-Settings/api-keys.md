@@ -2,7 +2,7 @@
 title: API keys
 description: Organization API keys for CLI and automation—scopes, expiry, copy once, revoke, and last used.
 seo:
-  title: Organization API keys | Cockpit | Laioutr
+  title: Organization API keys | Cockpit
 sitemap:
   loc: /cockpit/organisation/api-keys
   lastmod: 2026-07-21

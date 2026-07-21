@@ -2,7 +2,7 @@
 title: Vercel Speed Insights
 description: Developer documentation for the Laioutr Vercel Speed Insights app package. Add Vercel Speed Insights to your Nuxt app via a client plugin.
 seo:
-  title: Vercel Speed Insights | Laioutr
+  title: Vercel Speed Insights
   description: Developer documentation for the Laioutr Vercel Speed Insights app package. Add Vercel Speed Insights to your Nuxt app…
 sitemap:
   loc: /apps/app-docs/vercel-speed-insights

@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Grid Masonry | Laioutr
+  title: Grid Masonry
   description: A grid masonry component
 sitemap:
   loc: /laioutr-ui/ui-kit/layout/gridmasonry

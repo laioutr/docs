@@ -2,7 +2,7 @@
 title: Studio
 description: Visual storefront editor—layers, properties, preview, save and publish, and page SEO.
 seo:
-  title: Studio | Cockpit | Laioutr
+  title: Studio | Cockpit
 sitemap:
   loc: /cockpit/features/studio
   lastmod: 2026-07-21

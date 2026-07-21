@@ -13,7 +13,7 @@ links:
     to: https://www.figma.com/design/QgRgNtTxCAxpTe1rriHM/Studio-v1.0?node-id=985-108133&t=lxa1EnPQ6WmLk1ee-4
     target: _blank
 seo:
-  title: Footer | Laioutr
+  title: Footer
   description: Responsive site footer with menu columns, contact rows, social links, and an optional email CTA.
 sitemap:
   loc: /laioutr-ui/navigation/footer

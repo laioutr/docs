@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Toaster | Laioutr
+  title: Toaster
   description: A toaster component
 sitemap:
   loc: /laioutr-ui/ui-kit/surfaces/toaster

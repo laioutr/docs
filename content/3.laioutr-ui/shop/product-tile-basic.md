@@ -9,7 +9,7 @@ playground:
   defaultStory: full-featured
   height: 500px
 seo:
-  title: Product Tile (Basic) | Laioutr
+  title: Product Tile (Basic)
   description: Versatile product tile for grids and sliders.
 sitemap:
   loc: /laioutr-ui/shop/product-tile-basic

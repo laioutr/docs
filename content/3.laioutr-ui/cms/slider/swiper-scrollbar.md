@@ -7,7 +7,7 @@ playground:
   defaultStory: horizontal
   height: 460px
 seo:
-  title: Swiper Scrollbar | Laioutr
+  title: Swiper Scrollbar
   description: Custom scrollbar control for sliders.
 sitemap:
   loc: /laioutr-ui/cms/slider/swiper-scrollbar

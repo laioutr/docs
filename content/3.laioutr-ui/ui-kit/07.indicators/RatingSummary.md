@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Rating Summary | Laioutr
+  title: Rating Summary
   description: A rating summary component
 sitemap:
   loc: /laioutr-ui/ui-kit/indicators/ratingsummary

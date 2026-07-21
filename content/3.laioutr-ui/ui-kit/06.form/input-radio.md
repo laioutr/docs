@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Input Radio | Laioutr
+  title: Input Radio
   description: Group of radio buttons where exactly one option can be selected.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/input-radio

@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Swiper Chrome | Laioutr
+  title: Swiper Chrome
   description: Text and Swiper-chrome composition.
 sitemap:
   loc: /laioutr-ui/cms/slider/swiper-chrome

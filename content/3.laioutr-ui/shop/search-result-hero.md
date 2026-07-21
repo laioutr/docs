@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Search Result Hero | Laioutr
+  title: Search Result Hero
   description: Search results hero with the matched search term and a result-count pill.
 sitemap:
   loc: /laioutr-ui/shop/search-result-hero

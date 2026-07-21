@@ -2,7 +2,7 @@
 title: B2B
 description: B2B-specific UI patterns for account-based commerce, roles, approvals, quotes, and structured purchasing workflows.
 seo:
-  title: B2B | Laioutr
+  title: B2B
   description: B2B-specific UI patterns for account-based commerce, roles, approvals, quotes, and structured purchasing workflows.
 sitemap:
   loc: /figma-kit/kits/b2b

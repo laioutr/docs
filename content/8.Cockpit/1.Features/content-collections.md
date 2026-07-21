@@ -2,7 +2,7 @@
 title: Content (Collections)
 description: Laioutr Cockpit Content area—structured collections and entries, statuses, multilingual editing, and media library entry point.
 seo:
-  title: Content (Collections) | Cockpit | Laioutr
+  title: Content (Collections) | Cockpit
 sitemap:
   loc: /cockpit/features/content-collections
   lastmod: 2026-04-09

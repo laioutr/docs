@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Status Message | Laioutr
+  title: Status Message
   description: Icon-led message composition.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/status-message

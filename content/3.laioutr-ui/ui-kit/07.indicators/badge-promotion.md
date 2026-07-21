@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Badge Promotion | Laioutr
+  title: Badge Promotion
   description: Promotional badge atom for product tiles and pricing.
 sitemap:
   loc: /laioutr-ui/ui-kit/indicators/badge-promotion

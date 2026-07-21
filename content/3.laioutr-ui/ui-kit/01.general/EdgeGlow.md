@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Edge Glow | Laioutr
+  title: Edge Glow
   description: A edge glow component
 sitemap:
   loc: /laioutr-ui/ui-kit/general/edgeglow

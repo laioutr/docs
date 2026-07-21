@@ -1,7 +1,7 @@
 ---
 title: Figma Kit
 seo:
-  title: Figma Kit | Laioutr
+  title: Figma Kit
 sitemap:
   loc: /laioutr-ui/getting-started/figma-kit
   lastmod: 2026-04-08

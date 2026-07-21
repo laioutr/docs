@@ -2,7 +2,7 @@
 title: Actions
 description: Understanding the basics of Orchestr actions
 seo:
-  title: Actions | Laioutr
+  title: Actions
   description: Understanding the basics of Orchestr actions
 sitemap:
   loc: /frontend/orchestr/actions

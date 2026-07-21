@@ -2,7 +2,7 @@
 title: Z-Ordering
 description: Keep overlays and sticky elements predictable across sections — without z-index leaks that create visual bugs when pages change.
 seo:
-  title: Z-Ordering | Laioutr
+  title: Z-Ordering
   description: Keep overlays and sticky elements predictable across sections — without z-index leaks that create visual bugs when pages change.
 sitemap:
   loc: /frontend/features/z-ordering

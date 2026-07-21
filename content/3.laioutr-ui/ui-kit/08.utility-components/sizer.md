@@ -7,7 +7,7 @@ playground:
   defaultStory: aspect-ratio
   height: 460px
 seo:
-  title: Sizer | Laioutr
+  title: Sizer
   description: Headless primitive that resolves a flat sizing config (fixed height, aspect ratio, or fill) into the right CSS, with responsive mobile/desktop variants.
 sitemap:
   loc: /laioutr-ui/ui-kit/utility-components/sizer

@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Swiper Numbers | Laioutr
+  title: Swiper Numbers
   description: Slider position indicator showing current slide and total count.
 sitemap:
   loc: /laioutr-ui/cms/slider/swiper-numbers

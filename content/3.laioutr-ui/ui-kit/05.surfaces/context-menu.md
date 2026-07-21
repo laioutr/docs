@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Context Menu | Laioutr
+  title: Context Menu
   description: Reka-UI-backed context menu primitive.
 sitemap:
   loc: /laioutr-ui/ui-kit/surfaces/context-menu

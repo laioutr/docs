@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Product Detail | Laioutr
+  title: Product Detail
   description: Two-column gallery + content layout for product detail pages.
 sitemap:
   loc: /laioutr-ui/shop/product-detail/product-detail

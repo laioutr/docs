@@ -2,7 +2,7 @@
 title: Component Resolvers
 description: Component resolvers map backend data to entity components. They are how you extend the data model — add new data to existing entities or create entirely new entity types.
 seo:
-  title: Component Resolvers | Laioutr
+  title: Component Resolvers
   description: Component resolvers map backend data to entity components. They are how you extend the data model — add new data to…
 sitemap:
   loc: /frontend/orchestr/component-resolvers

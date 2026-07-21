@@ -13,7 +13,7 @@ links:
     target: _blank
 jiraIssueId: LUI-3
 seo:
-  title: Plan Card Slider | Laioutr
+  title: Plan Card Slider
   description: A responsive grid of Plan Cards on desktop with a mobile swipe carousel.
 sitemap:
   loc: /laioutr-ui/saas/plan-card-slider

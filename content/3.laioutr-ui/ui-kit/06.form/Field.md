@@ -13,7 +13,7 @@ links:
     to: https://www.figma.com/design/92moLelAY8lh8mI0rhCGzy/laioutr-UI?node-id=1-48
     target: _blank
 seo:
-  title: Field | Laioutr
+  title: Field
   description: Form field wrapper that adds label, description, and error message around any input control.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/field

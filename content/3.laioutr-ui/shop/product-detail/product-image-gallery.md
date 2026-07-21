@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Product Image Gallery | Laioutr
+  title: Product Image Gallery
   description: Product detail image gallery with main stage, thumbnails, and fullscreen lightbox.
 sitemap:
   loc: /laioutr-ui/shop/product-detail/product-image-gallery

@@ -4,7 +4,7 @@ description: The Netlify Adapter is a pre-built integration that connects the La
 aliases:
   - /hosting/hosting-adapter/netlify-adapter
 seo:
-  title: Netlify Adapter | Laioutr
+  title: Netlify Adapter
   description: The Netlify Adapter is a pre-built integration that connects the Laioutr Cockpit directly with Netlify. It allows you…
 sitemap:
   loc: /hosting/hyperscaler/netlify-adapter

@@ -2,7 +2,7 @@
 title: Consent Adapters
 description: How to build a Laioutr app that integrates a Consent Management Platform (CMP) by implementing the ConsentAdapter contract from frontend-core.
 seo:
-  title: Consent Adapters | Laioutr
+  title: Consent Adapters
   description: How to build a Laioutr app that integrates a Consent Management Platform (CMP) by implementing the ConsentAdapter contract from frontend-core.
 sitemap:
   loc: /apps/app-development/consent-adapters

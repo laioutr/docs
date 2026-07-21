@@ -2,7 +2,7 @@
 title: Changelog
 description: Changelog for the @laioutr/byos-agent package (Bring Your Own Server webhook agent).
 seo:
-  title: BYOS Agent Changelog | Laioutr
+  title: BYOS Agent Changelog
   description: Changelog for the @laioutr/byos-agent package (Bring Your Own Server webhook agent).
 sitemap:
   loc: /hosting/bring-your-own-server-byos/changelog

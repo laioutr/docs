@@ -2,7 +2,7 @@
 title: Nimstrata Google Retail API
 description: Developer documentation for the Laioutr Nimstrata app package. Add AI-powered search, recommendations, suggested search, and event tracking to your Laioutr frontend via the Nimstrata (Retail Connect) API, with Shopify integration.
 seo:
-  title: Nimstrata Google Retail API | Laioutr
+  title: Nimstrata Google Retail API
   description: Developer documentation for the Laioutr Nimstrata app package. Add AI-powered search, recommendations, suggested…
 sitemap:
   loc: /apps/app-docs/nimstrata

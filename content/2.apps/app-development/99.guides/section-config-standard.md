@@ -3,7 +3,7 @@ title: Section config standard
 aliases: []
 description: A canonical sidebar layout and field-naming convention for every section and block. Same ordering and the same names everywhere, so editors learn one app and know them all.
 seo:
-  title: Section config standard | Laioutr
+  title: Section config standard
   description: Canonical sidebar panel ordering and field naming for Laioutr sections and blocks.
 sitemap:
   loc: /apps/app-development/guides/section-config-standard

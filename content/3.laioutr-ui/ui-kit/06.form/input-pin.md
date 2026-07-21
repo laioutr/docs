@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Input Pin | Laioutr
+  title: Input Pin
   description: Row of single-character cells for OTP / PIN entry.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/input-pin

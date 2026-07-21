@@ -11,7 +11,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Media | Laioutr
+  title: Media
   description: The dispatcher that renders a Media value through nuxt-image (images) and built-in native players (video, audio) you can override with your own renderer.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/media

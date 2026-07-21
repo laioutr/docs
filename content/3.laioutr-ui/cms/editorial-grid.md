@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Editorial Grid | Laioutr
+  title: Editorial Grid
   description: Editorial-style grid of cards with featured emphasis.
 sitemap:
   loc: /laioutr-ui/cms/editorial-grid

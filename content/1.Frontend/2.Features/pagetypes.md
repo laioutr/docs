@@ -2,7 +2,7 @@
 title: Page Types
 description: Page types define the kinds of pages customers can add in Studio (Home, Product Detail, Landing Page, etc.) and control routing, data loading, and link resolution.
 seo:
-  title: Page Types | Laioutr
+  title: Page Types
   description: Page types define the kinds of pages customers can add in Studio (Home, Product Detail, Landing Page, etc.) and…
 sitemap:
   loc: /frontend/features/pagetypes

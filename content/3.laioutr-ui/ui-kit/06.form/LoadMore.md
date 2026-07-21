@@ -8,7 +8,7 @@ playground:
   height: 460px
 jiraIssueId: LUI-70
 seo:
-  title: Load More | Laioutr
+  title: Load More
   description: Explicit-click pagination control combining a Load More button with progress indicator.
 sitemap:
   loc: /laioutr-ui/ui-kit/form/loadmore

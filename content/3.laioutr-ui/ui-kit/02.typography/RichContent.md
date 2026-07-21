@@ -8,7 +8,7 @@ playground:
   height: 460px
 links: []
 seo:
-  title: Rich Content | Laioutr
+  title: Rich Content
   description: Renders HTML or markdown coming from a CMS or product description with the theme's typography applied.
 sitemap:
   loc: /laioutr-ui/ui-kit/typography/richcontent

@@ -10,7 +10,7 @@ links: []
 changelogKeys:
   - GridFill
 seo:
-  title: Grid Fill | Laioutr
+  title: Grid Fill
   description: A grid fill component
 sitemap:
   loc: /laioutr-ui/ui-kit/layout/gridfill

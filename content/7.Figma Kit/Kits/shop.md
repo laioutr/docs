@@ -2,7 +2,7 @@
 title: Shop
 description: Commerce-focused components for product discovery, listing, merchandising, and conversion flows.
 seo:
-  title: Shop | Laioutr
+  title: Shop
   description: Commerce-focused components for product discovery, listing, merchandising, and conversion flows.
 sitemap:
   loc: /figma-kit/kits/shop

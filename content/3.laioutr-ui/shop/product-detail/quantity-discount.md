@@ -7,7 +7,7 @@ playground:
   defaultStory: two-items
   height: 460px
 seo:
-  title: Quantity Discount | Laioutr
+  title: Quantity Discount
   description: Tiered quantity-discount display.
 sitemap:
   loc: /laioutr-ui/shop/product-detail/quantity-discount

@@ -7,7 +7,7 @@ playground:
   defaultStory: simple-style
   height: 460px
 seo:
-  title: Accordion | Laioutr
+  title: Accordion
   description: A group of togglable entries
 sitemap:
   loc: /laioutr-ui/ui-kit/general/accordion

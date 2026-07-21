@@ -2,7 +2,7 @@
 title: Battery Included
 description: Developer documentation for the Laioutr Battery Included app package. Add search, suggested search, and product recommendations to your Laioutr frontend via the BatteryIncluded API.
 seo:
-  title: Battery Included | Laioutr
+  title: Battery Included
   description: Developer documentation for the Laioutr Battery Included app package. Add search, suggested search, and product…
 sitemap:
   loc: /apps/app-docs/battery-included

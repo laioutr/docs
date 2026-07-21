@@ -7,7 +7,7 @@ playground:
   defaultStory: default
   height: 460px
 seo:
-  title: Blog Post Listing | Laioutr
+  title: Blog Post Listing
   description: Featured post and paginated grid of blog cards.
 sitemap:
   loc: /laioutr-ui/cms/blog/blog-post-listing

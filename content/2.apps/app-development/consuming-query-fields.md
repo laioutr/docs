@@ -2,7 +2,7 @@
 title: Consuming Query Fields
 description: How blocks and sections read interactive state from a resolved query field and update the URL when the user changes filters, sorting, or pagination.
 seo:
-  title: Consuming Query Fields | Laioutr
+  title: Consuming Query Fields
   description: How blocks and sections read interactive state from a resolved query field and update the URL when the user changes filters, sorting, or pagination.
 sitemap:
   loc: /apps/app-development/consuming-query-fields

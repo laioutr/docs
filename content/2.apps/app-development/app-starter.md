@@ -2,7 +2,7 @@
 title: App Starter
 description: Introduction to the Laioutr App Starter — the template and starting point for new developers building Laioutr apps.
 seo:
-  title: App Starter | Laioutr
+  title: App Starter
   description: Introduction to the Laioutr App Starter — the template and starting point for new developers building Laioutr apps.
 sitemap:
   loc: /apps/app-development/app-starter
