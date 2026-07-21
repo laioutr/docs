@@ -17,18 +17,23 @@ These hooks run on the client. Register them in a Nuxt plugin with [`nuxtApp.hoo
 
 Three hooks let you customize how `linkResolver` resolves links, switches locale paths, and switches market URLs. They come in two shapes.
 
-The `resolve` hook is a **filter**. It runs *after* a link is resolved, with `result.value` pre-seeded with the resolved URL or path. Your handler can transform that value (for example, append a query parameter), replace it outright (route a reference to an external URL), or leave it untouched to keep the default. This works for any link type. When several plugins register this hook, each receives the previous one's output.
+The `resolve` hook is a **filter**. It runs *after* a link is resolved, with `result.value` pre-seeded with the resolved URL or path. Your handler can transform that value, replace it outright, or leave it untouched to keep the default. When several plugins register this hook, each receives the previous one's output.
 
 The two `switch-*` hooks are **overrides**. They run *before* the default logic, with `result.value` starting empty. Set it to take over locale or market switching, including cases the default cannot resolve. Leave it unset to fall back to the default.
 
-| Hook                                             | Arguments                                                       | When it fires                                                  |
-| ------------------------------------------------ | --------------------------------------------------------------- | -------------------------------------------------------------- |
-| `frontend-core:link-resolver:resolve`            | `{ link: Link, result }`                                        | After every call to `linkResolver.resolve()`                   |
-| `frontend-core:link-resolver:switch-locale-path` | `{ targetLanguageId: string, result }`                          | When switching the current page to another language            |
-| `frontend-core:link-resolver:switch-market-url`  | `{ targetMarketId: string, targetLanguageId?: string, result }` | When switching to a different market (may include host change) |
-
-For `resolve`, `result` has the shape `{ value: string }`, pre-seeded with the resolved value. For the two `switch-*` hooks, it is `{ value: string | undefined }`, empty until you set it.
-
+::hook-meta
+---
+name: frontend-core:link-resolver:resolve
+title: link-resolver · resolve
+surface: client
+register: nuxt-plugin
+kind: filter
+payload:
+  - { field: link, type: Link, description: The link being resolved. }
+  - { field: result, type: '{ value: string }', description: Mutate to transform the output — see result.value. }
+result: { seed: pre-seeded, type: string, description: Starts with the resolved URL or path. Transform it, replace it, or leave it untouched. Threads across plugins — each handler receives the previous one's output. }
+whenItFires: After every call to linkResolver.resolve(), once the default resolution has produced a value.
+---
 ```ts [app/plugins/custom-link-resolver.ts]
 export default defineNuxtPlugin((nuxtApp) => {
   // Replace: resolve product references to an external catalog URL
@@ -37,16 +42,25 @@ export default defineNuxtPlugin((nuxtApp) => {
       result.value = `https://catalog.example.com/p/${link.reference.slug}`;
     }
   });
+});
+```
+::
 
-  // Filter: append a tracking param to outbound links to a partner domain
-  nuxtApp.hook('frontend-core:link-resolver:resolve', ({ link, result }) => {
-    if (link.type === 'url' && result.value.includes('://partner.example.com')) {
-      const separator = result.value.includes('?') ? '&' : '?';
-      result.value = `${result.value}${separator}ref=laioutr`;
-    }
-  });
-
-  // Override: take over locale switching for a specific market
+::hook-meta
+---
+name: frontend-core:link-resolver:switch-locale-path
+title: link-resolver · switch-locale-path
+surface: client
+register: nuxt-plugin
+kind: override
+payload:
+  - { field: targetLanguageId, type: string, description: The language being switched to. }
+  - { field: result, type: '{ value?: string }', description: Set it to take over — see result.value. }
+result: { seed: empty, type: string | undefined, description: Set it to take over locale switching, including cases the default cannot resolve. Leave it unset to fall back. First handler to set a value wins. }
+whenItFires: Before the default logic, when switching the current page to another language.
+---
+```ts [app/plugins/custom-locale-switch.ts]
+export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('frontend-core:link-resolver:switch-locale-path', ({ targetLanguageId, result }) => {
     if (targetLanguageId === 'fr-CH') {
       result.value = `/fr-ch${useRoute().path}`;
@@ -54,17 +68,41 @@ export default defineNuxtPlugin((nuxtApp) => {
   });
 });
 ```
+::
+
+::hook-meta
+---
+name: frontend-core:link-resolver:switch-market-url
+title: link-resolver · switch-market-url
+surface: client
+register: nuxt-plugin
+kind: override
+payload:
+  - { field: targetMarketId, type: string, description: The market being switched to. }
+  - { field: targetLanguageId, type: string, description: The target language, if any., optional: true }
+  - { field: result, type: '{ value?: string }', description: Set it to take over — see result.value. }
+result: { seed: empty, type: string | undefined, description: Set it to take over market switching (may include a host change). Leave it unset to fall back to the default. }
+whenItFires: Before the default logic, when switching to a different market.
+---
+::
 
 ### Page Renderer
 
 This hook lets you control which **page variant** is rendered. Pages can have multiple variants (for A/B testing, personalization, or conditional layouts). If you set `result.value` to a `RenderPageVariant`, that variant is used instead of the default.
 
-| Hook                                              | Arguments                      | When it fires                                       |
-| ------------------------------------------------- | ------------------------------ | --------------------------------------------------- |
-| `frontend-core:page-renderer:select-page-variant` | `{ page: RenderPage, result }` | When the `PageRenderer` component selects a variant |
-
-Here `result` has the shape `{ value: RenderPageVariant | undefined }`. The `page` object contains `id`, `type`, `path`, and a `variants` array.
-
+::hook-meta
+---
+name: frontend-core:page-renderer:select-page-variant
+title: page-renderer · select-page-variant
+surface: client
+register: nuxt-plugin
+kind: override
+payload:
+  - { field: page, type: RenderPage, description: 'Contains id, type, path, and a variants array.' }
+  - { field: result, type: '{ value?: RenderPageVariant }', description: Set it to pick a variant — see result.value. }
+result: { seed: empty, type: RenderPageVariant | undefined, description: Set it to a variant to render it instead of the default. Leave it unset to keep the default. }
+whenItFires: When the PageRenderer component selects a variant.
+---
 ```ts [app/plugins/ab-testing.ts]
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('frontend-core:page-renderer:select-page-variant', ({ page, result }) => {
@@ -76,22 +114,28 @@ export default defineNuxtPlugin((nuxtApp) => {
   });
 });
 ```
+::
 
 ### Page Head
 
-One **filter** hook lets you customize the tags Frontend Core writes to `<head>` on every page. It runs with `result.value` pre-seeded with Frontend Core's computed head, so your handler can read those values and add, override, or remove tags. When several plugins register the hook, each receives the previous one's output.
+One **filter** hook lets you customize the tags Frontend Core writes to `<head>` on every page. It runs with `result.value` pre-seeded with Frontend Core's computed head, so your handler can read those values and add, override, or remove tags.
 
-| Hook                             | Arguments                                                | Seeded `result.value`                                            |
-| -------------------------------- | -------------------------------------------------------- | --------------------------------------------------------------- |
-| `frontend-core:page-head:resolve` | `{ page, pageVariant, metaPage, currentDomain, result }` | `{ seo, locale }` — the SEO meta and the locale head (see below) |
-
-`result.value` has two slots:
-
-- **`seo`** — a flat SEO-meta object (same shape as [`useSeoMeta`](https://nuxt.com/docs/api/composables/use-seo-meta)): `title`, `description`, `robots`, and any `og:` / `twitter:` field.
-- **`locale`** — `{ htmlAttrs, meta, link }`: `<html lang>`, `og:locale`, canonical, and hreflang alternates, where `meta` and `link` are arrays of tag objects.
-
-`currentDomain` is `undefined` when no market domain is resolved (for example, in Studio preview).
-
+::hook-meta
+---
+name: frontend-core:page-head:resolve
+title: page-head · resolve
+surface: client
+register: nuxt-plugin
+kind: filter
+payload:
+  - { field: page, type: RenderPage, description: The page being rendered. }
+  - { field: pageVariant, type: RenderPageVariant, description: The selected variant. }
+  - { field: metaPage, type: MetaPage, description: The page's SEO meta. }
+  - { field: currentDomain, type: string, description: The resolved market domain — undefined in Studio preview., optional: true }
+  - { field: result, type: '{ value: { seo, locale } }', description: Mutate to change the head — see result.value. }
+result: { seed: pre-seeded, type: '{ seo, locale }', description: 'seo is a flat useSeoMeta object (title, description, robots, og:/twitter:). locale is { htmlAttrs, meta, link } — html lang, og:locale, canonical, and hreflang alternates.' }
+whenItFires: When the PageRenderer applies the page head via useHead, on every page.
+---
 ```ts [app/plugins/custom-head.ts]
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('frontend-core:page-head:resolve', ({ result }) => {
@@ -104,6 +148,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   });
 });
 ```
+::
 
 ## Orchestr Client Hooks
 
@@ -111,25 +156,39 @@ These hooks fire during client-side action execution. They follow the lifecycle 
 
 ### Fetch Action Hooks
 
-Fired by [`fetchAction`](/frontend/orchestr/actions#fetchaction), [`useFetchAction`](/frontend/orchestr/actions#usefetchaction), [`useQueryAction`](/frontend/orchestr/actions#query), and [`useMutationAction`](/frontend/orchestr/actions#mutation) (which uses `fetchAction` internally).
-
-| Hook                            | Arguments                           |
-| ------------------------------- | ----------------------------------- |
-| `orchestr:action:fetch:before`  | `{ token, input }`                  |
-| `orchestr:action:fetch:success` | `{ token, output }`                 |
-| `orchestr:action:fetch:error`   | `{ token, error }`                  |
-| `orchestr:action:fetch:finally` | `{ token, output?, error?, input }` |
+::hook-lifecycle
+---
+family: Fetch action lifecycle
+description: Four hooks fire around every fetchAction request. finally always runs, whether the action resolved or errored.
+surface: client
+register: nuxt-plugin
+firedBy: [fetchAction, useFetchAction, useQueryAction, useMutationAction]
+diagram: fetch
+phases:
+  - { phase: before, name: 'orchestr:action:fetch:before', when: Before the request is sent., payload: '{ token, input }' }
+  - { phase: success, name: 'orchestr:action:fetch:success', when: After the action resolves., payload: '{ token, output }' }
+  - { phase: error, name: 'orchestr:action:fetch:error', when: After the action rejects., payload: '{ token, error }' }
+  - { phase: finally, name: 'orchestr:action:fetch:finally', when: Always, after success or error., payload: '{ token, output?, error?, input }' }
+---
+::
 
 ### Mutation Action Hooks
 
-Fired by [`useMutationAction`](/frontend/orchestr/actions#mutation).
-
-| Hook                               | Arguments                                    |
-| ---------------------------------- | -------------------------------------------- |
-| `orchestr:action:mutation:before`  | `{ token, input }`                           |
-| `orchestr:action:mutation:success` | `{ token, output, input, context }`          |
-| `orchestr:action:mutation:error`   | `{ token, error, context }`                  |
-| `orchestr:action:mutation:finally` | `{ token, output?, error?, input, context }` |
+::hook-lifecycle
+---
+family: Mutation action lifecycle
+description: useMutationAction fires these around the mutation. The context value comes from Pinia Colada's mutation context, set by the onMutate callback.
+surface: client
+register: nuxt-plugin
+firedBy: [useMutationAction]
+diagram: mutation
+phases:
+  - { phase: before, name: 'orchestr:action:mutation:before', when: Before the mutation runs., payload: '{ token, input }' }
+  - { phase: success, name: 'orchestr:action:mutation:success', when: After the mutation resolves., payload: '{ token, output, input, context }' }
+  - { phase: error, name: 'orchestr:action:mutation:error', when: After the mutation rejects., payload: '{ token, error, context }' }
+  - { phase: finally, name: 'orchestr:action:mutation:finally', when: Always, after success or error., payload: '{ token, output?, error?, input, context }' }
+---
+::
 
 The `context` value comes from [Pinia Colada's mutation context](https://pinia-colada.esm.dev/guide/mutations.html) and is set by the `onMutate` callback.
 
@@ -150,32 +209,54 @@ export default defineNuxtPlugin((nuxtApp) => {
 
 Two hooks control how Orchestr reads and writes URL query parameters (pagination, sorting, filters). See [URL Query Parameters](/frontend/orchestr/url-query-params#hooks) for the full reference with examples.
 
-| Hook                              | Arguments                                          | When it fires                                                |
-| --------------------------------- | -------------------------------------------------- | ------------------------------------------------------------ |
-| `orchestr:query-params:parsed`    | `{ params, queryPrefixes, route }`                 | After parsing the URL, before reading pagination/sort/filter |
-| `orchestr:navigate-query:build`   | `{ params, query, path, queryString }`             | At the end of `buildQueryUrl()`, before returning the URL    |
+::hook-meta
+---
+name: orchestr:query-params:parsed
+title: query-params · parsed
+surface: client
+register: nuxt-plugin
+kind: modify
+payload:
+  - { field: params, type: QueryParams, description: The parsed query params — mutate directly. }
+  - { field: queryPrefixes, type: QueryPrefixes, description: The active query prefixes. }
+  - { field: route, type: RouteLocation, description: The current route. }
+whenItFires: After parsing the URL, before reading pagination, sort, and filter.
+related:
+  - { label: URL Query Parameters, to: /frontend/orchestr/url-query-params#hooks }
+---
+::
+
+::hook-meta
+---
+name: orchestr:navigate-query:build
+title: navigate-query · build
+surface: client
+register: nuxt-plugin
+kind: modify
+payload:
+  - { field: params, type: QueryParams, description: The params being written. }
+  - { field: query, type: QueryObject, description: The assembled query object — mutate directly. }
+  - { field: path, type: string, description: The target path. }
+  - { field: queryString, type: string, description: The serialized query string. }
+whenItFires: At the end of buildQueryUrl(), before returning the URL.
+related:
+  - { label: URL Query Parameters, to: /frontend/orchestr/url-query-params#hooks }
+---
+::
 
 ### Client Environment
 
-The `orchestr:client-env:modify` hook fires **synchronously** every time orchestr builds the `clientEnv` object before sending an action request. Use it to set locale, currency, or custom fields based on the current frontend state.
-
-| Hook                         | Arguments                  |
-| ---------------------------- | -------------------------- |
-| `orchestr:client-env:modify` | `{ clientEnv: ClientEnv }` |
-
-The `ClientEnv` object has the following shape:
-
-```ts
-{
-  locale: string;
-  currency: string;
-  isPreview?: boolean;
-  custom?: Record<string, any>;
-}
-```
-
-Mutate `clientEnv` directly; don't replace it.
-
+::hook-meta
+---
+name: orchestr:client-env:modify
+title: client-env · modify
+surface: client
+register: nuxt-plugin
+kind: modify
+payload:
+  - { field: clientEnv, type: ClientEnv, description: '{ locale, currency, isPreview?, custom? } — mutate directly, do not replace.' }
+whenItFires: Synchronously, every time orchestr builds the clientEnv object before sending an action request.
+---
 ```ts [app/plugins/client-env.ts]
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('orchestr:client-env:modify', ({ clientEnv }) => {
@@ -184,6 +265,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   });
 });
 ```
+::
 
 ::note
 This hook is called synchronously (not `async`). Avoid async work inside the callback.
@@ -193,12 +275,20 @@ This hook is called synchronously (not `async`). Avoid async work inside the cal
 
 These hooks fire during **server-side** action handler execution. They are [Nitro runtime hooks](https://nitro.build/guide/plugins#nitro-hooks) and must be registered in a Nitro plugin, not a Nuxt plugin.
 
-| Hook                              | Arguments                           |
-| --------------------------------- | ----------------------------------- |
-| `orchestr:action:handler:before`  | `{ token, input, clientEnv }`       |
-| `orchestr:action:handler:error`   | `{ token, error }`                  |
-| `orchestr:action:handler:success` | `{ token, output }`                 |
-| `orchestr:action:handler:finally` | `{ token, output?, error?, input }` |
+::hook-lifecycle
+---
+family: Server handler lifecycle
+description: Four hooks fire around the server-side action handler. Register them in a Nitro plugin with nitroApp.hooks.hook().
+surface: server
+register: nitro-plugin
+diagram: handler
+phases:
+  - { phase: before, name: 'orchestr:action:handler:before', when: Before the handler runs., payload: '{ token, input, clientEnv }' }
+  - { phase: success, name: 'orchestr:action:handler:success', when: After the handler resolves., payload: '{ token, output }' }
+  - { phase: error, name: 'orchestr:action:handler:error', when: After the handler throws., payload: '{ token, error }' }
+  - { phase: finally, name: 'orchestr:action:handler:finally', when: Always, after success or error., payload: '{ token, output?, error?, input }' }
+---
+::
 
 ```ts [server/plugins/action-logging.ts]
 export default defineNitroPlugin((nitroApp) => {
