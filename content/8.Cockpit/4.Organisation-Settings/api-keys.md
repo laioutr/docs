@@ -5,7 +5,7 @@ seo:
   title: Organization API keys | Cockpit | Laioutr
 sitemap:
   loc: /cockpit/organisation/api-keys
-  lastmod: 2026-04-09
+  lastmod: 2026-07-21
   changefreq: monthly
   priority: 0.75
 
@@ -14,6 +14,8 @@ sitemap:
 ## API keys (organization)
 
 The **API Keys** tab (`/o/{organization-slug}/api-keys`) lists **organization-scoped API keys** used to **authenticate automation** (for example **CLI** usage and **CI pipelines**). You need the **`apiKeyManagement`** permission; without it the tab is **disabled** with a tooltip.
+
+The same page shows the server URL for [Cockpit MCP](/cockpit/features/mcp) when Laioutr has enabled the private alpha for your organization. Cockpit MCP uses OAuth with your user account, not an organization API key.
 
 ### What API keys are for
 
