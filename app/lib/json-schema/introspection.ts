@@ -185,6 +185,8 @@ export interface ExpandableVariant {
   summary: string;
   descriptionHtml: string;
   schema: JSONSchema;
+  /** Whether this variant has nested details that can be expanded. */
+  expandable: boolean;
   /** Placeholder shown in the type cell when the variant is open. Defaults to `{ }`. */
   openPlaceholder?: string;
   /**
@@ -280,6 +282,7 @@ const variantFromKind = (k: SchemaKind): ExpandableVariant | undefined => {
       summary: summarizeProps(k.schema),
       descriptionHtml: getVariantDescriptionHtml(k.schema),
       schema: k.schema,
+      expandable: true,
       originKind: 'object',
     };
   }
@@ -296,6 +299,7 @@ const variantFromKind = (k: SchemaKind): ExpandableVariant | undefined => {
       summary: `[type: ${JSON.stringify(k.tag)}, value: ${getTypeName(k.valueSchema, 'json')}]`,
       descriptionHtml: getVariantDescriptionHtml(synthetic),
       schema: synthetic,
+      expandable: true,
       openPlaceholder: '[ ]',
       originKind: 'discriminated-tuple',
     };
@@ -309,12 +313,24 @@ const variantFromKind = (k: SchemaKind): ExpandableVariant | undefined => {
         summary: summarizeProps(k.items),
         descriptionHtml: getVariantDescriptionHtml(k.items),
         schema: k.items,
+        expandable: true,
         originKind: 'array',
       };
     }
   }
   return undefined;
 };
+
+/** Preserve non-expandable branches when an object union also contains primitive values. */
+const variantFromUnionKind = (k: SchemaKind): ExpandableVariant =>
+  variantFromKind(k) ?? {
+    label: getTypeName(k.schema),
+    summary: '',
+    descriptionHtml: getVariantDescriptionHtml(k.schema),
+    schema: k.schema,
+    expandable: false,
+    originKind: k.kind,
+  };
 
 /** Detect a discriminant: a property where every schema has a unique `const` value. */
 const getDiscriminantField = (schemas: JSONSchema[]): string | undefined => {
@@ -369,7 +385,7 @@ const computeExpandableVariants = (s: JSONSchema): ExpandableVariant[] | undefin
 
   // Expandable literal union: synthesize a single 'values' variant. Display gating happens here.
   if (k.kind === 'literal-union' && isExpandableLiteralUnion(s)) {
-    return [{ label: 'values', summary: '', descriptionHtml: '', schema: s }];
+    return [{ label: 'values', summary: '', descriptionHtml: '', schema: s, expandable: true }];
   }
 
   // Direct kinds that produce a single variant
@@ -378,8 +394,8 @@ const computeExpandableVariants = (s: JSONSchema): ExpandableVariant[] | undefin
 
   // Union of variants — each variant gets classified individually
   if (k.kind === 'union') {
-    const results = k.variants.map((v) => variantFromKind(classify(v))).filter((v): v is ExpandableVariant => !!v);
-    if (results.length) {
+    const results = k.variants.map((v) => variantFromUnionKind(classify(v)));
+    if (results.some((variant) => variant.expandable)) {
       enrichWithDiscriminant(results);
       return results;
     }
@@ -389,8 +405,8 @@ const computeExpandableVariants = (s: JSONSchema): ExpandableVariant[] | undefin
   if (k.kind === 'array') {
     const itemsKind = classify(k.items);
     if (itemsKind.kind === 'union') {
-      const results = itemsKind.variants.map((v) => variantFromKind(classify(v))).filter((v): v is ExpandableVariant => !!v);
-      if (results.length) {
+      const results = itemsKind.variants.map((v) => variantFromUnionKind(classify(v)));
+      if (results.some((variant) => variant.expandable)) {
         enrichWithDiscriminant(results);
         return results;
       }
