@@ -16,6 +16,8 @@ sitemap:
   priority: 1.0
 aliases:
   - /laioutr-ui/navigation/headerwithtextlinks
+changelogKeys:
+  - NavigationMenuTextItem
 ---
 
 ## Overview
@@ -28,6 +30,8 @@ aliases:
 - `NavigationMenuContentColumn`, `ContentList`, `ContentLink`, `ContentHeadline`, and `ContentSeparator` compose the panel.
 
 It is typically used inside [`HeaderBasic`](/laioutr-ui/navigation/header-basic)'s `desktop` slot. The hover panel anchors to the trigger `<li>` with `top: 100%; left: 0; z-index: var(--z-index-popover)` so it sits naturally below the header rather than at a fixed pixel offset. Text-item surface tones are restricted to `Exclude<SurfaceTone, 'bright'>` because the triggers live on neutral header chrome.
+
+`NavigationMenuTextItem` also takes an optional `textColor` prop — a resolved CSS color string. Set it to override the surface-tone label color for a single item (for example, a "Sale" link in the brand accent); leave it unset and the item inherits the surrounding surface tone.
 
 Reach for `NavigationMenu` when the header needs simple text links with optional flyouts. For catalog-driven mega menus, use the dedicated `MegaMenu` compound instead.
 

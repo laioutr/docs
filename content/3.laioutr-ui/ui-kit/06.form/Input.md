@@ -15,6 +15,8 @@ sitemap:
   lastmod: 2026-05-13
   changefreq: monthly
   priority: 1.0
+changelogKeys:
+  - Input
 
 ---
 
@@ -25,6 +27,18 @@ Input is the styled text field for forms and search. It accepts optional addons 
 Wrap an Input in `<LField>` and pass `errorMessage` on the Field. The Field's `errorMessage` automatically derives `invalid` on the Input, so you rarely need to set `invalid` directly.
 
 For composed groups (currency symbols, action buttons), use [`InputGroup`](/laioutr-ui/ui-kit/form/input-group) with `InputGroupAddon` and `InputGroupButton`.
+
+### Variants
+
+The `variant` prop chooses the field chrome:
+
+| `variant`   | When to use                                                                                  |
+| ----------- | ------------------------------------------------------------------------------------------- |
+| `'outline'` | Default. Bordered field for standalone forms.                                                |
+| `'subtle'`  | Low-emphasis field that leans on a filled background instead of a border.                    |
+| `'plain'`   | For fields sitting on an already-styled surface — they shouldn't carry their own box.        |
+
+The `plain` variant paints its resting, hover, focus, disabled, and error backgrounds and borders from the `--input-field-plain-*` design tokens, so a theme can recolor it without overriding component styles.
 
 ## Key Business & UX Benefits
 

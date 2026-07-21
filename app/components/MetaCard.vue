@@ -2,7 +2,7 @@
 defineProps<{
   title: string;
   token: string;
-  importLine: string;
+  importLine?: string;
 }>();
 
 const copied = ref(false);
@@ -20,7 +20,7 @@ function copyImport(text: string) {
     <!-- Header: title + token badge -->
     <div class="meta-card__header">
       <h3 :id="title.toLowerCase()" class="meta-card__title">{{ title }}</h3>
-      <code class="meta-card__token">{{ token }}</code>
+      <code v-if="token" class="meta-card__token">{{ token }}</code>
     </div>
 
     <!-- After header (pills, badges, etc.) -->
@@ -32,7 +32,7 @@ function copyImport(text: string) {
     </div>
 
     <!-- Import snippet -->
-    <button class="meta-card__snippet" type="button" @click="copyImport(importLine)">
+    <button v-if="importLine" class="meta-card__snippet" type="button" @click="copyImport(importLine)">
       <code class="meta-card__snippet-code">{{ importLine }}</code>
       <UIcon
         :name="copied ? 'lucide:check' : 'lucide:copy'"

@@ -17,6 +17,8 @@ sitemap:
   priority: 1.0
 aliases:
   - /laioutr-ui/ui-kit/content/ctabannershowcase
+changelogKeys:
+  - BannerShowcase
 ---
 
 ## Overview
@@ -24,6 +26,8 @@ aliases:
 `BannerShowcase` lays a media image alongside a copy block (caption, heading, description) and a single CTA. On narrow viewports the image stacks above the content; from the MD container breakpoint, the image and content sit side-by-side.
 
 The `mediaAspectRatio` prop picks a single ratio for the image (`16/9`, `4/3`, or `1/1`) that applies across all breakpoints. Text and chrome are surface-tone aware via the surrounding `MediaStage`, so the banner stays legible on themed backdrops. Apply `.radius-contained` on a padded parent to round corners inside a container.
+
+The `contentPadding` prop (`'default' | 'm' | 's' | 'none'`) tunes the padding around the banner's inner content, surfaced as the Design → Layout **Content Padding** control in Studio. Leave it unset (or `default`) to keep the existing padding.
 
 ## Key Business & UX Benefits
 

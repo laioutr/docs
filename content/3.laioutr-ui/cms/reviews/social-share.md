@@ -18,7 +18,7 @@ sitemap:
 
 ## Overview
 
-`SocialShare` is the row of platform share buttons (Facebook, X / Twitter, LinkedIn, Pinterest, email) used inside `BlogPostDetail`. Each button opens the platform's web intent URL (for example `sharer.php`, `intent/post`, `share-offsite`, `mailto:`) prefilled with the page URL and title.
+`SocialShare` is the row of platform share buttons (Facebook, X / Twitter, LinkedIn, Pinterest, email) used inside `ArticleDetail`. Each button opens the platform's web intent URL (for example `sharer.php`, `intent/post`, `share-offsite`, `mailto:`) prefilled with the page URL and title.
 
 ## Key Business & UX Benefits
 
@@ -35,7 +35,7 @@ items:
   - "Platform buttons cover Facebook, X / Twitter, LinkedIn, Pinterest, and email in one row"
   - "Each button opens the platform's web intent URL prefilled with the page URL and title"
   - "Web intents work without third-party SDKs, keeping the page light and free of extra consent reviews"
-  - "Used inside BlogPostDetail for one-click distribution of editorial content"
+  - "Used inside ArticleDetail for one-click distribution of editorial content"
   - "Defaults the share URL to the current page when none is passed"
 ---
 ::

@@ -14,6 +14,8 @@ sitemap:
   lastmod: 2026-05-28
   changefreq: monthly
   priority: 1.0
+changelogKeys:
+  - LocationFinder
 ---
 
 ## Overview
@@ -26,6 +28,8 @@ sitemap:
 Search filters by name and address. Filters work via the same `AvailableFilter` / `SelectedFilters` shape used by `FilterPanelContent`. Both are state-only: the parent owns the data and the filter definitions.
 
 `LocationFinder` composes [`LocationFinderList`](#locationfinderlist) and [`LocationFinderMap`](#locationfindermap) internally. Both are exported from `@laioutr-core/ui` so you can drop them in independently when you need just the list or just the map.
+
+The `containerStyle` prop (`'full-width' | 'boxed'`, via the shared `containerStyleField` toggle in Studio) controls the desktop framing. In `boxed` mode, `.location-finder--boxed` clamps the finder to `--container-max-width` and centers it with `margin-inline: auto` from the `--lg` breakpoint up, so it sits as a contained card rather than stretching edge-to-edge.
 
 ## Key Business & UX Benefits
 

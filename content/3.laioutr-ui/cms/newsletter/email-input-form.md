@@ -16,6 +16,8 @@ sitemap:
   priority: 1.0
 aliases:
   - /laioutr-ui/cms/newsletter/inputnewsletter
+changelogKeys:
+  - EmailInputForm
 ---
 
 ## Overview
@@ -23,6 +25,8 @@ aliases:
 `EmailInputForm` is the email-capture field and submit button used inside `NewsletterRegistration`, `PopUpNewsletter`, and standalone footer signups. The form is accessible and validation-ready, with optional placeholder and label.
 
 `EmailInputFormDisplay` is the display sub-component. Use it to separate the form chrome from the success or empty state when you need finer control over rendering.
+
+Both accept a `variant` prop (`'boxed' | 'plain'`), forwarded to the underlying [`Input`](/laioutr-ui/ui-kit/form/input). Pick `plain` when the signup sits on an already-colored surface — a footer or popup — so the email field renders flush via the plain `Input` styling instead of its own bordered box.
 
 ## Key Business & UX Benefits
 

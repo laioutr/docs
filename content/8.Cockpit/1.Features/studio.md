@@ -5,7 +5,7 @@ seo:
   title: Studio | Cockpit
 sitemap:
   loc: /cockpit/features/studio
-  lastmod: 2026-04-09
+  lastmod: 2026-07-21
   changefreq: monthly
   priority: 0.8
 
@@ -14,6 +14,8 @@ sitemap:
 ## Studio
 
 **Studio** is the in-browser editor for your Laioutr storefront. Open it from the project sidebar to work on **pages, sections, and blocks** with a **live preview** of the frontend.
+
+To inspect and edit Studio content from Claude Desktop, ChatGPT, or Cursor, [connect an AI assistant through Laioutr MCP](/agent-api/laioutr-mcp).
 
 ### Layout
 

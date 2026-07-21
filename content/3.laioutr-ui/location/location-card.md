@@ -62,6 +62,6 @@ items:
 ## Related
 
 - [`OpeningStatus`](/laioutr-ui/ui-kit/general/opening-status): the open/closed summary rendered inside each card.
-- [`OpeningHoursWeeklyTable`](/laioutr-ui/ui-kit/general/opening-hours-weekly-table): the full weekly schedule for the detail page this card links to.
+- [`TableOpeningHours`](/laioutr-ui/location/table-opening-hours): the full weekly schedule for the detail page this card links to.
 - [`OpeningHours` type](/frontend/api-reference/common-types/opening-hours): the shape the `openingHours` prop expects.
 - [`Media` type](/frontend/api-reference/common-types/media): the shape the `image` prop expects.

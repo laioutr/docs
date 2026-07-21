@@ -1,4 +1,10 @@
 AlphabeticalIndex:
+  - version: 2.4.0
+    type: fixed
+    changelog: ui
+    note: >-
+      Group content is now top-aligned (`align-items: flex-start` instead of
+      `center`), so columns of uneven height line up along their top edge.
   - version: 2.3.0
     type: changed
     breaking: true
@@ -21,6 +27,135 @@ AlphabeticalIndex:
         items: { name: string; href: string; count?: number }[];
       }
       ```
+
+ArticleDetail:
+  - version: 2.4.0
+    type: changed
+    breaking: true
+    changelog: ui
+    note: >-
+      `BlogPostDetail` was renamed to `ArticleDetail` and promoted to the shared
+      reading view behind both the Blog Post and Glossary sections. There is no
+      backwards-compatible alias.
+    migration: |
+      Update imports and template tags.
+
+      ```diff
+      - import BlogPostDetail from '#ui/components/BlogPostDetail/BlogPostDetail.vue';
+      + import ArticleDetail from '#ui/components/ArticleDetail/ArticleDetail.vue';
+
+      - <LBlogPostDetail :title :media :body />
+      + <LArticleDetail :title :media :body />
+      ```
+  - version: 2.4.0
+    type: added
+    changelog: ui
+    note: >-
+      New optional `showSocialShare` prop (default `false`) toggles the trailing
+      `SocialShare` row. `SectionBlogPostDetail` enables it; `SectionGlossaryDetail`
+      leaves it off.
+
+BasicTable:
+  - version: 2.5.0
+    type: changed
+    breaking: true
+    changelog: ui
+    note: >-
+      Renamed from `DescriptionList` (and `DescriptionListItem` → `BasicTableRow`),
+      now rendered as a semantic description list (`<dl>` with `<dt>`/`<dd>` rows)
+      instead of presentational `<div>`s. The label column is overridable via the
+      new public `--basic-table-label-col` custom property; the grid/subgrid layout
+      and CSS surface (`.basic-table` class, BEM classes) are unchanged.
+    migration: |
+      ```diff
+      - import DescriptionList from '#ui-kit/components/DescriptionList/DescriptionList.vue';
+      - import DescriptionListItem from '#ui-kit/components/DescriptionList/DescriptionListItem.vue';
+      + import BasicTable from '#ui-kit/components/BasicTable/BasicTable.vue';
+      + import BasicTableRow from '#ui-kit/components/BasicTable/BasicTableRow.vue';
+      ```
+
+BannerBasic:
+  - version: 2.4.0
+    type: added
+    changelog: ui
+    note: >-
+      New `contentPadding` prop (`'default' | 'm' | 's' | 'none'`) with matching
+      `.banner-basic--content-padding-{m,s,none}` modifier classes. Unset preserves
+      the existing padding. In Studio it surfaces as the Design → Layout
+      **Content Padding** control.
+
+BannerIntegrated:
+  - version: 2.4.0
+    type: added
+    changelog: ui
+    note: >-
+      New `contentPadding` prop (`'default' | 'm' | 's' | 'none'`) with matching
+      `.banner-integrated--content-padding-{m,s,none}` modifier classes. Unset
+      preserves the existing padding, and the Design → Layout **Content Padding**
+      control exposes it in Studio.
+
+BannerShowcase:
+  - version: 2.4.0
+    type: added
+    changelog: ui
+    note: >-
+      New `contentPadding` prop (`'default' | 'm' | 's' | 'none'`) with matching
+      `.banner-showcase--content-padding-{m,s,none}` modifier classes. Unset
+      preserves the existing padding, and the Design → Layout **Content Padding**
+      control exposes it in Studio.
+
+CouponBox:
+  - version: 2.4.0
+    type: added
+    changelog: ui
+    note: >-
+      New `BlockProductDetailCouponBox` wraps `CouponBox` for placement in the
+      Product Detail section's content slot. Editors configure the text, code,
+      optional discount badge, and icon; the block hard-wires `action="copy"` so
+      shoppers copy the code to the clipboard.
+
+EmailInputForm:
+  - version: 2.4.0
+    type: added
+    changelog: ui
+    note: >-
+      `EmailInputForm` and `EmailInputFormDisplay` gained a `variant`
+      (`'boxed' | 'plain'`) prop, forwarded to the underlying `Input`. The `plain`
+      variant paints resting backgrounds and borders from the `--input-field-plain-*`
+      tokens, so a footer or popup signup can sit flush on an already-styled surface.
+
+GridFill:
+  - version: 2.4.0
+    type: added
+    changelog: ui
+    note: >-
+      New `justify` and `align` props (`'start' | 'center' | 'end'`, both default
+      `'start'`) set main- and cross-axis item alignment. They are stated logically:
+      under `sizing="greedy-first"` GridFill internally un-mirrors the reversed axis,
+      so `start`/`end` resolve to the intended physical direction. `Container` maps
+      its 2D `alignment` onto these, fixing mirrored alignment under "Greedy First"
+      sizing.
+
+Input:
+  - version: 2.4.0
+    type: added
+    changelog: ui
+    note: >-
+      A `plain` variant joins `outline` (default) and `subtle`. It paints resting,
+      hover, focus, disabled, and error backgrounds/borders from the
+      `--input-field-plain-*` tokens, for inputs that sit on an already-styled
+      surface.
+
+LocationFinder:
+  - version: 2.4.0
+    type: changed
+    changelog: ui
+    note: >-
+      The container-style control moved to the shared `containerStyleField` toggle
+      (`'full-width' | 'boxed'`); the field name and stored values are unchanged, so
+      no re-authoring is needed. In `boxed` mode `.location-finder--boxed` now clamps
+      to `--container-max-width` and centres with `margin-inline: auto` from the
+      `--lg` breakpoint up.
 
 Media:
   - version: 0.34.0
@@ -140,6 +275,63 @@ MediaComponent:
       (HLS/DASH) or a custom player UI. See
       [Rendering video and audio](/laioutr-ui/ui-kit/general/media#rendering-video-and-audio).
 
+MediaLibrary:
+  - version: 0.31.0
+    type: changed
+    changelog: frontend
+    note: >-
+      Media-library connectors are now defined through the Orchestr builder's
+      `mediaLibrary` facet. `defineMediaLibraryProvider()` remains available as
+      a deprecated compatibility shim, but legacy providers do not support
+      folders, staged uploads, declared sorts, or server-side type filtering.
+
+MediaText:
+  - version: 2.4.0
+    type: added
+    changelog: ui
+    note: >-
+      New `innerBlockPadding` prop (`'s' | 'm' | 'l'`) forwarded to `Backdrop`,
+      surfaced as the Design → Layout **Padding** control (none/S/M/L). Unset
+      defaults to none, so existing sections render unchanged.
+
+MegaMenu:
+  - version: 2.4.0
+    type: added
+    changelog: ui
+    note: >-
+      `MegaMenuItem` gained an optional `textColor` (`ColorFieldValue`) that
+      overrides the surface-tone label color of a top-level trigger. In Studio,
+      `BlockMegaMenu` exposes a per-item color picker via an `as: 'style'`
+      decorator on author-typed titles.
+
+MenuSideBySide:
+  - version: 2.4.0
+    type: added
+    changelog: ui
+    note: >-
+      `NavigationNode` gained an optional `textColor` (`ColorFieldValue`) that
+      overrides the surface-tone label color of a top-level node. In Studio,
+      `BlockMenuSideBySide` and `BlockMenuBasic` expose a per-item color picker via
+      an `as: 'style'` decorator on author-typed titles.
+
+NavigationMenuTextItem:
+  - version: 2.4.0
+    type: added
+    changelog: ui
+    note: >-
+      New optional `textColor` prop accepting a resolved CSS color string. When set
+      it overrides the surface-tone label color for that item; unset, the item
+      inherits the surrounding surface tone.
+
+SectionGlossaryDetail:
+  - version: 2.4.0
+    type: added
+    changelog: ui
+    note: >-
+      New section that renders a single glossary entry through the shared
+      `ArticleDetail` reading view, bound to the `Glossary` entity's `base` and
+      `content` components.
+
 SchemaCondition:
   - version: 0.30.0
     type: added
@@ -148,3 +340,30 @@ SchemaCondition:
       Field and fieldset definitions gained an optional `if` expression that
       hides a control in the Studio sidebar — see
       [Conditional visibility](/apps/app-development/schema-fields#conditional-visibility).
+
+TableOpeningHours:
+  - version: 2.5.0
+    type: changed
+    breaking: true
+    changelog: ui
+    note: >-
+      Moved out of UI Kit into `@laioutr-core/ui` (renamed from
+      `OpeningHoursWeeklyTable`), now built on the `BasicTable` primitive and
+      gaining an `outlined` / `plain` `variant`. The weekday-grouping behavior is
+      unchanged.
+    migration: |
+      ```diff
+      - import OpeningHoursWeeklyTable from '#ui-kit/components/OpeningHoursWeeklyTable/OpeningHoursWeeklyTable.vue';
+      + import TableOpeningHours from '#ui/components/TableOpeningHours/TableOpeningHours.vue';
+      ```
+
+TableProductSpecifications:
+  - version: 2.5.0
+    type: added
+    changelog: ui
+    note: >-
+      Product specification sheet built on `BasicTable`. Rows carry a `label` and a
+      typed `value` (`string | number | boolean | Measurement | Money`) formatted
+      per locale by the `TableProductSpecificationsValue` subcomponent, with optional
+      per-row `sectionName` grouping. Consumes a Product's `specifications` component
+      or manually authored rows.

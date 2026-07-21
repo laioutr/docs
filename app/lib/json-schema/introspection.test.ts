@@ -406,6 +406,37 @@ describe('getTypeSummary', () => {
     expect(getTypeSummary(ANY_OF_OBJECTS)).toBe('TextNode | ImageNode');
   });
 
+  it('preserves primitive and expandable object branches in a mixed union', () => {
+    const productSpecificationValue = {
+      anyOf: [
+        { type: 'string' as const },
+        { type: 'number' as const },
+        { type: 'boolean' as const },
+        {
+          id: 'Measurement',
+          type: 'object' as const,
+          properties: { unit: { type: 'string' as const }, value: { type: 'number' as const } },
+        },
+        {
+          id: 'Money',
+          type: 'object' as const,
+          properties: { amount: { type: 'number' as const }, currency: { type: 'string' as const } },
+        },
+      ],
+    };
+
+    expect(getTypeSummary(productSpecificationValue)).toBe('string | number | boolean | Measurement | Money');
+    expect(
+      getExpandableVariants(productSpecificationValue)?.map(({ label, expandable }) => ({ label, expandable }))
+    ).toEqual([
+      { label: 'string', expandable: false },
+      { label: 'number', expandable: false },
+      { label: 'boolean', expandable: false },
+      { label: 'Measurement', expandable: true },
+      { label: 'Money', expandable: true },
+    ]);
+  });
+
   it('uses outer id over expanding variants when both are present', () => {
     expect(getTypeSummary({ ...ANY_OF_OBJECTS, id: 'Node' } as any)).toBe('Node');
   });

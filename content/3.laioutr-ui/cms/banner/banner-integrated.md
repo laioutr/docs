@@ -17,6 +17,8 @@ sitemap:
   priority: 1.0
 aliases:
   - /laioutr-ui/ui-kit/content/ctabannerintegrated
+changelogKeys:
+  - BannerIntegrated
 ---
 
 ## Overview
@@ -24,6 +26,8 @@ aliases:
 `BannerIntegrated` is a horizontal call-to-action banner with caption, heading, subline, an optional icon, and up to two CTA buttons. On mobile the layout stacks vertically; from MD+ the icon sits left of the copy and the buttons hug the trailing edge.
 
 Both CTAs render as `BackgroundAwareButton`, so they pick up standard button variants (`primary`, `secondary`, and so on). Apply `.radius-contained` on a padded parent to round corners inside a container.
+
+The `contentPadding` prop (`'default' | 'm' | 's' | 'none'`) tunes the padding around the banner's inner content, surfaced as the Design → Layout **Content Padding** control in Studio. Leave it unset (or `default`) to keep the existing padding.
 
 ## Key Business & UX Benefits
 

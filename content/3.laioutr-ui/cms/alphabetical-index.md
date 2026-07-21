@@ -27,7 +27,7 @@ links:
 
 ## Overview
 
-`AlphabeticalIndex` renders an A-Z grouped directory of links. Items passed via the `items` prop are sorted with the active locale's collator, then grouped by the first character of each name into alphabetical sections. Each row is a text link with an optional count pill. It is the shared component behind both the Brand List and Glossary List sections, and suits any "shop by brand", glossary, or partner-directory entry point. Pass an optional `heading` to label the index.
+`AlphabeticalIndex` renders an A-Z grouped directory of links. Items passed via the `items` prop are sorted with the active locale's collator, then grouped by the first character of each name into alphabetical sections. Each row is a text link with an optional count pill. It suits any "shop by brand", glossary, or partner-directory entry point. Pass an optional `heading` to label the index.
 
 ## Key Business & UX Benefits
 
@@ -35,7 +35,6 @@ links:
 - A-Z grouping with locale-aware sorting helps shoppers scan a long list without scrolling endlessly.
 - Optional per-item counts hint at catalogue depth, nudging shoppers toward sections with more on offer.
 - One component covers brands, glossaries, and similar indexes, so teams stop forking a list component per use case.
-- Editors maintain the items array in Studio, so directories stay current as partnerships and content evolve.
 
 ## Feature List
 
@@ -45,9 +44,8 @@ items:
   - "A-Z grouped directory built from the items array, with locale-aware collation"
   - "Each row is a text link with an optional count pill, sized for dense directories"
   - "Groups appear in alphabetical order with non-alphanumeric entries pushed to the end"
-  - "Optional heading labels the index; falls back to a locale-aware default per section"
-  - "Shared by the Brand List and Glossary List sections, and reusable for any index"
-  - "Editors maintain the items list in Studio as partnerships and content evolve"
+  - "Optional heading labels the index"
+  - "Reusable for brand lists, glossaries, partner directories, and similar indexes"
 ---
 ::
 

@@ -1,11 +1,11 @@
 ---
 title: Translations
-description: Manage storefront languages, fallback chains, and where each language is used on domains—linked to Markets in the Cockpit.
+description: Manage storefront languages, fallback chains, and where each language is used on domains, and export or import all translatable content as a JSON file—in the Cockpit.
 seo:
   title: Translations | Cockpit
 sitemap:
   loc: /cockpit/features/translations
-  lastmod: 2026-04-09
+  lastmod: 2026-06-24
   changefreq: monthly
   priority: 0.8
 
@@ -20,7 +20,7 @@ sitemap:
 The page header summarizes the purpose of the section. In the toolbar you will find:
 
 - **Add language** — opens the dialog to register a new locale.
-- **Export** / **Import** — may appear as actions for future or staged workflows; if they are disabled, bulk export/import is not available in your build yet.
+- **Export** / **Import** — download all translatable content for the project as a JSON file, or upload an edited file to apply translations in bulk. Both are disabled until the project has at least one language. See [Exporting and importing translations](#exporting-and-importing-translations).
 
 Below, **Published languages** lists every language that is already configured.
 
@@ -53,6 +53,47 @@ Removing a language asks for **confirmation**. The dialog may warn you if:
 - Other languages use this one in their **fallback** chain (those relationships need to be updated).
 
 After deletion, the list updates automatically.
+
+### Exporting and importing translations
+
+The toolbar **Export** and **Import** actions let you take all of a project's translatable content out as a single **JSON file**, edit it offline (or hand it to a translation team), and bring it back in. Both actions are disabled until the project has at least one language, and access follows the same permission as **Markets** management.
+
+#### What counts as translatable content
+
+Export and import operate on the **localized fields of your storefront configuration**—the content you would otherwise edit per language in **Studio**:
+
+- **Section, block, and global-section props** whose field type can hold text: **text**, **textarea**, **rich text**, **link**, and **media**. Other field types (numbers, selects, colors, icons, and so on) are not translated and are left out.
+- **Page SEO** — each page variant's **title** and **description**.
+
+The export is driven by your **field schema**, not just the stored values, so only fields that are genuinely marked translatable are included. Values are scoped to the **languages you have configured** on this page; any locale outside that set is dropped.
+
+This is **not** about UI message strings or product/catalog data from a connected app—only the content configured on your project's pages.
+
+::callout{icon="i-lucide-triangle-alert" color="warning"}
+Export and import read your field schema from the project's **deployed frontend**. If the frontend has never been published or deployed—or the deployment is unreachable—both actions fail with a message asking you to publish or deploy first.
+::
+
+#### Exporting
+
+Select **Export** to download a file named `translations-<project-slug>.json`. It contains every configured language (with its fallback chain), a description of each component and field, and one entry per translatable value holding the text for each language.
+
+If some fields could not be read—usually because the saved content no longer matches the current schema (**schema drift**)—the export still completes and a notice tells you **how many fields were skipped**.
+
+#### Importing
+
+**Import** lets you upload a file in the same format—typically an export you have since edited. Because importing **rewrites the project's configuration** with the contents of the file, Cockpit asks you to confirm first:
+
+> Importing overwrites this project's configuration with the uploaded file and will disconnect anyone editing in Studio. Only proceed when Studio is closed. This cannot be undone.
+
+Close Studio before you import. The action is **destructive and not reversible** from the dialog, so treat it deliberately. As a safety net, Cockpit captures a **snapshot** of the current configuration before applying any changes; if you need to roll back, restore that `pre-translation-import` snapshot from the project's snapshots list.
+
+Import applies values **entry by entry**, matching each one to its field by a stable identifier:
+
+- A value is written only if its **field still exists** and is **still translatable**, and only for **languages configured** on the project.
+- An entry that no longer matches anything in the project—or whose value is not valid for its field—is **skipped** rather than aborting the whole import. One bad entry never stops the rest.
+- Page SEO values are **merged** with what is already there, so importing one language does not wipe the others.
+
+When it finishes, Cockpit reports how many translations were **applied** and how many were **skipped** (for example, *"Imported 124 translations, 3 skipped"*). Imported content becomes part of your project configuration and reaches the live storefront through your normal **publish or deploy** process.
 
 ### Footer hints
 

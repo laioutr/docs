@@ -50,5 +50,5 @@ items:
 
 - [`OpeningStatusIndicator`](/laioutr-ui/ui-kit/general/opening-status-indicator): the open/closed pill atom on its own.
 - [`OpeningStatusDetail`](/laioutr-ui/ui-kit/general/opening-status-detail): the next state-change one-liner on its own.
-- [`OpeningHoursWeeklyTable`](/laioutr-ui/ui-kit/general/opening-hours-weekly-table): full weekly schedule for the detail panel under this summary.
+- [`TableOpeningHours`](/laioutr-ui/location/table-opening-hours): full weekly schedule for the detail panel under this summary.
 - [`OpeningHours` type](/frontend/api-reference/common-types/opening-hours): the shape the component consumes.

@@ -22,7 +22,7 @@ Not every canonical type needs an implementation on day one. The tiers below ref
 
 **Expected** items enable common features like login, checkout redirect, customer account, category navigation, and search autocomplete. Omitting them disables the feature but does not break the storefront.
 
-**Optional** items power specific add-ons: blog, reviews, wishlist, newsletter, analytics. Implement them when your project needs them.
+**Optional** items power specific add-ons: blog, reviews, product lists, newsletter, legal workflows, and B2B features. Implement them when your project needs them.
 
 ### Queries
 
@@ -30,7 +30,7 @@ Not every canonical type needs an implementation on day one. The tiers below ref
 |---|---|
 | Required | [`product/by-slug`](/frontend/api-reference/ecommerce/queries#product), [`product/by-category-slug`](/frontend/api-reference/ecommerce/queries#product), [`category/by-slug`](/frontend/api-reference/ecommerce/queries#category), [`cart/get-current`](/frontend/api-reference/ecommerce/queries#cart), [`menu/by-alias`](/frontend/api-reference/ecommerce/queries#menu) |
 | Expected | [`product/by-category-id`](/frontend/api-reference/ecommerce/queries#product), [`product/search`](/frontend/api-reference/ecommerce/queries#product), [`category/all`](/frontend/api-reference/ecommerce/queries#category), [`suggested-search/search`](/frontend/api-reference/suggested-search/queries) |
-| Optional | [`wishlist/get-current`](/frontend/api-reference/ecommerce/queries#wishlist), [`blog/collection/all`](/frontend/api-reference/blog/queries), [`blog/collection/by-slug`](/frontend/api-reference/blog/queries), [`blog/post/all`](/frontend/api-reference/blog/queries), [`blog/post/by-slug`](/frontend/api-reference/blog/queries) |
+| Optional | [`wishlist/get-current`](/frontend/api-reference/ecommerce/queries#wishlist), [`blog/collection/all`](/frontend/api-reference/blog/queries), [`blog/collection/by-slug`](/frontend/api-reference/blog/queries), [`blog/post/by-slug`](/frontend/api-reference/blog/queries) |
 
 ### Actions
 
@@ -38,7 +38,7 @@ Not every canonical type needs an implementation on day one. The tiers below ref
 |---|---|
 | Required | [`cart/add-items`](/frontend/api-reference/ecommerce/actions#cart), [`cart/remove-items`](/frontend/api-reference/ecommerce/actions#cart), [`cart/update-items`](/frontend/api-reference/ecommerce/actions#cart) |
 | Expected | [`cart/get-checkout-url`](/frontend/api-reference/ecommerce/actions#cart), [`auth/login`](/frontend/api-reference/ecommerce/actions#auth), [`auth/logout`](/frontend/api-reference/ecommerce/actions#auth), [`auth/register`](/frontend/api-reference/ecommerce/actions#auth), [`auth/recover`](/frontend/api-reference/ecommerce/actions#auth), [`customer/get-current`](/frontend/api-reference/ecommerce/actions#customer), [`customer/address-get-all`](/frontend/api-reference/ecommerce/actions#customer), [`customer/address-create`](/frontend/api-reference/ecommerce/actions#customer), [`customer/address-update`](/frontend/api-reference/ecommerce/actions#customer), [`customer/address-delete`](/frontend/api-reference/ecommerce/actions#customer), [`customer/address-set-default`](/frontend/api-reference/ecommerce/actions#customer) |
-| Optional | [`auth/login-oauth`](/frontend/api-reference/ecommerce/actions#auth), [`auth/logout-oauth`](/frontend/api-reference/ecommerce/actions#auth), [`auth/oauth-callback`](/frontend/api-reference/ecommerce/actions#auth), [`wishlist/add-items`](/frontend/api-reference/ecommerce/actions#wishlist), [`wishlist/remove-items`](/frontend/api-reference/ecommerce/actions#wishlist), [`product/reviews/create`](/frontend/api-reference/ecommerce/actions#review), [`newsletter/subscribe`](/frontend/api-reference/newsletter/actions), [`tracking/event/track`](/frontend/api-reference/tracking/actions) |
+| Optional | [`auth/login-oauth`](/frontend/api-reference/ecommerce/actions#auth), [`auth/logout-oauth`](/frontend/api-reference/ecommerce/actions#auth), [`auth/oauth-callback`](/frontend/api-reference/ecommerce/actions#auth), [`product-list/create`](/frontend/api-reference/ecommerce/actions#product-lists), [`product-list/add-items`](/frontend/api-reference/ecommerce/actions#product-lists), [`product-list/remove-items`](/frontend/api-reference/ecommerce/actions#product-lists), [`product/reviews/create`](/frontend/api-reference/ecommerce/actions#review), [`legal/withdrawal`](/frontend/api-reference/ecommerce/actions#legal), [`newsletter/subscribe`](/frontend/api-reference/newsletter/actions) |
 
 ### Links
 
@@ -52,9 +52,9 @@ Not every canonical type needs an implementation on day one. The tiers below ref
 
 Your connector resolves entity data through component resolvers. Each entity is split into components that resolvers provide independently. The [entity reference](/frontend/api-reference/entities) documents every component. Below is the priority breakdown for the two most complex entities.
 
-**Product:** base, description, media, prices, and defaultVariant are required. seo, info, and flags are expected. brand, rating, and analytics are optional.
+**Product:** base, description, media, prices, and defaultVariant are required. seo, info, and flags are expected. brand, rating, analytics, specifications, and optionGroups are optional.
 
-**ProductVariant:** base, prices, and options are required. availability and info are expected. quantityPrices, quantityRule, and shipping are optional.
+**ProductVariant:** base, prices, and options are required. availability and info are expected. quantityPrices, quantityRule, shipping, customerReference, and energyLabel are optional.
 
 For Cart, CartItem, Category, MenuItem, and BreadcrumbItem, implement at least the `base` component (plus `cost` for Cart and CartItem).
 
