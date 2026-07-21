@@ -126,10 +126,12 @@ describe('CockpitMcpWorkflow', () => {
   it('exposes the data-driven workflow contract', () => {
     const { script } = compileComponent();
 
-    expect(script.content).toContain('prompt: string');
-    expect(script.content).toContain('steps: CockpitMcpWorkflowStep[]');
-    expect(script.content).toContain('handoff?: string');
-    expect(script.content).toContain('review: string');
+    expect(script.content).toContain('prompt: { type: String, required: true }');
+    expect(script.content).toContain('steps: { type: Array, required: true }');
+    expect(script.content).toContain(
+      `handoff: { type: String, required: false, default: "The edit enters Cockpit's shared Studio document." }`,
+    );
+    expect(script.content).toContain('review: { type: String, required: true }');
   });
 
   it('uses semantic, state-free activity markup', () => {
