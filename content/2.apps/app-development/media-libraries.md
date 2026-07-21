@@ -17,8 +17,7 @@ changelogKeys:
 
 A media-library connector lets Studio editors browse, search, and upload assets that live in an external system — a shop backend's media section (Shopify Files, Shopware media), a DAM, or a CMS asset store. The connector is a facet of your app's Orchestr builder: you declare static **capabilities** and implement a small set of handlers, and the platform provides the routes, the picker UI, validation, and origin tracking.
 
-```ts
-// src/runtime/server/media-libraries/acme.ts
+```ts [src/runtime/server/media-libraries/acme.ts]
 import { defineAcme } from '../middleware/defineAcme';
 
 export default defineAcme.mediaLibrary({
@@ -48,13 +47,13 @@ Handlers receive two arguments: the query/args object and `ctx` — the per-requ
 
 Capabilities are **static** flags the picker reads before its first request. Only declare what your backend genuinely supports — the platform strips undeclared query fields before they reach your handler and drops undeclared response fields (a `folders` array from a library that declared `folders: false` is discarded).
 
-| Capability | Effect |
-|---|---|
-| `search` | Free-text term rides in `query.term`; the picker shows a search box. |
-| `tags` | Tag filter rides in `query.tags` (no picker UI yet — the contract is ready). |
-| `folders` | The picker renders folder tiles + a breadcrumb; `query.folderId` selects the browsed location and your `list` returns that location's subfolders. |
-| `sorts` | Declared options render as a sort dropdown; the chosen `key` rides in `query.sorting`. |
-| `upload` | Enables upload; `transfer` selects proxied or staged (see below), `accept`/`maxFileSize`/`maxBatchSize` drive client-side pre-validation. |
+| Capability | Effect                                                                                                                                            |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `search`   | Free-text term rides in `query.term`; the picker shows a search box.                                                                              |
+| `tags`     | Tag filter rides in `query.tags` (no picker UI yet — the contract is ready).                                                                      |
+| `folders`  | The picker renders folder tiles + a breadcrumb; `query.folderId` selects the browsed location and your `list` returns that location's subfolders. |
+| `sorts`    | Declared options render as a sort dropdown; the chosen `key` rides in `query.sorting`.                                                            |
+| `upload`   | Enables upload; `transfer` selects proxied or staged (see below), `accept`/`maxFileSize`/`maxBatchSize` drive client-side pre-validation.         |
 
 ## Browsing: `list`
 
