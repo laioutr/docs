@@ -736,7 +736,7 @@ In `content/8.Cockpit/0.index.md`, update `sitemap.lastmod` from `2026-04-09` to
 Add this bullet to `### What you can do here` immediately after the Studio bullet:
 
 ```md
-- **Cockpit MCP** — [connect an AI assistant](/cockpit/features/mcp) to inspect and edit project content through your Cockpit account.
+- **Cockpit MCP** lets you [connect an AI assistant](/cockpit/features/mcp) to inspect and edit project content through your Cockpit account.
 ```
 
 - [ ] **Step 2: Link from the Studio guide**
