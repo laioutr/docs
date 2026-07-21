@@ -28,15 +28,15 @@ Cockpit MCP is in private alpha. Contact Laioutr to enable it for your organizat
 Choose the setup for your assistant. Each path opens the same Cockpit OAuth flow on first use.
 
 ::tabs
-  :::tabs-item{label="Claude Desktop"}
+  :::tabs-item{label="Claude Desktop" icon="i-simple-icons-anthropic"}
   Open the [Laioutr Cockpit connector](https://claude.ai/directory/connectors/47f4846e-6a51-4ecb-831e-ead6b247cbcd) in Claude's connector directory and follow the connection flow.
   :::
 
-  :::tabs-item{label="ChatGPT"}
+  :::tabs-item{label="ChatGPT" icon="i-simple-icons-openai"}
   Open the [Laioutr Cockpit plugin](https://chatgpt.com/plugins/Plugin_xxxxxxxxxxx) in ChatGPT and follow the connection flow.
   :::
 
-  :::tabs-item{label="Cursor"}
+  :::tabs-item{label="Cursor" icon="i-simple-icons-cursor"}
   Open your organization's [API keys page](https://cockpit.laioutr.cloud/o/_/api-keys). Find the Cockpit MCP card, copy its server URL, then add that URL as a remote MCP server in Cursor.
 
   Cockpit shows the MCP card only after Laioutr enables the private alpha for your organization.
@@ -234,4 +234,4 @@ Cockpit also rejects moves that would break a page-scoped query or cross an unsu
 
 - [Studio](/cockpit/features/studio)
 - [Organization API keys](/cockpit/organisation/api-keys)
-- [Documentation MCP server](/getting-started/mcp-server)
+- [Documentation MCP server](/getting-started/documentation-mcp-server)
