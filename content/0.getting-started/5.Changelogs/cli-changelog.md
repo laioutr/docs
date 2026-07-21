@@ -14,6 +14,12 @@ sitemap:
 
 All notable changes to the **Laioutr CLI** (the `laioutr` command-line tool) will be documented in this file.
 
+## [0.4.1] - 2026-07-21
+
+### Patch Changes
+
+- Follow CLI output conventions for deployment logs, add actionable timeout-aware HTTP errors and a versioned API user agent, and introduce kebab-case flags with deprecated camelCase aliases.
+
 ## [0.4.0]
 
 ### Added

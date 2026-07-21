@@ -14,7 +14,31 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.7.0]
+## [2.8.0] - 2026-07-20
+
+### Minor Changes
+
+- **Breaking:** The `ai` metadata on section and block definitions is now a typed `AiComponentMetadata` object with exactly two optional fields — `description` (agent-facing facts that don't fit the picker-facing `studio.description`) and `examples` (a worked slot/block composition for complex multi-block sections). The previous free-form `{ label, description }` shape, the co-located `ai-descriptions/*.md` files, and the `aiDescription()` helper are removed. An absent `ai` object is the normal state: `studio.description` plus the field/slot schema carry the load for agents, and all built-in section/block descriptions have been enriched with the facts that previously lived in `ai` metadata. Prescriptive guidance fields (`useWhen`, `avoidWhen`, `constraints`, `neverWith`, `pairsWellWith`, `typicallyFollowedBy`, `supports`, …) are gone — evals showed they measurably degrade agent page composition.
+
+  ```ts
+  // before
+  ai: { label: 'Button', description: aiDescription('BlockButton') }
+
+  // after — most definitions:
+  // (no ai key at all; put facts in studio.description)
+
+  // after — only where a fact doesn't fit the picker text or an assembly is non-obvious:
+  ai: {
+    description: 'Currently a progress display only — it does not yet fetch the next batch.',
+    examples: 'gallery slot: BlockProductMediaGallery; content column: BasicInfo, PriceInfo, CartButton in on-page order.',
+  }
+  ```
+
+### Patch Changes
+
+- Add `studio.package` and `studio.kit` metadata to section/block definitions for the Studio picker tabs and type filter. Every built-in section and block description has been reviewed and enriched so the picker text carries the component's non-obvious capabilities and data-binding facts.
+
+## [2.7.0] - 2026-07-14
 
 ### Added
 
