@@ -9,6 +9,8 @@ sitemap:
   lastmod: 2026-07-02
   changefreq: monthly
   priority: 1
+changelogKeys:
+  - MediaLibrary
 ---
 
 ## What you are building
@@ -124,7 +126,3 @@ Everything your handlers return crosses a validation boundary before it reaches 
 - `src` and `previewUrl` values with `javascript:`, `data:`, or `vbscript:` schemes are rejected — including inside nested poster/cover images.
 - Response fields you did not declare a capability for are discarded, and query fields you did not declare are stripped before your handler runs.
 - The platform stamps every stored media source with `origin: { libraryId, externalId? }` — your library's id plus the item-level `externalId` you provided. If a single media mixes assets (e.g. art-directed sources from different backend assets), set `origin` per source yourself; a value you set is never overwritten.
-
-## Legacy API
-
-`defineMediaLibraryProvider()` from frontend-core still works as a deprecated shim: old providers register into the same system but run degraded — no folders, no staged upload, no declared sorts, no server-side type filtering. Migrate to the builder facet to get the full capability set.

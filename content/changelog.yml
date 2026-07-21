@@ -223,6 +223,16 @@ MediaComponent:
       (HLS/DASH) or a custom player UI. See
       [Rendering video and audio](/laioutr-ui/ui-kit/general/media#rendering-video-and-audio).
 
+MediaLibrary:
+  - version: 0.31.0
+    type: changed
+    changelog: frontend
+    note: >-
+      Media-library connectors are now defined through the Orchestr builder's
+      `mediaLibrary` facet. `defineMediaLibraryProvider()` remains available as
+      a deprecated compatibility shim, but legacy providers do not support
+      folders, staged uploads, declared sorts, or server-side type filtering.
+
 MediaText:
   - version: 2.4.0
     type: added
