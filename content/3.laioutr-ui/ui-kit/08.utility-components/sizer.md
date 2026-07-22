@@ -6,14 +6,11 @@ playground:
   base: ui-kit-atoms-sizer
   defaultStory: aspect-ratio
   height: 460px
-seo:
-  title: Sizer
-  description: Headless primitive that resolves a flat sizing config (fixed height, aspect ratio, or fill) into the right CSS, with responsive mobile/desktop variants.
 sitemap:
   loc: /laioutr-ui/ui-kit/utility-components/sizer
   lastmod: 2026-05-28
   changefreq: monthly
-  priority: 1.0
+  priority: 1
 ---
 
 ## Overview
@@ -38,14 +35,14 @@ It renders as a `<div>` by default and accepts an `as` prop to render as any ele
 
 The `mode` field on the `sizing` object picks how the height is computed. Only the fields relevant to that mode are read.
 
-| Mode | Reads | Result |
-| --- | --- | --- |
-| `auto` | (nothing) | Intrinsic content height. Same as omitting `sizing`. |
-| `fill` | (nothing) | `height: 100%`. The parent must give a definite height. |
-| `fixed` | `value`, `unit` | `height: <value><unit>`. |
-| `responsive-fixed` | `valueMobile`, `valueDesktop`, `unit` | Mobile and desktop heights, switching at the `lg` breakpoint. |
-| `aspect-ratio` | `aspectRatio` | CSS `aspect-ratio` (e.g. `'16/9'`). |
-| `responsive-aspect-ratio` | `aspectRatioMobile`, `aspectRatioTablet`, `aspectRatioDesktop` | Mobile, tablet, and desktop aspect ratios. |
+| Mode                      | Reads                                                          | Result                                                        |
+| ------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------- |
+| `auto`                    | (nothing)                                                      | Intrinsic content height. Same as omitting `sizing`.          |
+| `fill`                    | (nothing)                                                      | `height: 100%`. The parent must give a definite height.       |
+| `fixed`                   | `value`, `unit`                                                | `height: <value><unit>`.                                      |
+| `responsive-fixed`        | `valueMobile`, `valueDesktop`, `unit`                          | Mobile and desktop heights, switching at the `lg` breakpoint. |
+| `aspect-ratio`            | `aspectRatio`                                                  | CSS `aspect-ratio` (e.g. `'16/9'`).                           |
+| `responsive-aspect-ratio` | `aspectRatioMobile`, `aspectRatioTablet`, `aspectRatioDesktop` | Mobile, tablet, and desktop aspect ratios.                    |
 
 `unit` is `'px'` (default) or `'dvh'`. The `dvh` choice tracks the dynamic viewport so the height stays right when mobile browser chrome shows or hides.
 
@@ -53,29 +50,32 @@ The `mode` field on the `sizing` object picks how the height is computed. Only t
 
 Both responsive modes share one breakpoint scheme, in lockstep with the Columns grid:
 
-| Band | Width | `responsive-fixed` | `responsive-aspect-ratio` |
-| --- | --- | --- | --- |
-| Mobile | below `sm` (600px) | `valueMobile` | `aspectRatioMobile` |
-| Tablet | `sm`–`lg` (600–1279px) | `valueMobile` | `aspectRatioTablet`, falling back to `aspectRatioMobile` |
-| Desktop | `lg` and up (1280px+) | `valueDesktop` | `aspectRatioDesktop` |
+| Band    | Width                  | `responsive-fixed` | `responsive-aspect-ratio`                                |
+| ------- | ---------------------- | ------------------ | -------------------------------------------------------- |
+| Mobile  | below `sm` (600px)     | `valueMobile`      | `aspectRatioMobile`                                      |
+| Tablet  | `sm`–`lg` (600–1279px) | `valueMobile`      | `aspectRatioTablet`, falling back to `aspectRatioMobile` |
+| Desktop | `lg` and up (1280px+)  | `valueDesktop`     | `aspectRatioDesktop`                                     |
 
 `responsive-fixed` has no tablet value of its own — the mobile height covers everything below 1280px and switches to the desktop height at `lg`. `responsive-aspect-ratio` has a dedicated tablet stage that falls back to the mobile ratio when left empty, so configs written before the tablet stage existed keep rendering as they did across 600–1279px.
-
-:::warning
-Desktop values take effect at `lg` (1280px). They previously took effect at `md` (800px), so an existing `responsive-fixed` configuration now uses its **mobile** height across 800–1279px where it used to use the desktop one. Check any hero or media block that relied on the desktop height kicking in at 800px.
-:::
 
 ## Feature List
 
 ::features
 ---
 items:
-  - "Six sizing modes (auto, fill, fixed, responsive-fixed, aspect-ratio, responsive-aspect-ratio) cover the height patterns banners and media blocks need"
-  - "Flat config object maps 1:1 to the `sizingField` shared schema, so editor input flows straight to the storefront"
-  - "Separate mobile, tablet, and desktop branches for aspect ratios (mobile/desktop for heights) prevent mobile-crop disasters on hero layouts"
-  - "`dvh` unit option tracks the dynamic viewport so percentage heights stay correct as mobile browser chrome appears and disappears"
-  - "Renders as `<div>` by default; pass `as` to render any element or component, or `as-child` to merge onto the single child"
-  - "Reka `Primitive` under the hood, so prop merging and ref forwarding behave like the rest of the kit"
+  - Six sizing modes (auto, fill, fixed, responsive-fixed, aspect-ratio,
+    responsive-aspect-ratio) cover the height patterns banners and media blocks
+    need
+  - Flat config object maps 1:1 to the `sizingField` shared schema, so editor
+    input flows straight to the storefront
+  - Separate mobile, tablet, and desktop branches for aspect ratios
+    (mobile/desktop for heights) prevent mobile-crop disasters on hero layouts
+  - "`dvh` unit option tracks the dynamic viewport so percentage heights stay
+    correct as mobile browser chrome appears and disappears"
+  - Renders as `<div>` by default; pass `as` to render any element or component,
+    or `as-child` to merge onto the single child
+  - Reka `Primitive` under the hood, so prop merging and ref forwarding behave
+    like the rest of the kit
 ---
 ::
 

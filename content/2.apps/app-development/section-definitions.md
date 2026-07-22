@@ -1,15 +1,11 @@
 ---
 title: Section Definitions
 description: How to create and register section definitions that appear in Laioutr Studio.
-seo:
-  title: Section Definitions
-  description: How to create and register section definitions that appear in Laioutr Studio.
 sitemap:
   loc: /apps/app-development/section-definitions
   lastmod: 2026-04-08
   changefreq: monthly
-  priority: 1.0
-
+  priority: 1
 ---
 
 You have a Laioutr app and you want editors to place a new section on pages through Studio. Every section starts with a **definition**: a TypeScript object that declares the component name, Studio metadata, configurable fields, and slots for blocks.
@@ -52,11 +48,11 @@ The platform reads this definition at three points: **Studio** uses it to build 
 
 Every section definition needs these properties:
 
-| Property | Type | Purpose |
-|---|---|---|
-| `component` | `string` | The globally registered Vue component name. Must match the component's filename (e.g., `SectionHeroBanner.vue` registers as `'SectionHeroBanner'`). See [Section and block naming](/apps/app-development/coding-standards#section-and-block-naming) for why the `Section` prefix matters. |
-| `studio` | `object` | Metadata shown in the Studio UI. At minimum, provide `label`. |
-| `slots` | `SectionSlotDefinition[]` | Named insertion points for blocks. Pass an empty array if the section has no slots. |
+| Property    | Type                      | Purpose                                                                                                                                                                                                                                                                                   |
+| ----------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `component` | `string`                  | The globally registered Vue component name. Must match the component's filename (e.g., `SectionHeroBanner.vue` registers as `'SectionHeroBanner'`). See [Section and block naming](/apps/app-development/coding-standards#section-and-block-naming) for why the `Section` prefix matters. |
+| `studio`    | `object`                  | Metadata shown in the Studio UI. At minimum, provide `label`.                                                                                                                                                                                                                             |
+| `slots`     | `SectionSlotDefinition[]` | Named insertion points for blocks. Pass an empty array if the section has no slots.                                                                                                                                                                                                       |
 
 `schema` is optional but present on almost every section. `rendering` is optional and controls runtime behavior like [stacking context isolation](/laioutr-ui/getting-started/z-ordering).
 
@@ -78,7 +74,7 @@ export const definition = defineSection({
 ```
 
 ::field-group
-  :::field{name="isolate" type="boolean" default="true"}
+  :::field{default="true" name="isolate" type="boolean"}
   When `true`, the section gets its own CSS stacking context via `isolation: isolate`. Z-index values inside the section cannot leak out and affect sibling sections. Set to `false` for sections with sticky or fixed elements that must remain visible above subsequent sections. See [Z-Ordering](/laioutr-ui/getting-started/z-ordering) for details.
   :::
 ::
@@ -105,24 +101,35 @@ export const definition = defineSection({
 ```
 
 ::field-group
-  :::field{name="label" type="string" required}
+  :::field
+  ---
+  required: true
+  name: label
+  type: string
+  ---
   Display name in the Studio component picker.
   :::
+
   :::field{name="description" type="string"}
   Short description shown below the label.
   :::
+
   :::field{name="previewSrc" type="string"}
   Path to a preview image. Place the image in your app's `public/` directory.
   :::
+
   :::field{name="tags" type="WellKnownComponentTag[]"}
   Categorization tags for the component picker. Use [well-known tags](#well-known-tags) or any custom string.
   :::
+
   :::field{name="package" type="string"}
   The human-facing package or library this section belongs to, e.g. `'Laioutr UI'`. Drives which tab the section appears under in the Studio picker.
   :::
+
   :::field{name="kit" type="string"}
   A sub-grouping within the package, e.g. `'Growth Kit B2B'`. Drives the Studio picker's type filter.
   :::
+
   :::field{name="propsWizard" type="PropsWizard"}
   A multi-step wizard that pre-configures the section before it is placed on a page. See [Props wizard](#props-wizard).
   :::
@@ -155,14 +162,15 @@ export const definition = defineSection({
   :::field{name="description" type="string"}
   Agent-facing facts that do not fit the human-facing `studio.description`. Overflow only — if a fact would also help a human in the picker, and it usually would, put it in `studio.description` instead. Write declarative prose.
   :::
+
   :::field{name="examples" type="string"}
   A worked composition: which blocks, in which slots, in what order, for what scenario. Reserve this for complex multi-block sections whose intended assembly cannot be guessed from block names alone, such as the product-detail family.
   :::
 ::
 
-:::warning
-Do not write prescriptive guidance here — no "use when", "avoid when", "never combine with", or pairing rules. Evaluation rounds showed that this kind of instruction measurably *degrades* agent page composition, which is why the fields that once held it were removed.
-:::
+::warning
+Do not write prescriptive guidance here — no "use when", "avoid when", "never combine with", or pairing rules. Evaluation rounds showed that this kind of instruction measurably *degrades* agent page composition.
+::
 
 ### Well-known tags
 
@@ -219,13 +227,30 @@ The `propsWizard` object contains a `steps` array. Currently only `variant` step
 #### Step properties
 
 ::field-group
-  :::field{name="type" type="'variant'" required}
+  :::field
+  ---
+  required: true
+  name: type
+  type: "'variant'"
+  ---
   Step type. Only `'variant'` is supported.
   :::
-  :::field{name="title" type="string" required}
+
+  :::field
+  ---
+  required: true
+  name: title
+  type: string
+  ---
   Heading shown above the variant cards in the wizard.
   :::
-  :::field{name="input" type="PropsWizardVariant[]" required}
+
+  :::field
+  ---
+  required: true
+  name: input
+  type: PropsWizardVariant[]
+  ---
   The variants the editor can choose from in this step.
   :::
 ::
@@ -233,18 +258,37 @@ The `propsWizard` object contains a `steps` array. Currently only `variant` step
 #### Variant properties
 
 ::field-group
-  :::field{name="id" type="string" required}
+  :::field
+  ---
+  required: true
+  name: id
+  type: string
+  ---
   Unique identifier for this variant within the step.
   :::
-  :::field{name="label" type="string" required}
+
+  :::field
+  ---
+  required: true
+  name: label
+  type: string
+  ---
   Display name shown on the variant card.
   :::
+
   :::field{name="icon" type="string"}
   [Studio icon](/apps/app-development/studio-icons) shown on the variant card.
   :::
-  :::field{name="props" type="Record<string, any>" required}
+
+  :::field
+  ---
+  required: true
+  name: props
+  type: Record<string, any>
+  ---
   Props applied to the section when this variant is selected. Keys must match field names in the section's `schema`.
   :::
+
   :::field{name="previewSrc" type="string"}
   Path to a preview image for this variant. Place the image in your app's `public/` directory.
   :::
@@ -278,18 +322,27 @@ export const definition = defineSection({
 ```
 
 ::field-group
-  :::field{name="name" type="string" required}
+  :::field
+  ---
+  required: true
+  name: name
+  type: string
+  ---
   Slot name. Use `'default'` for the main slot. Must match the `<slot name="...">` in your Vue template.
   :::
+
   :::field{name="studio.label" type="string"}
   Label shown in the Studio sidebar for this slot area.
   :::
+
   :::field{name="restrictTo" type="(string | BlockDefinition)[]"}
   If set, only these blocks can be placed in this slot. Accepts component name strings or imported block definition objects.
   :::
+
   :::field{name="allow" type="(string | BlockDefinition)[]"}
   Blocks marked as `isStandalone: false` need to appear in this list to be usable in this slot.
   :::
+
   :::field{name="prefer" type="(string | BlockDefinition)[]"}
   These blocks appear first in the Studio block picker for this slot.
   :::
@@ -377,7 +430,7 @@ const props = defineProps(definitionToProps(definition));
 
 Place each section as a single `.vue` file in your app's sections directory:
 
-```
+```text
 src/runtime/app/sections/
   SectionHeroBanner.vue
   SectionImageAndContent.vue
@@ -399,7 +452,6 @@ registerLaioutrApp({
 A section with media, design settings, and a content slot (based on the built-in `SectionImageAndContent`):
 
 ::code-collapse
-
 ```vue [SectionImageAndContent.vue]
 <script lang="ts">
 import { defineSection, definitionToProps, toMedia } from '#imports';
@@ -494,5 +546,4 @@ const props = defineProps(definitionToProps(definition));
   </section>
 </template>
 ```
-
 ::
