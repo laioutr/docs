@@ -129,6 +129,52 @@ Pages can also be **scoped to specific markets** via `marketIds` in Studio. A pa
 
 ---
 
+## Trailing slashes
+
+Every storefront URL is generated in one shape, controlled by `trailingSlash` in the `config` block of your project's [`laioutrrc.json`](/getting-started/key-concepts/architecture). It defaults to `false`, meaning URLs are generated without a trailing slash (`/products/sneaker`). Set it to `true` to generate them with one (`/products/sneaker/`).
+
+```json [laioutrrc.json]
+{
+  "config": {
+    "trailingSlash": false
+  }
+}
+```
+
+The policy is applied everywhere a URL is produced, so the shape stays consistent across the whole storefront:
+
+| Surface | Effect |
+|---|---|
+| Generated routes | Page-type routes are registered in the configured shape. |
+| Canonical and hreflang links | `<link rel="canonical">` and every `hreflang` alternate use the configured shape. |
+| Switch-locale and switch-market URLs | The language switcher and market switcher emit matching hrefs. |
+| `useMarketPath` | Returns paths in the configured shape. |
+| `<NuxtLink>` | Nuxt's link default is set to match, so client-side navigation hrefs agree with server-rendered ones. |
+
+### Normalizing incoming requests
+
+A Nitro server middleware issues a **301 redirect** for any request arriving in the opposite shape, so a URL is only ever served at one address. This runs **before** your [project redirects](/frontend/features/redirects), so a redirect rule always sees the path in its normalized shape.
+
+Three kinds of path are left untouched:
+
+- The root path `/`.
+- Internal routes — anything under `/api/` or starting with `/_`.
+- File-like paths, where the last segment contains a dot. This is what stops append-mode from turning `/style.css` into `/style.css/`.
+
+### Path prefixes
+
+Domain path prefixes are normalized before they are composed into a URL, so single-segment (`/fr`) and multi-segment (`/en/us`) prefixes both compose correctly — including prefixes written with a stray trailing slash. On a path-prefixed domain, the homepage resolves at `/fr` rather than `/fr/`.
+
+### Reading the policy at runtime
+
+The active value is exposed on the public runtime config, so app and component code can generate matching URLs:
+
+```ts
+const { trailingSlash } = useRuntimeConfig().public.laioutr;
+```
+
+---
+
 ## Path validation in Studio
 
 Studio uses the page type's `pathConstraints` to validate paths that content managers enter. If a page type declares `requiredParams: ['slug']`, Studio will not allow saving a path like `/products` — it must include `:slug` (e.g. `/products/:slug`).

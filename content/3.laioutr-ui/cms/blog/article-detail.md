@@ -46,6 +46,22 @@ Pro-Tip from Larry: Pair the blog's `ArticleDetail` view with `BlogPostListing` 
 ::component-code{:name="LArticleDetail" story-id="ui-sections-articledetail--with-social-share"}
 ::
 
+## Table of contents
+
+Set `showTableOfContents` to render a navigable outline of the article. There is nothing to author and nothing to pass — the outline is derived from the body itself.
+
+`ArticleDetail` scans the body HTML for `<h2>` elements and builds one entry per heading, in document order. Each heading also gets an `id` so the entry can link to it:
+
+- A heading that already carries an `id` keeps it.
+- Otherwise the id is slugified from the heading text (lowercased, non-alphanumeric runs collapsed to `-`). Duplicate slugs get a numeric suffix, so two headings named "Details" become `details` and `details-2`.
+- A heading with no usable text falls back to a positional id and label.
+
+Only `<h2>` counts. Deeper headings are left alone, which keeps the outline to one flat level rather than a nested tree.
+
+The outline renders differently per breakpoint from a single flag: on desktop it sits in a sticky sidebar beside the body, clearing any sticky header; on mobile it collapses into an accordion above the article. Active-item tracking comes from [`TableOfContents`](/laioutr-ui/ui-kit/general/table-of-contents), which highlights the section currently in view.
+
+Nothing renders when the body contains no `<h2>` at all, so turning the flag on for a mixed set of articles is safe — short entries simply show no outline.
+
 ## Feature List
 
 ::features
@@ -53,6 +69,7 @@ Pro-Tip from Larry: Pair the blog's `ArticleDetail` view with `BlogPostListing` 
 items:
   - "Renders three parts: optional hero media, title, and a rich-content body, with an optional trailing SocialShare row"
   - "showSocialShare (default false) toggles the SocialShare row independently of the article content"
+  - "showTableOfContents (default false) builds a navigable outline from the body's H2 headings — sticky sidebar on desktop, accordion on mobile"
   - "Body accepts a raw HTML string or HtmlFragment and renders through RichContent for safe inline HTML"
   - "Reusable for blog articles, glossary entries, and other long-form content"
 ---

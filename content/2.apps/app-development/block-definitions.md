@@ -73,7 +73,17 @@ Works the same way as for [sections](/apps/app-development/section-definitions#t
   :::field{name="tags" type="WellKnownComponentTag[]"}
   Categorization tags. Same [well-known tags](/apps/app-development/section-definitions#well-known-tags) as sections, plus custom strings.
   :::
+  :::field{name="package" type="string"}
+  The human-facing package or library this block belongs to, e.g. `'Laioutr UI'`. Drives which tab the block appears under in the Studio picker.
+  :::
+  :::field{name="kit" type="string"}
+  A sub-grouping within the package, e.g. `'Growth Kit B2B'`. Drives the Studio picker's type filter.
+  :::
 ::
+
+## AI metadata
+
+Blocks accept the same optional `ai` property as sections — `description` for agent-facing facts that do not fit `studio.description`, and `examples` for a worked composition. Omitting it is the normal state. See [AI metadata](/apps/app-development/section-definitions#ai-metadata) for the full rules, including why prescriptive guidance does not belong there.
 
 ## Standalone vs non-standalone blocks
 

@@ -117,10 +117,52 @@ export const definition = defineSection({
   :::field{name="tags" type="WellKnownComponentTag[]"}
   Categorization tags for the component picker. Use [well-known tags](#well-known-tags) or any custom string.
   :::
+  :::field{name="package" type="string"}
+  The human-facing package or library this section belongs to, e.g. `'Laioutr UI'`. Drives which tab the section appears under in the Studio picker.
+  :::
+  :::field{name="kit" type="string"}
+  A sub-grouping within the package, e.g. `'Growth Kit B2B'`. Drives the Studio picker's type filter.
+  :::
   :::field{name="propsWizard" type="PropsWizard"}
   A multi-step wizard that pre-configures the section before it is placed on a page. See [Props wizard](#props-wizard).
   :::
 ::
+
+## AI metadata
+
+The optional `ai` property carries facts for AI agents composing pages through the [Laioutr MCP server](/agent-api/laioutr-mcp/supported-tools). It is never shown in the Studio picker, and it is returned only when an agent fetches a single component's schema — not in the component list.
+
+**Leaving `ai` off entirely is the normal state.** A section's `studio.description` plus its field and slot schema already describe it to an agent exactly as they do to a human. Reach for `ai` only when a fact cannot be inferred from that existing surface.
+
+The product-detail section below is a fair case for `examples`: its slots accept many blocks, and their intended order is not something an agent could guess from the block names alone.
+
+```ts twoslash
+import type { SectionDefinition } from '@laioutr-core/core-types/frontend';
+declare const defineSection: <const T extends SectionDefinition>(definition: T) => T;
+// ---cut---
+export const definition = defineSection({
+  component: 'SectionProductDetail',
+  studio: { label: 'Product Detail' },
+  ai: {
+    examples: 'gallery slot: BlockProductMediaGallery; content column: BasicInfo, PriceInfo, CartButton in on-page order.',
+  },
+  slots: [],
+  schema: [],
+});
+```
+
+::field-group
+  :::field{name="description" type="string"}
+  Agent-facing facts that do not fit the human-facing `studio.description`. Overflow only — if a fact would also help a human in the picker, and it usually would, put it in `studio.description` instead. Write declarative prose.
+  :::
+  :::field{name="examples" type="string"}
+  A worked composition: which blocks, in which slots, in what order, for what scenario. Reserve this for complex multi-block sections whose intended assembly cannot be guessed from block names alone, such as the product-detail family.
+  :::
+::
+
+:::warning
+Do not write prescriptive guidance here — no "use when", "avoid when", "never combine with", or pairing rules. Evaluation rounds showed that this kind of instruction measurably *degrades* agent page composition, which is why the fields that once held it were removed.
+:::
 
 ### Well-known tags
 
