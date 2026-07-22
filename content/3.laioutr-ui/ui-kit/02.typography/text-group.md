@@ -18,7 +18,7 @@ sitemap:
 
 ## Overview
 
-`TextGroup` pairs a caption, heading, and subline into the typographic shape used inside hero banners, page heroes, section headers, and content cards. Semantic tags for each line are configurable via `captionTag`, `headingTag`, and `sublineTag` so the same visual composition can render as `<h1>`-led on a page hero and `<h3>`-led inside a card without rewriting markup.
+`TextGroup` pairs a caption, heading, and subline into the typographic shape used inside hero banners, page heroes, section headers, and content cards. The heading and subline tags are configurable via `headingAs` and `sublineAs`, so the same visual composition can render as `<h1>`-led on a page hero and `<h3>`-led inside a card without rewriting markup. The caption always renders as an eyebrow above the heading and has no tag prop.
 
 For one-off campaign treatments, the `captionColor`, `headingColor`, `sublineColor`, and `iconColor` props accept any CSS color string and inline it onto the matching element, so a single hero can repaint a heading or caption without touching tokens.
 
@@ -33,7 +33,7 @@ For one-off campaign treatments, the `captionColor`, `headingColor`, `sublineCol
 ::features
 ---
 items:
-  - "Three configurable semantic tags (`captionTag`, `headingTag`, `sublineTag`) keep the SEO outline correct as the same composition moves between hero and card"
+  - "Configurable heading and subline tags (`headingAs`, `sublineAs`) keep the SEO outline correct as the same composition moves between hero and card"
   - "Global `size` tier maps to canonical per-element Text sizes; per-line overrides (`captionSize`, `headingSize`, `sublineSize`) fine-tune density"
   - "`align` controls horizontal alignment of all three lines together, so left-rail and centered hero patterns share one prop"
   - "Optional `icon` plus `iconSize` and `iconColor` overrides render an icon above the caption for status-led intros"

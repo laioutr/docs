@@ -210,7 +210,7 @@ Media:
       ```
 
 MediaLibrary:
-  - version: 0.34.0
+  - version: 0.35.0
     type: changed
     breaking: true
     changelog: frontend
@@ -241,7 +241,7 @@ MediaLibrary:
         list: async (query, ctx) => ({ items, nextCursor, total }),
       });
       ```
-  - version: 0.34.0
+  - version: 0.35.0
     type: deprecated
     changelog: frontend
     note: >-
@@ -274,16 +274,6 @@ MediaComponent:
       `provideMediaRenderers` to override the built-in for adaptive streaming
       (HLS/DASH) or a custom player UI. See
       [Rendering video and audio](/laioutr-ui/ui-kit/general/media#rendering-video-and-audio).
-
-MediaLibrary:
-  - version: 0.31.0
-    type: changed
-    changelog: frontend
-    note: >-
-      Media-library connectors are now defined through the Orchestr builder's
-      `mediaLibrary` facet. `defineMediaLibraryProvider()` remains available as
-      a deprecated compatibility shim, but legacy providers do not support
-      folders, staged uploads, declared sorts, or server-side type filtering.
 
 MediaText:
   - version: 2.4.0
