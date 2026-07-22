@@ -81,7 +81,6 @@ Save the form. The Cockpit will use these values for all subsequent deploys for 
 - **Trigger**: Deploy is started from the Cockpit (e.g. “Deploy” or “Publish”).
 - **Build**: Runs on Vercel; the Cockpit does not run the build itself. Build env includes:
   - `VERCEL_FORCE_NO_BUILD_CACHE=1` so dependencies are not served from Vercel’s build cache.
-  - `NUXT_PUBLIC_LTR_LOGGER_LOG_FOR_DEVELOPMENT=false` for production.
 - **Result**: The Cockpit returns success once the deployment has been accepted and is “ready” or after the short timeout. The actual build and go-live continue on Vercel; check the Vercel dashboard for final status and URL.
 - **Capabilities**: In Bring Your Own mode, the adapter does **not** support: deployment status updates in the Cockpit, cancel, promote, rollback, or delete deployment. Those are available only with the managed Vercel integration and webhooks.
 

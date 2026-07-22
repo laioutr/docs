@@ -134,6 +134,38 @@ $entity({
 
 Prefer the lazy form when computing the value is expensive.
 
+## Resolution order
+
+More than one installed app can provide the same component on the same entity type. A commerce connector and a loyalty app might both declare `provides: ['prices']`, for example. Only one of them wins: a component resolves to exactly one value, never a merge.
+
+The `order` property decides which:
+
+```ts
+export default defineMyApp.componentResolver({
+  label: 'Loyalty prices',
+  entityType: 'product',
+  provides: ['prices'],
+  order: 10,
+  resolve: async ({ ids }) => { /* … */ },
+});
+```
+
+| `order` | Outcome |
+|---|---|
+| Omitted | Treated as `1`. |
+| Higher than the others | Wins — its value is the one the storefront receives. |
+| Equal to another resolver's | The **last one registered** wins, which follows app installation order. |
+
+Because ties are broken by registration order, rely on an explicit `order` whenever two apps genuinely compete for a component. Leaving both at the default makes the winner depend on install order, which changes as apps are added or removed.
+
+:::tip
+Pro-Tip from Larry: give an overriding resolver a deliberate gap (`order: 10`, not `order: 2`) so a third app can later slot in between without renumbering everything.
+:::
+
+### Which app gets the credit
+
+Component reflection lists a component's resolvers with the **effective** one first — the resolver that `get()` actually selects at runtime. Tools that read the first implementation to attribute a component to its providing app, such as Studio's dynamic-data-source picker, therefore show the icon of the app that really supplies the value, not whichever app happened to register first.
+
 ## Using App Middleware
 
 If your resolver needs an API client or shared configuration, use Orchestr's **middleware** pattern to set up context once and reuse it across all your handlers:

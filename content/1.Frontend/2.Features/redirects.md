@@ -60,7 +60,9 @@ Source paths can use `:param` segments, and the captured values are substituted 
 
 ### Trailing slashes
 
-`/old/` and `/old` resolve the same way. The root path `/` is the one exception and is always matched literally.
+`/old/` and `/old` resolve the same way, so a rule matches whichever shape the visitor typed. The root path `/` is the one exception and is always matched literally.
+
+Note that redirect rules run *after* the trailing-slash normalizer. A request in the non-configured shape is 301-redirected to the configured one first, and your rules are then matched against the normalized path. See [Trailing slashes](/frontend/features/routing#trailing-slashes) for the policy and its exceptions.
 
 ### Disabled redirects
 

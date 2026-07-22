@@ -4,7 +4,7 @@ description: Compact list of product benefits or USPs such as delivery, returns,
 playground:
   name: BenefitsBox
   base: ui-blocks-benefitsbox
-  defaultStory: without-free-delivery
+  defaultStory: without-delivery-benefit
   height: 460px
 seo:
   title: Benefits Box

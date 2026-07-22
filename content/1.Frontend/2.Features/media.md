@@ -14,7 +14,7 @@ changelogKeys:
 
 ---
 
-::since-version{version="0.34.0" packages="@laioutr-core/frontend-core, @laioutr-core/orchestr" changelog="frontend"}
+::since-version{version="0.35.0" packages="@laioutr-core/frontend-core, @laioutr-core/orchestr" changelog="frontend"}
 ::
 
 ## What is the media library?

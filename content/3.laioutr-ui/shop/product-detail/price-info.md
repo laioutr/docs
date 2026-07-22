@@ -23,9 +23,34 @@ links:
 
 ## Overview
 
-`PriceInfo` is the PDP price display. It renders the current `price`, an optional `strikethroughPrice` (the MSRP shown above the sale price), a unit price (for example, `€2.50 / 100g`), an optional `savingPercentage` badge, and a "VAT included" label. Values are formatted through the active locale so currency symbols and decimal separators stay correct across markets.
+`PriceInfo` is the PDP price display. It renders the current `price`, an optional `strikethroughPrice` (the MSRP shown above the sale price), a unit price (for example, `€2.50 / 100g`), an optional `savingPercentage` badge, a shipping line when `shippingRate` is set, and a tax note such as "VAT included". Values are formatted through the active locale so currency symbols and decimal separators stay correct across markets.
 
 Auto-import tag: `<LPriceInfo>`.
+
+## Customizing the labels
+
+The texts around the price are overridable. Each label prop falls back to its locale string when left empty, so a storefront that is happy with the defaults passes nothing:
+
+| Prop | Overrides | Falls back to |
+|---|---|---|
+| `strikethroughPriceLabel` | The label before the strikethrough price (MSRP / UVP) | `pdp.msrp` |
+| `vatInfo` | The tax and legal note below the price | `pdp.vatIncluded` |
+| `shippingPrefix` | The text before the shipping amount | `pdp.plusShipping` |
+| `shippingSuffix` | The text after the shipping amount | `pdp.shipping` |
+
+The displayed price values themselves are never affected by these props — they only change the surrounding wording.
+
+`vatInfoVisible` controls whether the tax note renders at all. It shows by default; only an explicit `false` hides it, which is what a market with no applicable tax note needs.
+
+```vue
+<LPriceInfo
+  :price="price"
+  :strikethrough-price="listPrice"
+  strikethrough-price-label="UVP"
+  :shipping-rate="shipping"
+  :vat-info-visible="false"
+/>
+```
 
 ## Key Business & UX Benefits
 
@@ -39,8 +64,10 @@ Auto-import tag: `<LPriceInfo>`.
 ::features
 ---
 items:
-  - "Renders price, strikethroughPrice (MSRP), unitPrice, and a savingPercentage badge in one block"
+  - "Renders price, strikethroughPrice (MSRP), unitPrice, shippingRate, and a savingPercentage badge in one block"
   - "unitPrice prop supports formats like '€2.50 / 100g' to meet EU price-indication rules"
+  - "Every label around the price (MSRP, tax note, shipping prefix and suffix) is overridable, falling back to its pdp.* locale string"
+  - "vatInfoVisible hides the tax note for markets where it does not apply"
   - "Locale-aware currency symbol, position, and decimal separator with no per-country code paths"
   - "One price component covers PDP, tile, and cart so shoppers see the same price story from browse to buy"
   - "Optional props mean the same block handles full-price items, promotions, and compared-at displays without conditional templates"

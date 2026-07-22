@@ -18,7 +18,9 @@ sitemap:
 
 ## Overview
 
-`PopUpPromotion` is the promotional popup content preset. It composes a `TextGroup` (optional icon, caption, heading, body), an optional `countdown` slot, an embedded `CouponBox` for code copy or apply, a primary call-to-action, and a fine-print hint. It owns no dialog chrome of its own. Drop it into [`PopUp`](/laioutr-ui/cms/popups/pop-up)'s default slot for launch offers, seasonal promos, and welcome discounts.
+`PopUpPromotion` is the promotional popup content preset. It composes a `TextGroup` (optional icon, caption, heading, body), an optional countdown, an embedded `CouponBox` for code copy or apply, a primary call-to-action, and a fine-print hint. It owns no dialog chrome of its own. Drop it into [`PopUp`](/laioutr-ui/cms/popups/pop-up)'s default slot for launch offers, seasonal promos, and welcome discounts.
+
+The component exposes no slots — everything is prop-driven. Set `countdownEndDate` to render a [`CountdownBoxed`](/laioutr-ui/ui-kit/general/countdown-boxed) in place of the coupon, optionally styled with `countdownVariant` (`default`, `pale`, `bright`, or `solid`).
 
 ## Key Business & UX Benefits
 
@@ -32,9 +34,9 @@ sitemap:
 ::features
 ---
 items:
-  - "Composes a TextGroup, optional countdown slot, embedded CouponBox, primary CTA, and fine-print hint"
+  - "Composes a TextGroup, optional countdown, embedded CouponBox, primary CTA, and fine-print hint"
   - "CouponBox supports 'copy' or 'apply' actions, cutting friction between popup and checkout redemption"
-  - "Countdown slot accepts any countdown component, sharpening urgency on launch offers and flash sales"
+  - "`countdownEndDate` renders a boxed countdown instead of the coupon, sharpening urgency on launch offers and flash sales"
   - "Inherits PopUp shell semantics for focus traps, keyboard support, and ARIA roles"
   - "Editors ship Black Friday, Easter, and welcome promos from Studio without engineering deploys"
   - "apply-coupon event hands cart logic back to the parent so coupons land in the customer's session"
