@@ -27,6 +27,26 @@ Orchestr maintains three separate cache layers, all stored under the `cache:orch
 | **Links**      | Link handler results (source/target ID mappings)                   | `{token}:{buildCacheKey(args)}`                    | Link handler `cache`       |
 | **Components** | Resolved entity components (per entity, per component)             | `{entityType}:{entityId}:{component}:{keySuffix?}` | Component resolver `cache` |
 
+## The automatic client-env segment
+
+Every cache key carries a segment derived from the [client environment](/frontend/orchestr/client-env), so a multi-language storefront can never serve cross-locale data:
+
+```
+{locale}:{currency}:{published|preview}
+```
+
+That is the whole segment. It deliberately does **not** widen as `ClientEnv` grows — if your handler's output varies by anything else, append your own scalar (see `buildCacheKey` for queries and links, `getKeySuffix` for component resolvers):
+
+```ts
+getKeySuffix: (clientEnv) => clientEnv.market.slug,
+```
+
+Return a scalar, never `clientEnv` itself: `market` and `language` are cyclic, so `JSON.stringify(clientEnv)` throws.
+
+::caution
+[Content preview](/frontend/features/content-preview) bypasses all three cache layers entirely — a preview request behaves as if every handler were `strategy: 'live'`, reading nothing and writing nothing. Unpublished content is never stored and can never be served to a shopper.
+::
+
 ## Strategies for queries and links
 
 Query and link handlers use the same cache config shape:
@@ -105,7 +125,7 @@ export default defineMyAppComponentResolver({
   cache: {
     ttl: '1 day',
     swr: false,         // optional: use SWR semantics
-    getKeySuffix: () => useRuntimeConfig().public.locale ?? 'default',
+    getKeySuffix: (clientEnv) => clientEnv.market.slug,
     components: {
       prices: { ttl: '15 minutes' },
     },
@@ -118,7 +138,7 @@ export default defineMyAppComponentResolver({
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `ttl`          | Default TTL for all components from this resolver.                                                                                                                                   |
 | `swr`          | When `true`, uses application-level expiry instead of storage driver TTL.                                                                                                            |
-| `getKeySuffix` | Returns a suffix appended to cache keys (e.g. locale, channel). Same entity cached separately per suffix. Must not reference handler arguments; use `useRuntimeConfig()` or similar. |
+| `getKeySuffix` | Receives the resolved [`ClientEnv`](/frontend/orchestr/client-env) and returns a suffix appended to cache keys (e.g. market slug, channel). Same entity cached separately per suffix. Must not reference handler arguments, and must return a scalar. |
 | `components`   | Per-component overrides. Keys are component names (e.g. `'prices'`), values override `ttl` and `swr`.                                                                                |
 | `enabled`      | Set to `false` to disable caching for this resolver.                                                                                                                                 |
 

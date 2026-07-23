@@ -12,7 +12,7 @@ sitemap:
 
 ---
 
-Your storefront passes `clientEnv: { locale: 'de-DE', currency: 'EUR' }` to every Orchestr request. Your backend has no idea what `de-DE` or `EUR` mean. It wants its own opaque IDs (`sw-language-id: 0190a1b2c3...`, `sw-currency-id: 0190a1b2d4...`) on every API call. You can't hardcode them because they differ per installation, and asking the storefront to know them is a layering violation.
+Orchestr resolves a `clientEnv` for every request, so your handler knows it is serving `de-DE` in `EUR`. Your backend has no idea what `de-DE` or `EUR` mean. It wants its own opaque IDs (`sw-language-id: 0190a1b2c3...`, `sw-currency-id: 0190a1b2d4...`) on every API call. You can't hardcode them because they differ per installation, and asking the storefront to know them is a layering violation.
 
 The pattern: fetch the vendor metadata once on first request, cache it for a day, and resolve `clientEnv` against it inside `extendRequest` on every request. The resolved IDs go onto the API client's default headers, so handlers downstream can ignore localization entirely.
 
@@ -130,14 +130,18 @@ const findBestLocale = (locales: SwSystemLocale[], clientLocale: string): SwSyst
 };
 
 export const getCurrentSystemEntities = (system: SwSystemEntities, clientEnv: ClientEnv) => {
-  const locale = findBestLocale(system.locales, clientEnv.locale);
-  const currency = system.currencies.find((c) => c.iso === clientEnv.currency) ?? system.currencies[0];
-  const country = system.countries.find((c) => c.iso === new Intl.Locale(clientEnv.locale).region) ?? system.countries[0];
+  const locale = findBestLocale(system.locales, clientEnv.language.code);
+  const currency = system.currencies.find((c) => c.iso === clientEnv.market.currency) ?? system.currencies[0];
+  const country = system.countries.find((c) => clientEnv.market.regionCodes.includes(c.iso)) ?? system.countries[0];
   return { locale, currency, country };
 };
 ```
 
 The ladder is sequential, not heuristic. Each rung is a clear rule someone can debug if a customer reports the wrong locale rendering. Currency and country usually only need an exact match plus a "first available" fallback. There's no equivalent of language-only matching for ISO 4217.
+
+::tip
+Read the resolved objects — `clientEnv.language.code`, `clientEnv.market.currency`, `clientEnv.market.regionCodes` — rather than the deprecated flat `clientEnv.locale` and `clientEnv.currency`. The market's region codes are authoritative where a locale's region subtag is only incidental. See [Client Environment](/frontend/orchestr/client-env).
+::
 
 ## Step 4: wire it into extendRequest
 
