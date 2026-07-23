@@ -31,7 +31,7 @@ The token is a **project-level secret**, not a per-user credential. It travels l
 
 ### Cockpit stores it
 
-Every project has a **Content Preview Token**, shown under **Project → Settings**. It is separate from the [project secret key](/cockpit/settings/project-secret-key) and separately rotatable, because it gets pasted into CMS preview-URL templates. It is also what Studio's "Show preview content" toggle sends.
+Every project has a **Content Preview Token**, shown under **Project → Settings**. It is separate from the [project secret key](/cockpit/project-settings/project-secret-key) and separately rotatable, because it gets pasted into CMS preview-URL templates. It is also what Studio's "Show preview content" toggle sends.
 
 ### The frontend receives it at deploy time
 

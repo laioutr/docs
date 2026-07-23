@@ -129,25 +129,7 @@ await runQuery(Token, args, clientEnv, event);
 
 Every orchestr endpoint does this before dispatching. If you write your own endpoint that runs orchestr handlers, you must too — passing a hand-built object skips the gate.
 
-### Registering a resolver
-
-Orchestr knows *how* to resolve, but not *what* to resolve against: the i18n config and the preview secret live in frontend-core, which orchestr must not import. The knowledge is injected instead.
-
-**If you use `@laioutr-core/frontend-core`, this is already done for you** and you can skip this section.
-
-A frontend that runs orchestr standalone must register a resolver from a Nitro plugin. There is no fallback — without one, `resolveClientEnv()` throws and every query and action request is refused, rather than serving data built from a browser-asserted locale and currency.
-
-```ts [server/plugins/client-env-resolver.ts]
-export default defineNitroPlugin(() => {
-  registerClientEnvResolver((event, wire) => ({
-    previewGranted: false,
-    market: myMarketFor(wire.marketId),
-    language: myLanguageFor(wire.languageId),
-  }));
-});
-```
-
-The resolver returns only the three facts orchestr cannot derive on its own. Orchestr composes the rest, including `isPreview` from `wire.isPreview && previewGranted`.
+The market and language ids are resolved against the project's i18n config, and `isPreview` is granted only when the presented token verifies. Both are decided server-side, from configuration the browser has no access to.
 
 ## Cache keys
 
