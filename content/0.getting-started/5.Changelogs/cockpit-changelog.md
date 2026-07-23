@@ -14,6 +14,12 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-07-22]
+
+### Fixed
+
+- **Studio**: Fix connecting AI agents to the Studio MCP server — the OAuth discovery URL the server advertised pointed at a page that did not exist, so authorization could never complete.
+
 ## [2026-07-18]
 
 ### Added
