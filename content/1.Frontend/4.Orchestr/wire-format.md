@@ -53,6 +53,8 @@ The client sends a `QueryWireRequest` as a JSON POST body. It contains an array 
     }
   ],
   "clientEnv": {
+    "marketId": "0190bad70001",
+    "languageId": "0190bad70002",
     "locale": "en-US",
     "currency": "EUR",
     "isPreview": false,
@@ -66,6 +68,22 @@ The client sends a `QueryWireRequest` as a JSON POST body. It contains an array 
     }
   }
 }
+```
+
+`clientEnv` is the **wire** shape — the browser's claim about its environment, not what handlers receive. The server resolves `marketId` and `languageId` against the project's i18n config, verifies `previewToken` if one is present, and hands handlers a `ClientEnv` carrying full `market` and `language` objects. `locale` and `currency` are sent but not read by the server; they are derived from the resolved language and market. See [Client Environment](/frontend/orchestr/client-env) for both shapes and the trust boundary between them.
+
+A [content preview](/frontend/features/content-preview) request adds the token, which is verified and then stripped before any handler runs:
+
+```json
+  "clientEnv": {
+    "marketId": "0190bad70001",
+    "languageId": "0190bad70002",
+    "locale": "en-US",
+    "currency": "EUR",
+    "isPreview": true,
+    "previewToken": "pvtk_3Qm…",
+    "custom": {}
+  }
 ```
 
 Each query specifies exactly which `components` and `links` it needs. Links are recursive: a link can request its own components, nested links, filter, sort, and pagination. This tree structure lets the client declare its full data requirements in a single request.
@@ -162,8 +180,11 @@ Actions use a separate endpoint per action token. The POST body contains the act
     "quantity": 1
   },
   "clientEnv": {
+    "marketId": "0190bad70001",
+    "languageId": "0190bad70002",
     "locale": "en-US",
-    "currency": "EUR"
+    "currency": "EUR",
+    "isPreview": false
   }
 }
 ```

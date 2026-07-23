@@ -60,10 +60,14 @@ export const defineShopwareQuery = defineShopware.queryHandler;
 export const defineShopwareLink = defineShopware.linkHandler;
 ```
 
-The callback receives `event` (the H3 request event) and `clientEnv` (locale, currency, and other client environment data). The returned `context` object is merged into every handler's arguments.
+The callback receives `event` (the H3 request event) and `clientEnv` — the server-resolved [client environment](/frontend/orchestr/client-env), carrying the full `market` and `language` objects plus `isPreview`. The returned `context` object is merged into every handler's arguments.
 
 ::note
-`clientEnv.locale` and `clientEnv.currency` are guaranteed populated on every request. Read them directly; do not write fallback defaults like `clientEnv.currency ?? 'USD'`.
+`clientEnv.market` and `clientEnv.language` are guaranteed populated on every request. Read `clientEnv.language.code` for the locale and `clientEnv.market.currency` for the currency; do not write fallback defaults like `clientEnv.market.currency ?? 'USD'`. The flat `clientEnv.locale` and `clientEnv.currency` are deprecated.
+::
+
+::caution
+Middleware cannot override `market`, `language`, or `isPreview`. These are resolved server-side from the project's i18n config and the verified preview token — they are facts about the request, not values a middleware negotiates.
 ::
 
 You can chain multiple `extendRequest` calls. Each one extends the context further:

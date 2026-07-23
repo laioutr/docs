@@ -73,7 +73,7 @@ Technically, each registered action acts as an http POST handler on the server. 
 
 The action response is encoded as a [turbo-stream](https://github.com/jacob-ebey/turbo-stream) response, which is a superset of JSON. This means that any data-type supported by turbo-stream can be returned. This includes regular objects and arrays but also Dates, Maps, Sets, etc.
 
-The client adds `clientEnv` to every request. This object contains information about the client environment (like locale or currency). You can modify it with the [`orchestr:client-env:modify` hook](/frontend/features/hooks#client-environment).
+The client adds `clientEnv` to every request. The server resolves it into the object your handler receives, carrying the request's `market`, `language`, and `isPreview` — see [Client Environment](/frontend/orchestr/client-env). You can shape what the browser sends with the [`orchestr:client-env:modify` hook](/frontend/features/hooks#client-environment).
 
 ```typescript [server/orchestr/newsletter/subscribe.ts] twoslash
 import { defineActionHandlerMock as defineActionHandler } from '@laioutr-core/orchestr/types';
@@ -83,7 +83,7 @@ import { AuthRegisterAction } from '@laioutr-core/canonical-types/ecommerce';
 
 // Alternatively, you can use the shortcut `defineActionHandler`
 export default defineActionHandler(AuthRegisterAction, async ({ clientEnv }) => {
-  const userLanguage = getLanguageByLocale(clientEnv.locale);
+  const userLanguage = getLanguageByLocale(clientEnv.language.code);
   // ...
 });
 ```

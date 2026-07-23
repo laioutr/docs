@@ -171,6 +171,73 @@ export default defineNuxtPlugin((nuxtApp) => {
 ```
 ::
 
+### Content Preview
+
+Two hooks around [content preview](/frontend/features/content-preview): one decides where the preview token comes from, the other tells you when preview turned on or off.
+
+::hook-meta
+---
+name: frontend-core:content-preview:resolve-token
+title: Resolve preview token
+surface: client
+register: nuxt-plugin
+dispatch: sync
+kind: override
+payload:
+  - { field: route, type: RouteLocation, description: The current route. }
+  - { field: result, type: '{ value?: string }', description: 'Set result.value to a token to drive content preview from your own source. It starts empty; leave it unset to fall back to the ?preview_token= query parameter. The first handler to set a value wins.' }
+whenItFires: Before frontend-core reads the preview_token query parameter, on every evaluation of the preview token source.
+related:
+  - { label: Content Preview, to: /frontend/features/content-preview }
+---
+
+Take over where the content-preview token comes from — a CMS cookie, a header injected by a gateway — instead of the query parameter.
+
+Your plugin **must** use `enforce: 'pre'`: frontend-core evaluates the token source during its own plugin setup, so a handler registered later is never consulted. Handlers must also be synchronous — you may read cookies or `useRequestHeaders()`, but you must not `await`.
+
+#example
+```ts [app/plugins/preview-from-cookie.ts]
+export default defineNuxtPlugin({
+  enforce: 'pre',
+  setup(nuxtApp) {
+    nuxtApp.hook('frontend-core:content-preview:resolve-token', ({ result }) => {
+      result.value = useCookie('cms_preview_token').value ?? undefined;
+    });
+  },
+});
+```
+::
+
+::hook-meta
+---
+name: frontend-core:content-preview:changed
+title: Content preview changed
+surface: client
+register: nuxt-plugin
+dispatch: sync
+kind: lifecycle
+payload:
+  - { field: enabled, type: boolean, description: The new state — true once the server has verified the token, false otherwise. Already applied by the time the hook fires. }
+whenItFires: After a content-preview transition — entering preview, leaving preview, or swapping to a different token.
+related:
+  - { label: Content Preview, to: /frontend/features/content-preview }
+---
+
+Invalidate your own caches when content preview turns on or off. Fire-and-forget: there is no result slot, and a returned promise is ignored.
+
+Frontend Core already calls `refreshNuxtData()` and `invalidateOrchestrQueries()` for you, so Nuxt's own data and every stored orchestr query result are handled. Use this hook for anything else you hold — a hydrated Pinia store, a memoized CMS client.
+
+#example
+```ts [app/plugins/preview-invalidation.ts]
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.hook('frontend-core:content-preview:changed', ({ enabled }) => {
+    useMyCmsStore().reset();
+    console.debug(`[preview] now ${enabled ? 'on' : 'off'}`);
+  });
+});
+```
+::
+
 ## Orchestr Client Hooks
 
 These hooks fire during client-side action execution. All receive a `token` string that identifies the action (e.g. `ecommerce/cart/add-items`).
@@ -282,18 +349,21 @@ register: nuxt-plugin
 dispatch: sync
 kind: modify
 payload:
-  - { field: clientEnv, type: ClientEnv, description: '{ locale, currency, isPreview?, custom? } — mutate directly, do not replace.' }
-whenItFires: Synchronously, every time orchestr builds the clientEnv object before sending an action request.
+  - { field: clientEnv, type: WireClientEnv, description: '{ locale, currency, isPreview, previewToken?, marketId?, languageId?, custom? } — mutate directly, do not replace.' }
+whenItFires: Synchronously, every time orchestr builds the wire clientEnv before sending a query or action request.
+related:
+  - { label: Client Environment, to: /frontend/orchestr/client-env }
 ---
 
-Mutate the `clientEnv` — locale, currency, preview flags — before every action request is sent.
+Shape the **wire** client environment before every request is sent. This is the browser's payload, not what handlers receive: the server validates every field against the project's own configuration and resolves it into a [`ClientEnv`](/frontend/orchestr/client-env). Nothing you set here is trusted.
+
+Frontend Core already sets `marketId`, `languageId`, and the content-preview fields. Put your own data under `custom`, and validate it server-side — a shopper can set it to anything.
 
 #example
 ```ts [app/plugins/client-env.ts]
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.hook('orchestr:client-env:modify', ({ clientEnv }) => {
-    clientEnv.locale = useLanguage().value.locale;
-    clientEnv.currency = useCurrency().value;
+    clientEnv.custom = { ...clientEnv.custom, abVariant: useCookie('ab-variant').value };
   });
 });
 ```

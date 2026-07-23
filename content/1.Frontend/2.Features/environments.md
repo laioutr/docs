@@ -48,14 +48,14 @@ Preview deployments use the same `laioutrrc.json` and data configuration as prod
 
 ---
 
-## Workaround: preview content with the rule engine
+## Previewing content changes
 
-Sometimes you need to preview **content changes** on the live production site without exposing them to all visitors. The **rule engine** can help here. You can create rules that show specific content only when a secret URL parameter is present.
+Preview deployments cover **code** changes. For **content** changes — a draft campaign page, an unpublished article — use [Content Preview](/frontend/features/content-preview) instead: append `?preview_token=<token>` to any URL on the live production site and the page is server-rendered against unpublished content, while regular visitors continue to see the published version.
 
-For example, you could configure a rule that displays a draft campaign banner only when `?preview=your-secret-token` is appended to the URL. This way, your team can review upcoming content on the production deployment by sharing links with the query parameter, while regular visitors see the current version.
+The token is verified server-side, previews are never written to a shared cache, and a wrong token silently renders the published page.
 
 ::tip
-This approach works well for toggling visibility of sections, banners, and promotional content. It does not replace a full staging environment, but it covers many real-world preview needs without additional infrastructure.
+For toggling the visibility of individual sections or banners without a CMS draft behind them, the **rule engine** still works: a rule keyed on a secret URL parameter shows a section only to whoever has the link.
 ::
 
 ---
@@ -82,7 +82,7 @@ Multi-environment data configuration is not yet available. The information above
 |---|---|---|
 | Production deployments | Available | Laioutr Cloud + [hyperscaler integrations](/hosting/hyperscaler) |
 | Branch preview deployments | Available | [Vercel adapter](/hosting/hyperscaler/vercel-adapter) |
-| Preview content on production | Workaround | Rule engine with secret URL parameter |
+| Preview content on production | Available | [Content Preview](/frontend/features/content-preview) with `?preview_token=` |
 | Environment-specific data configs | Coming soon | Planned multi-environment support |
 
-For most teams, the combination of Vercel preview deployments for code changes and rule-engine-based content previews covers the majority of staging needs today.
+For most teams, the combination of Vercel preview deployments for code changes and Content Preview for unpublished content covers the majority of staging needs today.
