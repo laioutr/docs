@@ -194,6 +194,7 @@ Brute-force resistance comes from token entropy. The response never contains the
 - **It is never sent to the browser as configuration.** It lives in private runtime config. It reaches the browser only when *someone typed it into a URL*.
 - **A wrong token is indistinguishable from no token** as far as rendered output goes. This is intentional: a preview URL that leaks to a shopper renders the ordinary published page.
 - **Preview never reaches a shared cache.** See [Caching](#caching) above.
+- **Preview pages are never indexed.** Any presented token forces `<meta name="robots" content="noindex, nofollow">` onto the render, overriding the page's own SEO config and any `page-head:resolve` hook. It holds for a rejected token too, because the token rides in the URL and no preview URL may ever be crawled.
 
 ## Related
 
