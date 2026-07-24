@@ -6,7 +6,7 @@ seo:
   description: Developer documentation for the Laioutr Shopware app package. Connect your Nuxt frontend to a Shopware backend via the…
 sitemap:
   loc: /apps/app-docs/shopware
-  lastmod: 2026-04-08
+  lastmod: 2026-07-24
   changefreq: monthly
   priority: 1.0
 
@@ -17,6 +17,8 @@ sitemap:
 The **@laioutr-app/shopware** package integrates a Laioutr-powered Nuxt app with a [Shopware](https://www.shopware.com/) backend. It registers with the Laioutr orchestr (queries, actions, links, resolvers, templates), provides a Nuxt Image provider for Shopware media, and a media library provider for the Laioutr Studio. All communication uses the official **Storefront API** (customer-facing) and **Admin API** (OAuth2 client credentials) from `@shopware/api-client`.
 
 To use it, you add the module to your Nuxt config and configure the five required connection options (storefront endpoint and token, admin endpoint and OAuth client). The package then exposes canonical ecommerce capabilities (products, categories, cart, search, menu, auth, newsletter, reviews) so your UI can stay backend-agnostic while talking to Shopware.
+
+Checkout can stay inside your Laioutr frontend or hand off to the Shopware storefront. The app runs fully headless on its own; pairing it with the optional [LaioutrConnector](https://github.com/laioutr/shopware-laioutr-connector) plugin adds an embedded checkout and a secure session handoff. See [Optional: the LaioutrConnector plugin](#optional-the-laioutrconnector-plugin).
 
 ## Configuration requirements
 
@@ -140,10 +142,123 @@ The package implements Laioutr’s canonical ecommerce types via the orchestr. T
 
 The Storefront API uses a **context token** to identify the session (cart, customer). The package:
 
-- **Reads** the context token from the cookie **`sw-context-token`** on each storefront request.  
-- **Writes** it when the API returns a new token (e.g. after login or add-to-cart). Cookie options: `path: '/'`, long-lived `maxAge`, `sameSite: 'lax'`, and `secure` when the storefront endpoint is HTTPS.
+- **Reads** the context token from the cookie **`sw-context-token`** on each storefront request, unless a project supplies one through the [`shopware:context-token:resolve`](#token-hooks-for-external-identity) hook.  
+- **Writes** it through a single persist step whenever the API returns a new token (after login, add-to-cart, or another cart mutation), then fires the [`shopware:context-token:changed`](#token-hooks-for-external-identity) hook. The cookie is `httpOnly` (never readable by client JS), with `path: '/'`, a one-year `maxAge`, `sameSite: 'lax'`, and `secure` when the request is HTTPS.
 
 Ensure your domain and cookie settings align with your Shopware sales channel and storefront URL so the same context is used consistently.
+
+## Optional: the LaioutrConnector plugin
+
+The app is fully headless on its own. Products, categories, cart, search, menus, customer auth, newsletter, and reviews all work against the Storefront and Admin APIs with nothing extra installed on the Shopware side.
+
+Install the [**LaioutrConnector**](https://github.com/laioutr/shopware-laioutr-connector) plugin when you want shoppers to finish checkout on the Shopware storefront using the cart they built in your Laioutr frontend. It is a Shopware 6 plugin (PHP) that pairs the storefront with this app and adds:
+
+- **Embedded checkout.** The Shopware checkout renders inside your frontend as an iframe section, with the storefront chrome (header, footer, navigation) suppressed so only the checkout flow shows.
+- **A secure session handoff.** The cart's `sw-context-token` moves from your frontend into the storefront session server-to-server. The app mints a single-use, short-lived code at `/app-shopware/checkout` and redirects to the plugin's `connect-session`, which adopts the cart context and regenerates the session. The token never appears in a browser URL.
+- **A `postMessage` bridge.** The embedded storefront and your frontend exchange auth, navigation, and checkout-completion signals through a versioned message envelope.
+
+### Install the plugin
+
+Run this on the Shopware host (it needs PHP 8.2 to 8.5 and Shopware 6.6 or 6.7):
+
+```bash
+composer require laioutr/shopware-connector
+bin/console plugin:refresh
+bin/console plugin:install --activate --clearCache LaioutrConnector
+```
+
+In the plugin's settings, add your Laioutr frontend origin to the allowed callback domains. Serve both the storefront and the frontend over HTTPS with `cookie_samesite: none` so the embedded session survives the cross-site context. The plugin README covers the full embedded-storefront prerequisites.
+
+### App-side options
+
+Point the app at the storefront that runs the plugin. These options sit under the same `'@laioutr-app/shopware'` key as the five core options, and all three are optional:
+
+| Option | Type | Description |
+|--------|------|-------------|
+| **`storefrontUrl`** | `string` | Base URL of the storefront where the connector is installed (e.g. `https://shop.example.com`). Required for the cart `checkoutLink` and `GetCheckoutUrlAction`; both are unavailable when it is unset. |
+| **`checkoutLoginCallbackUrl`** | `string` | Absolute URL the storefront returns to after a login inside checkout. Defaults to the request origin. Set it to your login route for external-identity (SSO) projects. |
+| **`checkoutLogoutCallbackUrl`** | `string` | Absolute URL the storefront returns to after a logout inside checkout. Defaults to the request origin. Set it to your identity provider's RP-logout route so a storefront logout also ends the external session. |
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  modules: ['@laioutr-app/shopware'],
+  '@laioutr-app/shopware': {
+    endpoint: process.env.SHOPWARE_STOREFRONT_ENDPOINT!,
+    accessToken: process.env.SHOPWARE_STOREFRONT_ACCESS_TOKEN!,
+    adminEndpoint: process.env.SHOPWARE_ADMIN_ENDPOINT!,
+    adminClientId: process.env.SHOPWARE_ADMIN_CLIENT_ID!,
+    adminClientSecret: process.env.SHOPWARE_ADMIN_CLIENT_SECRET!,
+    // Enables the checkout handoff to the storefront:
+    storefrontUrl: process.env.SHOPWARE_STOREFRONT_URL!,
+  },
+});
+```
+
+## Token hooks for external identity
+
+By default the app reads and writes the `sw-context-token` from its own cookie (see [Cookies and context token](#cookies-and-context-token)). That covers every project where Shopware owns login.
+
+Projects that own login through an **external identity provider** (an SSO service) need the app's cart and checkout to run in their customer's Shopware context rather than an anonymous one. The app exposes two Nitro runtime hooks so your project decides where the context token is read from and where it is stored.
+
+::hook-meta
+---
+name: shopware:context-token:resolve
+title: Resolve the context token
+surface: server
+register: nitro-plugin
+dispatch: async
+kind: override
+payload:
+  - { field: event, type: H3Event, description: The incoming storefront request. }
+  - { field: result, type: '{ token?: string }', description: 'Set result.token to supply the context token from your own session store. It starts empty; leave it unset to fall back to the sw-context-token cookie. The first handler to set it wins.' }
+whenItFires: Before the Store API client is built, on every storefront request.
+related:
+  - { label: Extension hooks, to: /apps/app-development/coding-standards#extension-hooks }
+---
+
+Source the `sw-context-token` from your own session store instead of the app's cookie, so cart and checkout run in the customer's Shopware context.
+::
+
+::hook-meta
+---
+name: shopware:context-token:changed
+title: Context token changed
+surface: server
+register: nitro-plugin
+dispatch: async
+kind: lifecycle
+payload:
+  - { field: event, type: H3Event, description: The incoming storefront request. }
+  - { field: token, type: 'string | null', description: The new context token, or null when the session is cleared on logout. }
+whenItFires: After the app persists a new token (login, add-to-cart, or another cart mutation) or clears it on logout.
+related:
+  - { label: Extension hooks, to: /apps/app-development/coding-standards#extension-hooks }
+---
+
+Mirror every token change into your own store so it survives across requests. Fire-and-forget: there is no result slot.
+::
+
+Register both hooks in one Nitro plugin:
+
+```ts [server/plugins/shopware-context-token.ts]
+export default defineNitroPlugin((nitroApp) => {
+  // Supply the token from your own session store; the app's cookie is the fallback.
+  nitroApp.hooks.hook('shopware:context-token:resolve', async ({ event, result }) => {
+    result.token = await loadShopwareToken(event); // e.g. Redis, keyed by the IdP subject
+  });
+
+  // Mirror every token change back into your store; token is null on logout.
+  nitroApp.hooks.hook('shopware:context-token:changed', async ({ event, token }) => {
+    await storeShopwareToken(event, token);
+  });
+});
+```
+
+::warning
+These hooks only **transport** the token; they never mint one. Keep the `resolve` handler a cheap read of your own storage, never a login call, because it runs on every Store API request. Turning an SSO shopper into a real, logged-in Shopware customer stays your project's job, done once at login through a Shopware SSO-login plugin or the Store API register/login endpoints. If the token you supply is only ever a guest token, checkout stays anonymous.
+::
+
+`changed` fires for guests too. Before login, a cart mutation issues a guest token and the hook fires with it, so you can store that token against a guest id and swap to the customer token once the shopper logs in.
 
 ## Summary checklist for developers
 
@@ -153,7 +268,8 @@ Ensure your domain and cookie settings align with your Shopware sales channel an
 4. **Environment** – Put secrets and URLs in env vars; ensure the Nuxt server can reach both APIs.  
 5. **Orchestr / frontend** – Use the canonical queries, actions, links, and resolvers from your UI; the package maps them to Shopware under the hood.  
 6. **Images** – Use the `shopware` Nuxt Image provider for Shopware media when using the expected `src` format.  
-7. **Studio** – The `shopware` media library provider will work once the Admin API and integration are correctly configured.
+7. **Studio** – The `shopware` media library provider will work once the Admin API and integration are correctly configured.  
+8. **Checkout (optional)** – To let shoppers finish checkout on the Shopware storefront, install the [LaioutrConnector](https://github.com/laioutr/shopware-laioutr-connector) plugin and set `storefrontUrl`. See [Optional: the LaioutrConnector plugin](#optional-the-laioutrconnector-plugin).
 
 For type-level details and exact canonical action/query names, see the package source and `@laioutr-core/canonical-types` in the laioutr repository.
 
