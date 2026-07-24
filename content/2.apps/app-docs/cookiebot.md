@@ -48,7 +48,7 @@ Use an environment variable for **cbid** in production if you prefer not to hard
 
 ### Runtime behaviour
 
-The client plugin reads `runtimeConfig.public['@laioutr-app/cookiebot']`, instantiates `CookiebotAdapter`, and activates it with `useConsentStore()`. On `init()` the adapter injects the Cookiebot script via `useHead` (with `data-blockingmode="auto"`), sets up `useCookie('CookieConsent')`, and on the client listens for `CookiebotOnLoad` to forward consent updates.
+The client plugin reads `runtimeConfig.public['@laioutr-app/cookiebot']`, instantiates `CookiebotAdapter`, and activates it with `useConsentStore()`. On `init()` the adapter injects the Cookiebot script via `useHead`, sets up `useCookie('CookieConsent')`, and on the client listens for `CookiebotOnLoad` to forward consent updates.
 
 Cookiebot's categories map to Laioutr's `ConsentManagementState` as follows: `necessary` → `necessary`, `preferences` → `functional`, `statistics` → `statistics`, `marketing` → `marketing`. `unclassified` is always `false`. Because the cookie is readable through `useCookie`, `getConsentState()` works on the server and the first SSR render reflects the user's choice with no flash.
 
