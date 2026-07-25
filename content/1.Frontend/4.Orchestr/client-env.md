@@ -6,7 +6,7 @@ seo:
   description: The clientEnv object every handler receives — what the browser sends, what the server resolves it into, and why the two are different types.
 sitemap:
   loc: /frontend/orchestr/client-env
-  lastmod: 2026-07-23
+  lastmod: 2026-07-24
   changefreq: monthly
   priority: 0.9
 ---
@@ -29,6 +29,7 @@ type ClientEnv<T = Record<string, any> | undefined> = {
   isPreview: boolean;
   market: RenderMarket;
   language: RenderLanguage;
+  domain: RenderMarketDomain;
   custom?: T;
 };
 ```
@@ -38,9 +39,10 @@ type ClientEnv<T = Record<string, any> | undefined> = {
 | `isPreview` | `boolean`        | `true` only when the client asked for [content preview](/frontend/features/content-preview) **and** the server verified the token. |
 | `market`    | `RenderMarket`   | The full resolved market — id, slug, currency, region codes, domains.                                            |
 | `language`  | `RenderLanguage` | The full resolved language — id, BCP 47 code, fallback chain, direction.                                          |
+| `domain`    | `RenderMarketDomain` | The specific domain this request resolved to — its host, optional path prefix, and language. Use `domain.host` for the request's canonical host. |
 | `custom`    | `T \| undefined` | Whatever your own plugin put on the wire env. Passed through untouched, and therefore **untrusted**.              |
 
-`market` and `language` are always populated. Read them directly; do not write fallback defaults like `clientEnv.market.currency ?? 'USD'`.
+`market`, `language`, and `domain` are always populated. Read them directly; do not write fallback defaults like `clientEnv.market.currency ?? 'USD'`.
 
 The fields most handlers reach for:
 
@@ -50,7 +52,8 @@ The fields most handlers reach for:
 | `market.slug`               | `switzerland`        | Developer-friendly alias — the usual key for a sales channel. |
 | `market.currency`           | `CHF`                | ISO 4217 currency code.                                       |
 | `market.regionCodes`        | `['CH']`             | ISO 3166 region codes the market covers.                      |
-| `market.defaultDomain.host` | `www.shop.ch`        | The market's canonical hostname.                              |
+| `market.defaultDomain.host` | `www.shop.ch`        | The market's **default** hostname.                           |
+| `domain.host`               | `www.shop.ch`        | The host **this request** resolved to — may differ from `market.defaultDomain.host` when a market spans several domains. Prefer it for the request's canonical URL. |
 | `language.id`               | `lng_abc`            | RC entity id of the language.                                 |
 | `language.code`             | `de-CH`              | BCP 47 tag — the request's locale.                            |
 | `language.languageCode`     | `de`                 | ISO 639 subtag, for backends that key on language alone.      |
@@ -75,7 +78,7 @@ export default defineMyQuery(ProductsQuery, async ({ context, clientEnv }) => {
 ::
 
 ::caution
-`market` and `language` reference each other (`RenderMarketDomain.language` ↔ `RenderLanguage.marketDomains`). Traversing the graph is fine, but `JSON.stringify(clientEnv)` **throws** on the cycle. Never serialize the whole object — pick the scalars you need.
+`market`, `language`, and `domain` reference each other (`RenderMarketDomain.language` ↔ `RenderLanguage.marketDomains`). Traversing the graph is fine, but `JSON.stringify(clientEnv)` **throws** on the cycle. Never serialize the whole object — pick the scalars you need.
 ::
 
 ## `WireClientEnv` — what the browser sends

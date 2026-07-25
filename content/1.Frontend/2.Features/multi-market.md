@@ -83,7 +83,9 @@ Use `useMarketPath()` when you need to prepend the current domain's path prefix 
 
 ### Validation
 
-`validateI18nConfig(languages, markets)` runs at build time and checks: valid BCP 47 codes, existing `defaultDomainId` and `languageId` references, no duplicate (host, path) pairs. Issues are logged as warnings.
+`validateI18nConfig(languages, markets)` runs at build time and checks: valid BCP 47 codes, existing `defaultDomainId` and `languageId` references, no duplicate (host, path) pairs, and no two domains within one market serving the same language. Issues are logged as warnings.
+
+The last check keeps `(market, language)` a unique key for a domain — the pair the server uses to resolve [`clientEnv.domain`](/frontend/orchestr/client-env). If a market legitimately spans two same-language regions (e.g. Germany and Austria on one EUR market), give each domain a region-qualified locale (`de-DE` vs `de-AT`) so they stay distinguishable.
 
 ### Dev hosts
 
