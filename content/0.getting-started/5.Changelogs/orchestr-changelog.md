@@ -14,6 +14,51 @@ sitemap:
 
 All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data-fetching and query orchestration layer, will be documented in this file.
 
+## [0.37.0] - 2026-07-23
+
+### Minor Changes
+
+- **Breaking:** Make `clientEnv.isPreview` a server-verified fact instead of a browser claim, so a handler can safely return unpublished content when it is set.
+
+  The client env is now two types. `WireClientEnv` is what the browser sends (`isPreview`, `previewToken`, `marketId`, `languageId`, `custom`) and is untrusted. It no longer carries `locale` or `currency` — the server derives both from the market and language it resolves, and a request that still sends them has them ignored. `ClientEnv` is what handlers receive, and it is produced only by `resolveClientEnv()`. That function verifies the presented preview token, drops it before handlers can see it, and turns the wire's `marketId`/`languageId` into full `market`/`language` objects validated against the project's i18n config — so the language a handler serves can never disagree with the market it reads. `isPreview` is true only when the client asked for preview **and** the server verified the token; a middleware can no longer override `market`, `language` or `isPreview`.
+
+  Query, link and component caches are preview-aware: keys carry the preview stage, and caching is bypassed entirely while previewing, so unpublished content is never stored and can never be served to a shopper.
+
+  Adds `invalidateOrchestrQueries()` (auto-imported) to drop every stored query result at once, for changes that are not part of a query's cache key — entering or leaving content preview being the motivating case.
+
+  **Breaking:** `ClientEnv` now carries required `market` and `language`. Handlers keep reading it as before, but anything that builds one by hand must supply them, or go through `resolveClientEnv()`.
+
+  Before:
+
+  ```ts
+  await runQuery(Token, args, { locale: 'de-DE', currency: 'EUR', isPreview: false }, event);
+  ```
+
+  After:
+
+  ```ts
+  await runQuery(Token, args, resolveClientEnv(event, rawClientEnvFromRequest), event);
+  ```
+
+  `ClientEnv.locale` and `ClientEnv.currency` are deprecated. They keep resolving, but they are flat copies of fields the resolved objects already carry, and the resolved objects also carry the region codes, fallback chain and domains the strings drop.
+
+  Before:
+
+  ```ts
+  const { locale, currency } = clientEnv;
+  ```
+
+  After:
+
+  ```ts
+  const locale = clientEnv.language.code;
+  const currency = clientEnv.market.currency;
+  ```
+
+  If your handler's output varies by market, append a scalar such as `clientEnv.market.slug` in your own `getKeySuffix` — the default cache key deliberately does not widen with `ClientEnv`, and `market`/`language` are cyclic, so `JSON.stringify(clientEnv)` throws.
+
+  Cache keys now include the preview stage, so entries written by earlier versions are orphaned. Expect one cold-cache window against a shared cache after deploying; nothing has to be flushed by hand.
+
 ## [0.35.0] - 2026-07-14
 
 ### Minor Changes

@@ -14,6 +14,38 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.37.0] - 2026-07-23
+
+### Minor Changes
+
+- Add content preview: a CMS editor opening a storefront URL with `?preview_token=<token>` now sees unpublished content, server-rendered, instead of the published page.
+
+  The token is verified server-side against the project's `previewToken` with a timing-safe compare, and the verdict is what reaches connectors as `clientEnv.isPreview`. A wrong token renders published content and never throws. Any response rendered for a presented token — granted or rejected — is sent as `private, no-store`, which keeps it out of a _shared_ cache such as a CDN or reverse proxy.
+
+  New auto-imported composable:
+
+  ```ts
+  const { enabled, status, state } = useContentPreview();
+  // status: 'off' | 'pending' | 'active' | 'rejected'
+  // enabled: true only once the server has verified the token — safe for `v-if`
+  // enabled is writable, so `enabled.value = false` still exits preview
+  ```
+
+  Two new hooks:
+
+  - `frontend-core:content-preview:resolve-token` — a bail hook over the token source. Set `result.value` to drive preview from a cookie or request header instead of the query parameter. Handlers must be synchronous and registered from a plugin with `enforce: 'pre'`.
+  - `frontend-core:content-preview:changed` — fires after a preview transition with the new `enabled` value. frontend-core already refreshes Nuxt data and the orchestr store; use this to invalidate your own caches.
+
+  Adds `POST /api/frontend/preview-verify`, an unauthenticated endpoint that answers `{ granted: boolean }` for a presented token. It is a UI hint only — authorization for real data is the gate that runs on every orchestr request regardless.
+
+  Media-library requests (Cockpit's asset browser) now run with the project's default market and language instead of a placeholder `{ locale: 'en', currency: '' }`. Providers that relied on the empty currency triggering their own fallback will now receive the default market's real currency. Media requests are never preview.
+
+- Add the content-preview token to the two contracts that carry it.
+
+  `RcProject.laioutr.previewToken?: string` is the project's content-preview token, read from `laioutrrc` by every deployed frontend. It is separate from `projectSecretKey` and separately rotatable, because it is pasted into CMS preview-URL templates. It reaches a frontend at deploy time, so rotating it in Cockpit has no effect until the project redeploys.
+
+  `EditorChildProps.previewToken?: string` lets Cockpit push the token to the Studio iframe when an editor turns content preview on. Absent or `undefined` means preview is off.
+
 ## [0.36.0] - 2026-07-20
 
 ### Minor Changes

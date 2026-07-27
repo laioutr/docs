@@ -14,6 +14,29 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-07-24]
+
+### Added
+
+- **Hosting**: Project settings has an "open preview" link that opens the live storefront in content-preview mode in a new tab, shown once the project has a deployed host.
+
+## [2026-07-23]
+
+### Added
+
+- **Studio**: Generate a content preview token in project settings, then use the "Show Preview Content" command in Studio to preview unpublished content.
+- **Hosting**: New projects come with a content preview token already generated.
+
+### Changed
+
+- **Studio**: The studio's "Show preview content" command is disabled, with the required version in a tooltip, when the project's deployed frontend-core is too old to honour it.
+- **Hosting**: New content-preview tokens carry a "pvtk_" prefix; already-issued tokens keep working.
+- **Hosting**: Project settings now links to the docs and lets you copy the project secret key.
+
+### Fixed
+
+- **Studio**: Data-source options in the query picker now match the market selected in Studio.
+
 ## [2026-07-22]
 
 ### Fixed

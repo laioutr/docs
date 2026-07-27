@@ -14,6 +14,12 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.8.1] - 2026-07-23
+
+### Patch Changes
+
+- Add the missing Product Slider preview image so the Studio component picker shows a preview for it. The `previewSrc` already pointed to `SectionProductSlider.png`, but that asset was absent, leaving the entry with a broken preview link.
+
 ## [2.8.0] - 2026-07-20
 
 ### Minor Changes
