@@ -6,7 +6,7 @@ seo:
   description: Introduction to the Laioutr App Starter — the template and starting point for new developers building Laioutr apps.
 sitemap:
   loc: /apps/app-development/app-starter
-  lastmod: 2026-04-08
+  lastmod: 2026-07-28
   changefreq: monthly
   priority: 1.0
 
@@ -14,7 +14,7 @@ sitemap:
 
 ## Overview
 
-The **App Starter** is the official template for creating a new [Laioutr app](https://github.com/laioutr/app-starter). It gives you a minimal Nuxt module structure, Laioutr registration, two playgrounds for development, and the conventions you need so your app works with Laioutr’s Frontend Core, Orchestr, and Studio.
+The **App Starter** is the official template for creating a new [Laioutr app](https://github.com/laioutr/app-starter). It gives you a minimal Nuxt module structure, Laioutr registration, a playground for development, and the conventions you need so your app works with Laioutr’s Frontend Core, Orchestr, and Studio.
 
 Use the App Starter when you want to:
 
@@ -65,8 +65,7 @@ After opening the App Starter, you’ll see a structure like this:
 | **`src/runtime/server/orchestr/`** | Orchestr handlers live here: e.g. `product/by-slug.query.ts`, `cart/add-item.action.ts`, `menu/base.resolver.ts`. The starter only adds a `plugins/` (e.g. Zod fix) and leaves entity folders for you. |
 | **`src/runtime/app/sections/`** | Vue components and definitions for **sections** (Studio). Starter ships an empty folder with a `.gitkeep`. |
 | **`src/runtime/app/blocks/`** | Vue components and definitions for **blocks** (Studio). Starter ships an empty folder with a `.gitkeep`. |
-| **`playground/`** | A Nuxt app that uses your module and a **laioutrrc.json** (or mock) to develop the full UI with Frontend Core. Run with `pnpm dev`. |
-| **`orchestr-playground/`** | A Nuxt app focused on **orchestr**: it includes Orchestr and Orchestr DevTools so you can test queries and actions (e.g. via the Orchestr Request Editor). Run with `pnpm orchestr-dev`. |
+| **`playground/`** | A Nuxt app that uses your module and a **laioutrrc.json** (or mock) to develop the full UI with Frontend Core. It also registers Laioutr DevTools, so you can test queries and actions (e.g. via the Orchestr Request Editor) from the same app. Run with `pnpm dev`. |
 | **`test/`** | Basic module tests (e.g. Vitest). |
 
 Important details:
@@ -81,7 +80,7 @@ Before you start:
 
 - **Node.js** (>= 22.12) and **pnpm** (>= 10.15).
 - A **Laioutr project** in [Cockpit](https://cockpit.laioutr.cloud) (for fetching `laioutrrc.json` and testing with Studio).
-- **NPM token** for Laioutr’s registry (for installing dependencies). Create a copy of `.npmrc.config` as `.npmrc` and set `NPM_LAIOUTR_TOKEN`; you can find the token in [project settings](https://cockpit.laioutr.cloud/o/_/p/_/settings).
+- Access to Laioutr’s **npm registry** (for installing dependencies). Copy `.npmrc.config` to `.npmrc` for the scope mapping, then run `npm login --registry https://npm.laioutr.cloud`. See [npm registry](/cockpit/project-settings/npm).
 
 Optional but recommended: install the [Laioutr CLI](/getting-started/next-steps/cli) to fetch and update `laioutrrc.json`:
 
@@ -103,20 +102,20 @@ pnpm add -g @laioutr/cli@latest
    laioutr rc fetch -p <organization-slug>/<project-slug> -s <project-secret>
    ```
 
-   If you don’t use the CLI, create or copy a `laioutrrc.json` at the project root. The **playground** can import it (see `playground/nuxt.config.ts`); the **orchestr-playground** typically doesn’t need a full laioutrrc for testing orchestr only.
+   If you don’t use the CLI, create or copy a `laioutrrc.json` at the project root. The playground imports it (see `playground/nuxt.config.ts`).
 
-3. **Prepare and run**
+3. **Run the playground**
 
    ```bash
-   pnpm dev:prepare
-   pnpm dev          # UI playground (Frontend Core + laioutrrc)
-   pnpm orchestr-dev # Orchestr playground (queries/actions + DevTools)
+   pnpm dev
    ```
+
+   `pnpm dev` runs `dev:prepare` for you. Run `pnpm dev:prepare` on its own when you only want to stub the module and prepare types.
 
 After that you can:
 
-- Open the UI playground and, if applicable, connect Studio to localhost (e.g. “Developer: Use Localhost” in the Studio command palette) to test with real project data.
-- Open the orchestr-playground and use the Orchestr Request Editor (Queries / Actions) to call your orchestr handlers.
+- Connect Studio to localhost (e.g. “Developer: Use Localhost” in the Studio command palette) to test with real project data.
+- Use the Orchestr Request Editor (Queries / Actions) in DevTools to call your orchestr handlers.
 
 Detailed steps and troubleshooting are in [Setup Local Development Environment](/getting-started/next-steps/local-setup).
 
@@ -162,6 +161,6 @@ For deeper dives, see [Architecture](/getting-started/key-concepts/architecture)
 ## Related documentation
 
 - [App Configuration](/apps/app-development/app-configuration) — How `laioutrrc.json` and runtime config work for your app.
-- [Setup Local Development Environment](/getting-started/next-steps/local-setup) — Step-by-step clone, install, fetch rc, and run playgrounds.
+- [Setup Local Development Environment](/getting-started/next-steps/local-setup) — Step-by-step clone, install, fetch rc, and run the playground.
 - [CLI](/getting-started/next-steps/cli) — Fetch and update `laioutrrc.json`.
 - [Coding Standards](/apps/app-development/coding-standards) — Conventions and quality guidelines for app code.
