@@ -14,6 +14,18 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.37.1] - 2026-07-25
+
+### Patch Changes
+
+- `ClientEnv` now includes a `domain` field — the market domain (host, path, language) the current request resolved to. Read it for the request's canonical host instead of assuming `market.defaultDomain`.
+
+  The i18n config check now warns when two domains in the same market use the same language, which makes the resolved domain ambiguous — give them region-qualified locales (e.g. `de-DE` vs `de-AT`).
+
+- Force `noindex, nofollow` on content-preview page renders. Preview URLs serve unpublished, secret-gated content and carry the preview token in the URL, so they must never be indexed. `PageRenderer` now overrides the page's configured `robots` (and any `page-head:resolve` hook) whenever a request carries a preview token — whether preview is pending, active, or rejected.
+
+- Consent-store consumers registered via `onConsentChange` now receive updates. The store mutated its state ref in place while watching it without `deep`, so the watcher never fired and consumers reacting to consent changes were never notified. Consent updates now reassign the state, triggering the watcher.
+
 ## [0.37.0] - 2026-07-23
 
 ### Minor Changes
