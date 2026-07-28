@@ -6,7 +6,7 @@ seo:
   description: Conventions and quality guidelines for developing Laioutr apps. Use these standards to keep app code consistent,…
 sitemap:
   loc: /apps/app-development/coding-standards
-  lastmod: 2026-04-08
+  lastmod: 2026-07-28
   changefreq: monthly
   priority: 1.0
 
@@ -206,19 +206,17 @@ The hooks only **transport** the token — the app never mints it; establishing 
 
 ### package.json scripts
 
-- **dev:** Prepare and run the main playground (`nuxi dev playground`).
-- **orchestr-dev:** Prepare and run the orchestr playground (`nuxi dev orchestr-playground`).
-- **dev:prepare:** Build the module (stub), run nuxt prepare for playground(s). Required before `dev` and `orchestr-dev`.
+- **dev:** Prepare and run the playground (`nuxi dev playground`).
+- **dev:prepare:** Build the module (stub), run nuxt prepare for the playground. `dev` runs it first; call it directly when you only need types.
 - **prepack:** Build the module for publishing (`nuxt-module-build build`).
 - **release:** Lint, test, prepack, then run your release flow (e.g. changelogen, publish, push tags).
 - **lint:** Run ESLint (e.g. `eslint .`).
 - **test:** Run tests (e.g. `vitest run`).
 - **test:types:** Type-check the module and playground (e.g. `vue-tsc --noEmit`).
 
-### Playgrounds
+### Playground
 
-- **playground:** Consumes your module and, if applicable, `laioutrrc.json` and Frontend Core. Use it for full UI and integration testing.
-- **orchestr-playground:** Adds Orchestr and Orchestr DevTools. Use it to test queries and actions (e.g. Orchestr Request Editor) without a full project config. Both playgrounds should list your module and required peer deps in their own `package.json`.
+- **playground:** Consumes your module and, if applicable, `laioutrrc.json` and Frontend Core. Use it for full UI and integration testing. Register `@laioutr-core/devtools` alongside it to test queries and actions through the Orchestr Request Editor. The playground should list your module and required peer deps in its own `package.json`.
 
 ## Testing
 

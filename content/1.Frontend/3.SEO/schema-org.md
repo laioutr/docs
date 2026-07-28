@@ -6,7 +6,7 @@ seo:
   description: Generate JSON-LD structured data for your Laioutr frontend to enable rich snippets in Google search results. Add…
 sitemap:
   loc: /frontend/seo/schema-org
-  lastmod: 2026-04-08
+  lastmod: 2026-07-28
   changefreq: monthly
   priority: 1.0
 
@@ -42,32 +42,49 @@ Nuxt Schema.org reads these values automatically. No additional module-level con
 
 ## Example: Product Structured Data
 
-In a product detail section, use `defineProduct()` with data from `usePageVariant()`:
+Structured data is built from the entity the section renders, not from the page's SEO fields. A product detail section declares a `singleEntity` query field, and Frontend Core hands the resolved [Product](/frontend/api-reference/entities/product) to the component as a prop — see [Consuming Query Fields](/apps/app-development/consuming-query-fields).
 
-```vue
+```vue [app/sections/ProductDetail.vue]
 <script setup lang="ts">
-const pageVariant = usePageVariant();
+import type { ClientEntity } from '@laioutr-core/orchestr/types';
+import { computed } from 'vue';
 
-useSchemaOrg([
-  defineProduct({
-    name: pageVariant.value.seo.title,
-    description: pageVariant.value.seo.description,
-    image: pageVariant.value.seo.image,
-    offers: [
-      defineOffer({
-        price: pageVariant.value.data.price,
-        priceCurrency: pageVariant.value.data.currency,
-        availability: pageVariant.value.data.inStock
-          ? 'https://schema.org/InStock'
-          : 'https://schema.org/OutOfStock',
+// Resolved from the section's query field. Undefined while the query loads.
+const { product } = defineProps<{ product: ClientEntity | undefined }>();
+
+useSchemaOrg(
+  computed(() => {
+    if (!product) return [];
+    const { base, seo, prices, media } = product.components;
+
+    return [
+      defineProduct({
+        name: base.name,
+        description: seo?.description,
+        image: media?.images[0]?.sources[0]?.src,
+        offers: [
+          defineOffer({
+            // Money.amount is in the smallest currency unit; schema.org expects a decimal.
+            price: prices.price.amount / 100,
+            priceCurrency: prices.price.currency,
+          }),
+        ],
       }),
-    ],
-  }),
-]);
+    ];
+  })
+);
 </script>
 ```
 
+::note
+Stock status lives on [ProductVariant](/frontend/api-reference/entities/product-variant), not on Product — read it from the linked variant if you want to emit `availability` on the offer.
+::
+
 Other helpers like `defineBreadcrumb()`, `defineOrganization()`, and `defineWebSite()` work the same way. The module provides 30+ typed helpers for different schema types.
+
+### Page-level metadata
+
+The page's `title`, `description`, and `robots` come from the SEO fields on the page variant in Studio, and Frontend Core already applies them to the head. Don't re-derive them in a section. To read or override them, use the `frontend-core:page-head:resolve` [hook](/frontend/features/hooks), which receives the current `page` and `pageVariant`.
 
 ## Further Reading
 
