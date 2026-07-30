@@ -14,11 +14,46 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-07-29]
+
+### Added
+
+- **Studio**: Pick a concrete page right in the link picker; manual parameter entry stays available.
+
+### Changed
+
+- **Studio**: The preview and link page pickers now say "page" instead of "instance".
+
+### Fixed
+
+- **Studio**: Preview data now follows on-page links that carry a query string or an accented URL.
+
+## [2026-07-27]
+
+### Added
+
+- **Studio**: The Preview Data selector now shows the source app's icon and name.
+
+### Changed
+
+- **Studio**: The Preview Data selector now names the product being previewed instead of showing its raw URL parameters.
+- **Studio**: The Preview Data selector names the page you picked immediately, instead of briefly showing its raw URL parameters.
+
+### Fixed
+
+- **Studio**: The Preview Data selector now tracks the previewed page on stores whose product URLs span several path segments.
+- **Studio**: Clicking a link in the preview now updates the Preview Data selector to that page.
+
 ## [2026-07-24]
 
 ### Added
 
 - **Hosting**: Project settings has an "open preview" link that opens the live storefront in content-preview mode in a new tab, shown once the project has a deployed host.
+- **Studio**: The Preview Data selector now marks the exact product shown in the preview.
+
+### Fixed
+
+- **Studio**: The Preview Data selector now reflects the product you open via an in-preview link.
 
 ## [2026-07-23]
 

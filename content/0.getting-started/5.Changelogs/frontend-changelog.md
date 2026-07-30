@@ -14,6 +14,55 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.38.0] - 2026-07-29
+
+### Minor Changes
+
+- Fill hreflang alternates, `og:locale:alternate`, `x-default` and the locale switcher with each locale's own route params instead of the current locale's.
+
+  On a page whose slug is translated per locale, the alternate URLs and the locale-switch target previously reused the current locale's params — pointing at URLs that do not exist in the target locale. Where the page type's `pageIndex` registration implements `locate` and reports a complete per-locale map, each locale now gets its own slug, and locales the page does not exist in are omitted from the alternates rather than guessed at.
+
+  Omission follows only from that complete map. A `locate` that resolves just the locale it was called in omits the map entirely, and its pages keep filling every alternate from the current locale's params — a partial map cannot distinguish "no page in this locale" from "did not look", so nothing is dropped on its word.
+
+  The lookup runs alongside the page queries and is bounded by a 2s SSR budget. If it breaches, that render falls back to the previous behaviour — every alternate filled from the current locale's params — while the request completes and warms the server cache, so the next render is correct. Page types whose connector provides no `locate` are unchanged, as are single-language projects and pages without dynamic params — neither performs a lookup.
+
+- Add the `pageIndex` orchestr handler kind — one registration per page type that owns that page type's whole page-space.
+
+  `defineOrchestr.pageIndex({ for, label?, batchSize?, list, search?, count?, locate?, cache?, order? })`:
+
+  - `list` walks the whole page-space in stable order, returning one `PageIndexEntry` per concrete page (`{ params, subject?, meta }`) as an array or async iterable; the new `paginate()` helper turns a cursor-paged platform API into one. It is called with `batchSize` — how many entries the platform serves in a single request, declared once on the registration and defaulting to 100 — and never with a bound, so a walk always caches a complete enumeration.
+  - `search` answers a search term with a relevance-ordered top-N, receiving the `term` plus a `take` already clamped to `batchSize`. It is optional: without it a page type still answers search terms, because the runner scans the first 1000 enumerated entries and matches them on title and route params. Implementing `search` buys relevance ordering and coverage past that scan rather than the capability itself.
+  - `count` supplies a cheap total for chunked sitemaps and picker totals; consumers degrade when it is absent.
+  - `locate` is a point lookup returning `PageIndexLocateResult` (`{ subject?, meta?, locales? }`) — a page's route params in every locale it exists in, plus the located page's metadata in the locale the lookup was made in. `locales` carries a deliberate distinction: present, it is the **complete** set, and a locale missing from it means the page has no counterpart there, so consumers drop that alternate rather than guess a URL. Absent, it means the connector resolved only the locale it was called in, and consumers fall back to that locale's params. A registration that can answer for one locale must omit `locales` rather than return a single-key map, which would assert absence for every locale it never looked up.
+  - `cache` tunes the enumerate, search and locate tiers independently; walks are cached in cursor-page chunks with stale-while-revalidate and a subject tag index.
+  - `order` breaks ties between registrations, higher wins.
+
+  Every handler receives the resolved `clientEnv`, so a connector scopes its platform reads to the active market with `clientEnv.market.id` — the same value the runner keys its caches by.
+
+  Consumer surface is auto-imported server utils: `listPages()` enumerates a page type in stable order and `searchPages()` returns a relevance-ordered top-N, both as a `PageIndexEntryStream` (`for await`, `.toArray()`); `countPages()` returns a page type's cheap total; `locatePage()` performs the point lookup; and `invalidateEntity()` drops cached chunks referencing an entity.
+
+  The `page-index/list` and `page-index/locate` endpoints serve these to editor clients under the secret-protected `/api/laioutr/` namespace. `locate` is also served ungated at `POST /api/orchestr/page-index/locate`, which the frontend itself calls to resolve a page's per-locale slugs — that lookup runs during client-side navigation as well as SSR, so it can never hold the project secret, and it discloses only the route params the rendered hreflang tags publish anyway. Reverse proxies or edge rules that restrict the app's API paths must allow it. The `page-index/list` endpoint validates each enumerated entry on its own and drops the ones that fail with a warning, so a single malformed entry costs one page rather than the whole enumeration. Reflection gains a `pageIndex` map keyed by page-type token: a key means the type is enumerable, `locate` marks the point-lookup capability, and `label`/`appLabel`/`logoUrl` carry the providing app's identity for editor pickers.
+
+  `PageIndexEntry`, `PageIndexLocateResult`, `ReflectedPageIndex` and the endpoint request/response schemas are exported from `@laioutr-core/core-types/orchestr`; `PageSubjectRef` from `@laioutr-core/core-types/common`.
+
+  Page types without a registration behave exactly as before — an empty stream and one warning. Providers are never required to implement this.
+
+- **Breaking:** Type the `clientEnv` field of the `query-templates` and `page-index` request schemas as `WireClientEnv` rather than `unknown`.
+
+  **Breaking:** `WireClientEnv` now lives in `@laioutr-core/core-types/orchestr`, alongside the request schemas that carry it, and is no longer exported from `@laioutr-core/orchestr`. A handler for the `orchestr:client-env:modify` hook takes it from there instead:
+
+  ```ts
+  // before
+  import type { WireClientEnv } from '#orchestr/types';
+
+  // after
+  import type { WireClientEnv } from '@laioutr-core/core-types/orchestr';
+  ```
+
+  The resolved `ClientEnv` that handlers receive is unaffected and stays in `@laioutr-core/orchestr`.
+
+  Editor clients build the wire payload by hand. While it was `unknown`, any object satisfied the type — and because every field of `WireClientEnv` is optional, a misspelled key such as `marketid` for `marketId` also passed validation, so the request resolved against the default market with no error anywhere. Such a key is now a compile error at the call site, and a request carrying a malformed `clientEnv` is rejected with `400` naming the offending path instead of failing further in as a `500`.
+
 ## [0.37.1] - 2026-07-25
 
 ### Patch Changes
