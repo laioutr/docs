@@ -349,7 +349,7 @@ register: nuxt-plugin
 dispatch: sync
 kind: modify
 payload:
-  - { field: clientEnv, type: WireClientEnv, description: '{ locale, currency, isPreview, previewToken?, marketId?, languageId?, custom? } — mutate directly, do not replace.' }
+  - { field: clientEnv, type: WireClientEnv, description: '{ isPreview, previewToken?, marketId?, languageId?, custom? }, imported from @laioutr-core/core-types/orchestr — mutate directly, do not replace.' }
 whenItFires: Synchronously, every time orchestr builds the wire clientEnv before sending a query or action request.
 related:
   - { label: Client Environment, to: /frontend/orchestr/client-env }

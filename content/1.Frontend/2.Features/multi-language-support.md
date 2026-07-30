@@ -111,7 +111,7 @@ navigateTo(linkResolver.switchMarketUrl('mkt_germany'), { external: true })
 navigateTo(linkResolver.switchMarketUrl('mkt_germany', 'lng_fr'), { external: true })
 ```
 
-Both resolve the correct localized path for the current page, including dynamic params.
+Both resolve the correct localized path for the current page, including dynamic params. On a page type whose slug is translated per locale, see [translated slugs](#translated-slugs) for how the switch target picks up the target locale's own slug.
 
 ### Link resolution
 
@@ -130,6 +130,23 @@ Frontend Core emits SEO head tags **automatically on every page** — you don't 
 - **`<html lang>`** — the current domain's language code
 
 All URLs are built as `https://{domain.host}{domain.path}{localizedPagePath}`, with dynamic route params (e.g. `:slug`) filled from the current route. Domains where the page has no localized path are silently skipped — no broken alternate links are generated.
+
+#### Translated slugs
+
+::since-version{version="0.38.0" packages="@laioutr-core/frontend-core" changelog="frontend"}
+::
+
+A German product at `/produkte/handtuch-blau` is the same product as the French `/produits/serviette-bleue`. Filling every alternate from the current route's params would advertise `/produits/handtuch-blau`, a URL that does not exist.
+
+Where the page type's [page index](/frontend/orchestr/page-index) implements `locate` and reports a complete per-locale map, each alternate is filled with its own locale's params instead, and locales the page does not exist in are dropped from the alternates rather than guessed at. `linkResolver.switchLocalePath()` uses the same map, so switching language lands on the translated slug.
+
+Three things follow from that:
+
+- The lookup only runs where it can change anything: a project with more than one domain language, on a page type that resolves from a connector entity, on a route that has params. Single-language projects, static pages, and the 404 catch-all perform no lookup.
+- It is bounded by a 2 second SSR budget. If the budget is breached, that render falls back to filling every alternate from the current locale's params while the request finishes and warms the server cache, so the next render is correct.
+- Omission follows only from a **complete** map. A connector that resolves just the locale it was called in omits the map, and its pages keep filling every alternate from the current params. A partial map cannot tell "no page in this locale" apart from "did not look", so nothing is dropped on its word.
+
+Page types whose connector provides no `locate` are unchanged. The Shopify and Shopware product detail pages are in that group today: they resolve the product but not its slug in every language.
 
 #### Market-scoped pages
 

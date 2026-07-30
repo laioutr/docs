@@ -19,13 +19,16 @@ By default, handlers are **not cached**. You opt in per handler by adding a `cac
 
 ## Cache layers
 
-Orchestr maintains three separate cache layers, all stored under the `cache:orchestr:internal` namespace with different prefixes:
+Orchestr maintains four separate cache layers, all stored under the `cache:orchestr:internal` namespace with different prefixes:
 
-| Layer          | Cached data                                                        | Key shape                                          | Configured on              |
-| -------------- | ------------------------------------------------------------------ | -------------------------------------------------- | -------------------------- |
-| **Queries**    | Query handler results (IDs, totals, filters, optional passthrough) | `{token}:{buildCacheKey(args)}`                    | Query handler `cache`      |
-| **Links**      | Link handler results (source/target ID mappings)                   | `{token}:{buildCacheKey(args)}`                    | Link handler `cache`       |
-| **Components** | Resolved entity components (per entity, per component)             | `{entityType}:{entityId}:{component}:{keySuffix?}` | Component resolver `cache` |
+| Layer           | Cached data                                                        | Key shape                                          | Configured on              |
+| --------------- | ------------------------------------------------------------------ | -------------------------------------------------- | -------------------------- |
+| **Queries**     | Query handler results (IDs, totals, filters, optional passthrough) | `{token}:{buildCacheKey(args)}`                    | Query handler `cache`      |
+| **Links**       | Link handler results (source/target ID mappings)                   | `{token}:{buildCacheKey(args)}`                    | Link handler `cache`       |
+| **Components**  | Resolved entity components (per entity, per component)             | `{entityType}:{entityId}:{component}:{keySuffix?}` | Component resolver `cache` |
+| **Page index**  | Enumerated pages, search results, counts, locate results           | `{tier}:{pageType}:{market}:{locale}:…`            | Page index `cache`         |
+
+The page-index layer follows its own rules: it is on by default, keys itself from the resolved market and locale rather than from a `buildCacheKey`, and serves stale while refreshing. See [Page Index caching](/frontend/orchestr/page-index#caching).
 
 ## The automatic client-env segment
 

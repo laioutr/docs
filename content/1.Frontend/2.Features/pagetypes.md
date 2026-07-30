@@ -8,8 +8,7 @@ sitemap:
   loc: /frontend/features/pagetypes
   lastmod: 2026-04-08
   changefreq: monthly
-  priority: 1.0
-
+  priority: 1
 ---
 
 ::callout{icon="i-lucide-list"}
@@ -20,8 +19,7 @@ For a reference of all built-in page types, see the [Page Types API reference](/
 
 Every page in Laioutr has a **page type**: a named kind of page that defines its URL shape, what data it loads, and how it appears in Studio. Customers add pages of a given type in Studio; developers define page types with `definePageTypeToken`:
 
-```ts twoslash
-// @filename: ProductBySlug.query.ts
+```ts [ProductBySlug.query.ts] twoslash
 import { z } from 'zod/v4';
 import { defineQueryToken } from '@laioutr-core/core-types/orchestr';
 export const ProductBySlugQuery = defineQueryToken('ecommerce/product/by-slug', {
@@ -90,6 +88,8 @@ Declares data the page needs from the current route:
 ### `resolveFor`
 
 Tells the [link resolver](/frontend/features/multi-language-support#language-switcher) which entity **reference links** should resolve to this page type. For example, Product Detail Page declares `resolveFor: [{ referenceType: 'Product' }]`, so a link of type `reference` pointing to a Product entity resolves to this page's route with the product's slug.
+
+It also marks the page type as entity-resolved, which is what gates the per-locale slug lookup behind [translated slugs](/frontend/features/multi-language-support#translated-slugs). A page type without `resolveFor` never performs that lookup, because its path comes from the page configuration rather than from an entity.
 
 ### `studio`
 
@@ -184,3 +184,13 @@ export default defineNuxtPlugin(() => {
 Once the token is registered, Studio picks it up automatically. When a customer adds a new page of your type, Studio uses `pathConstraints` to suggest a default path and shows the page under the configured `studio.group`.
 
 Routes are generated from RC pages at build time. Each RC page has a `type` string that matches the token name (e.g. `'my-app/recipe-detail'`). The link resolver uses the page type's `resolveFor` metadata to map reference links to the correct route.
+
+### 4. Make its pages listable (optional)
+
+A `dynamic` page type describes a route shape, not the pages behind it. Studio can show `/recipes/:slug` but has no way to know which slugs exist, so an editor linking to one recipe has to type the slug by hand.
+
+Register a [page index](/frontend/orchestr/page-index) for the token to close that gap. One registration enumerates the page type's pages, searches them, and resolves a URL back to the entity it renders, which is what fills the link menu, the preview-data selector, and locale-correct hreflang alternates.
+
+::note
+Page types without a registration keep working exactly as before. Nothing about a page index is required.
+::

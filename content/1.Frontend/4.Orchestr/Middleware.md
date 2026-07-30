@@ -166,3 +166,5 @@ export const defineMyQuery = defineMyPackage.queryHandler;
 export const defineMyLink = defineMyPackage.linkHandler;
 export const defineMyComponentResolver = defineMyPackage.componentResolver;
 ```
+
+`defineMyPackage.pageIndex` is available too, for the registration that enumerates a dynamic page type's pages. See [Page Index](/frontend/orchestr/page-index).

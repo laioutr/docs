@@ -25,6 +25,16 @@ The wire format is the HTTP protocol between the Orchestr client (running in the
 
 Both endpoints respond with `Cache-Control: no-cache`.
 
+Orchestr serves a few side endpoints that are plain JSON rather than turbo-stream, because their callers are editor clients and the frontend's own head builder rather than the streaming query client:
+
+| Purpose | Method | Path | Auth |
+| ------- | ------ | ---- | ---- |
+| [Page enumeration](/frontend/orchestr/page-index#endpoints) | POST | `/api/laioutr/orchestr/page-index/list` | Project secret |
+| [Page lookup](/frontend/orchestr/page-index#endpoints) | POST | `/api/laioutr/orchestr/page-index/locate` | Project secret |
+| [Page lookup](/frontend/orchestr/page-index#endpoints) | POST | `/api/orchestr/page-index/locate` | None |
+
+They take the same untrusted `clientEnv` payload as the query endpoint and resolve it the same way.
+
 ## Query Request
 
 The client sends a `QueryWireRequest` as a JSON POST body. It contains an array of queries, client environment data, and optional dev settings.
