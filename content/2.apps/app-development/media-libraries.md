@@ -125,3 +125,29 @@ Everything your handlers return crosses a validation boundary before it reaches 
 - `src` and `previewUrl` values with `javascript:`, `data:`, or `vbscript:` schemes are rejected — including inside nested poster/cover images.
 - Response fields you did not declare a capability for are discarded, and query fields you did not declare are stripped before your handler runs.
 - The platform stamps every stored media source with `origin: { libraryId, externalId? }` — your library's id plus the item-level `externalId` you provided. If a single media mixes assets (e.g. art-directed sources from different backend assets), set `origin` per source yourself; a value you set is never overwritten.
+
+## Declaring AI provenance
+
+If your backend knows that an asset was produced with generative AI, say so on the media you return. Set [`aiDisclosure`](/frontend/api-reference/common-types/media#ai-disclosure) to `'generated'` for a fully AI-generated asset, or `'modified'` where generative AI altered human-authored content.
+
+```ts
+list: async (query, ctx) => ({
+  items: assets.map((asset) => ({
+    externalId: asset.id,
+    previewUrl: asset.thumbnailUrl,
+    media: {
+      type: 'image',
+      sources: [{ provider: 'myBackend', src: asset.url }],
+      // only because this backend has an explicit flag for it
+      ...(asset.generatedByAi ? { aiDisclosure: 'generated' as const } : {}),
+    },
+  })),
+}),
+```
+
+Two rules:
+
+- **Only from an authoritative backend signal.** A dedicated flag, or a location the platform itself guarantees, qualifies. A filename, an editor-renamable folder, or a guess does not — a wrong disclosure is worse than none, because a merchant may rely on it to meet a legal obligation.
+- **Omit it when your backend says nothing.** Absent means no disclosure is known; it is not a claim that the asset is human-made. Leaving it out is the correct answer for an unknown asset, not a gap in your adapter.
+
+An unrecognised value fails the canonical `Media` parse, so the whole item is dropped with a warning — the same as any other invalid field. Set one of the two documented values or nothing at all.
