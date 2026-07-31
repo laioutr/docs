@@ -166,14 +166,16 @@ Every capability that returns pages returns `PageIndexEntry` objects.
 For a cursor-paged platform API, `paginate()` turns the fetch into a lazy async iterable so you never write `async function*` yourself:
 
 ```ts
-list: ({ context, batchSize }) =>
+list: ({ context, batchSize, startCursor }) =>
   paginate(async ({ cursor }) => {
     const page = await context.client.recipes({ limit: batchSize, cursor });
     return { entries: page.items.map(toEntry), nextCursor: page.nextCursor };
-  }),
+  }, startCursor),
 ```
 
 The cursor is opaque to Orchestr. Pass whatever your platform hands back: a GraphQL `endCursor`, a stringified page number, an offset. Returning `nextCursor: undefined` ends the walk; an empty string is still treated as a valid continuation.
+
+`startCursor` is where a previous partial walk stopped. Forwarding it to `paginate` as the second argument is the whole of what a handler must do to become resumable, which is what [`listPagesFrom`](#resuming-a-walk-across-requests) needs. Ignoring it is legal and enumeration still works — but `listPagesFrom` then throws for that page type rather than silently restarting at the first entry on every pass.
 
 ::tip
 Stable order matters more than any particular order. The runner writes the walk to the cache in chunks and resumes from a chunk boundary, so a list whose order changes between calls produces duplicated or skipped entries.
@@ -237,6 +239,8 @@ Enumerate, search, and locate serve stale and refresh in the background: once 80
 
 Enumerate and search keys carry the resolved market and locale, taken from the `clientEnv` the runner resolved. That is also why your handlers must scope their platform reads to the same values.
 
+[`listPagesFrom`](#resuming-a-walk-across-requests) is the one exception to the table: it is cursor-addressed and touches no tier at all.
+
 Every cached chunk writes a **subject tag** for each entry that carries one. When an entity changes, drop the chunks referencing it:
 
 ```ts [server/routes/webhooks/product-updated.post.ts]
@@ -251,11 +255,12 @@ Entries without a `subject` cannot be tagged, so they expire on TTL alone.
 
 ## Reading a page index from your own code
 
-Five server utilities are auto-imported. Each takes the page type token plus the resolved `clientEnv` from the handler or endpoint you are in.
+Six server utilities are auto-imported. Each takes the page type token plus the resolved `clientEnv` from the handler or endpoint you are in.
 
 | Utility | Returns | Notes |
 |---|---|---|
 | `listPages(token, { clientEnv, take? })` | `PageIndexEntryStream` | Full walk in stable order unless `take` bounds it. |
+| `listPagesFrom(token, { clientEnv, take, resumeFrom? })` | `ResumablePageEntryStream` | One bounded pass you can continue in a later request. See [below](#resuming-a-walk-across-requests). |
 | `searchPages(token, { clientEnv, term, take })` | `PageIndexEntryStream` | `take` is required and clamped to `batchSize`. |
 | `countPages(token, { clientEnv })` | `Promise<number \| undefined>` | `undefined` when the type has no registration or no `count`. |
 | `locatePage(token, { clientEnv, params })` | `Promise<PageIndexLocateResult \| null>` | `null` on any failure, by design. |
@@ -278,6 +283,53 @@ export default defineMyAppQuery(RelatedRecipesQuery, async ({ clientEnv, input }
 ```
 
 Calling `toArray()` twice starts two separate walks. Collect once and reuse the array.
+
+### Resuming a walk across requests
+
+Some consumers cannot finish a walk in one request. A sharded sitemap is the usual case: each shard is its own URL, served minutes or hours apart, and each has to pick up exactly where the last one stopped.
+
+`listPagesFrom` answers that. Every pass returns at most `take` entries plus an `endCursor`, and handing that `endCursor` back as `resumeFrom` continues from the next entry:
+
+```ts
+const boundaries: string[] = [];
+let cursor: string | undefined;
+let stream: ResumablePageEntryStream;
+
+do {
+  stream = listPagesFrom(RecipeDetailPage, { clientEnv, resumeFrom: cursor, take: 5000 });
+  await writeShard(await stream.toArray());
+  cursor = stream.endCursor;
+  if (cursor) boundaries.push(cursor);
+} while (!stream.exhausted && stream.progressed);
+```
+
+Persist the collected boundaries and each shard becomes independently servable later, without re-walking the shards before it.
+
+A consumer bounded by wall-clock rather than by shard size stops the pass itself and persists what it has. That needs no loop at all:
+
+```ts
+const stream = listPagesFrom(RecipeDetailPage, { clientEnv, resumeFrom: saved.cursor, take: 10000 });
+
+for await (const entry of stream) {
+  collect(entry);
+  if (Date.now() > deadline) break;
+}
+
+await persist({ cursor: stream.endCursor, complete: stream.exhausted });
+```
+
+::caution
+Stop a loop on `exhausted`, and also on `!progressed`. `endCursor` only ever means "where the next pass starts", with `undefined` meaning the beginning both going in and coming out — so a loop watching the token alone cannot tell a finished enumeration from one that has not moved. A pass that takes nothing hands its token straight back, and repeating it repeats identical work.
+::
+
+Four things to know before reaching for it:
+
+- **It bypasses the enumerate cache entirely.** Being cursor-addressed, it has no entry offset from which to derive a chunk index, so it neither reads nor writes the chunk chain. That is the point: no TTL bounds how long a consumer may take to work through the page-space. The cost is that every pass is real upstream work — prefer `listPages` for anything a request can finish.
+- **It needs a resumable handler.** A `list` that ignores `startCursor` makes `listPagesFrom` throw, naming the page type. Degrading quietly would restart at the first entry on every pass, so a loop like the one above would never terminate.
+- **The token names the position after the last entry you were handed.** Collect an entry before you break out of the loop, or the next pass skips it. A pass that throws reports the token it started from rather than the position it failed at, so retrying it loses nothing.
+- **Tokens are opaque and unbound.** They carry no page type, market, or locale, so a token handed to a different enumeration resumes at a meaningless position. Key whatever you store by that same triple. A token that arrives truncated or otherwise unreadable counts as absent, so the pass starts over at the first entry rather than failing.
+
+A resumed enumeration is eventually consistent, not a snapshot. Upstream may change between passes, so an entry can be duplicated or missed at a resume boundary — fine for a sitemap, not a basis for a diff.
 
 ## Endpoints
 
@@ -307,7 +359,7 @@ Studio learns all of this from reflection: the reflected `pageIndex` map is keye
 
 Nothing is required. A page type with no `pageIndex` behaves exactly as it did before:
 
-- `listPages` and `searchPages` return an empty stream and log one warning.
+- `listPages`, `listPagesFrom`, and `searchPages` return an empty stream and log one warning. `listPagesFrom` reports `exhausted: true`, so a resume loop terminates on the first pass rather than inferring it from a missing token.
 - `countPages` resolves to `undefined` without warning, since consumers already degrade without a total.
 - `locatePage` resolves to `null` without warning, because it runs for whatever page the route resolved to, including static and system pages that no connector enumerates.
 
