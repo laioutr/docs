@@ -14,6 +14,25 @@ sitemap:
 
 All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data-fetching and query orchestration layer, will be documented in this file.
 
+## [0.38.1] - 2026-07-30
+
+### Patch Changes
+
+- Add `listPagesFrom` for page-index enumerations that cannot finish in one request.
+
+  `paginate` takes an optional `startCursor` and exposes `cursor` / `consumedSinceCursor`, so a walk can
+  report where it stopped. `listPagesFrom(token, { take, resumeFrom })` builds on that: it returns a
+  stream with an `endCursor` the caller persists to continue later. Collecting each pass's `endCursor`
+  yields independently servable shards, which is what a sharded sitemap needs.
+
+  It is cursor-addressed and never touches the page-index chunk cache, so no TTL bounds a consumer's
+  progress across visits. `listPages` is unchanged and keeps serving the cached enumeration exactly as
+  before.
+
+  Page-index handlers receive an optional `startCursor`; pass it to `paginate` to become resumable.
+  Ignoring it keeps today's behaviour, but `listPagesFrom` throws for such a handler rather than
+  silently restarting at entry 0 on every pass. Both shipped product connectors are resumable.
+
 ## [0.38.0] - 2026-07-29
 
 ### Minor Changes

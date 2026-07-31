@@ -14,6 +14,22 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.38.1] - 2026-07-30
+
+### Patch Changes
+
+- Add `aiDisclosure` to `Media`, recording whether an asset was fully AI-generated
+  (`'generated'`) or altered by generative AI (`'modified'`). Available on images,
+  videos and audio; a video's `poster` and an audio's `cover` carry their own value
+  independently of the parent.
+
+  Media-library providers and component resolvers may set it from an authoritative
+  backend signal, and should omit it otherwise: absent means no disclosure is known,
+  not that the asset is human-made. An unrecognised value fails the canonical `Media`
+  parse, so the item is dropped with a server-side warning.
+
+  The `<Media>` component does not render the field.
+
 ## [0.38.0] - 2026-07-29
 
 ### Minor Changes
