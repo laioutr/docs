@@ -14,6 +14,23 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.38.2] - 2026-07-31
+
+### Patch Changes
+
+- **Breaking:** Stop installing `@nuxtjs/robots`. `robots.txt`, the `X-Robots-Tag` header and the
+  route-rule `robots` value now come from the `@laioutr/app-essentials-seo` app —
+  install it to keep them, and configure them through its app config instead of
+  `nuxt.options.robots`.
+
+  A frontend with neither that app nor its own `@nuxtjs/robots` install serves no
+  `/robots.txt` (a 404 tells crawlers to crawl everything, which is what the previous
+  default content said), and any `robots` key in `nuxt.config` or in a route rule is
+  silently inert.
+
+  Page-level `robots` meta tags are unaffected — they come from the page variant's SEO
+  settings, not from the module.
+
 ## [0.38.1] - 2026-07-30
 
 ### Patch Changes
