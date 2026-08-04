@@ -14,6 +14,31 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.39.0] - 2026-08-04
+
+### Minor Changes
+
+- Add a `laioutr://` resource locator for addressing a single field inside a project's configuration tree.
+
+  `@laioutr-core/core-types/locator` exports `formatLocator`/`parseLocator` plus the supporting types (`StudioLocator`, `LaioutrLocator`, `StudioContainerKind`, `LocatorPathStep`, `StudioLocatorView`, `LocatorParseResult`) and the `STUDIO_CONTAINER_KINDS` constant. A locator names a namespace (`studio` is the only one today), a container (`pageVariant`, `section`, `sectionRef`, `globalSection`, or `block`) by id, a path of object-key or array-item-by-id steps into its props, and optional view coordinates (`locale`, `market`, `ref`) — for example `laioutr://studio/block/blk_C3/slides[itm_E5]/heading?locale=de`.
+
+  Both directions also handle a relative form that omits the `laioutr://studio/` base: `formatLocator(loc, { relative: 'studio' })` emits it and `parseLocator(input, { relative: 'studio' })` accepts it. Without that option `parseLocator` takes absolute input only — a body with no scheme names no namespace, so the caller has to say which one it means. `parseLocator` never throws: it returns `{ ok: true, value } | { ok: false, error }` for every input, including an unsupported namespace, malformed percent-encoding, or empty path segments.
+
+## [0.38.3] - 2026-08-03
+
+### Patch Changes
+
+- Stop the reflect endpoint from serving a previous deployment's section and block
+  catalog. Its cached reflection is now keyed by build id, so a redeploy is a cache
+  miss instead of inheriting whatever the last build left behind, and two frontends
+  sharing one Redis no longer overwrite each other's entry. Cached entries expire
+  after 12 hours.
+
+  Previously the cache entry outlived the deployment that wrote it: a frontend whose
+  cache driver is Redis could hand Studio the old build's component definitions,
+  templates, page types and style tokens after a deploy, and a failed SSR trigger
+  would keep re-persisting that entry rather than refreshing it.
+
 ## [0.38.2] - 2026-07-31
 
 ### Patch Changes

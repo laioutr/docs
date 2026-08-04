@@ -14,6 +14,20 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.10.0] - 2026-08-03
+
+### Minor Changes
+
+- `Container` gains `columnsTablet` and `gapTablet` props, adding a tablet stage between mobile and desktop. Column count and gap now resolve in three stages — mobile (below 600px), tablet (600–1279px), desktop (1280px and up) — one breakpoint scheme shared with the Sizer. Both fall back to their mobile value when unset (`columnsTablet` → `columnsMobile`, `gapTablet` → `gapMobile`), so containers that only configured mobile and desktop render as before at those two stages.
+
+  **Breaking (intended):** the desktop gap now switches at 1280px instead of 800px. Containers with an explicit desktop gap and no tablet gap now use the mobile gap between 800–1279px where they previously used the desktop gap — the same breakpoint unification the Sizer already applies. Column behaviour is unaffected. (SUPPORT-18)
+
+  The Container section adds **Tablet columns** and **Gap (Tablet)** controls, so editors can set a distinct column count and gap for tablet viewports (600–1279px); previously the tablet band inherited the mobile columns and, above 800px, the desktop gap.
+
+- Banner Basic, Banner Integrated and Banner Showcase — both their section and block variants — gain a Background Color control that fills the inner banner tile (the surface behind the copy, shown when no background image is set). This is independent of a section's outer Backdrop background, so the band around the banner and the banner tile itself can be coloured separately. Text and icon contrast adapt automatically to the chosen colour; unset banners keep their pale theme fallback. (SUPPORT-31)
+
+- All three CTA banner sections — Banner Basic, Banner Integrated and Banner Showcase — gain a Sizing control (fixed height, responsive height, or aspect ratio) to give the banner a definite height. Banner Basic's Content Alignment becomes two-dimensional (vertical + horizontal, e.g. `bottom-left`) and Banner Integrated gains a Vertical Alignment control, so content can now sit at any edge — including the bottom. Vertical alignment only takes effect once the banner has a definite height (with Sizing `auto` it stays at the top) and composes with the existing Content Padding control. Existing sections render unchanged: stored alignment is preserved and Sizing defaults to `auto`. (DEV-343, SUPPORT-16)
+
 ## [2.9.2] - 2026-08-02
 
 ### Patch Changes
