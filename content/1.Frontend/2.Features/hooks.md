@@ -238,6 +238,125 @@ export default defineNuxtPlugin((nuxtApp) => {
 ```
 ::
 
+### Analytics
+
+Three hooks along the emission pipeline. Every event passes through them in order: `:emit` can veto it, `:enrich` shapes the whole event, and `:project` shapes each orchestr entity found in the payload.
+
+::hook-meta
+---
+name: frontend-core:analytics:emit
+title: Emit analytics event
+surface: client
+register: nuxt-plugin
+dispatch: sync
+kind: filter
+payload:
+  - { field: result, type: '{ value: AnalyticsEvent | null }', description: 'Pre-seeded with the event as tracked. Transform it, or set it to null to drop the event before anything else sees it.' }
+whenItFires: At the start of every track() call, before enrichment, buffering and delivery.
+---
+
+Veto or pre-transform an event. Setting `result.value` to `null` drops it entirely — no enrichment, no buffering, no destination. Frontend Core registers no handlers here, so it is yours alone.
+
+#example
+```ts [app/plugins/analytics-veto.ts]
+export default defineNuxtPlugin((nuxtApp) => {
+  const { enabled } = useContentPreview();
+
+  nuxtApp.hook('frontend-core:analytics:emit', ({ result }) => {
+    // Editors browsing a preview should not appear in any destination
+    if (enabled.value) {
+      result.value = null;
+    }
+  });
+});
+```
+::
+
+::hook-meta
+---
+name: frontend-core:analytics:enrich
+title: Enrich analytics event
+surface: client
+register: nuxt-plugin
+dispatch: sync
+kind: filter
+payload:
+  - { field: result, type: '{ value: AnalyticsEvent }', description: 'Pre-seeded with the vetted event. Core handlers project payload entities and attach registered contexts before yours run; reassign result.value to change what is buffered and delivered.' }
+whenItFires: After the :emit veto and before the event enters the replay buffer, on every event that survives.
+---
+
+Add to or rewrite the whole event — extra payload fields, a context of your own, a redacted value.
+
+Frontend Core registers two handlers here, in this order: it projects the orchestr entities in the payload (firing `:project` once per entity), then attaches the registered ambient contexts. **Handlers run in registration order**, so a handler that needs to see — or redact — a projected entity or an attached context must run *after* core's. That means `enforce: 'post'` or a `dependsOn` on the frontend-core plugin, not `enforce: 'pre'`.
+
+Redaction here is durable: `:enrich` runs *before* the event enters the replay buffer, so the redacted form is what gets buffered. The unredacted event is never retained and never replayed.
+
+#example
+```ts [app/plugins/analytics-redact.ts]
+export default defineNuxtPlugin({
+  enforce: 'post',
+  setup(nuxtApp) {
+    nuxtApp.hook('frontend-core:analytics:enrich', ({ result }) => {
+      const session = result.value.contexts.session as { customerId?: string } | undefined;
+      if (!session?.customerId) return;
+
+      // Core attaches the customer id; this storefront sends it to no destination
+      result.value = {
+        ...result.value,
+        contexts: { ...result.value.contexts, session: { ...session, customerId: undefined } },
+      };
+    });
+  },
+});
+```
+::
+
+::hook-meta
+---
+name: frontend-core:analytics:project
+title: Project analytics entity
+surface: client
+register: nuxt-plugin
+dispatch: sync
+kind: filter
+payload:
+  - { field: entity, type: ClientEntity, description: The orchestr entity found in the payload, with its entityType. }
+  - { field: overrides, type: 'Record<string, unknown>', description: 'The literal fields written alongside the entity at the track() call site, e.g. quantity.' }
+  - { field: result, type: '{ value: unknown }', description: 'Pre-seeded with the base projection for the entity type, or { id } when no projector is registered for it. Reassign to add, remove or replace fields.' }
+whenItFires: Once per orchestr entity in the event payload, during :enrich.
+---
+
+Shape the wire snapshot a single entity turns into. Use `augmentProjection` for a typed handler bound to one entity type.
+
+#example
+```ts [app/plugins/analytics-project.ts]
+import { AnalyticsProduct } from '@laioutr-core/canonical-types/analytics';
+
+export default defineNuxtPlugin({
+  enforce: 'post',
+  setup(nuxtApp) {
+    nuxtApp.hook('frontend-core:analytics:project', ({ entity, result }) => {
+      if (entity.entityType !== 'Product') return;
+
+      augmentProjection(result, AnalyticsProduct, (base) => ({
+        ...base,
+        // Fill in an affiliation the base projector has no component for
+        affiliation: 'acme-marketplace',
+        // Drop a field you would rather not send
+        url: undefined,
+      }));
+    });
+  },
+});
+```
+::
+
+#### Redaction is global, not per destination
+
+The bus hands **the same event object** to every eligible destination. There is no seam between enrichment and an individual destination, so an app cannot give one destination a redacted payload and another the full one — whatever you change in `:enrich` or `:project`, every destination sees.
+
+A destination author can of course shape their own output inside `track()`, since that code owns what it sends. What you cannot do from outside is redact someone else's destination. If two destinations need genuinely different data, that difference has to live in the destinations themselves.
+
 ## Orchestr Client Hooks
 
 These hooks fire during client-side action execution. All receive a `token` string that identifies the action (e.g. `ecommerce/cart/add-items`).
