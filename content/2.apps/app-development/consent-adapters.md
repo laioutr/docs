@@ -244,7 +244,7 @@ A few constraints are easy to miss:
 - If your CMP exposes consent through a server-readable cookie, `getConsentState()` can read it on SSR and the first byte renders with the correct state. If it does not, return the denied baseline and let the client correct it.
 - `destroy()` only runs when the store deactivates the adapter (an explicit `deactivateAdapter()` call or a swap to a different adapter via `activateAdapter()`). It does not run on Nuxt page navigation. Adapters that need per-route cleanup must arrange that themselves.
 
-Once your adapter is active, `useConsentStore().hasCategoryConsent('statistics')` works in every consumer (your code, the tracking store, the GTM app) without anyone knowing which CMP you wired in.
+Once your adapter is active, `useConsentStore().hasCategoryConsent('statistics')` works in every consumer (your code, the analytics bus, the GTM app) without anyone knowing which CMP you wired in.
 
 ## Related
 

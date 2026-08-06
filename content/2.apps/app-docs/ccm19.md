@@ -87,7 +87,7 @@ For the full adapter contract and how to wire equivalent methods for another CMP
 
 ## What it integrates with
 
-The CCM19 widget renders the consent banner and stores the user's choices server-side under a UCID. Once the adapter is active, anything that reads `useConsentStore()` respects those choices: your own `hasCategoryConsent('statistics')` checks, the [tracking store's](/frontend/features/tracking) per-adapter `consentCategories` gate, and the [GTM app's](/apps/app-docs/gtm) Google Consent Mode `gtag('consent', 'update', ...)` calls.
+The CCM19 widget renders the consent banner and stores the user's choices server-side under a UCID. Once the adapter is active, anything that reads `useConsentStore()` respects those choices: your own `hasCategoryConsent('statistics')` checks, the [analytics layer's](/frontend/features/tracking) per-destination `consent: { purposes: […] }` gate, and the [GTM app's](/apps/app-docs/gtm) Google Consent Mode `gtag('consent', 'update', ...)` calls.
 
 For the consumer-facing API (`useConsentStore`, `showConsentOverlay`, `onConsentChange`) see the [Consent Management feature](/frontend/features/consent-management).
 

@@ -1,101 +1,215 @@
 ---
 title: Tracking
-description: Laioutr’s tracking abstraction gives you a single API to send analytics and marketing events. Use one or more tracking adapters (e.g. Google Tag Manager), optionally gated by consent, and implement your own adapters for other tools.
+description: Laioutr’s analytics layer gives you one typed API to emit events. Destinations declare the consent purposes they need, and the bus delivers each event only to the destinations the visitor has allowed.
 seo:
   title: Tracking
-  description: Laioutr’s tracking abstraction gives you a single API to send analytics and marketing events. Use one or more tracking…
+  description: Laioutr’s analytics layer gives you one typed API to emit events. Destinations declare the consent purposes they…
 sitemap:
   loc: /frontend/features/tracking
-  lastmod: 2026-04-08
+  lastmod: 2026-08-06
   changefreq: monthly
   priority: 1.0
 
 ---
 
-## What is the tracking abstraction?
+## What the analytics layer does
 
-Laioutr provides a **tracking** layer in the frontend that centralises how events (page views, add to cart, purchase, search, etc.) are sent to analytics and marketing tools. Your app (and Laioutr’s own components) call a single **tracking store** with a standard event shape. The store forwards each event to every **tracking adapter** that is currently active. Adapters can be **gated by consent**: an adapter only receives events if the user has granted the consent categories that adapter declares (e.g. `statistics`, `marketing`). That way you keep one event API and multiple backends (GTM, GA4, custom pixels, etc.) without duplicating consent logic everywhere.
+Laioutr centralises how events — page views, add to cart, purchase, search — reach analytics and marketing tools. Your app and Laioutr's own components emit through one API, `useAnalytics().track()`. A **bus** enriches each event and fans it out to every registered **destination** whose consent requirement the visitor has satisfied.
 
-This gives you:
+- **One typed API.** `track(Token, payload)`. The token is an imported value, not a string, so the payload is checked at compile time and the event name can never drift.
+- **Consent per destination, evaluated at delivery.** A destination declares the purposes it needs. One emission reaches exactly the destinations the visitor allowed — you never branch on consent at the call site.
+- **Ambient context, attached for you.** Page, market, session, consent and experiment facts ride along on every event without being passed in.
+- **Pluggable backends.** Add or remove destinations without touching the code that emits.
 
-- **One API** – Call **pushEvent(eventName, payload)** or **pushEvent({ eventName, payload })** from anywhere; the store fans out to all active adapters.
-- **Consent-aware delivery** – Adapters can declare **consentCategories** (e.g. `['statistics', 'marketing']`). They only receive events when the user has granted all of those categories in the [consent store](/frontend/features/consent-management). Adapters that don’t set consent categories receive every event (they can handle consent themselves, e.g. via Google Consent Mode).
-- **Pluggable backends** – Add or remove tracking adapters (GTM, custom analytics, etc.) without changing the code that emits events.
-- **Standard event shape** – Events follow Laioutr’s **Analytics** type (event names like `page_view`, `add_to_cart`, `purchase`, `search`, plus typed payloads). Adapters can map this to their own format (e.g. data layer, GA4 schema).
+The layer lives in **@laioutr-core/frontend-core**, so `useAnalytics()` is auto-imported in any Laioutr frontend. It works together with [consent management](/frontend/features/consent-management), which supplies the visitor's choices.
 
-The tracking store lives in **@laioutr-core/frontend-core**. Your Nuxt app must have this module so **useTrackingStore()** and the **Analytics** types are available. Tracking works best together with the [consent management](/frontend/features/consent-management) abstraction so adapters can be gated by the user’s choices.
+::note
+Analytics is browser-only in v1. `track()` called during SSR is ignored, with a warning in development.
+::
 
-## How the tracking store works
+## Emitting an event
 
-The **tracking store** (useTrackingStore) is a global state that:
-
-- Holds a **registry of adapters**. Each adapter has an **id**, a **track(event)** function, and optionally **consentCategories** (e.g. `['statistics']` or `['statistics', 'marketing']`).
-- Computes **active adapters** from the consent store: an adapter is active if it has no **consentCategories**, or if the user has granted **every** category in **consentCategories** (via the consent store’s **hasCategoryConsent**). So when the user accepts or revokes consent, the set of active adapters updates automatically.
-- **pushEvent(event)** adds the event to an internal queue and calls **track(event)** on **every active adapter only**. Adapters that require consent but don’t have it never receive the event.
-- **registerAdapter(adapter)** adds an adapter and subscribes it to future events (again, only when it’s active). Optionally replays the current event queue to the new adapter if it’s already active, so late-registered adapters can receive recent events.
-- **unregisterAdapter(id)** removes an adapter. **isAdapterActive(adapterId)** tells you whether an adapter is currently receiving events (e.g. for UI that depends on consent).
-
-So: **your app only calls pushEvent**. The store decides which adapters receive each event based on registration and consent. Adapters that need consent should set **consentCategories**; adapters that handle consent themselves (e.g. GTM with Consent Mode) can omit it and receive all events.
-
-## Event shape: Analytics
-
-Events follow the **Analytics** type: **eventName** (string) and **payload** (object). Laioutr defines standard event names and payloads (e.g. **page_view**, **add_to_cart**, **view_item**, **begin_checkout**, **purchase**, **search**, **view_search_results**, **form_start**, **form_submit**, **custom**) and typed payloads (currency, products, cartId, orderId, searchTerm, etc.). Use these from **@laioutr-core/frontend-core** (or your app’s imports) so adapters get a consistent structure. Custom events can use **eventName: 'custom'** and a flexible payload.
-
-Example: send a page view and an add-to-cart from your code:
+Import the token and call `track`:
 
 ```ts
-const trackingStore = useTrackingStore();
+import { AddToCart } from '@laioutr-core/canonical-types/analytics';
 
-trackingStore.pushEvent('page_view', { pageType: 'home' });
+const { track } = useAnalytics();
 
-trackingStore.pushEvent('add_to_cart', {
-  hasUserConsent: true,
-  currency: 'EUR',
-  cartId: 'gid://shopify/Cart/abc',
-  products: [{ productGid: '...', name: '...', brand: '...', price: 10, quantity: 1 }],
-  // ... other payload fields as needed
+track(AddToCart, {
+  products: [{ productId: 'gid://shopify/Product/1', name: 'Runner', price: { amount: 8990, currency: 'EUR' }, quantity: 1 }],
+  value: { amount: 8990, currency: 'EUR' },
 });
 ```
 
-Adapters receive the same **{ eventName, payload }** and can push it to the data layer, send it to an API, or transform it for their backend.
+Money is `{ amount, currency }` in **minor units** with an ISO 4217 code. Destination adapters convert to whatever their backend expects.
 
-## How tracking uses consent
+### Passing entities instead of fields
 
-The tracking store uses the **consent store** (useConsentStore) to decide which adapters are active:
+Any object slot in a payload also accepts an orchestr entity. It is projected to a flat wire snapshot at emit time, selected by its `entityType`, so destinations receive plain data rather than a live store object:
 
-- When you register an adapter with **consentCategories** (e.g. `['statistics']`), the store checks **consentStore.hasCategoryConsent('statistics')**. Only if that (and any other listed category) is true does the adapter get events.
-- When the user changes consent (e.g. accepts statistics in the cookie banner), the consent store updates; the tracking store’s **activeAdapters** recompute, and from then on **pushEvent** will include that adapter.
-- Adapters **without** consentCategories are always active. They receive every event. This is useful for adapters that implement consent themselves (e.g. GTM: it receives all events but tags inside GTM are controlled by Google Consent Mode, which the GTM app updates from the consent store).
+```ts
+track(AddToCart, { products: [{ entity: product, quantity: 2 }] });
+```
 
-So: **consent management** defines “what the user allowed”; **tracking** uses that to decide “who gets the event.” For a new analytics or marketing adapter, set **consentCategories** to the categories that must be granted (e.g. `['statistics']` for analytics, `['marketing']` for ads) so you don’t send data without consent.
+Entity types with no registered projector seed `{ id }`. The `frontend-core:analytics:project` hook completes or replaces any projection — see [Hooks](/frontend/features/hooks).
 
-## How to build your own tracking adapter
+### The event vocabulary
 
-To send Laioutr events to another tool (e.g. a custom analytics endpoint, another tag manager, or a CRM):
+Tokens are typed, versioned and namespaced `<namespace>/<name>`.
 
-1. **Create a Laioutr app** (Nuxt module) that depends on **@laioutr-core/frontend-core**.
-2. **Implement an adapter object** with:
-   - **id** – Unique string (e.g. `'my-analytics'`).
-   - **track(event: Analytics) => void** – Called for each event when the adapter is active. Map **event.eventName** and **event.payload** to your backend’s format and send (e.g. fetch, data layer, pixel).
-   - **consentCategories** (optional) – Array of consent category keys (e.g. `['statistics']` or `['statistics', 'marketing']`). If present, the adapter only receives events when the user has granted **all** of these categories. Omit to receive all events (and handle consent yourself if needed).
-3. **Register the adapter in a client plugin** – Use **useTrackingStore()**, then **trackingStore.registerAdapter(adapter)**. Run this only on the client (e.g. in a plugin with `mode: 'client'` or inside `import.meta.client`).
-4. **Optional: unregister on teardown** – If your adapter is conditional or can be disabled, call **trackingStore.unregisterAdapter(adapter.id)** when it should stop receiving events.
+| Package | Namespace | Events |
+| --- | --- | --- |
+| `@laioutr-core/core-types/analytics` | `web/*` | `page_view`, `impression`, `element_click`, `scroll_depth`, `video_progress`, `experiment_viewed`, `share`, `generate_lead`, `login`, `sign_up`, `logout` |
+| `@laioutr-core/canonical-types/analytics` | `ecommerce/*` | `view_item`, `view_item_list`, `select_item`, `add_to_cart`, `remove_from_cart`, `view_cart`, `add_to_wishlist`, `remove_from_wishlist`, `begin_checkout`, `add_shipping_info`, `add_payment_info`, `purchase`, `refund`, `search`, `view_search_results`, `view_promotion`, `select_promotion` |
 
-The store will call your **track** function only when the adapter is active (i.e. when consent for **consentCategories** is granted, or when **consentCategories** is not set). You don’t need to check consent inside **track** if you use **consentCategories**; the store does that for you.
+Define your own with `defineAnalyticsEventToken` when nothing fits. Use your app's own namespace so it cannot collide with the platform vocabulary:
 
-## Ready-to-use: Google Tag Manager (GTM) app
+```ts
+import { defineAnalyticsEventToken } from '@laioutr-core/core-types/analytics';
+import { z } from 'zod/v4';
 
-Laioutr ships a ready-to-use tracking app for [Google Tag Manager](https://tagmanager.google.com/). It registers a tracking adapter that pushes every event to the GTM data layer as **{ event: eventName, ...payload }**, so you can configure tags and triggers in GTM to react to Laioutr events. The GTM app does **not** set **consentCategories** on its adapter: it receives all events and relies on **Google Consent Mode** for consent. It subscribes to the consent store and pushes consent updates (e.g. `analytics_storage`, `ad_storage`) to the data layer when the user grants statistics or marketing, so tags inside GTM can respect consent.
+export const QuoteRequested = defineAnalyticsEventToken('acme/quote_requested', {
+  schema: z.object({ quoteId: z.string(), lineCount: z.number() }),
+});
+```
+
+### What is collected for you
+
+Frontend Core already emits some of the vocabulary, so you do not have to:
+
+- **`web/page_view`** after every completed router navigation.
+- **`v-track-click="{ key, kind?, label? }"`** emits `web/element_click`, filling in link href and outbound-ness from the DOM.
+- **`v-track-impression="{ kind, key, label? }"`** emits `web/impression` once per key, after the element has held 50% visibility for a second. `useTrackImpression(target, payload, { minRatio, minDurationMs })` is the composable form.
+- **`useTrackScrollDepth({ thresholds })`** emits `web/scroll_depth` as the visitor crosses each threshold.
+
+## Ambient contexts
+
+Every event carries a `contexts` object built at enrichment time, so payloads stay about the thing that happened:
+
+| Context | Carries |
+| --- | --- |
+| `page` | `url`, `path`, `title`, `pageType`, and the in-session `referrer` (the route navigated away from) |
+| `market` | The active market, language and currency |
+| `session` | `authStatus`, visitor and session tokens, a hashed `customerId`, and the `entryReferrer` captured on entry |
+| `consent` | The visitor's granted purposes at emission time |
+| `experiments` | Active allocations |
+
+Add your own or replace one of Laioutr's — registering the same token wins:
+
+```ts [app/plugins/analytics-context.client.ts]
+import { defineAnalyticsContextToken } from '@laioutr-core/core-types/analytics';
+import { z } from 'zod/v4';
+
+const StoreContext = defineAnalyticsContextToken('store', {
+  schema: z.object({ storeId: z.string(), fulfilment: z.string() }),
+});
+
+export default defineNuxtPlugin(() => {
+  useAnalyticsContexts().register(StoreContext, () => ({
+    storeId: useSelectedStore().id,
+    fulfilment: useSelectedStore().mode,
+  }));
+});
+```
+
+A provider returning `undefined` attaches nothing, so a context that is not yet known simply stays off the event.
+
+## How consent gates delivery
+
+Each destination declares what it needs:
+
+```ts
+consent: { purposes: ['analytics'] }
+```
+
+There are five purposes — `necessary`, `functional`, `analytics`, `advertising`, `personalization` — resolved from the [consent store](/frontend/features/consent-management)'s five categories: `analytics` reads `statistics`, and both `advertising` and `personalization` read `marketing`.
+
+- **`purposes`** — every listed purpose must be granted (AND).
+- **`purposeSets`** — a list of alternatives, OR between sets and AND within one, for a destination that can operate in more than one mode.
+- **`{ purposes: [] }`** — needs no consent at all, and delivers unconditionally.
+
+**There is no ungated path.** A destination that names a purpose receives nothing until the visitor grants it, and stops receiving the moment they revoke — at which point its `teardown()` runs.
+
+### Events emitted before the visitor answers
+
+The banner is usually still open when the first page view fires. Those events are **held, not dropped**: the bus buffers them and delivers them in order once the visitor grants. A denial the visitor actually made discards them; a CMP merely reporting its denied default does not, because nothing has been decided yet.
+
+That distinction is why a destination sees the landing page view at all. It also means a redaction applied in `frontend-core:analytics:enrich` is what gets buffered — the unredacted event is never retained.
+
+## Building your own destination
+
+To send Laioutr events to another tool — a custom endpoint, another tag manager, a CRM:
+
+1. **Create a Laioutr app** (a Nuxt module) that depends on **@laioutr-core/frontend-core**.
+2. **Author the destination** with `defineAnalyticsDestination`.
+3. **Register it from a client plugin** with `useAnalytics().register()`.
+
+```ts [app/plugins/acme-analytics.client.ts]
+export default defineNuxtPlugin(() => {
+  const destination = defineAnalyticsDestination({
+    id: 'acme-analytics',
+    consent: { purposes: ['analytics'] },
+
+    // Runs once, before the first delivered event
+    init: () => loadAcmeSdk(),
+
+    // Optional: narrow what this destination cares about
+    filter: (event) => event.type.startsWith('ecommerce/'),
+
+    track: (event) => {
+      window.acme?.send(event.type, { ...event.payload, page: event.contexts.page });
+    },
+
+    // Runs when consent is revoked or the destination is unregistered
+    teardown: () => window.acme?.reset(),
+  });
+
+  useAnalytics().register(destination);
+});
+```
+
+You do not check consent inside `track()` — the bus has already decided. Deliveries are serialised per destination, and a throwing destination is isolated: it warns and the others still receive the event.
+
+Call `useAnalytics().unregister('acme-analytics')` to detach; its `teardown` runs and any queued events for it are discarded.
+
+### Reshaping events on the way out
+
+Three synchronous Nuxt hooks sit on the pipeline — `frontend-core:analytics:emit` (veto or pre-transform), `:enrich` (the whole event) and `:project` (one entity). Handler ordering, worked redaction examples, and the limit that redaction is global rather than per-destination are covered in [Hooks](/frontend/features/hooks).
+
+## Receiving events on the server
+
+For a recipient that must not run in the browser — a server-side API key, a warehouse ingest — subscribe in a Nitro plugin. The browser posts consented batches and Frontend Core dispatches them:
+
+```ts [server/plugins/analytics.ts]
+import { Purchase } from '@laioutr-core/canonical-types/analytics';
+
+export default defineNitroPlugin((nitroApp) => {
+  subscribeToAnalytics(nitroApp, [Purchase], { purposes: ['analytics'] }, async (event) => {
+    await sendToWarehouse(event);
+  });
+});
+```
+
+Batches go to `POST /api/frontend/signals`. Change it with `analyticsIngestPath` in the module's public runtime config — that moves the server route too, not just where the browser posts.
+
+## Debugging
+
+Set `analyticsDebug: true` in the module's public runtime config to register a built-in destination that logs every event to the console. It declares `{ purposes: [] }`, so it is not gated by consent and shows you the full stream regardless of what any other destination is receiving.
+
+## Ready-to-use: Google Tag Manager
+
+Laioutr ships an app for [Google Tag Manager](https://tagmanager.google.com/). It registers a destination requiring the `analytics` purpose, maps canonical events to GA4 names and pushes them to the data layer with money converted to major units, and drives **Google Consent Mode v2** from the consent store — an inline `denied` default in the head before `gtm.js` loads, then an update once the visitor answers.
 
 - **App package:** **@laioutr-app/gtm**
-- **What it does:** Injects the GTM script and noscript iframe, sets Consent Mode defaults to “denied,” registers a tracking adapter that pushes events to the data layer, and updates Consent Mode when the user changes consent (works best with a [consent adapter](/frontend/features/consent-management) such as Cookiebot).
-- **Configuration:** Set your GTM **containerId** (and optionally **layer** for the data layer variable name).
+- **Configuration:** your GTM `containerId`, optionally `layer` for the data layer variable name.
 
 For setup and options, see the **[GTM app documentation](/apps/app-docs/gtm)**.
 
 ## Summary
 
-- Laioutr’s **tracking abstraction** is a single **tracking store** (useTrackingStore) and **tracking adapters** in **@laioutr-core/frontend-core**. You emit events with **pushEvent(eventName, payload)**; the store forwards them to all **active** adapters.
-- **Consent** gates which adapters are active: set **consentCategories** on an adapter (e.g. `['statistics']`) so it only receives events when the user has granted those categories in the [consent store](/frontend/features/consent-management). Adapters without **consentCategories** receive all events and can handle consent themselves (e.g. GTM + Consent Mode).
-- To add your own backend, implement an adapter **{ id, track, consentCategories? }** and **registerAdapter** in a client plugin. Use the standard **Analytics** event names and payloads where possible.
-- For a ready-to-use solution, use the **@laioutr-app/gtm** app and follow the **[GTM app documentation](/apps/app-docs/gtm)**. Combine it with a consent app (e.g. [Cookiebot](/apps/app-docs/cookiebot)) so Consent Mode stays in sync with the user’s choices.
+- Emit with **`useAnalytics().track(Token, payload)`** using tokens from `@laioutr-core/core-types/analytics` (`web/*`) and `@laioutr-core/canonical-types/analytics` (`ecommerce/*`). Payload slots accept orchestr entities, which are projected at emit time.
+- **Ambient contexts** — page, market, session, consent, experiments — are attached for you; add or override them with `useAnalyticsContexts()`.
+- **Consent gates delivery per destination.** Declare `consent: { purposes: [...] }`; there is no ungated path, and events emitted before the visitor decides are held rather than dropped.
+- **Add a backend** with `defineAnalyticsDestination({ id, consent, track })` registered from a client plugin, or `subscribeToAnalytics` in a Nitro plugin for server-side recipients.
+- For a ready-made setup use **@laioutr-app/gtm** with a consent app such as [Cookiebot](/apps/app-docs/cookiebot), so Consent Mode stays in sync with the visitor's choices.

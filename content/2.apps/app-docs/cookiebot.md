@@ -56,7 +56,7 @@ Cookiebot's categories map to Laioutr's `ConsentManagementState` as follows: `ne
 
 ## What it integrates with
 
-The Cookiebot script renders the consent banner and stores the user's choices in the `CookieConsent` cookie. Once the adapter is active, anything that reads `useConsentStore()` respects those choices: your own `hasCategoryConsent('statistics')` checks, the [tracking store's](/frontend/features/tracking) per-adapter `consentCategories` gate, and the [GTM app's](/apps/app-docs/gtm) Google Consent Mode `gtag('consent', 'update', ...)` calls.
+The Cookiebot script renders the consent banner and stores the user's choices in the `CookieConsent` cookie. Once the adapter is active, anything that reads `useConsentStore()` respects those choices: your own `hasCategoryConsent('statistics')` checks, the [analytics layer's](/frontend/features/tracking) per-destination `consent: { purposes: […] }` gate, and the [GTM app's](/apps/app-docs/gtm) Google Consent Mode `gtag('consent', 'update', ...)` calls.
 
 For the consumer-facing API (`useConsentStore`, `showConsentOverlay`, `onConsentChange`) see the [Consent Management feature](/frontend/features/consent-management).
 

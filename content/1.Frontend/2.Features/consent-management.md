@@ -85,8 +85,8 @@ consentStore.onConsentChange((consent) => {
 
 The store is consumed across the platform, not just by your code:
 
-- The [tracking store](/frontend/features/tracking) gates events per adapter. A tracking adapter declares `consentCategories: ['statistics']`, and the store only forwards events to it once `hasCategoryConsent('statistics')` is `true`. Adapters without `consentCategories` receive every event (useful for GTM, which manages consent itself via Consent Mode).
-- The [GTM app](/apps/app-docs/gtm) sets Google Consent Mode defaults to `denied`, then watches the active adapter's consent updates and calls `gtag('consent', 'update', ...)` when the user grants `statistics` or `marketing`.
+- The [analytics layer](/frontend/features/tracking) gates delivery per destination. A destination declares `consent: { purposes: ['analytics'] }`, and the bus only hands it an event once that purpose is granted. Purposes resolve from these categories: `analytics` reads `statistics`, and both `advertising` and `personalization` read `marketing`. Read them directly with `hasPurposeConsent('analytics')` or `getPurposeConsents()`.
+- The [GTM app](/apps/app-docs/gtm) sets Google Consent Mode v2 defaults to `denied` inline in the head, before `gtm.js` loads, then sends an update once the visitor has actually answered — not when the CMP merely reports its default.
 
 This means once a CMP adapter is active and the user has accepted analytics, GA fires through GTM without any further wiring in your app.
 
