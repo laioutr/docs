@@ -14,6 +14,31 @@ sitemap:
 
 All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data-fetching and query orchestration layer, will be documented in this file.
 
+## [0.38.2] - 2026-07-31
+
+### Patch Changes
+
+- Report `listPagesFrom`'s `endCursor` at any stopping position, not only at the `take` boundary.
+
+  A consumer that stopped iterating early — on a wall-clock budget, say — read `endCursor` as
+  `undefined` and could not distinguish that from an exhausted enumeration, so a partial walk was
+  recorded as complete. The resume point is now computed from the walk's live position, which
+  `paginate` has always tracked.
+
+  Two fields make the outcome of a pass unambiguous. `exhausted` is the termination signal for an
+  accumulation loop; `endCursor` is only ever "where the next pass starts", `undefined` meaning the
+  beginning both going in and coming out. `progressed` reports whether the pass durably advanced —
+  false when it took nothing and false when it threw, in both of which cases `endCursor` is the token
+  the pass was given. A loop must stop on `!progressed` as well as on `exhausted`, or a pass that takes
+  nothing repeats forever.
+
+  The token names the position _after_ the last entry handed over, so collect an entry before breaking
+  out of the loop. A pass that throws reports the token it started from rather than the position it
+  died at, so retrying it loses nothing.
+
+  `toArray()` callers see no change: draining to `take` reports the same token as before, and draining
+  to exhaustion still reports `undefined`.
+
 ## [0.38.1] - 2026-07-30
 
 ### Patch Changes

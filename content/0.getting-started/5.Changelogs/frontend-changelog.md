@@ -14,6 +14,56 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.40.0] - 2026-08-05
+
+### Minor Changes
+
+- `useConsentStore()` exposes `hasDecision()`, reporting whether the visitor has answered the consent prompt at all. A consent state of "denied" is otherwise indistinguishable from "never asked", which matters wherever that state is passed to a third party applying its own regional default.
+
+  `ConsentAdapter` gains an optional `hasDecision?()`. The Cookiebot and CCM19 apps implement it, each reporting a saved refusal as a decision rather than as silence. An adapter that omits it always reports `false`, so a refusal its visitor made is indistinguishable from an unanswered prompt, and consumers forwarding consent to a third party will withhold that refusal rather than pass it on. Granted consent is unaffected — a grant cannot arise from silence.
+
+## [0.39.0] - 2026-08-04
+
+### Minor Changes
+
+- Add a `laioutr://` resource locator for addressing a single field inside a project's configuration tree.
+
+  `@laioutr-core/core-types/locator` exports `formatLocator`/`parseLocator` plus the supporting types (`StudioLocator`, `LaioutrLocator`, `StudioContainerKind`, `LocatorPathStep`, `StudioLocatorView`, `LocatorParseResult`) and the `STUDIO_CONTAINER_KINDS` constant. A locator names a namespace (`studio` is the only one today), a container (`pageVariant`, `section`, `sectionRef`, `globalSection`, or `block`) by id, a path of object-key or array-item-by-id steps into its props, and optional view coordinates (`locale`, `market`, `ref`) — for example `laioutr://studio/block/blk_C3/slides[itm_E5]/heading?locale=de`.
+
+  Both directions also handle a relative form that omits the `laioutr://studio/` base: `formatLocator(loc, { relative: 'studio' })` emits it and `parseLocator(input, { relative: 'studio' })` accepts it. Without that option `parseLocator` takes absolute input only — a body with no scheme names no namespace, so the caller has to say which one it means. `parseLocator` never throws: it returns `{ ok: true, value } | { ok: false, error }` for every input, including an unsupported namespace, malformed percent-encoding, or empty path segments.
+
+## [0.38.3] - 2026-08-03
+
+### Patch Changes
+
+- Stop the reflect endpoint from serving a previous deployment's section and block
+  catalog. Its cached reflection is now keyed by build id, so a redeploy is a cache
+  miss instead of inheriting whatever the last build left behind, and two frontends
+  sharing one Redis no longer overwrite each other's entry. Cached entries expire
+  after 12 hours.
+
+  Previously the cache entry outlived the deployment that wrote it: a frontend whose
+  cache driver is Redis could hand Studio the old build's component definitions,
+  templates, page types and style tokens after a deploy, and a failed SSR trigger
+  would keep re-persisting that entry rather than refreshing it.
+
+## [0.38.2] - 2026-07-31
+
+### Patch Changes
+
+- **Breaking:** Stop installing `@nuxtjs/robots`. `robots.txt`, the `X-Robots-Tag` header and the
+  route-rule `robots` value now come from the `@laioutr/app-essentials-seo` app —
+  install it to keep them, and configure them through its app config instead of
+  `nuxt.options.robots`.
+
+  A frontend with neither that app nor its own `@nuxtjs/robots` install serves no
+  `/robots.txt` (a 404 tells crawlers to crawl everything, which is what the previous
+  default content said), and any `robots` key in `nuxt.config` or in a route rule is
+  silently inert.
+
+  Page-level `robots` meta tags are unaffected — they come from the page variant's SEO
+  settings, not from the module.
+
 ## [0.38.1] - 2026-07-30
 
 ### Patch Changes

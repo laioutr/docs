@@ -14,6 +14,18 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-08-03]
+
+### Fixed
+
+- **Studio**: Clearing a number field now resets it to its default, and a field set to 0 shows the 0.
+
+## [2026-08-01]
+
+### Added
+
+- **Studio**: Studio now remembers your open page, selection, and preview in the URL — reload or share a link to return exactly where you were.
+
 ## [2026-07-29]
 
 ### Added

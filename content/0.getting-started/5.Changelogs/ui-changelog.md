@@ -14,6 +14,54 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.10.0] - 2026-08-03
+
+### Minor Changes
+
+- `Container` gains `columnsTablet` and `gapTablet` props, adding a tablet stage between mobile and desktop. Column count and gap now resolve in three stages — mobile (below 600px), tablet (600–1279px), desktop (1280px and up) — one breakpoint scheme shared with the Sizer. Both fall back to their mobile value when unset (`columnsTablet` → `columnsMobile`, `gapTablet` → `gapMobile`), so containers that only configured mobile and desktop render as before at those two stages.
+
+  **Breaking (intended):** the desktop gap now switches at 1280px instead of 800px. Containers with an explicit desktop gap and no tablet gap now use the mobile gap between 800–1279px where they previously used the desktop gap — the same breakpoint unification the Sizer already applies. Column behaviour is unaffected. (SUPPORT-18)
+
+  The Container section adds **Tablet columns** and **Gap (Tablet)** controls, so editors can set a distinct column count and gap for tablet viewports (600–1279px); previously the tablet band inherited the mobile columns and, above 800px, the desktop gap.
+
+- Banner Basic, Banner Integrated and Banner Showcase — both their section and block variants — gain a Background Color control that fills the inner banner tile (the surface behind the copy, shown when no background image is set). This is independent of a section's outer Backdrop background, so the band around the banner and the banner tile itself can be coloured separately. Text and icon contrast adapt automatically to the chosen colour; unset banners keep their pale theme fallback. (SUPPORT-31)
+
+- All three CTA banner sections — Banner Basic, Banner Integrated and Banner Showcase — gain a Sizing control (fixed height, responsive height, or aspect ratio) to give the banner a definite height. Banner Basic's Content Alignment becomes two-dimensional (vertical + horizontal, e.g. `bottom-left`) and Banner Integrated gains a Vertical Alignment control, so content can now sit at any edge — including the bottom. Vertical alignment only takes effect once the banner has a definite height (with Sizing `auto` it stays at the top) and composes with the existing Content Padding control. Existing sections render unchanged: stored alignment is preserved and Sizing defaults to `auto`. (DEV-343, SUPPORT-16)
+
+## [2.9.2] - 2026-08-02
+
+### Patch Changes
+
+- Fix filter off-canvas accordion opening the wrong panel. `FilterOffCanvasAccordionItem` used `activeValue` (the display text) as its reka `AccordionItem` identity, so every unselected list/range filter shared `value=""` and clicking any trigger opened the first one, overlapping the others. The item now takes a dedicated, unique `value` prop for identity, with `activeValue` used for display only.
+
+## [2.9.1] - 2026-08-02
+
+### Patch Changes
+
+- `ProductTileBasic` accepts an optional `sizeVariants` prop (`{ value: string; label: string; disabled?: boolean }[]`, default `[]`), carrying each product's selectable size options through to the tile. The prop is data-only — the default tile renders no size picker — so overrides can render their own selector from it without changing existing tiles.
+
+- Expose per-product size variants on the product-tile pipeline. `productTileMapper` now emits a `sizeVariants` array (`{ value, label, disabled }`, keyed by variant id, `disabled` for sold-out sizes) derived from the variants already fetched by the shared product-tile query; products without a size option yield `[]`. The shared query's variant limit is raised from 5 to 30 so full size runs are no longer truncated. Consumers of `ProductTileBasic` (Product Slider, Product Slider Showcase, and tile overrides) receive this data without forking the query or mapper.
+
+  The Product Slider Showcase now defaults `Show Product Flags` to on, matching the standard Product Slider (new sections only; existing configurations are unaffected).
+
+## [2.9.0] - 2026-08-01
+
+### Minor Changes
+
+- Add `BlockProductSlider` — the Product Slider available as a standalone block so it
+  can be placed inside a container slot, not only as a full-width section. Its
+  configuration, data binding and rendering are identical to `SectionProductSlider`.
+
+## [2.8.6] - 2026-08-01
+
+### Patch Changes
+
+- Add a `Child Categories` link (`Category → Category`) and let the Category Card Slider render categories from a data source.
+
+  - **canonical-types:** new `ChildCategoriesLink` token (`ecommerce/category/child-categories`).
+  - **shopify:** implements the link by reading the navigation menu (new `categoryMenuHandle` option, default `main-menu`), locating the source collection's node and returning its collection children as inline `Category` entities (title/slug + collection image). Localized via `@inContext`.
+  - **ui-app:** `SectionCategoryCardSlider` gains an optional Category external-source query (`categories`) whose entities render as cards. Manual slot cards still take precedence, so existing usage is unchanged. Bind it in Studio to the current category's `Child Categories` to show its sub-categories.
+
 ## [2.8.1] - 2026-07-23
 
 ### Patch Changes
