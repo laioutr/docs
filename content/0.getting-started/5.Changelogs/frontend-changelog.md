@@ -14,6 +14,14 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.40.0] - 2026-08-05
+
+### Minor Changes
+
+- `useConsentStore()` exposes `hasDecision()`, reporting whether the visitor has answered the consent prompt at all. A consent state of "denied" is otherwise indistinguishable from "never asked", which matters wherever that state is passed to a third party applying its own regional default.
+
+  `ConsentAdapter` gains an optional `hasDecision?()`. The Cookiebot and CCM19 apps implement it, each reporting a saved refusal as a decision rather than as silence. An adapter that omits it always reports `false`, so a refusal its visitor made is indistinguishable from an unanswered prompt, and consumers forwarding consent to a third party will withhold that refusal rather than pass it on. Granted consent is unaffected — a grant cannot arise from silence.
+
 ## [0.39.0] - 2026-08-04
 
 ### Minor Changes
