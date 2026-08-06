@@ -130,6 +130,7 @@ Construct the client inside `extendRequest` so each request gets its own instanc
 - **Resolvers:** Default export = `defineXComponentResolver({ entityType, label, provides: [...], resolve: async ({ entityIds, context, clientEnv, $entity, passthrough }) => { ... } })`. Use `$entity({ id, base: () => ({...}), ... })` to build entities; return `{ entities }`.
 - **Canonical types:** Import queries, actions, links, and entity parts from `@laioutr-core/canonical-types` (e.g. `ecommerce`, `entity/cart`, `entity/product`). Do not invent new variable or entity shapes; extend the canonical model if needed via the proper channels.
 - **Cookies and response headers:** Set them inside `extendRequest` (runs before streaming) or inside an action (single non-streamed response). Query, link, and component-resolver handlers cannot set headers because the response stream has already started. See [Setting cookies and response headers](/frontend/orchestr/middleware#setting-cookies-and-response-headers).
+- **Cookie helpers:** Use the auto-imported `setManagedCookie` and `deleteManagedCookie`, never h3's `setCookie` / `deleteCookie`. They own `secure` and `partitioned` so the cookie survives the Studio preview frame. See [Identity cookies](/frontend/orchestr/recipes/identity-cookies#write-cookies-with-setmanagedcookie).
 
 ### Errors
 

@@ -6,7 +6,7 @@ seo:
   description: Read-or-create-and-set patterns for cart, session, and visitor identity cookies in Orchestr.
 sitemap:
   loc: /frontend/orchestr/recipes/identity-cookies
-  lastmod: 2026-05-05
+  lastmod: 2026-08-06
   changefreq: monthly
   priority: 0.9
 
@@ -21,35 +21,99 @@ Both problems share the same shape: read a cookie; if missing, create the underl
 let id = getCookie(event, ID_COOKIE);
 if (!id) {
   id = await createIdentityRecord();
-  setCookie(event, ID_COOKIE, id, secureCookieOptions);
+  setManagedCookie(event, ID_COOKIE, id, { httpOnly: true, sameSite: 'strict', path: '/' });
 }
 return { id };
 ```
 
-## Wrap setCookie once, not per call site
+## Write cookies with setManagedCookie
 
-Every identity cookie you set should be `httpOnly`, `secure`, `sameSite: 'strict'`, and have an explicit `path`. Missing one leaks an attack vector. Wrap `setCookie` once with the defaults locked in:
+::since-version{version="0.40.2" packages="@laioutr-core/frontend-core" changelog="frontend"}
+::
+
+frontend-core auto-imports three helpers into every app's server code:
+
+| Auto-import | What it does |
+| --- | --- |
+| `setManagedCookie(event, name, value, options?)` | `setCookie` with the platform's transport policy applied |
+| `deleteManagedCookie(event, name, options?)` | `deleteCookie` addressing the same cookie the set produced |
+| `isStudioEmbedRequest(event)` | Whether this request came from the Studio preview frame |
+
+Use them instead of h3's `setCookie` and `deleteCookie` for anything a browser has to send back — cart IDs, session tokens, visitor IDs. A cookie written with the raw h3 functions is accepted inside the Studio preview but never returned, so an editor building a cart in Studio watches it reset on every request.
+
+The options are h3's minus `secure` and `partitioned`, which the platform owns:
+
+```ts
+type ManagedCookieOptions = Omit<CookieSerializeOptions, 'secure' | 'partitioned'>;
+```
+
+`secure` is derived from the request origin rather than passed, because getting it wrong fails in both directions: hardcoding `secure: true` loses the cookie on a plain-HTTP dev hostname, and a `SameSite=None` cookie without `Secure` is rejected outright by Chrome. An origin counts as secure if it is `https:` or a loopback host — `localhost`, `127.0.0.1`, `[::1]`, and any `*.localhost` name.
+
+You still want app-level defaults, so keep the wrapper — it just carries policy now, not security attributes:
 
 ```ts [server/myapp-helper/cookie-helper.ts]
-import { CookieOptions } from 'nuxt/app';
-import { setCookie } from '#imports';
+import { deleteManagedCookie, setManagedCookie } from '#imports';
+import type { ManagedCookieOptions } from '@laioutr-core/frontend-core/runtime';
 import type { H3Event } from 'h3';
 
-const defaults = {
+const commonCookieOptions: ManagedCookieOptions = {
   httpOnly: true,
-  secure: true,
   sameSite: 'strict',
   path: '/',
-} as const;
+};
 
 export const cookieHelper = {
-  setCookie: (event: H3Event, name: string, value: string, options: CookieOptions = {}) => {
-    setCookie(event, name, value, { ...defaults, ...options } as CookieOptions);
+  setCookie: (event: H3Event, name: string, value: string, options: ManagedCookieOptions = {}) => {
+    setManagedCookie(event, name, value, { ...commonCookieOptions, ...options });
+  },
+
+  deleteCookie: (event: H3Event, name: string) => {
+    deleteManagedCookie(event, name, { path: commonCookieOptions.path });
   },
 };
 ```
 
-Each app keeps its own copy with whatever defaults match its security posture. The Nimstrata app, for example, drops `secure` to `process.env.NODE_ENV === 'production'` because its dev server runs over HTTP; everything else stays the same.
+Route deletions through `deleteManagedCookie` as well. A cookie set inside the preview carries `Partitioned`, and a deletion that omits it addresses the unpartitioned jar instead: the browser accepts the `Set-Cookie`, deletes nothing, and the cookie you meant to clear is still there on the next request. Logout is where this shows up.
+
+Repeat the `path` your sets used when deleting. h3 supplies no default, so a deletion issued from a nested route is scoped to that route and leaves the root cookie in place.
+
+## Cookies in the Studio preview
+
+Studio renders the storefront in an iframe on a different site (`cockpit.laioutr.cloud` framing your storefront domain), which makes every cookie in that frame a third-party cookie. Two things have to be true for one to survive:
+
+- `SameSite=None`, or the browser never sends it back to the frame at all.
+- `Partitioned`, so the frame gets its own jar keyed on `(cockpit, your storefront)` — [CHIPS](https://developer.mozilla.org/en-US/docs/Web/Privacy/Guides/Privacy_sandbox/Partitioned_cookies). Browsers restrict third-party cookies differently — Safari blocks them, Firefox partitions them silently — so an unpartitioned cookie behaves differently in each. Declaring `Partitioned` is what makes the outcome the same everywhere.
+
+`setManagedCookie` applies both, but only for requests it recognizes as coming from the preview frame. Top-level storefront traffic keeps whatever `sameSite` you passed, so a shopper's cart cookie stays `Strict` in production. Nothing to opt into.
+
+The partition is a genuine boundary, not a formality: a cart built in the Studio preview is invisible to the same shop opened in a normal tab, and vice versa. That is the intended behavior — an editor clicking around a test cart should not disturb their own session.
+
+### Detecting the preview yourself
+
+Reach for `isStudioEmbedRequest` when the app's own behavior has to change inside a frame, not just its cookies:
+
+```ts [server/routes/app-myapp/checkout.ts]
+import { defineEventHandler, isStudioEmbedRequest, sendRedirect } from '#imports';
+import { createHostedCheckout, renderOpenInNewTab } from '../../myapp-helper/checkout';
+
+export default defineEventHandler(async (event) => {
+  const { url } = await createHostedCheckout(event);
+
+  // The hosted checkout sends `X-Frame-Options: DENY`, so redirecting inside
+  // the preview renders a blank frame. Give the editor a link out instead.
+  if (isStudioEmbedRequest(event)) {
+    return renderOpenInNewTab(url);
+  }
+
+  return sendRedirect(event, url, 302);
+});
+```
+
+Detection bootstraps from a handshake on the frame's first navigation and is then carried by a partitioned `__Host-laioutr-embed` marker cookie. The marker is the only durable signal — the handshake query does not survive client-side navigation, and a `fetch` from the frame to its own origin reports `Sec-Fetch-Site: same-origin`, which is indistinguishable from top-level traffic.
+
+::note
+The marker is `HttpOnly`, so client-side code cannot read it. `isStudioEmbedRequest` is server-only.
+::
 
 ## When to bootstrap in extendRequest
 
@@ -68,7 +132,7 @@ export const defineNimstrata = defineOrchestr
 ```
 
 ```ts [server/utils/nimstrata.ts]
-import { getCookie, setCookie } from '#imports';
+import { getCookie, setManagedCookie } from '#imports';
 import type { H3Event } from 'h3';
 import { VISITOR_ID_COOKIE } from '../const/cookies';
 import UUIDV4 from './uuid';
@@ -78,9 +142,8 @@ export const ensureVisitorId = (event: H3Event): string => {
 
   if (!UUIDV4.validate(visitorId)) {
     visitorId = UUIDV4.random();
-    setCookie(event, VISITOR_ID_COOKIE, visitorId, {
+    setManagedCookie(event, VISITOR_ID_COOKIE, visitorId, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       path: '/',
       maxAge: 60 * 60 * 24 * 365,

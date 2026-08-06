@@ -99,6 +99,8 @@ Query, link, and component-resolver responses are streamed as turbo-stream chunk
 
 Header and cookie writes from query handlers, link handlers, component resolvers, or `use` middleware fail (Nitro logs a "Cannot set headers after they are sent" error) because the response stream has already started.
 
+Write cookies with the auto-imported `setManagedCookie` / `deleteManagedCookie` rather than h3's `setCookie` / `deleteCookie`. They apply the transport attributes a cookie needs to survive the Studio preview frame, which h3's own functions leave to you.
+
 ::tip
 For the read-or-create-and-set pattern used for cart, session, and visitor IDs (with guidance on which slot to pick), see the [Identity cookies](/frontend/orchestr/recipes/identity-cookies) recipe.
 ::
