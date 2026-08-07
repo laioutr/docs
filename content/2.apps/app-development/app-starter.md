@@ -78,9 +78,15 @@ Important details:
 
 Before you start:
 
-- **Node.js** (>= 22.12) and **pnpm** (>= 10.15).
+- **Node.js** (>= 22.12) and **pnpm** (>= 10.15). Use **Node 24** if you intend to publish the app — npm trusted publishing needs npm >= 11.5.1, which Node 22 does not ship. The starter’s `.nvmrc` pins it.
 - A **Laioutr project** in [Cockpit](https://cockpit.laioutr.cloud) (for fetching `laioutrrc.json` and testing with Studio).
-- Access to Laioutr’s **npm registry** (for installing dependencies). Copy `.npmrc.config` to `.npmrc` for the scope mapping, then run `npm login --registry https://npm.laioutr.cloud`. See [npm registry](/cockpit/project-settings/npm).
+- Access to Laioutr’s **npm registry** (for installing dependencies). Render `.npmrc.config` into `.npmrc` with your token, or copy it across and run `npm login --registry https://npm.laioutr.cloud`. See [npm registry](/cockpit/project-settings/npm).
+
+  ```bash
+  sed "s|NPM_LAIOUTR_TOKEN|$YOUR_TOKEN|" .npmrc.config > .npmrc
+  ```
+
+  `@laioutr-core/*` and `@laioutr-app/*` cannot resolve until this exists, and `pnpm install` fails on the first of them.
 
 Optional but recommended: install the [Laioutr CLI](/getting-started/next-steps/cli) to fetch and update `laioutrrc.json`:
 
@@ -164,3 +170,4 @@ For deeper dives, see [Architecture](/getting-started/key-concepts/architecture)
 - [Setup Local Development Environment](/getting-started/next-steps/local-setup) — Step-by-step clone, install, fetch rc, and run the playground.
 - [CLI](/getting-started/next-steps/cli) — Fetch and update `laioutrrc.json`.
 - [Coding Standards](/apps/app-development/coding-standards) — Conventions and quality guidelines for app code.
+- [Publishing](/apps/app-development/publishing) — Releasing with Changesets and publishing to npmjs.org with trusted publishing.

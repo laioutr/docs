@@ -93,11 +93,14 @@ Add the scope-to-registry lines plus the auth token to your `.npmrc`. Supply the
 ```ini [.npmrc]
 @laioutr-core:registry=https://npm.laioutr.cloud/
 @laioutr-app:registry=https://npm.laioutr.cloud/
+@laioutr-store:registry=https://npm.laioutr.cloud/
 @laioutr-org:registry=https://npm.laioutr.cloud/
-//npm.laioutr.cloud/:_authToken=NPMRC_LAIOUTR_TOKEN
+//npm.laioutr.cloud/:_authToken=NPM_LAIOUTR_TOKEN
 ```
 
 We recommend using a tools such as [npmrc-replace-env](https://github.com/dennzimm/npmrc-replace-env) for this task.
+
+The [app-starter](/apps/app-development/app-starter) ships this as a committed `.npmrc.config` and renders it in CI with `sed`. See [Publishing](/apps/app-development/publishing#registry-access-in-ci) for that workflow.
 
 ## Publish an organization package
 
