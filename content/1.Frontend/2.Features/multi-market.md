@@ -42,9 +42,52 @@ Markets and their domains come from **RC** (`laioutrrc.markets`). Each `RcMarket
 - **`currency`** (ISO 4217, e.g. `CHF`)
 - **`regionCodes`** (e.g. `["CH"]`)
 - **`defaultDomainId`**
+- **`status`**: `'active'` or `'draft'` (optional; absent reads as `'active'`)
 - **`domains`**: dictionary of `RcMarketDomain`, each with `id`, `host`, optional `path`, and `languageId`
 
+The project itself carries **`laioutrrc.defaultMarketId`**, naming the market that acts as the default.
+
 At build time, Frontend Core transforms this into a **`RenderI18nConfig`** (via `buildI18nConfig()`) with resolved types (`RenderMarket`, `RenderMarketDomain`, `RenderLanguage`) and lookup maps (`marketById`, `marketBySlug`, `hostToMarket`). You access this derived config through composables, never the raw RC.
+
+### Market status
+
+A **draft** market is configured but not launched. It still serves its own host, so you can check it before go-live, but the frontend never links to it and never lets it be indexed.
+
+`buildI18nConfig()` resolves `status` into two predicates on `RenderMarket`. Read these, not `status` itself: a future status then costs one mapping change instead of a sweep through every consumer.
+
+| Field | `active` | `draft` |
+|---|---|---|
+| `status` | `'active'` | `'draft'` |
+| `isLinkable` | `true` | `false` |
+| `isIndexable` | `true` | `false` |
+
+What follows from them:
+
+- **`isLinkable: false`**: the market is absent from `hreflang` alternates, `og:locale:alternate`, and `x-default`, and `linkResolver.switchMarketUrl()` returns `'#'` for it.
+- **`isIndexable: false`**: every page served from that market renders `robots: noindex, nofollow`, overriding both the page's own SEO config and any `frontend-core:page-head:resolve` handler.
+
+Routes are unaffected: a draft market keeps its aliases and answers 200 on its own host. Delisted, not unreachable.
+
+### `markets` vs `allMarkets`
+
+`RenderI18nConfig` carries two arrays, and picking the wrong one is the easiest mistake here:
+
+| | Contains | Use for |
+|---|---|---|
+| `markets` | linkable markets only | market switchers, alternates, anything the visitor can follow |
+| `allMarkets` | every configured market, drafts included | routing, host resolution, preview, tooling |
+
+The lookup maps (`marketById`, `marketBySlug`, `hostToMarket`) always stay complete. That is what keeps a draft market's own host resolving to it.
+
+### Default market
+
+`RenderI18nConfig.defaultMarket` resolves in this order:
+
+1. the market named by `laioutrrc.defaultMarketId`, if it exists **and** is active;
+2. otherwise the first active market;
+3. otherwise the first market, so an all-draft configuration still renders.
+
+It drives `x-default`, the primary (non-alias) path of every route, the unknown-host fallback, nuxt-i18n's `defaultLocale`, and the market Studio opens on. Leaving `defaultMarketId` unset reproduces the old behaviour, which took whichever market happened to come first. Set it explicitly on any project with more than one market.
 
 ### Host-to-market constraint
 
@@ -83,13 +126,13 @@ Use `useMarketPath()` when you need to prepend the current domain's path prefix 
 
 ### Validation
 
-`validateI18nConfig(languages, markets)` runs at build time and checks: valid BCP 47 codes, existing `defaultDomainId` and `languageId` references, no duplicate (host, path) pairs, and no two domains within one market serving the same language. Issues are logged as warnings.
+`validateI18nConfig(languages, markets, defaultMarketId)` runs at build time and checks: valid BCP 47 codes, existing `defaultDomainId` and `languageId` references, no duplicate (host, path) pairs, no two domains within one market serving the same language, a `defaultMarketId` that names an existing and active market, and at least one active market. Issues are logged as warnings.
 
 The last check keeps `(market, language)` a unique key for a domain — the pair the server uses to resolve [`clientEnv.domain`](/frontend/orchestr/client-env). If a market legitimately spans two same-language regions (e.g. Germany and Austria on one EUR market), give each domain a region-qualified locale (`de-DE` vs `de-AT`) so they stay distinguishable.
 
 ### Dev hosts
 
-`toDevHost(host)` maps production hosts to local development hosts (e.g. `www.shop.ch` → `shop-ch.local.laioutr.tech`). A `*.local.laioutr.tech` wildcard DNS record points to `127.0.0.1`, so you can test multi-domain setups locally. The first market is also aliased to `localhost` as an offline fallback.
+`toDevHost(host)` maps production hosts to local development hosts (e.g. `www.shop.ch` → `shop-ch.local.laioutr.tech`). A `*.local.laioutr.tech` wildcard DNS record points to `127.0.0.1`, so you can test multi-domain setups locally. The default market is also aliased to `localhost` as an offline fallback, and the startup banner marks draft markets with `[draft]`.
 
 ### Fallback behaviour
 
@@ -97,7 +140,7 @@ Market and language are **never null** at runtime. Resolution always produces a 
 
 | Scenario | What happens |
 |----------|-------------|
-| No market matches the request host | Falls back to the default market (first configured). Warning logged. |
+| No market matches the request host | Falls back to the default market (see [Default market](#default-market)). Warning logged. |
 | No path prefix matches within the market | Uses the market's default domain. |
 | Page not in current market (`marketIds`) | No route alias exists. Standard 404. |
 | Language has no path for a page | No alias generated. `linkResolver.switchLocalePath()` returns `'#'`. |
