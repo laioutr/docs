@@ -61,9 +61,11 @@ A **draft** market is configured but not launched. It still serves its own host,
 | `isLinkable` | `true` | `false` |
 | `isIndexable` | `true` | `false` |
 
+A third predicate, `isDefault`, is independent of status — see [Default market](#default-market).
+
 What follows from them:
 
-- **`isLinkable: false`**: the market is absent from `hreflang` alternates, `og:locale:alternate`, and `x-default`, and `linkResolver.switchMarketUrl()` returns `'#'` for it.
+- **`isLinkable: false`**: the market is absent from `hreflang` alternates, `og:locale:alternate`, and `x-default`, and `linkResolver.switchMarketUrl()` returns `'#market-not-active'` for it.
 - **`isIndexable: false`**: every page served from that market renders `robots: noindex, nofollow`, overriding both the page's own SEO config and any `frontend-core:page-head:resolve` handler.
 
 Routes are unaffected: a draft market keeps its aliases and answers 200 on its own host. Delisted, not unreachable.
@@ -88,6 +90,14 @@ The lookup maps (`marketById`, `marketBySlug`, `hostToMarket`) always stay compl
 3. otherwise the first market, so an all-draft configuration still renders.
 
 It drives `x-default`, the primary (non-alias) path of every route, the unknown-host fallback, nuxt-i18n's `defaultLocale`, and the market Studio opens on. Leaving `defaultMarketId` unset reproduces the old behaviour, which took whichever market happened to come first. Set it explicitly on any project with more than one market.
+
+The resolved market is reachable two ways, and they name the same object:
+
+```ts
+i18nConfig.defaultMarket === i18nConfig.allMarkets.find((m) => m.isDefault);
+```
+
+Use `defaultMarket` when you have the config and want the market. Use `isDefault` when you have a market and want to know whether it is the default one — a switcher marking its primary entry, or a component that only ever receives a single `RenderMarket`. Exactly one market in `allMarkets` carries the flag; it is missing from `markets` only when every configured market is draft, which is also the one case where no `x-default` is emitted.
 
 ### Host-to-market constraint
 
