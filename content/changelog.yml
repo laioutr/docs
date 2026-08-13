@@ -28,6 +28,29 @@ AlphabeticalIndex:
       }
       ```
 
+AnimatedButton:
+  - version: 2.12.0
+    type: added
+    changelog: ui
+    note: >-
+      New component. A `Button` that pulses on a two-second loop, for the single
+      call to action on a media-heavy screen that has to be found before it is
+      read. Takes every `Button` prop and forwards it. The pulse pauses on hover,
+      under `prefers-reduced-motion`, and via the `paused` prop. See
+      [Animated Button](/laioutr-ui/ui-kit/form/animated-button).
+
+AnimatedIcon:
+  - version: 2.12.0
+    type: added
+    changelog: ui
+    note: >-
+      New component. An icon reflecting a parent-owned `active` boolean: on the
+      false to true transition the two artworks cross-fade while three copies of
+      the active one fly up and outwards. Motion is sized in multiples of the
+      icon box, so it holds at every `size`, and
+      `--animated-icon-active-color` colours the active artwork and its burst.
+      See [Animated Icon](/laioutr-ui/ui-kit/general/animated-icon).
+
 ArticleDetail:
   - version: 2.4.0
     type: changed
@@ -54,6 +77,16 @@ ArticleDetail:
       New optional `showSocialShare` prop (default `false`) toggles the trailing
       `SocialShare` row. `SectionBlogPostDetail` enables it; `SectionGlossaryDetail`
       leaves it off.
+
+Badge:
+  - version: 2.12.0
+    type: added
+    changelog: ui
+    note: >-
+      New `glass-black` variant for badges sitting over arbitrary media — a
+      translucent dark chip with a backdrop blur, so the text keeps its contrast
+      whatever the media does underneath. See
+      [Over media](/laioutr-ui/ui-kit/indicators/badge#over-media).
 
 BasicTable:
   - version: 2.5.0
@@ -251,6 +284,25 @@ MediaLibrary:
       server-side type filtering), and logs a one-time warning at registration.
 
 MediaComponent:
+  - version: 2.12.0
+    type: changed
+    changelog: ui
+    note: >-
+      Videos now wait until they are within a screen of the viewport before
+      fetching, so a page or feed carrying several no longer loads them all up
+      front. `preload` alone could not carry this — `autoplay` overrides it and
+      a `play()` call fetches regardless — so the attributes and the play call
+      are held back together. Wrap a hero in `MediaAboveTheFoldProvider` to opt
+      out, or set the new `videoPreload` prop to spell out one video's loading.
+      See [Deferred loading](/laioutr-ui/ui-kit/general/media#deferred-loading).
+  - version: 2.12.0
+    type: added
+    changelog: ui
+    note: >-
+      `<Media>` gained `v-model:currentTime`, the sibling of `v-model:paused`.
+      Assigning to it seeks and the element reports its own progress back, so a
+      scrubber, chapter link, or rewind needs no template ref. See
+      [Seeking and reading progress](/laioutr-ui/ui-kit/general/media#seeking-and-reading-progress).
   - version: 2.4.0
     type: added
     changelog: ui
@@ -274,6 +326,20 @@ MediaComponent:
       `provideMediaRenderers` to override the built-in for adaptive streaming
       (HLS/DASH) or a custom player UI. See
       [Rendering video and audio](/laioutr-ui/ui-kit/general/media#rendering-video-and-audio).
+
+MediaFeed:
+  - version: 2.12.0
+    type: added
+    changelog: ui
+    note: >-
+      New component. A full-screen vertical media feed in the TikTok and Reels
+      pattern: scroll-snap, one item playing at a time, an action rail, a mute
+      toggle, and a read-more sheet. Render it from `items` plus
+      `v-model:open`, or drive it from anywhere on the page with
+      `useMediaFeedStore()`. Set `urlParam` to sync the item in view to a query
+      parameter by id, so a link is shareable and the back button closes the
+      feed. Off-screen items are `inert`. See
+      [Media Feed](/laioutr-ui/publishers/media-feed).
 
 MediaText:
   - version: 2.4.0

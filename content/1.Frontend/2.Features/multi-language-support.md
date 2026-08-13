@@ -72,8 +72,22 @@ The UI Kit registers global formatters that respect the active locale:
 | `$measurement(measurement)` | [`{ value, unit }`](/frontend/api-reference/common-types/measurement) | `100 cm` / `10 m²` |
 | `$unitPrice(unitPrice)` | [`{ price, quantity, reference }`](/frontend/api-reference/common-types/unit-price) | `13,99 € / 100 ml` |
 | `$duration(duration)` | `{ duration }` (ISO 8601) | `1h 30m` |
+| `$count(count)` | `number` | `1.2K` / `1234` |
 
 Available in any template: `{{ $money(price) }}`. See [Currencies](/frontend/features/currencies) for the developer-facing summary, and the [`Money` reference](/frontend/api-reference/common-types/money) for the full `$money` signature and options.
+
+#### `$count`
+
+`$count` formats a plain count — likes, views, comments — compactly for the active locale, and takes an optional `Intl.NumberFormatOptions` to override the defaults (`$count(12345, { notation: 'standard' })`).
+
+Where it abbreviates is CLDR's decision, not ours, so it differs by language. English shortens from a thousand up; German only from a million:
+
+| Input | English | German |
+|-------|---------|--------|
+| `1234` | `1.2K` | `1234` |
+| `1234567` | `1.2M` | `1,2 Mio.` |
+
+A design that budgets a fixed width for a count badge has to allow for the long form.
 
 ### Language switcher
 

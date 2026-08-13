@@ -15,7 +15,7 @@ seo:
   description: The dispatcher that renders a Media value through nuxt-image (images) and built-in native players (video, audio) you can override with your own renderer.
 sitemap:
   loc: /laioutr-ui/ui-kit/general/media
-  lastmod: 2026-06-04
+  lastmod: 2026-08-13
   changefreq: monthly
   priority: 1
   videos: []
@@ -55,9 +55,15 @@ items:
     autoplay loop) sets video/audio behavior per placement; the individual
     `controls` / `autoplay` / `muted` / `loop` / `playsinline` /
     `disablePictureInPicture` props map 1:1 to native HTML and override the mode
-  - `playback="background"` runs a decorative video loop (autoplay suppressed
+  - "`playback=\"background\"` runs a decorative video loop (autoplay suppressed
     under reduced motion); `v-model:paused` lets the consumer render and place
-    its own WCAG-compliant pause control
+    its own WCAG-compliant pause control"
+  - Videos wait until they are within a screen of the viewport before fetching,
+    so a page carrying several no longer loads them all up front;
+    `MediaAboveTheFoldProvider` opts a hero out and `videoPreload` overrides it
+    per video
+  - "`v-model:currentTime` seeks on write and reports playback progress back, so
+    a scrubber or chapter link needs no template ref"
   - "`aspectRatio` accepts boolean, string, or number, so callers pick between
     intrinsic, square, and named ratios from the same prop"
   - Breakpoint-aware `sizes` strings hint the browser to pick the smallest
@@ -219,6 +225,71 @@ const toggle = () => {
 ```
 
 `<Media>` seeds `paused` on mount from the reduced-motion-aware autoplay decision, so the button reflects reality on first paint — it shows "play" when autoplay was suppressed. It also reflects browser-initiated pauses (a data-saver mode, a backgrounded tab) back into the binding, so the icon and label stay truthful.
+
+### Seeking and reading progress
+
+:since-version{changelog="ui" packages="@laioutr-core/ui-kit" version="2.12.0"}
+
+`v-model:currentTime` is the sibling of `v-model:paused` and carries the playback position in seconds. Assigning to it seeks; the element reports its own progress back as it plays. A scrubber, a chapter link, or a rewind button needs no template ref and no `addEventListener`:
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const currentTime = ref(0);
+</script>
+
+<template>
+  <Media :media="episode.video" v-model:currentTime="currentTime" />
+  <button @click="currentTime = 0">Rewind</button>
+  <p>{{ Math.floor(currentTime) }}s</p>
+</template>
+```
+
+Writes only seek when the value has genuinely moved away from the element, so binding a slider to the same ref that the element writes back to does not fight itself.
+
+### Deferred loading
+
+:since-version{changelog="ui" packages="@laioutr-core/ui-kit" version="2.12.0"}
+
+A video does not fetch anything until the visitor scrolls near it. A page or feed carrying several videos loads only the ones in play, instead of pulling every file up front.
+
+This needs more than the `preload` attribute alone: `autoplay` overrides `preload`, a `play()` call fetches regardless of both, and a server without range support answers `preload="metadata"` with the whole file. So `<Media>` holds back the attributes *and* the play call together until the element comes within one screen of the viewport — a screen of lead time, so the next item of a feed is warm before it lands.
+
+The gate latches. Once a video has come into range its bytes are on the wire, and scrolling away does not restrict it again.
+
+#### Above the fold
+
+A hero video is on screen at first paint, and making it wait for an observer callback would cost it the start of its own playback. Wrap that subtree in `MediaAboveTheFoldProvider` — the same provider that already opts images out of lazy loading — and every `<Media>` inside it loads immediately:
+
+```vue
+<script setup lang="ts">
+import { toRef } from 'vue';
+import { MediaAboveTheFoldProvider } from '#ui-kit/components/Media/MediaAboveTheFoldProvider';
+
+const isAboveTheFold = true;
+</script>
+
+<template>
+  <MediaAboveTheFoldProvider :value="toRef(isAboveTheFold)">
+    <Media :media="hero.video" playback="background" />
+  </MediaAboveTheFoldProvider>
+</template>
+```
+
+`value` is a ref, so a slider can flip it per slide: the first slide is above the fold and loads eagerly, the rest wait until they are scrolled to.
+
+#### Overriding per video
+
+`videoPreload` maps to the native `preload` attribute (`'none' | 'metadata' | 'auto'`) and takes precedence over the gate, for the rare video whose loading you want to spell out yourself:
+
+```vue
+<template>
+  <Media :media="trailer" videoPreload="auto" />
+</template>
+```
+
+It is named `videoPreload` rather than `preload` because `<Media>`'s own `preload` is the image boolean that emits a `<link rel="preload">` hint.
 
 ### What the built-in players handle
 
