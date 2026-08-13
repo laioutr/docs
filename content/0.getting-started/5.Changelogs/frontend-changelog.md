@@ -14,6 +14,89 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.41.0] - 2026-08-11
+
+### Minor Changes
+
+- Markets can be set to `draft`, and a project can name its default market.
+
+  A draft market still serves its own host so it can be checked before launch, but it is excluded
+  from hreflang alternates, `og:locale:alternate`, `x-default`, and market switchers, and its pages
+  are served with `noindex, nofollow`. `switchMarketUrl` returns `'#market-not-active'` for a draft
+  target. Status is read through `RenderMarket.isLinkable` and `isIndexable` rather than the `status`
+  member, so a future status changes one mapping instead of every consumer.
+
+  `RcProject.defaultMarketId` replaces the implicit "first market in the configuration" rule for
+  `x-default`, the primary route path, the unknown-host fallback, and nuxt-i18n's `defaultLocale`.
+  Which market that was depended on the order Cockpit happened to return them in, so a project whose
+  primary market did not sort first was pointing `x-default` at the wrong one. Leaving the new field
+  unset preserves the previous behaviour. The resolved default is reachable both as
+  `RenderI18nConfig.defaultMarket` and as `RenderMarket.isDefault`, so a component holding a single
+  market can tell whether it is the default one without reading the whole config.
+
+  **Breaking:** `RenderI18nConfig.markets` now contains only markets that may be linked to. The
+  complete list, including drafts, moved to `RenderI18nConfig.allMarkets`. Code that renders a market
+  switcher needs no change and starts honouring status automatically; code that needs every configured
+  market (routing, host resolution, preview) must switch to `allMarkets`.
+
+  ```ts
+  // Before: one list, used for both
+  const switcherMarkets = i18nConfig.markets;
+  const routableMarkets = i18nConfig.markets;
+
+  // After
+  const switcherMarkets = i18nConfig.markets; // linkable only, now status-aware
+  const routableMarkets = i18nConfig.allMarkets; // every configured market
+  ```
+
+### Patch Changes
+
+- **Breaking:** Local dev hostnames for projects hosted on `*.app.laioutr.tech` drop that suffix instead of folding it into the label. A market on `acme-shop.app.laioutr.tech` is now reachable at `acme-shop.local.laioutr.tech` rather than `acme-shop-app-laioutr-tech.local.laioutr.tech`. The same host drives market resolution and the dev cookie domain, so all three stay in step — update any bookmark or `allowedHosts` entry that named the old form.
+
+  The startup banner no longer prints during `nuxi prepare` and `nuxi typecheck`, only when the app actually boots.
+
+- Switching market or language in the Studio reloads the previewed content
+
+  The preview kept rendering whichever market it was opened with. Switching from German to Dutch —
+  or from German to English inside a single market — left the previous menus, product data and
+  prices on screen, so the preview showed one market's content under another market's settings.
+
+  Orchestr results are scoped to a market and a language, but the client caches them under a key
+  that carries neither. Every query after a switch therefore read as a cache hit and no request was
+  ever sent. The cached results are now dropped when the selection changes, and the page refetches
+  under the market and language now selected.
+
+  Reselecting the market already being previewed still serves the cache. Storefront rendering is
+  unaffected; the change is limited to the Studio preview.
+
+## [0.40.3] - 2026-08-07
+
+### Patch Changes
+
+- `linkResolver.resolve()` no longer drops a link's `query`.
+
+  Every Laioutr page route carries `localizedPaths`, so internal links always resolved through the localized-path branch — which ignored `query` and returned before the vue-router fallback that applied it. A header search resolving `{ type: 'pageType', pageType: ProductSearchPage, query: { q: term } }` landed on `/search` without `?q=`. `reference`, `page` and `pageType` links were affected alike.
+
+  `url` and `anchor` links kept their `query` in the type but dropped it on resolve; they now carry it too. The query is merged into whatever the `href` already has — the link's own `query` wins on a key collision — and always lands before the fragment. A link without a `query` still passes its href through untouched.
+
+  Query strings go through vue-router's `stringifyQuery`, so a resolved link matches what `router.resolve()` would have produced.
+
+## [0.40.2] - 2026-08-06
+
+### Patch Changes
+
+- Session cookies now survive the Cockpit Studio preview. Cart and customer-session cookies are issued with `SameSite=None; Secure; Partitioned` when the request comes from the Studio preview frame, so a cart built in the editor persists across reloads instead of resetting on every request. The preview gets its own cookie partition, keeping it separate from your real session on the same shop in the same browser. Top-level storefront traffic is unaffected and keeps its existing `SameSite` attributes.
+
+  App authors get two new server auto-imports, `setManagedCookie` and `deleteManagedCookie`, which apply this policy. Use them instead of h3's `setCookie` / `deleteCookie` so an app's cookies work inside the preview — and note that deletions must go through `deleteManagedCookie`, since a delete that omits `Partitioned` addresses the wrong cookie jar and silently leaves the cookie in place.
+
+  `Secure` is now derived from the request origin rather than set per connector, which fixes Shopify and Adobe Commerce cookies being dropped by the browser during local development over plain http on a non-loopback hostname.
+
+## [0.40.1] - 2026-08-06
+
+### Patch Changes
+
+- Fix `laioutrrc.json` app config being merged into each app module twice. The config was both assigned to `nuxt.options[<appName>]` and passed to `installModule`, so Nuxt merged it with itself and concatenated every array-valued option. A four-entry Shopify `sortings` list arrived as eight and failed the build with a duplicate-key error.
+
 ## [0.40.0] - 2026-08-05
 
 ### Minor Changes

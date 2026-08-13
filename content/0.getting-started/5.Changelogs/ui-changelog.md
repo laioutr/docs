@@ -14,6 +14,74 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.11.0] - 2026-08-11
+
+### Minor Changes
+
+- Dutch locale for ui-kit
+
+  `#ui-kit/locale/nl` joins `en` and `de`, covering every message key the kit defines — cart and
+  checkout, the add-to-cart and sold-out states, search, filters, reviews, the withdrawal form,
+  product-detail pricing, the location finder, and the newsletter.
+
+  A storefront whose language resolves to `nl` now renders ui-kit's own chrome in Dutch. Until now
+  only `en` and `de` existed, so a Dutch market showed English controls — "Add to Cart", "Sold Out",
+  "Select an option" — around product data in its own language. Markets in other languages are
+  unaffected and still fall back to English.
+
+### Patch Changes
+
+- `CategoryCardSlider` and `CategoryCardGrid` render their `nodes` prop and their default
+  slot together, `nodes` first. Previously the default slot replaced `nodes` entirely, and
+  because the Category Card sections always pass one, `nodes` never rendered through them
+  at all.
+
+  So a Category Card Slider bound to a category data source — e.g. the current category's
+  Child Categories — showed an empty slider. It now shows one card per category, with any
+  manually placed `BlockCategoryCard`s after them.
+
+- The Filter Bar's header and quick-filter rows line up with the surrounding page content on large screens. Their horizontal padding was a fixed `--spacing-ml`, narrower than the page container's own padding, so both rows sat slightly inside the content column from `lg` upwards. They now read `--container-padding`, the same token the container uses, and follow it at every breakpoint above `lg`.
+
+- The add-to-cart button on tiles in the Product Slider Showcase section did nothing when
+  clicked — no spinner, no toast, no cart request — while the same button in the plain
+  Product Slider section worked. Both now behave identically: per-tile loading state,
+  success and error toasts, and the cart count updating.
+
+  `ProductSliderShowcase` gains an optional `productTile` slot for callers that render
+  their own tile; leaving it unfilled keeps the current one.
+
+- **Breaking:** `AuthLoginOauthAction` (`ecommerce/auth/login-oauth`) no longer returns a bare `authorizationUrl`. It returns a discriminated union: the OAuth authorization URL when the customer has no session, and a `Link` to their account when they do. Narrow on `type` before reading either.
+
+  ```ts
+  // Before
+  const { authorizationUrl } = await mutateAsync(undefined);
+  window.open(authorizationUrl, '_blank', 'popup,width=500,height=500');
+
+  // After
+  const result = await mutateAsync(undefined);
+  if (result.type === 'oauth') {
+    window.open(result.authorizationUrl, '_blank', 'popup,width=500,height=500');
+  } else {
+    await navigateTo(resolve(result.link), { external: true });
+  }
+  ```
+
+  Clicking the account icon in the shop header no longer restarts the OAuth flow for a customer who is already signed in — they go straight to their account. The Shopify connector answers from its own cookies without a network call, and returns before writing anything, so an account redirect in one tab can no longer invalidate a login in progress in another.
+
+  The account destination is a `Link` rather than a URL string, so the frontend resolves it. Shopify returns an external link to its hosted account page; a connector whose account is a storefront page returns a `pageType` link from the same contract, with no change to the header.
+
+  The login popup no longer fails silently in Safari and Firefox. It is opened while the click is still a trusted gesture rather than after the request that resolves its URL, and falls back to a full-page redirect where a popup is blocked anyway.
+
+  A signed-in customer's cart now carries their identity, so checkout opens authenticated and the resulting order attaches to their account. A cart created while signed in is associated at creation; one filled beforehand is associated on the next cart read, so signing in mid-session no longer leaves the cart anonymous.
+
+## [2.10.3] - 2026-08-06
+
+### Patch Changes
+
+- Add `ProductDetailButtonGroup`, a vertical stack of full-width call-to-action buttons (label, link, variant, size) for the product detail page.
+
+- Add `BlockProductDetailButtonGroup`, a block wrapping `ProductDetailButtonGroup` with a repeatable buttons array built on the shared button field set. Placeable only inside the Product Detail section's content slot.
+
 ## [2.10.0] - 2026-08-03
 
 ### Minor Changes
