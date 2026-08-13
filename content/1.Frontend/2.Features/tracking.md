@@ -54,6 +54,8 @@ track(AddToCart, { products: [{ entity: product, quantity: 2 }] });
 
 Entity types with no registered projector seed `{ id }`. The `frontend-core:analytics:project` hook completes or replaces any projection — see [Hooks](/frontend/features/hooks).
 
+Any entity carrying a slug on its `base` component also gets a `url`: an absolute address on the market's production host, resolved through the same link resolver the storefront's own links use. It works for every addressable entity type, not just products, and a destination — including a server-side subscriber, which has no way to build one — receives a link it can follow. A projector that resolved its own `url` keeps it, and a `:project` handler can replace or drop it.
+
 ### The event vocabulary
 
 Tokens are typed, versioned and namespaced `<namespace>/<name>`.
