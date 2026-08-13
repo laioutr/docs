@@ -14,6 +14,23 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-08-11]
+
+### Added
+
+- **Studio**: The selected market and language are kept in the URL, so a reload or a shared link opens the same market and language instead of the project default.
+
+## [2026-08-10]
+
+### Added
+
+- **Hosting**: Markets have a status of Draft or Active, new markets start as Draft, and the market cards show Draft and Default badges.
+- **Hosting**: A project can choose its default market from its active markets, and the selector names the fallback used when none is chosen.
+
+### Fixed
+
+- **Hosting**: Billing settings are now always available, so you can open the billing portal before a payment method has been added.
+
 ## [2026-08-03]
 
 ### Fixed
