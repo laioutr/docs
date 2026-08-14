@@ -14,6 +14,21 @@ sitemap:
 
 All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data-fetching and query orchestration layer, will be documented in this file.
 
+## [0.41.1] - 2026-08-13
+
+### Patch Changes
+
+- Render a streamed query result once it has settled, rather than once per response chunk
+
+  On a server-rendered page, the first client-side navigation that ran a query re-rendered on every
+  chunk of the streamed response — including the window where a link's entity ids have arrived but
+  the entities themselves still report no components. Sections reading those components rendered
+  against that half-loaded state and threw, which read as intermittent because a retry usually landed
+  after the response had finished.
+
+  A streamed response is now published once, complete, and a query started from a server-rendered
+  page keeps the data already on screen until it finishes.
+
 ## [0.38.2] - 2026-07-31
 
 ### Patch Changes

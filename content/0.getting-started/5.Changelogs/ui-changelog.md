@@ -14,6 +14,56 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.12.0] - 2026-08-13
+
+### Minor Changes
+
+- Add `MediaFeed`, a full-screen short-form media feed in the TikTok/Reels pattern: vertical scroll-snap, one item playing at a time, an action rail, a mute toggle, and a read-more sheet. Only the item in view is interactive — the others are `inert`, so tabbing never reaches a control that is off screen, and each item carries `data-state="active" | "inactive"` to style or query against. Video items carry a play/pause affordance over the whole backdrop; image items have nothing to pause and carry none.
+
+  Render it from props (`items` + `v-model:open`) or drive it from anywhere on the page with `useMediaFeedStore()`:
+
+  ```ts
+  const { openFeed, setItems } = useMediaFeedStore();
+
+  // Seed on mount so a shared link resolves before anyone opens the feed.
+  setItems(reels);
+  // A tile opens at a position or at an item id.
+  openFeed(reels, 'reel-1235512');
+  ```
+
+  Browsers only allow autoplay while muted, so the feed starts silent and the top bar carries a mute toggle back to sound — bound to `v-model:muted`, and left out when no item is a video. Replace it through the `top-bar-end` slot.
+
+  Set `urlParam` to sync the item in view to the URL — `?reel=<id>` — so an item can be shared and the back button closes the feed instead of leaving the page. The parameter carries the item id, not its position, so a link survives the feed being reordered.
+
+  The compound parts are exported for composition: `MediaFeedIconButton`, `MediaFeedTopBar`, `MediaFeedDesktopNavigation`, `MediaFeedItemInformation`, `MediaFeedDisclosureTeaser`, `MediaFeedOffCanvasSheet` and `MediaFeedItem`. Action rails and CTAs are scoped slots, because favourite state and counts come from your own queries rather than from the item data.
+
+  `MediaFeedIconButton` draws an engaged `AnimatedIcon` in red, so a favourited heart reads as favourited while the rail's other icons stay on the button's own colour. Override it per rail or per button with `--animated-icon-active-color`.
+
+  New in `ui-kit` alongside it:
+
+  - `useOverlayHistory` — syncs any overlay's open state and current item to a query parameter. Opening pushes one history entry, item changes replace it, and back closes the overlay rather than navigating away. Usable for the lightbox, a cart drawer or any other overlay. Several overlays can run at once as long as each owns its own parameter.
+  - `AnimatedIcon` — an icon that reflects a boolean active state. On the false → true transition the two artworks cross-fade — the outgoing one springs, the incoming one grows in from a quarter size — while three copies of the active artwork fly up and outwards and fade. The motion is sized in multiples of the icon, so it holds at every `size`. Overlapping bursts are kept separate so rapid repeat taps each animate in full. It reflects `data-state="active" | "inactive"`, and `--animated-icon-active-color` colours the active artwork and the hearts it throws while the resting outline keeps the ambient icon colour.
+  - `AnimatedButton` — `Button` with a continuous pulse, paused on hover, under `prefers-reduced-motion`, or via `paused`.
+  - `$count(1234)` — compact number formatting for the current locale, honouring your i18n `numberFormats` where you define them. The default abbreviation is CLDR's and differs by language: English shortens from a thousand (`1.2K`), German only from a million (`1234`, then `1,2 Mio.`), so a badge on a fixed width wants either room for the long form or a format of its own.
+  - `Badge` gains a `glass-black` variant for badges sitting over arbitrary media.
+  - `Media` and `MediaVideo` gain `v-model:currentTime`, the sibling of `v-model:paused`: assigning to it seeks, and the element reports its own progress back, so a scrubber, a chapter link or a rewind needs no template ref.
+
+  (DEV-414, DEV-440)
+
+- Videos rendered through `Media` wait until they are near the viewport before fetching, so a page or feed carrying several no longer loads all of them up front. Videos under a `MediaAboveTheFold` provider are unaffected; elsewhere set `videoPreload` to override it per video. (DEV-414)
+
+### Patch Changes
+
+- Fix the filled heart icon (`essentials/heart-filled`) rendering at `size="s"` and `size="m"`.
+
+- Keep product tiles rendering when a variant is missing the components they read
+
+  A query result can legitimately carry a product variant whose components have not been resolved.
+  The shared product-tile mapper read `options.selected` and `availability.status` off every variant,
+  so a single such variant took the whole Product Grid, Product Slider or Product Slider – Showcase
+  down behind its error boundary. Those variants are now skipped, and the tile renders with a
+  momentarily shorter size list instead.
+
 ## [2.11.0] - 2026-08-11
 
 ### Minor Changes
