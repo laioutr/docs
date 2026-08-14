@@ -13,7 +13,7 @@ sitemap:
 
 ## What you are building
 
-A consent adapter is a small class that bridges a concrete CMP (OneTrust, CookieYes, an in-house solution) and Laioutr's [consent store](/frontend/features/consent-management). The store calls `init()` to load the CMP, asks `getConsentState()` for the current categories, subscribes to `onConsentChange()` for live updates, and forwards user actions like "open the banner" through `showConsentOverlay()`.
+A consent adapter is a small class that bridges a concrete CMP (OneTrust, CookieYes, an in-house solution) and Laioutr's [consent store](/frontend/features/consent-management). The store calls `init()` to load the CMP, asks `getConsentState()` for the purposes the visitor has granted, subscribes to `onConsentChange()` for live updates, and forwards user actions like "open the banner" through `showConsentOverlay()`.
 
 If your CMP is already covered by `@laioutr-app/cookiebot` or `@laioutr-app/ccm19`, use those instead. Build your own only when no existing app fits.
 
@@ -29,17 +29,16 @@ For the module skeleton, options handling, and how `runtimeConfig.public` flows 
 The contract is exported from `@laioutr-core/frontend-core` and re-exported under the `#frontend/consent` alias:
 
 ```ts
-import type { ConsentAdapter, ConsentManagementState } from '#frontend/consent';
+import type { ConsentAdapter, ConsentState } from '#frontend/consent';
 
 export interface ConsentAdapter {
   readonly name: string;
   readonly isActive: boolean;
   init(): Promise<void> | void;
-  getConsentState(): Promise<Partial<ConsentManagementState>> | Partial<ConsentManagementState>;
+  getConsentState(): Promise<Partial<ConsentState>> | Partial<ConsentState>;
   showConsentOverlay(): Promise<void> | void;
   renewConsent(): Promise<void> | void;
-  hasCategoryConsent(category: keyof ConsentManagementState): boolean;
-  onConsentChange(callback: (consent: Partial<ConsentManagementState>) => void): void;
+  onConsentChange(callback: (consent: Partial<ConsentState>) => void): void;
   destroy?(): Promise<void> | void;
 }
 ```
@@ -61,10 +60,10 @@ export interface ConsentAdapter {
   ---
   required: true
   name: getConsentState()
-  type: () => Promise<Partial<ConsentManagementState>> |
-    Partial<ConsentManagementState>
+  type: () => Promise<Partial<ConsentState>> |
+    Partial<ConsentState>
   ---
-  Returns the current consent as a partial of the five-category shape. Called once on activation (the result is merged into `state`). Sync if you can read from a cookie; async only when you genuinely need to wait.
+  Returns the visitor's verdict as a partial over the five purposes. Translating the CMP's own vocabulary onto them is the adapter's job -- a purpose you omit counts as denied. Called once on activation (the result is merged into `state`). Sync if you can read from a cookie; async only when you genuinely need to wait.
   :::
 
   :::field{required name="showConsentOverlay()" type="() => Promise<void> | void"}
@@ -72,23 +71,14 @@ export interface ConsentAdapter {
   :::
 
   :::field{required name="renewConsent()" type="() => Promise<void> | void"}
-  Opens the granular preferences dialog so the user can revisit individual categories. Some CMPs use the same UI for both; that is fine.
-  :::
-
-  :::field
-  ---
-  required: true
-  name: hasCategoryConsent(category)
-  type: "(category: keyof ConsentManagementState) => boolean"
-  ---
-  Synchronous check for one category. Almost always derived from `getConsentState()`.
+  Opens the granular preferences dialog so the visitor can revisit individual choices. Some CMPs use the same UI for both; that is fine.
   :::
 
   :::field
   ---
   required: true
   name: onConsentChange(callback)
-  type: "(callback: (consent: Partial<ConsentManagementState>) => void) => void"
+  type: "(callback: (consent: Partial<ConsentState>) => void) => void"
   ---
   Registers a callback fired whenever the CMP reports a consent change. The store calls this once during activation; you must invoke every registered callback when the CMP fires its own change event. The store merges the callback's argument into `state`.
   :::
@@ -98,7 +88,7 @@ export interface ConsentAdapter {
   :::
 ::
 
-A `Partial<ConsentManagementState>` is enough: the store merges it into the existing state, so omitted keys keep their previous value.
+A `Partial<ConsentState>` is enough: the store merges it into the existing state, so omitted keys keep their previous value.
 
 ## Registering the adapter
 
@@ -136,7 +126,7 @@ Here is the full adapter:
 
 ```ts
 import { useHead } from 'nuxt/app';
-import type { ConsentAdapter, ConsentManagementState } from '#frontend/consent';
+import type { ConsentAdapter, ConsentState } from '#frontend/consent';
 
 interface ConsentKitConfig {
   apiKey: string;
@@ -146,7 +136,7 @@ interface ConsentKitConfig {
 export class ConsentKitAdapter implements ConsentAdapter {
   readonly name = 'consentkit';
   private _isActive = false;
-  private _callbacks: Array<(c: Partial<ConsentManagementState>) => void> = [];
+  private _callbacks: Array<(c: Partial<ConsentState>) => void> = [];
   private _unsubscribe: (() => void) | null = null;
 
   constructor(private _config: ConsentKitConfig) {}
@@ -180,7 +170,7 @@ export class ConsentKitAdapter implements ConsentAdapter {
     this._isActive = true;
   }
 
-  getConsentState(): Partial<ConsentManagementState> {
+  getConsentState(): Partial<ConsentState> {
     if (import.meta.client && window.ConsentKit) {
       const current = window.ConsentKit.getConsent();
       if (current) return this.mapConsent(current);
@@ -188,11 +178,7 @@ export class ConsentKitAdapter implements ConsentAdapter {
     return { necessary: true }; // SSR or pre-load: only essential is safe by default.
   }
 
-  hasCategoryConsent(category: keyof ConsentManagementState): boolean {
-    return this.getConsentState()[category] ?? false;
-  }
-
-  onConsentChange(callback: (c: Partial<ConsentManagementState>) => void) {
+  onConsentChange(callback: (c: Partial<ConsentState>) => void) {
     this._callbacks.push(callback);
   }
 
@@ -211,12 +197,20 @@ export class ConsentKitAdapter implements ConsentAdapter {
     this._isActive = false;
   }
 
-  // The contract boundary: ConsentKit's category names become Laioutr's.
-  private mapConsent(c: ConsentKitState): Partial<ConsentManagementState> {
-    return { necessary: c.essential, functional: c.functional, statistics: c.analytics, marketing: c.ads };
+  // The contract boundary: ConsentKit's own vocabulary becomes Laioutr's purposes. ConsentKit has
+  // one `ads` bucket, so both ad purposes come from it; a CMP that separates them reports them
+  // separately, and that is the whole point of translating here rather than downstream.
+  private mapConsent(c: ConsentKitState): Partial<ConsentState> {
+    return {
+      necessary: c.essential,
+      functional: c.functional,
+      analytics: c.analytics,
+      advertising: c.ads,
+      personalization: c.ads,
+    };
   }
 
-  private _notify(consent: Partial<ConsentManagementState>) {
+  private _notify(consent: Partial<ConsentState>) {
     for (const cb of this._callbacks) cb(consent);
   }
 }
@@ -229,7 +223,7 @@ Even if your CMP looks nothing like ConsentKit, the same handful of moves apply:
 - Inject the CMP script through `useHead` so it gets the same SSR/hydration handling as any other Nuxt-managed tag.
 - Validate required configuration in `init()` and throw on missing values. The store catches the error, logs it, and deactivates the adapter. Treat this as the right way to fail loudly.
 - Handle both load orderings. If the CMP's global is already on `window` when your plugin runs, subscribe immediately. Otherwise wait for the CMP's "ready" event. Either case must end with you holding a subscription.
-- Keep all category-name translation in one private method. The contract boundary belongs in one place, not sprinkled across `init()`, `getConsentState()`, and the change handler.
+- Keep all vocabulary translation in one private method. The contract boundary belongs in one place, not sprinkled across `init()`, `getConsentState()`, and the change handler.
 - Return `{ necessary: true }` from `getConsentState()` when you cannot reconstruct consent on the server (or before the script has loaded). The client overwrites it once the CMP reports in, and consumers see safe defaults until then.
 - Save every subscription handle (the function returned by `on(...)`, the `addEventListener` reference) and release them in `destroy()`. Without this, deactivating the adapter (or hot-reloading in dev) leaks handlers.
 
@@ -244,7 +238,7 @@ A few constraints are easy to miss:
 - If your CMP exposes consent through a server-readable cookie, `getConsentState()` can read it on SSR and the first byte renders with the correct state. If it does not, return the denied baseline and let the client correct it.
 - `destroy()` only runs when the store deactivates the adapter (an explicit `deactivateAdapter()` call or a swap to a different adapter via `activateAdapter()`). It does not run on Nuxt page navigation. Adapters that need per-route cleanup must arrange that themselves.
 
-Once your adapter is active, `useConsentStore().hasCategoryConsent('statistics')` works in every consumer (your code, the analytics bus, the GTM app) without anyone knowing which CMP you wired in.
+Once your adapter is active, `useConsentStore().hasPurposeConsent('analytics')` works in every consumer (your code, the analytics bus, the GTM app) without anyone knowing which CMP you wired in.
 
 ## Related
 

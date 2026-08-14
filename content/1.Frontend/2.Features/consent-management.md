@@ -13,33 +13,35 @@ sitemap:
 
 ## What the consent abstraction does
 
-A storefront usually loads scripts from several vendors (analytics, ads, chat, retargeting). Each vendor needs the user's consent before it runs, and the law cares about the *category* of cookie, not the vendor. Laioutr's consent layer separates the two: your code asks "does the user consent to **statistics**?" and the active CMP (Cookiebot, CCM19, OneTrust, custom) answers. Switching CMPs later is a config change, not a rewrite.
+A storefront usually loads scripts from several vendors (analytics, ads, chat, retargeting). Each vendor needs the visitor's consent before it runs, and what consent is given for is a *purpose* — why the data is processed — not a vendor. Laioutr's consent layer separates the two: your code asks "does the visitor consent to **analytics**?" and the active CMP (Cookiebot, CCM19, OneTrust, custom) answers. Switching CMPs later is a config change, not a rewrite.
 
-The abstraction gives you a **consent store** with five fixed categories and a provider-agnostic `useConsentStore()` composable. A **consent adapter** maps a concrete CMP into that store. Other Laioutr features (tracking, GTM) read the store too, so a single source of truth gates every consented behaviour in the frontend.
+The abstraction gives you a **consent store** with five fixed purposes and a provider-agnostic `useConsentStore()` composable. A **consent adapter** maps a concrete CMP's own vocabulary onto them. Other Laioutr features (tracking, GTM) read the store too, so a single source of truth gates every consented behaviour in the frontend.
 
 ```ts
 const consentStore = useConsentStore();
 
-if (consentStore.hasCategoryConsent('statistics')) {
+if (consentStore.hasPurposeConsent('analytics')) {
   loadHeatmapScript();
 }
 ```
 
 The store lives in `@laioutr-core/frontend-core`. Your Nuxt app must include the module so `useConsentStore()` and the `#frontend/consent` types are available.
 
-## The five consent categories
+## The five consent purposes
 
-Every adapter normalises its CMP's categories into this fixed shape, so the rest of the app only deals with one model:
+Every adapter translates its CMP's own vocabulary into this fixed shape, so the rest of the app only deals with one model:
 
-| Category       | Typical use                                                                      |
-| -------------- | -------------------------------------------------------------------------------- |
-| `necessary`    | Essential cookies (session, security, CSRF). Always `true`, not user-toggleable. |
-| `functional`   | Preferences and functionality (language, cart, recently viewed).                 |
-| `statistics`   | Analytics and performance (GA, heatmaps, session replay).                        |
-| `marketing`    | Advertising and personalisation (ad pixels, retargeting).                        |
-| `unclassified` | Anything that does not fit the above.                                            |
+| Purpose           | Typical use                                                                       |
+| ----------------- | --------------------------------------------------------------------------------- |
+| `necessary`       | Essential processing (session, security, CSRF). Always `true`, not user-toggleable. |
+| `functional`      | Preferences and functionality (language, cart, recently viewed, embeds).          |
+| `analytics`       | Measurement and performance (GA, heatmaps, session replay).                       |
+| `advertising`     | Advertising and its measurement (ad pixels, retargeting, conversion tracking).    |
+| `personalization` | Tailoring content or ads to the individual.                                       |
 
-The store keeps a single `state` object with these five booleans. Whenever the user accepts or revokes a category in the CMP, the active adapter pushes the change into the store, and `state` updates reactively.
+The store keeps a single `state` object with these five booleans. Whenever the visitor accepts or revokes something in the CMP, the active adapter pushes the change into the store, and `state` updates reactively.
+
+A purpose describes processing; a cookie *category* classifies an artifact. The two are not the same question, and only the first one has an answer for every recipient — a server-side subscriber forwarding orders to a warehouse writes nothing to the browser, so it has no category, but it plainly has a purpose. Adapters therefore report purposes, and a CMP that models categories maps them across. Where a CMP's vocabulary is coarser than ours the mapping loses precision: Cookiebot has one marketing bucket, so it grants `advertising` and `personalization` together and a visitor cannot separate them. That is a property of the CMP, not of this API.
 
 ## Using the consent store
 
@@ -49,11 +51,13 @@ The methods you will use most:
 
 | Method                         | What it does                                                                                                              |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| `state`                        | Readonly reactive `ConsentManagementState`. Watch it to react to consent changes.                                         |
-| `hasCategoryConsent(category)` | Returns `true` if the category is granted by the active adapter. With no adapter active, only `necessary` returns `true`. |
-| `showConsentOverlay()`         | Reopens the CMP banner. Wire this to a "Cookie preferences" link.                                                         |
-| `renewConsent()`               | Opens the detailed preferences dialog so the user can revisit individual categories.                                      |
-| `onConsentChange(callback)`    | Registers a watcher on the store state. The callback receives the full `ConsentManagementState` whenever it changes.      |
+| `state`                       | Readonly reactive `ConsentState`. Watch it to react to consent changes.                                                    |
+| `hasPurposeConsent(purpose)`  | Returns `true` if the purpose is granted. With no adapter active, only `necessary` returns `true`.                        |
+| `getPurposeConsents()`        | The whole `ConsentState` as a plain object, for a consumer that needs the full allow/deny picture.                        |
+| `hasDecision()`               | Whether the visitor has actually answered, as opposed to the CMP having merely loaded and reported its default.           |
+| `showConsentOverlay()`        | Reopens the CMP banner. Wire this to a "Cookie preferences" link.                                                         |
+| `renewConsent()`              | Opens the detailed preferences dialog so the visitor can revisit individual choices.                                      |
+| `onConsentChange(callback)`   | Registers a watcher on the store state. The callback receives the full `ConsentState` whenever it changes.                |
 
 A typical "Cookie preferences" footer link:
 
@@ -69,13 +73,13 @@ const consentStore = useConsentStore();
 </template>
 ```
 
-Reacting to consent changes outside a template (for example, lazy-loading a chat widget once the user accepts marketing):
+Reacting to consent changes outside a template (for example, lazy-loading a chat widget once the visitor accepts advertising):
 
 ```ts
 const consentStore = useConsentStore();
 
 consentStore.onConsentChange((consent) => {
-  if (consent.marketing) {
+  if (consent.advertising) {
     loadChatWidget();
   }
 });
@@ -85,7 +89,7 @@ consentStore.onConsentChange((consent) => {
 
 The store is consumed across the platform, not just by your code:
 
-- The [analytics layer](/frontend/features/tracking) gates delivery per destination. A destination declares `consent: { purposes: ['analytics'] }`, and the bus only hands it an event once that purpose is granted. Purposes resolve from these categories: `analytics` reads `statistics`, and both `advertising` and `personalization` read `marketing`. Read them directly with `hasPurposeConsent('analytics')` or `getPurposeConsents()`.
+- The [analytics layer](/frontend/features/tracking) gates delivery per destination. A destination declares `consent: { purposes: ['analytics'] }`, and the bus only hands it an event once that purpose is granted. A destination may also declare `onDenied` to receive events under refusal in a degraded form rather than going silent. Read the state directly with `hasPurposeConsent('analytics')` or `getPurposeConsents()`.
 - The [GTM app](/apps/app-docs/gtm) sets Google Consent Mode v2 defaults to `denied` inline in the head, before `gtm.js` loads, then sends an update once the visitor has actually answered — not when the CMP merely reports its default.
 
 This means once a CMP adapter is active and the user has accepted analytics, GA fires through GTM without any further wiring in your app.
@@ -100,6 +104,6 @@ If you need a CMP that is not on the list (OneTrust, CookieYes, an in-house solu
 
 ## Summary
 
-- One store, five categories, one set of methods. Write your code against `useConsentStore()` and stop caring about which CMP is behind it.
-- Use `hasCategoryConsent(category)` to gate behaviour, `onConsentChange` to react, and `showConsentOverlay` / `renewConsent` for "Cookie preferences" UI.
+- One store, five purposes, one set of methods. Write your code against `useConsentStore()` and stop caring about which CMP is behind it.
+- Use `hasPurposeConsent(purpose)` to gate behaviour, `onConsentChange` to react, and `showConsentOverlay` / `renewConsent` for "Cookie preferences" UI.
 - Drop in [Cookiebot](/apps/app-docs/cookiebot) or [CCM19](/apps/app-docs/ccm19) for ready-to-use providers, or build your own following the [Consent Adapters](/apps/app-development/consent-adapters) guide.
