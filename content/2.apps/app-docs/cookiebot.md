@@ -14,7 +14,7 @@ sitemap:
 
 ## Overview
 
-The `@laioutr-app/cookiebot` package wires [Cookiebot](https://www.cookiebot.com/) into a Laioutr-powered Nuxt app as a [consent adapter](/frontend/features/consent-management). On install, a client plugin registers a `CookiebotAdapter` with `useConsentStore()` from `@laioutr-core/frontend-core`. The adapter injects the Cookiebot script, reads the `CookieConsent` cookie, maps Cookiebot's four categories onto Laioutr's consent purposes, and forwards consent changes to the store.
+The `@laioutr-app/cookiebot` package wires [Cookiebot](https://www.cookiebot.com/) into a Laioutr-powered Nuxt app as a [consent adapter](/frontend/features/consent-management). On install, a client plugin builds an adapter with `createCookiebotAdapter()` and installs it on `useConsentStore()` from `@laioutr-core/frontend-core`. The adapter injects the Cookiebot script, reads the `CookieConsent` cookie, maps Cookiebot's four categories onto Laioutr's consent purposes, and forwards consent changes to the store.
 
 Only `cbid` is required. `consentMode` and `consentModeDefaults` toggle Google Consent Mode v2 integration. The module installs `@laioutr-core/frontend-core` on prepare.
 
@@ -48,19 +48,19 @@ Use an environment variable for **cbid** in production if you prefer not to hard
 
 ### Runtime behaviour
 
-The client plugin reads `runtimeConfig.public['@laioutr-app/cookiebot']`, instantiates `CookiebotAdapter`, and activates it with `useConsentStore()`. On `init()` the adapter injects the Cookiebot script via `useHead`, sets up `useCookie('CookieConsent')`, and on the client listens for `CookiebotOnLoad` to forward consent updates.
+The client plugin reads `runtimeConfig.public['@laioutr-app/cookiebot']`, builds the adapter with `createCookiebotAdapter(config)`, and installs it via `useConsentStore().setAdapter(adapter)`. In `setup()` the adapter injects the Cookiebot script via `useHead`, reads the `CookieConsent` cookie via `useCookie` and reports it immediately when present, and on the client also listens for `CookiebotOnLoad`, `CookiebotOnConsentReady`, `CookiebotOnAccept`, and `CookiebotOnDecline` to forward consent updates.
 
 Cookiebot's categories map onto Laioutr's purposes as follows: `necessary` → `necessary`, `preferences` → `functional`, `statistics` → `analytics`, and `marketing` → **both** `advertising` and `personalization`. Cookiebot has one marketing bucket and cannot tell those two apart, so a visitor who allowed measurement but refused personalisation cannot say so through Cookiebot; a CMP that reports them separately does. Cookiebot's `unclassified` is not a consent category — it means the scanner found a cookie it could not file — so nothing is derived from it.
 
-Because the cookie is readable through `useCookie`, `getConsentState()` works on the server and the first SSR render reflects the user's choice with no flash.
+Because the cookie is readable through `useCookie`, `setup()` reports the visitor's choice synchronously, and the first SSR render reflects it with no flash.
 
-`showConsentOverlay()` and `renewConsent()` call `window.Cookiebot.show()` and `window.Cookiebot.renew()`. For the full adapter contract and how to wire equivalent methods for another CMP, see the [Consent Adapters](/apps/app-development/consent-adapters) guide.
+`openConsentUi()` calls `window.Cookiebot.show()`; `openConsentUi('preferences')` calls `window.Cookiebot.renew()`. For the full adapter contract and how to wire equivalent methods for another CMP, see the [Consent Adapters](/apps/app-development/consent-adapters) guide.
 
 ## What it integrates with
 
 The Cookiebot script renders the consent banner and stores the user's choices in the `CookieConsent` cookie. Once the adapter is active, anything that reads `useConsentStore()` respects those choices: your own `hasPurposeConsent('analytics')` checks, the [analytics layer's](/frontend/features/tracking) per-destination `consent: { purposes: […] }` gate, and the [GTM app's](/apps/app-docs/gtm) Google Consent Mode `gtag('consent', 'update', ...)` calls.
 
-For the consumer-facing API (`useConsentStore`, `showConsentOverlay`, `onConsentChange`) see the [Consent Management feature](/frontend/features/consent-management).
+For the consumer-facing API (`useConsentStore`, `openConsentUi`, `onConsentChange`) see the [Consent Management feature](/frontend/features/consent-management).
 
 ## Backend requirements
 
@@ -71,7 +71,7 @@ For the consumer-facing API (`useConsentStore`, `showConsentOverlay`, `onConsent
 
 | Cookie | Purpose |
 |--------|---------|
-| **CookieConsent** | Set by the Cookiebot script. Contains the user’s consent choices (necessary, preferences, statistics, marketing, method, region, stamp, etc.). The adapter reads it to provide **getConsentState()**. |
+| **CookieConsent** | Set by the Cookiebot script. Contains the user’s consent choices (necessary, preferences, statistics, marketing, method, region, stamp, etc.). The adapter reads it in **setup()** to report the visitor's initial state. |
 
 ## Summary checklist
 
