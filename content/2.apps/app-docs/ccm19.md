@@ -13,7 +13,7 @@ sitemap:
 
 ## Overview
 
-The `@laioutr-app/ccm19` package wires [CCM19](https://www.ccm19.de/) into a Laioutr-powered Nuxt app as a [consent adapter](/frontend/features/consent-management). On install, a client plugin registers a `CCM19Adapter` with `useConsentStore()` from `@laioutr-core/frontend-core`. The adapter loads the CCM19 widget, listens to its consent events, and translates CCM19's purpose IDs into Laioutr's `ConsentState`.
+The `@laioutr-app/ccm19` package wires [CCM19](https://www.ccm19.de/) into a Laioutr-powered Nuxt app as a [consent adapter](/frontend/features/consent-management). On install, a client plugin builds an adapter with `createCcm19Adapter()` and installs it on `useConsentStore()` from `@laioutr-core/frontend-core`. The adapter loads the CCM19 widget, listens to its consent events, and translates CCM19's purpose IDs into Laioutr's `ConsentState`.
 
 CCM19 organises consent by **purposes** rather than fixed categories, which is the same shape Laioutr uses. Each purpose has a 7-character hex ID (visible in the CCM19 admin UI or on `event.detail.purpose` in the widget's events). The adapter ships with a `purposeMapping` for CCM19's built-in purposes, override it to handle admin-defined purposes.
 
@@ -84,15 +84,15 @@ purposeMapping: { ...DEFAULT_PURPOSE_MAPPING, abc1234: ['analytics'] },
 
 ### Runtime behaviour
 
-The client plugin reads `runtimeConfig.public['@laioutr-app/ccm19']`, instantiates `CCM19Adapter`, and activates it with `useConsentStore()`. On `init()` the adapter:
+The client plugin reads `runtimeConfig.public['@laioutr-app/ccm19']`, builds the adapter with `createCcm19Adapter(config)`, and installs it via `useConsentStore().setAdapter(adapter)`. In `setup()` the adapter:
 
 1. Injects an inline bootstrap script into the SSR `<head>` (with `tagPriority: 1`) that runs at HTML parse and accumulates purpose IDs from `ccm19CookieAccepted` and `ccm19EmbeddingAccepted` events into `window.__CCM19Purposes`. This catches the event storm CCM19 fires during its own init, before any client-side plugin can attach.
 2. Injects the CCM19 script (`{serverUrl}/app.js?apiKey=...&domain=...&lang=...`) with `referrerpolicy="origin"`.
-3. On the client, listens to `ccm19WidgetLoaded` and `ccm19WidgetClosed` and pushes the current state to registered consent-change callbacks.
+3. On the client, listens to `ccm19WidgetLoaded` and `ccm19WidgetClosed`. Each event reads `window.__CCM19Purposes`, looks each ID up in `purposeMapping`, and reports every purpose it maps to. An ID with nothing mapped grants nothing and logs a warning naming it. If `window.CCM.fullConsentGiven` is `true`, every purpose is reported granted. If the widget global is already present when `setup()` runs, it reports once immediately.
 
-`getConsentState()` reads `window.__CCM19Purposes`, looks each ID up in `purposeMapping`, and grants every purpose it maps to. An ID with nothing mapped grants nothing and logs a warning naming it. If `window.CCM.fullConsentGiven` is `true`, every purpose is granted. On the server, where neither `window.CCM` nor the cookie is parseable, `getConsentState()` returns the denied baseline (`necessary: true`, others `false`).
+On the server, where neither `window.CCM` nor the cookie is parseable, nothing is reported and consumers see the denied baseline (`necessary: true`, others `false`) until the client corrects it.
 
-`showConsentOverlay()` calls `window.CCM.openWidget()`. `renewConsent()` calls `window.CCM.openControlPanel()` (the granular preferences dialog). `destroy()` removes all event listeners and clears callbacks.
+`openConsentUi()` calls `window.CCM.openWidget()`; `openConsentUi('preferences')` calls `window.CCM.openControlPanel()` (the granular preferences dialog). The cleanup function `setup()` returns removes both event listeners.
 
 For the full adapter contract and how to wire equivalent methods for another CMP, see the [Consent Adapters](/apps/app-development/consent-adapters) guide.
 
@@ -100,7 +100,7 @@ For the full adapter contract and how to wire equivalent methods for another CMP
 
 The CCM19 widget renders the consent banner and stores the user's choices server-side under a UCID. Once the adapter is active, anything that reads `useConsentStore()` respects those choices: your own `hasPurposeConsent('analytics')` checks, the [analytics layer's](/frontend/features/tracking) per-destination `consent: { purposes: […] }` gate, and the [GTM app's](/apps/app-docs/gtm) Google Consent Mode `gtag('consent', 'update', ...)` calls.
 
-For the consumer-facing API (`useConsentStore`, `showConsentOverlay`, `onConsentChange`) see the [Consent Management feature](/frontend/features/consent-management).
+For the consumer-facing API (`useConsentStore`, `openConsentUi`, `onConsentChange`) see the [Consent Management feature](/frontend/features/consent-management).
 
 ## Backend requirements
 

@@ -45,19 +45,25 @@ A purpose describes processing; a cookie *category* classifies an artifact. The 
 
 ## Using the consent store
 
-`useConsentStore()` is a global state created with VueUse's `createGlobalState`. Auto-imported by `frontend-core`, you can call it from any component, composable, or plugin.
+`useConsentStore()` is scoped to the Nuxt app rather than shared as a process-wide global. On the server that means one store per request: consent is request data, and a process-global would hand one visitor's answers to the next. Auto-imported by `frontend-core`, you can call it from any component, composable, or plugin.
 
 The methods you will use most:
 
 | Method                         | What it does                                                                                                              |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
 | `state`                       | Readonly reactive `ConsentState`. Watch it to react to consent changes.                                                    |
+| `adapterName`                 | `ComputedRef<string \| null>` — the installed adapter's name, or `null` when no adapter is installed.                     |
 | `hasPurposeConsent(purpose)`  | Returns `true` if the purpose is granted. With no adapter active, only `necessary` returns `true`.                        |
 | `getPurposeConsents()`        | The whole `ConsentState` as a plain object, for a consumer that needs the full allow/deny picture.                        |
-| `hasDecision()`               | Whether the visitor has actually answered, as opposed to the CMP having merely loaded and reported its default.           |
-| `showConsentOverlay()`        | Reopens the CMP banner. Wire this to a "Cookie preferences" link.                                                         |
-| `renewConsent()`              | Opens the detailed preferences dialog so the visitor can revisit individual choices.                                      |
+| `hasDecision()`               | Whether the visitor has actually answered. Returns `boolean \| undefined` — see below.                                    |
+| `openConsentUi(view?)`        | Opens the CMP's banner, or its granular preferences panel with `'preferences'`. Wire this to a "Cookie preferences" link. |
 | `onConsentChange(callback)`   | Registers a watcher on the store state. The callback receives the full `ConsentState` whenever it changes.                |
+
+`hasDecision()` can return `undefined` as well as `true` or `false`. `undefined` means no decision signal exists at all — either no CMP adapter is installed, or the installed one has no way to report whether the visitor answered. That is not the same as a visitor who was asked and declined; treat `undefined` as "unknown", not as "no".
+
+::caution
+Migrating from an older integration: `showConsentOverlay()` and `renewConsent()` no longer exist. Replace `showConsentOverlay()` with `openConsentUi()` and `renewConsent()` with `openConsentUi('preferences')`.
+::
 
 A typical "Cookie preferences" footer link:
 
@@ -67,7 +73,7 @@ const consentStore = useConsentStore();
 </script>
 
 <template>
-  <button type="button" @click="consentStore.showConsentOverlay()">
+  <button type="button" @click="consentStore.openConsentUi()">
     Cookie preferences
   </button>
 </template>
@@ -105,5 +111,5 @@ If you need a CMP that is not on the list (OneTrust, CookieYes, an in-house solu
 ## Summary
 
 - One store, five purposes, one set of methods. Write your code against `useConsentStore()` and stop caring about which CMP is behind it.
-- Use `hasPurposeConsent(purpose)` to gate behaviour, `onConsentChange` to react, and `showConsentOverlay` / `renewConsent` for "Cookie preferences" UI.
+- Use `hasPurposeConsent(purpose)` to gate behaviour, `onConsentChange` to react, and `openConsentUi` for "Cookie preferences" UI.
 - Drop in [Cookiebot](/apps/app-docs/cookiebot) or [CCM19](/apps/app-docs/ccm19) for ready-to-use providers, or build your own following the [Consent Adapters](/apps/app-development/consent-adapters) guide.
