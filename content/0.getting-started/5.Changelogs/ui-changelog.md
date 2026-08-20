@@ -14,6 +14,50 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.13.0] - 2026-08-19
+
+### Minor Changes
+
+- `MediaVideo` emits a `milestone` event as playback crosses each quarter of the video, carrying `{ milestone, currentTime, duration }` where `milestone` is the fraction reached — `0.25`, `0.5`, `0.75` or `1`. Each fires once per mounted player.
+
+  `useMediaMilestones(playback, onMilestone, config?)` is the headless detector behind it, for wiring the same behaviour to a non-native player. It takes reactive `currentTime` and `duration`, knows nothing about media elements or analytics, and accepts `{ fractions }` to replace the default quarters.
+
+  ```ts
+  useMediaMilestones({ currentTime, duration }, (event) => report(event), { fractions: [0.1, 0.9] });
+  ```
+
+- Make `BlockMedia`'s Sizing setting apply to the image only, not to the image plus its description.
+
+  `Sizer` wrapped the whole block, so an Aspect Ratio of 16/9 was the ratio of image **and** caption together: the image lost exactly the height the caption took, and a longer caption shrank the image further. The same held for Responsive Aspect Ratio and for both fixed-height modes.
+
+  `MediaPreview` now takes an optional `sizing` and applies it to its media box, with the description below it and outside the sized box — which is where a caption belongs regardless of the mode. `BlockMedia` passes the field straight through instead of wrapping itself.
+
+  Backwards compatible: without `sizing`, `MediaPreview` keeps its previous geometry and fills whatever box it is given, caption included. Consumers that size the outer box themselves (as the stories do) are unaffected.
+
+- Let `CartSheet` be told how many items its header pill should report, via a new optional `cartContent.itemCount`.
+
+  The pill was hardcoded to `cartContent.cartListItems?.length` — the number of LINES, which only equals the number of items while every line has quantity 1. A storefront whose header cart badge counts units (the usual choice, and what `CartBase.totalQuantity` provides) therefore showed two different numbers for the same cart: a cart with two products at quantity 3 read 6 in the header and 2 in the drawer.
+
+  `itemCount` falls back to the line count when it is not passed, so existing call sites are unaffected.
+
+- `HeroSlide`, `BannerBasic`, `BannerIntegrated` and `BannerShowcase` accept an `href` prop that turns the whole component into a single link, rendered as a transparent full-area overlay. It activates only when no CTA button is present, so a component is either button-driven or fully clickable — never both (which would nest interactive elements inside an anchor). Unset by default; existing usage is unchanged.
+
+  The Hero Slide, Banner Basic, Banner Integrated and Banner Showcase blocks gain a **Link** field that makes the whole component clickable.
+
+- Add `BlockBasicTable` — a Studio block for the `BasicTable` molecule.
+
+  The primitive has been in ui-kit since the DescriptionList rename, but only domain compositions could reach it: there was no way to author a plain key-value table in the Studio. Rows are an authored array of label/value pairs, and the block exposes the primitive's `outlined` / `plain` variant as its Design style.
+
+  Standalone, so it is offered in every section rather than only in the ones that allow-list it.
+
+- The Mega Menu, Mobile Menu (Shop), and Side-by-Side Menu blocks gain a **Start Level** control that descends the fetched category tree by the configured number of levels before rendering. This lets editors skip a synthetic upstream root node (e.g. a Magento "Root" category) so the first business-facing level becomes the top level, without changing the query or connector. It applies only to the queried Root Menu tree — manually authored navigation items are unaffected. Default `0` preserves the current behaviour.
+
+- Hide `BlockPagination` when the result set fits on a single page, with a `showOnSinglePage` toggle to keep it.
+
+  A lone "1" button that cannot lead anywhere reads as a broken control, so the block now renders nothing when there is one page or none. The page count is derived from `pagination.total / pagination.limit`; a `limit` of 0 is treated as unpaged, i.e. one page.
+
+  **Behaviour change:** storefronts that showed the controls on single-page listings will stop doing so. Switch `showOnSinglePage` on in the block's Rules group to keep the old rendering — worth doing where a listing's height should not change as filters narrow the result set, since the control appearing and disappearing moves everything below it.
+
 ## [2.12.0] - 2026-08-13
 
 ### Minor Changes

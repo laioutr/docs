@@ -14,6 +14,127 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.42.0] - 2026-08-19
+
+### Minor Changes
+
+- Add the consent-aware analytics system. `useAnalytics()` returns `{ track, register, unregister }`; `track(Token, payload)` emits a typed event whose token carries its own payload schema. `@laioutr-core/core-types/analytics` provides the token factories and the platform's own `web/*` events, `@laioutr-core/canonical-types/analytics` the `ecommerce/*` commerce vocabulary.
+
+  **Breaking:** the specialized tracking composables are removed.
+
+  ```ts
+  // Before
+  const { trackAddToCart } = useProductInteraction();
+  trackAddToCart(payload);
+
+  // After
+  const { track } = useAnalytics();
+  track(AddToCart, payload);
+  ```
+
+  **Destinations and consent.** Register a recipient with `defineAnalyticsDestination`, declaring what it needs as `consent: { purposes: ['analytics'] }`, or `purposeSets` for OR-of-ANDs. Consent is evaluated per recipient at delivery, never at emission, so one emission fans out to exactly the destinations the visitor allowed. Events emitted before the visitor answers are held and replayed in order once they grant. A destination may instead declare `onDenied` to take denied events with the consent state attached, degrading rather than going silent; such an event counts as delivered and is not replayed on a later grant, and revocation leaves that destination running rather than tearing it down.
+
+  **Payloads.** Payloads may carry orchestr entities directly — `track(AddToCart, { products: [{ entity: product, quantity: 2 }] })` — each projected to a flat wire snapshot at emit time, selected by `entityType`. An entity carrying a slug on its `base` component also gets an absolute `url` on the market's production host. `@laioutr-core/core-types/orchestr` gains `getEntityComponent(entity, Token)` and `getLinkedEntities(entity, LinkToken)`. Every payload schema carries an optional `customFields` bag for site- or vendor-specific data; namespace the keys (`'acme:productLine'`).
+
+  **Collection and extension.** The `v-track-click` and `v-track-impression` directives, plus `useTrackImpression`, `useTrackScrollDepth` and `useTrackVideoProgress`. Ambient page, market, session, consent and experiment context attaches to every event; `useAnalyticsContexts()` adds a provider or overrides one of the platform's own. Three synchronous Nuxt hooks — `:emit` as a veto, `:enrich`, and a per-entity `:project` filter — extend the pipeline, with `augmentProjection` typing a `:project` handler.
+
+  **Server side.** The browser posts batches to `POST /api/frontend/signals`, overridable with `analyticsIngestPath` in the module's public runtime config, which moves the server route too. Every event in a batch is judged on its own, so one malformed or oversized event never costs the batch it rode in on. `subscribeToAnalytics` registers a recipient that must not run in the browser; handlers receive `sentAt` and `receivedAt` alongside the event.
+
+  **Identity.** Visitor and session cookies are minted only under the `analytics` purpose and scoped to the market's registrable domain, so an identity survives a hop between subdomains; on platform hostnames they stay host-only. Inside the Studio preview they are written cross-site and partitioned. Withdrawal deletes both, and a later re-grant mints fresh ones without stitching activity retroactively.
+
+- **Breaking:** a `ConsentAdapter` is four members — `name`, `setup`, `openConsentUi` and an optional `hasDecision` — and the store installs one with `setAdapter`. Upgrade the CMP apps alongside `@laioutr-core/frontend-core`: an adapter written against the old contract no longer installs.
+
+  **Adapter authors.** `init`, `getConsentState`, `onConsentChange`, `destroy` and `isActive` collapse into `setup(report)`: report the visitor's verdict at once and again on every change, and return a cleanup if you need one. It runs synchronously inside the installing plugin, so `useHead` and `useCookie` are available, and throwing from it makes the store warn and drop the adapter. `registerAdapter` plus `activateAdapter` become one synchronous `setAdapter`, which returns the handle that drops the adapter; `deactivateAdapter` is gone.
+
+  ```ts
+  // Before
+  consent.registerAdapter({
+    name: 'my-cmp',
+    isActive: true,
+    init: () => loadCmp(),
+    getConsentState: () => read(),
+    onConsentChange: (callback) => cmp.on('change', () => callback(read())),
+    destroy: () => cmp.off('change'),
+    showConsentOverlay: () => cmp.show(),
+    renewConsent: () => cmp.renew(),
+  });
+  await consent.activateAdapter('my-cmp');
+
+  // After
+  const stop = consent.setAdapter({
+    name: 'my-cmp',
+    setup: (report) => {
+      loadCmp();
+      report(read());
+      cmp.on('change', () => report(read()));
+      return () => cmp.off('change');
+    },
+    openConsentUi: (view) => (view === 'preferences' ? cmp.renew() : cmp.show()),
+  });
+  ```
+
+  **Storefronts.** One `openConsentUi` replaces both overlay calls, and `adapterName` replaces `activeAdapter`.
+
+  ```ts
+  // Before
+  consentStore.showConsentOverlay();
+  consentStore.renewConsent();
+
+  // After
+  consentStore.openConsentUi();
+  consentStore.openConsentUi('preferences');
+  ```
+
+  `hasDecision()` returns `boolean | undefined` rather than `boolean`. `undefined` means no decision signal exists at all — no adapter, or one that cannot tell — which is not the same as a visitor who answered no. Code that read a falsy result as a refusal has to tell the two apart.
+
+- **Breaking:** consent is reported as processing purposes rather than cookie categories. `ConsentManagementState` and `hasCategoryConsent` are gone; a `ConsentAdapter` reports `Partial<ConsentState>` over `necessary`, `functional`, `analytics`, `advertising` and `personalization`, and owns the mapping from its own vendor's vocabulary. A purpose absent from a report counts as denied.
+
+  ```ts
+  // Before — Partial<ConsentManagementState>
+  { necessary: true, functional: false, statistics: true, marketing: false, unclassified: false }
+
+  // After — Partial<ConsentState>
+  { necessary: true, functional: false, analytics: true, advertising: false, personalization: false }
+  ```
+
+  An adapter grants a purpose when any of its own that map to it is granted. A visitor who allowed measurement but refused personalisation is now reported to Google Consent Mode as exactly that, rather than as allowing both ad purposes.
+
+- Every way a link can fail to resolve now has a name. `linkResolver.resolve()` still returns an in-page fallback rather than throwing, but that fallback has one shape — `#<code>?<detail>` — drawn from a closed set, and each carries what identifies the offending link (`#unknown-route?pageId=pdp`, `#missing-required-params?params=brand`). Every failure warns in the same format.
+
+  `linkResolver.resolveOrThrow(link, options?)` is the same resolution for a caller that can act on the failure — an analytics projector, a sitemap writer — throwing `LinkResolutionError` carrying `code` and `details` instead of a fallback string the caller would have to sniff for a leading `#`. Pass `{ withOrigin: true }` for an absolute URL rather than an absolute path; the origin comes from the market's own domain, never from `location`, so an address resolved inside the Studio preview or on a dev host still names the site a visitor would land on. A market with no domain warns and yields the resolved path.
+
+  ```ts
+  try {
+    return linkResolver.resolveOrThrow(link, { withOrigin: true });
+  } catch (error) {
+    if (error instanceof LinkResolutionError) return undefined;
+    throw error;
+  }
+  ```
+
+  **Breaking:** `fillParams` returns `undefined` when a required param has no value, instead of filling it with a blank. The blank collapsed into the neighbouring separator — `/:brand/p/:slug` became `/p/shoe`, an address that looked resolvable and was not — so a caller synthesizing params from anywhere other than the current route was quietly producing wrong links. Finite-set defaults (`/:page(a|b)`) and optional params (`:lang?`, `:rest*`) are unaffected; `missingRequiredParams(path, params)` names the ones missing.
+
+  ```ts
+  // Before
+  const path = fillParams(pagePath, params);
+
+  // After
+  const path = fillParams(pagePath, params);
+  if (path === undefined) return;
+  ```
+
+  Downstream: an hreflang or canonical link whose params cannot be filled is omitted rather than emitted truncated, and a language switcher offers the target domain's homepage rather than a broken path.
+
+- Add `menuTreeAtDepth(items, startLevel)`, auto-imported alongside `buildMenuTree`. It builds the menu tree and then descends `startLevel` levels so the nodes at that depth become the top level — for skipping a synthetic upstream root node (e.g. a Magento "Root" category) so the first business-facing level renders as the top level. `startLevel` `0` (the default) keeps the tree as fetched; it descends only, and a value past the deepest node yields an empty list.
+
+### Patch Changes
+
+- Bound the page endpoint's render cache, which grew without limit and could exhaust a storefront's memory.
+
+  The endpoint memoised every rendered page by page, market and language in a map that was never evicted from. Module scope on a serverless host lives for the whole instance, so the map retained the site's entire page config, materialised per locale, for as long as the process ran. It is now capped.
+
+- The consent store is scoped to the Nuxt app rather than the module, so on the server each request gets its own. It was global to the module, which on a server is global to the process: every concurrent render shared one store, the CMP adapter installed by the first request kept serving all later ones with the cookie ref it captured then, and each subsequent request added another consent listener to it.
+
 ## [0.41.0] - 2026-08-11
 
 ### Minor Changes
