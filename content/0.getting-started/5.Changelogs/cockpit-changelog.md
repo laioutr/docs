@@ -14,6 +14,12 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-08-20]
+
+### Changed
+
+- **Studio**: The preview now opens at the desktop frame (1920) instead of stretching to the width of the editor window.
+
 ## [2026-08-11]
 
 ### Added
