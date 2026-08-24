@@ -14,6 +14,49 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.43.0] - 2026-08-21
+
+### Minor Changes
+
+- `useSectionContext()` and `useRenderPageContext()` are auto-imported.
+
+  Both contexts were already provided at runtime but reachable only through a deep import path. A block never receives its own id, so the section context is the only stable list identity available to one.
+
+### Patch Changes
+
+- The canonical page types and analytics projectors now register in the browser.
+
+  The plugin that pulled them used a dynamic import with `@vite-ignore` and a template-literal specifier, so Vite left the bare specifier alone and the browser could not resolve it. The failure went into an empty `catch`, so nothing registered and every entity in an analytics payload fell back to its id and address. Page types were unaffected, because they resolve on the server where Node handles the specifier.
+
+  The module now checks at build time whether the package is installed and, if it is, emits a plugin that imports it statically. Vite resolves it and picks the browser or server build by its own export conditions. The package stays optional: a storefront without it simply gets no plugin.
+
+- Development-only switches live under `laioutr.dev`, and a production build discards the whole object rather than each flag on its own.
+
+  ```ts
+  export default defineNuxtConfig({
+    laioutr: {
+      laioutrrc,
+      dev: { analyticsDebug: true, consentDebug: true },
+    },
+  });
+  ```
+
+  `consentDebug` is new: a debug CMP that grants every purpose without asking. Playgrounds install no consent management app, so nothing ever grants a purpose and the consent-gated paths never run — no visitor identity, no browser-to-server transports, no delivery to a destination. It reports a decision the visitor never made, so it warns on install.
+
+  `analyticsDebug` keeps logging canonical events through the built-in debug destination, and now only takes effect in dev.
+
+- A page no longer runs a query that only an abandoned field still binds. When a section or block drops a field from its schema, the stored value stays in the project configuration, and that value kept its query alive — so every render fetched data no component reads. A header still holding a cart binding this way cost one upstream request on every page of the storefront.
+
+  A query survives as long as any live field, or an SEO placeholder, still references it. A section or block that no registry knows loses its queries as well, so a component that never renders no longer loads data. Each drop warns once and names the component, the field, and the query token.
+
+- Server code reads the visitor's analytics identity off a request with `readAnalyticsIdentity(event)`, returning the visitor and session tokens the browser is already reporting on its events. A server route or a connector can group its own work into the same visit without minting a second identity. The tokens exist only under the `analytics` consent purpose, so an empty result means the visitor has not granted it.
+
+- The Studio preview no longer fails when the handshake secret is absent from the URL. It authorizes off the embed marker the server mints after validating that secret, so a reload or a client-side navigation inside the frame keeps working, and a storefront opened outside Studio renders normally instead of throwing `No secret provided`.
+
+  The marker stays scoped to one project. A request that presents a project secret the storefront rejects clears the marker and renders the storefront, so pointing Studio at a dev server that belongs to another project no longer drives that server's preview.
+
+  The project secret never reaches client JavaScript now, so it no longer appears in the hydration payload of an embedded page.
+
 ## [0.42.0] - 2026-08-19
 
 ### Minor Changes

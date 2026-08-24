@@ -14,6 +14,64 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.14.0] - 2026-08-21
+
+### Minor Changes
+
+- Captions gain a **Text Size** setting, wired the same way heading and subline already are.
+
+  `CaptionFlag` had its size hardcoded — `caption-s` for the plain variant, `caption-xs` for boxed — so no consumer could change it. It now takes an optional `size`, and the variant-derived value stays the fallback, leaving existing callers unchanged.
+
+  The option list is a deliberate SUBSET of the shared text-size scale: the caption utilities come from the `--caption-*` tokens, which stop at `xl`, so `2xl`+ are not offered rather than offered and silently ineffective.
+
+  The setting lands on the shared `captionVariant` style decorator, so every section and block that already uses it gets the control: Banner Basic, Banner Integrated, Banner Showcase, Product Slider Showcase, Hero Slider (per slide caption) and the Banner Basic block. The schema keeps the canonical `textSize` name with its `auto` sentinel and one shared mapper (`resolveCaptionVariant`) translates it to ui-kit's `size` — `auto` becomes absent, which is what lets `CaptionFlag` fall back.
+
+- `ProductListingGrid` accepts a `productTile` scoped slot, bound as `{ product }`, matching the slot `ProductSlider` already exposes. Its fallback is the tile it rendered before, so an existing consumer is unaffected.
+
+  `CartSummaryBox` emits `checkout` when its call to action is clicked, and `CartSheet` forwards it. The button keeps its `href`, so navigation is unchanged.
+
+- `SocialShare` emits `share` with the platform a visitor picked, and `BlockSocialShare` reports it as a `web/share` event.
+
+  The payload carries `method` alone — the platform id (`facebook`, `x`, `linkedin`, `pinterest`, `email`). The block binds to no entity, so what was shared is the page, and the ambient page context already puts its url, path and type on every event.
+
+  Every button is an outbound link to the platform's own dialog, so the event marks the click rather than a completed share. A visitor can still abandon it.
+
+- Product lists, product pages, the cart and search now emit commerce events. No configuration: the instrumentation is always on and has no Studio surface.
+
+  - Product sliders and the product grid report `view_item_list` once they are on screen, not merely rendered.
+  - A tile reports `select_item` on a navigation and `add_to_cart` after the mutation resolves.
+  - A product page reports `view_item` on load and again on every variant switch.
+  - The cart reports `view_cart` on open, `begin_checkout` from the call to action, and a removal or an add for every quantity change, sized to what moved rather than what remains.
+  - The header reports a submitted `search`, and a search results page reports `view_search_results`.
+
+  Raw entities go into `track()` and the projector registry turns them into wire shapes, so no call site builds a payload by hand.
+
+### Patch Changes
+
+- `SectionBannerBasic` can now be made clickable across its whole area.
+
+  `BannerBasic` has carried the full-area link all along — a transparent `NuxtLink` over the banner, enabled by `isFullAreaLink` — but the section never passed an `href` and had no link field, so the overlay could never render there. `BlockBannerBasic` already has both. This brings the section in line with its own block: a `Link` field in Content, resolved through `linkResolver` and handed to `BannerBasic` as `href`.
+
+  The existing constraint is unchanged: the overlay only renders when no CTA is configured, since a CTA inside a full-area link would nest one anchor in another. A banner with a CTA keeps exactly the behaviour it has today.
+
+- **Breaking:** `SectionCategoryCardSlider` no longer pads itself by default.
+
+  The section overrode the shared `paddingField` with `default: 's'`, so every instance started with vertical section padding nobody asked for — and a section that pads itself cannot be placed flush against its neighbour. It now uses the shared field unchanged, whose default is `none`; `margin` was already `none`.
+
+  **Behaviour change:** existing instances that never touched the Padding field lose that padding. Set it to `S` explicitly to keep the old look. Seven other sections still carry the same `default: 's'` override and are deliberately left alone here.
+
+- Fix a crash on a hero slide that shows a caption.
+
+  `SectionHeroSlider` called `resolveCaptionVariant` without importing it, and ui-app registers no auto-import directory, so building the slide props threw a `ReferenceError`. Only a slide with at least one visible caption reached the call, which is why it stayed latent.
+
+- Price the variant a commerce event names, not the product it belongs to.
+
+  A product's own price is a "from" price across its variants. The projection already reported the active variant's sku and name, so pairing those with the product's price priced one variant as another — on a product with a wide variant spread it understated the amount by an order of magnitude. `projectAnalyticsProduct` now reads the active variant's prices and falls back to the product's only where the variant has none.
+
+  A variant price never carries the product's strike-through price: that belongs to a different price point, and carrying it across would invent a discount.
+
+  A tile's `add_to_cart` value is computed from the variant actually being added, taken from the id in the add-to-cart payload rather than from the product.
+
 ## [2.13.0] - 2026-08-19
 
 ### Minor Changes

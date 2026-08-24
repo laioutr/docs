@@ -14,6 +14,19 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-08-21]
+
+### Added
+
+- **Studio**: Set a sorting on a query in the query editor to change the default order of its results.
+- **Studio**: A rejected project secret now offers a link to the project your host actually serves.
+- **Studio Devtools**: A new Abandoned Props panel reports stored props whose field a section or block no longer defines, or whose value no longer fits it, and can prune them.
+
+### Fixed
+
+- **Studio**: Editing a query's limit, label, URL alias and input rules in Studio now saves.
+- **Studio**: Studio now reports a rejected project secret and names the project the host serves.
+
 ## [2026-08-20]
 
 ### Changed
