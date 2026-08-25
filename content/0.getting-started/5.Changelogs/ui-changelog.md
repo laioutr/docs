@@ -14,6 +14,124 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.17.0] - 2026-08-24
+
+### Minor Changes
+
+- `Review` now reports the write-review intent instead of handling it itself. It emits `submit` with the form data when the review form is sent, and `login` when the visitor confirms the login prompt.
+
+  **Breaking:** the login prompt's primary button no longer opens a confirmation dialog of its own — it emits `login`, and the consumer decides where the visitor goes. A `Review` that is rendered without a `login` listener shows the prompt but cannot log anyone in.
+
+  ```vue
+  <!-- before: the button handled itself, and confirmed a review nothing had stored -->
+  <Review :rating="rating" :reviews="reviews" />
+
+  <!-- after -->
+  <Review :rating="rating" :reviews="reviews" @login="login" @submit="onSubmit" />
+  ```
+
+### Patch Changes
+
+- Added the `review.logIn` string, in all seven shipped locales. The review login prompt's button was hardcoded English.
+
+- `SectionProductReviews` now sends a visitor who wants to write a review to their account. The login prompt resolves through the `ecommerce/auth/login-oauth` action, so it works with whichever connector answers it — an OAuth authorization URL where accounts are hosted, a link to the account page where the storefront renders its own.
+
+## [2.16.0] - 2026-08-24
+
+### Minor Changes
+
+- Add French, Italian, Spanish and Polish locale bundles, so storefronts in those
+  languages stop rendering their UI chrome in English.
+
+  `ui-kit` shipped `de`, `en` and `nl` only, and `UiAppWrapper` resolves the bundle
+  from a literal map:
+
+  ```ts
+  const uiKitLocales: Record<string, typeof en> = { en, de, nl };
+  const uiKitLocale = computed(() => uiKitLocales[appLanguage.value.languageCode] ?? en);
+  ```
+
+  Any other language fell through to `en`. A project configured with `fr`, `it`, `es`
+  or `pl` therefore rendered every `$tl()` string in English — 257 messages across 33
+  components, including the search field, the cart, "Add to cart", "Sold Out", the
+  filter drawer and the header's account/wishlist/cart labels. The page content was
+  translated; the chrome around it was not.
+
+  There was no way to fix this from a consuming app: the map is a literal with no
+  registration hook (themes have `$laioutrThemes`, locales have no equivalent), so an
+  app could only have patched it by re-implementing `UiAppWrapper`.
+
+  `fr.ts`, `it.ts`, `es.ts` and `pl.ts` follow the existing `extendLocale(en, …)`
+  shape and cover all 257 keys — verified key-for-key against `en.ts`, with every
+  `{placeholder}` token preserved. Register is by adding them to the map; no consumer
+  change is needed.
+
+  Two pre-existing gaps in the shipped bundles are closed at the same time, since they
+  are the same defect: `de` was missing `sliderNavigation.play` / `.pause`, and `nl`
+  was missing the whole `mediaFeed` block. Both silently fell back to English.
+
+  Polish avoids the plural forms a static string cannot express — `filterStars` and
+  `showProducts` read "Gwiazdki: {count}" and "Pokaż produkty ({count})" rather than a
+  genitive that would be wrong for 2–4.
+
+  The `ui` playground's `fr-CH`, `fr-FR` and `it-CH` entries pointed at `en` because no
+  bundle existed; they now use the real ones.
+
+  Not a behaviour change for existing projects: `de`, `en` and `nl` resolve exactly as
+  before, and a language with no bundle still falls back to `en`.
+
+### Patch Changes
+
+- **Breaking:** The cart sheet marks a line whose merchandise cannot be bought. `CartListItem` takes a new `isSoldOut` prop, renders an "Out of stock" badge, and carries `data-unavailable` on its root for styling. `ConnectedCartSheet` sets it from the cart item's availability component.
+
+  A custom locale must supply the new `cart.itemSoldOut` key.
+
+## [2.15.0] - 2026-08-24
+
+### Minor Changes
+
+- `MenuSideBySide` gains a `below-separator` slot on the root level.
+
+  The area under the root drawer's separator rendered `MobileMenuListItem`s built from
+  the `rootMenuItems` prop and nothing else, so a storefront whose quick links are styled
+  buttons rather than list rows had no way to put them there — the only route was forking
+  `MenuSideBySide` and `MenuSideBySideRoot` downstream.
+
+  The slot sits between the separator and the menu items and is forwarded at every level
+  that sits between a consumer and it — `BlockMenuSideBySide` to `MenuSideBySide` to
+  `MenuSideBySideRoot` — each time only when a consumer actually provides it. All three
+  components now declare their slots with `defineSlots`. Nothing renders differently
+  without it.
+
+### Patch Changes
+
+- `BrandHero`: a background colour now shows when no background image is set.
+
+  `fallbackColor` was passed to `MediaStage` all along, but `finalMedia` fell back to
+  the theme's decorative hero SVG whenever `background` was empty — so the colour was
+  painted behind an opaque image and only ever visible through `colorMode: 'plain'`.
+  Setting it therefore looked like nothing happened. An explicit colour now takes
+  precedence over the theme default; the default still applies when no colour is set.
+
+  The field is relabelled "Background Color" in `SectionBrandHero`, with a description
+  saying when it applies. The prop name is unchanged.
+
+  **Behaviour change:** an instance that has a background colour AND no image switches
+  from the theme graphic to that colour. That is the reported bug, but it is visible —
+  clear the colour to keep the graphic.
+
+  `BrandHero`'s description also becomes rich text. The field was a `textarea`, which
+  takes typed copy only — and on a brand page its whole point is to carry the brand's
+  own description from the catalogue. It is now `richtext`, the type Studio offers a
+  data source on and the same one `BlockText` uses for its body, so an editor can bind
+  it to the query instead of retyping it per brand.
+
+  The component's `description` prop widens to `string | HtmlFragment` and renders a
+  fragment through `RichContent`, exactly as ui-kit's `Card` does for its body copy.
+  Callers passing a plain string keep working unchanged.
+
+- The product tiles in a Product Grid show their add-to-cart button, brand, description, flags and rating again. `ConnectedProductTileBasic` declared each toggle as an optional boolean without a default, so Vue cast an unset one to `false` and the component forwarded that `false` on to `ProductTileBasic` — beating the tile's own `default: true`. `BlockProductsListing` passes none of these toggles, so every tile in a grid rendered with all five switched off. A toggle a caller does not set now stays unset and the tile decides.
+
 ## [2.14.0] - 2026-08-21
 
 ### Minor Changes

@@ -14,6 +14,28 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.44.0] - 2026-08-24
+
+### Minor Changes
+
+- OpenTelemetry tracing. A storefront that sets `OTEL_EXPORTER_OTLP_ENDPOINT` at build time exports traces of its server-side work through the standard `OTEL_*` configuration; without it nothing is installed. Queries, links and component resolvers each become spans nested under the Nitro request span, and an upstream API call made while a resolver runs nests under that resolver — so a trace attributes upstream time to the work that caused it.
+
+  **What spans carry.** Attributes are counts and names a backend can group by: how many entities a resolver asked for, a token name, the app a handler comes from. Entity-id lists, link payloads and handler metadata stay in the local dev tree that feeds devtools, because a span over a backend's payload ceiling is dropped whole — which would lose the slowest requests first.
+
+  **Cache behaviour.** Every cache read carries `orchestr.cache.verdict`, which answers whether a warmer cache would have helped: `hit`, `miss`, `partial`, `skip` for a read that never consults the cache, and `uncacheable` for one blocked by a component configured never to cache. Reads against a hosted cache are `CLIENT` spans and in-process ones `INTERNAL`, detected from the mounted unstorage driver rather than configured.
+
+  **Which page.** A server-rendered request tags its span with the page type, market slug and locale, since a product page and a listing page share one wildcard route. A query request tags its root span with the market, the locale and the query names it ran, so a client-side navigation is identifiable too.
+
+  **Richer local traces.** The `orchestr` module option `exportDevAttributes` exports the diagnostic values that otherwise stay in the dev tree. Point it at a local collector only.
+
+## [0.43.1] - 2026-08-24
+
+### Patch Changes
+
+- The analytics identity cookies survive on a hosting platform's shared domain. A storefront served from a host such as `acme.vercel.app` or `acme.pages.dev` scoped `laioutr_vid` and `laioutr_sid` to the platform suffix itself, which a browser rejects as an invalid cookie domain — so neither cookie existed on those hosts and no visitor or session token reached an event. The cookie domain now resolves against the private section of the Public Suffix List, the same view a browser applies.
+
+- A query's configured sorting is now applied. The value stored on the query was dropped while the request was built, so a sorting set in the studio, or returned as `defaultSorting` from a `queryTemplateProvider`, never reached the query handler. It is now sent as the query's `sort`. An `s` URL parameter still takes precedence, so the configured value sets the default order rather than a fixed one. Links are unaffected and continue to resolve their own sorting from the URL.
+
 ## [0.43.0] - 2026-08-21
 
 ### Minor Changes

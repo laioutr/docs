@@ -14,6 +14,12 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-08-24]
+
+### Added
+
+- **Studio**: Link fields can now take their target from a query result, the same way media fields already can.
+
 ## [2026-08-21]
 
 ### Added

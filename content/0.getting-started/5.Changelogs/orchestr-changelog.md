@@ -14,6 +14,44 @@ sitemap:
 
 All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data-fetching and query orchestration layer, will be documented in this file.
 
+## [0.44.1] - 2026-08-24
+
+### Patch Changes
+
+- Fix a `TypeError: Cannot read properties of undefined (reading 'length')` that failed any query whose link handler answers with `entity`, `entities`, or a single `targetId`. Telemetry added in 0.44.0 counted a link's targets by reading `targetIds` on the handler's raw response, which only the `targetIds` shape carries — the other three are converted a step later. The failing query returned no data and reported an error chunk, so a page built on it rendered without its products.
+
+## [0.44.0] - 2026-08-24
+
+### Minor Changes
+
+- OpenTelemetry tracing. A storefront that sets `OTEL_EXPORTER_OTLP_ENDPOINT` at build time exports traces of its server-side work through the standard `OTEL_*` configuration; without it nothing is installed. Queries, links and component resolvers each become spans nested under the Nitro request span, and an upstream API call made while a resolver runs nests under that resolver — so a trace attributes upstream time to the work that caused it.
+
+  **What spans carry.** Attributes are counts and names a backend can group by: how many entities a resolver asked for, a token name, the app a handler comes from. Entity-id lists, link payloads and handler metadata stay in the local dev tree that feeds devtools, because a span over a backend's payload ceiling is dropped whole — which would lose the slowest requests first.
+
+  **Cache behaviour.** Every cache read carries `orchestr.cache.verdict`, which answers whether a warmer cache would have helped: `hit`, `miss`, `partial`, `skip` for a read that never consults the cache, and `uncacheable` for one blocked by a component configured never to cache. Reads against a hosted cache are `CLIENT` spans and in-process ones `INTERNAL`, detected from the mounted unstorage driver rather than configured.
+
+  **Which page.** A server-rendered request tags its span with the page type, market slug and locale, since a product page and a listing page share one wildcard route. A query request tags its root span with the market, the locale and the query names it ran, so a client-side navigation is identifiable too.
+
+  **Richer local traces.** The `orchestr` module option `exportDevAttributes` exports the diagnostic values that otherwise stay in the dev tree. Point it at a local collector only.
+
+- A request's top-level queries now resolve concurrently, up to six at a time, instead of one after another. Each query fans out to its own links and component resolvers, so a page whose sections issue several independent queries waited for the sum of them; it now waits for the slowest. Measured on a storefront home page against a warm cache, a server render fell from about 724 ms to about 322 ms.
+
+  Response chunks are addressed by query id, so a client that reads them by `path` is unaffected. One that depends on chunks arriving grouped by query, in request order, is not: chunks from different queries now interleave. Errors are unchanged — a failing query still reports its own error chunk and no longer blocks its siblings, which previously waited behind it.
+
+### Patch Changes
+
+- Devtools traces and execution summaries describe what actually happened. A completed query reported `unknown` for its id and token, a component resolver's missing entity ids were dropped, and spans started concurrently appeared as a chain — initwares running under `Promise.all` rendered as each one nested inside the last rather than side by side.
+
+## [0.43.1] - 2026-08-24
+
+### Patch Changes
+
+- Query, link and entity-component caches now key on the market, and query and link caches also key on the pagination limit. Two markets that share a language and a currency no longer read each other's cached results, and a request for 24 items no longer receives the slice a different page size cached.
+
+  The key format changed, so existing cache entries become unreachable on upgrade and expire on their own TTL. Expect one cold period after the deploy.
+
+- A query's configured sorting is now applied. The value stored on the query was dropped while the request was built, so a sorting set in the studio, or returned as `defaultSorting` from a `queryTemplateProvider`, never reached the query handler. It is now sent as the query's `sort`. An `s` URL parameter still takes precedence, so the configured value sets the default order rather than a fixed one. Links are unaffected and continue to resolve their own sorting from the URL.
+
 ## [0.41.1] - 2026-08-13
 
 ### Patch Changes
