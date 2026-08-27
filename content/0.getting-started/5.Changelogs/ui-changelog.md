@@ -14,6 +14,38 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.19.1] - 2026-08-27
+
+### Patch Changes
+
+- The account button and the review section's login prompt redirect to customer login instead of opening a popup, and carry the current path so the customer comes back to it. Returning to that page needs a connector that reads `AuthLoginOauthAction`'s `returnTo` input — against one that ignores it, login still works and the customer lands wherever that connector sends them.
+
+## [2.19.0] - 2026-08-26
+
+### Minor Changes
+
+- Product tiles show the colour swatches of the product they render. The swatch row existed but was never filled, so it was always empty. Tiles read the product's option axes directly and no longer load every variant to build a listing, which cuts the data a product grid ships to the browser.
+
+  A sold-out product still disables its add-to-cart button. That state now comes from the product's default variant instead of a loaded variant entity.
+
+  `ProductTileBasic`'s `sizeVariants` carries one entry per value on the product's size axis, each addressing the variant the connector names for that size and disabled when no purchasable variant carries it. The default tile renders no picker, so the prop serves tile overrides that build their own. Where a product has more than one axis, the named variant is the connector's representative for that size rather than a shopper's full combination.
+
+## [2.18.0] - 2026-08-26
+
+### Minor Changes
+
+- A footer menu link can be restricted to specific markets. Each item in `BlockFooterMenu` gains a "Visible in markets" list; leaving it empty shows the item everywhere, which is what every menu authored before this release does.
+
+  This closes a gap rather than adding a concept. Markets are already available at render time through `useMarket()`, and visibility is already a schema concern through `visibilityField` — but that toggle is static, and the `if` condition beside it is evaluated by Studio only, so it hides a field from the editor rather than content from a visitor. Projects serving several countries from one storefront had no way to express "this link, not in that market" and were rebuilding the filter per component.
+
+  The two pieces are exported for other components to adopt: `visibleMarketsField` for the schema and `inMarket()` for the render, from `shared-fields/visibleMarkets`. The stored value is the market slug, matching `RenderMarket.slug`.
+
+- A product-detail URL that names several option values opens the variant carrying all of them. Any single matching value was previously enough, so `?variant=Rot&variant=XL` could open a red product in the wrong size. A URL naming one value still opens the first variant carrying it.
+
+### Patch Changes
+
+- Fix `QuantityPicker` removing an item by mistake: it emitted `delete` when the quantity field lost focus at the minimum value, or when the minus button stepped down to it — so clicking the quantity input of a cart line at quantity 1 removed the line. `delete` now fires only for the delete button at the minimum, or a value typed below it.
+
 ## [2.17.0] - 2026-08-24
 
 ### Minor Changes

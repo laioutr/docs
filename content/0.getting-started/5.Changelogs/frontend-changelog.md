@@ -14,6 +14,27 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.46.0] - 2026-08-27
+
+### Minor Changes
+
+- **Breaking:** tracing on Vercel is now opt-in. A storefront deployed there turned it on automatically, which cost every request a failed span export and two error log lines, because Vercel runs no collector for it to reach. Set `LAIOUTR_OTEL_ENABLED=1` on the project to keep tracing. A build configured with `OTEL_EXPORTER_OTLP_ENDPOINT` is unaffected.
+
+  ```diff
+    # Vercel project environment
+  + LAIOUTR_OTEL_ENABLED=1
+  ```
+
+  A traced request now also joins the trace it arrives in, instead of starting a second, unrelated one. A storefront's own spans therefore sit beside the platform's for that request — on Vercel they were missing from it entirely.
+
+## [0.45.0] - 2026-08-26
+
+### Minor Changes
+
+- Tracing turns itself on for a storefront deployed to Vercel. It previously required `OTEL_EXPORTER_OTLP_ENDPOINT` at build time, which the Vercel path never reads — there the module registers through `@vercel/otel`, which reports spans into the platform's own telemetry context. Spans now reach Vercel's observability view with nothing to configure.
+
+  Every request is recorded. Set `OTEL_TRACES_SAMPLER=traceidratio` and `OTEL_TRACES_SAMPLER_ARG` on the project to record a fraction instead. A build anywhere else is unchanged: without an OTLP endpoint, nothing is installed.
+
 ## [0.44.0] - 2026-08-24
 
 ### Minor Changes

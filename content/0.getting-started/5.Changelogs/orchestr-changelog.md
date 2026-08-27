@@ -14,6 +14,117 @@ sitemap:
 
 All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data-fetching and query orchestration layer, will be documented in this file.
 
+## [0.45.0] - 2026-08-26
+
+### Minor Changes
+
+- `cacheKeys` reaches the pieces orchestr builds its own cache keys from, for code that has to build one by hand.
+
+  `useUserlandCache` hands back a bare storage with no prefixing at all. A key built there carries the environment itself or it serves one storefront's data to another, and it escapes any id holding a `/` or a `:` or unstorage rewrites it into a different key.
+
+  ```ts
+  const key = `${cacheKeys.forClientEnv(clientEnv)}:${cacheKeys.escape(productId)}`;
+  ```
+
+  `cacheKeys.forEntityIds` turns a set of entity ids into a short, fixed-length segment, so a hand-built key stops growing with the page size. A handler that joined ids instead produced over two thousand characters for 48 products — past the 255 bytes a filesystem allows for one path segment, and into the request-size limit of a hosted Redis. The ids are sorted before hashing, so the same set keys the same entry however it arrives.
+
+  Query and link handlers no longer need it. Orchestr keys a link's source ids itself.
+
+- An execution summary carries a request-level cache report next to its per-query summaries. It answers questions the query summaries could not — whether a component read arrives as one batched call or many single ones, what a given component's hit rate is, and whether a background write was lost when the isolate froze.
+
+  The counters are gathered only for a request that set `options.dev.enableSummary`. Every other request pays nothing, including the payload measurement.
+
+  **Breaking:** `ExecutionSummary` is a union now, so narrow on `type` before reading a query's fields.
+
+  ```ts
+  // before
+  summary.linkSummaries;
+
+  // after
+  if (summary.type === 'query') summary.linkSummaries;
+  ```
+
+- A query or link cache config accepts `validate`, called with the handler's result before it is written. Return false and the result is served but not stored.
+
+  `buildCacheKey` already decides cacheability from the request, before the handler runs. This decides it from the outcome — a degraded fallback that must not be served for the rest of its TTL, or a result that cost nothing to produce and would be re-derived just as cheaply next time.
+
+  ```ts
+  cache: {
+    ttl: '1 day',
+    strategy: 'ttl',
+    buildCacheKey: ({ input }) => input.categorySlug,
+    validate: ({ value }) => (value?.ids.length ?? 0) > 0,
+  }
+  ```
+
+  It gates the write only. An entry already in the cache keeps serving until its TTL lapses, so adding `validate` stops a bad result being stored again but does not evict the one already there.
+
+  It receives a `CacheEntry` wrapping the value rather than the value itself, and is consulted only for a request that would have been cached anyway — a preview request or a handler returning no key never reaches it.
+
+- **Concurrent resolution.** A request's queries, a query's links, and the component resolvers for one entity type now resolve concurrently instead of one after another. A page waits for its longest strand rather than for the sum of its work. A storefront home page's server render fell from about 724 ms to about 322 ms. A cold product page's six component resolvers finished in 378 ms — run one after another they total 937 ms.
+
+  Chunks now interleave. A client that routes them by `path`, and merges entity chunks by id as it always had to, is unaffected. One that depends on chunks arriving grouped in request order is not.
+
+  **A failing link no longer discards its query.** A link handler that threw collapsed the whole query into one error chunk, taking the query result and every entity chunk its sibling links had already streamed. It now reports an error at its own path, `[queryId, linkToken]`, and the rest of the query completes. Where several parts of one query fail, each reports its own error rather than only the first.
+
+  **Passthrough is scoped to the handler that writes it.** Every handler in a query used to share one `passthrough` store. A handler now reads every token its callers set, and writes where only the handlers beneath it can read.
+
+  So a link handler can hand data to its own component resolvers without it reaching the rest of the query. In exchange, two links that set the same token no longer see each other's value — each reads its own, and a handler that read a sibling's token now gets its own default.
+
+- A query or link handler enables its cache with a TTL and a strategy, and nothing else. Orchestr builds the whole key — the token, the environment, the requested slice, the sorting, the filters, and the token's input.
+
+  ```ts
+  cache: { ttl: '1 day', strategy: 'ttl' }
+  ```
+
+  **Which requests are cached.** The first slice of a listing, unfiltered, is cached by default. The tail of a listing is cold and a filter combination is unbounded, so both are opted into rather than out of. `filters` also takes an allowlist, for a filter whose value set is small enough to be worth keying.
+
+  ```ts
+  cache: { ttl: '1 day', strategy: 'ttl', pages: 'all', filters: ['filter.v.availability'] }
+  ```
+
+  `shouldBypassCache` refuses a request the declarative options would admit. It runs after them and can only narrow them, so widening them can never serve one request's result to another — the runner keys the full request shape either way.
+
+  **Breaking:** `buildCacheKey` is now optional and supplies one trailing segment rather than the whole key. A handler that keeps it keeps working, and returning `null` from it still refuses the cache. Every key changes shape, so existing entries are never read again and expire under their own TTL. The first deploy runs on a cold cache.
+
+  **Fixed:** the requested offset was absent from every query and link key, so `?offset=5&limit=24` was served the `offset=0` result. A component resolver's `getKeySuffix` replaced the environment digest instead of extending it, which would have let two markets collide on one entry.
+
+- Cache keys are roughly 45% shorter. Measured across two live storefronts: a component key fell from 144 bytes to 84 on one and from 121 to 66 on the other, a product-variants link key from 136 to 82, and a page-index key by 17%. The key was a third of what a component entry cost to store, and every key is sent again on each batched read, so the saving lands on stored size and on request payload alike.
+
+  Three things got shorter. The namespace a key carries. The escaping, which now spends two bytes on the four characters unstorage would otherwise rewrite rather than three bytes on every character `encodeURIComponent` recognises — a Shopify GID paid 15 bytes for 5 characters. And the environment segment, where locale, currency, market and preview stage become one 8-character digest, being identical for every key in a request. Entity type, id, component and page type stay readable.
+
+  All four layers use that digest now, page index included, so a handler no longer has to fold the market or the pagination limit into a key of its own — both are already there.
+
+  **Breaking:** the storage namespaces moved. A project mounting one driver at `cache` covers both and needs no change. A project mounting at the full path does.
+
+  ```ts
+  // Before
+  storage: { 'cache:orchestr:internal': { driver: 'redis' /* … */ } }
+
+  // After
+  storage: { 'cache:orch:i': { driver: 'redis' /* … */ } }
+  ```
+
+  A driver left at an old path receives nothing, and the cache falls back to whatever serves `cache` — in the worst case a per-isolate memory driver, which reports no error and holds nothing between requests.
+
+  Existing entries are addressed the old way and are never read again. They expire under their own TTL, so the first deploy runs on a cold cache.
+
+### Patch Changes
+
+- A project that points its cache at a real backend now keeps it in development. Orchestr mounted an in-memory LRU over its own cache namespace on every dev boot, and that mount is more specific than the `cache` mount a project configures, so it won.
+
+  The effect was that dev never ran the path production runs: no round trips, no serialization limits, and a configured Redis that received nothing. The LRU still mounts when no backend is configured.
+
+- A `pageIndex.locate` lookup no longer serves one locale's page metadata to another. The cached result carries `meta` resolved in the locale the lookup was made in, but the entry was keyed on the market alone. Two locales of one market collide whenever they share a route param — which is every product whose slug is a SKU, a brand name or an untranslated model number — so whichever locale filled the cache first supplied the title and description for both.
+
+  The key now covers the locale, and preview and published results no longer share an entry either.
+
+- Cache writes survive on Vercel. Orchestr writes to the cache after responding, through `event.waitUntil`, and on Vercel's Node runtime nothing was keeping the function alive to finish them — Nitro's Vercel preset never sets the `event.context.waitUntil` that Nitro itself looks for, so the write was left as a floating promise and died with the invocation.
+
+  Measured against a deployed probe on a cold instance: the deferred write was lost in four trials out of four, and the immediate write in two of them — the response flushed while the Redis connection was still being established. A warm instance kept both, which is why the cache filled at all.
+
+  A Nitro plugin now supplies that hook from Vercel's own request context, so every deferred write — query, link, component and page-index caches alike — is completed before the function is frozen. It needs no extra dependency, does nothing off Vercel, and defers to any platform that already provides one.
+
 ## [0.44.1] - 2026-08-24
 
 ### Patch Changes
