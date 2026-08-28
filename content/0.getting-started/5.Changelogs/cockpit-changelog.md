@@ -14,6 +14,17 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-08-27]
+
+### Changed
+
+- **Hosting**: A managed-Vercel deploy publishes its redirects to the Vercel edge, which answers them before any route in the deployment, so an old URL no longer costs a function invocation.
+
+### Fixed
+
+- **Hosting**: Importing a redirect CSV with more than 256 rows now works.
+- **Hosting**: Projects with more than 1000 redirects now deploy every redirect, export the full list to CSV, and re-import without creating duplicates.
+
 ## [2026-08-24]
 
 ### Added

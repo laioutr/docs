@@ -14,6 +14,26 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.47.1] - 2026-08-28
+
+### Patch Changes
+
+- A page with a single variant now fetches its page queries and its variant queries in one request, instead of two round trips in series, so it renders sooner. Pages with several variants are unchanged — a `frontend-core:page-renderer:select-page-variant` handler still reads the resolved page queries before it chooses.
+
+## [0.47.0] - 2026-08-27
+
+### Minor Changes
+
+- **Breaking:** An `/api` or `/.well-known` path that nothing claims now answers with a small plain HTML 404, instead of the project's whole 404 page with its sections and queries.
+
+  The response carries `Cache-Control: public, s-maxage=3600`, so a CDN answers a repeat probe without invoking the function.
+
+  A registered server route and a file in `public/` both still win, so neither needs changing. A `/.well-known/…` path served by a Nuxt page does not: move it to `public/` or to a server route.
+
+### Patch Changes
+
+- A request span adopts an inbound trace context only when nothing upstream opened one. Where an HTTP instrumentation already started a server span — a node deployment shipping to an OTLP endpoint — that span stays the parent, instead of the request being reattached to the remote caller.
+
 ## [0.46.0] - 2026-08-27
 
 ### Minor Changes

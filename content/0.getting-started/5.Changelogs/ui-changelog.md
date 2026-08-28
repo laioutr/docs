@@ -14,6 +14,46 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.22.0] - 2026-08-28
+
+### Minor Changes
+
+- `CommonSwiper` now hydrates once it comes near the viewport instead of during the initial hydration pass, so carousels far down a page no longer initialise Swiper on load. Server-rendered markup is unchanged — a slider looks the same before it hydrates, it just does not answer arrows, bullets or autoplay yet. Import `CommonSwiperEager` for the previous behaviour.
+
+## [2.21.1] - 2026-08-28
+
+### Patch Changes
+
+- `fonts.defaults.subsets` now takes effect. Setting it previously changed nothing: every subset a provider returned reached the stylesheet, and an unused one still downloaded as soon as a single character claimed it — 36.7 KB of glyphs that never render, on every page, on one storefront. A storefront that sets no `subsets` is unaffected.
+
+## [2.21.0] - 2026-08-27
+
+### Minor Changes
+
+- **Web fonts are configurable.** Set `fonts` on the `@laioutr-app/ui` module to reach the whole `@nuxt/fonts` configuration — `families`, `defaults`, `providers` and `preload`. A value you set replaces the default, arrays included. `false` skips the module, for a storefront that ships its own `@font-face` rules.
+
+  ```ts
+  '@laioutr-app/ui': {
+    fonts: { families: [{ name: 'Open Sans', preload: true }] },
+  }
+  ```
+
+  **Fonts are served as woff2 only.** A provider answers one request per user agent and returns every format tier at once. The legacy `woff` faces carry no `unicode-range`, so they match every character, and they are written last — which makes a modern browser download them in place of the woff2 files.
+
+## [2.20.0] - 2026-08-27
+
+### Minor Changes
+
+- **The product tile pins a variant in its link only when the connector authored it.** A tile in a listing, a grid or a slider produced `/<slug>?variant=<variant-id>` for every product. The value came from `defaultVariant`, which most connectors derive from stock, so the same product changed its URL whenever one of its sizes sold out. A derived default now stays out of the link, and every listing and slider URL for those products changes. An authored default is a merchant's choice and does not move with stock, so the link still carries it. An explicit `?variant=` in a shared link, an ad landing URL or a wishlist entry is untouched.
+
+  **A product detail page opened without `?variant=` now opens the product's default variant.** It opened the first variant of the product before, whatever the connector named as the default. A default named by option values instead of an id also selects correctly now.
+
+  **A colour swatch is marked as selected only for an authored default variant.** A connector that derives its default — first in stock, first in the configurator — no longer moves the highlighted swatch as stock moves. `ProductDefaultVariant.origin` carries the distinction.
+
+### Patch Changes
+
+- An above-the-fold image emits its preload link with `fetchpriority="high"`. The `<img>` already carried the hint, but the preload link is what starts the fetch, and it carried none — so the browser fetched the LCP image at default priority. An explicit `fetchpriority` on the component still wins, on the link as on the image.
+
 ## [2.19.1] - 2026-08-27
 
 ### Patch Changes
