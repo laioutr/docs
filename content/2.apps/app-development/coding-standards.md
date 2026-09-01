@@ -162,17 +162,53 @@ The prefix also makes it clear in Studio and in Vue devtools whether a component
 
 An app shares one origin with the project's editor-created content pages, the platform's own routes, and every other installed app. Just as global component names must be unique ([Section and block naming](#section-and-block-naming)), **every URL path your app owns must be namespaced** so it can never collide with a content slug or another app.
 
-**Convention: prefix every app-owned path with `/app-<name>/`**, where `<name>` is your app's short name — the app segment of the package name (e.g. `shopware` for `@laioutr-app/shopware`). This is already the de-facto pattern for public assets; apply it uniformly across every path type:
+Your app has **two prefixes**, and the policy a path needs decides which one it takes — not who calls it, and not what it responds with.
+
+| Prefix | Response | Crawlers | Unmatched path | Holds |
+| --- | --- | --- | --- | --- |
+| `/app-<name>/` | same for every visitor | allowed | rendered 404 page | public assets, custom Vue pages |
+| `/api/app-<name>/` | may be per-visitor or single-use | disallowed | static 404 page, no app boot | fetch endpoints, webhooks, redirect endpoints |
+
+A path belongs under `/api/` whenever a cached hit or a crawler hit would be wrong. So a browser-facing **redirect endpoint** — an OAuth callback, a checkout handoff — goes under `/api/` too, although a browser navigates to it. Shopify's Customer Account API callback lives at `/api/app-shopify/auth/callback`.
+
+The 404 column is already real: Frontend Core answers every unmatched path under `/api/**` with a minimal static 404 page, instead of booting the app to render the project's own. Nitro prefers the deeper match, so your registered route still wins over that catch-all.
+
+**The platform sets no cache header on either prefix — your handler owns it.** Two shapes under `/api/app-<name>/` must never reach a shared cache: a redirect endpoint, because its authorization code is single-use, and a per-visitor `GET` that sets no cookie. HTTP already excludes a response carrying `Set-Cookie`, and every `POST`.
+
+If you set a Nitro route rule for your own namespace, spell the prefix out. `/api/app-shopify/**` matches; `/api/app-*/**` matches nothing, because radix3 matches `*` against a whole segment and never a prefix inside one.
+
+One `Disallow: /api/` line in the project's robots.txt excludes every installed app at once. Your app writes no robots rule of its own.
+
+### `<name>`
+
+`<name>` is the app segment of your package name, always. A third-party package's provider segment never appears in the path.
+
+| Package | `<name>` |
+| --- | --- |
+| `@laioutr-app/shopware` | `shopware` |
+| `@laioutr/app-hygraph` | `hygraph` |
+| `@laioutr-org/acme__checkout` | `checkout` |
+
+Keep the segment identical everywhere — assets, routes, pages — and identical to the public-assets folder you ship, so your app occupies one predictable namespace.
+
+### Where each kind of path goes
 
 - **Public assets** — place files under `src/runtime/app/public/app-<name>/` so they serve at `/app-<name>/…`. Your `defineOrchestr` `logoUrl` and any image/font/icon your runtime references use this path (e.g. `/app-shopware/shopware-logo.svg`).
-- **Server routes** — when you register a browser- or server-facing route with `addServerHandler`, give it an `/app-<name>/…` path (e.g. the Shopware checkout handoff at `/app-shopware/checkout`).
 - **Custom pages** — any Vue page your app adds to the router lives under `/app-<name>/…`.
+- **Fetch endpoints** your own JS calls — `/api/app-<name>/…`.
+- **Redirect endpoints** an external service or a click sends the browser to — `/api/app-<name>/…` (e.g. the Shopware checkout handoff at `/api/app-shopware/checkout`).
+- **Inbound webhooks** — `/api/app-<name>/webhooks/…`. No platform gate protects these, so verify the vendor's signature yourself.
 
-One hard rule:
+### Namespaces the platform reserves
+
+Never register a route under `/api/laioutr/*`, `/api/orchestr/*`, or `/api/frontend/*`.
+
+`/api/laioutr/*` in particular is gated behind the project secret (`Authorization: Bearer <projectSecretKey>`). A browser navigation sends no such header, so it answers `401`. Nothing gates `/api/app-<name>/*`, which is where a browser-facing route belongs.
+
+Two hard rules:
 
 1. **Never use a bare top-level path** (`/checkout`, `/cart`, `/account`). Editors create content pages at arbitrary slugs, so an un-namespaced path can shadow — or be shadowed by — real content.
-
-Keep the `<name>` segment identical everywhere (assets, routes, pages) and identical to the public-assets folder you already ship, so the whole app occupies one predictable path namespace.
+2. **Never route a browser navigation through `/api/laioutr/*`.** It answers `401` for every link click and every redirect.
 
 ## Extension hooks
 
