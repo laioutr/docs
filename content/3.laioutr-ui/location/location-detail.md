@@ -35,7 +35,7 @@ The map height adapts per breakpoint via two CSS custom properties: `--location-
 ::component-meta{:name="LocationDetail"}
 ::
 
-Required props are `mapLocation` (the single pin to render), the Google Maps `apiPromise`, and the `mapId`. The slot receives no props. Compose the body using the helper components below.
+Required props are `mapLocation` (the single pin to render), the Google Maps `apiPromise`, and the `mapId`. In a Studio storefront the Section supplies both from the `googleMapsApiKey` module option and the section's Map ID field — see [Google Maps setup](/laioutr-ui/location/location-finder#google-maps-setup). The slot receives no props. Compose the body using the helper components below.
 
 ### LocationHeader
 

@@ -31,6 +31,31 @@ Search filters by name and address. Filters work via the same `AvailableFilter` 
 
 The `containerStyle` prop (`'full-width' | 'boxed'`, via the shared `containerStyleField` toggle in Studio) controls the desktop framing. In `boxed` mode, `.location-finder--boxed` clamps the finder to `--container-max-width` and centers it with `margin-inline: auto` from the `--lg` breakpoint up, so it sits as a contained card rather than stretching edge-to-edge.
 
+## Google Maps setup
+
+The map needs a Google Maps JavaScript API key and a Map ID.
+
+In a Studio storefront the key is one option on the `@laioutr-app/ui` module. The Location Finder and Location Detail sections read it and pass the loaded API down.
+
+```ts
+export default defineNuxtConfig({
+  modules: ['@laioutr-app/ui'],
+  '@laioutr-app/ui': {
+    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+  },
+});
+```
+
+::warning
+The key reaches the browser. Restrict it by HTTP referrer in the Google Cloud Console.
+::
+
+The Map ID is a per-section field in Studio ("Google Maps Map ID"). Advanced Markers need one. `DEMO_MAP_ID` works while you develop.
+
+The Maps script loads on the first page that shows a map, not on every page. Without a key the section keeps its search, list and filters, the map area stays empty, and the browser console names the missing option.
+
+Outside Studio, when you render `LocationFinder` yourself, pass `apiPromise` and `mapId` as props. `apiPromise` resolves to the loaded `google` namespace.
+
 ## Key Business & UX Benefits
 
 - Search-by-name and search-by-address from the same input means shoppers can find a store by whatever they remember (the brand of the location, the street it sits on, or the neighborhood).
@@ -45,7 +70,7 @@ The `containerStyle` prop (`'full-width' | 'boxed'`, via the shared `containerSt
 ::component-meta{:name="LocationFinder"}
 ::
 
-The component takes a `locations: LocationFinderMapItem[]` array (the shape exported from `LocationFinderMap`), a Google Maps `apiPromise` and `mapId`, and a set of optional v-models:
+The component takes a `locations: LocationFinderMapItem[]` array (the shape exported from `LocationFinderMap`), a Google Maps `apiPromise` and `mapId` (see [Google Maps setup](#google-maps-setup)), and a set of optional v-models:
 
 - `v-model:selectedLocationId`: the currently focused store; emitted on row click or marker click.
 - `v-model:searchQuery`: the text in the search input.
@@ -70,7 +95,7 @@ Standalone Google Maps view. Use it when you need a map without the surrounding 
 ::component-meta{:name="LocationFinderMap"}
 ::
 
-Requires a Google Maps `apiPromise` (a resolved promise of the loaded `google.maps` namespace) and a `mapId` (your Google Cloud Map Style ID). The `no-popup` prop suppresses the `InfoWindow` overlay. Set it on mobile when a bottom-sheet card handles the selection UI instead.
+Requires a Google Maps `apiPromise` (a resolved promise of the loaded `google.maps` namespace) and a `mapId` (your Google Cloud Map Style ID) — see [Google Maps setup](#google-maps-setup). The `no-popup` prop suppresses the `InfoWindow` overlay. Set it on mobile when a bottom-sheet card handles the selection UI instead.
 
 ## Composition
 
