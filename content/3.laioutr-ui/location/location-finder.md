@@ -35,7 +35,26 @@ The `containerStyle` prop (`'full-width' | 'boxed'`, via the shared `containerSt
 
 The map needs a Google Maps JavaScript API key and a Map ID.
 
-In a Studio storefront the key is one option on the `@laioutr-app/ui` module. The Location Finder and Location Detail sections read it and pass the loaded API down.
+The key is one option on the `@laioutr-app/ui` app. The Location Finder and Location Detail sections read it and pass the loaded API down.
+
+In a platform project it goes in the app's config, next to `theme`:
+
+```json
+{
+  "apps": [
+    {
+      "name": "@laioutr-app/ui",
+      "version": "latest",
+      "config": {
+        "theme": "classic",
+        "googleMapsApiKey": "AIza..."
+      }
+    }
+  ]
+}
+```
+
+A Nuxt app that lists the module itself sets the same option in `nuxt.config.ts`:
 
 ```ts
 export default defineNuxtConfig({
@@ -52,9 +71,9 @@ The key reaches the browser. Restrict it by HTTP referrer in the Google Cloud Co
 
 The Map ID is a per-section field in Studio ("Google Maps Map ID"). Advanced Markers need one. `DEMO_MAP_ID` works while you develop.
 
-The Maps script loads on the first page that shows a map, not on every page. Without a key the section keeps its search, list and filters, the map area stays empty, and the browser console names the missing option.
+The Maps script loads on the first page that shows a map, not on every page. Without a key the section keeps its search, list and filters, the map area stays empty, and the browser console asks for the option by name.
 
-Outside Studio, when you render `LocationFinder` yourself, pass `apiPromise` and `mapId` as props. `apiPromise` resolves to the loaded `google` namespace.
+Outside a Studio section, when you render `LocationFinder` yourself, pass `apiPromise` and `mapId` as props. `apiPromise` resolves to the loaded `google` namespace.
 
 ## Key Business & UX Benefits
 
