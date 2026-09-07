@@ -240,7 +240,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
 ### Analytics
 
-Three hooks along the emission pipeline. Every event passes through them in order: `:emit` can veto it, `:enrich` shapes the whole event, and `:project` shapes each orchestr entity found in the payload.
+Four hooks along the emission pipeline. Every event passes through the first three in order: `:emit` can veto it, `:enrich` shapes the whole event, and `:project` shapes each orchestr entity found in the payload. An event that waited for a consent decision passes through `:redeliver` as well, once, on its way out.
 
 ::hook-meta
 ---
@@ -345,6 +345,43 @@ export default defineNuxtPlugin({
         // Drop a field you would rather not send
         url: undefined,
       }));
+    });
+  },
+});
+```
+::
+
+::hook-meta
+---
+name: frontend-core:analytics:redeliver
+title: Redeliver held analytics event
+surface: client
+register: nuxt-plugin
+dispatch: sync
+kind: filter
+payload:
+  - { field: result, type: '{ value: AnalyticsEvent }', description: 'Pre-seeded with the event as it was enriched, before the visitor answered. Core re-reads the consent-scoped contexts before your handlers run; reassign result.value to change what the destination receives.' }
+whenItFires: Once per held event, when a destination becomes eligible for it and before that event is delivered. Never on a live emission.
+---
+
+Transform an event that waited for a consent decision. Frontend Core registers one handler here: it re-reads the contexts marked `refreshOnDelivery`, which are `session` and `consent`, so the event carries the identity minted at the grant rather than the empty one it was enriched with. Every other context keeps its emit-time value, so a held page view still reports the page it was raised on.
+
+The bus stamps the `delivery` context with `{ deferred: true }` **after** your handlers run, so you cannot set or override it from here. Read it in the destination's `track()` instead.
+
+#example
+```ts [app/plugins/analytics-redeliver.ts]
+export default defineNuxtPlugin({
+  enforce: 'post',
+  setup(nuxtApp) {
+    nuxtApp.hook('frontend-core:analytics:redeliver', ({ result }) => {
+      // Core has just re-read session and consent; record how long the event waited on the banner
+      result.value = {
+        ...result.value,
+        contexts: {
+          ...result.value.contexts,
+          replay: { heldForMs: Date.now() - Date.parse(result.value.time) },
+        },
+      };
     });
   },
 });

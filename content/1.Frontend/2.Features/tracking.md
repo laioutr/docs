@@ -6,7 +6,7 @@ seo:
   description: Laioutr’s analytics layer gives you one typed API to emit events. Destinations declare the consent purposes they…
 sitemap:
   loc: /frontend/features/tracking
-  lastmod: 2026-08-06
+  lastmod: 2026-09-07
   changefreq: monthly
   priority: 1.0
 
@@ -84,6 +84,25 @@ Frontend Core already emits some of the vocabulary, so you do not have to:
 - **`v-track-click="{ key, kind?, label? }"`** emits `web/element_click`, filling in link href and outbound-ness from the DOM.
 - **`v-track-impression="{ kind, key, label? }"`** emits `web/impression` once per key, after the element has held 50% visibility for a second. `useTrackImpression(target, payload, { minRatio, minDurationMs })` is the composable form.
 - **`useTrackScrollDepth({ thresholds })`** emits `web/scroll_depth` as the visitor crosses each threshold.
+- **`useTrackVideoProgress(meta)`** returns a handler that emits `web/video_progress` for each playback milestone it is given.
+
+### Video progress
+
+Video is opt-in rather than automatic. `MediaVideo` lives in ui-kit, which sits below Frontend Core in the dependency order, so it cannot emit a canonical event itself; it reports milestones and the page decides what they mean.
+
+Call the composable once in `setup` and bind the handler it returns. Calling it in the template would run a composable on every milestone.
+
+```vue
+<script setup lang="ts">
+const trackVideoProgress = useTrackVideoProgress({ title: 'Launch film' });
+</script>
+
+<template>
+  <MediaVideo :media="media" @milestone="trackVideoProgress" />
+</template>
+```
+
+The handler rounds the milestone fraction into a whole `percent` and passes `currentTime` and `duration` through. Anything you put in `meta` (`playerType`, `title`, `url`) rides along on the event. `url` is the media address; the page address stays in the page context.
 
 ## Ambient contexts
 
@@ -96,6 +115,7 @@ Every event carries a `contexts` object built at enrichment time, so payloads st
 | `session` | `authStatus`, visitor and session tokens, a hashed `customerId`, and the `entryReferrer` captured on entry |
 | `consent` | The visitor's granted purposes at emission time |
 | `experiments` | Active allocations |
+| `delivery` | `deferred`, present only on an event that waited for a consent decision |
 
 Add your own or replace one of Laioutr's — registering the same token wins:
 
@@ -115,7 +135,25 @@ export default defineNuxtPlugin(() => {
 });
 ```
 
-A provider returning `undefined` attaches nothing, so a context that is not yet known simply stays off the event.
+A provider returning `undefined` attaches nothing, so a context that is not yet known simply stays off the event. A provider that throws costs its own context a value and warns; the event keeps the rest and still goes out.
+
+### Contexts that follow the consent decision
+
+A provider is called once per emission, so it reports the state at the moment the event was raised. That is what you want almost everywhere: re-reading the page context later would report the page the visitor is on now, not the one the event happened on.
+
+Identity and consent state are the exception, because their value follows the visitor's decision rather than the moment of the emission. Register a context with `refreshOnDelivery` and it is read again when a held event is finally delivered:
+
+```ts [app/plugins/analytics-context.client.ts]
+const CrmContext = defineAnalyticsContextToken('crm', {
+  schema: z.object({ profileId: z.string() }),
+});
+
+// The profile id exists only once the visitor has granted personalization, so a held event
+// should carry the value minted at the grant rather than the empty one from before it.
+useAnalyticsContexts().register(CrmContext, () => useCrmProfile().id, { refreshOnDelivery: true });
+```
+
+Of Laioutr's own contexts, `session` and `consent` are marked this way. `page`, `market` and `experiments` keep their emit-time values.
 
 ## How consent gates delivery
 
@@ -138,6 +176,19 @@ There are five purposes — `necessary`, `functional`, `analytics`, `advertising
 The banner is usually still open when the first page view fires. Those events are **held, not dropped**: the bus buffers them and delivers them in order once the visitor grants. A denial the visitor actually made discards them; a CMP merely reporting its denied default does not, because nothing has been decided yet.
 
 That distinction is why a destination sees the landing page view at all. It also means a redaction applied in `frontend-core:analytics:enrich` is what gets buffered — the unredacted event is never retained.
+
+A replayed event is not byte-identical to the one that was buffered. On delivery, the consent-scoped contexts are read again, so it carries the identity minted at the grant instead of the empty one it was enriched with. Every other context stays at its emit-time value, so a held page view still reports the page it was raised on.
+
+Such an event also carries a `delivery` context of `{ deferred: true }`, which is how a destination tells a replay from a live emission:
+
+```ts
+track: (event) => {
+  const { deferred } = (event.contexts.delivery ?? {}) as { deferred?: boolean };
+  window.acme?.send(event.type, { ...event.payload, backfilled: deferred === true });
+},
+```
+
+To transform a held event on its way out, tap [`frontend-core:analytics:redeliver`](/frontend/features/hooks).
 
 ## Building your own destination
 
@@ -175,9 +226,26 @@ You do not check consent inside `track()` — the bus has already decided. Deliv
 
 Call `useAnalytics().unregister('acme-analytics')` to detach; its `teardown` runs and any queued events for it are discarded.
 
+### Degrading instead of going silent
+
+A destination that can still do something useful without consent declares `onDenied`, and receives the events it was not granted, with the consent state attached:
+
+```ts
+onDenied: (event, consent) => {
+  // No visitor or session token is attached, so this can be counted but not attributed
+  window.acme?.count(event.type, { consent });
+},
+```
+
+What that changes:
+
+- An event handed to `onDenied` counts as **delivered**. It is not held for a later grant, because a destination that degrades upgrades its own record rather than being sent the same event twice.
+- Revocation leaves the destination running. `teardown()` is for a destination that goes silent; one that declares `onDenied` keeps receiving.
+- `filter` still applies, and `init()` still runs before the first denied event reaches you.
+
 ### Reshaping events on the way out
 
-Three synchronous Nuxt hooks sit on the pipeline — `frontend-core:analytics:emit` (veto or pre-transform), `:enrich` (the whole event) and `:project` (one entity). Handler ordering, worked redaction examples, and the limit that redaction is global rather than per-destination are covered in [Hooks](/frontend/features/hooks).
+Four synchronous Nuxt hooks sit on the pipeline: `frontend-core:analytics:emit` (veto or pre-transform), `:enrich` (the whole event), `:project` (one entity), and `:redeliver` (an event that waited for a consent decision). Handler ordering, worked redaction examples, and the limit that redaction is global rather than per-destination are covered in [Hooks](/frontend/features/hooks).
 
 ## Receiving events on the server
 
@@ -195,9 +263,35 @@ export default defineNitroPlugin((nitroApp) => {
 
 Batches go to `POST /api/frontend/signals`. Change it with `analyticsIngestPath` in the module's public runtime config — that moves the server route too, not just where the browser posts.
 
+### Reading the visitor's identity on a request
+
+A server route or a connector that wants its own work grouped into the same visit reads the tokens the browser is already reporting, rather than minting a second identity:
+
+```ts [server/api/quote.post.ts]
+export default defineEventHandler(async (event) => {
+  const { visitorToken, sessionToken } = readAnalyticsIdentity(event);
+
+  await recordQuoteRequest({ visitorToken, sessionToken, ...(await readBody(event)) });
+});
+```
+
+Both cookies are written only under the `analytics` purpose, so an empty result means the visitor has not granted it, not that something is misconfigured.
+
 ## Debugging
 
-Set `analyticsDebug: true` in the module's public runtime config to register a built-in destination that logs every event to the console. It declares `{ purposes: [] }`, so it is not gated by consent and shows you the full stream regardless of what any other destination is receiving.
+Both switches live under `laioutr.dev` in `nuxt.config.ts`. A production build discards that object whole, so neither can ship by accident:
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  laioutr: {
+    dev: { analyticsDebug: true, consentDebug: true },
+  },
+});
+```
+
+**`analyticsDebug`** registers a built-in destination that logs every event to the console. It declares `{ purposes: [] }`, so consent does not gate it and you see the full stream regardless of what any other destination is receiving.
+
+**`consentDebug`** installs a debug CMP that grants every purpose without asking. A storefront with no consent app installed never grants anything, so none of the consent-gated paths run: no visitor identity, no browser-to-server transport, no delivery to a destination. It reports a decision the visitor never made, so it warns on install.
 
 ## Ready-to-use: Google Tag Manager
 
@@ -211,7 +305,8 @@ For setup and options, see the **[GTM app documentation](/apps/app-docs/gtm)**.
 ## Summary
 
 - Emit with **`useAnalytics().track(Token, payload)`** using tokens from `@laioutr-core/core-types/analytics` (`web/*`) and `@laioutr-core/canonical-types/analytics` (`ecommerce/*`). Payload slots accept orchestr entities, which are projected at emit time.
-- **Ambient contexts** — page, market, session, consent, experiments — are attached for you; add or override them with `useAnalyticsContexts()`.
-- **Consent gates delivery per destination.** Declare `consent: { purposes: [...] }`; there is no ungated path, and events emitted before the visitor decides are held rather than dropped.
-- **Add a backend** with `defineAnalyticsDestination({ id, consent, track })` registered from a client plugin, or `subscribeToAnalytics` in a Nitro plugin for server-side recipients.
+- **Ambient contexts** — page, market, session, consent, experiments — are attached for you; add or override them with `useAnalyticsContexts()`, and mark one `refreshOnDelivery` when its value follows the consent decision rather than the moment of the emission.
+- **Consent gates delivery per destination.** Declare `consent: { purposes: [...] }`; there is no ungated path, and events emitted before the visitor decides are held rather than dropped. A replayed event arrives with `delivery` set to `{ deferred: true }`. Declare `onDenied` instead to receive events under denial and degrade rather than go silent.
+- **Add a backend** with `defineAnalyticsDestination({ id, consent, track })` registered from a client plugin, or `subscribeToAnalytics` in a Nitro plugin for server-side recipients. `readAnalyticsIdentity(event)` gives server code the visitor and session tokens off a request.
+- **Debug in dev** with `laioutr.dev.analyticsDebug` to log the full event stream, and `laioutr.dev.consentDebug` to grant every purpose without a CMP installed.
 - For a ready-made setup use **@laioutr-app/gtm** with a consent app such as [Cookiebot](/apps/app-docs/cookiebot), so Consent Mode stays in sync with the visitor's choices.
