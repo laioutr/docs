@@ -14,6 +14,70 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.49.0] - 2026-09-03
+
+### Minor Changes
+
+- An analytics event held for a consent decision now reaches its destinations with the identity minted at the grant. A held event was enriched before the visitor answered, so it carried no visitor or session token and a consent context that still said denied — a destination that requires analytics consent received the pre-consent page views and could do nothing with them. Only the consent-scoped contexts are re-read at delivery, so a held page view still reports the page it was raised on.
+
+  Such an event carries the new `DeliveryContext` as `{ deferred: true }`, so a destination can tell a replay from a live emission.
+
+  Register a context with `refreshOnDelivery` to have it re-read the same way, or tap `frontend-core:analytics:redeliver` to transform a held event before it is delivered.
+
+  ```ts
+  useAnalyticsContexts().register(MyContext, () => value, { refreshOnDelivery: true });
+  ```
+
+- A page's render config is now cacheable, and it arrives before the visitor asks for it.
+
+  **Cached by URL.** The config comes from a `GET` whose URL carries a hash of the project config, so the response is immutable and both the CDN and the browser keep it. A deploy that changes no configuration keeps every cached response valid. Any change to it expires all of them, and each page's config is fetched once more on the next visit.
+
+  **Prefetched on hover.** Resting on or tabbing to a `<NuxtLink>` loads the target page's render config into the Nuxt payload. Opening that page then costs no request at all — on a first visit as much as on a return. A cursor merely passing over links fetches nothing.
+
+  **`frontend-core:link:intent`.** The hover detection is a hook, so an app can warm its own work for the page a visitor is heading to:
+
+  ```ts
+  useNuxtApp().hook('frontend-core:link:intent', ({ path, page, market, language }) => {
+    // `market` and `language` are resolved for the target, which the link may cross.
+  });
+  ```
+
+  It fires once per link per intent, and nothing reports the intent ending — a request already sent is never cancelled.
+
+  `<NuxtLink>` prefetches on hover and focus instead of on entering the viewport, because a prefetch now carries a render config and a viewport full of links would fetch one each. A project can set `experimental.defaults.nuxtLink.prefetchOn` to choose a different trigger.
+
+  **Switching it off.** `config.prefetch` in the laioutrrc turns off both halves — the render config and the route, layout and middleware chunks Nuxt loads. Neither plugin is bundled, so the storefront makes no speculative request at all. It defaults to `true`.
+
+  ```jsonc
+  { "config": { "prefetch": false } }
+  ```
+
+  `runtimeConfig.public.laioutr` gains `contentHash`. It is empty when no laioutrrc is configured, which leaves the responses uncached.
+
+- `GET /api/frontend/health` answers `{"status":"ok"}` with `cache-control: no-store`, for a container host that needs a liveness probe. It resolves no market, page or upstream, so it answers alike for every host and for a project with nothing published — which a probe against a content path does not.
+
+### Patch Changes
+
+- A storefront served over plain HTTP on anything but `localhost` renders again. Minting an analytics identity threw there, during app initialization, so Nuxt replaced the whole page with its error screen — which is what a multi-market dev host or a preview proxy is. Production storefronts are unaffected, because HTTPS was never the failing case.
+
+  An analytics identity that cannot be established now costs the identity and warns, rather than the page. Events raised without one still deliver, carrying no visitor or session token.
+
+## [0.48.0] - 2026-09-01
+
+### Minor Changes
+
+- A hook handler that throws no longer fails the code that ran the hook. Every result-returning hook skips the throwing handler with a warning and runs the rest, so the value keeps threading and the caller falls back to what it seeded. A handler an app installed could previously fail a render.
+
+  `getHookResult` and `useHookResult` are auto-imported, so a package outside frontend-core can implement a result-returning hook without restating the synchronous-caller pattern that makes a handler's `result.value` readable on the next line.
+
+## [0.47.2] - 2026-08-28
+
+### Patch Changes
+
+- The `referrer` on a page event is now an absolute URL on every page view, not only the first. Within an SPA session it reported the previous route as a bare path, which a destination that classifies referrers reads as malformed rather than as a same-site visit.
+
+- A property edit in the studio updates the preview again. Every edit re-rendered the page variant that `PageRenderer` captured when the preview opened, so nothing on the page moved until a reload.
+
 ## [0.47.1] - 2026-08-28
 
 ### Patch Changes

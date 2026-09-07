@@ -14,6 +14,14 @@ sitemap:
 
 All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data-fetching and query orchestration layer, will be documented in this file.
 
+## [0.49.1] - 2026-09-03
+
+### Patch Changes
+
+- A failed action names its cause in the server log. An action that threw without an HTTP status became a bare 500 whose message reached the browser and nowhere else, so the request's own log stayed empty and a Shopify outage was indistinguishable from a crash, an out-of-memory kill or a timeout. The action route now logs those failures the way the query plane already logs its own. An action that throws a status-carrying error, such as a variant that is out of stock, still logs nothing.
+
+  Shopify transport failures carry the HTTP status Shopify answered with. The message came from `statusText` alone, which does not separate a Shopify 5xx from a throttled request from a request that never reached Shopify.
+
 ## [0.45.0] - 2026-08-26
 
 ### Minor Changes

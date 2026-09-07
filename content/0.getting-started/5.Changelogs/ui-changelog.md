@@ -14,6 +14,49 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.23.1] - 2026-09-01
+
+### Patch Changes
+
+- `SwiperChrome` renders a root element around its swiper, so every slider built on it — `ProductSlider`, `ContentSlider`, `LogoSlider`, `CategoryCardSlider` — exposes a real element as `$el` from its first render. `CommonSwiper` leaves a comment placeholder there until its chunk lands, and code that measured or observed the root received that comment.
+
+  Stylesheets need no change. `.swiper-chrome` stays on the swiper, and every class, id, style and listener passed to the component still reaches it.
+
+- The Product Slider section and block no longer throw when they mount on the client instead of hydrating from server markup — in the studio preview, and after an in-app navigation. Both raised `TypeError: IntersectionObserver.observe: Argument 1 does not implement interface Element`. Their `view_item_list` tracking still reports.
+
+## [2.23.0] - 2026-09-01
+
+### Minor Changes
+
+- The Location sections now load Google Maps from a key in the module config. Set `googleMapsApiKey` and the map renders — a storefront needs no Maps plugin of its own.
+
+  ```ts
+  export default defineNuxtConfig({
+    modules: ['@laioutr-app/ui'],
+    '@laioutr-app/ui': {
+      googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+    },
+  });
+  ```
+
+  The key reaches the browser, so restrict it by HTTP referrer in the Google Cloud Console. The Maps script loads on the first page that shows a map, not on every page. Without a key the sections keep their search, list and filters, the map area stays empty, and the browser console names the missing option.
+
+  **Breaking:** the sections no longer read a `$googleMapsApi` promise from the Nuxt app. A storefront that provides one must move the key into the module config and delete its plugin.
+
+  ```ts
+  // Before — storefront plugin
+  export default defineNuxtPlugin(() => ({
+    provide: { googleMapsApi: loader.load().then(() => window.google) },
+  }));
+
+  // After — nuxt.config.ts
+  '@laioutr-app/ui': { googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY }
+  ```
+
+### Patch Changes
+
+- The `LocationFinder` sidebar no longer grows past the component frame on desktop. Its height now follows the `--location-finder-max-height-lg` cap, so the location list scrolls inside the sidebar instead of running out of the frame. Both `full-width` and `boxed` are affected. The mobile layout is unchanged.
+
 ## [2.22.0] - 2026-08-28
 
 ### Minor Changes
