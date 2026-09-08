@@ -93,6 +93,22 @@ This shape lets you `getKeys()` or iterate all SEO URLs across languages from on
 
 If a change to the value would invalidate every entry, put it in the prefix. If a change just selects which entry you want among siblings that should coexist, put it in the key. When in doubt, prefix is the safer default; you can always merge prefixes later, but splitting an over-keyed cache requires reading every entry.
 
+### Building the segments with `cacheKeys`
+
+`useUserlandCache` hands back a bare storage with no prefixing at all, so both placements above are yours to compose. `cacheKeys` exposes the same pieces orchestr builds its own keys from, so a hand-built key matches the platform's rather than inventing a second convention. It is auto-imported in server files.
+
+```ts
+const key = `${cacheKeys.forClientEnv(clientEnv)}:${cacheKeys.escape(productId)}`;
+```
+
+| Member | What it gives you |
+| --- | --- |
+| `cacheKeys.forClientEnv(clientEnv)` | The digest orchestr keys every layer by: locale, currency, market, and published or preview |
+| `cacheKeys.escape(value)`, `cacheKeys.unescape(value)` | One segment made safe to sit between colons, and the inverse |
+| `cacheKeys.forEntityIds(ids)` | A bounded, fixed-length segment for a set of entity ids, so a key stops growing with the page size. The ids are sorted before hashing, so the same set keys the same entry however it arrives |
+
+A query or link handler's `buildCacheKey` needs only `forEntityIds`: the runner supplies the environment and the pagination limit around whatever it returns.
+
 ## The anti-pattern to avoid
 
 ```ts

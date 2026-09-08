@@ -180,6 +180,16 @@ Design your sections to use the same canonical component types (e.g. `product-ti
 
 ---
 
+## Render config prefetching
+
+Resting on or tabbing to a `<NuxtLink>` loads the target page's render config into the Nuxt payload. Opening that page then costs no request for the config at all, on a first visit as much as on a return.
+
+The config is cacheable in its own right: its URL carries a hash of the project configuration, so both the CDN and the browser keep the response until an edit changes that hash.
+
+`frontend-core:link:intent` fires on the same signal, so an app can warm its own work for the page a visitor is heading to. See [Hooks](/frontend/features/hooks).
+
+---
+
 ## Quick reference
 
 | What                        | Where                                             | Default                                            |
