@@ -19,13 +19,13 @@ By default, handlers are **not cached**. You opt in per handler by adding a `cac
 
 ## Cache layers
 
-Orchestr maintains four separate cache layers, all stored under the `cache:orchestr:internal` namespace with different prefixes:
+Orchestr maintains four separate cache layers, all stored under the `cache:orch:i` namespace with different prefixes (`q`, `l`, `c`, `pi`):
 
 | Layer           | Cached data                                                        | Key shape                                          | Configured on              |
 | --------------- | ------------------------------------------------------------------ | -------------------------------------------------- | -------------------------- |
-| **Queries**     | Query handler results (IDs, totals, filters, optional passthrough) | `{token}:{buildCacheKey(args)}`                    | Query handler `cache`      |
-| **Links**       | Link handler results (source/target ID mappings)                   | `{token}:{buildCacheKey(args)}`                    | Link handler `cache`       |
-| **Components**  | Resolved entity components (per entity, per component)             | `{entityType}:{entityId}:{component}:{keySuffix?}` | Component resolver `cache` |
+| **Queries**     | Query handler results (IDs, totals, filters, optional passthrough) | `{token}:{env}:{offset}-{limit}:{sort}:{filters}:{input}` | Query handler `cache` |
+| **Links**       | Link handler results (source/target ID mappings)                   | `{token}:{env}:{sourceIds}:{offset}-{limit}:{sort}:{filters}` | Link handler `cache` |
+| **Components**  | Resolved entity components (per entity, per component)             | `{entityType}:{entityId}:{component}:{env}:{keySuffix?}` | Component resolver `cache` |
 | **Page index**  | Enumerated pages, search results, counts, locate results           | `{tier}:{pageType}:{market}:{locale}:…`            | Page index `cache`         |
 
 The page-index layer follows its own rules: it is on by default, keys itself from the resolved market and locale rather than from a `buildCacheKey`, and serves stale while refreshing. See [Page Index caching](/frontend/orchestr/page-index#caching).
@@ -35,14 +35,44 @@ The page-index layer follows its own rules: it is on by default, keys itself fro
 Every cache key carries a segment derived from the [client environment](/frontend/orchestr/client-env), so a multi-language storefront can never serve cross-locale data:
 
 ```
-{locale}:{currency}:{published|preview}
+{locale}:{currency}:{market}:{published|preview}
 ```
 
-That is the whole segment. It deliberately does **not** widen as `ClientEnv` grows — if your handler's output varies by anything else, append your own scalar (see `buildCacheKey` for queries and links, `getKeySuffix` for component resolvers):
+Those four values are digested into one short segment. It deliberately does **not** widen as `ClientEnv` grows, because a field added for some other reason would silently rotate every cache key.
+
+### Adding a dimension of your own
+
+When your responses vary on something those four do not cover — a customer group, a price list, a store selection — contribute a segment from a Nitro plugin:
+
+```ts
+// server/plugins/cacheKey.ts
+export default defineNitroPlugin((nitroApp) => {
+  nitroApp.hooks.hook('orchestr:client-env-key:build', ({ clientEnv, parts }) => {
+    const group = clientEnv.custom?.customerGroup;
+    if (group) parts.push(`cg:${group}`);
+  });
+});
+```
+
+One handler reaches every cache layer, because queries, links, component resolvers and the page index all digest the same segment.
+
+Three things to know:
+
+- **Handlers run synchronously.** A handler cannot await. Resolve the value into `clientEnv.custom` earlier in the request and read it here.
+- **Contributions are sorted, then joined to the four base values.** Two plugins key the same entry whichever registers first, and no handler can drop the market and let two of them share an entry.
+- **Registering a handler rotates every cache key** for that project at the next deploy. That is correct, because the responses now vary on a dimension they did not before, but the first requests after the deploy all miss.
+
+Contribute only what the response actually varies on. Push a request id and every request keys its own entry, which is a cache that never hits.
+
+### Per-handler suffixes
+
+A handler that varies on something no other handler does appends a scalar instead — `buildCacheKey` for queries and links, `getKeySuffix` for component resolvers:
 
 ```ts
 getKeySuffix: (clientEnv) => clientEnv.market.slug,
 ```
+
+`getKeySuffix` **extends** the environment segment rather than replacing it, so a resolver can never accidentally drop the market and let two storefronts share an entry.
 
 Return a scalar, never `clientEnv` itself: `market` and `language` are cyclic, so `JSON.stringify(clientEnv)` throws.
 
@@ -57,9 +87,15 @@ Query and link handlers use the same cache config shape:
 ```ts
 cache: {
   strategy: 'ttl' | 'swr' | 'live',
-  ttl: '10 minutes',  // HumanTtl: number (seconds) or string ('1 day', '2h')
-  buildCacheKey: (args) => string | null | undefined,
-  includePassthrough?: boolean,  // queries only
+  ttl: '10 minutes',          // HumanTtl: number (seconds) or string ('1 day', '2h')
+  staleMaxAge?: '2 hours',    // swr only; defaults to '24 hours'
+
+  pages?: 'first' | 'all',            // default 'first'
+  filters?: boolean | string[],       // default false
+
+  buildCacheKey?: (args) => string | null | undefined,
+  shouldBypassCache?: (args) => boolean,
+  includePassthrough?: boolean,       // queries only
 }
 ```
 
@@ -67,9 +103,28 @@ cache: {
 | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `live`   | No caching. Handler runs on every request.                                                                                                               |
 | `ttl`    | Cached for a fixed duration using the storage driver's native TTL. Entry is evicted after expiry.                                                        |
-| `swr`    | Cached with an application-level expiry timestamp. On read, expired entries are removed and the handler runs again. The `ttl` field is optional for SWR. |
+| `swr`    | Cached for `ttl`, then served stale for `staleMaxAge` while the handler re-runs behind the response. A refresh that fails keeps the last good value until the stale window closes. |
 
-`buildCacheKey` receives the handler arguments and must return a unique string. Return `null` or `undefined` to skip caching for that particular request.
+An entry occupies storage for `ttl` plus `staleMaxAge`, so a long stale window trades footprint for a cache that survives an upstream outage. Two concurrent readers of one stale entry schedule a single refresh.
+
+### Which requests are cached
+
+Orchestr caches the first slice of a listing, unfiltered, and nothing else. The tail of a listing is cold, and a filter combination is unbounded, so both are opted into rather than out of.
+
+| Option | Default | Widen it with |
+| ------ | ------- | ------------- |
+| `pages` | `'first'` — only `offset === 0` | `'all'` |
+| `filters` | `false` — unfiltered requests only | `true`, or an allowlist of filter ids |
+
+An allowlist entry asserts that the filter's value set is **bounded**. A boolean availability filter is a good candidate. A price range is not — every bracket a shopper drags would mint an entry.
+
+`shouldBypassCache` refuses a request the two options above would admit. It runs after them and can only narrow them. Widening them is always safe: Orchestr keys the full request shape either way, so a wider gate changes *whether* an entry is written, never *what* it is keyed by.
+
+### Building the key yourself
+
+You usually should not. Orchestr keys the token, the environment, the requested slice, the sorting, the filters, and — for queries — the token's input. A token declaring a single property keys on that property's value, so a `by-slug` key stays readable.
+
+`buildCacheKey` replaces only the trailing input segment. Returning `null` or `undefined` still refuses the cache, but prefer `shouldBypassCache` for that — it says so without also claiming to build a key.
 
 ### Query cache example
 
@@ -79,11 +134,7 @@ export default defineMyAppQuery({
   cache: {
     strategy: 'ttl',
     ttl: '1 day',
-    buildCacheKey({ input, pagination, filter, sorting }) {
-      // Only cache unfiltered first page
-      if (filter || (pagination && pagination.offset > 0)) return null;
-      return `${input.categorySlug}:${sorting ?? 'default'}`;
-    },
+    filters: ['filter.v.availability'],
   },
   run: async (args) => { /* ... */ },
 });
@@ -97,13 +148,12 @@ export default defineMyAppLink({
   cache: {
     strategy: 'ttl',
     ttl: '1 day',
-    buildCacheKey({ entityIds }) {
-      return entityIds.sort().join(',');
-    },
   },
   run: async (args) => { /* ... */ },
 });
 ```
+
+A link key already carries the source entity ids, sorted, as a bounded digest. Your handler never has to build that segment.
 
 ### Passthrough and query cache
 
@@ -127,7 +177,8 @@ export default defineMyAppComponentResolver({
   provides: [ProductBase, ProductPrices, ProductMedia],
   cache: {
     ttl: '1 day',
-    swr: false,         // optional: use SWR semantics
+    swr: false,               // optional: serve stale while refreshing
+    staleMaxAge: '2 hours',   // swr only; defaults to '24 hours'
     getKeySuffix: (clientEnv) => clientEnv.market.slug,
     components: {
       prices: { ttl: '15 minutes' },
@@ -140,7 +191,8 @@ export default defineMyAppComponentResolver({
 | Option         | Description                                                                                                                                                                          |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `ttl`          | Default TTL for all components from this resolver.                                                                                                                                   |
-| `swr`          | When `true`, uses application-level expiry instead of storage driver TTL.                                                                                                            |
+| `swr`          | When `true`, the entry stays servable past `ttl` while the resolver re-runs behind the response.                                                                                     |
+| `staleMaxAge`  | How long that stale window lasts. Read only when `swr` is on. Defaults to `'24 hours'`.                                                                                             |
 | `getKeySuffix` | Receives the resolved [`ClientEnv`](/frontend/orchestr/client-env) and returns a suffix appended to cache keys (e.g. market slug, channel). Same entity cached separately per suffix. Must not reference handler arguments, and must return a scalar. |
 | `components`   | Per-component overrides. Keys are component names (e.g. `'prices'`), values override `ttl` and `swr`.                                                                                |
 | `enabled`      | Set to `false` to disable caching for this resolver.                                                                                                                                 |
@@ -149,8 +201,12 @@ export default defineMyAppComponentResolver({
 
 Orchestr registers two storage namespaces:
 
-- `cache:orchestr:internal`: used by the three cache layers above
-- `cache:orchestr:userland`: for app-level cached helpers (see below)
+- `cache:orch:i`: used by the three cache layers above
+- `cache:orch:u`: for app-level cached helpers (see below)
+
+Both are namespaces below `cache`, so a project that mounts one driver at `cache` covers them.
+Mounting at the full path works too, and the paths are short deliberately: every key carries its
+namespace, so a longer one is paid on every read and every write.
 
 In development, both use **LRU in-memory** drivers (max 5000 entries). In production, configure a persistent driver (e.g. Redis) via Nitro storage config for durable or shared caching across instances.
 
@@ -164,7 +220,7 @@ Clears both internal and userland caches. Restrict access in production.
 
 ## Userland cache
 
-For data outside query/link/component results (e.g. aggregated counts, resolved SEO URLs, system config), use `useUserlandCache` so the data is cleared together with the orchestr cache. It returns a typed unstorage instance scoped to `cache:orchestr:userland:{prefix}`.
+For data outside query/link/component results (e.g. aggregated counts, resolved SEO URLs, system config), use `useUserlandCache` so the data is cleared together with the orchestr cache. It returns a typed unstorage instance scoped to `cache:orch:u:{prefix}`.
 
 ```ts
 import { useUserlandCache } from '#imports';
