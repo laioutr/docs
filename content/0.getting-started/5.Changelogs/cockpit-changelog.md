@@ -14,6 +14,12 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-09-07]
+
+### Added
+
+- **Studio**: The editor now reaches a deployment protected by its hosting provider.
+
 ## [2026-08-27]
 
 ### Changed

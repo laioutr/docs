@@ -14,6 +14,32 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.50.0] - 2026-09-07
+
+### Minor Changes
+
+- Storefronts now capture ad-campaign attribution from the landing URL and publish it on a new `campaign` analytics context, so an event carries the campaign that brought the visitor. Alongside the parameters it records where the visit began — the landing page without its query, and the entry referrer.
+
+  Two consent purposes gate it separately: click ids such as `gclid` and `msclkid` need `advertising`, and `utm_*` parameters and the entry record need `analytics`. A group the visitor has not granted is absent from the context rather than empty. A refusal deletes the stored values and forgets the capture, so a later grant republishes nothing.
+
+  Every known click id and `utm_*` parameter is captured by default and kept for 90 days. Narrow the lists or change the window through `campaign` in the laioutrrc. A name outside the shipped `ClickId` and `CampaignParam` unions is accepted, so a network's new identifier needs no release.
+
+  Read the captured values directly with `useCampaignAttribution()`.
+
+- Compress the build's JavaScript and CSS ahead of time, by whichever route the deployment host allows.
+
+  **On Vercel**, whose CDN compresses static assets on the fly at a low brotli quality, the module now writes maximum-quality siblings at build time and hands those to browsers that accept brotli — 17–23 % fewer bytes on the wire for first-party script and style. On the reference storefront that removed 175 KiB from the mobile LCP request graph and about 560 ms of throttled LCP.
+
+  **Where Nitro serves the public directory itself** — the `node-server` and `node-cluster` presets, which is how a storefront runs on hosts such as Google Cloud Run — nothing was compressed at all, because Nitro's node server does no compression on the fly. Nitro's own `compressPublicAssets` now defaults to brotli plus gzip there, so every static asset leaves the process compressed. An explicit `nitro.compressPublicAssets` is left alone, including a deliberate `false`. Dynamic responses — the HTML document and API routes — are still uncompressed on those hosts and want compression at the load balancer.
+
+  Both are on by default in production builds. Turn the whole thing off with:
+
+  ```ts
+  export default defineNuxtConfig({
+    laioutr: { precompressAssets: false },
+  });
+  ```
+
 ## [0.49.0] - 2026-09-03
 
 ### Minor Changes
