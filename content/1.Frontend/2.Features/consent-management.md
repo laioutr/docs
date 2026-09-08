@@ -41,6 +41,8 @@ Every adapter translates its CMP's own vocabulary into this fixed shape, so the 
 
 The store keeps a single `state` object with these five booleans. Whenever the visitor accepts or revokes something in the CMP, the active adapter pushes the change into the store, and `state` updates reactively.
 
+Frontend Core splits its own [campaign attribution](/frontend/features/tracking#campaign-attribution) across two of these: ad click ids such as `gclid` are stored only under `advertising`, while `utm_*` parameters and the entry record need `analytics`.
+
 A purpose describes processing; a cookie *category* classifies an artifact. The two are not the same question, and only the first one has an answer for every recipient — a server-side subscriber forwarding orders to a warehouse writes nothing to the browser, so it has no category, but it plainly has a purpose. Adapters therefore report purposes, and a CMP that models categories maps them across. Where a CMP's vocabulary is coarser than ours the mapping loses precision: Cookiebot has one marketing bucket, so it grants `advertising` and `personalization` together and a visitor cannot separate them. That is a property of the CMP, not of this API.
 
 ## Using the consent store

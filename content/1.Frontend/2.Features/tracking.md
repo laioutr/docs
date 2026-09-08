@@ -6,7 +6,7 @@ seo:
   description: Laioutr’s analytics layer gives you one typed API to emit events. Destinations declare the consent purposes they…
 sitemap:
   loc: /frontend/features/tracking
-  lastmod: 2026-09-07
+  lastmod: 2026-09-08
   changefreq: monthly
   priority: 1.0
 
@@ -114,6 +114,7 @@ Every event carries a `contexts` object built at enrichment time, so payloads st
 | `market` | The active market, language and currency |
 | `session` | `authStatus`, visitor and session tokens, a hashed `customerId`, and the `entryReferrer` captured on entry |
 | `consent` | The visitor's granted purposes at emission time |
+| `campaign` | `clickIds`, `params` and the `entry` record, for the ad campaign that brought the visitor |
 | `experiments` | Active allocations |
 | `delivery` | `deferred`, present only on an event that waited for a consent decision |
 
@@ -153,7 +154,7 @@ const CrmContext = defineAnalyticsContextToken('crm', {
 useAnalyticsContexts().register(CrmContext, () => useCrmProfile().id, { refreshOnDelivery: true });
 ```
 
-Of Laioutr's own contexts, `session` and `consent` are marked this way. `page`, `market` and `experiments` keep their emit-time values.
+Of Laioutr's own contexts, `session`, `consent` and `campaign` are marked this way. `page`, `market` and `experiments` keep their emit-time values.
 
 ## How consent gates delivery
 
@@ -189,6 +190,62 @@ track: (event) => {
 ```
 
 To transform a held event on its way out, tap [`frontend-core:analytics:redeliver`](/frontend/features/hooks).
+
+## Campaign attribution
+
+A merchant pays for an ad, a visitor clicks it, and buys something later. The parameter naming that click exists in the landing URL and nowhere else: the router rewrites the URL on the first navigation and the value is gone. Frontend Core reads it on entry and publishes it on the `campaign` context, so every event carries the campaign that brought the visitor.
+
+Three groups are captured, and they are not gated alike:
+
+| Group | Carries | Purpose |
+| --- | --- | --- |
+| `clickIds` | `gclid`, `msclkid`, `fbclid` and the other ad networks' click identifiers | `advertising` |
+| `params` | The `utm_*` set an operator writes into the URL themselves | `analytics` |
+| `entry` | `landingPage` and `referrer`, naming where the visit began | `analytics` |
+
+Click ids sit under `advertising` because Google and Microsoft gate their own storage of those ids on an advertising signal. A group the visitor has not granted is **absent from the context**, rather than present and empty.
+
+Capture itself runs before the visitor answers, because the values would be gone by the time they did, and the result is held in memory. What the purpose gates is storage and publication. A refusal deletes the stored values and forgets the capture, so a later grant republishes nothing.
+
+### What is captured by default
+
+Ten click ids: `gclid`, `gbraid`, `wbraid`, `msclkid`, `fbclid`, `ttclid`, `twclid`, `li_fat_id`, `dclid`, `rdt_cid`.
+
+Nine campaign parameters: `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`, `utm_id`, `utm_source_platform`, `utm_creative_format`, `utm_marketing_tactic`.
+
+A capture is kept for 90 days, which is what both Google and Microsoft publish for their own click-id cookies. Narrow the lists or change the window with `config.campaign` in the laioutrrc:
+
+```jsonc [laioutrrc.json]
+{
+  "config": {
+    "campaign": {
+      "clickIds": ["gclid", "msclkid"],
+      "params": ["utm_source", "utm_medium", "utm_campaign"],
+      "retentionDays": 30
+    }
+  }
+}
+```
+
+A name outside the shipped `ClickId` and `CampaignParam` unions is accepted and behaves identically, so a network introducing a new identifier needs no release; it simply gets no autocomplete. Those lists are also the boundary against hostile input: a name you did not configure is never kept, whether it arrives in the URL or in a cookie some other page on the registrable domain wrote.
+
+### One record is one touch
+
+A landing URL carrying any configured parameter replaces both halves of the record, so a click id from one campaign is never reported beside the campaign text of another.
+
+The entry record follows the same touch. `landingPage` is the origin and path with the query stripped, since the campaign parameters are carried individually and the rest of a landing query is whatever the visitor happened to paste. A referrer from the storefront's own origin is dropped, because arriving from another page of the site is a navigation rather than an entry. A direct visit stores nothing at all: its landing page is simply the page the visitor opened, and there is no referrer to name.
+
+A value longer than 256 characters is dropped whole rather than truncated. Half a click id is worse than none, because it still looks like one.
+
+### Reading it yourself
+
+`useCampaignAttribution().ensure()` returns the same value the context carries, for code that wants the campaign without waiting for an event:
+
+```ts
+const { clickIds, params, entry } = useCampaignAttribution().ensure();
+```
+
+It applies the same consent gate, so a group the visitor has not granted is absent here too, and reading never extends the retention window.
 
 ## Building your own destination
 
@@ -306,6 +363,7 @@ For setup and options, see the **[GTM app documentation](/apps/app-docs/gtm)**.
 
 - Emit with **`useAnalytics().track(Token, payload)`** using tokens from `@laioutr-core/core-types/analytics` (`web/*`) and `@laioutr-core/canonical-types/analytics` (`ecommerce/*`). Payload slots accept orchestr entities, which are projected at emit time.
 - **Ambient contexts** — page, market, session, consent, experiments — are attached for you; add or override them with `useAnalyticsContexts()`, and mark one `refreshOnDelivery` when its value follows the consent decision rather than the moment of the emission.
+- **Campaign attribution** rides on the `campaign` context, captured from the landing URL on entry. Click ids need `advertising`; `utm_*` and the entry record need `analytics`. Read it directly with `useCampaignAttribution().ensure()`.
 - **Consent gates delivery per destination.** Declare `consent: { purposes: [...] }`; there is no ungated path, and events emitted before the visitor decides are held rather than dropped. A replayed event arrives with `delivery` set to `{ deferred: true }`. Declare `onDenied` instead to receive events under denial and degrade rather than go silent.
 - **Add a backend** with `defineAnalyticsDestination({ id, consent, track })` registered from a client plugin, or `subscribeToAnalytics` in a Nitro plugin for server-side recipients. `readAnalyticsIdentity(event)` gives server code the visitor and session tokens off a request.
 - **Debug in dev** with `laioutr.dev.analyticsDebug` to log the full event stream, and `laioutr.dev.consentDebug` to grant every purpose without a CMP installed.
