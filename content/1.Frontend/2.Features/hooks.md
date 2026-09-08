@@ -20,6 +20,21 @@ Every hook uses one of four **mechanics**, which decide when your handler runs a
 
 Each hook also has a **dispatch**, shown on its card. *Synchronous* handlers run inline and are not awaited — set values immediately, since a returned promise is ignored. *Asynchronous* handlers may `await`. Dispatch is a property of the individual hook, not of its mechanic.
 
+### A throwing handler does not fail the caller
+
+Every result-returning hook guards each handler on its own. One that throws is skipped with a warning, the remaining handlers still run, and the value keeps threading, so the caller falls back at worst to what it seeded. This matters most inside a render, where SSR has no error boundary: before, a handler an app installed could fail the page. A handler that mutates `result.value` in place and then throws keeps that mutation.
+
+### Implementing a result-returning hook of your own
+
+`getHookResult` and `useHookResult` are auto-imported, so a package outside Frontend Core can offer this same pattern without restating the synchronous-caller trick that makes a handler's `result.value` readable on the next line:
+
+```ts [app/composables/useBadgeLabel.ts]
+export const useBadgeLabel = (product: Product) =>
+  useHookResult('acme:badge:label', { product }, defaultLabel(product));
+```
+
+Pass a seed and the hook behaves as a **filter**, each handler receiving the previous one's output. Omit it and it behaves as an **override**, with `result.value` starting `undefined` until a handler sets it. `useHookResult` reads the Nuxt app for you; `getHookResult` takes one explicitly, for code that already holds it.
+
 ## Frontend Core Hooks
 
 These hooks run on the client. Register them in a Nuxt plugin with [`nuxtApp.hook()`](https://nuxt.com/docs/3.x/api/composables/use-nuxt-app#hookname-cb).
@@ -101,6 +116,42 @@ whenItFires: Before the default logic, when switching to a different market.
 ---
 
 Take over the URL used when switching to a different market, which may include a change of host.
+::
+
+### Link Intent
+
+::hook-meta
+---
+name: frontend-core:link:intent
+title: Link intent
+surface: client
+register: nuxt-plugin
+dispatch: sync
+kind: lifecycle
+payload:
+  - { field: path, type: string, description: The resolved in-app path the visitor is heading to. Never an external URL. }
+  - { field: page, type: MetaPage, description: The page matched for that path. }
+  - { field: market, type: RenderMarket, description: The market resolved for the target path, not the one the visitor is currently on. }
+  - { field: language, type: RenderLanguage, description: The language resolved for the target path. }
+whenItFires: When a visitor rests on or tabs to an in-app link, after a short delay a passing cursor does not survive. Once per link per intent.
+---
+
+Warm what the next page will need. Frontend Core already fetches that page's render config on this signal, so opening the link can cost no request at all; use the hook to load your own work alongside it.
+
+`market` and `language` are resolved for the **target**, which a link may cross, so a link into another market reports where it lands rather than where the visitor is.
+
+Nothing reports the intent ending and a request already sent is never cancelled, so keep the handler cheap.
+
+#example
+```ts [app/plugins/warm-next-page.ts]
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.hook('frontend-core:link:intent', ({ path, market, language }) => {
+    if (!path.startsWith('/products/')) return;
+
+    useMyCatalogStore().prime({ path, market, language });
+  });
+});
+```
 ::
 
 ### Page Renderer

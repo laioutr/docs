@@ -6,7 +6,7 @@ seo:
   description: To successfully host a Laioutr frontend on your own infrastructure, you'll need to provision the required components.
 sitemap:
   loc: /hosting/bring-your-own-server-byos/infrastructure
-  lastmod: 2026-04-08
+  lastmod: 2026-09-08
   changefreq: monthly
   priority: 1.0
 
@@ -33,6 +33,19 @@ sitemap:
 - **HTTPS Support**: SSL/TLS certificates for secure communication and proper content delivery.
 - **DNS Configuration**: Ability to configure DNS records for your frontend domain(s).
 - **Firewall Rules**: Properly configured firewall rules to allow webhook traffic from Laioutr Cockpit IP ranges.
+
+## Health Checks
+
+Point your platform's liveness probe at `GET /api/frontend/health`. It answers `{"status":"ok"}` with `cache-control: no-store`.
+
+The endpoint is deliberately shallow. It resolves no market, page, cache or upstream, so it reports that the server can run a handler and nothing more.
+
+That shallowness is the point, because probing a content path instead does not work reliably:
+
+- A platform healthcheck arrives with the host's own `Host` header, which matches no configured market.
+- A project with nothing published answers 404 on every content path.
+
+Either case fails a container that is running perfectly well. Railway has taken healthy containers out of rotation this way.
 
 ## Geographic Distribution
 
