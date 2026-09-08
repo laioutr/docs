@@ -354,7 +354,7 @@ This validates *shape and safety*, not *truthfulness*: it can’t tell whether `
 
 ## API endpoints (reference)
 
-The frontend-core module registers these handlers; you don’t implement them. All are behind the `Authorization: Bearer <projectSecretKey>` gate that protects every `/api/laioutr/*` route, so they are also drivable server-to-server (e.g. from the Cockpit Studio MCP server).
+The frontend-core module registers these handlers; you don’t implement them. These are the platform-internal paths the Studio picker calls. The same five operations are exposed to your own clients at `/api/public/media/*`, authorized by a project-scoped restricted key — that is the surface to build against, and its request bodies, response shapes, and error codes are documented in full under [Assets](/data-api/management-api/assets).
 
 | Endpoint | Purpose |
 |----------|---------|
