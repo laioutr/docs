@@ -110,6 +110,7 @@ The module expects configuration under the key **`'@laioutr-app/shopify'`** in `
 | **`customerAccountApiClientId`** | `string` | OAuth2 **Client ID** for the **Customer Account API** app (client type Confidential). |
 | **`customerAccountApiClientSecret`** | `string` | OAuth2 **Client Secret** for the same Customer Account API app. Keep this in private runtime config. |
 | **`redirectUri`** | `string` | OAuth2 **redirect URI** (callback URL) that you also configured in the Customer Account API app, e.g. `https://your-frontend.com/api/orchestr/action/oauth/callback`. |
+| **`analyticsIds`** | `object` | Optional. `{ stripGidPrefix: true }` sends third-party analytics destinations a plain `123` instead of `gid://shopify/Product/123`, across the id fields on commerce events. A cart id also drops its `?key=` part. `fields` **replaces** the default field set outright; `excludeDestinations` exempts a destination by id. The project's own analytics ingest always receives the gid, so Shopify's event forwarding is unaffected. Off by default. |
 
 ### Example `nuxt.config.ts`
 

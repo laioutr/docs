@@ -439,11 +439,51 @@ export default defineNuxtPlugin({
 ```
 ::
 
-#### Redaction is global, not per destination
+::hook-meta
+---
+name: frontend-core:analytics:deliver
+title: Shape an analytics event for one destination
+surface: client
+register: nuxt-plugin
+dispatch: sync
+kind: filter
+payload:
+  - { field: destination, type: '{ id: string }', description: The destination that is about to receive this event. }
+  - { field: consent, type: "'granted' | 'denied'", description: 'Whether the visitor consented to this destination. denied reaches only a destination that declares onDenied.' }
+  - { field: result, type: '{ value: AnalyticsEvent }', description: 'Pre-seeded with the event that destination is about to receive. Reassign result.value to change it for this destination alone.' }
+whenItFires: Once per destination, per delivery, immediately before the destination is called. Never for the transport that carries events to the project's own ingest endpoint.
+---
 
-The bus hands **the same event object** to every eligible destination. There is no seam between enrichment and an individual destination, so an app cannot give one destination a redacted payload and another the full one — whatever you change in `:enrich` or `:project`, every destination sees.
+Give one destination a different event from every other. This is the only seam between enrichment and an individual destination.
 
-A destination author can of course shape their own output inside `track()`, since that code owns what it sends. What you cannot do from outside is redact someone else's destination. If two destinations need genuinely different data, that difference has to live in the destinations themselves.
+Copy rather than mutate. Every destination holds the same object and the transport batches it for a later request, so an in-place edit reaches recipients you did not mean to change.
+
+#example
+```ts [app/plugins/analytics-deliver.ts]
+export default defineNuxtPlugin({
+  enforce: 'post',
+  setup(nuxtApp) {
+    nuxtApp.hook('frontend-core:analytics:deliver', ({ destination, result }) => {
+      if (destination.id !== 'gtm') return;
+
+      // Keep the visitor identity out of this one destination
+      const { session, ...contexts } = result.value.contexts;
+      result.value = { ...result.value, contexts };
+    });
+  },
+});
+```
+::
+
+#### Redaction: global or per destination
+
+`:emit`, `:enrich` and `:project` all run once per event, before the fan-out. Whatever they change, every destination sees. Use them for a change that belongs to the event itself.
+
+To give one destination different data, use `frontend-core:analytics:deliver`. It fires per destination, immediately before that destination is called, and `result.value` starts as the event that destination would otherwise have received.
+
+One destination is exempt: the transport that carries events to the project's own ingest endpoint. The recipient fan-out for server-side subscribers happens there, and those subscribers declare their own consent requirements, so a handler must not be able to reshape what they receive. A destination declares this role with `stage: 'transport'`, which only Frontend Core's own transport sets.
+
+A destination author can also shape their own output inside `track()`, since that code owns what it sends.
 
 ## Orchestr Client Hooks
 

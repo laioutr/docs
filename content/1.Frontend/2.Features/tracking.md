@@ -302,7 +302,7 @@ What that changes:
 
 ### Reshaping events on the way out
 
-Four synchronous Nuxt hooks sit on the pipeline: `frontend-core:analytics:emit` (veto or pre-transform), `:enrich` (the whole event), `:project` (one entity), and `:redeliver` (an event that waited for a consent decision). Handler ordering, worked redaction examples, and the limit that redaction is global rather than per-destination are covered in [Hooks](/frontend/features/hooks).
+Five synchronous Nuxt hooks sit on the pipeline: `frontend-core:analytics:emit` (veto or pre-transform), `:enrich` (the whole event), `:project` (one entity), `:redeliver` (an event that waited for a consent decision), and `:deliver` (the copy one destination is about to receive). Handler ordering, worked redaction examples, and which hooks change the event for every destination rather than one are covered in [Hooks](/frontend/features/hooks).
 
 ## Receiving events on the server
 
