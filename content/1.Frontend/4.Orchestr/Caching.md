@@ -24,7 +24,7 @@ Orchestr maintains four separate cache layers, all stored under the `cache:orch:
 | Layer           | Cached data                                                        | Key shape                                          | Configured on              |
 | --------------- | ------------------------------------------------------------------ | -------------------------------------------------- | -------------------------- |
 | **Queries**     | Query handler results (IDs, totals, filters, optional passthrough) | `{token}:{env}:{offset}-{limit}:{sort}:{filters}:{input}` | Query handler `cache` |
-| **Links**       | Link handler results (source/target ID mappings)                   | `{token}:{env}:{sourceIds}:{offset}-{limit}:{sort}:{filters}` | Link handler `cache` |
+| **Links**       | Link handler results, one entry per source entity                  | `{token}:{env}:{sourceId}:{offset}-{limit}:{sort}:{filters}` | Link handler `cache` |
 | **Components**  | Resolved entity components (per entity, per component)             | `{entityType}:{entityId}:{component}:{env}:{keySuffix?}` | Component resolver `cache` |
 | **Page index**  | Enumerated pages, search results, counts, locate results           | `{tier}:{pageType}:{market}:{locale}:…`            | Page index `cache`         |
 
@@ -126,6 +126,8 @@ You usually should not. Orchestr keys the token, the environment, the requested 
 
 `buildCacheKey` replaces only the trailing input segment. Returning `null` or `undefined` still refuses the cache, but prefer `shouldBypassCache` for that — it says so without also claiming to build a key.
 
+For a **link**, `buildCacheKey` runs once per source entity, and `args.entityIds` holds the one source its key is for. So returning `cacheKeys.forEntityIds(args.entityIds)` names that source rather than the request, and returning `null` refuses the cache for that source alone while its siblings stay cached.
+
 ### Query cache example
 
 ```ts
@@ -153,7 +155,30 @@ export default defineMyAppLink({
 });
 ```
 
-A link key already carries the source entity ids, sorted, as a bounded digest. Your handler never has to build that segment.
+### One link entry per source entity
+
+A link handler is called with a set of source ids, but the cache stores **one entry per source**. An
+entry therefore serves every later request whose set contains that source, so a listing that scrolls,
+re-sorts or searches asks the handler only for the sources it has not seen. A partial hit costs one
+batch read and one handler call, exactly as a full miss does.
+
+Three consequences for a handler author:
+
+- **Your handler never builds the id segment.** The runner keys the source itself.
+- **A subset call is normal.** `entityIds` holds what the cache could not answer, which is often
+  fewer ids than the request carried. Resolve those and return links for them.
+- **`validate` judges one source.** The response it receives holds that source's link, so `links`
+  has one entry or none.
+
+A source your handler returns no link for is stored as an absence, so it is asked for once rather
+than on every request. Downstream it still arrives as `{ sourceId, targetIds: [] }`.
+
+::warning
+A cached link handler must not write to `passthrough`. A cache hit skips the handler, so those
+writes never happen, and a partial hit makes them cover only the sources it had to resolve — a
+consumer of the token cannot tell either case from a handler that wrote nothing. Orchestr warns
+about this once per link in development. Read from `passthrough` freely: only writing is affected.
+::
 
 ### Passthrough and query cache
 

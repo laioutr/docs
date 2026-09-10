@@ -54,7 +54,7 @@ When *not* to use this pattern: the next request depends on the write completing
 
 ## Cache key composition for multi-tenant safety
 
-Userland cache instances live in a global namespace (`cache:orchestr:userland:<prefix>`). When the same connector serves multiple tenants, locales, or storefronts in one deployment, you have to fold the differentiating value into either the prefix or the key. Skipping this is the single highest-impact bug in connector code: rotating credentials silently serves stale data from the previous tenant, and locale-specific data leaks across markets.
+Userland cache instances live in a global namespace (`cache:orch:u:<prefix>`). When the same connector serves multiple tenants, locales, or storefronts in one deployment, you have to fold the differentiating value into either the prefix or the key. Skipping this is the single highest-impact bug in connector code: rotating credentials silently serves stale data from the previous tenant, and locale-specific data leaks across markets.
 
 There are two valid placements, with different lifecycle properties.
 
@@ -107,7 +107,9 @@ const key = `${cacheKeys.forClientEnv(clientEnv)}:${cacheKeys.escape(productId)}
 | `cacheKeys.escape(value)`, `cacheKeys.unescape(value)` | One segment made safe to sit between colons, and the inverse |
 | `cacheKeys.forEntityIds(ids)` | A bounded, fixed-length segment for a set of entity ids, so a key stops growing with the page size. The ids are sorted before hashing, so the same set keys the same entry however it arrives |
 
-A query or link handler's `buildCacheKey` needs only `forEntityIds`: the runner supplies the environment and the pagination limit around whatever it returns.
+A query or link handler's `buildCacheKey` usually needs none of these. The runner already keys the environment, the entity input and the list shape around whatever it returns, so a key naming those again only repeats bytes. Reach for one to name something the runner cannot see.
+
+A **link** handler in particular should not call `forEntityIds`. The link cache stores one entry per source entity and `buildCacheKey` runs once per source, so `entityIds` already holds that one source — digesting it only writes the source id into the key twice. See [Caching](/frontend/orchestr/caching#one-link-entry-per-source-entity).
 
 ## The anti-pattern to avoid
 
