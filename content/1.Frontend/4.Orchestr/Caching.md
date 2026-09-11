@@ -24,7 +24,7 @@ Orchestr maintains four separate cache layers, all stored under the `cache:orch:
 | Layer           | Cached data                                                        | Key shape                                          | Configured on              |
 | --------------- | ------------------------------------------------------------------ | -------------------------------------------------- | -------------------------- |
 | **Queries**     | Query handler results (IDs, totals, filters, optional passthrough) | `{token}:{env}:{offset}-{limit}:{sort}:{filters}:{input}` | Query handler `cache` |
-| **Links**       | Link handler results, one entry per source entity                  | `{token}:{env}:{sourceId}:{offset}-{limit}:{sort}:{filters}` | Link handler `cache` |
+| **Links**       | Link handler results, one entry per source entity                  | `{sourceType}:{sourceId}:{token}:{env}:{offset}-{limit}:{sort}:{filters}` | Link handler `cache` |
 | **Components**  | Resolved entity components (per entity, per component)             | `{entityType}:{entityId}:{component}:{env}:{keySuffix?}` | Component resolver `cache` |
 | **Page index**  | Enumerated pages, search results, counts, locate results           | `{tier}:{pageType}:{market}:{locale}:…`            | Page index `cache`         |
 
@@ -162,6 +162,9 @@ entry therefore serves every later request whose set contains that source, so a 
 re-sorts or searches asks the handler only for the sources it has not seen. A partial hit costs one
 batch read and one handler call, exactly as a full miss does.
 
+The key opens with the source entity's type and id — the same address the component cache uses — so
+one prefix reaches everything cached about an entity in either layer.
+
 Three consequences for a handler author:
 
 - **Your handler never builds the id segment.** The runner keys the source itself.
@@ -174,10 +177,15 @@ A source your handler returns no link for is stored as an absence, so it is aske
 than on every request. Downstream it still arrives as `{ sourceId, targetIds: [] }`.
 
 ::warning
-A cached link handler must not write to `passthrough`. A cache hit skips the handler, so those
-writes never happen, and a partial hit makes them cover only the sources it had to resolve — a
-consumer of the token cannot tell either case from a handler that wrote nothing. Orchestr warns
-about this once per link in development. Read from `passthrough` freely: only writing is affected.
+**A cached link handler's `passthrough` writes reach a consumer only on a cache miss.** A hit skips
+the handler, so the writes never happen, and a partial hit makes them cover only the sources it had
+to resolve. A consumer reading the token cannot tell either case from a handler that wrote nothing.
+
+That is fine where the consumer resolves the data itself and treats the token as a shortcut. It is
+silently wrong where the token is the consumer's **only** source — that consumer returns nothing on
+every hit. If a resolver depends on a link's passthrough, the link cannot be cached.
+
+Orchestr warns once per link in development. Reading from `passthrough` is unaffected.
 ::
 
 ### Passthrough and query cache
