@@ -183,9 +183,11 @@ to resolve. A consumer reading the token cannot tell either case from a handler 
 
 That is fine where the consumer resolves the data itself and treats the token as a shortcut. It is
 silently wrong where the token is the consumer's **only** source — that consumer returns nothing on
-every hit. If a resolver depends on a link's passthrough, the link cannot be cached.
+every hit.
 
-Orchestr warns once per link in development. Reading from `passthrough` is unaffected.
+So: if a resolver depends on a link's passthrough, either the link cannot be cached, or the link
+should carry the data itself. A handler that returns `entities` and declares them with `provides`
+puts them in the cached entry, where they survive a hit. Reading from `passthrough` is unaffected.
 ::
 
 ### Passthrough and query cache
