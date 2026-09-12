@@ -128,6 +128,22 @@ You usually should not. Orchestr keys the token, the environment, the requested 
 
 For a **link**, `buildCacheKey` runs once per source entity, and `args.entityIds` holds the one source its key is for. So returning `cacheKeys.forEntityIds(args.entityIds)` names that source rather than the request, and returning `null` refuses the cache for that source alone while its siblings stay cached.
 
+### The component segment
+
+A handler may return different data for different requested components: fewer entity components, a narrower upstream fetch, a smaller passthrough dump. So the components a request asks for are part of the key.
+
+The segment is bounded by what the handler declares:
+
+| Handler | Keyed by |
+| ------- | -------- |
+| No `provides`, no `includePassthrough` | nothing — the key is unchanged |
+| `provides` | the requested components that appear in `provides` |
+| `includePassthrough: true` | every requested component |
+
+Two requests asking for different component sets therefore get their own entries, and neither evicts the other.
+
+**The contract this rests on:** narrow your **stored** value only by the components you declare in `provides`, plus your passthrough dump where `includePassthrough` is set. Narrowing an upstream fetch by any other component is safe while that narrowing reaches nothing the cache keeps — a fragment that shapes only the passthrough of an uncached handler, for instance.
+
 ### Query cache example
 
 ```ts
@@ -192,7 +208,7 @@ puts them in the cached entry, where they survive a hit. Reading from `passthrou
 
 ### Passthrough and query cache
 
-When a query handler stores data in `passthrough` that component resolvers depend on, set `includePassthrough: true`. The cache then stores and restores the passthrough dump alongside the query result. If a cached entry was stored without passthrough but the current request needs it, the cache returns a miss so the handler re-runs.
+When a query handler stores data in `passthrough` that component resolvers depend on, set `includePassthrough: true`. The cache then stores and restores the passthrough dump alongside the query result. If a cached entry was stored without passthrough but the current request needs it, the cache returns a miss so the handler re-runs. Because that dump is narrowed by `requestedComponents`, an entry carrying one is keyed by the request's full component set. See [The component segment](#the-component-segment).
 
 ## Component cache
 
