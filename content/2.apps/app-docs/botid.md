@@ -13,7 +13,7 @@ sitemap:
 
 ## Overview
 
-The `@laioutr-app/botid` package makes [Vercel BotID](https://vercel.com/docs/botid) the [bot-protection provider](/apps/app-development/bot-protection-providers) of a Laioutr storefront. It checks the actions the project lists — a newsletter sign-up, a login, a contact form — and rejects a request that BotID does not classify as a person.
+The `@laioutr/app-botid` package makes [Vercel BotID](https://vercel.com/docs/botid) the [bot-protection provider](/apps/app-development/bot-protection-providers) of a Laioutr storefront. It checks the actions the project lists (a newsletter sign-up, a login, a contact form) and rejects a request that BotID does not classify as a person. For how bot protection works in a storefront, read [Bot Protection](/frontend/features/bot-protection).
 
 The app uses BotID's Basic check level only. It runs only on storefronts hosted on Vercel.
 
@@ -21,10 +21,9 @@ The app uses BotID's Basic check level only. It runs only on storefronts hosted 
 
 ### Install the module
 
-```ts
-// nuxt.config.ts
+```ts [nuxt.config.ts]
 export default defineNuxtConfig({
-  modules: ['@laioutr-app/botid'],
+  modules: ['@laioutr/app-botid'],
 });
 ```
 
@@ -60,7 +59,7 @@ On the server, the app asks BotID about each request to a protected action:
 - Any other request is rejected with 403, including verified bots such as search-engine crawlers.
 - When BotID cannot answer, the project's `whenUnavailable` decides.
 
-A rejected request reaches the storefront as an error. Show a message with `botProtectionErrorOf(error)` from `#frontend/bot-protection`, which returns `'rejected'` or `'unavailable'` for these errors.
+A rejected request reaches the storefront as an error. [Show a message](/frontend/features/bot-protection#show-a-message-when-a-request-is-rejected) with `botProtectionErrorOf(error)` from `#frontend/bot-protection`, which returns `'rejected'` or `'unavailable'` for these errors. BotID never shows an interactive challenge, so `'cancelled'` does not occur.
 
 In development (`nuxi dev`), BotID classifies every request as a person without contacting Vercel.
 
@@ -82,7 +81,7 @@ The app starts BotID only when a visitor triggers a protected action, and it add
 
 ## Summary checklist
 
-- Add **@laioutr-app/botid** to Nuxt modules.
+- Add **@laioutr/app-botid** to Nuxt modules.
 - List the actions to protect under **config.botProtection.actions** in `laioutrrc.json`.
 - Choose **whenUnavailable** if `open` does not fit.
 - Leave Deep Analysis off in the Vercel dashboard.
@@ -90,4 +89,4 @@ The app starts BotID only when a visitor triggers a protected action, and it add
 
 ## Changelog
 
-All changelogs are managed in **`CHANGELOG.md`** in the package's GitHub repository. This app does not currently have a [public repository under the Laioutr organization](https://github.com/orgs/laioutr/repositories?q=&type=public); when it is published there, use that repo's **`CHANGELOG.md`** for release notes.
+Version history is maintained in [`CHANGELOG.md`](https://github.com/laioutr/app-botid/blob/main/CHANGELOG.md) in the public repository [**laioutr/app-botid**](https://github.com/laioutr/app-botid).

@@ -540,6 +540,90 @@ export default defineNuxtPlugin((nuxtApp) => {
 });
 ```
 
+### Action Request Hooks
+
+Two hooks around each HTTP request that `fetchAction` sends. `:prepare` adds request headers, and `:retry` decides whether a failed request goes out once more. [Bot protection](/frontend/features/bot-protection) uses both: `:prepare` attaches the provider's proof, and `:retry` sends a step-up proof after the server asks for one.
+
+Unlike the `fetch:*` hooks, which fire once per `fetchAction` call, `:prepare` fires once per request. A call that is retried fires it twice.
+
+::hook-meta
+---
+name: orchestr:action:request:prepare
+title: Prepare an action request
+surface: client
+register: nuxt-plugin
+dispatch: async
+kind: modify
+payload:
+  - { field: token, type: ActionToken, description: The action being called. }
+  - { field: input, type: unknown, description: The action input. }
+  - { field: headers, type: 'Record<string, string>', description: 'Starts empty for each request. Add entries in place; they are sent with the request.' }
+  - { field: previousError, type: unknown, description: 'The error of the first request. Set only on the retry that orchestr:action:request:retry asked for.', optional: true }
+whenItFires: Before every action request fetchAction sends, including the retry, and during server-side rendering as well as in the browser.
+firedBy: [fetchAction, useFetchAction, useQueryAction, useMutationAction]
+related:
+  - { label: Bot Protection, to: /frontend/features/bot-protection }
+---
+
+Attach headers an action request needs, such as a CSRF token or a proof from a bot-protection vendor. Handlers are awaited, so you can load a script or fetch a token first.
+
+A handler that throws **cancels the call**: no request is sent, and `fetchAction` rejects with that error. This is different from the result-returning hooks, where a throwing handler is skipped.
+
+#example
+```ts [app/plugins/csrf-header.ts]
+export default defineNuxtPlugin((nuxtApp) => {
+  let csrfToken: string | undefined;
+
+  nuxtApp.hook('orchestr:action:request:prepare', async ({ token, headers, previousError }) => {
+    if (!token.startsWith('ecommerce/customer/')) return;
+
+    // Fetch a fresh token on first use, and on the retry after the server rejected an expired one
+    if (!csrfToken || previousError !== undefined) {
+      csrfToken = (await $fetch<{ token: string }>('/api/app-acme/csrf')).token;
+    }
+    headers['x-acme-csrf'] = csrfToken;
+  });
+});
+```
+::
+
+::hook-meta
+---
+name: orchestr:action:request:retry
+title: Retry a failed action request
+surface: client
+register: nuxt-plugin
+dispatch: sync
+kind: override
+payload:
+  - { field: token, type: ActionToken, description: The action being called. }
+  - { field: input, type: unknown, description: The action input. }
+  - { field: error, type: unknown, description: 'The error of the failed request, or the error a :prepare handler threw.' }
+  - { field: result, type: '{ value: boolean | undefined }', description: 'Starts empty. Set result.value = true to send the request once more; leave it unset to let the error reach the caller.' }
+whenItFires: Once per fetchAction call, after its first request fails. Never after the retry fails.
+firedBy: [fetchAction, useFetchAction, useQueryAction, useMutationAction]
+related:
+  - { label: Bot Protection, to: /frontend/features/bot-protection }
+---
+
+Send a failed action request once more, with fresh headers from `:prepare`. A call is retried **at most once**: when the retry fails too, its error reaches the caller and this hook is not asked again.
+
+Decide from the error alone, synchronously. Ask for a retry only for an error the server raised **before the action's side effects**, such as a rejection from an [`orchestr:action:handler:guard`](#orchestr-server-hooks) handler. Retrying a request that failed halfway through a handler can run its side effects twice, for example adding an item to the cart twice.
+
+#example
+```ts [app/plugins/csrf-retry.ts]
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.hook('orchestr:action:request:retry', ({ error, result }) => {
+    // The server's guard rejected an expired CSRF token before the handler ran
+    const code = (error as { cause?: { data?: { code?: string } } }).cause?.data?.code;
+    if (code === 'acme-csrf-expired') {
+      result.value = true;
+    }
+  });
+});
+```
+::
+
 ### URL Query Parameters
 
 Two hooks control how Orchestr reads and writes URL query parameters (pagination, sorting, filters). See [URL Query Parameters](/frontend/orchestr/url-query-params#hooks) for the full reference with examples.
@@ -620,6 +704,48 @@ export default defineNuxtPlugin((nuxtApp) => {
 
 These hooks fire during **server-side** action handler execution. They are [Nitro runtime hooks](https://nitro.build/guide/plugins#nitro-hooks) and must be registered in a Nitro plugin, not a Nuxt plugin.
 
+::hook-meta
+---
+name: orchestr:action:handler:guard
+title: Guard an action request
+surface: server
+register: nitro-plugin
+dispatch: async
+kind: lifecycle
+payload:
+  - { field: token, type: ActionToken, description: The action being requested. }
+  - { field: event, type: H3Event, description: The incoming request. }
+  - { field: readInput, type: '() => Promise<unknown>', description: 'Reads the request body and validates it against the action input schema. The body is read once, however often this is called, and the route reuses that read.' }
+whenItFires: After orchestr has found the action handler, and before the body is read, initwares run or orchestr:action:handler:before fires.
+related:
+  - { label: Bot Protection, to: /frontend/features/bot-protection }
+---
+
+Refuse an action request before it costs anything. Throw an h3 error to end the request: the client receives `Action failed` with the error's status code, and the error as `data`. Frontend Core registers one handler here, which runs the [bot-protection](/frontend/features/bot-protection) check for the listed actions.
+
+Handlers run one after another, and the first one that throws ends the request. A rejection fires `orchestr:action:handler:error` and `:finally`, but not `:before`.
+
+Call `readInput()` only when the decision depends on the input. A guard that never calls it rejects a request without parsing its body. When the body fails validation, `readInput()` throws the same 400 the route would.
+
+#example
+```ts [server/plugins/newsletter-domain-guard.ts]
+const BLOCKED_DOMAINS = new Set(['mailinator.com', 'guerrillamail.com']);
+
+export default defineNitroPlugin((nitroApp) => {
+  nitroApp.hooks.hook('orchestr:action:handler:guard', async ({ token, readInput }) => {
+    if (token !== 'newsletter/subscribe') return;
+
+    const { email } = (await readInput()) as { email: string };
+    const domain = email.split('@')[1]?.toLowerCase();
+
+    if (domain && BLOCKED_DOMAINS.has(domain)) {
+      throw createError({ statusCode: 422, statusMessage: 'Unprocessable Entity', data: { code: 'acme-disposable-email' } });
+    }
+  });
+});
+```
+::
+
 ::hook-lifecycle
 ---
 family: Server handler lifecycle
@@ -634,6 +760,8 @@ phases:
   - { phase: finally, name: 'orchestr:action:handler:finally', when: Always, after success or error., payload: '{ token, output?, error?, input }' }
 ---
 ::
+
+A request whose body fails validation fires `:error` and `:finally` too, with `input` undefined, and reaches the client as `Action failed` with status 400 and the validation error as `data`.
 
 ```ts [server/plugins/action-logging.ts]
 export default defineNitroPlugin((nitroApp) => {

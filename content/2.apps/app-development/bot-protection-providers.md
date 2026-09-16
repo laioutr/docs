@@ -6,34 +6,25 @@ seo:
   description: How to build a Laioutr app that protects selected actions with a bot-protection or captcha service by implementing the BotProtectionAdapter and BotProtectionVerifier contracts from frontend-core.
 sitemap:
   loc: /apps/app-development/bot-protection-providers
-  lastmod: 2026-09-14
+  lastmod: 2026-09-15
   changefreq: monthly
   priority: 1
 ---
 
 ## What you are building
 
-A project protects selected actions — a newsletter sign-up, a login, a checkout step — by listing them in its project config. A **bot-protection provider** app decides whether a request to one of those actions came from a person. Vercel BotID, Cloudflare Turnstile, reCAPTCHA, hCaptcha and a self-hosted proof-of-work all fit the same contract.
+A **bot-protection provider** app decides whether a request to a [protected action](/frontend/features/bot-protection) came from a person. Build one when [`@laioutr/app-botid`](/apps/app-docs/botid) does not fit your hosting. Cloudflare Turnstile, reCAPTCHA, hCaptcha and proof-of-work services all fit the same contract.
 
-If `@laioutr-app/botid` fits your hosting, use it. Build your own provider only when no existing app fits.
+A provider has two halves. frontend-core owns everything around them: the list of protected actions, the outage policy, the error responses and the signed bypass.
 
-A project installs **one** provider. A provider has two halves:
+- A **client adapter** (`BotProtectionAdapter`) produces a proof for a protected request. A token adapter returns the proof as headers from `prepare()`, as Turnstile or reCAPTCHA would. A wrapper adapter hands the protected paths to a vendor script that wraps `fetch`, and returns `{}` from `prepare()`, as BotID does.
+- A **server verifier** (`BotProtectionVerifier`) checks the proof and returns a verdict.
 
-1. A **client adapter** (`BotProtectionAdapter`) that produces a proof for a protected request. Install it with `useBotProtection().setAdapter(adapter)` in a client plugin.
-2. A **server verifier** (`BotProtectionVerifier`) that checks the proof and returns a verdict. Register it with `setBotProtectionVerifier(verifier)` in a Nitro plugin.
-
-frontend-core owns everything around them: which actions are protected, the outage policy, the error responses, and the signed bypass for scripts and devtools.
-
-Providers come in two shapes:
-
-- **Token shape.** The adapter returns the proof as request headers from `prepare()`. Turnstile, reCAPTCHA, hCaptcha and proof-of-work work this way.
-- **Wrapper shape.** The vendor's script wraps `fetch` and attaches its own headers to matching requests. The adapter hands the protected paths to the vendor in `setup()` and returns `{}` from `prepare()`. BotID works this way.
-
-For the module skeleton and options handling, scaffold from the [App Starter](/apps/app-development/app-starter) and follow [App Configuration](/apps/app-development/app-configuration).
+Scaffold the module from the [App Starter](/apps/app-development/app-starter).
 
 ## The contract
 
-The types are exported under the `#frontend/bot-protection` alias:
+The types are exported from `#frontend/bot-protection`:
 
 ```ts
 import type { H3Event } from 'h3';
@@ -45,7 +36,6 @@ export interface BotProtectionRequest {
 
 export interface BotProtectionTarget extends BotProtectionRequest {
   method: string;
-  /** Same-origin pathname. */
   path: string;
 }
 
@@ -63,7 +53,6 @@ export type BotProtectionVerdict =
   | { status: 'challenge'; reason: string; data?: unknown };
 
 export interface BotProtectionServerRequest extends BotProtectionRequest {
-  /** The request input, read and validated on first call. */
   readInput(): Promise<unknown>;
 }
 
@@ -75,25 +64,25 @@ export interface BotProtectionVerifier {
 
 ::field-group
   :::field{name="setup(context)" type="({ targets }) => void | (() => void)"}
-  Runs once, in the plugin that installs the adapter. `targets` lists every protected action with the method and path its request goes to. Throw on missing configuration: the store logs a warning and installs nothing. Return a cleanup function if the adapter holds listeners.
+  Runs once when the adapter is installed, with the method and path of every protected action. Throw on missing configuration, and the adapter is not installed. Return a cleanup function if it holds listeners.
   :::
 
   :::field{required name="prepare(request)" type="(request) => Promise<Record<string, string>>"}
-  Returns the headers that prove this one request. It may load the vendor script and show an interactive challenge. Throw `BotProtectionCancelled` when the visitor closes that challenge: the action sends no request.
+  Returns the headers that prove one request. It may load the vendor script or show a challenge. Throw `BotProtectionCancelled` when the visitor closes the challenge.
   :::
 
   :::field{name="challenge(request, data)" type="(request, data) => Promise<Record<string, string>>"}
-  Returns a step-up proof after the verifier answered `challenge`. `data` is what the verifier returned. Omit it when your verifier never answers `challenge`.
+  Returns a [step-up proof](#step-up-challenges), given the `data` the verifier sent.
   :::
 
   :::field{required name="verify(event, request)" type="(event, request) => Promise<BotProtectionVerdict>"}
-  Checks the proof on the incoming request. Call `request.readInput()` only when the verdict depends on the submitted input, such as a proof bound to a hash of the form.
+  Checks the proof. Call `request.readInput()` only when the verdict depends on the submitted input.
   :::
 ::
 
 ## Registering the provider
 
-A client plugin installs the adapter:
+Install the adapter from a client plugin, and register the verifier from a Nitro plugin:
 
 ```ts [src/runtime/app/plugins/botProtection.client.ts]
 import { defineNuxtPlugin } from 'nuxt/app';
@@ -105,8 +94,6 @@ export default defineNuxtPlugin(() => {
 });
 ```
 
-A Nitro plugin registers the verifier:
-
 ```ts [src/runtime/server/plugins/botProtection.ts]
 import { defineNitroPlugin, setBotProtectionVerifier } from '#imports';
 import { verifyWithAcme } from '../lib/verifyWithAcme';
@@ -116,81 +103,53 @@ export default defineNitroPlugin(() => {
 });
 ```
 
-The module names itself as the provider, so frontend-core can warn at build time when a project lists actions and no provider is installed:
+Name the provider in your module, so the build can warn when a project lists actions but installs no provider:
 
 ```ts [src/module.ts]
 nuxt.options.runtimeConfig.laioutr = defu({ botProtection: { provider: 'acme' } }, nuxt.options.runtimeConfig.laioutr);
 ```
 
-When a verifier cannot run in the current environment — a vendor that works only on one host, a missing secret — do not register it. frontend-core then rejects every protected action, which is visible. A verifier that always throws would let every request through under the default outage policy, which is not.
+Do not register a verifier that cannot run in the current environment, for example without its secret. frontend-core then rejects every protected action. A verifier that always throws would instead let every request through under the default `open` policy.
 
 ## What the server does with a verdict
 
-For a protected action, frontend-core checks in this order:
+A valid [signed bypass](#the-signed-bypass) skips the verifier, and a missing verifier rejects the request. Otherwise the verifier runs with a 5-second limit, where a throw or a timeout counts as `unavailable`:
 
-1. A valid [signed bypass](#the-signed-bypass) lets the request through without asking the verifier.
-2. No registered verifier: the request is rejected, and the server logs this once.
-3. The verifier runs, with a limit of 5 seconds. A verifier that throws or takes longer counts as `unavailable`.
-4. The verdict decides:
-
-| Verdict | Response | `data.code` |
+| Verdict | Response | Error code |
 | --- | --- | --- |
-| `valid` | The action runs. | — |
+| `valid` | The action runs. | |
 | `invalid` | 403 | `bot-protection-rejected` |
 | `challenge` | 403, with the verifier's `data` as `challenge` | `bot-protection-challenge` |
-| `unavailable`, project policy `open` (default) | The action runs, and the server logs a warning. | — |
-| `unavailable`, project policy `closed` | 503 | `bot-protection-unavailable` |
+| `unavailable`, policy `open` (default) | The action runs, and the server logs a warning. | |
+| `unavailable`, policy `closed` | 503 | `bot-protection-unavailable` |
 
-The `reason` never reaches the browser. It is recorded on the request's trace as `laioutr.bot_protection.reason`, next to `laioutr.bot_protection.verdict` and `laioutr.bot_protection.provider`.
+The code is in the error's `data.code`, or at `data.data.code` in the response of an orchestr action. The `reason` stays on the server, in the trace attribute `laioutr.bot_protection.reason`.
 
-Choose the verdict carefully, because the outage policy only applies to `unavailable`:
-
-- Return `invalid` for a missing, expired, reused or foreign proof, and for a configuration error such as a wrong secret key. Returning `unavailable` for these would let every request through under the `open` policy.
-- Return `unavailable` only when the vendor cannot answer: a network error, a timeout, a 5xx.
-- An error that carries a `statusCode`, such as the 400 from `readInput()` on invalid input, is passed on unchanged.
+The outage policy applies only to `unavailable`. Return `invalid` for a missing, expired, reused or foreign proof, and for a configuration error such as a wrong secret key. Return `unavailable` only when the vendor cannot answer. An error with a `statusCode`, such as the 400 from `readInput()` on invalid input, passes through unchanged.
 
 ## When the vendor script does not load
 
-A client that cannot load the vendor's script cannot produce a proof. The adapter may then send the header `x-laioutr-bot-protection-client-outage: 1` (exported as `BOT_PROTECTION_CLIENT_OUTAGE_HEADER`) instead of a proof.
-
-A client can send that header whether or not the vendor is really down, so the header alone must never produce `unavailable`. When the verifier sees it, check the vendor's health from the server — cache the result for about 30 seconds — and answer `unavailable` only when the vendor is really unreachable. Otherwise answer `invalid`.
+An adapter that cannot load the vendor script may send `x-laioutr-bot-protection-client-outage: 1` (`BOT_PROTECTION_CLIENT_OUTAGE_HEADER`) instead of a proof. Any client can send that header, so never answer `unavailable` because of it alone: check the vendor's health from the server, cache the result for about 30 seconds, and answer `invalid` when the vendor is up.
 
 ## Step-up challenges
 
-A verifier can ask for a stronger proof — for example after a low invisible score — by answering `challenge` with the public data the client needs:
+A verifier asks for a stronger proof by answering `challenge`. Its `data` reaches the browser, so put only public values in it:
 
 ```ts
 return { status: 'challenge', reason: 'low-score', data: { siteKey: config.interactiveSiteKey } };
 ```
 
-`data` is sent to the browser. Put public values in it only, never a secret.
-
-When the adapter implements `challenge()`, the client retries the action once: it calls `challenge(request, data)` and sends its headers with the second request. Without `challenge()`, or when the second request fails too, the error reaches the caller.
-
-A storefront shows a message for these errors with `botProtectionErrorOf(error)`, which returns `'rejected'`, `'unavailable'`, `'cancelled'` or `undefined`:
-
-```ts
-import { botProtectionErrorOf } from '#frontend/bot-protection';
-
-try {
-  await subscribe.mutateAsync(input);
-} catch (error) {
-  if (botProtectionErrorOf(error) === 'cancelled') return;
-  toaster.addToast({ title: 'Please try again.', variant: 'error' });
-}
-```
+If the adapter implements `challenge()`, the client calls it and retries the action once with its headers. Without `challenge()`, or when the retry fails, the caller receives the error as `'rejected'`.
 
 ## Timing and consent
 
-First-party providers start at the protected action, not on page load: the adapter's `setup()` loads nothing and contacts no vendor, and the vendor's code runs when the visitor triggers a protected action. frontend-core has no consent integration for bot protection.
-
-A provider may start earlier — some vendors must run on page load to observe the visitor. If yours loads vendor code, contacts the vendor or reads device data in `setup()`, say so in its documentation, together with what the vendor states about its own purposes. Whether a provider needs consent is the project's decision, and it needs that information to make it.
+Laioutr's own providers load nothing in `setup()` and start the vendor when a visitor triggers a protected action. If yours loads vendor code, contacts the vendor or reads device data earlier, say so in its documentation, together with what the vendor states about its purposes. The project decides whether the provider needs consent.
 
 ## Protecting an app route
 
-An orchestr action needs nothing beyond its entry in the project config. A route your app registers itself — for example `POST /api/app-acme/login/start` — protects itself in three steps.
+An orchestr action needs only its entry in the project config. A route your app registers itself, such as `POST /api/app-acme/login/start`, also needs three steps, after which the project lists `app-acme/login-start` like any action.
 
-Declare the route from your module, so the adapter knows its path:
+Declare the route in your module:
 
 ```ts [src/module.ts]
 nuxt.options.runtimeConfig.public.laioutr = defu(
@@ -199,10 +158,11 @@ nuxt.options.runtimeConfig.public.laioutr = defu(
 );
 ```
 
-Call `requireBotProtection` first in the handler. It returns at once when the project does not list the id:
+Check it first in the handler:
 
 ```ts [src/runtime/server/api/app-acme/login/start.post.ts]
 export default defineEventHandler(async (event) => {
+  // Returns at once when the project does not list the id
   await requireBotProtection(event, { action: 'app-acme/login-start' });
   // …
 });
@@ -217,20 +177,20 @@ const headers = botProtection.isProtected('app-acme/login-start') ? await botPro
 await $fetch('/api/app-acme/login/start', { method: 'POST', body, headers });
 ```
 
-The project lists the id `app-acme/login-start` in its config like any action.
-
 ## The signed bypass
 
-Scripts, load tests and the Nuxt DevTools run protected actions without a proof by sending a signed bypass header. The value is bound to one action and is valid for five minutes either side of its timestamp:
+A request with a valid bypass in the `x-laioutr-bypass-bot-protection` header never reaches your verifier. Scripts, load tests and the Orchestr tab of the Nuxt DevTools use it. The value is signed with the project secret key, bound to one action, and valid for five minutes either side of its timestamp:
 
-```ts
-import { BOT_PROTECTION_BYPASS_HEADER, signBotProtectionBypass } from '@laioutr-core/core-types/utils';
+```ts [scripts/subscribe-smoke-test.ts]
+import { BOT_PROTECTION_BYPASS_HEADER, signBotProtectionBypass } from '@laioutr-core/frontend-core/bot-protection';
 
-const headers = {
-  [BOT_PROTECTION_BYPASS_HEADER]: await signBotProtectionBypass(projectSecretKey, 'newsletter/subscribe', Math.floor(Date.now() / 1000)),
-};
+const bypass = await signBotProtectionBypass(process.env.LAIOUTR_PROJECT_SECRET_KEY!, 'newsletter/subscribe', Math.floor(Date.now() / 1000));
+
+await fetch('https://staging.acme-outdoor.com/api/orchestr/action/newsletter/subscribe', {
+  method: 'POST',
+  headers: { 'content-type': 'application/json', [BOT_PROTECTION_BYPASS_HEADER]: bypass },
+  body: JSON.stringify({ input: { email: 'smoke-test@acme-outdoor.com' }, clientEnv: {} }),
+});
 ```
 
-The value is signed with the project secret key, and a project without one accepts no bypass. The Orchestr tab of the Nuxt DevTools adds the header to every action it runs.
-
-The header carries a credential. Exclude `x-laioutr-bypass-bot-protection` from any request-header capture in logging or tracing.
+A project without a secret key accepts no bypass. The header carries a credential, so keep it out of request-header logging and tracing.
