@@ -143,18 +143,3 @@ If a run had to leave something out, it says so. If it could not start at all, i
 Most channels need a web address for every product. Cockpit builds it from your own product page setup, so it matches where a visitor would actually land.
 
 If your product pages are set up in an unusual way, you can write the address pattern yourself in **Product URL** — `https://shop.example.com/p/{slug}` — and that is used as-is. Leave it empty and Cockpit works the address out for you.
-
-### If your storefront blocks bots
-
-A feed is a program reading your storefront, so protection that keeps programs out keeps the feed out too. You may not notice from Studio: the preview runs in your browser, which passes the check, while Cockpit also reads your catalogue from its own server, which does not.
-
-Cockpit presents two things when it reads, and neither is something you create:
-
-- the **project secret** your storefront already shares with the platform, which identifies the caller as Cockpit. It is only ever sent to an address your project itself declares — its hosting address or one of its market domains;
-- a **protection bypass key**, which you enter under **Hosting → Vercel**. This one is checked before your storefront application even starts, which is why the project secret alone cannot get past it.
-
-If neither applies, the run fails straight away and names the protection instead of retrying quietly — a bot check never lets up on its own, and a feed that kept retrying would look like one still working.
-
-::callout{type="info"}
-Channels also **visit your product pages**, not just download the file. Google checks the price and availability on the landing page before approving an item. If your protection blocks those visits, your products are rejected even when the feed itself is perfect. See [Bot Protection](/frontend/features/bot-protection).
-::
