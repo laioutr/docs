@@ -13,9 +13,9 @@ sitemap:
 
 ## Distributr
 
-**Distributr** turns your catalogue into the file a marketing channel expects and publishes it at an address that never changes. You configure a **feed** per channel and market; Cockpit reads your storefront on a schedule, writes the file, and the channel fetches it whenever it likes. Open **Distributr** from the project sidebar.
+**Distributr** turns your catalogue into the file a marketing channel expects and publishes it at a web address that never changes. You set up one **feed** per channel and market; Cockpit reads your storefront on a schedule, writes the file, and the channel downloads it whenever it likes. Open **Distributr** from the project sidebar.
 
-Nothing is exported from a commerce platform directly. A feed reads the **same storefront a visitor sees**, so a product that is hidden, out of stock or priced differently for a market is that way in the feed too.
+A feed reads the **same storefront your visitors see**, not the shop system behind it. So a product that is hidden, out of stock, or priced differently for one market appears that way in the feed too.
 
 ### How it fits together
 
@@ -39,13 +39,13 @@ flowchart LR
   ADDR --> CH
 ```
 
-The mapping says which column carries what, the bindings say where this shop keeps each value, and the market values supply what is a decision rather than a catalogue fact.
+Three things shape what the file contains. The **column mapping** says which column carries what. The **field bindings** say where your particular shop keeps each value. The **market values** supply the things that are your decision rather than a fact about a product — what delivery costs, for instance.
 
 ### Channels
 
-Each channel ships as a **template** — the columns that channel documents, spelled the way it reads them, in the order it expects.
+Each channel comes with a ready **template**: the columns that channel asks for, named the way it reads them, in the order it expects.
 
-| Channel | File | One row per |
+| Channel | File type | One row per |
 | --- | --- | --- |
 | Google Shopping | Tab-separated | Variant |
 | Meta Commerce | CSV | Product |
@@ -53,149 +53,108 @@ Each channel ships as a **template** — the columns that channel documents, spe
 | idealo | CSV | Variant |
 | eBay File Exchange | Tab-separated | Variant |
 
-Templates follow each channel's own published specification, including the spellings that are wrong on purpose — idealo reads `decription`, and correcting it breaks the import.
+Templates follow each channel's own published specification — including the column names that look misspelled but are not. idealo really does read `decription`, and correcting it breaks the import.
 
 ::callout{type="info"}
-Some channels are also offered in an older **legacy** shape, kept for accounts already configured against it. New feeds should use the specification template: it is the one held to the channel's current documentation.
+Some channels also offer an older **legacy** template, kept for accounts already set up against it. Choose the specification template for a new feed: that is the one kept in step with the channel's current documentation.
 ::
 
 ### Creating a feed
 
-**Create feed** asks for the essentials, and the feed is created with its channel's mapping already in place — it can generate before you change anything.
+**Create feed** asks for the basics. The feed arrives with its channel's mapping already filled in, so it can generate before you change anything.
 
-::field-group{title="Feed settings"}
-  :::field{required name="Channel" type="string"}
-  Decides the columns, the file format and whether a row is a product or a variant.
-  :::
-
-  :::field{required name="Market" type="string"}
-  The market whose catalogue, prices and currency the feed reads.
-  :::
-
-  :::field{required name="Storefront endpoint" type="url"}
-  Where the catalogue is read from, for example `https://shop.example.com`.
-  :::
-
-  :::field{name="Locale" type="string"}
-  The language the feed carries. Defaults to the market's.
-  :::
-
-  :::field{name="Currency" type="ISO 4217"}
-  Leave empty to take the market's own.
-  :::
-
-  :::field{name="Format" type="csv | tsv"}
-  Leave empty to take the channel's own. Only an account configured otherwise needs to disagree.
-  :::
-
-  :::field{name="Encoding" type="UTF-8 | ISO-8859-1"}
-  UTF-8 unless the channel account expects otherwise.
-  :::
-
-  :::field{name="Refresh" type="minutes"}
-  How often the schedule regenerates the feed.
-  :::
-::
+- **Channel** — decides the columns, the file type, and whether each row is a product or a variant.
+- **Market** — decides which catalogue, prices and currency the feed reads.
+- **Storefront endpoint** — the address your storefront answers on, for example `https://shop.example.com`.
+- **Locale** — the language the feed is written in. Defaults to the market's.
+- **Currency** — leave empty to use the market's own.
+- **Format** — leave empty to use the channel's own. Only change it if your channel account expects something else.
+- **Encoding** — UTF-8, unless the channel account expects otherwise.
+- **Refresh** — how often the feed regenerates on its own.
 
 ### The feed address
 
-Every feed has a public **Feed address**, shown on its page with a copy button. It is stable and answerable **before the first run**, which is the point: a channel account is configured with a URL, and waiting for a generation to learn it is backwards.
+Every feed has a public **Feed address**, shown on its page with a copy button. You can hand it to a channel **before the feed has ever run** — which matters, because setting up a channel account starts with pasting a URL.
 
-The address carries an unguessable token, so it cannot be derived from your project or market names. Each run replaces the file; the URL never moves.
+The address contains a long random token, so nobody can guess it from your project or market name. Each run replaces the file behind that address; the address itself never changes.
 
 ### Column mapping
 
-A feed's page shows its columns as a table you can edit, reorder and extend.
+A feed's page lists its columns in a table you can edit, reorder and extend. Each column has:
 
-::field-group{title="Per column"}
-  :::field{required name="Channel column" type="string"}
-  The header the channel reads. Rename only if your account expects something else.
-  :::
-
-  :::field{name="Source field" type="string"}
-  Which catalogue value fills it.
-  :::
-
-  :::field{required name="Transform" type="string"}
-  How the value becomes what the channel accepts — a price with its currency, an availability word from that channel's vocabulary, a category path with the right separator.
-  :::
-
-  :::field{name="Constant" type="string"}
-  A literal written into every row, whatever the product says.
-  :::
-
-  :::field{name="Fallback" type="string"}
-  Used only when everything above produces nothing.
-  :::
-
-  :::field{name="Prefix / suffix" type="string"}
-  Wrapped around the result — a unit, a literal marker.
-  :::
-::
+- **Channel column** — the heading the channel reads. Rename it only if your account expects something different.
+- **Source field** — which value from your catalogue fills it.
+- **Transform** — how that value is turned into what the channel accepts: a price with its currency, an availability word from that channel's own list, a category path with the right separator.
+- **Constant** — a fixed value written into every row, whatever the product says.
+- **Fallback** — used only when everything above comes out empty.
+- **Prefix / suffix** — text wrapped around the result, such as a unit.
 
 ::callout{type="info"}
-**A fallback is not a constant.** A constant overwrites the product's own value; a fallback only fills a blank. It is how a catalogue-wide fact your shop has no field for — a marketplace condition code, a delivery time quoted the same for everything — reaches a column while a product that does carry its own value still wins.
+**A fallback is not the same as a constant.** A constant overwrites the product's own value. A fallback only fills in a blank, so a product that does have its own value keeps it. Use a fallback for something true of your whole catalogue that your shop has no field for — a marketplace condition code, or a delivery time that is the same for everything.
 ::
 
 ### Where a field lives
 
-A template asks for a field by name — `gender`, `gtin`, `taxonomy` — and never says where your shop keeps it. That is answered once per project as a **channel input** binding and shared by every feed that asks for it. Cockpit suggests paths taken from what your storefront actually returned for a real product, so you choose among fields that exist and are populated.
+A template asks for a field by name — `gender`, `gtin`, `taxonomy` — without saying where your shop keeps it, because every shop keeps it somewhere different. You answer that once per project, as a **channel input** binding, and every feed that needs the field uses it.
 
-A field nobody has bound is not fatal: the feed generates, the column is empty, and the run names it.
+Cockpit suggests the fields your storefront actually returned for a real product, so you are picking from things that exist and are filled in.
+
+Leaving a field unbound is not fatal. The feed still generates, that column is empty, and the run tells you which one.
 
 ### Market values
 
-Some values are a decision rather than a catalogue fact. They belong to the market, and every feed of that market uses them.
+Some values are a decision rather than a fact about a product. They belong to the market, and every feed of that market uses them.
 
-| Setting | What it decides |
-| --- | --- |
-| **Ships to** | The country a shipping offer applies to. Without it the offer is left out — a shipping price with no country applies nowhere. |
-| **Service name** | What to call the shipping service, e.g. `Standard`. |
-| **Shipping rate**, **Free above** | What delivery costs, and the order value above which it is nothing. |
-| **Decimal separator**, **Category separator** | What the channel account expects in a price and in a category path. |
-| **New for**, **Top seller from** | The thresholds behind the "new" and "top seller" labels. |
-| **Reference** | Dictionaries mapping your shop's words to a channel's vocabulary. A shop says `Damen`; Google takes `female`. |
+- **Ships to** — the country a delivery offer applies to. Without it the offer is left out entirely, because a delivery price with no country applies nowhere.
+- **Service name** — what to call the delivery service, for example `Standard`.
+- **Shipping rate** and **Free above** — what delivery costs, and the order value above which it is free.
+- **Decimal separator** and **Category separator** — what your channel account expects in a price and in a category path.
+- **New for** and **Top seller from** — how long a product counts as new, and the sales figure above which it is a top seller.
+- **Reference** — small dictionaries that translate your shop's own words into a channel's. Your shop says `Damen`; Google wants `female`, and nothing can work that out on its own.
 
 ### Which products go in
 
-A feed can require products to be **in stock** or to **have an image**, set a **minimum price**, and add conditions on any field. Separately, an **exclusion list** removes products by SKU — the answer for the handful of items no rule would ever describe.
+A feed can require products to be **in stock** or to **have an image**, set a **minimum price**, and add conditions on any other field. Separately, an **exclusion list** removes individual products by SKU — for the handful of items no rule would ever describe.
 
-Every product a rule removes is counted per rule, so a feed that suddenly halves tells you which rule did it.
+Whatever a rule removes is counted, rule by rule. So if a feed suddenly has half the products, you can see which rule did it.
 
 ### Running a feed
 
-A feed regenerates on its **Refresh** interval, and you can run one by hand from the list or from the feed. A manual run asks for confirmation first: regenerating a large catalogue takes minutes, cannot be stopped once started, and reads a live storefront while it serves buyers.
+A feed regenerates on its **Refresh** interval, and you can also run one by hand from the list or from the feed itself. A manual run asks you to confirm: a large catalogue takes minutes, cannot be stopped once it starts, and reads your live storefront while it is serving shoppers.
 
-Runs are **resumable** — an interrupted generation continues where it stopped rather than starting over, and a feed already running refuses a second run instead of publishing two files over each other. The list shows progress in the row, so a long run is distinguishable from a stuck one without opening anything.
+If a run is interrupted it continues from where it stopped instead of starting over, and a feed that is already running will not start a second time. The list shows progress in the row, so you can tell a long run from a stuck one without opening it.
 
-When several feeds of one market are due together they **share one read** of the catalogue. Five channels cost one pass over your products, not five.
+When several feeds of the same market come due together, they share a single read of the catalogue. Five channels cost one pass over your products, not five.
 
 ### What a run tells you
 
-The run log names the unit it is talking about:
+The run log names exactly what it is talking about:
 
 - a column the channel **requires** that came out empty;
-- a column only your **channel account** can answer — a marketplace's own category id lives in that account, and no catalogue has it. A file is rejected wholesale on first upload for exactly this, and nothing else reports it;
-- two rows claiming the **same id**, which a channel reads as one product overwriting the other;
-- a **link** that would ship a slug rather than an address;
-- which **components** the run asked your storefront for — the first thing to check when a column comes back empty.
+- a column only your **channel account** can fill — a marketplace's own category number lives in that account, and no catalogue has it. This is what gets a file rejected on the first upload, and nothing else warns you about it;
+- two rows with the **same ID**, which a channel reads as one product replacing the other;
+- a **link** that would have been a slug instead of a full address;
+- which parts of your catalogue the run asked for — the first thing to check when a column is unexpectedly empty.
 
-A run that had to degrade says so. A run that could not start says why.
+If a run had to leave something out, it says so. If it could not start at all, it says why.
 
 ### Product links
 
-Most channels need an address for every product. Cockpit builds it from your project's own product page configuration, so it matches what a visitor would land on.
+Most channels need a web address for every product. Cockpit builds it from your own product page setup, so it matches where a visitor would actually land.
 
-A project whose product pages are not configured in the usual way can state the shape directly in **Product URL** — `https://shop.example.com/p/{slug}` is then used verbatim. Leave it empty and Cockpit derives the address from the storefront endpoint and the page configuration.
+If your product pages are set up in an unusual way, you can write the address pattern yourself in **Product URL** — `https://shop.example.com/p/{slug}` — and that is used as-is. Leave it empty and Cockpit works the address out for you.
 
-### A storefront behind bot protection
+### If your storefront blocks bots
 
-A feed is a machine reading your storefront, so a storefront that keeps non-browsers out keeps the feed out too — and a browser passing the challenge in Studio's preview says nothing about it, because Cockpit also reads the catalogue from its own server.
+A feed is a program reading your storefront, so protection that keeps programs out keeps the feed out too. You may not notice from Studio: the preview runs in your browser, which passes the check, while Cockpit also reads your catalogue from its own server, which does not.
 
-Two credentials answer this, and a read presents both where both apply. The **project secret** the storefront already shares with the platform says the caller is Cockpit; it is sent only to a host the project itself declares — its hosting address or one of its market domains — and never anywhere else, whatever the endpoint says. A **protection bypass key**, entered under **Hosting → Vercel**, answers whatever stands in front of the deployment; that one is settled at the edge, before the storefront application runs, which is why no application-level secret can clear it.
+Cockpit presents two things when it reads, and neither is something you create:
 
-Where neither applies, the run fails immediately and names the protection rather than retrying quietly — a challenge never clears, and a feed that retries forever looks like one still generating.
+- the **project secret** your storefront already shares with the platform, which identifies the caller as Cockpit. It is only ever sent to an address your project itself declares — its hosting address or one of its market domains;
+- a **protection bypass key**, which you enter under **Hosting → Vercel**. This one is checked before your storefront application even starts, which is why the project secret alone cannot get past it.
+
+If neither applies, the run fails straight away and names the protection instead of retrying quietly — a bot check never lets up on its own, and a feed that kept retrying would look like one still working.
 
 ::callout{type="info"}
-Channels crawl the **product pages** as well as fetching the file — Google verifies price and availability on the landing page before approving an item. Protection that blocks those crawlers disapproves the products even when the feed itself is perfect. See [Bot Protection](/frontend/features/bot-protection).
+Channels also **visit your product pages**, not just download the file. Google checks the price and availability on the landing page before approving an item. If your protection blocks those visits, your products are rejected even when the feed itself is perfect. See [Bot Protection](/frontend/features/bot-protection).
 ::
