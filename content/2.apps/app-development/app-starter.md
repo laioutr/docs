@@ -6,7 +6,7 @@ seo:
   description: Introduction to the Laioutr App Starter — the template and starting point for new developers building Laioutr apps.
 sitemap:
   loc: /apps/app-development/app-starter
-  lastmod: 2026-07-28
+  lastmod: 2026-09-18
   changefreq: monthly
   priority: 1.0
 
@@ -38,11 +38,11 @@ The App Starter is a minimal implementation of this: it registers orchestr dirs 
 
 ## Getting the App Starter
 
-Clone or download the template from GitHub:
+Download the template from GitHub (without its git history):
 
 ```bash
 npx giget@latest gh:laioutr/app-starter
-cd app-starter
+cd laioutr-app-starter
 ```
 
 Or clone the repo directly:
@@ -65,7 +65,7 @@ After opening the App Starter, you’ll see a structure like this:
 | **`src/runtime/server/orchestr/`** | Orchestr handlers live here: e.g. `product/by-slug.query.ts`, `cart/add-item.action.ts`, `menu/base.resolver.ts`. The starter only adds a `plugins/` (e.g. Zod fix) and leaves entity folders for you. |
 | **`src/runtime/app/sections/`** | Vue components and definitions for **sections** (Studio). Starter ships an empty folder with a `.gitkeep`. |
 | **`src/runtime/app/blocks/`** | Vue components and definitions for **blocks** (Studio). Starter ships an empty folder with a `.gitkeep`. |
-| **`playground/`** | A Nuxt app that uses your module and a **laioutrrc.json** (or mock) to develop the full UI with Frontend Core. It also registers Laioutr DevTools, so you can test queries and actions (e.g. via the Orchestr Request Editor) from the same app. Run with `pnpm dev`. |
+| **`playground/`** | A Nuxt app that uses your module and your project's **laioutrrc.json** to develop the full UI with Frontend Core. It also registers Laioutr DevTools, so you can test queries and actions (e.g. via the Orchestr Request Editor) from the same app. Run with `pnpm dev`. |
 | **`test/`** | Basic module tests (e.g. Vitest). |
 
 Important details:
@@ -78,15 +78,9 @@ Important details:
 
 Before you start:
 
-- **Node.js** (>= 22.12) and **pnpm** (>= 10.15).
+- **Node.js** 22.12 or newer (we recommend 24) and **pnpm** 10 or newer. `pnpm install` stops on an older Node.js.
 - A **Laioutr project** in [Cockpit](https://cockpit.laioutr.cloud) (for fetching `laioutrrc.json` and testing with Studio).
-- Access to Laioutr’s **npm registry** (for installing dependencies). Copy `.npmrc.config` to `.npmrc` for the scope mapping, then run `npm login --registry https://npm.laioutr.cloud`. See [npm registry](/cockpit/project-settings/npm).
-
-Optional but recommended: install the [Laioutr CLI](/getting-started/next-steps/cli) to fetch and update `laioutrrc.json`:
-
-```bash
-pnpm add -g @laioutr/cli@latest
-```
+- Access to Laioutr’s **npm registry** (for installing dependencies). The starter's committed `.npmrc` maps the Laioutr scopes; run `npm login --registry https://npm.laioutr.cloud` once per machine. See [npm registry](/cockpit/project-settings/npm).
 
 ## Quick setup
 
@@ -99,10 +93,12 @@ pnpm add -g @laioutr/cli@latest
 2. **Fetch project configuration** (so the playground uses your project’s apps and config)
 
    ```bash
-   laioutr rc fetch -p <organization-slug>/<project-slug> -s <project-secret>
+   pnpm rc:fetch -p <organization-slug>/<project-slug> -s <project-secret>
    ```
 
-   If you don’t use the CLI, create or copy a `laioutrrc.json` at the project root. The playground imports it (see `playground/nuxt.config.ts`).
+   If you don’t use the CLI, create or copy a `laioutrrc.json` at the project root. The playground reads it (see `playground/nuxt.config.ts`); without it, `pnpm dev` stops and prints the fetch command.
+
+   The playground loads every app listed in `laioutrrc.json`. If `pnpm dev` stops and names apps that are not installed, add them with `pnpm add -D <app>`.
 
 3. **Run the playground**
 
