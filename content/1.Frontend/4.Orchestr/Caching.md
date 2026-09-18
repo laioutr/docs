@@ -96,6 +96,8 @@ cache: {
   buildCacheKey?: (args) => string | null | undefined,
   shouldBypassCache?: (args) => boolean,
   includePassthrough?: boolean,       // queries only
+
+  tags?: (args) => string[],          // queries only; see Invalidation
 }
 ```
 
@@ -233,6 +235,7 @@ export default defineMyAppComponentResolver({
     getKeySuffix: (clientEnv) => clientEnv.market.slug,
     components: {
       prices: { ttl: '15 minutes' },
+      visits: { ttl: '1 hour', autoInvalidate: false },
     },
   },
   resolve: async (args) => { /* ... */ },
@@ -247,6 +250,7 @@ export default defineMyAppComponentResolver({
 | `getKeySuffix` | Receives the resolved [`ClientEnv`](/frontend/orchestr/client-env) and returns a suffix appended to cache keys (e.g. market slug, channel). Same entity cached separately per suffix. Must not reference handler arguments, and must return a scalar. |
 | `components`   | Per-component overrides. Keys are component names (e.g. `'prices'`), values override `ttl` and `swr`.                                                                                |
 | `enabled`      | Set to `false` to disable caching for this resolver.                                                                                                                                 |
+| `autoInvalidate` | Defaults to `true`. Set `false` for a value the platform does not own, so an upstream change to the entity leaves it alone. See [Invalidation](#invalidation).                    |
 
 ## Storage and drivers
 
@@ -268,6 +272,108 @@ POST /api/laioutr/orchestr/clear-cache
 ```
 
 Clears both internal and userland caches. Restrict access in production.
+
+## Invalidation
+
+A TTL says how long you accept being wrong. Invalidation says you are wrong **now**.
+
+Every cache entry carries tags, and invalidating one bumps a counter that every entry holding that tag is judged against. The cost is one command whatever the tag reaches, so a tag on ten entries and a tag on ten thousand cost the same. An invalidated entry is still served, and refreshed behind the response — so an invalidation costs a visitor no latency, and a popular entry cannot start a stampede.
+
+### What is tagged for you
+
+Component and link entries carry the entity they describe. There is nothing to author:
+
+```ts
+await invalidateTags([entityTag('Product', 'gid://shopify/Product/123')]);
+```
+
+That reaches every cached component and every cached link for that product, in every market and language.
+
+### What you declare
+
+A query result is a list, and no key names the list it is. Say so:
+
+```ts
+export default defineMyAppQuery({
+  implements: ProductsByCategorySlugQuery,
+  cache: {
+    ttl: '5 min',
+    tags: (args) => [args.categorySlug],
+  },
+  resolve: async (args) => { /* ... */ },
+});
+```
+
+```ts
+await invalidateTags([listTag('winter-sale')]);
+```
+
+Declare a tag for the empty case as much as the full one: an empty listing is an entry like any other, and without a tag nothing but its TTL reaches it.
+
+Every query entry also carries its own query token, whether or not you declared anything:
+
+```ts
+await invalidateTags([queryTokenTag('ecommerce/product/by-category-slug')]);
+```
+
+That is the coarse lever, and the only one that reaches a **creation** — a new entity matches no existing entry, so no entity tag names it.
+
+Tag names carry one of three prefixes, so a name you mint can never collide with an entity id: `entity:` for one entity, `list:` for a name you declared, `query:` for a query token. An app minting its own uses its package segment, as `app-myapp:stock-feed` does below.
+
+### The API
+
+`invalidateTags(names)` bumps every name you give it. Three builders name what it bumps, so you never spell a prefix yourself:
+
+| Builder | The entries that carry it |
+| --- | --- |
+| `entityTag(type, id)` | every component and link entry for one entity |
+| `listTag(name)` | every query entry a handler tagged with that name |
+| `queryTokenTag(token)` | every entry of one query token, in every environment |
+
+All four are server auto-imports. Pass every name to **one** `invalidateTags` call rather than calling it per name: the batch goes to the backend as a single round trip, so an entity and its children cost the same as the entity alone.
+
+It needs a shared cache backend: without one it warns and does nothing, because an in-memory cache is private to one instance and there is nothing to tell the others.
+
+An app that owns its own cached data can mint its own names, prefixed with the app segment so nothing collides:
+
+```ts
+await invalidateTags(['app-myapp:stock-feed']);
+```
+
+### Opting out
+
+A component the platform does not own has no relationship to the upstream entity. Refetching a locally computed score every time a price changes upstream costs your own origin and buys nothing:
+
+```ts
+components: {
+  visits: { ttl: '1 hour', autoInvalidate: false },
+}
+```
+
+That entry is then reachable only by its TTL, or by a tag you invalidate yourself.
+
+### What invalidation does not reach
+
+**The in-process tier.** Each instance keeps a copy in memory for up to 30 seconds, and no invalidation reaches it — so a change takes effect after that window rather than instantly. Checking a counter on a batch that memory already answered would close the window at the cost of the round trip that tier exists to avoid. A render whose HTML is cached downstream for longer must skip that tier, or it bakes the short window into the long one.
+
+**A route that says it is cached already skips it.** Orchestr reads the route's own rules on every request, so `isr` and `cache` need no server code beside them:
+
+```ts
+// nuxt.config.ts
+routeRules: {
+  '/**': { isr: 3600 },
+},
+```
+
+`swr` counts too, because Nitro turns it into a `cache` rule before it reaches the server. `cache: false` turns the skip back off, and `isr` is read on its own — a deployment preset acts on `isr` where Nitro acts on `cache`, so one never cancels the other.
+
+Call `setResponseCachedDownstream` for a cache Nuxt has no rule for — a CDN configured outside the project, a reverse proxy in front of it:
+
+```ts
+setResponseCachedDownstream(event);
+```
+
+**Anything whose platform publishes no event.** Shopify has no webhook for navigation menus or for online-store Pages, so those stay bound to their TTL. Choose that TTL as the staleness you accept, because nothing else will shorten it.
 
 ## Userland cache
 
