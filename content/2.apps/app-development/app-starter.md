@@ -96,7 +96,7 @@ Before you start:
    pnpm rc:fetch -p <organization-slug>/<project-slug> -s <project-secret>
    ```
 
-   If you don’t use the CLI, create or copy a `laioutrrc.json` at the project root. The playground reads it (see `playground/nuxt.config.ts`); without it, `pnpm dev` stops and prints the fetch command.
+   If you don’t use the CLI, create or copy a `laioutrrc.json` at the project root. The playground reads it (see `playground/nuxt.config.ts`); without it, it falls back to the placeholder project in `playground/fixtures/laioutrrc.json`.
 
    The playground loads every app listed in `laioutrrc.json`. If `pnpm dev` stops and names apps that are not installed, add them with `pnpm add -D <app>`.
 
