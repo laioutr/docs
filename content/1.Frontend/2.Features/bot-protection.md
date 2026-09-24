@@ -59,13 +59,17 @@ A project installs **one** provider app:
   Invisible bot detection for storefronts hosted on Vercel or Laioutr Cloud.
   :::
 
+  :::card{target="_self" title="Cloudflare Turnstile" to="/apps/app-docs/turnstile"}
+  Bot checks with your own Turnstile widget, on any host. Shows a challenge only when Cloudflare asks.
+  :::
+
   :::card
   ---
   target: _self
   title: Build your own provider
   to: /apps/app-development/bot-protection-providers
   ---
-  Wrap Cloudflare Turnstile, reCAPTCHA, hCaptcha or a proof-of-work service in a Laioutr app.
+  Wrap reCAPTCHA, hCaptcha or a proof-of-work service in a Laioutr app.
   :::
 ::
 
