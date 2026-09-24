@@ -56,7 +56,7 @@ A project installs **one** provider app:
 
 ::card-group
   :::card{target="_self" title="Vercel BotID" to="/apps/app-docs/botid"}
-  Invisible bot detection for storefronts hosted on Vercel or Laioutr Cloud.
+  Invisible bot detection for storefronts hosted on Vercel.
   :::
 
   :::card{target="_self" title="Cloudflare Turnstile" to="/apps/app-docs/turnstile"}
