@@ -309,7 +309,7 @@ The index is cached for 60 seconds, so a publish reaches Studio's page picker an
 
 **The sitemap.** The sitemap module of the SEO essentials app, `@laioutr/app-essentials-seo` (see [SEO](/apps/essentials/seo)), reads these indexes. It builds one child sitemap per CMS page type and locale, with one URL per published entry and `<lastmod>` set to the entry's publish date. It keeps its sitemap for a while before it rebuilds it, so an **unpublished entry can stay in the sitemap for up to about a day**. The page itself is gone at once.
 
-**Translated slugs.** When the CMS answers "which entry is this URL", it also reports the entry's slug in every language a domain serves. The hreflang alternates and the locale switcher of an entry's page therefore link each language's own slug, and leave out a language in which the entry has no slug. A project serving more than 50 languages, or a language whose fallback chain is longer than 10, gets a server warning and the current slug in every language instead.
+**Translated slugs.** When the CMS answers "which entry is this URL", it also reports the entry's slug in every language a domain serves. The hreflang alternates and the locale switcher of an entry's page therefore link each language's own slug, and leave out a language in which the entry has no slug. A project serving more than 50 languages, or a language with more than 9 fallback languages, gets a server warning and the current slug in every language instead.
 
 A `Link` of type `reference` stores the target's slug. When an editor changes an entry's slug, existing reference links keep the old one and lead nowhere until they are picked again.
 
