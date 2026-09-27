@@ -252,6 +252,8 @@ The CMS answers a query token of the type when its input is one of two shapes:
 
 A page of a `multi` query holds the limit the request asks for, else the token's `defaultLimit`, else 24. cms-api serves 1 to 100 entries per request: a larger or smaller limit is answered with the nearest of the two, and the server warns.
 
+When an editor binds a section to a `{ slug }` query in Studio, Studio offers the type's published entries to pick from, searchable by title or slug. The search covers the first 500 entries of the type, in slug order.
+
 A query with any other input — a search term, a category — is **skipped**, and so is a `{ slug }` query of a type without a slug. A skip never fails the build or the server start: the type is served without that query, and the reason is logged (and, for a manifest offer, listed in Cockpit).
 
 ### What stops a type from being served
