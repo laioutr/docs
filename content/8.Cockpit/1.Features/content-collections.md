@@ -21,7 +21,7 @@ Content types are not created in Cockpit. Developers declare them in the storefr
 
 ## Where to click
 
-From the project sidebar, open **Content**. It appears when content is enabled for your organization and you have permission to edit content in the project.
+From the project sidebar, open **Content**. It appears once Laioutr has enabled content for your organization (ask Laioutr support), and you have permission to edit content in the project.
 
 URLs follow the pattern  
 `/o/{organization}/p/{project}/content`  
@@ -46,7 +46,7 @@ You may see an empty state saying there is **no content yet**. In that case a **
 
 A type that still has entries but that the deployed storefront no longer declares stays in the list with a **Not declared** badge, so its entries remain reachable. You cannot create, edit or publish entries of such a type until the storefront declares it again.
 
-If the storefront cannot be reached, Cockpit says so and lists the content types as the storefront last declared them.
+If the storefront cannot be reached, Cockpit says so and lists the content types as the storefront last declared them. If Cockpit has never read the storefront's declaration, it lists only the types that already have entries.
 
 ---
 
@@ -116,11 +116,11 @@ Some complex field types may still show a short message that there is **no edito
 
 ### Links to other entries
 
-If the content type links to other content types, a **Links** card below the form holds one group per link. **Choose…** or **Add** opens a search over the entries of the target type, and can also **create a new entry** of that type. Click a linked entry to open it. A link whose target was deleted shows as **Deleted entry**, with a button to remove it.
+If the content type links to other content types, a **Links** card below the form holds one group per link. A link to one entry has a **Choose…** button; a link to several entries has a search field (**Search** followed by the link's name) and an ordered list you can move items up and down in. Both search the entries of the target type, and the search also offers **Create new {type}**. Click a linked entry to open it. A link whose target was deleted shows as **Deleted entry**, with a button to remove it.
 
 ### Publishing and validation
 
-**Publish** checks the entry against the schema of the deployed storefront. If there are **blocking validation errors**, the entry is not published and the issues are listed—fix the highlighted fields first. Warnings, such as an entry that is getting large, do not block publishing. Publishing waits until every change has reached the server.
+**Publish** checks the entry against the schema of the deployed storefront. If there are **blocking validation errors**, the entry is not published and the issues are listed—fix the highlighted fields first. Warnings, such as an entry that is getting large, do not block publishing. **Publish** is available once every change has reached the server; until then it is disabled.
 
 If the storefront cannot be reached, the form opens on the schema it last read and says so. You can keep editing; publishing works again once the storefront is reachable.
 

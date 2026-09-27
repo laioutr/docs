@@ -13,7 +13,7 @@ sitemap:
 
 ## What the CMS serves
 
-The Laioutr CMS stores **entries** of entity types your storefront already knows — a `BlogPost`, a `Recipe`, an `Author`. Editors create, translate and publish them in Cockpit, under [Content](/cockpit/features/content-collections). The storefront reads them through `@laioutr-app/cms`, which fetches them from cms-api and answers Orchestr like any other connector.
+The Laioutr CMS stores **entries** of entity types your storefront already knows — a `BlogPost`, a `Recipe`, an `Author`. Editors create, translate and publish them in Cockpit, under [Content](/cockpit/features/content-collections). The storefront reads them through `@laioutr-app/cms`, which fetches them from the Laioutr content delivery API (cms-api) and answers Orchestr like any other connector.
 
 For every type you declare, `@laioutr-app/cms` registers:
 
@@ -53,6 +53,7 @@ A hosted project carries the same list in the app's config in `laioutrrc.json`:
   "apps": [
     {
       "name": "@laioutr-app/cms",
+      "version": "latest",
       "config": { "collections": ["BlogPost", "Recipe"] }
     }
   ]
@@ -85,13 +86,13 @@ Nothing in the option fails the build. Each problem costs the entry it is in, an
 - a `tokens` path that does not resolve;
 - a type listed twice with different settings, which keeps the first.
 
-`nuxt.config.ts` and `laioutrrc.json` can both hold `collections`, and Nuxt concatenates the two lists. An identical duplicate is dropped silently.
+`nuxt.config.ts` and `laioutrrc.json` can both hold `collections`, and Nuxt concatenates the two lists when it merges the module's options. An identical duplicate is dropped silently. A type listed in both with different settings keeps only one of them, and which one depends on how the app is installed, so keep each type in one place.
 
 ### What Cockpit shows
 
 Cockpit reads the list from the storefront deployed on the project's **main** environment. A type appears there once that deploy declares it.
 
-A type that has stored entries and is no longer declared stays listed, marked **Not declared**, so its entries stay reachable. Its entries cannot be created, edited or published until a deploy declares the type again. When the main environment cannot be reached, Cockpit lists the types as that storefront last declared them, and says so.
+A type that has stored entries and is no longer declared stays listed, marked **Not declared**, so its entries stay reachable. Its entries cannot be created, edited or published until a deploy declares the type again. When the main environment cannot be reached, Cockpit says so and lists the types as that storefront last declared them. If Cockpit has never read that storefront's declaration, it lists only the types that already have entries.
 
 ## Offering types from an app
 
@@ -230,7 +231,7 @@ export const AuthorPage = definePageTypeToken('acme/author-page', {
 
 ### Components
 
-Each component schema is a `z.object` with named fields, even when the value is a shared type such as `HtmlFragment`: name it under a key (`z.object({ bio: HtmlFragment })`). That keeps every component's shape the same kind of thing, and lets you add a field next to it later without changing the shared type. Cockpit builds the entry form from the reflected schemas, and publishes only an entry that passes them.
+Each component schema is a `z.object` with named fields, even when the value is a shared type such as `HtmlFragment`: name it under a key (`z.object({ bio: HtmlFragment })`). That keeps every component's shape the same kind of thing, and lets you add a field next to it later without changing the shared type. Cockpit builds the entry form from the component schemas of the deployed storefront, and publishes only an entry that passes them.
 
 **Localization is decided per field.** By default a string is translated per locale, unless it carries an enum, a constant or a format such as a date. Rich text, media and links are translated too. Numbers, booleans, enums and dates are one value for every locale. Override the default on a field with `.meta({ cms: { localized: boolean } })`, as `email` does above. A value is read along the language's fallback chain, as the project's language configuration defines it.
 
@@ -246,7 +247,7 @@ The CMS answers a query token of the type when its input is one of two shapes:
 
 | Input | `multi` token | `single` token |
 | --- | --- | --- |
-| empty (`z.object({})`, or no input) | every entry, newest first, paged with offset and limit | the newest entry, or an error when none exists |
+| empty (`z.object({})`, or no input) | every entry, most recently created first, paged with offset and limit | the most recently created entry, or an error when none exists |
 | exactly `{ slug }` | a list of the one entry with that slug, or an empty list | the entry with that slug, or an error when none exists |
 
 A page of a `multi` query holds the limit the request asks for, else the token's `defaultLimit`, else 24. cms-api serves 1 to 100 entries per request: a larger or smaller limit is answered with the nearest of the two, and the server warns.
@@ -261,7 +262,18 @@ A query with any other input — a search term, a category — is **skipped**, a
 
 ## Links
 
-A relation between two entries is a [link token](/frontend/orchestr/queries#links), declared next to the types:
+A relation between two entries is a [link token](/frontend/orchestr/queries#links). **A link is served by the collection of its source type**, and only when it is exported from a token module of that collection: the source type's offer, or a token file the project names for it. A link token in another collection's file is ignored.
+
+For a `Recipe` → `Author` link, where `Recipe` is offered by an app and `Author` comes from the project's own file, the project adds a token file for `Recipe`. It extends the offer:
+
+```ts [nuxt.config.ts]
+'@laioutr-app/cms': {
+  collections: [
+    { entityType: 'Recipe', tokens: './cms/recipe.tokens' },
+    { entityType: 'Author', tokens: './cms/author.tokens' },
+  ],
+},
+```
 
 ```ts [cms/recipe.tokens.ts]
 import { defineLinkToken } from '@laioutr-core/core-types/orchestr';
@@ -295,7 +307,7 @@ The [page index](/frontend/orchestr/page-index) lists every **published** entry 
 
 The index is cached for 60 seconds, so a publish reaches Studio's page picker and the locale switcher within a minute. [`listPagesFrom`](/frontend/orchestr/page-index#resuming-a-walk-across-requests), which sitemaps read, uses no cache.
 
-**The sitemap.** The sitemap module of [`@laioutr/app-essentials-seo`](/apps/essentials/seo) reads these indexes. In version 1.4.1 it builds one child sitemap per CMS page type and locale, with one URL per published entry and `<lastmod>` set to the entry's publish date. That module keeps a complete sitemap for 24 hours and refreshes it after about 19, so an **unpublished entry can stay in the sitemap for up to about a day**. The page itself is gone at once.
+**The sitemap.** The sitemap module of the SEO essentials app, `@laioutr/app-essentials-seo` (see [SEO](/apps/essentials/seo)), reads these indexes. It builds one child sitemap per CMS page type and locale, with one URL per published entry and `<lastmod>` set to the entry's publish date. It keeps its sitemap for a while before it rebuilds it, so an **unpublished entry can stay in the sitemap for up to about a day**. The page itself is gone at once.
 
 ::caution
 **Known limit: `locate` reports no other locales.** The CMS answers "which entry is this URL" for the current locale only. The hreflang alternates and the locale switcher of an entry's page therefore use the current locale's slug for every other locale. When an entry's slug differs between locales, those links do not reach its page in the other locale.
@@ -335,8 +347,9 @@ These are enforced by Cockpit, per entry and per project.
 | Limit | Value | What happens | What to do |
 | --- | --- | --- | --- |
 | Recommended entry size | 200 KB | The entry shows a warning that it loads and publishes more slowly. It stays editable and publishable. | Shrink it: put long lists in their own entries and link them, and use media instead of inline data. |
-| Entry size | 1 MB | The entry turns read-only, and Cockpit no longer opens it for editing. | Stay well below 200 KB. An entry already above 1 MB cannot be shrunk in Cockpit. |
-| Entries open for editing, together | 2 MB | The open entries' forms turn read-only, with a message to close other entries. | Close entries you are not editing. |
+| Entry size | 1 MB | The entry turns read-only. Once it is closed, it cannot be opened again: Cockpit shows "The entry could not be opened for editing." Its published version, if it has one, keeps being served. | Keep entries well below 200 KB. An entry already above 1 MB can be deleted from the entries list. To recover its content, contact Laioutr support. |
+| Entries open for editing, together | 2 MB | The open entries' forms turn read-only, with a message to close other entries. Opening a further entry past the limit is refused: "The entry could not be opened for editing." | Close entries you are not editing. |
+| All entries held for editing, open or recently closed | 5 MB | Cockpit refuses to open another entry: "The entry could not be opened for editing." A closed entry is released about three minutes after its last tab left it. | Wait a few minutes, then try again. |
 | Editor tabs per project | 12 | A further tab that opens an entry says that the project has 12 editor tabs open, and stays read-only. It offers to try again. | Close editor tabs. A tab on a list with no entry open gives its place up after three minutes. |
 
 An entry's size is measured on what Cockpit stores: every locale of every field, plus its links.
