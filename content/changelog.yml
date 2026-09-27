@@ -243,6 +243,15 @@ Media:
       ```
 
 MediaLibrary:
+  - version: 0.62.0
+    type: added
+    changelog: frontend
+    note: >-
+      Storefronts that enable the public API now serve an OpenAPI 3.1 description
+      of it at `GET /api/public/openapi.json`, generated from the schemas the
+      routes validate with. It needs no key but follows the project's opt-in
+      and origin list. See
+      [OpenAPI specification](/data-api/management-api/assets#openapi-specification).
   - version: 0.35.0
     type: changed
     breaking: true
