@@ -1,12 +1,12 @@
 ---
 title: Schema.org
-description: Generate JSON-LD structured data for your Laioutr frontend to enable rich snippets in Google search results. Add structured data for products, organizations, breadcrumbs, and more.
+description: The JSON-LD structured data a Laioutr frontend emits out of the box — organization, breadcrumbs, FAQ, product and category pages — and how to add your own from a custom section.
 seo:
   title: Schema.org
-  description: Generate JSON-LD structured data for your Laioutr frontend to enable rich snippets in Google search results. Add…
+  description: The JSON-LD structured data a Laioutr frontend emits out of the box, and how to add your own from a custom section.
 sitemap:
   loc: /frontend/seo/schema-org
-  lastmod: 2026-07-28
+  lastmod: 2026-09-28
   changefreq: monthly
   priority: 1.0
 
@@ -14,78 +14,70 @@ sitemap:
 
 ## Overview
 
-Schema.org is a vocabulary of structured data that helps search engines understand the content of your pages. Adding Schema.org markup (as JSON-LD) can enable rich snippets in search results — star ratings, product prices, breadcrumbs, and more.
+Schema.org structured data (JSON-LD) tells search engines what a page is about. It enables rich results such as product prices and stock, breadcrumbs, and Google merchant listings.
 
-Laioutr projects can use **Nuxt Schema.org** to generate JSON-LD automatically. It is not bundled with frontend-core and must be installed separately.
+Every page carries **one** schema.org graph. Several parts of the platform add nodes to it, and all of them merge into a single `<script type="application/ld+json">` in the server-rendered HTML. No module has to be installed.
 
-## Installation
+| Source | Nodes | Turn it off |
+| --- | --- | --- |
+| [SEO app](/apps/essentials/seo) | `WebSite`, `WebPage`, `Organization` | `structuredData.enabled: false` in the app config |
+| `SectionBreadcrumbs` | `BreadcrumbList` | its "Emit BreadcrumbList structured data" checkbox |
+| `BlockAccordion` set to FAQ | `FAQPage` with one `Question` per item | set "Structured data" to "None" |
+| `SectionProductDetail` | `ItemPage` and a `ProductGroup` (or `Product`) | its "Turn off product structured data" checkbox |
+| `BlockProductsListing` on category and search pages | `CollectionPage` and an `ItemList` | its "Turn off product list structured data" checkbox |
 
-```bash
-npx nuxi module add @nuxtjs/schema-org
-```
+The organization — legal name, address, logo, social profiles — is configured in the SEO app, per project and per market. See [SEO](/apps/essentials/seo).
 
-## Configuration
+## Product pages
 
-Set your site URL and name using [Nuxt Site Config](https://nuxtseo.com/docs/site-config/getting-started/introduction):
+`SectionProductDetail` describes the product it shows. A product with two or more variants becomes a `ProductGroup`; a product with one variant becomes a single `Product`.
 
-```ts
-// nuxt.config.ts
-export default defineNuxtConfig({
-  site: {
-    url: 'https://yourstore.com',
-    name: 'Your Store',
-  },
-});
-```
+| Property | Source |
+| --- | --- |
+| `name`, `description`, `image`, `brand` | `ProductBase`, `ProductDescription` (as plain text), `ProductMedia` or `ProductInfo.cover`, `ProductInfo.brand` |
+| `productGroupID` | the product id |
+| `variesBy` | the option types the variants use: color, size, material, pattern |
+| `hasVariant` | one `Product` per variant (at most 100) |
 
-Nuxt Schema.org reads these values automatically. No additional module-level config is needed for basic usage.
+Each variant carries its `sku`, its `gtin` as the connector delivers it, its image, its option values (`color`, `size`, …), its own URL (`?variant=<id>`, which the product page resolves on the server), and an `Offer`:
 
-## Example: Product Structured Data
+- `price` and `priceCurrency` from the variant's price;
+- `availability` from its stock status;
+- when a strikethrough price is set and higher than the price, a `StrikethroughPrice` price specification, which Google can show as a reduction.
 
-Structured data is built from the entity the section renders, not from the page's SEO fields. A product detail section declares a `singleEntity` query field, and Frontend Core hands the resolved [Product](/frontend/api-reference/entities/product) to the component as a prop — see [Consuming Query Fields](/apps/app-development/consuming-query-fields).
+A variant without a valid price is left out, and a product with no valid price gets no product node at all — no markup is better than a wrong price.
 
-```vue [app/sections/ProductDetail.vue]
+Not emitted: reviews and ratings, the return policy, and shipping details.
+
+## Category and search pages
+
+On a page of type `ecommerce/product-listing-page` or `ecommerce/product-search-page`, `BlockProductsListing` adds an `ItemList` of the products on the current page, for Google's product carousel. Each entry names the product, its image, brand, product page URL and offer. Positions continue across pages: on page 2 with 48 products per page, the first entry is position 49. A product list embedded in a content page emits nothing.
+
+## Custom sections
+
+Add nodes to the page's graph with `useStructuredData(nodes)` from Frontend Core. It runs only on the server. Build nodes with the `define*` helpers of `@unhead/schema-org/vue`, or with the product mappers in `@laioutr-core/canonical-types/structured-data`:
+
+```vue [app/sections/MyProductDetail.vue]
 <script setup lang="ts">
-import type { ClientEntity } from '@laioutr-core/orchestr/types';
-import { computed } from 'vue';
+import { defineWebPage } from '@unhead/schema-org/vue';
+import { schemaOrgProductId, toSchemaOrgProduct } from '@laioutr-core/canonical-types/structured-data';
 
-// Resolved from the section's query field. Undefined while the query loads.
-const { product } = defineProps<{ product: ClientEntity | undefined }>();
+const props = defineProps(definitionToProps(definition));
+const url = useCanonicalUrl().value;
 
-useSchemaOrg(
-  computed(() => {
-    if (!product) return [];
-    const { base, seo, prices, media } = product.components;
-
-    return [
-      defineProduct({
-        name: base.name,
-        description: seo?.description,
-        image: media?.images[0]?.sources[0]?.src,
-        offers: [
-          defineOffer({
-            // Money.amount is in the smallest currency unit; schema.org expects a decimal.
-            price: prices.price.amount / 100,
-            priceCurrency: prices.price.currency,
-          }),
-        ],
-      }),
-    ];
-  })
-);
+if (props.product && url) {
+  const node = toSchemaOrgProduct(props.product, { url });
+  if (node) useStructuredData([defineWebPage({ '@type': 'ItemPage', mainEntity: { '@id': schemaOrgProductId(url) } }), node]);
+}
 </script>
 ```
 
-::note
-Stock status lives on [ProductVariant](/frontend/api-reference/entities/product-variant), not on Product — read it from the linked variant if you want to emit `availability` on the offer.
-::
+- `useCanonicalUrl()` returns the canonical URL of the page being rendered. Use it for every absolute URL in your nodes, so they match the page's canonical link.
+- `toSchemaOrgProduct(product, { url })` reads the product and its linked variants. Every component may be missing; the function never throws and returns `undefined` when there is no valid price.
+- `toSchemaOrgProductListItem(product, { url, position })` builds one list entry for a product tile.
 
-Other helpers like `defineBreadcrumb()`, `defineOrganization()`, and `defineWebSite()` work the same way. The module provides 30+ typed helpers for different schema types.
+The page's `title`, `description` and `robots` come from the SEO fields in Studio. To change them, use the `frontend-core:page-head:resolve` [hook](/frontend/features/hooks), not a section.
 
-### Page-level metadata
+## Testing
 
-The page's `title`, `description`, and `robots` come from the SEO fields on the page variant in Studio, and Frontend Core already applies them to the head. Don't re-derive them in a section. To read or override them, use the `frontend-core:page-head:resolve` [hook](/frontend/features/hooks), which receives the current `page` and `pageVariant`.
-
-## Further Reading
-
-For configuration options, available schema types, and advanced usage, see the [Nuxt Schema.org documentation](https://unhead.unjs.io/schema-org/getting-started/setup).
+Check a live page with Google's [Rich Results Test](https://search.google.com/test/rich-results), and watch the merchant listings report in Search Console after the pages are crawled.
