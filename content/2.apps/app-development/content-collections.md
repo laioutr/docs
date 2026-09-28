@@ -17,7 +17,7 @@ The Laioutr CMS stores **entries** of entity types your storefront already knows
 
 For every type you declare, `@laioutr-app/cms` registers:
 
-- a **query handler** for each query token of the type that its `queries` option lists (see [Queries](#queries));
+- a **query handler** for each query token of the type that the offering app serves by default or its `queries` option lists (see [Queries](#queries));
 - a **component resolver** for the type's components;
 - a **link handler** for each link token between two declared types;
 - a **page index** for each page type that gives an entry its own URL.
@@ -60,7 +60,7 @@ A hosted project carries the same list in the app's config in `laioutrrc.json`:
 }
 ```
 
-A collection serves its components and links as soon as it is listed. Its queries, and the page types that depend on them, are served once the `queries` option lists them as well — see [Queries](#queries).
+A collection serves its components and links as soon as it is listed. Its queries, and the page types that depend on them, are served when the offering app serves them by default or the `queries` option lists them — see [Queries](#queries).
 
 The list is read when the storefront is built, so a change takes effect with the next deploy.
 
@@ -131,8 +131,10 @@ An offer (`CmsContentOffer`) takes one of two shapes:
 
 | Shape | Fields |
 | --- | --- |
-| A token module | `entityType`; `tokens`, an absolute path the app resolves or a package specifier that resolves from the project root; optionally `slug` (`component.field` or `false`, default `base.slug`) and `requiredComponents`. |
-| A token manifest | `package`, and `manifest`, the absolute path of a manifest in the format `@laioutr-core/canonical-types` publishes under `./reflection`. It offers every entity type the manifest lists. |
+| A token module | `entityType`; `tokens`, an absolute path the app resolves or a package specifier that resolves from the project root; optionally `slug` (`component.field` or `false`, default `base.slug`), `requiredComponents` and `queries`. |
+| A token manifest | `package`, and `manifest`, the absolute path of a manifest in the format `@laioutr-core/canonical-types` publishes under `./reflection`. It offers every entity type the manifest lists. Optionally `queries`. |
+
+`queries` on an offer names the queries the CMS serves by default, in the shape of the [`queries` option](#queries). A project that names the type serves them without listing them, and can override each one or switch it off.
 
 The offer carries the paths, so a project that names `Recipe` needs no file of its own, hosted projects included. A project then writes only the name:
 
@@ -146,12 +148,26 @@ Rules an offering app should know:
 - **The token module is imported twice** — into the server bundle, and into the Vue app so that its page types reach the link resolver and Studio. It must load in both.
 - **One offer per type.** When two apps offer the same type, the first to register wins and the build warning names both.
 - **An offer serves nothing by itself.** Installing the app changes nothing until a project names the type.
+- **Default queries apply only to named types.** A default for a query of a type the project does not name is dropped without a warning. In a manifest offer, a default counts for the type whose query it is. A malformed default, or one for a query the manifest does not define, is ignored with a warning that names the app. When two apps serve the same token by default in different ways, the first to register wins and the build warning names both.
 
 A project can still name a token file for an offered type. It then **extends** the offer: its components, queries and links are served next to the offered ones.
 
 ### Canonical types
 
-`@laioutr-core/frontend-core` offers the [canonical entity types](/frontend/api-reference/entities) of `@laioutr-core/canonical-types` from that package's manifest, when the package resolves from the project root. A project names them like any other offered type — `'BlogPost'`, `'BlogCollection'`, `'Product'` — and the canonical queries it lists under [`queries`](#queries), such as `blog/post/by-slug`, answer from CMS entries. So do the canonical page types built on a listed by-slug query, such as `blog/post-single`.
+`@laioutr-core/frontend-core` offers the [canonical entity types](/frontend/api-reference/entities) of `@laioutr-core/canonical-types` from that package's manifest, when the package resolves from the project root. A project names them like any other offered type — `'BlogPost'`, `'BlogCollection'`, `'Product'` — and their canonical queries answer from CMS entries. So do the canonical page types built on a served by-slug query, such as `blog/post-single`.
+
+The offer serves these queries by default:
+
+| Type | Query | Served as |
+| --- | --- | --- |
+| `Product` | `ecommerce/product/by-slug` | `'by-slug'` |
+| `Product` | `ecommerce/product/by-category-slug` | through `ecommerce/category/products` from a `Category` found by slug in `categorySlug` |
+| `Product` | `ecommerce/product/by-category-id` | through `ecommerce/category/products` from a `Category` found by id in `categoryId` |
+| `Category` | `ecommerce/category/all`, `ecommerce/category/by-slug` | `'all'`, `'by-slug'` |
+| `BlogPost` | `blog/post/all`, `blog/post/by-slug` | `'all'`, `'by-slug'` |
+| `BlogCollection` | `blog/collection/all`, `blog/collection/by-slug` | `'all'`, `'by-slug'` |
+
+The two category queries need `Category` among the collections too. Product search, posts by topic and `ProductList` have no default: list them under [`queries`](#queries) if the CMS should answer them.
 
 A manifest is read at build time, so the build already knows which of its tokens the CMS cannot serve. Those appear in Cockpit on the type's entry list, under **Not served by the CMS**, with the reason. For a token module the same check runs when the server starts, and its result goes to the server log only.
 
@@ -250,7 +266,9 @@ Each component schema is a `z.object` with named fields, even when the value is 
 
 ### Queries
 
-The CMS serves a query token only when the `queries` option of `@laioutr-app/cms` lists it. The option maps each token to how the CMS answers it. Neither the token's name nor its input decides anything: a token of a served type that the option does not list is not served, so the CMS never answers a query it was not asked to, such as a customer's wishlist with every product list.
+The CMS serves a query token only when the app that offers its type serves it by default, or the `queries` option of `@laioutr-app/cms` lists it. The option maps each token to how the CMS answers it. Neither the token's name nor its input decides anything: a token of a served type that neither lists is not served, so the CMS never answers a query it was not asked to, such as a customer's wishlist with every product list.
+
+An entry in `queries` overrides the offer's default for its token, and `false` switches a default off. A type that only a project token file defines has no defaults.
 
 | Option | Serves | `multi` token | `single` token |
 | --- | --- | --- | --- |
@@ -259,31 +277,29 @@ The CMS serves a query token only when the `queries` option of `@laioutr-app/cms
 | `{ serve: 'by-slug', input: 'handle' }` | the same, with the slug in the input key you name | a list of that one entry, or an empty list | that entry, or an error when none exists |
 | `{ serve: 'through-link', link, source, by, input }` | the entries that one entry of the `source` type links to with the `link` token; that entry is found by `slug` or `id`, from the input key `input` | one page of the linked entries, in the order the editor gave them, with their total; an empty list when the input has no value or no source entry matches | the first linked entry; an error when the input has no value, no source entry matches, or the source links to nothing |
 
-For a shop whose categories and products are CMS entries, and whose editors sort the products of a category through the canonical `ecommerce/category/products` link:
+For a shop whose categories and products are CMS entries, and whose editors sort the products of a category through the canonical `ecommerce/category/products` link, the [canonical defaults](#canonical-types) already serve products by slug and by category. This project switches off products by category id, which its storefront never binds:
 
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
   '@laioutr-app/cms': {
     collections: ['Product', 'Category'],
     queries: {
-      'ecommerce/product/by-slug': 'by-slug',
-      'ecommerce/product/by-category-slug': {
-        serve: 'through-link',
-        link: 'ecommerce/category/products',
-        source: 'Category',
-        by: 'slug',
-        input: 'categorySlug',
-      },
-      'ecommerce/product/by-category-id': {
-        serve: 'through-link',
-        link: 'ecommerce/category/products',
-        source: 'Category',
-        by: 'id',
-        input: 'categoryId',
-      },
+      'ecommerce/product/by-category-id': false,
     },
   },
 });
+```
+
+A default written out in full has the same shape:
+
+```ts
+'ecommerce/product/by-category-slug': {
+  serve: 'through-link',
+  link: 'ecommerce/category/products',
+  source: 'Category',
+  by: 'slug',
+  input: 'categorySlug',
+},
 ```
 
 The token file under [Token files](#token-files-for-your-own-types) serves its two queries once the project lists them as `'acme/author/all': 'all'` and `'acme/author/by-slug': 'by-slug'`. A hosted project carries `queries` in the app's config in `laioutrrc.json`, next to `collections`.
@@ -294,14 +310,14 @@ With `by: 'id'`, an input value that is not a CMS entry id, such as another plat
 
 When an editor binds a section to a by-slug query or to a query through a link by id in Studio, Studio offers entries to pick from, searchable by title or slug: the published entries of the type for a by-slug query, and those of the link's `source` type for a query through a link by id. A query through a link by slug offers none. The search covers the first 500 entries of that type, in slug order, and needs that type to have a slug. A binding by slug stores the slug of the locale the editor picked the entry in, and a binding by id stores its id. A query by slug resolves that slug along the current locale's fallback chain, so a slug that is changed later, or that differs in another locale, may not find the entry there. Bind a fixed entry by id where the token allows it.
 
-**What is skipped.** A token that `queries` does not list is skipped as not listed. A listed token the CMS cannot serve is skipped with the reason:
+**What is skipped.** A token that neither a default nor `queries` serves is skipped as not listed. A listed token the CMS cannot serve is skipped with the reason:
 
 - a by-slug query of a type without a slug;
 - a query whose input has no key of the name the option gives;
 - a query through a link whose `source` is not a collection of the project, or has no slug when `by` is `'slug'`;
 - a query through a link whose `link` does not lead from `source` to the query's type. This one is checked when the server starts, and logged there only.
 
-A skip never fails the build or the server start: the type is served without that query, and the server logs one line per type that names the skipped tokens and why. For a manifest offer the build logs it instead, and Cockpit lists it. A malformed entry in `queries` is ignored with a warning that names its token, and a listed token that no collection has, such as a misspelled one, gets one warning when the server starts, or in the build warning when no collection is served at all. When `collections` names types and `queries` lists no query, the build warning says so first: the CMS then serves no query and indexes no page.
+A skip never fails the build or the server start: the type is served without that query, and the server logs one line per type that names the skipped tokens and why. For a manifest offer the build logs it instead, and Cockpit lists it. A malformed entry in `queries` is ignored with a warning that names its token, and a token `queries` lists that no collection has, such as a misspelled one, gets one warning when the server starts, or in the build warning when no collection is served at all. A default of a type the project does not serve gets no warning. When `collections` names types and neither `queries` nor the offering apps serve a query, the build warning says so first: the CMS then serves no query and indexes no page.
 
 ### What stops a type from being served
 
@@ -385,9 +401,9 @@ The repository is a public API of `@laioutr-app/cms`: a breaking change to it is
 An entry gets its own URL through a [page type](/frontend/features/pagetypes). The CMS serves a page index for a page type about one of its types when:
 
 - the page type's only route param is `slug` (`pathConstraints.requiredParams: ['slug']`), and
-- one of its `requiredQueries` is a query of the type that `queries` lists as `'by-slug'`, or as by slug through the input key `slug`.
+- one of its `requiredQueries` is a query of the type that is served as `'by-slug'`, or as by slug through the input key `slug`, by default or through `queries`.
 
-`AuthorPage` above qualifies once `queries` lists `acme/author/by-slug`, and so does canonical `blog/post-single` for a CMS `BlogPost` once `queries` lists `blog/post/by-slug`. A page type about the type that does not qualify is skipped as not indexable. A page at a fixed path, such as a blog listing, needs no index and works as soon as its query is served. Name the type in `resolveFor` so that a [link](/frontend/api-reference/common-types/link) of type `reference` to an entry resolves to its page.
+`AuthorPage` above qualifies once `queries` lists `acme/author/by-slug`, and so does canonical `blog/post-single` for a CMS `BlogPost`, whose `blog/post/by-slug` is served by default. A page type about the type that does not qualify is skipped as not indexable. A page at a fixed path, such as a blog listing, needs no index and works as soon as its query is served. Name the type in `resolveFor` so that a [link](/frontend/api-reference/common-types/link) of type `reference` to an entry resolves to its page.
 
 The [page index](/frontend/orchestr/page-index) lists every **published** entry that has a slug in the request's locale chain, ordered by slug. Each item carries the entry's `base.title` (else `base.name`) as its title and its publish date as `lastModified`. An entry without a slug has no page. A slug longer than 1,024 characters is left out, and a slug two entries share is listed once, for the entry that URL shows.
 
@@ -419,7 +435,7 @@ Drafts are not validated before they are saved, so a draft may fail its schema. 
 | `cdnApiUrl` | `https://api.laioutr.cloud/cdn/v1` | Where media is managed. Server-only. |
 | `maxFileSize` | 100 MB | The upload size the media picker allows before sending. cdn-api checks it again. |
 | `collections` | none | See [Declaring collections](#declaring-collections). |
-| `queries` | none | See [Queries](#queries). |
+| `queries` | the offering apps' defaults | See [Queries](#queries). |
 
 **The credential is not an option.** Content and media share the project's cdn key. Cockpit issues it when it sets up the project's Laioutr CDN, which also installs `@laioutr-app/cms`, and writes it into `laioutrrc.json` as `config.cdn`. It is read into private runtime config and never reaches the browser. Without it the module still builds, but every cms-api request is refused.
 
