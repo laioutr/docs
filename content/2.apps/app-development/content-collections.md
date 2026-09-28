@@ -6,7 +6,7 @@ seo:
   description: How a storefront declares the entity types the Laioutr CMS manages, how an app offers its own types to it, and how entries reach Orchestr, previews and sitemaps.
 sitemap:
   loc: /apps/app-development/content-collections
-  lastmod: 2026-09-27
+  lastmod: 2026-09-28
   changefreq: monthly
   priority: 1
 ---
@@ -17,7 +17,7 @@ The Laioutr CMS stores **entries** of entity types your storefront already knows
 
 For every type you declare, `@laioutr-app/cms` registers:
 
-- a **query handler** for each query token of the type it can answer (see [Token files](#token-files-for-your-own-types));
+- a **query handler** for each query token of the type that its `queries` option lists (see [Queries](#queries));
 - a **component resolver** for the type's components;
 - a **link handler** for each link token between two declared types;
 - a **page index** for each page type that gives an entry its own URL.
@@ -248,18 +248,56 @@ Each component schema is a `z.object` with named fields, even when the value is 
 
 ### Queries
 
-The CMS answers a query token of the type when its input is one of two shapes:
+The CMS serves a query token only when the `queries` option of `@laioutr-app/cms` lists it. The option maps each token to how the CMS answers it. Neither the token's name nor its input decides anything: a token of a served type that the option does not list is not served, so the CMS never answers a query it was not asked to, such as a customer's wishlist with every product list.
 
-| Input | `multi` token | `single` token |
-| --- | --- | --- |
-| empty (`z.object({})`, or no input) | every entry, most recently created first, paged with offset and limit | the most recently created entry, or an error when none exists |
-| exactly `{ slug }` | a list of the one entry with that slug, or an empty list | the entry with that slug, or an error when none exists |
+| Option | Serves | `multi` token | `single` token |
+| --- | --- | --- | --- |
+| `'all'` | every entry of the type, whatever the token's input | every entry, most recently created first, paged with offset and limit | the most recently created entry, or an error when none exists |
+| `'by-slug'` | the entry whose slug is in the input key `slug` | a list of that one entry, or an empty list | that entry, or an error when none exists |
+| `{ serve: 'by-slug', input: 'handle' }` | the same, with the slug in the input key you name | a list of that one entry, or an empty list | that entry, or an error when none exists |
+| `{ serve: 'through-link', link, source, by, input }` | the entries that one entry of the `source` type links to with the `link` token; that entry is found by `slug` or `id`, from the input key `input` | one page of the linked entries, in the order the editor gave them, with their total; an empty list when the input has no value or no source entry matches | the first linked entry, or an error when there is none |
+
+For a shop whose categories and products are CMS entries, and whose editors sort the products of a category through the canonical `ecommerce/category/products` link:
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  '@laioutr-app/cms': {
+    collections: ['Product', 'Category'],
+    queries: {
+      'ecommerce/product/by-slug': 'by-slug',
+      'ecommerce/product/by-category-slug': {
+        serve: 'through-link',
+        link: 'ecommerce/category/products',
+        source: 'Category',
+        by: 'slug',
+        input: 'categorySlug',
+      },
+      'ecommerce/product/by-category-id': {
+        serve: 'through-link',
+        link: 'ecommerce/category/products',
+        source: 'Category',
+        by: 'id',
+        input: 'categoryId',
+      },
+    },
+  },
+});
+```
+
+The token file under [Token files](#token-files-for-your-own-types) serves its two queries once the project lists them as `'acme/author/all': 'all'` and `'acme/author/by-slug': 'by-slug'`. A hosted project carries `queries` in the app's config in `laioutrrc.json`, next to `collections`.
 
 A page of a `multi` query holds the limit the request asks for, else the token's `defaultLimit`, else 24. cms-api serves 1 to 100 entries per request: a larger or smaller limit is answered with the nearest of the two, and the server warns.
 
-When an editor binds a section to a `{ slug }` query in Studio, Studio offers the type's published entries to pick from, searchable by title or slug. The search covers the first 500 entries of the type, in slug order.
+When an editor binds a section to a by-slug query or a query through a link in Studio, Studio offers entries to pick from, searchable by title or slug: the published entries of the type for a by-slug query, and those of the link's `source` type for a query through a link. The search covers the first 500 entries of that type, in slug order, and needs that type to have a slug. A binding by slug stores the entry's slug, and a binding by id stores its id. A slug can be translated or changed, and the binding then finds nothing, so bind a fixed entry by id where the token allows it.
 
-A query with any other input — a search term, a category — is **skipped**, and so is a `{ slug }` query of a type without a slug. A skip never fails the build or the server start: the type is served without that query, and the reason is logged (and, for a manifest offer, listed in Cockpit).
+**What is skipped.** A token that `queries` does not list is skipped as not listed. A listed token the CMS cannot serve is skipped with the reason:
+
+- a by-slug query of a type without a slug;
+- a query whose input has no key of the name the option gives;
+- a query through a link whose `source` is not a collection of the project, or has no slug when `by` is `'slug'`;
+- a query through a link whose `link` does not lead from `source` to the query's type. This one is checked when the server starts, and logged there only.
+
+A skip never fails the build or the server start: the type is served without that query, and the server logs one line per type that names the skipped tokens and why. For a manifest offer the build logs it instead, and Cockpit lists it. A malformed entry in `queries` is ignored with a warning that names its token, and a listed token that no collection serves, such as a misspelled one, gets one warning when the server starts.
 
 ### What stops a type from being served
 
@@ -301,12 +339,49 @@ Component data holds no references; a link relates two whole entries. A referenc
 - A visitor sees a link only to an entry that is published. A link to a target published later appears then, with no second publish of the source.
 - **A deleted target** is allowed. Cockpit's confirmation says how many entries link to it. The link disappears from delivery at once, and the source's editor shows the item as **Deleted entry**, for an editor to remove.
 
+## Your own queries
+
+A query the `queries` option cannot express — a fixed category, a combination of two lookups — is a query handler of the project's own. It reads the CMS through the content repository that `@laioutr-app/cms/server` exports. `useCmsContent(clientEnv)` returns it for one request: it reads drafts in content preview and published entries everywhere else, along the request's locale chain.
+
+| Method | Returns |
+| --- | --- |
+| `entryIdBySlug(entityType, slug)` | The id of the entry of `entityType` with that slug in the request's locale chain, or `null`. Throws for a type without a slug. |
+| `linkedIds(linkToken, sourceIds, page?)` | One item `{ sourceId, ids, total }` per source, in the order of `sourceIds`: one page of the entries it links to with `linkToken`, in the editor's order, and their total. |
+| `list(entityType, page)` | `{ ids, total }`: one page of the entries of `entityType`, most recently created first. |
+| `entries(entityType, ids)` | The entries that loaded, as `{ id, entityType, data }`, with `data` the entry's components projected onto the request's locale chain. |
+
+`page` is `{ offset, limit }`, and a limit outside 1 to 100 is answered with the nearest of the two. A failed cms-api request throws an error that names what was read, after five seconds at most.
+
+A "Bestsellers" product slider that shows the products editors put into the category `bestsellers`:
+
+```ts [src/runtime/server/orchestr/Product/bestsellers.query.ts]
+import { useCmsContent } from '@laioutr-app/cms/server';
+import { BestsellersQuery } from '../../../shared/tokens';
+import { defineAcme } from '../middleware/defineAcme';
+
+export default defineAcme.queryHandler({
+  implements: BestsellersQuery,
+  run: async ({ clientEnv, pagination }) => {
+    const cms = useCmsContent(clientEnv);
+    const categoryId = await cms.entryIdBySlug('Category', 'bestsellers');
+    if (!categoryId) return { ids: [], total: 0 };
+
+    const [products] = await cms.linkedIds('ecommerce/category/products', [categoryId], pagination);
+    return { ids: products?.ids ?? [], total: products?.total ?? 0 };
+  },
+});
+```
+
+`BestsellersQuery` is a `multi` query token of `Product` that the project defines. The ids it answers are resolved by the CMS's component resolver for `Product`, like those of any CMS query, so `Product` and `Category` must both be collections.
+
+The repository is a public API of `@laioutr-app/cms`: a breaking change to it is a breaking change of the app, released as one.
+
 ## Page types and the sitemap
 
 An entry gets its own URL through a [page type](/frontend/features/pagetypes). The CMS serves a page index for a page type about one of its types when:
 
 - the page type's only route param is `slug` (`pathConstraints.requiredParams: ['slug']`), and
-- one of its `requiredQueries` is a served by-slug query of the type.
+- one of its `requiredQueries` is a query of the type that `queries` lists as `'by-slug'`, or as by slug through the input key `slug`.
 
 `AuthorPage` above qualifies, and so does canonical `blog/post-single` for a CMS `BlogPost`. A page type about the type that does not qualify is skipped as not indexable. A page at a fixed path, such as a blog listing, needs no index and works as soon as its query is served. Name the type in `resolveFor` so that a [link](/frontend/api-reference/common-types/link) of type `reference` to an entry resolves to its page.
 
@@ -340,6 +415,7 @@ Drafts are not validated before they are saved, so a draft may fail its schema. 
 | `cdnApiUrl` | `https://api.laioutr.cloud/cdn/v1` | Where media is managed. Server-only. |
 | `maxFileSize` | 100 MB | The upload size the media picker allows before sending. cdn-api checks it again. |
 | `collections` | none | See [Declaring collections](#declaring-collections). |
+| `queries` | none | See [Queries](#queries). |
 
 **The credential is not an option.** Content and media share the project's cdn key. Cockpit issues it when it sets up the project's Laioutr CDN, which also installs `@laioutr-app/cms`, and writes it into `laioutrrc.json` as `config.cdn`. It is read into private runtime config and never reaches the browser. Without it the module still builds, but every cms-api request is refused.
 
