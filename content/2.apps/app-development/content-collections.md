@@ -60,6 +60,8 @@ A hosted project carries the same list in the app's config in `laioutrrc.json`:
 }
 ```
 
+A collection serves its components and links as soon as it is listed. Its queries, and the page types that depend on them, are served once the `queries` option lists them as well — see [Queries](#queries).
+
 The list is read when the storefront is built, so a change takes effect with the next deploy.
 
 **A name is an entity type.** `'BlogPost'` is the `entityType` its component tokens are defined with, and it is the name Cockpit lists. A name is served when an installed app [offers](#offering-types-from-an-app) that type. Entries are stored by entity type and component name, so replacing a token file with an app's offer of the same type, or the other way round, keeps every entry.
@@ -149,7 +151,7 @@ A project can still name a token file for an offered type. It then **extends** t
 
 ### Canonical types
 
-`@laioutr-core/frontend-core` offers the [canonical entity types](/frontend/api-reference/entities) of `@laioutr-core/canonical-types` from that package's manifest, when the package resolves from the project root. A project names them like any other offered type — `'BlogPost'`, `'BlogCollection'`, `'Product'` — and the canonical queries and page types, such as `blog/post/by-slug` and `blog/post-single`, answer from CMS entries.
+`@laioutr-core/frontend-core` offers the [canonical entity types](/frontend/api-reference/entities) of `@laioutr-core/canonical-types` from that package's manifest, when the package resolves from the project root. A project names them like any other offered type — `'BlogPost'`, `'BlogCollection'`, `'Product'` — and the canonical queries it lists under [`queries`](#queries), such as `blog/post/by-slug`, answer from CMS entries. So do the canonical page types built on a listed by-slug query, such as `blog/post-single`.
 
 A manifest is read at build time, so the build already knows which of its tokens the CMS cannot serve. Those appear in Cockpit on the type's entry list, under **Not served by the CMS**, with the reason. For a token module the same check runs when the server starts, and its result goes to the server log only.
 
@@ -255,7 +257,7 @@ The CMS serves a query token only when the `queries` option of `@laioutr-app/cms
 | `'all'` | every entry of the type, whatever the token's input | every entry, most recently created first, paged with offset and limit | the most recently created entry, or an error when none exists |
 | `'by-slug'` | the entry whose slug is in the input key `slug` | a list of that one entry, or an empty list | that entry, or an error when none exists |
 | `{ serve: 'by-slug', input: 'handle' }` | the same, with the slug in the input key you name | a list of that one entry, or an empty list | that entry, or an error when none exists |
-| `{ serve: 'through-link', link, source, by, input }` | the entries that one entry of the `source` type links to with the `link` token; that entry is found by `slug` or `id`, from the input key `input` | one page of the linked entries, in the order the editor gave them, with their total; an empty list when the input has no value or no source entry matches | the first linked entry, or an error when there is none |
+| `{ serve: 'through-link', link, source, by, input }` | the entries that one entry of the `source` type links to with the `link` token; that entry is found by `slug` or `id`, from the input key `input` | one page of the linked entries, in the order the editor gave them, with their total; an empty list when the input has no value or no source entry matches | the first linked entry; an error when the input has no value, no source entry matches, or the source links to nothing |
 
 For a shop whose categories and products are CMS entries, and whose editors sort the products of a category through the canonical `ecommerce/category/products` link:
 
@@ -345,12 +347,12 @@ A query the `queries` option cannot express — a fixed category, a combination 
 
 | Method | Returns |
 | --- | --- |
-| `entryIdBySlug(entityType, slug)` | The id of the entry of `entityType` with that slug in the request's locale chain, or `null`. Throws for a type without a slug. |
+| `entryIdBySlug(entityType, slug)` | The id of the entry of `entityType` with that slug in the request's locale chain, or `null`. Throws for a type that is not a CMS collection with a slug. |
 | `linkedIds(linkToken, sourceIds, page?)` | One item `{ sourceId, ids, total }` per source, in the order of `sourceIds`: one page of the entries it links to with `linkToken`, in the editor's order, and their total. |
 | `list(entityType, page)` | `{ ids, total }`: one page of the entries of `entityType`, most recently created first. |
 | `entries(entityType, ids)` | The entries that loaded, as `{ id, entityType, data }`, with `data` the entry's components projected onto the request's locale chain. |
 
-`page` is `{ offset, limit }`, and a limit outside 1 to 100 is answered with the nearest of the two. A failed cms-api request throws an error that names what was read, after five seconds at most.
+`page` is `{ offset, limit }`, and a limit outside 1 to 100 is answered with the nearest of the two, with a warning. A cms-api request that fails, or does not answer within five seconds, throws an error naming the cms-api route, and the server warns naming what was read. `entries` fetches in batches of up to 100: a failed batch costs only its own entries, with a warning, and it throws only when every batch failed.
 
 A "Bestsellers" product slider that shows the products editors put into the category `bestsellers`:
 
@@ -383,7 +385,7 @@ An entry gets its own URL through a [page type](/frontend/features/pagetypes). T
 - the page type's only route param is `slug` (`pathConstraints.requiredParams: ['slug']`), and
 - one of its `requiredQueries` is a query of the type that `queries` lists as `'by-slug'`, or as by slug through the input key `slug`.
 
-`AuthorPage` above qualifies, and so does canonical `blog/post-single` for a CMS `BlogPost`. A page type about the type that does not qualify is skipped as not indexable. A page at a fixed path, such as a blog listing, needs no index and works as soon as its query is served. Name the type in `resolveFor` so that a [link](/frontend/api-reference/common-types/link) of type `reference` to an entry resolves to its page.
+`AuthorPage` above qualifies once `queries` lists `acme/author/by-slug`, and so does canonical `blog/post-single` for a CMS `BlogPost` once `queries` lists `blog/post/by-slug`. A page type about the type that does not qualify is skipped as not indexable. A page at a fixed path, such as a blog listing, needs no index and works as soon as its query is served. Name the type in `resolveFor` so that a [link](/frontend/api-reference/common-types/link) of type `reference` to an entry resolves to its page.
 
 The [page index](/frontend/orchestr/page-index) lists every **published** entry that has a slug in the request's locale chain, ordered by slug. Each item carries the entry's `base.title` (else `base.name`) as its title and its publish date as `lastModified`. An entry without a slug has no page. A slug longer than 1,024 characters is left out, and a slug two entries share is listed once, for the entry that URL shows.
 
