@@ -18,13 +18,15 @@ Schema.org structured data (JSON-LD) tells search engines what a page is about. 
 
 Every page carries **one** schema.org graph. Several parts of the platform add nodes to it, and all of them merge into a single `<script type="application/ld+json">` in the server-rendered HTML. No module has to be installed.
 
-| Source | Nodes | Turn it off |
+| Source | Nodes | Switch |
 | --- | --- | --- |
 | [SEO app](/apps/essentials/seo) | `WebSite`, `WebPage`, `Organization` | `structuredData.enabled: false` in the app config |
 | `SectionBreadcrumbs` | `BreadcrumbList` | its "Emit BreadcrumbList structured data" checkbox |
-| `BlockAccordion` set to FAQ | `FAQPage` with one `Question` per item | set "Structured data" to "None" |
-| `SectionProductDetail` | `ItemPage` and a `ProductGroup` (or `Product`) | its "Turn off product structured data" checkbox |
-| `BlockProductsListing` on category and search pages | `CollectionPage` and an `ItemList` | its "Turn off product list structured data" checkbox |
+| `BlockAccordion` | `FAQPage` with one `Question` per item | set "Structured data" to "FAQ" |
+| `SectionProductDetail` | `ItemPage` and a `ProductGroup` (or `Product`) | its "Emit product structured data" checkbox |
+| `BlockProductsListing` on category and search pages | `CollectionPage` and an `ItemList` | its "Emit product list structured data" checkbox |
+
+The section checkboxes are on for a section or block added in Studio. A section saved before its checkbox existed has no value for it and emits nothing until the box is ticked.
 
 The organization — legal name, address, logo, social profiles — is configured in the SEO app, per project and per market. See [SEO](/apps/essentials/seo).
 
