@@ -235,6 +235,11 @@ Each component schema is a `z.object` with named fields, even when the value is 
 
 **Localization is decided per field.** By default a string is translated per locale, unless it carries an enum, a constant or a format such as a date. Rich text, media and links are translated too. Numbers, booleans, enums and dates are one value for every locale. Override the default on a field with `.meta({ cms: { localized: boolean } })`, as `email` does above. A value is read along the language's fallback chain, as the project's language configuration defines it.
 
+**Placeholder and default.** Two more keys shape the entry form, and neither changes how your storefront parses a value:
+
+- `.meta({ cms: { placeholder: string } })` is shown in the field's input while it is empty. A value inherited from a fallback locale is shown instead where there is one.
+- `.meta({ cms: { default: value } })` is written when the value is created — a new entry, a new list item, a newly chosen variant, a new object — and never to a value that already exists. A localized default is written in the locale being edited. It is an ordinary value: the entry's schema checks it like any other.
+
 **Dates:** a `z.date()` field is stored as an ISO 8601 timestamp in UTC and reaches your component as a `Date`. The editor enters it in the browser's time zone.
 
 **Empty values:** a field that is `.nullable()` but not `.optional()` arrives as `null` when the entry leaves it blank.
