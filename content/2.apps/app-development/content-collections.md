@@ -148,7 +148,7 @@ Rules an offering app should know:
 - **The token module is imported twice** — into the server bundle, and into the Vue app so that its page types reach the link resolver and Studio. It must load in both.
 - **One offer per type.** When two apps offer the same type, the first to register wins and the build warning names both.
 - **An offer serves nothing by itself.** Installing the app changes nothing until a project names the type.
-- **Default queries apply only to named types.** A default for a query of a type the project does not name is dropped without a warning. In a manifest offer, a default counts for the type whose query it is. A malformed default, or one for a query the manifest does not define, is ignored with a warning that names the app. When two apps serve the same token by default in different ways, the first to register wins and the build warning names both.
+- **Default queries apply only to named types.** A default for a query of a type the project does not name is dropped without a warning. In a manifest offer, a default counts for the type whose query it is. A token module's defaults count only for queries of its own `entityType`; any other is ignored with a warning when the server starts. A malformed default, or one for a query the manifest does not define, is ignored with a warning that names the app. When two apps serve the same token by default in different ways, the first to register wins, and the build warning names both unless the project sets that token itself.
 
 A project can still name a token file for an offered type. It then **extends** the offer: its components, queries and links are served next to the offered ones.
 
@@ -310,7 +310,7 @@ With `by: 'id'`, an input value that is not a CMS entry id, such as another plat
 
 When an editor binds a section to a by-slug query or to a query through a link by id in Studio, Studio offers entries to pick from, searchable by title or slug: the published entries of the type for a by-slug query, and those of the link's `source` type for a query through a link by id. A query through a link by slug offers none. The search covers the first 500 entries of that type, in slug order, and needs that type to have a slug. A binding by slug stores the slug of the locale the editor picked the entry in, and a binding by id stores its id. A query by slug resolves that slug along the current locale's fallback chain, so a slug that is changed later, or that differs in another locale, may not find the entry there. Bind a fixed entry by id where the token allows it.
 
-**What is skipped.** A token that neither a default nor `queries` serves is skipped as not listed. A listed token the CMS cannot serve is skipped with the reason:
+**What is skipped.** A token that neither a default nor `queries` serves is skipped as not listed, and one `queries` sets to `false` as switched off. A listed token the CMS cannot serve is skipped with the reason:
 
 - a by-slug query of a type without a slug;
 - a query whose input has no key of the name the option gives;
