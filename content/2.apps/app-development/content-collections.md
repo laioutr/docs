@@ -290,7 +290,9 @@ The token file under [Token files](#token-files-for-your-own-types) serves its t
 
 A page of a `multi` query holds the limit the request asks for, else the token's `defaultLimit`, else 24. cms-api serves 1 to 100 entries per request: a larger or smaller limit is answered with the nearest of the two, and the server warns.
 
-When an editor binds a section to a by-slug query or a query through a link in Studio, Studio offers entries to pick from, searchable by title or slug: the published entries of the type for a by-slug query, and those of the link's `source` type for a query through a link. The search covers the first 500 entries of that type, in slug order, and needs that type to have a slug. A binding by slug stores the slug of the locale the editor picked the entry in, and a binding by id stores its id. A query by slug resolves that slug along the current locale's fallback chain, so a slug that is changed later, or that differs in another locale, may not find the entry there. Bind a fixed entry by id where the token allows it.
+With `by: 'id'`, an input value that is not a CMS entry id, such as another platform's id or a typo in a binding, matches no source entry: a `multi` query answers an empty list, a `single` query an error, and the server warns naming the value without asking cms-api.
+
+When an editor binds a section to a by-slug query or to a query through a link by id in Studio, Studio offers entries to pick from, searchable by title or slug: the published entries of the type for a by-slug query, and those of the link's `source` type for a query through a link by id. A query through a link by slug offers none. The search covers the first 500 entries of that type, in slug order, and needs that type to have a slug. A binding by slug stores the slug of the locale the editor picked the entry in, and a binding by id stores its id. A query by slug resolves that slug along the current locale's fallback chain, so a slug that is changed later, or that differs in another locale, may not find the entry there. Bind a fixed entry by id where the token allows it.
 
 **What is skipped.** A token that `queries` does not list is skipped as not listed. A listed token the CMS cannot serve is skipped with the reason:
 
@@ -352,7 +354,7 @@ A query the `queries` option cannot express — a fixed category, a combination 
 | `list(entityType, page)` | `{ ids, total }`: one page of the entries of `entityType`, most recently created first. |
 | `entries(entityType, ids)` | The entries that loaded, as `{ id, entityType, data }`, with `data` the entry's components projected onto the request's locale chain. |
 
-`page` is `{ offset, limit }`, and a limit outside 1 to 100 is answered with the nearest of the two, with a warning. A cms-api request that fails, or does not answer within five seconds, throws an error naming the cms-api route, and the server warns naming what was read. `entries` fetches in batches of up to 100: a failed batch costs only its own entries, with a warning, and it throws only when every batch failed.
+`page` is `{ offset, limit }`, and a limit outside 1 to 100 is answered with the nearest of the two, with a warning. A cms-api request that fails, or does not answer within five seconds, throws an error naming the cms-api route, and the server warns naming what was read. `entries` fetches in batches of up to 100: a failed batch costs only its own entries, with a warning, and it throws only when every batch failed. An id in `sourceIds` or `ids` that is not a CMS entry id is left out, with one warning per call that names it; when none is left, `linkedIds` and `entries` answer an empty list without a cms-api request.
 
 A "Bestsellers" product slider that shows the products editors put into the category `bestsellers`:
 
