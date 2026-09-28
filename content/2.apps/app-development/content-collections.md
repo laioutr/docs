@@ -290,7 +290,7 @@ The token file under [Token files](#token-files-for-your-own-types) serves its t
 
 A page of a `multi` query holds the limit the request asks for, else the token's `defaultLimit`, else 24. cms-api serves 1 to 100 entries per request: a larger or smaller limit is answered with the nearest of the two, and the server warns.
 
-When an editor binds a section to a by-slug query or a query through a link in Studio, Studio offers entries to pick from, searchable by title or slug: the published entries of the type for a by-slug query, and those of the link's `source` type for a query through a link. The search covers the first 500 entries of that type, in slug order, and needs that type to have a slug. A binding by slug stores the entry's slug, and a binding by id stores its id. A slug can be translated or changed, and the binding then finds nothing, so bind a fixed entry by id where the token allows it.
+When an editor binds a section to a by-slug query or a query through a link in Studio, Studio offers entries to pick from, searchable by title or slug: the published entries of the type for a by-slug query, and those of the link's `source` type for a query through a link. The search covers the first 500 entries of that type, in slug order, and needs that type to have a slug. A binding by slug stores the slug of the locale the editor picked the entry in, and a binding by id stores its id. A query by slug resolves that slug along the current locale's fallback chain, so a slug that is changed later, or that differs in another locale, may not find the entry there. Bind a fixed entry by id where the token allows it.
 
 **What is skipped.** A token that `queries` does not list is skipped as not listed. A listed token the CMS cannot serve is skipped with the reason:
 
@@ -299,7 +299,7 @@ When an editor binds a section to a by-slug query or a query through a link in S
 - a query through a link whose `source` is not a collection of the project, or has no slug when `by` is `'slug'`;
 - a query through a link whose `link` does not lead from `source` to the query's type. This one is checked when the server starts, and logged there only.
 
-A skip never fails the build or the server start: the type is served without that query, and the server logs one line per type that names the skipped tokens and why. For a manifest offer the build logs it instead, and Cockpit lists it. A malformed entry in `queries` is ignored with a warning that names its token, and a listed token that no collection serves, such as a misspelled one, gets one warning when the server starts.
+A skip never fails the build or the server start: the type is served without that query, and the server logs one line per type that names the skipped tokens and why. For a manifest offer the build logs it instead, and Cockpit lists it. A malformed entry in `queries` is ignored with a warning that names its token, and a listed token that no collection has, such as a misspelled one, gets one warning when the server starts, or in the build warning when no collection is served at all. When `collections` names types and `queries` lists no query, the build warning says so first: the CMS then serves no query and indexes no page.
 
 ### What stops a type from being served
 
@@ -368,7 +368,7 @@ export default defineAcme.queryHandler({
     const categoryId = await cms.entryIdBySlug('Category', 'bestsellers');
     if (!categoryId) return { ids: [], total: 0 };
 
-    const [products] = await cms.linkedIds('ecommerce/category/products', [categoryId], pagination);
+    const [products] = await cms.linkedIds('ecommerce/category/products', [categoryId], pagination ?? { offset: 0, limit: 24 });
     return { ids: products?.ids ?? [], total: products?.total ?? 0 };
   },
 });
