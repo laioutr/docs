@@ -14,6 +14,140 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-09-25]
+
+### Fixed
+
+- **Studio**: The page switcher finds every page, and Studio searches take typing right after opening.
+
+## [2026-09-24]
+
+### Added
+
+- **Hosting**: Staff can attach a project's own domains to Laioutr Cloud and see their DNS status.
+- **Hosting**: Laioutr staff can prepare Laioutr Cloud beside a project's current hosting, deploy to it, and cut over — from the hosting page.
+- **Hosting**: Build logs now appear for Laioutr Cloud deployments.
+- **Hosting**: An environment can be deleted, with its hosting and its content. The live one cannot.
+- **Hosting**: An environment can be renamed; its address stays as it was.
+
+### Changed
+
+- **Hosting**: A new environment starts building as soon as it is created.
+- **Hosting**: Creating an environment now shows what it is doing step by step, and opens the finished environment instead of reporting that it does not exist.
+- **Hosting**: Undo now asks first and states what it will not bring back, and says when it is done. A missing environment explains itself instead of showing a bare line.
+- **Hosting**: Copying into an environment says when app versions cannot move yet.
+- **Hosting**: Copying an environment now updates its recorded apps, including ones the copy removed.
+- **Hosting**: How many environments a project may have now comes from its plan.
+
+### Fixed
+
+- **Hosting**: Renaming an environment opens its page under the new name straight away.
+- **Hosting**: Deploying an environment straight after creating it no longer fails, so its address starts answering once the first build finishes.
+- **Hosting**: Adding the same domain twice to one market is refused with an explanation, instead of discarding the market's other domains.
+- **Hosting**: Deleting a project now removes every environment's hosting, not only production's.
+
+## [2026-09-23]
+
+### Added
+
+- **Studio**: The Studio now shows which environment you are editing, with the live one marked.
+- **Studio**: Picking a page-index entry in a link field now fills every language.
+- **Hosting**: An environment's apps can be added, removed and re-versioned together, then saved once.
+- **Hosting**: An environment's History now lists every deploy, copy and migration with who ran it.
+- **Hosting**: An environment can now be pinned to any published platform version.
+- **Hosting**: An environment now lists its risks and delivery history.
+- **Hosting**: A deployment now shows which package versions the build installed.
+
+### Changed
+
+- **Hosting**: An environment's history now says which way a copy went, from the page you are on.
+- **Hosting**: Copying app versions between environments now carries what the source last built.
+- **Hosting**: A test environment now deploys as a preview rather than as a production release, and the warning that it shares production's connections appears only while it actually does.
+
+### Fixed
+
+- **Hosting**: Adding an app that is already installed no longer records it twice.
+- **Hosting**: Invalid input now explains what was wrong instead of failing as a server error.
+
+## [2026-09-22]
+
+### Added
+
+- **Hosting**: An environment can now be copied onto another in either direction — promote work into production, or reset a test environment from it — choosing what moves and confirming before anything is replaced.
+
+### Changed
+
+- **Hosting**: An environment stops following the newest platform release once its project has more than one environment, so what you test is what goes live. Its page shows which version it is on and whether a newer one exists.
+- **Hosting**: A project with more than one environment keeps the whole menu inside the environment you are working in, marked with its own colour, and deploys from each environment's own card after confirming which one.
+
+### Fixed
+
+- **Hosting**: The breadcrumb now names the environment you are actually looking at on its own page.
+
+## [2026-09-17]
+
+### Added
+
+- **Studio**: Rotate the phone and tablet preview in Studio to check your page in landscape.
+- **Hosting**: Hosting settings now take the deployment's protection bypass key, so a storefront behind bot protection still answers Studio and the feed generator.
+- **Studio**: Meta, AWIN and idealo gain feeds built to each vendor's own published specification.
+- **Studio**: A feed column can now carry a fallback value for facts your shop has no field for, and eBay and idealo read delivery and shipping details from your market settings.
+
+### Changed
+
+- **Studio**: Every channel built to a vendor specification is now checked against that specification.
+
+### Fixed
+
+- **Studio**: A feed now fails with a clear reason when the storefront blocks it, instead of retrying quietly and appearing to still be generating.
+- **Studio**: eBay feeds now use the column name eBay documents for the listing title.
+
+## [2026-09-16]
+
+### Added
+
+- **Studio**: New Google Shopping channel built to Google's own specification.
+- **Studio**: A feed now warns when its columns no longer match its channel.
+- **Studio**: Feeds can now set their own price bands, new-product window and top-seller threshold.
+- **Studio**: A feed column can take a per-product override.
+- **Studio**: A feed can now be told the address its products are served at.
+- **Studio**: A feed can now exclude categories, brands and SKUs by list, not only by filter rule.
+- **Studio**: A feed can be written as CSV or TSV whatever its channel defaults to, and its links start from the storefront rather than a bare product key.
+- **Studio**: A feed can be exported in a currency of its own, and follows its market's when it is not set.
+- **Studio**: Feeds export a whole catalogue rather than the first thousand products, filter it with conditions on any field, and report each run step by step.
+
+### Changed
+
+- **Studio**: Generating a feed now asks first, and the list shows how far a running feed has got.
+- **Studio**: Feeds now use each market's own wording and formats, and link to real product pages.
+- **Studio**: Feeds on one market now read the shop's catalogue together, once per market.
+- **Studio**: Generating a feed starts immediately when you press the button, and scheduled feeds now run on their own.
+- **Studio**: Generating a feed no longer blocks on the browser — the run continues on the server, and its progress and log survive closing the tab.
+- **Studio**: A feed's address opens in the browser and is shown on the feed itself, and every column a channel asks for is filled.
+
+### Fixed
+
+- **Studio**: A throttled storefront no longer fails a run, and Meta feeds always carry an id.
+- **Studio**: The generation dialog no longer carries a file link that opened slowly in a new tab.
+- **Studio**: The mapping editor now offers every transform the generator implements.
+- **Studio**: Product links in feeds are now built on the storefront the catalogue was read from.
+- **Studio**: Feeds of one project no longer read its shop at the same time, a filter that cannot apply says so, and the download link works again.
+- **Studio**: A feed that cannot be published now fails with the reason instead of reporting success.
+
+## [2026-09-15]
+
+### Added
+
+- **Studio**: Publish your catalogue to Google Shopping, Meta, AWIN and Idealo as scheduled feeds.
+- **Studio**: Translate a page's URL per language with the new translate button next to the URL field.
+- **Studio**: Duplicate page variants that use queries — the copy gets its own queries and keeps the source's SEO.
+
+## [2026-09-08]
+
+### Added
+
+- **Studio**: Create a scoped, revocable API key that lets an outside app use one project's media.
+
 ## [2026-09-07]
 
 ### Added

@@ -14,6 +14,121 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.26.0] - 2026-09-25
+
+### Minor Changes
+
+- Added `thumb-up` / `thumb-down` icons and the AI Mode assistant locale keys (tab labels, answer disclaimer, action labels, and placeholder answers) used by the AI Mode assistant view.
+
+- Added `microphone`, `lens`, and `ai-sparkle` icons (`communication/microphone`, `media/lens`, `misc/ai-sparkle`), plus `aiMode` locale keys (English and German) for the new AI Mode search bar.
+
+- Added the AI Mode assistant view. Pressing Enter in the AI Mode bar opens a Q&A thread — a tab row (AI Mode label + All / Products / Content), the conversation (user bubble, assistant answer with markdown, disclaimer, and copy/feedback/regenerate actions), and the bar docked as the bottom composer. Answers come from a typed `AiModeAnswerProvider` seam (a static mock by default; the active tab is passed as scope) so a real backend can be plugged in without UI changes.
+
+- Added the `AiMode` component — a Google-"AI Mode"-style search bar with a greeting, input row, and static example suggestions, plus supporting `AiModeSuggestions` and Storybook stories. Visual only: no search logic, autosuggest behavior, or data binding yet.
+
+- Added the `SectionAiMode` Studio section, wrapping the new `AiMode` component in a `Full Width` / `Boxed` layout via the standard container-style field.
+
+## [2.25.5] - 2026-09-22
+
+### Patch Changes
+
+- Gallery thumbnails have an accessible name. Each `ThumbnailsSlider` button is announced as "Show image 2 of 5" in the active locale, and the selected one carries `aria-current`. A thumbnail whose image had no `alt` text was an unnamed button. `ImageGallery`, `MediaGallery` and `ProductImageGallery` get the names with no change.
+
+  The position replaces the image's `alt` text as the button's name. To name a thumbnail by its content, set `label` on its `thumbnails` item, or pass `label` to `Thumbnail` directly.
+
+- `Select` always has an accessible name. A `Select` without `label` was announced as an unnamed combobox although it showed its placeholder, and failed the `button-name` audit. The trigger is now named by `label`, then by the label of the surrounding `Field`, then by `placeholder`, then by the default placeholder text.
+
+  Attributes set on `<Select>` — `aria-label`, `aria-labelledby`, `class`, `data-*` — reach the trigger button instead of being dropped. The sort selects in `SortModes` and `FilterBarControls` and the two selects in `Review` are named for their purpose.
+
+- An Embedded Page block (`BlockIframe`) without a URL renders no `<iframe>`, so it no longer fails the `frame-title` audit or adds an empty tab stop. It keeps the height from its Sizing settings. With Sizing set to Auto, an empty block has no height, where it had the browser's default iframe height of 150px — set Sizing to Fixed to keep that gap.
+
+## [2.25.2] - 2026-09-20
+
+### Patch Changes
+
+- The `lsolar` and `lhuge` icon collections go to `@nuxt/icon`'s `serverBundle` rather than to
+  `customCollections`. Both options take the same `{ prefix, dir }` and both resolve the icons, but
+  `customCollections` also makes the module's runtime plugin call `setCustomIconsLoader` on every
+  server-rendered request, with a closure that captures that request's `$fetch`. `@iconify/vue` keeps
+  unresolved loads in a module-scope array and removes an entry only when the load resolves — so one
+  icon that does not resolve holds that whole request alive: its router, its i18n instance, its stores
+  and its payload.
+
+  Measured on a storefront before the change: about 3.4 MiB retained per request, and the process
+  aborting at the V8 heap limit after thirteen minutes at half a request a second.
+
+## [2.25.1] - 2026-09-18
+
+### Patch Changes
+
+- `Media` renders `alt=""` when given an empty `alt`, so a decorative image can be marked as one. An empty string used to fall back to the media object's own alt text, and when that was missing the `alt` attribute was dropped entirely — which Lighthouse reports as "Image elements do not have [alt] attributes". Leaving `alt` unset still uses the media object's alt text.
+
+- `BannerBasic`, `BannerIntegrated`, `BannerShowcase` and `HeroSlide` name their full-area link after the image's alt text when they have no text of their own. An image-only banner with an `href` used to render that link with no accessible name — announced by screen readers as a bare link, and flagged by Lighthouse as "Links must have discernible text". A component with a heading, subline, description or caption keeps using that text.
+
+## [2.25.0] - 2026-09-17
+
+### Minor Changes
+
+- **Posts by topics.** Content Slider and Content Grid gain a third data source. Instead of binding a blog collection to the page, you list one or more topic slugs on the section itself, choose how many posts to show, and optionally hide the post currently being read. The section fetches the matching posts on its own, so it can go on a page that has no blog query at all — including one placed by an agent that can only set static props.
+
+  When the topic list returns no posts, the section renders nothing instead of a heading above an empty row. A bound blog collection behaves as before.
+
+  **Breadcrumb structured data.** Breadcrumbs gains an option, on by default, to emit a schema.org `BreadcrumbList` as JSON-LD next to the visible trail: the home page first, then each entry in order, with absolute URLs and no link on the current page. Two breadcrumb sections on one page emit a single block.
+
+## [2.24.2] - 2026-09-09
+
+### Patch Changes
+
+- The cart sheet no longer holds up hydration. It sits in the shop header on every page and fetched the cart during setup, which kept the page suspended until that request returned — so nothing on the page became interactive until the cart had loaded. The sheet now renders immediately and fills in when the cart arrives.
+
+  A cart request that fails no longer fails the page with it. It leaves the sheet empty and names the failure in the browser console.
+
+  Adding to cart refreshes the cart once. The header re-registered its refresh handler on every navigation without removing the previous one, so a visitor who moved through five pages triggered five refreshes on the next add.
+
+## [2.24.0] - 2026-09-08
+
+### Minor Changes
+
+- Locales carry a `filter.sortBy` message, translated in all seven shipped languages and overridable through `extendLocale`.
+
+- The breadcrumb's short trail now behaves as the UI Kit specifies it: it applies below the desktop layout, its trigger disappears once expanded, and a long trail wraps instead of running off the side of the page.
+
+  Three things were wrong, all in the same area:
+
+  - **The trail expanded too early.** Script switched on `smaller('md')` while every rule in the component's own stylesheet restores the expanded trail at `@media (--lg)`. Between 800px and 1279px the collapsed markup was therefore off while the CSS still expected it, and a long trail — a product title at the end of a deep category path — pushed the page sideways. Both now switch at `lg`, which is what the design's breakpoint matrix shows: a short version exists from `initial` through `md`, and only from `lg` is the full trail unconditional.
+  - **The trigger stayed after expanding**, swapping its icon to a collapse arrow. The design shows it gone, with the home button taking its place; expanding is one-way and home is the way back to the start.
+  - **The trail could not wrap.** The container was a nowrap `inline-flex`, so the expanded trail had nowhere to go but sideways. It wraps now, which is what the design draws at the narrow breakpoints — 64px of breadcrumb rather than 40px at `s` and below.
+
+  The label truncation stays scoped to the short trail and is released at `lg` rather than `sm`. Releasing it while the row was still a single nowrap line is what made the overflow reachable in the first place; the expanded trail shows its labels in full and wraps, as drawn.
+
+  Storefronts carrying a local override to stop breadcrumbs widening the page can drop it.
+
+- `FilterBar` accepts `showSortingLabel`, which renders a translated "Sort by" to the left of the sorting select. The label stays hidden while `availableSorting` is empty, so a bar with nothing to sort by never announces a control it does not show.
+
+- The Filter Bar block has a new `Sorting label` option, which puts a translated "Sort by" in front of the sorting select. It is off by default and only offered once `Sorting` is enabled, so an existing filter bar looks unchanged.
+
+### Patch Changes
+
+- Locales carry `addToCart.successToast`, `addToCart.errorToast`, `addToCart.unknownError` and `cart.couponApplyFailed`, translated in all seven shipped languages and overridable through `extendLocale`.
+
+- Locales carry `review.submitSuccess` and `review.submitError`, translated in all seven shipped languages and overridable through `extendLocale`.
+
+- `swiper/css/grid` ships alongside the other Swiper stylesheets, so a slider using Swiper's Grid module lays its slides out in the rows it configures. The module set its container class and nothing wrapped, leaving every slide on one row.
+
+- `LogoSlider` no longer shows a single oversized logo before it hydrates. Swiper writes its slide widths as inline styles at init, and init waits until the slider nears the viewport — with no width of its own the slider fell back to `swiper/css`'s `width: 100%`, so one logo filled the container until then.
+
+  It also emits the `logo-slider` root class it had been styling without ever setting, so that class is now a usable anchor for consumer CSS.
+
+- `Review` takes `isLoggedIn` and asks an unauthenticated visitor to sign in **before** opening the form. It used to open the form for everyone and raise the sign-in prompt after the visitor had written and submitted their review.
+
+- Cart toasts render in the storefront's language. The add-to-cart confirmation on the product page and on a product tile, the failure toast behind it, and the cart sheet's coupon-code error were English string literals that no locale could reach. (SUPPORT-62)
+
+- Paging, sorting and the star filter on the product-reviews list do what they say. The section listened for none of the three events the list raises, so every control moved and the list stayed as it was. Each now states itself in the URL, the way the other listings do, so a shared link reproduces the page the visitor was on. (SUPPORT-63)
+
+- The product-reviews section saves the review a visitor writes. It listened for the login event and nothing else, so `CreateReviewAction` was never called and the form's contents were dropped; the section now submits them, reporting the outcome in a toast.
+
+  A visitor without a customer session is asked to sign in before the form opens, rather than after they have filled it in. Their name and address come from the session, which is what the review needs and the form does not collect. (SUPPORT-61)
+
 ## [2.23.1] - 2026-09-01
 
 ### Patch Changes

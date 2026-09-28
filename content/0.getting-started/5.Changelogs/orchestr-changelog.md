@@ -14,6 +14,255 @@ sitemap:
 
 All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data-fetching and query orchestration layer, will be documented in this file.
 
+## [0.61.0] - 2026-09-26
+
+### Minor Changes
+
+- Every cache read is counted as OpenTelemetry metrics: `orchestr.cache.reads` by layer and hit or miss, plus `orchestr.cache.stale` and `orchestr.cache.invalidated`, each by cache namespace. Until now these counts existed only in a request's execution summary. They cost nothing without an OTel metrics SDK, and `cacheMetrics: false` or `NUXT_ORCHESTR_CACHE_METRICS=false` turns them off. (DEV-575)
+
+## [0.60.0] - 2026-09-25
+
+### Minor Changes
+
+- `pageIndex.locate` handlers receive `languages`: every language the project's markets serve, drafts included, each paired with a market that serves it. A connector can now return a complete `locales` map, which feeds hreflang alternates and the language switcher.
+
+## [0.58.0] - 2026-09-21
+
+### Minor Changes
+
+- A render that something else stores now skips the in-process tier on its own. That tier holds a value for up to 30 seconds that no invalidation reaches, so a response cached for longer would bake the short window into the long one.
+
+  Orchestr reads the route's own rules to decide, so a project that already configured `routeRules` writes no server code for it. Any of three counts: `cache` or `swr`, which Nitro serves itself; `isr`, which the Vercel and Netlify presets act on; and a `cache-control` header naming a shared cache, which is how a project behind a CDN says it — on Cloudflare that header is the only signal there is.
+
+  For a cache Nuxt has no rule for — a CDN configured outside the project, a reverse proxy in front of it — the new server import `setResponseCachedDownstream(event)` says so for one request.
+
+  **Breaking:** `event.context.orchestrBypassL1` is gone, and setting it now does nothing.
+
+  ```ts
+  // before
+  event.context.orchestrBypassL1 = true;
+
+  // after — nothing at all, when the route already declares `isr`, `swr` or `cache`.
+  // Otherwise, for a cache Nuxt cannot see:
+  setResponseCachedDownstream(event);
+  ```
+
+## [0.57.0] - 2026-09-18
+
+### Minor Changes
+
+- Cache entries can be invalidated by tag instead of waiting out their TTL. An invalidated entry is served and refreshed behind the response, so it costs no latency and cannot start a stampede.
+
+  **Nothing to author for entities.** Component and link entries carry the entity they describe, so `invalidateTags([entityTag('Product', id)])` reaches every cached component and link for that product, in every market and language.
+
+  A link handler declares tags the same way. Its entries each carry the tag of the source entity they answer for, derived from the key, and a declared tag is added beside that one — for naming what the whole set came from, such as the menu a category tree was read from.
+
+  **Query handlers declare what cannot be derived** — which list a result belongs to, including when that list came back empty:
+
+  ```ts
+  cache: {
+    ttl: '5 min',
+    tags: (args) => [args.categorySlug],
+  }
+  ```
+
+  Without one, `queryTokenTag` still reaches the entry, along with every other entry of that token.
+
+  A tag name carries one of three prefixes, so a name you mint can never collide with an entity id: `entity:` for one entity, `list:` for a name a handler declared, `query:` for a query token. An app minting its own should use its package segment — `app-myapp:stock-feed`.
+
+  **A component resolver can opt out** with `autoInvalidate: false`. An app-owned value — a view counter, a locally computed score — has no relationship to the upstream entity, so refetching it on every unrelated upstream change costs the app's own origin and buys nothing.
+
+  **An invalidated entry follows its own stale policy.** A handler that set a stale window serves the entry and refreshes it behind the response, so a bulk change costs background work rather than a wall of blocking reads. A handler that set none is refetched instead: it asked not to be served past its freshness, and a bumped counter is stronger evidence than age — age only suspects a value is old, where a counter says it is wrong. This is what Drupal, Fastly and bentocache all do.
+
+  New server imports: `invalidateTags`, plus `entityTag`, `listTag` and `queryTokenTag` to name what it bumps. One `INCR` per distinct name, whose cost does not change with how many entries carry the tag; nothing is scanned or deleted, and the effect lands on the next read. One call takes the whole batch, so naming an entity and its children costs one round trip rather than one each. It needs a shared cache backend; without one it warns and does nothing.
+
+  One call bumps at most `INVALIDATION_BATCH_CAP` distinct counters — 10,000 — and drops the rest with a warning rather than failing. The client pipelines a batch into one round trip, so the limit is server-side work: a burst of that size leaves a concurrent reader's median untouched, and its tail only moves an order of magnitude higher. Refusing instead would answer whatever carried the batch with an error, and for a webhook an unsuccessful answer eventually costs the subscription.
+
+  Counters never expire. One that lapsed under an entry still referencing it would read as `0`, mismatch, and discard a warm cache for nothing — and an entry's window has no upper bound, so no fixed TTL can be proven longer than it. The cost is one integer per distinct tag. Counters live inside the project's own key scope, so two storefronts sharing one Redis — a staging and a production one fronting the same store, say — cannot invalidate each other despite seeing identical entity ids.
+
+  **A request whose output is cached downstream should set `event.context.orchestrBypassL1 = true`.** The in-process tier holds a value for up to 30 seconds that no invalidation reaches, so a render that skips it keeps that staleness out of the longer downstream window.
+
+  **Breaking:** the stored cache version moves to `v2`. Every entry written by a previous deploy is orphaned and expires under its own TTL, so the first requests after the upgrade miss.
+
+### Patch Changes
+
+- Two requests asking for different entity components no longer evict each other from the query and link caches. A cached entry recorded which components it was resolved for, and a request wanting one it lacked was a miss that overwrote it — so a page asking for `[base, media]` and another asking for `[base, price]` refilled the same key in turn, and the handler ran every time. The component set is now part of the cache key, so each set keeps its own entry.
+
+  Entries for a handler declaring `provides`, or setting `includePassthrough`, are keyed differently and are never read again. They expire under their own TTL, and the first requests after the upgrade miss.
+
+- `POST /api/laioutr/orchestr/clear-cache` now actually clears a Redis-backed cache. It was shredding every key it enumerated into single characters, then deleting those, so it reported success and removed nothing — a project on Redis could not clear its cache at all, and a shortened TTL never took effect on entries already written.
+
+  Cache key enumeration was affected the same way, so anything reading keys back got characters instead of keys.
+
+## [0.56.0] - 2026-09-17
+
+### Minor Changes
+
+- Adds `useEntityQuery`, a composable that runs an Orchestr query from a component with an input the component decides itself. The result lands in the Orchestr store like a page query's does, so the entities are cached and shared, and the query runs once on the server and hydrates on the client. Sections whose data source is configured through static props use it where an agent cannot edit a page's queries.
+
+## [0.55.0] - 2026-09-15
+
+### Minor Changes
+
+- Add hooks around an action request. On the client, `orchestr:action:request:prepare` is awaited before the request goes out and can add request headers or cancel the call by throwing. `orchestr:action:request:retry` runs after a request fails and can ask for it to be sent once more. On the server, `orchestr:action:handler:guard` runs before the handler and can end the request by throwing an h3 error. Its `readInput()` returns the validated input without reading the body twice.
+
+  An action request whose body fails validation now fires `orchestr:action:handler:error` and `orchestr:action:handler:finally`, like every other failed action. The client receives it as `Action failed` with status 400, with the validation error as its data.
+
+- The link cache stores one entry per source entity instead of one per source-id set. An entry serves every later request whose set contains that source, so a listing that scrolls, re-sorts or searches resolves only the sources it has not seen — 49% to 89% fewer source ids reach the handler on those patterns, at no extra round trips. A source the handler answers nothing for is stored as such, so it is asked for once rather than on every request.
+
+  Link entries written before this are keyed differently and are never read again. They expire under their own TTL, and the first requests after the upgrade miss.
+
+  **Breaking:** `buildCacheKey` and `validate` run once per source entity rather than once per request.
+
+  `buildCacheKey` receives `entityIds` holding the one source its key is for. A handler that keyed on the entity ids can drop that key: the runner already names the source, so the handler's segment repeats it.
+
+  ```ts
+  // before
+  cache: {
+    ttl: '1 hour',
+    swr: true,
+    staleMaxAge: '1 day',
+    buildCacheKey: (args) => cacheKeys.forEntityIds(args.entityIds),
+  }
+
+  // after — the runner keys the source itself
+  cache: {
+    ttl: '1 hour',
+    swr: true,
+    staleMaxAge: '1 day',
+  }
+  ```
+
+  `validate` judges the one source's link, so `links` holds one entry or none:
+
+  ```ts
+  // before
+  validate: (entry) => entry.value.links.length === args.entityIds.length,
+
+  // after
+  validate: (entry) => entry.value.links.length > 0,
+  ```
+
+### Patch Changes
+
+- The Orchestr tab runs actions that the project protects from bots. It sends a bypass signed with the project secret key, so these actions no longer fail with a bot-protection rejection.
+
+## [0.54.0] - 2026-09-10
+
+### Minor Changes
+
+- **Breaking:** a query or link cache config is shaped like a component's. `swr` is a boolean, `staleMaxAge` sits beside it and is required, and a handler that should not be cached omits the block rather than declaring a strategy.
+
+  ```ts
+  // before
+  cache: { strategy: 'ttl', ttl: '1 day' }
+  cache: { strategy: 'swr', ttl: '10 minutes' }
+  cache: { strategy: 'live' }
+
+  // after
+  cache: { ttl: '1 day' }
+  cache: { ttl: '10 minutes', swr: true, staleMaxAge: '1 minute' }
+  // (no cache block)
+  ```
+
+  `ttl` is required too. It was optional under `swr`, and omitting it turned the cache off rather than erroring.
+
+  **A stale window is no longer inherited.** It used to default to 24 hours in silence, so a five-minute cache was really servable for a day and nothing in the config said so. A handler the types cannot reach — JavaScript, or built against an older release — falls back to a minute instead, and its `strategy` keeps working.
+
+### Patch Changes
+
+- A link or query handler that answers with entities keeps their components when the response comes from the cache. A component written as a factory — `base: () => ({ … })` — was dropped on the way in, so a cached breadcrumb or inline category arrived carrying an id and no data.
+
+  An entry records which components it was resolved for, and a request wanting one it lacks re-runs the handler rather than being served a gap. Link entries written before this cannot be read and count as a miss once, on the first read after the upgrade.
+
+- A handler or component that names a `ttl` of `0` alongside `swr` is always stale, so every read is served from the entry while a refresh runs behind the response. It used to be read as no window at all, which turned the cache off:
+
+  ```ts
+  cache: { ttl: 0, swr: true, staleMaxAge: '1 hour' }
+  ```
+
+  Naming no `ttl` still means no caching. An entry whose whole window — `ttl` plus its stale window — comes to zero is not written, because no read could ever serve it.
+
+## [0.53.0] - 2026-09-10
+
+### Minor Changes
+
+- A cache you own can serve stale and refresh behind the response, the way a query, link or component resolver already does. The pieces were public — `staleMaxAge`, the `stale` list a read reports, the refresh claim — but the loop that joins them was not, so an app had to re-implement it and lost the metrics tracking with it.
+
+  `refreshStale` claims the keys, bounds the fill, releases every claim whatever happens, and warns if the fill throws:
+
+  ```ts
+  const hit = await cache.readOne(key, { maxAge: '1 hour', staleMaxAge: '6 hours' });
+  if (hit && !hit.absent) {
+    if (hit.stale) cache.refreshStaleOne(key, options, () => fetchMenu(key));
+    return hit.value;
+  }
+  ```
+
+  `refreshStaleOne` stores whatever the fill resolves with. `refreshStale` takes a batch, hands the fill only the keys this instance won, and leaves the writing to it — so a set of entries refreshes in one pass.
+
+  **Deprecated:** `claimRefresh` and `releaseRefresh`. A claim taken through them and never released blocks its key for the life of the instance, which is the failure `refreshStale` cannot have. They keep working.
+
+### Patch Changes
+
+- **Breaking:** `POST /api/orchestr/query` and `POST /api/orchestr/action/<token>` answer with `Content-Type: text/plain; charset=utf-8` instead of `text/x-script`, so a CDN compresses them. Both routes shipped raw bytes on every request before, because a CDN picks what to compress from a content-type allowlist and `text/x-script` is on none of them. On the reference storefront a 473 KB category query drops to roughly 44 KB on the wire.
+
+  The body is the same turbo-stream encoding as before. A client that reads the response as a stream, which the built-in one does, needs no change. A client that picks its decoder from the content type must stop keying on `text/x-script`.
+
+## [0.52.0] - 2026-09-09
+
+### Minor Changes
+
+- A project can add its own dimension to every cache key. The key carries a digest of locale, currency, market and published/preview, so a response that varied on anything else — a customer group, a price list, a store selection — collided with one that did not.
+
+  Contribute a segment from a nitro plugin, and it reaches queries, links, component resolvers and the page index at once:
+
+  ```ts
+  export default defineNitroPlugin((nitroApp) => {
+    nitroApp.hooks.hook('orchestr:client-env-key:build', ({ clientEnv, parts }) => {
+      const group = clientEnv.custom?.customerGroup;
+      if (group) parts.push(`cg:${group}`);
+    });
+  });
+  ```
+
+  Handlers run synchronously, so resolve the value into `clientEnv.custom` earlier in the request rather than awaiting one here. Contributions are sorted and joined to the four base values: two plugins key the same entry whichever registers first, and no handler can drop the market and let two of them collide. Registering the first handler rotates that project's cache keys once.
+
+- Orchestr's query, link and component caches run on a new cache layer, with an in-process tier in front of the shared one.
+
+  **Stale-while-revalidate works.** A stale entry was served once, deleted by the reader, and never revalidated — so the next request took a full miss. It now serves immediately and refreshes behind the response, and a failed refresh keeps the last good value until its window closes. Two concurrent readers of one stale key schedule one refresh. `staleMaxAge` on a query, link or component cache config sets how long that window lasts, and defaults to 24 hours.
+
+  **Absence is cached deliberately.** A resolver that legitimately has no value for a component is remembered, instead of being asked the same unanswerable question on every render.
+
+  **Freshness follows the current configuration.** Shortening a TTL takes effect on entries that are already stored.
+
+  **A cache on a local driver honours its TTL.** unstorage's `memory`, `lru-cache`, `fs` and `fs-lite` drivers accept a TTL and drop it, so an entry stored through one never expired — in development a cached value outlived dev-server restarts. Orchestr stores in its own bounded in-process cache instead of those four, and an entry leaves when its window closes. A `null` mount still caches nothing.
+
+  **A `cacheBatchWrite: 'msetex'` module option writes a batch in one command instead of a pipeline.** Valkey 9.1 and later only; the default is unchanged.
+
+  **`useRedis()` hands you the cache's own Redis connection** for commands the cache API does not cover — counters, sets, locks. It answers `undefined` unless the internal cache resolved a Redis mount. Being the cache's connection, it suits ordinary commands and not `subscribe` or blocking reads, which take a connection over and stop the cache working on that instance.
+
+  **`clear-cache` reports what it achieved.** On a backend that cannot enumerate its keys it answers `{ success: false }` with a reason, rather than a success it never achieved.
+
+  **Breaking:** `useUserlandCache()` returns a cache store rather than an unstorage `Storage`. `readOne` and `writeOne` take one key; `read` and `write` take a batch, and cost one round trip for the whole set. Every entry carries its freshness window. The value type goes on the call as it did, and pins the namespace — a read and a write cannot disagree about the shape stored under one key.
+
+  ```ts
+  // before
+  const cache = useUserlandCache<string>('my-app/ids');
+  const id = await cache.getItem(handle);
+  await cache.setItem(handle, id, { ttl: 3600 });
+
+  // after
+  const cache = useUserlandCache<string>('my-app/ids');
+  const hit = await cache.readOne(handle, { maxAge: 3600 });
+  const id = hit && !hit.absent ? hit.value : undefined;
+
+  // Fire-and-forget: the write lands behind the response.
+  cache.writeOne(handle, id, { maxAge: 3600 });
+  ```
+
+  `maxAge` takes seconds as a number, or a string such as `'1 day'`. Add `staleMaxAge` for a window in which the entry stays servable while it refreshes. `@laioutr-core/orchestr/types` exports `CacheStore`, `TypedCacheStore`, `EntryOptions` and `ABSENT`, so a helper that takes the cache as a parameter can name what it receives.
+
 ## [0.49.1] - 2026-09-03
 
 ### Patch Changes

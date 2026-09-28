@@ -14,6 +14,157 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.60.0] - 2026-09-25
+
+### Minor Changes
+
+- A storefront built for any environment other than `main` now serves `noindex, nofollow` on every page, whatever the page's own SEO settings say. A test or staging copy of a storefront answers on its own address with the same content as the live one, so leaving it indexable lets it compete with the real site in search results.
+
+  Nothing changes for a project with one environment: its rc names `main`, or names nothing at all, and both read as production.
+
+- `pageIndex.locate` handlers receive `languages`: every language the project's markets serve, drafts included, each paired with a market that serves it. A connector can now return a complete `locales` map, which feeds hreflang alternates and the language switcher.
+
+- `LinkPageType` accepts an optional `subject`, naming the entity a page-index pick points at independently of its per-language params.
+
+## [0.59.0] - 2026-09-23
+
+### Minor Changes
+
+- `useIsStudioEmbed()` is now auto-imported, so apps can tell when they are rendered inside the Studio editor.
+
+## [0.58.1] - 2026-09-22
+
+### Patch Changes
+
+- **Breaking:** Pages rendered from Studio have a main landmark, so screen readers can jump to the page content and the `landmark-one-main` audit passes. An empty `role="main"` element before the body sections owns them through `aria-owns`. The sections keep their place in the DOM, and that element is the only new one.
+
+  The root element of every section carries `id="lfc-section-<section id>"`. A section that sets its own `id` on its root element loses it.
+
+## [0.58.0] - 2026-09-21
+
+### Minor Changes
+
+- Control how the storefront's own JavaScript reaches the browser on the first page view, with a new
+  `config.entryScript` setting in `laioutrrc.json`.
+
+  By default, production builds drop Nuxt's prefetch links and the entry script's own modulepreload
+  from the server-rendered head. The entry script stays where Nuxt puts it, and so do the preloads for
+  the chunks it imports.
+
+  **Two settings:**
+
+  ```json
+  {
+    "config": {
+      "entryScript": {
+        "loading": "eager",
+        "hints": "siblings"
+      }
+    }
+  }
+  ```
+
+  - `loading`: `eager` (default) leaves the entry script in the head; `after-paint` removes it and
+    requests it from a small inline script after the window `load` event.
+  - `hints`: `siblings` (default) drops the prefetch links and the entry's own preload, keeping the
+    preloads for the chunks the entry imports; `none` drops every prefetch and modulepreload; `all`
+    keeps Nuxt's output.
+
+  **A faster first paint is opt-in.** Measured on the reference storefront under real mobile
+  throttling, against Nuxt's own head: `loading: "after-paint"` took the homepage largest contentful
+  paint from 4,018 to 3,226 ms and the performance score from 56 to 68, with Time to Interactive
+  unchanged. `hints: "none"` with the script eager took 900 ms off the largest contentful paint but
+  added about 1.2 s to Time to Interactive, because the entry's sibling chunks are then discovered only
+  once the entry executes.
+
+  Restore Nuxt's own head with `hints: "all"`, or on a deployment without a code change through
+  `NUXT_PUBLIC_LAIOUTR_ENTRY_SCRIPT_LOADING=eager` and `NUXT_PUBLIC_LAIOUTR_ENTRY_SCRIPT_HINTS=all`.
+  Production builds only; dev is unchanged.
+
+## [0.57.2] - 2026-09-21
+
+### Patch Changes
+
+- The dev server no longer warns `Unknown host "127.0.0.1" — falling back to default market` twice for every page it renders. Nuxt addresses its own server-side fetches over the loopback interface, which is the dev server talking to itself rather than a domain nobody configured. A request for a host the configuration does not know still warns.
+
+- The startup banner reports when no project is loaded. A configuration without a project slug never came from Cockpit, so the banner names the project as `none` and its Issues list says the app runs on placeholder content, with the command that fetches a real configuration.
+
+## [0.57.1] - 2026-09-20
+
+### Patch Changes
+
+- A market with no domains no longer ends the build. `resolveCookieDomains` called
+  `Object.values(market.domains)` unguarded, so one malformed market threw
+  `Cannot convert undefined or null to object` — a message naming neither the market nor the
+  field — and took the whole storefront build with it. A market is customer-editable
+  configuration, so the blast radius of a bad one is now that market: it contributes no cookie
+  domain, a warning names it, and every other market builds.
+
+- When `laioutrrc.json` lists apps that are not installed, `nuxi dev` and `nuxi build` stop once and name every missing app with one install command — `pnpm add -D` in an app repo, whose playground registers the app from source, and `pnpm add` in a storefront — instead of stopping at the first one with `Could not load … Is it installed?`. `nuxi prepare` warns and still generates types. The startup banner marks those apps as not installed and collects every problem in one Issues list, including an app that brings its own copy of `@laioutr-core/frontend-core` in another version.
+
+## [0.55.0] - 2026-09-15
+
+### Minor Changes
+
+- Protect selected actions from bots with one installable provider app. A project lists orchestr action tokens under `config.botProtection.actions` in its laioutrrc, and the server rejects a request to a listed action that the provider does not verify. An unlisted action is never checked.
+
+  ```jsonc [laioutrrc.json]
+  {
+    "config": {
+      "botProtection": { "actions": ["newsletter/subscribe"], "whenUnavailable": "open" },
+    },
+  }
+  ```
+
+  **Outages.** `whenUnavailable` decides what happens when the provider cannot answer: `open` (default) runs the action and logs a warning, `closed` answers 503. A missing or failed proof is rejected under either value, and so is every listed action while no provider is installed.
+
+  **Handling errors in the UI.** `botProtectionErrorOf(error)` from `#frontend/bot-protection` returns `'rejected'`, `'unavailable'` or `'cancelled'` for a failed protected action, and `undefined` for any other error.
+
+  **Building a provider.** A provider app installs a client adapter with `useBotProtection().setAdapter(adapter)` and a server verifier with `setBotProtectionVerifier(verifier)`. The `BotProtectionAdapter`, `BotProtectionVerifier` and `BotProtectionVerdict` types come from `#frontend/bot-protection`. A verifier can answer `challenge` to ask for a stronger proof, which the client sends with one retry. An app route protects itself with `await requireBotProtection(event, { action })`.
+
+  **Scripts and devtools.** A request that carries a bypass signed with the project secret key skips the check. Create the value with `signBotProtectionBypass(projectSecretKey, action, nowSeconds)` from `@laioutr-core/frontend-core/bot-protection` and send it in the `BOT_PROTECTION_BYPASS_HEADER` header. A project without a secret key accepts no bypass.
+
+## [0.53.0] - 2026-09-10
+
+### Patch Changes
+
+- An app can now shape an analytics event per destination. `frontend-core:analytics:deliver` is a filter hook fired once per destination, immediately before that destination receives the event, so two recipients of the same event can be given different values:
+
+  ```ts
+  nuxtApp.hook('frontend-core:analytics:deliver', ({ destination, result }) => {
+    if (destination.id !== 'gtm') return;
+    result.value = { ...result.value, payload: redact(result.value.payload) };
+  });
+  ```
+
+  It never fires for the transport that carries events to the project's own ingest endpoint, so a handler cannot change what a server-side recipient receives. `AnalyticsDestination.stage` widens to `'destination' | 'transport'` to carry that distinction. A destination authored with `defineAnalyticsDestination` is unaffected.
+
+- A project sets orchestr's module options from its own `laioutrrc.json`, under `config.orchestr`. The first of them chooses how the cache writes a batch of entries:
+
+  ```json
+  {
+    "config": {
+      "orchestr": {
+        "cacheBatchWrite": "msetex"
+      }
+    }
+  }
+  ```
+
+  `msetex` writes one command per TTL group instead of one per entry, so a warm render's component write costs 3 commands rather than 144. It needs Valkey 9.1 or later: a server that refuses the command makes the backend fall back to the pipeline for the rest of the process and warn once. The default is unchanged.
+
+## [0.51.0] - 2026-09-08
+
+### Minor Changes
+
+- Storefronts now serve a `/api/public/*` route class, with the media library as its first domain. A client that has no backend of its own — an intranet page, a desktop tool, a script — can list, upload and finalize a project's media without holding the project secret.
+
+  A caller presents a project-scoped restricted key (`rstk_…`) as `Authorization: Bearer …`. Cockpit issues and revokes the key in project settings, and every request is authorized against Cockpit for the one scope the path requires: `media:read` for `/api/public/media/list` and `/libraries`, `media:write` for `/upload`, `/upload-targets` and `/finalize`. A path with no scope, an organization key, and a key belonging to another project are all refused.
+
+  The class is off until a project opts in. `RcCoreConfig.publicApi.allowedOrigins` enables it and lists the browser origins allowed to call it, matched exactly against the request's `Origin` header. Without that config the whole class answers 404, so nothing is exposed and nothing confirms the routes exist. A caller that sends no `Origin` is not a browser and reaches the credential check on the key alone.
+
+  The gate fails closed. A Cockpit that is unreachable, slow or malformed answers 503 rather than passing the request through. `/api/laioutr/*` and its project-secret gate are untouched: the two classes share no code path.
+
 ## [0.50.0] - 2026-09-07
 
 ### Minor Changes
