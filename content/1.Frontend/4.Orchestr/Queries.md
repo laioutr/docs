@@ -325,17 +325,17 @@ A **query template provider** supplies valid input presets for a query token. St
 Register a provider using the builder's `queryTemplateProvider` shortcut:
 
 ```ts
-// src/runtime/server/orchestr/Product/byCategorySlug.template.ts
-import { ProductsByCategorySlugQuery } from '@laioutr-core/canonical-types/ecommerce';
+// src/runtime/server/orchestr/Product/byCategoryId.template.ts
+import { ProductsByCategoryIdQuery } from '@laioutr-core/canonical-types/ecommerce';
 import { defineMyAppQueryTemplateProvider } from '../../middleware/defineMyApp';
 
 export default defineMyAppQueryTemplateProvider({
-  for: ProductsByCategorySlugQuery,
+  for: ProductsByCategoryIdQuery,
   run: async ({ input, context }) => {
     const categories = await context.api.listCategories({ term: input.term, limit: 50 });
 
     return categories.map((cat) => ({
-      input: { categorySlug: cat.slug },
+      input: { categoryId: cat.id },
       label: cat.name,
     }));
   },
@@ -345,6 +345,25 @@ export default defineMyAppQueryTemplateProvider({
 The handler receives an `input` object with an optional `term` (the search text the editor typed in Studio) and returns an array of `{ input, label }` objects. Each `input` must match the query token's Zod schema.
 
 Like other handlers, query template providers are auto-discovered from the `orchestr/` directory and support middleware context via the builder pattern.
+
+### Provide templates for id queries, not slug queries
+
+When the editor picks a template, Studio stores its `input` in the page config once. That one value is shared by every market and every language the project serves.
+
+The provider, however, runs in whatever language Studio is set to at the time. If your backend translates slugs per language (Shopify translates handles, for example), a provider that returns slugs stores the slug of that one language. The query then resolves only in that language, and in every other market it throws a not-found error or renders nothing.
+
+So if the entities come from a system with translatable slugs, register the provider on the **by-id** token:
+
+| Picking          | Provide templates for              | Not for                              |
+| ---------------- | ---------------------------------- | ------------------------------------ |
+| A category       | `ecommerce/product/by-category-id` | `ecommerce/product/by-category-slug` |
+| A single product | `ecommerce/product/by-id`          | `ecommerce/product/by-slug`          |
+
+Slug queries remain right for **route-bound** queries such as `route.params.slug` on a product or listing page. There each language's URL supplies its own slug, so nothing language-specific is stored.
+
+::warning
+**An id that no longer resolves is not an error.** A by-id query handler can return the id without asking the backend, and the component resolvers then load the entity by id. If the entity was deleted, or is not available in the current market, the resolvers return nothing for it. The page still renders, but a block bound to that query receives an entity without components (`{ id, components: {} }`), not `undefined`. Guard on a component the block needs, such as `v-if="product?.components.base"`, rather than on the entity itself.
+::
 
 ## Advanced
 
