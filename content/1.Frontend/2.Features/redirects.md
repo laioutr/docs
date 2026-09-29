@@ -99,6 +99,21 @@ External targets are open redirects by design: anyone with write access can send
 
 ---
 
+## Caching at the edge
+
+A redirect from your list depends only on the request URL, and it changes only with a deploy. On Laioutr Cloud and on Vercel, the storefront therefore sends it with `Cache-Control: public, s-maxage=86400`, and the CDN answers repeat requests for that URL without reaching your storefront.
+
+| Hosting | What clears a kept redirect |
+| --- | --- |
+| Laioutr Cloud | Every promotion to production clears the edge cache of your production hostnames. If that ever fails, a changed redirect is live after at most a day. |
+| Vercel | Each deployment has a cache of its own, so a new deployment starts empty. Most redirects are served by Vercel directly as bulk redirects; the header covers the ones beyond your plan's allowance. |
+
+The header carries no `max-age`, so browsers treat a `301` and a `302` exactly as before.
+
+On other hosting, the storefront sends no cache header on a redirect. To add one, use the [`frontend-core:redirect:send`](/frontend/features/hooks#redirects) hook, and only when your CDN clears its cache on every deploy.
+
+---
+
 ## Ordering with locale and built routes
 
 Two interactions are worth knowing about:

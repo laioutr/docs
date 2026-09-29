@@ -485,6 +485,40 @@ One destination is exempt: the transport that carries events to the project's ow
 
 A destination author can also shape their own output inside `track()`, since that code owns what it sends.
 
+### Redirects
+
+::hook-meta
+---
+name: frontend-core:redirect:send
+title: Send a project redirect
+surface: server
+register: nitro-plugin
+dispatch: async
+kind: modify
+payload:
+  - { field: event, type: H3Event, description: 'The request being redirected. Set response headers on it.' }
+  - { field: location, type: string, description: 'The target, with the request query string already appended.' }
+  - { field: statusCode, type: '301 | 302', description: 'Whether the redirect is permanent or temporary.' }
+whenItFires: When a request matches a redirect from the project's redirect list, before the redirect is sent.
+related:
+  - { label: Redirects, to: /frontend/features/redirects }
+---
+
+Add response headers to a redirect from the project's redirect list. Frontend Core sets no cache header on these redirects by default. On Laioutr Cloud and on Vercel, the hosting integration uses this hook to let the CDN keep them — see [Caching at the edge](/frontend/features/redirects#caching-at-the-edge).
+
+A project redirect depends only on the request URL, and it changes only with a deploy. So a shared cache may keep it, as long as the next deploy clears that cache. The hook does not fire for other redirects: a locale redirect or a redirect after login can depend on the visitor.
+
+#example
+```ts [server/plugins/redirect-cache.ts]
+export default defineNitroPlugin((nitroApp) => {
+  nitroApp.hooks.hook('frontend-core:redirect:send', ({ event }) => {
+    // Your CDN purges on every deploy, so a day is safe.
+    setResponseHeader(event, 'cache-control', 'public, s-maxage=86400');
+  });
+});
+```
+::
+
 ## Orchestr Client Hooks
 
 These hooks fire during client-side action execution. All receive a `token` string that identifies the action (e.g. `ecommerce/cart/add-items`).
