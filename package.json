@@ -8,8 +8,8 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@laioutr-core/canonical-types": "^0.26.0",
-    "@laioutr-core/core-types": "^0.36.0",
+    "@laioutr-core/canonical-types": "^0.34.9",
+    "@laioutr-core/core-types": "^0.62.0",
     "@laioutr-core/ui-component-meta": "^2.12.0",
     "@nuxt/content": "3.15.2",
     "@nuxtjs/mdc": "0.19.1",
@@ -18,7 +18,7 @@
     "@vueuse/nuxt": "14.1.0",
     "better-sqlite3": "^12.2.0",
     "didyoumean2": "^7.0.4",
-    "docus": "latest",
+    "docus": "5.12.3",
     "mermaid": "^11.12.2",
     "nuxt": "^4.1.2",
     "nuxt-component-meta": "^0.15.0",

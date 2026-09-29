@@ -6,6 +6,8 @@ allowBuilds:
   unrs-resolver: true
   vue-demi: true
 minimumReleaseAgeExclude:
+  - '@laioutr-core/canonical-types@0.34.9'
+  - '@laioutr-core/core-types@0.62.0'
   - '@laioutr-core/ui-component-meta@2.12.0'
 onlyBuiltDependencies:
   - '@parcel/watcher'

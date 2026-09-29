@@ -22,6 +22,8 @@ const pageTypeExportNames: Record<string, string> = {
   'blog/post-single': 'BlogPostSinglePage',
   'blog/post-listing': 'BlogPostListingPage',
   'blog/collection': 'BlogPostCollectionPage',
+  'location/detail': 'LocationDetailPage',
+  'location/finder': 'LocationFinderPage',
 };
 
 const displayTitle = computed(() => pageType.value?.studio.label ?? props.name);
@@ -75,7 +77,8 @@ const didYouMeanThing = useDidYouMean(
   <ProseCallout v-else color="warning" icon="i-lucide-alert-circle">
     No page type metadata found for {{ props.name }}.
     <template v-if="didYouMeanThing">
-      Did you mean <ProseCode>{{ didYouMeanThing }}</ProseCode>?
+      Did you mean <ProseCode>{{ didYouMeanThing }}</ProseCode
+      >?
     </template>
   </ProseCallout>
 </template>
