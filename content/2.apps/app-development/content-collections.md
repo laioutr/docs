@@ -64,7 +64,7 @@ A collection serves its components and links as soon as it is listed. Its querie
 
 The list is read when the storefront is built, so a change takes effect with the next deploy.
 
-**A name is an entity type.** `'BlogPost'` is the `entityType` its component tokens are defined with, and it is the name Cockpit lists. A name is served when an installed app [offers](#offering-types-from-an-app) that type. Entries are stored by entity type and component name, so replacing a token file with an app's offer of the same type, or the other way round, keeps every entry.
+**A name is an entity type.** `'BlogPost'` is the `entityType` its component tokens are defined with. Cockpit lists it in words, as "Blog Post". A name is served when an installed app [offers](#offering-types-from-an-app) that type. Entries are stored by entity type and component name, so replacing a token file with an app's offer of the same type, or the other way round, keeps every entry.
 
 **The object form** names a token file, or adjusts a type:
 
@@ -253,10 +253,32 @@ Each component schema is a `z.object` with named fields, even when the value is 
 
 **Localization is decided per field.** By default a string is translated per locale, unless it carries an enum, a constant or a format such as a date. Rich text, media and links are translated too. Numbers, booleans, enums and dates are one value for every locale. Override the default on a field with `.meta({ cms: { localized: boolean } })`, as `email` does above. A value is read along the language's fallback chain, as the project's language configuration defines it.
 
-**Placeholder and default.** Two more keys shape the entry form, and neither changes how your storefront parses a value:
+### Form hints
 
-- `.meta({ cms: { placeholder: string } })` is shown in the field's input while it is empty. A value inherited from a fallback locale is shown instead where there is one.
-- `.meta({ cms: { default: value } })` is written when the value is created — a new entry, a new list item, a newly chosen variant, a new object — and never to a value that already exists. A localized default is written in the locale being edited. It is an ordinary value: the entry's schema checks it like any other.
+`.meta({ cms: { … } })` on a field tells Cockpit how to edit it. No hint changes how your storefront parses a value.
+
+Each key is read on its own, and the outermost one wins. A hint at the field therefore overrides the same key on the shared type the field uses, key by key: `Money` carries `kind: 'laioutr.money'` and `localized: false`, and `price: Money.meta({ cms: { label: 'Price' } })` keeps both and adds the label.
+
+| Key | What it does |
+| --- | --- |
+| `localized` | `true` or `false`: whether the value differs per locale (see above). It also applies to every field below the one that carries it. |
+| `label` | The field's label. Without it, Cockpit uses the schema's `title`, then the property name in words (`bornOn` reads "Born On"). |
+| `description` | Help text under the field. Without it, Cockpit uses the schema's `description`, which is often a type's JSDoc; a `{@link Target \| text}` in it reads as its text. `''` or `null` shows no help text, even when the schema has a description. |
+| `placeholder` | Shown in the field's input while it is empty. A value inherited from a fallback locale is shown instead where there is one. |
+| `default` | Written when the value is created — a new entry, a new list item, a newly chosen variant, a new object — and never to a value that already exists. A localized default is written in the locale being edited. It is an ordinary value: the entry's schema checks it like any other. |
+| `suggestions` | A list of strings the editor offers for a string field. The field still accepts any other value. Empty strings and duplicates are dropped. |
+| `kind` | The editor to use, instead of the one the field's shape gives. |
+
+**`kind` values.** The editors Cockpit ships:
+
+- by shape: `core.string`, `core.number`, `core.integer`, `core.boolean`, `core.enum`, `core.date`, `core.datetime`, `core.time`, `core.object`, `core.array`, `core.union`;
+- by meaning: `laioutr.richtext`, `laioutr.money`, `laioutr.media`, `laioutr.link`, and `core.json` for a raw JSON value.
+
+The shared types already carry the right kind — `HtmlFragment` is `laioutr.richtext`, `Money` is `laioutr.money`, the media and link types are `laioutr.media` and `laioutr.link` — so a field that uses them needs no `kind` of its own.
+
+- `laioutr.media`, `laioutr.link` and `core.json` store the value whole, under one key. A media or link field offers exactly the media or link types its own schema accepts.
+- Every other kind only changes the editor. Its editor must be able to write the field's shape: `core.string` on an object field, for example, shows the field read-only.
+- A kind Cockpit has no editor for is still kept. Cockpit edits such a field as JSON when its value is stored whole, and shows it read-only when it is an object, a list or a union.
 
 **Dates:** a `z.date()` field is stored as an ISO 8601 timestamp in UTC and reaches your component as a `Date`. The editor enters it in the browser's time zone.
 

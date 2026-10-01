@@ -5,7 +5,7 @@ seo:
   title: Content (Collections) | Cockpit
 sitemap:
   loc: /cockpit/features/content-collections
-  lastmod: 2026-09-27
+  lastmod: 2026-10-01
   changefreq: monthly
   priority: 0.8
 
@@ -21,7 +21,7 @@ Content types are not created in Cockpit. Developers declare them in the storefr
 
 ## Where to click
 
-From the project sidebar, open **Content**. It appears once Laioutr has enabled content for your organization (ask Laioutr support), and you have permission to edit content in the project.
+In the project sidebar, open **Content** › **Collections**. The group appears once Laioutr has enabled content for your organization (ask Laioutr support), and you have permission to edit content in the project.
 
 URLs follow the pattern  
 `/o/{organization}/p/{project}/content`  
@@ -32,40 +32,78 @@ and
 
 ---
 
-## Content types overview
+## Collections overview
 
-The **Content** page lists every content type of the project in a table with two columns: the **type** and its number of **entries**.
+The **Collections** page lists every content type of the project. The name is shown in words: a type the storefront calls `BlogPost` appears as **Blog Post**.
 
-**Click a row** to open that type's **entries** list.
+Each row shows:
+
+- **Name**
+- **Updated** — when an entry of the type last changed, or **—** when the type has no entries yet
+- **Edited by** — who made that change
+- **Entries** — how many entries the type has
+- a **⋮** menu with **Open** and **New entry**
+
+**Click a row** to open that type's entries list.
+
+Above the table, **search** narrows the list by name, and the **sort** menu orders it by **Name A–Z** (the default), **Recently updated** or **Most entries**. Types without entries come last when you sort by update. Below the table you can page through the list and choose how many types a page shows (10, 20 or 50).
+
+The **Documentation** link at the top right opens this page.
 
 ### If nothing is listed yet
 
-You may see an empty state saying there is **no content yet**. In that case a **developer** needs to declare content types in the storefront's configuration and deploy it. Content types are not invented from scratch inside this screen; they come from your **project configuration**.
+You see **You don't have a collection yet**. Content types are not created in this screen: they come from your **project configuration**, or from an installed **app** that brings its own. Two cards below point to the documentation and to the **App Store**. Otherwise, a **developer** declares content types in the storefront's configuration and deploys it.
 
 ### Types marked "Not declared"
 
-A type that still has entries but that the deployed storefront no longer declares stays in the list with a **Not declared** badge, so its entries remain reachable. You cannot create, edit or publish entries of such a type until the storefront declares it again.
+A type that still has entries but that the deployed storefront no longer declares stays in the list with a **Not declared** badge, so its entries remain reachable. You cannot create, edit or publish entries of such a type until the storefront declares it again; **New entry** in its menu is disabled.
 
 If the storefront cannot be reached, Cockpit says so and lists the content types as the storefront last declared them. If Cockpit has never read the storefront's declaration, it lists only the types that already have entries.
 
 ---
 
-## Inside a content type (entries list)
+## Inside a collection (entries list)
 
-### Toolbar
+The page shows the collection's name under the label **Collection**.
 
-- **New entry** — creates a **new entry** and opens the **entry editor**. It is disabled for a type the storefront no longer declares.
+**Add Entry** at the top right creates a new entry and opens the **entry editor**. It is disabled for a type the storefront no longer declares. A collection without entries shows **Create your first entry** with the same button.
+
+### Search and sort
+
+- **Search entries…** finds entries by title, name or slug, in any language.
+- The **sort** menu orders the list by **Newest first** (the default), **Oldest first** or **Recently updated**.
+
+Search, sort, page and page size are part of the page's address. When you open an entry and go back, the list is as you left it, and you can share a link to a filtered list.
 
 ### Entries table
 
 Each row is one **entry**. You see:
 
-- **Label** — the entry's title or name
-- **Status** — shown as a coloured badge (see below)
+- a **checkbox** to select the entry (see [Bulk actions](#bulk-actions))
+- the entry's **image**, when the type has one; an empty frame when the entry has no image yet
+- **Name** — the entry's title or name. A warning sign next to it means the entry has **validation issues**.
+- **Edited by** — who last changed the entry
 - **Updated** — when the entry last changed
-- A **delete** button. Its confirmation tells you how many other entries link to the entry.
+- **Status** — shown as a coloured badge (see below)
+- a **⋮** menu:
+  - **Open**
+  - **Publish** — for a draft or a changed entry
+  - **Unpublish** — for a live or a changed entry, after a confirmation
+  - **Delete** — after a confirmation that tells you how many other entries link to the entry
 
-A marker on a row shows that the entry has **validation issues**. **Click a row** to open the entry. The list shows 50 entries per page, with **previous** / **next** controls.
+**Click a row** to open the entry. Below the table you can page through the entries and choose how many a page shows (10, 20, 50 or 100).
+
+### Bulk actions
+
+Select entries with their checkboxes, or all entries of the page with the checkbox in the header. A bar replaces the search and shows how many are selected, with three actions:
+
+- **Publish** — publishes every selected entry, after a confirmation.
+- **Delete** — deletes every selected entry, after a confirmation that tells you how many other entries link to them.
+- **Clear** — clears the selection.
+
+While the action runs, the bar shows its progress. When it ends, a message says how many entries changed. Each entry is published or deleted on its own, so one entry that cannot be published does not stop the others. If some entries did not change, a dialog lists them, each with a link and the reason — for example validation issues, an entry that was being saved at that moment, or a result that is unknown because the connection failed. Open those entries and try again.
+
+The selection only ever holds entries on the current page. Changing the page, the search, the sort or the page size clears it.
 
 ### Not served by the CMS
 
@@ -85,7 +123,7 @@ Statuses describe where the entry stands relative to the live storefront:
 
 ### Header actions
 
-On the entry screen you see the **entry label**, a link back to its **content type**, and a **status** badge.
+On the entry screen you see the **entry label**, a link back to its **collection**, and a **status** badge.
 
 Actions include:
 
