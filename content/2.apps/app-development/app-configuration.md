@@ -14,7 +14,7 @@ sitemap:
 
 Laioutr uses Nuxt's regular mechanisms for configuration-data. However with Laioutr projects being configured through the `laioutrrc.json` file instead of a `nuxt.config.ts` file, there are some differences:
 
-1. Each app can be configured in the Studio. When deploying or testing your project locally, this configuration is stored in the `laioutrrc.json` file.
+1. Each app is configured per environment in the Cockpit, under the environment's [Configuration](/cockpit/features/configuration). Which settings appear there is declared in the app's [`laioutr.manifest.json`](/apps/app-development/app-manifest). When deploying or testing your project locally, this configuration is stored in the `laioutrrc.json` file.
 2. This configuration is passed to the app's `module.ts` file based on the app's package name. Therefore it is necessary that each Laioutr app uses its package name (e.g. `@laioutr-app/ui`) as the `configKey` in its module.ts file.
 
 Having a look at the `laioutrrc.json` file, will show you the current configuration for all apps in your project. Each app has a `config` object that contains the configuration.

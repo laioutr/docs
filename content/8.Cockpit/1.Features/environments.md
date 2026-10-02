@@ -62,6 +62,10 @@ Each app carries its own version per environment, so **stage** can run a newer a
 
 **Apps** lists what the environment carries. **Add an app** searches the catalogue; the trash icon marks one for removal; the version dropdowns move one to another release. Nothing is written until you press **Save**, so several changes are applied as one. Saving changes what the **next deployment** installs; it does not change the running site.
 
+### App settings
+
+The settings an installed app asks for, such as its shop domain or API token, are entered per environment under [Configuration](/cockpit/features/configuration).
+
 ## Copying between environments
 
 **Copy into this environment** takes everything from another environment of the same project. The dialog names the direction: **Promote** moves work forward, for example stage into main; **Reset** replaces an environment with another, for example main back into dev after you have broken it.
