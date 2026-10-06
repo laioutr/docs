@@ -41,7 +41,7 @@ export default defineAcme.mediaLibrary({
 
 The library's identity (id, label, icon) is derived from the builder's `.meta()` — you do not declare it again. Registration happens when the returned Nitro plugin runs, and Studio discovers the library (with its capabilities) through the reflect payload.
 
-Your handlers sit behind five HTTP routes the platform registers for you. If you want to drive them directly (to test a connector with curl, or to script a bulk import), see [Assets](/data-api/management-api/assets) for the wire contract.
+Your handlers sit behind the HTTP routes the platform registers for you. If you want to drive them directly (to test a connector with curl, or to script a bulk import), see [Assets](/data-api/management-api/assets) for the wire contract.
 
 Handlers receive two arguments: the query/args object and `ctx` — the per-request context built by your app's `extendRequest` initwares. Use the clients your initware already constructs (e.g. an authenticated admin client) instead of building new ones. Note that media requests originate from Studio, not a storefront visitor: the platform supplies a neutral locale/currency to the initwares, so do not rely on visitor-specific context in media handlers.
 
@@ -60,6 +60,7 @@ Capabilities are **static** flags the picker reads before its first request. Onl
 | `moveAssets` | The picker can move an asset into a folder. Implement `moveAssets`. |
 | `deleteAssets` | The picker can delete an asset. Implement `deleteAssets`. |
 | `renameFolders`, `moveFolders`, `deleteFolders` | Folder rename, move, and delete through the API. Implement `renameFolder`, `moveFolder`, `deleteFolder`. |
+| `updateAssets` | `{ name?, alt?, tags? }`: the asset fields your backend can write, each `true` or absent. Implement `updateAsset`. |
 
 ## Browsing: `list`
 
@@ -143,6 +144,17 @@ An upload outcome's `item` may be a file item when the uploaded file is not medi
 when an editor picked it. If your backend builds the URL from a folder path or a file name, do not
 implement that operation. If your backend can only tell at runtime — Cloudinary's `folder_mode` is
 `fixed` on some accounts and `dynamic` on others — throw `MediaProviderError` with `url_change`.
+
+**`updateAsset` changes the name, the alt text or the tags of one asset.** It receives
+`{ assetId, name?, alt?, tags? }` with only the fields the caller sent, already normalised: trimmed,
+the name 1 to 255 characters, `alt` up to 1000 characters or `null` to clear it, at most 50 tags of up
+to 64 characters, without empty tags or duplicates. A field your library does not declare in
+`capabilities.updateAssets` never reaches it. Return the stored item, so the caller sees the values as
+your backend saved them, and throw `MediaProviderError` with `not_found` for an unknown asset.
+
+A rename must keep the delivery URL, as above. If your backend builds the URL from the file name, set
+`updateAssets.name` to `false`. `alt` is the default alt text: a media field that picks the asset copies
+it into the field value, and a value already stored on a prop does not change when it changes later.
 
 **`deleteFolder` deletes an empty folder only.** A folder with assets or subfolders must be refused
 with `not_empty`. Never cascade: a caller empties the folder first.
