@@ -180,6 +180,43 @@ Design your sections to use the same canonical component types (e.g. `product-ti
 
 ---
 
+## Entry script loading
+
+The first page view downloads the storefront's JavaScript bundle and, by Nuxt's default, a set of
+`prefetch` and `modulepreload` hints for the chunks around it. On a slow mobile connection those
+hints compete with the hero image before the first paint. The `entryScript` block in the `config`
+section of your project's `laioutrrc.json` controls both. Without it, the entry script stays where
+Nuxt puts it and only the prefetch links and the entry's own preload leave the head. A faster first
+paint is the opt-in below:
+
+```json [laioutrrc.json]
+{
+  "config": {
+    "entryScript": {
+      "loading": "after-paint",
+      "hints": "siblings"
+    }
+  }
+}
+```
+
+| Setting | Values | Default | Effect |
+|---|---|---|---|
+| `loading` | `eager`, `after-paint` | `eager` | `eager` keeps the entry script in the head. `after-paint` removes it and requests it from a small inline script after the window `load` event, so its bytes stop competing with the largest image. |
+| `hints` | `all`, `siblings`, `none` | `siblings` | `siblings` drops the prefetch links and the entry's own preload but keeps the preloads for the chunks the entry imports, so those are still discovered while the page parses and interactivity does not move. `none` drops every hint, so the imported chunks also stop competing with the first paint, but interactivity comes around a second later on a slow connection, because the entry then discovers those chunks itself. `all` keeps Nuxt's output. |
+
+Measured on the reference storefront's homepage under mobile throttling, against Nuxt's own head:
+`loading: "after-paint"` took the largest contentful paint from 4,018 to 3,226 ms with Time to
+Interactive unchanged. `hints: "none"` with the script eager took 900 ms off the largest
+contentful paint and added about 1.2 s to Time to Interactive.
+
+The setting applies to production builds only. To restore Nuxt's own head without changing the
+project file, set both environment variables `NUXT_PUBLIC_LAIOUTR_ENTRY_SCRIPT_LOADING=eager` and
+`NUXT_PUBLIC_LAIOUTR_ENTRY_SCRIPT_HINTS=all` on the deployment. The resolved value is on the public
+runtime config as `useRuntimeConfig().public.laioutr.entryScript`.
+
+---
+
 ## Render config prefetching
 
 Resting on or tabbing to a `<NuxtLink>` loads the target page's render config into the Nuxt payload. Opening that page then costs no request for the config at all, on a first visit as much as on a return.
