@@ -203,12 +203,17 @@ paint is the opt-in below:
 | Setting | Values | Default | Effect |
 |---|---|---|---|
 | `loading` | `eager`, `after-paint` | `eager` | `eager` keeps the entry script in the head. `after-paint` removes it and requests it from a small inline script after the window `load` event, so its bytes stop competing with the largest image. |
-| `hints` | `all`, `siblings`, `none` | `siblings` | `siblings` drops the prefetch links and the entry's own preload but keeps the preloads for the chunks the entry imports, so those are still discovered while the page parses and interactivity does not move. `none` drops every hint, so the imported chunks also stop competing with the first paint, but interactivity comes around a second later on a slow connection, because the entry then discovers those chunks itself. `all` keeps Nuxt's output. |
+| `hints` | `all`, `siblings`, `with-entry`, `none` | `siblings` | `siblings` drops the prefetch links and the entry's own preload but keeps the preloads for the chunks the entry imports, so those are still discovered while the page parses and interactivity does not move. `with-entry` (frontend-core 0.66.1 and later, only with `loading: "after-paint"`) takes those preloads out of the head too, and the inline script requests them together with the entry, so they stop competing with the first paint and are still in flight before the entry needs them. Under `eager` it acts as `siblings`. `none` drops every hint, so the imported chunks also stop competing with the first paint, but interactivity comes around a second later on a slow connection, because the entry then discovers those chunks itself. `all` keeps Nuxt's output. |
 
 Measured on the reference storefront's homepage under mobile throttling, against Nuxt's own head:
 `loading: "after-paint"` took the largest contentful paint from 4,018 to 3,226 ms with Time to
 Interactive unchanged. `hints: "none"` with the script eager took 900 ms off the largest
 contentful paint and added about 1.2 s to Time to Interactive.
+
+With `loading: "after-paint"`, `hints: "with-entry"` measured on another storefront's homepage made
+the first paint about 0.6 s earlier than `siblings`, and Vue hydrated at the same time. That holds
+while the imported chunks are smaller than the entry, because they now download alongside it. A
+project whose imported chunks outweigh its entry should measure before it switches.
 
 The setting applies to production builds only. To restore Nuxt's own head without changing the
 project file, set both environment variables `NUXT_PUBLIC_LAIOUTR_ENTRY_SCRIPT_LOADING=eager` and
