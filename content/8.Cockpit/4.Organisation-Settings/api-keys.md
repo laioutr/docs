@@ -26,11 +26,11 @@ The **Key type** you pick when creating a key decides what it can reach. The two
 | --- | --- | --- |
 | Prefix | `orgKey_` | `rstk_` |
 | Bound to | the organization | one project you choose |
-| Scopes | the server scopes below | `media:read`, `media:write` |
+| Scopes | the server scopes below | `media:read`, `media:write`, `media:delete` |
 | Reaches | the Laioutr API, the CLI, the npm registry | the storefront's `/api/public/*` routes |
 | For | automation on a machine you control | an app outside Laioutr |
 
-A restricted key is the credential to hand to a client you do not control — an internal tool, a partner's page, a desktop app. It cannot read your project configuration and cannot deploy; it reads or writes assets on the one project it is bound to. See [Assets](/data-api/management-api/assets) for the routes it opens, and note that the project must list an allowed origin before those routes answer at all.
+A restricted key is the credential to hand to a client you do not control — an internal tool, a partner's page, a desktop app. It cannot read your project configuration and cannot deploy; it reads, writes or deletes assets on the one project it is bound to, as its scopes allow. See [Assets](/data-api/management-api/assets) for the routes it opens, and note that the project must list an allowed origin before those routes answer at all.
 
 The same page shows the server URL for [Laioutr MCP](/agent-api/laioutr-mcp) when Laioutr has enabled the private alpha for your organization. Laioutr MCP uses OAuth with your user account, not an organization API key.
 
@@ -55,7 +55,8 @@ Organization scopes:
 Restricted scopes:
 
 - **`media:read`** — browse and search the project's connected media libraries.
-- **`media:write`** — upload assets to them.
+- **`media:write`** — upload assets to them, edit an asset's name, alt text and tags, move assets, and create, rename and move folders.
+- **`media:delete`** — delete assets and empty folders. A delete is permanent and does not check where an asset is used, so grant it only to a client that must delete.
 
 You should grant **only the scopes** each integration needs. The media scopes are not offered for an organization key, and the server scopes are not offered for a restricted key.
 
