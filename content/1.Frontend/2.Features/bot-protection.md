@@ -98,12 +98,12 @@ Without an installed provider, every listed action is rejected, and both the bui
 
 A rejected request reaches your section as a thrown error, like any failed action. `botProtectionErrorOf(error)` tells you whether bot protection caused it:
 
-| Return value    | Cause                                                                                      |
-| --------------- | ------------------------------------------------------------------------------------------ |
-| `'rejected'`    | The provider did not verify the request (HTTP 403).                                        |
-| `'unavailable'` | The provider could not answer and the project uses `whenUnavailable: 'closed'` (HTTP 503). |
-| `'cancelled'`   | The visitor closed an interactive challenge. No request was sent.                          |
-| `undefined`     | The error has another cause.                                                               |
+| Return value    | Cause                                                                                                                                                 |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `'rejected'`    | The provider did not verify the request (HTTP 403), or the action ran during [server-side rendering](#actions-that-run-during-server-side-rendering). |
+| `'unavailable'` | The provider could not answer and the project uses `whenUnavailable: 'closed'` (HTTP 503).                                                            |
+| `'cancelled'`   | The visitor closed an interactive challenge. No request was sent.                                                                                     |
+| `undefined`     | The error has another cause.                                                                                                                          |
 
 A newsletter section that stays silent when the visitor cancels and asks everyone else to retry:
 
@@ -145,6 +145,6 @@ A missing or rejected proof is refused under either value.
 
 ## Actions that run during server-side rendering
 
-Only a browser can produce a proof. A protected action that runs during server-side rendering, for example through `useQueryAction` in a section's setup, sends no proof, and the server rejects it. In development, the server logs a warning naming the action.
+Only a browser can produce a proof. A protected action that runs during server-side rendering, for example through `useFetchAction` or `useQueryAction` in a section's setup, is refused before a request goes out, so the provider is never asked. The caller receives an error that `botProtectionErrorOf` reports as `'rejected'`, and the server logs a warning that names the action, in every environment.
 
 Protect actions that a visitor triggers, such as form submits and button clicks. An action that a page needs to render is the wrong candidate.
