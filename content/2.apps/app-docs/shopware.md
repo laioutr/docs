@@ -13,7 +13,7 @@ sitemap:
 
 ## Overview
 
-The **@laioutr-app/shopware** package integrates a Laioutr-powered Nuxt app with a [Shopware](https://www.shopware.com/) backend. It registers with the Laioutr orchestr (queries, actions, links, resolvers, templates), provides a Nuxt Image provider for Shopware media, and a media library provider for the Laioutr Studio. All communication uses the official **Storefront API** (customer-facing) and **Admin API** from `@shopware/api-client`.
+The **@laioutr/app-shopware** package integrates a Laioutr-powered Nuxt app with a [Shopware](https://www.shopware.com/) backend. It registers with the Laioutr orchestr (queries, actions, links, resolvers, templates), provides a Nuxt Image provider for Shopware media, and a media library provider for the Laioutr Studio. All communication uses the official **Storefront API** (customer-facing) and **Admin API** from `@shopware/api-client`.
 
 To use it, you add the module to your Nuxt config and set the connection options for the Storefront and Admin APIs. The package then exposes canonical ecommerce capabilities (products, categories, cart, search, menu, auth, newsletter, reviews) so your UI can stay backend-agnostic while talking to Shopware.
 
@@ -21,7 +21,7 @@ Checkout hands off to the Shopware storefront through the [LaioutrConnector](htt
 
 ## Configuration requirements
 
-The module expects configuration under the key **`@laioutr-app/shopware`** in `nuxt.config.ts` (or via `runtimeConfig`). All options live under this one key; the **Required** column below marks which the app needs.
+The module expects configuration under the key **`@laioutr/app-shopware`** in `nuxt.config.ts` (or via `runtimeConfig`). All options live under this one key; the **Required** column below marks which the app needs.
 
 ### Module options
 
@@ -41,8 +41,8 @@ The module expects configuration under the key **`@laioutr-app/shopware`** in `n
 ```ts
 // nuxt.config.ts
 export default defineNuxtConfig({
-  modules: ['@laioutr-app/shopware'],
-  '@laioutr-app/shopware': {
+  modules: ['@laioutr/app-shopware'],
+  '@laioutr/app-shopware': {
     endpoint: process.env.SHOPWARE_STOREFRONT_ENDPOINT!,
     accessToken: process.env.SHOPWARE_STOREFRONT_ACCESS_TOKEN!,
     adminEndpoint: process.env.SHOPWARE_ADMIN_ENDPOINT!,
@@ -246,7 +246,7 @@ These hooks only **transport** the token; they never mint one. Keep the `resolve
 
 1. **Shopware instance** – Storefront API and Admin API reachable; SEO URLs and sales channel access token configured.
 2. **Admin integration** – Create an integration, note Client ID and Client Secret, grant required scopes (e.g. media).
-3. **Nuxt config** – Add `@laioutr-app/shopware` to `modules` and set all five options under `'@laioutr-app/shopware'` (endpoint, accessToken, adminEndpoint, adminClientId, adminClientSecret).
+3. **Nuxt config** – Add `@laioutr/app-shopware` to `modules` and set all five options under `'@laioutr/app-shopware'` (endpoint, accessToken, adminEndpoint, adminClientId, adminClientSecret).
 4. **Environment** – Put secrets and URLs in env vars; ensure the Nuxt server can reach both APIs.
 5. **Orchestr / frontend** – Use the canonical queries, actions, links, and resolvers from your UI; the package maps them to Shopware under the hood.
 6. **Images** – Use the `shopware` Nuxt Image provider for Shopware media.

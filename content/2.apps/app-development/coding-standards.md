@@ -185,7 +185,7 @@ One `Disallow: /api/` line in the project's robots.txt excludes every installed 
 
 | Package | `<name>` |
 | --- | --- |
-| `@laioutr-app/shopware` | `shopware` |
+| `@laioutr-app/shopify` | `shopify` |
 | `@laioutr/app-hygraph` | `hygraph` |
 | `@laioutr-org/acme__checkout` | `checkout` |
 

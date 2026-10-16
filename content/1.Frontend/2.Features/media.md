@@ -27,7 +27,7 @@ This gives you:
 - **Backend-agnostic content** – Stored content uses Laioutr’s **Media** shape (sources, provider for Nuxt Image, alt, etc.), so the frontend can render it regardless of which provider supplied it.
 - **Extensibility** – You can implement a **media library connector** for your own asset system so it appears as a selectable library in Cockpit, and editors can browse, filter, and (optionally) upload assets.
 
-A media library is an **Orchestr integration facet**: you declare it on the same builder that carries your app’s identity (`.meta()`) and per-request context (`.extendRequest()`), alongside `queryHandler` / `componentResolver` / `actionHandler`. It inherits the app’s label, logo, and backend client — no re-declaration, no second client to instantiate. Apps like **@laioutr-app/shopify** and **@laioutr-app/shopware** ship with a built-in connector; you add more by declaring and registering your own.
+A media library is an **Orchestr integration facet**: you declare it on the same builder that carries your app’s identity (`.meta()`) and per-request context (`.extendRequest()`), alongside `queryHandler` / `componentResolver` / `actionHandler`. It inherits the app’s label, logo, and backend client — no re-declaration, no second client to instantiate. Apps like **@laioutr-app/shopify** and **@laioutr/app-shopware** ship with a built-in connector; you add more by declaring and registering your own.
 
 ## How it works
 

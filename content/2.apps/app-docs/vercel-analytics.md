@@ -27,7 +27,7 @@ The module does not define any required options. You can add the module with no 
 ```ts
 // nuxt.config.ts
 export default defineNuxtConfig({
-  modules: ['@laioutr-app/vercel-analytics'],
+  modules: ['@laioutr/app-vercel-analytics'],
   // optional: any module-specific options can go under the config key
   // '@laioutr/app-vercel-analytics': {},
 });

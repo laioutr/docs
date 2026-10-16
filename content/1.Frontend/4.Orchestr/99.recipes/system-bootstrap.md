@@ -81,7 +81,7 @@ import { useRuntimeConfig, useUserlandCache } from '#imports';
 const SYSTEM_ENTITIES_TTL = 60 * 60 * 24; // 1 day
 
 export const getCachedSystemEntities = async (client: StorefrontClient) => {
-  const accessToken = useRuntimeConfig()['@laioutr-app/shopware'].accessToken;
+  const accessToken = useRuntimeConfig()['@laioutr/app-shopware'].accessToken;
   const cache = useUserlandCache<SwSystemEntities>(
     `shopware:${accessToken}:system-entities`,
   );
