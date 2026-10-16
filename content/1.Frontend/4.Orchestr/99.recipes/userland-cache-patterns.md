@@ -63,7 +63,7 @@ There are two valid placements, with different lifecycle properties.
 Put the differentiator in the prefix when its change should evict every entry under it. Credential rotation is the canonical case: when an access token rotates, all cached data tied to the old token's identity space becomes inaccessible, so making the token part of the prefix means the new token's prefix starts empty by definition.
 
 ```ts [server/shopware-helper/system/getSystemEntities.ts]
-const accessToken = useRuntimeConfig()['@laioutr-app/shopware'].accessToken;
+const accessToken = useRuntimeConfig()['@laioutr/app-shopware'].accessToken;
 const cache = useUserlandCache<SwSystemEntities>(
   `shopware:${accessToken}:system-entities`,
 );

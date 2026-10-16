@@ -18,7 +18,7 @@ This app is **planned** and currently under development. The feature set describ
 
 ## Overview
 
-The **@laioutr-app/b2bsellers** package integrates the [B2Bsellers Suite](https://www.b2b-sellers.com/) into a Laioutr-powered Nuxt app. B2Bsellers is a modular Shopware 6 plugin that transforms a standard shop into a full-featured B2B e-commerce platform — covering employee management, role-based permissions, order approval workflows, offer management, budgets, cost centers, sales representative tools, and more.
+The **@laioutr/app-b2bsellers** package integrates the [B2Bsellers Suite](https://www.b2b-sellers.com/) into a Laioutr-powered Nuxt app. B2Bsellers is a modular Shopware 6 plugin that transforms a standard shop into a full-featured B2B e-commerce platform — covering employee management, role-based permissions, order approval workflows, offer management, budgets, cost centers, sales representative tools, and more.
 
 This app connects to the **B2Bsellers Store API** endpoints that the plugin adds to Shopware's existing Store API. All endpoints use the same authentication mechanism as the standard Shopware Store API (`sw-context-token` header).
 
@@ -37,7 +37,7 @@ For detailed property-level API reference, see the official [B2Bsellers Store AP
 
 ## Architecture
 
-The B2Bsellers plugin extends Shopware's Store API with additional `/b2b/*` endpoints. Laioutr communicates with these endpoints through the same Shopware storefront connection that the `@laioutr-app/shopware` package establishes.
+The B2Bsellers plugin extends Shopware's Store API with additional `/b2b/*` endpoints. Laioutr communicates with these endpoints through the same Shopware storefront connection that the `@laioutr/app-shopware` package establishes.
 
 ```mermaid
 flowchart LR
@@ -266,7 +266,7 @@ Allow visitors or customers to request information about products that may not b
 
 ### Prerequisites
 
-The B2Bsellers app requires the **@laioutr-app/shopware** package to be installed and configured, as it relies on the Shopware Store API connection and session management (`sw-context-token`).
+The B2Bsellers app requires the **@laioutr/app-shopware** package to be installed and configured, as it relies on the Shopware Store API connection and session management (`sw-context-token`).
 
 ### Extending B2Bsellers features
 
