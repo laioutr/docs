@@ -63,13 +63,17 @@ A project installs **one** provider app:
   Bot checks with your own Turnstile widget, on any host. Shows a challenge only when Cloudflare asks.
   :::
 
+  :::card{target="_self" title="Cap" to="/apps/app-docs/cap"}
+  Invisible proof of work that the storefront checks itself, on any host with Redis. No vendor account.
+  :::
+
   :::card
   ---
   target: _self
   title: Build your own provider
   to: /apps/app-development/bot-protection-providers
   ---
-  Wrap reCAPTCHA, hCaptcha or a proof-of-work service in a Laioutr app.
+  Wrap reCAPTCHA, hCaptcha or another proof-of-work service in a Laioutr app.
   :::
 ::
 

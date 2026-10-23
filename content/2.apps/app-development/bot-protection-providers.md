@@ -13,7 +13,7 @@ sitemap:
 
 ## What you are building
 
-A **bot-protection provider** app decides whether a request to a [protected action](/frontend/features/bot-protection) came from a person. Build one when [`@laioutr/app-botid`](/apps/app-docs/botid) does not fit your hosting. Cloudflare Turnstile, reCAPTCHA, hCaptcha and proof-of-work services all fit the same contract.
+A **bot-protection provider** app decides whether a request to a [protected action](/frontend/features/bot-protection) came from a person. Build one when none of the provider apps fits your project: [Vercel BotID](/apps/app-docs/botid), [Cloudflare Turnstile](/apps/app-docs/turnstile) or [Cap](/apps/app-docs/cap). reCAPTCHA, hCaptcha and other proof-of-work services fit the same contract.
 
 A provider has two halves. frontend-core owns everything around them: the list of protected actions, the outage policy, the error responses and the signed bypass.
 
