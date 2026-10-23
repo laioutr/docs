@@ -71,6 +71,8 @@ export default defineOrchestr.actionHandler(SubscribeAction, async ({ input }) =
 
 Technically, each registered action acts as an http POST handler on the server. The path is computed, using the action-token name. E.g. `ecommerce/auth/register` will be available at `POST /api/orchestr/action/ecommerce/auth/register`.
 
+The route refuses with 403 any request a browser sends from another site (`Sec-Fetch-Site: cross-site` or `same-site`), so call actions from the storefront's own origin or from a server.
+
 The action response is encoded as a [turbo-stream](https://github.com/jacob-ebey/turbo-stream) response, which is a superset of JSON. This means that any data-type supported by turbo-stream can be returned. This includes regular objects and arrays but also Dates, Maps, Sets, etc.
 
 The client adds `clientEnv` to every request. The server resolves it into the object your handler receives, carrying the request's `market`, `language`, and `isPreview` — see [Client Environment](/frontend/orchestr/client-env). You can shape what the browser sends with the [`orchestr:client-env:modify` hook](/frontend/features/hooks#client-environment).
@@ -242,6 +244,79 @@ const { data, error } = await useFetchAction(SubscribeAction, {
   email: 'test@example.com'
 });
 ```
+
+## Files in Action Input
+
+::since-version{version="0.75.0" packages="@laioutr-core/orchestr" changelog="orchestr"}
+::
+
+An action's input can carry files. Declare a field with `z.file()` in the action-token, alone or in an array. `.max()` and `.mime()` limit the size and the type, and the same schema validates in the browser and on the server.
+
+```ts [shared/tokens/forms/job-application.action.ts]
+import { z } from 'zod/v4';
+import { defineActionToken } from '@laioutr-core/core-types/orchestr';
+
+const document = z
+  .file()
+  .max(6 * 1024 * 1024)
+  .mime(['application/pdf', 'image/jpeg', 'image/png']);
+
+export const SubmitJobApplicationAction = defineActionToken('forms/job-application/submit', {
+  input: z.object({
+    email: z.email(),
+    resume: document,
+    attachments: z.array(document).max(5).default([]),
+  }),
+  output: z.object({ status: z.enum(['submitted']) }),
+});
+```
+
+Pass the `File` from a file input like any other value. `fetchAction` and the composables built on it send the request as multipart as soon as the input holds a file. An input without files is sent as JSON, as before.
+
+```vue [app/components/job-application-form.vue]
+<script setup lang="ts">
+import { SubmitJobApplicationAction } from '../../shared/tokens/forms/job-application.action';
+
+const email = ref('');
+const resume = ref<File>();
+const { mutateAsync, isLoading } = useMutationAction(SubmitJobApplicationAction);
+
+const pickResume = (event: Event) => {
+  resume.value = (event.target as HTMLInputElement).files?.[0];
+};
+</script>
+
+<template>
+  <form @submit.prevent="mutateAsync({ email, resume: resume! })">
+    <input v-model="email" type="email" />
+    <input type="file" accept="application/pdf" @change="pickResume" />
+    <button :disabled="isLoading">Apply</button>
+  </form>
+</template>
+```
+
+The handler receives `File` objects. It can forward them, or read them with `arrayBuffer()` or `stream()`.
+
+```ts [server/orchestr/forms/job-application.action.ts]
+import { defineOrchestr } from '#imports';
+import { SubmitJobApplicationAction } from '../../../shared/tokens/forms/job-application.action';
+
+export default defineOrchestr.actionHandler(SubmitJobApplicationAction, async ({ input }) => {
+  const body = new FormData();
+  body.set('email', input.email);
+  body.set('cv', input.resume, input.resume.name);
+  for (const file of input.attachments) body.append('attachments[]', file, file.name);
+
+  await $fetch('https://ats.example.com/api/applications', { method: 'POST', body });
+  return { status: 'submitted' as const };
+});
+```
+
+::note
+- **Size.** A request with files may carry at most 20 MiB, set by `orchestr.actionMultipartBodyLimit` in bytes. On Vercel, the platform refuses any request body over 4.5 MB. In both cases the action fails with status 413, which you can check with `error.status === 413`.
+- **Type.** `.mime()` compares the type the browser declares, not the file's content. Read the file's first bytes in the handler when the type must be certain.
+- **Blobs.** Wrap a `Blob`, for example from an image cropper, as `new File([blob], 'photo.jpg', { type: blob.type })`.
+::
 
 ## Action Flow
 
