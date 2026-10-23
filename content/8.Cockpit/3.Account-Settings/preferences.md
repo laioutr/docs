@@ -1,11 +1,11 @@
 ---
 title: Preferences
-description: Cockpit language, profile information, and color mode from the account preferences page.
+description: Cockpit language, time zone, profile information, and color mode from the account preferences page.
 seo:
   title: Account preferences | Cockpit
 sitemap:
   loc: /cockpit/account/preferences
-  lastmod: 2026-04-09
+  lastmod: 2026-10-23
   changefreq: monthly
   priority: 0.7
 
@@ -18,6 +18,14 @@ Account preferences apply to **your user**, not to a single storefront project. 
 ### Language
 
 The **Language** section lets you choose the **Cockpit UI locale**. After you change it, menus, dialogs, and built-in copy use the selected language where translations exist.
+
+### Time zone
+
+Times in the Cockpit — deployments, an environment's history, reports, the audit log — are shown in **your own time zone**, the one your browser runs in. Nothing needs to be set for that: the Cockpit picks the zone up on your first visit.
+
+Under **Time zone** you can switch to **UTC** instead. This helps when your team works across time zones, or when you compare Cockpit times with logs from other systems that use UTC. Switch back to **Your time zone** at any time.
+
+The choice is kept **in the browser you made it in**. On another browser or device, times start in that browser's own time zone until you choose UTC there too.
 
 ### Profile information
 
