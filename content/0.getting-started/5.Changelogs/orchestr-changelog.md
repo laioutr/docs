@@ -14,6 +14,92 @@ sitemap:
 
 All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data-fetching and query orchestration layer, will be documented in this file.
 
+## [0.74.0] - 2026-10-19
+
+### Minor Changes
+
+- A source-entity connector can answer a list narrowed to what changed: it declares `capabilities.changedSince`, and `list` then receives `changedSince`, a UTC ISO 8601 date-time. It must answer every entity whose original may have changed at or after that moment, as far as its source records the change, at least once across the pages even while entities change, and may answer more. Deleted entities, and the changes a connector names as unrecorded, are not in it, so a caller keeps a periodic full read. The registration keeps the capability on the type's descriptor, and the storefront's list route refuses `changedSince` with `unsupported` for a type that does not declare it, so a caller sends it only where the descriptor says so.
+
+## [0.72.0] - 2026-10-16
+
+### Minor Changes
+
+- A query field can request an entity component as optional: `components: [MenuItemBase, { token: MenuItemStyle, optional: true }]`. When no app serves that component for the returned entities, the response leaves it out instead of failing the whole query, and orchestr logs one warning per entity type and component. The typed result marks an optional component as possibly `undefined`, so read it with `?.`. A required component that no app serves still fails the query. A wire query, for example one passed to `useEntityQuery`, takes the same option as `{ name: MenuItemStyle, optional: true }`.
+
+  **Breaking:** an entry of a query field's `components`, and of a link's `components` in a query handler's `requestedLinks`, is now typed as a component name or an object. Code that treats such a list as plain names must read the name from each entry:
+
+  ```ts
+  // before
+  const names: string[] = field.components ?? [];
+
+  // after
+  import { componentSpecToken } from '@laioutr-core/core-types/orchestr';
+  const names: string[] = (field.components ?? []).map(componentSpecToken);
+  ```
+
+  **Breaking:** `RenderQueryLoadSpec.components`, the load spec that `useRenderQueryToWire` reads, now lists objects instead of names. A seed's `spec` still lists plain names.
+
+  ```ts
+  // before
+  loadSpec: { components: ['base'], links: {} }
+
+  // after
+  loadSpec: { components: [{ name: 'base' }], links: {} }
+  ```
+
+- `redisKeyPrefix(app)`, a server auto-import next to `useRedis()`, returns the root for an app's own keys on that connection: `<scope>:app-<app>:`, where the scope is the cache mount's key base. On a connection that may write only below that base, as on Laioutr Cloud, a key that an app builds on any other root is refused. A cache clear does not delete keys below this root, and nothing else does either, so give each key an expiry.
+
+  It returns `undefined` when `useRedis()` has no connection to give, and it throws a `TypeError` unless `app` is a string that matches `[a-z0-9-]+`. The answer reflects the mounts at the time of the call. On Laioutr Cloud the cache is mounted by a Nitro plugin that can run after an app's own, so call it on first use, not in a plugin body.
+
+- A query handler can set `provides: 'all'` to answer every component a request asks for. No component resolver runs for the entities it returns, and a component the handler leaves out of an entity is absent from the response. Use it for a source that alone holds its entities' data, such as menu items from the CMS.
+
+## [0.68.1] - 2026-10-13
+
+### Patch Changes
+
+- `fetchAction` and `useFetchAction` work again during server-side rendering. Since 0.55.0 every call made while a page rendered on the server threw `[nuxt] instance unavailable` before the request went out, so the page showed the error state until a client-side navigation. `fetchTurboStream` takes the request event as an optional third argument, for calls made after an `await`.
+
+## [0.67.0] - 2026-10-09
+
+### Minor Changes
+
+- Add source-entity connectors. An app registers one entity type of its external system with
+  `defineX.sourceEntity({ type, capabilities, describe, list, read, count?, write? })`. The storefront then serves
+  `POST /api/laioutr/source-entities/{describe,count,list,read,write}` behind the project secret, and the reflection
+  lists the registered types as `sourceEntities`. In a production build without a project secret, these routes refuse
+  every request.
+
+  **Contract.** Types, request schemas and errors come from `@laioutr-core/core-types/source-entity`. A read returns the
+  base values in `data` and only explicitly stored values per locale in `translations`. A write is a list of `set` and
+  `remove` operations per entity; core checks each one against the connector's zod schema, and failures come back per
+  operation.
+
+  **Field hints.** A zod schema can carry `.meta({ field: { … } })` with the same keys as `cms`, and `zodToJSONSchema`
+  merges it across wrappers the same way. `CmsFieldMeta` is an alias of the new `FieldMeta`.
+
+  **Request context.** `buildAdminRequestContext` builds the initware context for admin-plane routes.
+  `buildMediaRequestContext` remains as a deprecated alias.
+
+## [0.66.2] - 2026-10-08
+
+### Patch Changes
+
+- Client-side navigation is faster when the next page loads a kind of data that no earlier page in the session loaded, such as the first product page with variants. The sections of the page you leave no longer render again before that page goes away.
+
+## [0.66.0] - 2026-10-06
+
+### Patch Changes
+
+- The media library boundary also checks the item that `updateAsset` returns: it stamps the origin and refuses a forbidden URL scheme, as for list and upload results. A refused item fails the update instead of reaching the caller.
+
+- The media library trust boundary accepts distribution file items (`kind: 'file'`). It validates their `file` description and refuses a `javascript:`, `data:` or `vbscript:` URL in it, as it already does for media sources. It also validates the `file` of a media item, and drops an item of an unknown `kind`.
+
+- On Node 22 and earlier, a storefront server no longer gets slower with every orchestr request it serves. Each request left work behind that every later promise repeated, so a process that had rendered a few hundred pages spent almost three times the CPU on each page. Node 24 was not affected.
+
+- The page index refreshes in the background on Laioutr Cloud and on any Redis or Valkey whose user is limited to the cache mount's `base`. Before, taking its refresh lock was refused there, so cached page lists and lookups were only renewed once they expired. On Valkey 9 or later with scripting disabled, a finished refresh no longer logs a failure.
+
+- A storefront keeps using its Redis or Valkey cache after the cache server restarts. Before, a storefront server that was running during the restart failed every cache read and write from then on, with `ClientClosedError: The client is closed`, until the server process itself was restarted.
+
 ## [0.61.0] - 2026-09-26
 
 ### Minor Changes

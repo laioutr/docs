@@ -14,6 +14,299 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.74.0] - 2026-10-19
+
+### Minor Changes
+
+- A source-entity connector can answer a list narrowed to what changed: it declares `capabilities.changedSince`, and `list` then receives `changedSince`, a UTC ISO 8601 date-time. It must answer every entity whose original may have changed at or after that moment, as far as its source records the change, at least once across the pages even while entities change, and may answer more. Deleted entities, and the changes a connector names as unrecorded, are not in it, so a caller keeps a periodic full read. The registration keeps the capability on the type's descriptor, and the storefront's list route refuses `changedSince` with `unsupported` for a type that does not declare it, so a caller sends it only where the descriptor says so.
+
+## [0.73.0] - 2026-10-16
+
+### Minor Changes
+
+- A storefront answers `POST /api/laioutr/pages` with the pages of its build: each page's id, page type, Studio label and path in each language. Cockpit's link pickers read it, so a CMS link field can link the storefront's pages. Like every `/api/laioutr` route, it requires the project secret. The answer's shape is `DeployedPagesResponse` from `@laioutr-core/core-types/studio`.
+
+### Patch Changes
+
+- Pages no longer wait for the hreflang lookup (`page-index/locate`) in the browser. Hydration reuses the alternates the server rendered instead of requesting them again, and client-side navigation renders without waiting for the lookup. The language switcher no longer keeps the previous page's slugs when a lookup fails or arrives late.
+
+## [0.72.0] - 2026-10-16
+
+### Minor Changes
+
+- A query field can request an entity component as optional: `components: [MenuItemBase, { token: MenuItemStyle, optional: true }]`. When no app serves that component for the returned entities, the response leaves it out instead of failing the whole query, and orchestr logs one warning per entity type and component. The typed result marks an optional component as possibly `undefined`, so read it with `?.`. A required component that no app serves still fails the query. A wire query, for example one passed to `useEntityQuery`, takes the same option as `{ name: MenuItemStyle, optional: true }`.
+
+  **Breaking:** an entry of a query field's `components`, and of a link's `components` in a query handler's `requestedLinks`, is now typed as a component name or an object. Code that treats such a list as plain names must read the name from each entry:
+
+  ```ts
+  // before
+  const names: string[] = field.components ?? [];
+
+  // after
+  import { componentSpecToken } from '@laioutr-core/core-types/orchestr';
+  const names: string[] = (field.components ?? []).map(componentSpecToken);
+  ```
+
+  **Breaking:** `RenderQueryLoadSpec.components`, the load spec that `useRenderQueryToWire` reads, now lists objects instead of names. A seed's `spec` still lists plain names.
+
+  ```ts
+  // before
+  loadSpec: { components: ['base'], links: {} }
+
+  // after
+  loadSpec: { components: [{ name: 'base' }], links: {} }
+  ```
+
+## [0.71.0] - 2026-10-15
+
+### Minor Changes
+
+- A source entity can carry `canonical`: the entity as its storefront shows it, as canonical components, with those of the entities it holds (a product's variants) under `children`. `null` says the storefront does not show the entity; absence says it was not read. A connector sends at most `SOURCE_ENTITY_CANONICAL_MAX_BYTES` and passes each entity through `fitCanonical`, which replaces a larger one with `{ components: {}, omitted: 'tooLarge' }`.
+
+### Patch Changes
+
+- Firefox no longer shows a 500 page ("undefined has no properties") when a visitor reloads or leaves a storefront page before it finishes loading, and the browser no longer waits for an extra script request before the app starts.
+
+  The fallback languages from the project configuration now reach vue-i18n in every project. A project that sets its own `i18n.vueI18n` got none of them before, and they now replace a `fallbackLocale` from that project's own config file. A project's `i18n/i18n.config.ts` in the default location now loads; before, frontend-core's own config file took its place. A project that keeps a config file of its own still loads it with an extra request, so Firefox can still show the 500 page there.
+
+## [0.70.0] - 2026-10-15
+
+### Minor Changes
+
+- A project can replace the storefront's built-in interface texts per language through `messages` in its laioutrrc, laid over the UI kit's own texts key by key; a language the UI kit does not ship starts from English.
+
+## [0.69.0] - 2026-10-14
+
+### Minor Changes
+
+- Project redirects can apply to one language. A rule with a `locale` fires only on requests whose market and address resolve to that language, so one old path can lead to `/producten/…` in Dutch and `/produkty/…` in Polish. At the same specificity, a rule for the request's language beats a rule for every language; a more specific rule still wins whatever its language. The redirect resolve endpoint answers the same way, from the request's host.
+
+  **Patterns:** `:name+` as the last segment of a source matches one or more segments, like `**:name`, and can be reused in the target. A rule the storefront cannot apply is skipped with a warning at boot instead of misbehaving — `**` before the last source segment, `:name*` in a target or `:name?` before its last segment, or a target that uses a parameter the source declares only with a modifier. A malformed entry or an unknown language costs only that rule. Other unsupported shapes, such as `/p/:slug?`, keep matching exactly one segment, with a warning.
+
+  **Safety:** a redirect never sends a visitor to a host taken from the request. A path target stays on the request's host whatever its parameters hold, and a target whose host or user part holds a parameter, or that is neither a path nor an `http(s)` URL, is skipped.
+
+- A redirect can apply to one language: `RcRedirect` has an optional `locale`, the `code` of one of the project's languages, matched exactly. Absent or empty means every language. The redirect rules the storefront applies are exported from `@laioutr-core/core-types/rc`, so a tool can check a rule before it saves it — `unsupportedRedirectSegment` for a pattern the storefront cannot express, and `redirectTargetHostFromRequest` for a target whose host a request could choose.
+
+## [0.68.2] - 2026-10-14
+
+### Patch Changes
+
+- A browser tab that opened the Studio preview URL directly no longer shows a blank page on every later visit to the storefront. A top-level page load is never treated as the Studio preview: it renders the live page and removes a stray preview cookie, so a browser that is already affected recovers on its next visit. Browsers older than Chrome 80, Firefox 90 and Safari 16.4 keep the previous behaviour.
+
+## [0.68.1] - 2026-10-13
+
+### Patch Changes
+
+- A protected action called during server-side rendering is refused before a request goes out, so no verifier runs for it. `botProtectionErrorOf` returns `'rejected'` for that error, and the server logs a warning that names the action in every environment.
+
+## [0.67.1] - 2026-10-12
+
+### Patch Changes
+
+- The analytics cookies `laioutr_vid` and `laioutr_sid` stay host-only on a market hostname under `laioutr.app`, as they already did under `laioutr.tech`. Every Laioutr Cloud storefront answers on a subdomain of `laioutr.app`, so a cookie scoped to that domain would have carried one visitor identity across every storefront on the platform.
+
+- A media library can refuse a request it cannot serve, such as an unknown list cursor, with the new `MediaProviderError` code `invalid_request`. The media routes answer it with 422 and `data.code: 'invalid_request'` instead of a generic 502, so a caller can tell a bad request from a library outage.
+
+## [0.67.0] - 2026-10-09
+
+### Minor Changes
+
+- Add source-entity connectors. An app registers one entity type of its external system with
+  `defineX.sourceEntity({ type, capabilities, describe, list, read, count?, write? })`. The storefront then serves
+  `POST /api/laioutr/source-entities/{describe,count,list,read,write}` behind the project secret, and the reflection
+  lists the registered types as `sourceEntities`. In a production build without a project secret, these routes refuse
+  every request.
+
+  **Contract.** Types, request schemas and errors come from `@laioutr-core/core-types/source-entity`. A read returns the
+  base values in `data` and only explicitly stored values per locale in `translations`. A write is a list of `set` and
+  `remove` operations per entity; core checks each one against the connector's zod schema, and failures come back per
+  operation.
+
+  **Field hints.** A zod schema can carry `.meta({ field: { … } })` with the same keys as `cms`, and `zodToJSONSchema`
+  merges it across wrappers the same way. `CmsFieldMeta` is an alias of the new `FieldMeta`.
+
+  **Request context.** `buildAdminRequestContext` builds the initware context for admin-plane routes.
+  `buildMediaRequestContext` remains as a deprecated alias.
+
+## [0.66.1] - 2026-10-07
+
+### Patch Changes
+
+- `config.entryScript.hints` accepts `with-entry` for projects on `loading: "after-paint"`. The preloads for the chunks the entry imports leave the head and are requested together with the deferred entry, so they no longer compete with the first paint, and the page still hydrates as early as with `siblings`. On one storefront's homepage under mobile throttling, the first paint came about 0.6 s earlier than with `siblings`.
+
+  ```json
+  {
+    "config": {
+      "entryScript": {
+        "loading": "after-paint",
+        "hints": "with-entry"
+      }
+    }
+  }
+  ```
+
+  Under `loading: "eager"` the value acts as `siblings`, and the build warns.
+
+## [0.66.0] - 2026-10-06
+
+### Minor Changes
+
+- Adds `useCanonicalUrl()`, the canonical URL of the page being rendered, including changes made through the `frontend-core:page-head:resolve` hook.
+
+- Add a media asset update route: `/api/laioutr/media-update-asset`, and in the public API `/api/public/media/update-asset` (`media:write`). It changes the name, the alt text, or the tags of one asset and answers the stored item. A field the library does not declare in `capabilities.updateAssets` is refused with `400`.
+
+- Add asset metadata updates to the media library contract: `updateAsset` changes the name, the alt text, or the tags of one asset, and the `updateAssets` capability declares which of the three fields a library can write. A list item can carry its `tags`. A name change must never change a delivery URL: a library whose URL carries the name sets `updateAssets.name` to `false`.
+
+- A media library item is one of two kinds. `ProviderStudioMediaItem` gains `kind?: 'media'` and `file`, the stored original (`url`, `mimeType`, `size`, `downloadUrl`). The new `ProviderStudioFileItem` (`kind: 'file'`) describes a distribution file: it has a delivery URL, and no media field can select it. `MediaListResult.items`, the `item` of a successful `UploadOutcome` and the return of `updateAsset` are `ProviderStudioLibraryItem`, the union of both. `MediaQuery.type` accepts `'file'`, and a list without `type` returns file items too. `mediaKindForMime` and `isFileItem` are new.
+
+  **Breaking:** code that reads `item.media` on a list, upload or update item must check `isFileItem(item)` first.
+
+  ```ts
+  // Before
+  const src = item.media.sources[0];
+
+  // After
+  if (!isFileItem(item)) {
+    const src = item.media.sources[0];
+  }
+  ```
+
+  **Breaking:** `ProviderStudioMediaItem.previewUrl` is optional. It is absent when the provider has no preview image, for example for audio. Code that reads it as a string must handle `undefined`.
+
+  ```ts
+  // Before
+  const thumb: string = item.previewUrl;
+
+  // After
+  const thumb = item.previewUrl; // string | undefined
+  if (thumb) showPreview(thumb);
+  ```
+
+  **Breaking:** a provider's `MediaQuery.type` may contain `'file'`. A provider that maps each type to a backend clause, for example through a `Record<MediaType, …>`, must ignore `'file'` in a mixed query and answer a query for `['file']` alone with no items.
+
+  ```ts
+  // Before
+  const clauses = query.type?.map((type) => CLAUSE_BY_TYPE[type]);
+
+  // After
+  const clauses = query.type?.filter((type) => type !== 'file').map((type) => CLAUSE_BY_TYPE[type]);
+  if (query.type?.length && !clauses?.length) return { items: [] };
+  ```
+
+### Patch Changes
+
+- The public API's OpenAPI document describes a media library item as a media item or a distribution file item (`LibraryItem`), and `update-asset` answers with one. A legacy media library returns no items for a query of `type: ['file']`.
+
+- `buildMenuTree` and `menuTreeAtDepth` build a menu of several thousand items in well under a millisecond. A category tree of 3,000 items took about 48 ms, and a shop header builds it twice on every page.
+
+## [0.65.0] - 2026-10-02
+
+### Minor Changes
+
+- Add media folder rename, move, and delete routes: `/api/laioutr/media-{rename,move,delete}-folder`, and in the public API `/api/public/media/rename-folder` and `/api/public/media/move-folder` (`media:write`) and `/api/public/media/delete-folder` (`media:delete`). A deliberate refusal from a media library keeps its status (`403`, `404`, `409`, or `422`) and carries `data.code`; any other library failure stays a `502`.
+
+- Add authenticated media control routes for folder create, asset move, and asset delete, and forward the upload `folderId` hint. Expose folder create and asset move through the public API (`/api/public/media/create-folder` and `/api/public/media/move-assets`) under the `media:write` scope, and asset delete (`/api/public/media/delete-assets`) under a new `media:delete` scope.
+
+- Add folder rename, move, and delete to the media library contract (`renameFolder`, `moveFolder`, `deleteFolder`, with the `renameFolders`, `moveFolders`, and `deleteFolders` capabilities), and `MediaProviderError` for deliberate refusals. A rename or move must never change a delivery URL: a provider that cannot keep this does not implement the method, or throws `MediaProviderError` with `url_change`. Folder names are now trimmed and limited to 255 characters.
+
+- Add folder-write + asset-delete to the media-library contract: `createFolders` / `moveAssets` capability flags, `createFolder` / `moveAssets` / `deleteAssets` provider methods, an optional `folderId` upload hint, and their arg schemas.
+
+## [0.64.0] - 2026-10-01
+
+### Minor Changes
+
+- Apps can declare the settings they need in a `laioutr.manifest.json` at the package root. `AppManifest` types the file, and `validateAppManifest(manifest)` returns what is wrong with one — an empty list when it is valid — without throwing. A section may also declare a read-only `test` request, with `{{field}}` placeholders (`TEST_PLACEHOLDER`), which the Cockpit runs to check that section's credentials before they are used; a secret may appear in its headers or body, never in its URL.
+
+### Patch Changes
+
+- `useLinkResolver()` is no longer deprecated. Call it in setup: the resolver it returns keeps working where `linkResolver` throws `[nuxt] instance unavailable` on the server — in a `useHead` getter, a watcher, or code after an `await`. `useResolvedLink()` is built on it, so its value can be read there too.
+
+  Page, page-type and reference links no longer search the whole route table, where each locale counts as a separate route. A lookup took 3 µs with 1,000 routes and 28 µs with 7,000, and now takes about 20 ns.
+
+- A redirect from the project's redirect list now fires the Nitro hook `frontend-core:redirect:send` with `{ event, location, statusCode }` before it is sent, so a Nitro plugin can add response headers to it. On Vercel, these redirects carry `Cache-Control: public, s-maxage=86400`, and Vercel's CDN answers them until the next deployment. On other hosting they carry no cache header, as before.
+
+## [0.63.0] - 2026-09-29
+
+### Minor Changes
+
+- Apps can offer their own entity types to the Laioutr CMS. List them under `cmsOffers` in the app definition — one token module per entity type, resolved by the app, so a hosted project needs no file of its own:
+
+  ```ts
+  const { resolve } = createResolver(import.meta.url);
+  await registerLaioutrApp({
+    name,
+    version,
+    cmsOffers: [{ entityType: 'Recipe', tokens: resolve('./runtime/cms/recipe.tokens') }],
+  });
+  ```
+
+  An offer serves nothing by itself: a project serves the type by naming it in the CMS app's `collections`. Offers are read when the storefront is built and never reach the runtime app meta.
+
+  frontend-core offers canonical-types' entity types the same way when `@laioutr-core/canonical-types` resolves from the project, so `collections: ['Product', 'BlogPost']` needs nothing else.
+
+  An offer can also say which components an entry of its type must have (`requiredComponents: ['base', 'media']`); Cockpit then refuses to publish an entry without them.
+
+  An offer can state the queries the CMS serves by default for its types, in the shape of the CMS app's `queries` option (`queries: { 'acme/recipe/by-slug': 'by-slug' }`, typed `CmsQueryOption`). A project's own `queries` entry overrides a default. frontend-core's offer of the canonical types carries a curated list, so `collections: ['Product', 'Category']` serves products by slug and by category without listing a query.
+
+- Add `cmsCollections` to the app runtime metadata, so Cockpit learns which content types a storefront declares, which app offers each (or that a token file defines it), which of a type's offered tokens the CMS does not serve, with the reason, and which components an entry of the type must have before it is published.
+
+  The reflect endpoint alone carries this list; the app meta compiled into the storefront's client bundle holds only each app's name, version and page wrapper.
+
+- A schema says how the Laioutr CMS edits it, in the `cms` key of `.meta()`. The key is typed (`CmsFieldMeta`), so a misspelt key is a type error.
+
+  **Value types.** `Money`, `Media`, `Link` and `HtmlFragment` get their own editor — a money input, a media form, a link form, a rich-text box — instead of a raw JSON field. An amount, a currency, a measurement unit, a duration and a time zone are one value for every locale rather than something to translate. A `Measurement`'s unit offers the known units.
+
+  **Labels and help.** `label` names a field in the form, before the schema's `title` and the property name. `description` is its help text; without it the form shows the schema's description, and an empty string shows none.
+
+  **Known values.** `wellKnownString(values)` builds a string field whose known values the CMS offers in a dropdown, while any other string stays valid. The value is the same in every locale, and TypeScript still completes the known values:
+
+  ```ts
+  export const WELL_KNOWN_ORDER_STATUSES = ['open', 'confirmed', 'shipped'] as const;
+  export type WellKnownOrderStatus = WellKnownString<typeof WELL_KNOWN_ORDER_STATUSES>;
+  export const OrderStatus = wellKnownString(WELL_KNOWN_ORDER_STATUSES);
+  ```
+
+  `zodToJSONSchema` merges `cms` key by key across repeated `.meta()` calls and wrappers such as `.optional()`, the outermost value winning, so a use site that sets one key keeps the others.
+
+  **Breaking:** a key `CmsFieldMeta` does not name no longer compiles.
+
+  ```ts
+  // before: accepted, and ignored by the CMS
+  z.string().meta({ cms: { localised: false } });
+  // after
+  z.string().meta({ cms: { localized: false } });
+  ```
+
+### Patch Changes
+
+- `OpeningHours`, `DateTime` and `CalendarDate` carry their schema id and title again. A JSON Schema generated from them now hoists each type into `definitions` under its own name, instead of inlining it without one, so a tool that reads the schema can recognize and label these types.
+
+## [0.62.0] - 2026-09-28
+
+### Minor Changes
+
+- Section and block definitions can now leave themselves out of a page's Markdown version with `rendering: { markdown: false }`. The renderer then marks the component with `data-markdown-ignore`, the same attribute component authors can put on any part of their markup. Markdown versions are served by `@laioutr/app-essentials-seo`.
+
+- A storefront built with the node-server preset and tracing on starts several seconds faster: the module loader hook `@scayle/nuxt-opentelemetry` registers there is off by default. Spans from `fetch`, the server and orchestr are unaffected. An app whose database or queue client relies on an OpenTelemetry instrumentation that patches the library turns it back on with `laioutr: { otelEsmLoaderHook: true }`.
+
+- Adds `useStructuredData(nodes)`, a server-only composable that adds schema.org nodes to the page's JSON-LD graph. Build nodes with the `define*` helpers from `@unhead/schema-org/vue`; nodes from every caller merge into one shared `application/ld+json` script. A caller adds `@unhead/schema-org@^2.0.10` as its own direct dependency — frontend-core does not re-export the `define*` helpers.
+
+  `@unhead/schema-org` must resolve to the same unhead version as the project's `@unhead/vue`. When it brings a newer unhead, every server-rendered page fails, so a production build now stops with both versions and the fix (`pnpm update @unhead/vue @unhead/schema-org unhead`). An older copy only warns.
+
+  The `frontend-core:page-head:resolve` hook's result now carries a `head` slot, letting a handler contribute `script`, `link`, `meta`, `style`, and `noscript` entries alongside the existing `seo` and `locale` fields. A handler that replaces the whole result (`result.value = { seo, locale }`) should include `head` too — a missing one is treated as empty at runtime, but the object literal is otherwise incomplete against the new type. A `robots` meta entry contributed through `head` or `locale` is dropped, since robots directives are resolved from `seo.robots` alone.
+
+### Patch Changes
+
+- `/api/frontend/health` answers before any middleware or route runs, so a container host's health probe costs the server about a third of what it did. It still answers `{"status":"ok"}` with `cache-control: no-store`, and every other path behaves as before.
+
+- Requests to `/api/frontend/health` are no longer traced, so a container host's health probe no longer fills the traces with spans. A `pathBlocklist` a project sets for the OpenTelemetry module keeps working beside it.
+
+- Storefronts that enable the public API now serve an OpenAPI 3.1 description of it at `GET /api/public/openapi.json`. It is generated from the schemas the routes validate with, needs no key, and follows the project's opt-in and allowed origins like the rest of `/api/public/`.
+
+- The trailing-slash redirect no longer applies to `/.well-known/*` paths. With `trailingSlash: true`, a request for `/.well-known/ucp` was redirected to `/.well-known/ucp/`, and standards such as UCP forbid a redirect on these paths.
+
+- `@laioutr-core/core-types/media-library` exports zod schemas for the media library response types: `MediaListResultSchema`, `MediaFolderSchema`, `UploadTargetSchema`, `UploadOutcomeSchema`, `UploadErrorCodeSchema`, `ProviderStudioMediaItemSchema`, `MediaLibraryCapabilitiesSchema` and `MediaLibraryDescriptorSchema`.
+
 ## [0.60.0] - 2026-09-25
 
 ### Minor Changes

@@ -14,6 +14,12 @@ sitemap:
 
 All notable changes to the **Laioutr CLI** (the `laioutr` command-line tool) will be documented in this file.
 
+## [0.5.0] - 2026-09-30
+
+### Minor Changes
+
+- `laioutr deploy trigger` deploys a chosen project environment with `--environment-name` (`-e`, or `ENVIRONMENT_NAME`). Without it, `main` is deployed as before, so a workflow on a staging branch can now deploy `staging` instead of production.
+
 ## [0.4.1] - 2026-07-21
 
 ### Patch Changes

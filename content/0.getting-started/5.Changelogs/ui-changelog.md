@@ -14,6 +14,102 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.33.0] - 2026-10-16
+
+### Minor Changes
+
+- Menus can come from the Laioutr CMS. Editors build a menu as an entry of the `Menu` collection, and a menu block shows it through the query `navigation/menu/by-alias`, which finds the menu by its alias. A project with the CMS gets the `Menu` collection without listing it under `collections`.
+
+  **In the storefront.** The query answers the menu's items as `MenuItem` entities in tree order. An item that names markets shows only in those markets. A menu that cannot be read costs the blocks that show it, not the page.
+
+  **In the blocks.** `BlockMegaMenu`, `BlockMenuSideBySide` and `BlockMobileMenuShop` show a CMS menu in their `Root Menu` field, as they show a shop menu. `BlockMenuBasic`, `BlockMobileMenuBasic` and `BlockFooterMenu` get a `Root Menu` field; its items come before the block's own items, and the footer shows only the menu's top-level links. An item's text colour and icon show where the block has a place for them. A shop menu in a `Root Menu` field gets a cache entry of its own, so the shop is asked for it once more after the update.
+
+  **Tokens.** `@laioutr-core/canonical-types/entity/menu` exports `MenuBase` and `MenuContent`, `@laioutr-core/canonical-types/navigation` exports `NavigationMenuByAliasQuery`, and `@laioutr-core/canonical-types/entity/menuItem` exports the optional components `MenuItemStyle` and `MenuItemIcon`.
+
+### Patch Changes
+
+- Text in `Card`, `TextGroup` and `RichContent` no longer widens the block past the viewport when a word is wider than the line. Words of ten letters or more are hyphenated in the page language, and a run with no break point at all — words joined by non-breaking spaces — breaks inside the word. The global class `text-break` holds these rules, so you can add it to your own text containers. Use it on editorial text only: a price inside it can break mid-number. A long word that wrapped whole before can now break with a hyphen; set `hyphens: manual` on `.text-break` to keep the old breaks. (CS-22)
+
+## [2.32.0] - 2026-10-15
+
+### Minor Changes
+
+- A project can replace the storefront's built-in interface texts per language through `messages` in its laioutrrc, laid over the UI kit's own texts key by key; a language the UI kit does not ship starts from English.
+
+## [2.31.2] - 2026-10-14
+
+### Patch Changes
+
+- `CommonSwiper` renders in production builds that also import `CommonSwiperEager` directly. Until now, importing the
+  eager variant anywhere made every other `CommonSwiper` in the server bundle render an empty comment and never hydrate,
+  so those sliders stayed blank.
+
+## [2.31.0] - 2026-10-13
+
+### Minor Changes
+
+- `CartSummaryBox` takes `totalTaxIncluded`. With `false`, the total reads "excl. VAT" instead of "incl. VAT". The cart sheet sets it when the cart's line prices are net and the cart reports no tax amount, so a B2B cart whose tax is added at checkout no longer labels its net total as including VAT. The cart sheet shows a shipping cost of zero as free shipping.
+
+### Patch Changes
+
+- `CartSummaryBox` and `PriceInfo` no longer show prices as excluding VAT when `taxIncluded` is not passed. An absent value means unknown, as documented, and only an explicit `false` shows the net wording. `PriceInfo` also shows its tax note when `vatInfoVisible` is not passed, instead of hiding it.
+
+- `SectionProductReviews` loads the current customer in the browser, never during server-side rendering, so a page that a shared cache stores cannot carry one visitor's name and email to the next. On a full page load the review form shows the logged-out state until the customer has loaded.
+
+## [2.29.0] - 2026-10-12
+
+### Minor Changes
+
+- A storefront can serve its images in more than one pixel density, so they stay sharp on high-density (retina) screens: `'@laioutr-app/ui': { media: { densities: [1, 2] } }`. Each extra density costs larger downloads on those screens and a longer `srcset` in the HTML. It applies to images with `sizes`, a width or a height, from a provider that can resize them. The default stays 1x, and `<Media retina>` adds 2x for one image.
+
+- `<Media>` can show a blurred preview of an image while it loads, decoded from the image's ThumbHash. Turn it on with `'@laioutr-app/ui': { media: { blurPreviews: true } }`, or `laioutrUiKit: { media: { blurPreviews: true } }` without `@laioutr-app/ui`. It is off by default.
+
+  Previews appear only for images that load after hydration, such as lazy images further down the page or images after a client-side navigation. Only images whose connector provides a ThumbHash get one, such as Shopify product images. The server-rendered HTML does not change.
+
+### Patch Changes
+
+- `<Media>` removes a `solid` placeholder color when its image loaded before hydration. The color stayed behind the image before, visible through transparent areas. When `<Media>` gets a new image, the placeholder shows again until that image loads.
+
+- `Select` renders an item with `type: 'label'` only as a group heading. It no longer also appears in the list as an option that can be selected.
+
+- `Select` renders the selected item's label in the server HTML. A select with a value no longer shows its placeholder until hydration, so the trigger does not change width when the page hydrates. It carries `data-placeholder` only when no item matches the value. (CS-9)
+
+## [2.28.0] - 2026-10-06
+
+### Minor Changes
+
+- `SectionProductDetail` and `BlockProductsListing` can emit schema.org product markup — a `ProductGroup` with each variant's price, strikethrough price and stock on product detail pages, and a product `ItemList` on category and search pages — for Google merchant listings and the product carousel. A new "Emit … structured data" checkbox controls it: on for newly added sections and blocks, off for ones saved before this release until it is ticked in Studio. Requires `@laioutr-core/frontend-core` 0.63.0 and `@laioutr-core/canonical-types` 0.35.0 or later.
+
+### Patch Changes
+
+- `$money`, `$count`, `$measurement`, `$unitPrice`, `$timeOfDay` and `$timespan` reuse one `Intl` formatter per locale and option set instead of building a new one for every value, and so do the countdown, opening-hours and product-specification components. A page with many prices renders faster on the server and hydrates faster in the browser. The output is unchanged.
+
+  The formatters no longer call vue-i18n's `$n`; they format in its locale directly. Outside a Nuxt app, such as Storybook, `$money` and `$measurement` now format instead of throwing, and `$measurement` shows its unit there too.
+
+- Fixed declarations in several components that referenced CSS custom properties no theme defines, so the browser discarded them. `SwatchChip` shows its focus ring on dark surfaces again, the `InputSearch` clear button gets its backdrop blur on hover and press, `NavigationMenuIconItem` applies its default and disabled colours in the white-text variant, a disabled `close-white` `Button` is dimmed, and `Link` text renders at weight 400 instead of inheriting.
+
+  Text in `ContextMenuItem`, `ListboxItem`, `ListboxGroup`, `PopoverContent`, `InputCombobox`, the suggestion dropdown and `OpeningStatusDetail` now takes its colour from a token instead of inheriting it.
+
+- `LocationFinder` and `LocationDetail` load their Google map on demand. The map code, and the Vue template compiler that `vue3-google-map`'s browser build pulled into the entry chunk of every storefront, now download only on pages that show a map.
+
+- `SectionBreadcrumbs` no longer emits a `BreadcrumbList` element without `item` before the last position. A crumb with no link, a placeholder link (`#`) or an unparseable one is left out of the structured data, while the visible trail still shows it. Google Search Console reports such a list as "Missing field "item" (in "itemListElement")".
+
+## [2.27.2] - 2026-09-29
+
+### Patch Changes
+
+- A blog post without media and a product variant without options or availability render instead of failing. The Content Grid, Content Slider and Blog Post Detail sections show such a post without an image; on the product detail page such a variant matches no option selection and is not shown as sold out.
+
+## [2.27.0] - 2026-09-28
+
+### Minor Changes
+
+- `BlockAccordion` gains a "Structured data" field (None / FAQ, default None). Set to FAQ, it emits its items as `FAQPage` structured data alongside the accordion markup.
+
+  `SectionBreadcrumbs` now writes its `BreadcrumbList` into the page's shared schema.org graph instead of emitting its own separate JSON-LD script, so a page with both a breadcrumb trail and other structured data (such as an FAQ accordion) ends up with one script rather than several.
+
+  Both components call `useStructuredData`, so this release requires `@laioutr-core/frontend-core@0.62.0` or later — an older frontend-core fails the build on the missing auto-import.
+
 ## [2.26.0] - 2026-09-25
 
 ### Minor Changes

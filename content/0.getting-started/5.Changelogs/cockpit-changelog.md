@@ -14,6 +14,473 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-10-22]
+
+### Added
+
+- **Studio**: Every product, add-on and service in the Marketplace now carries its own icon and text.
+- **Studio**: Find and add apps in the Marketplace, for the project and environment you choose.
+- **Studio**: Products not built yet can be requested at the size you need; Laioutr gets back to you.
+- **Studio**: People without a picture now show their llama on the dashboard and member pages too.
+- **Studio**: You can upload your own picture on My account; it shows wherever the Cockpit shows you.
+- **Studio**: Products not yet available can be requested from the Marketplace instead of bought.
+- **Studio**: Organizations can upload their own logo for the sidebar, the switcher and member emails.
+- **Studio**: My account now opens inside your organization, and roles sit as a tab under Members & Roles.
+
+### Fixed
+
+- **Studio**: In the Operation Center preview, your own entries show your picture, or your llama.
+- **Studio**: The members page shows each member's picture, or their llama when they have none.
+- **Studio**: The Licenses menu entry shows how many of your licenses are not on a project yet.
+- **Studio**: Studio menus, fields and dialogs are readable in the dark theme.
+
+## [2026-10-21]
+
+### Added
+
+- **Studio**: Billing & Usage shows the AI spend limit beside services and the plan.
+- **Studio**: AI Usage, the Marketplace's Apps tab and app configuration follow the new design.
+- **Studio**: The organization pages match the new design; the partner portal opens on its own address.
+- **Studio**: Buy products from inside a project, start on your organization, and see AI Usage set up.
+- **Hosting**: A project's dashboard shows how many images it stores and its image traffic this month.
+- **Studio**: Organizations on Enterprise can store their own AI provider keys for add-on agents.
+
+### Fixed
+
+- **Studio**: Translatr and Distributr apply only through their own licence.
+- **Studio**: AI Usage is marked Soon in the organization menu until add-on agents are available.
+- **Studio**: Dark mode follows your organization color; members can leave one awaiting a plan.
+- **Studio**: Removing several apps at once in Package Management no longer stops half-way.
+- **Hosting**: Opening a deployment, or going back to Deployments, keeps the environment you chose.
+- **Studio**: Assigning a license to a project now asks you to confirm it, as it cannot be moved.
+
+## [2026-10-20]
+
+### Added
+
+- **Studio**: Organization Owners see their AI usage per agent and model, with an estimated cost.
+- **Studio**: Studio translations wait for your press until you set Studio to sync automatically.
+- **Studio**: Translatr writes Studio by itself when set to automatic, and the shop much faster.
+- **Studio**: Every organization can choose its own brand color for the Cockpit and Studio.
+- **Hosting**: Cloud Image CDN licenses set how many images a project can store.
+- **Studio**: The Licences page shows which apps each project's licenses include and where they run.
+- **Studio**: Edit redirects in place, see every unsaved change, and save or discard them all at once.
+- **Studio**: Owners choose the server emails are sent through; partners find registration at login.
+- **Studio**: Plans can include add-ons, shown on the Licences page as included in the plan.
+- **Studio**: The Marketplace shows which licensed apps a project has and where to get the rest.
+- **Studio**: Every organization has a Marketplace that shows what each project has and can add.
+- **Studio**: HubSpot fields are mapped with two dropdowns; invitation emails show only buttons.
+
+### Fixed
+
+- **Studio**: The Marketplace no longer offers purchases a partner makes for the organization.
+- **Studio**: Studio's layer tree is readable in the dark theme, which Studio can now switch to.
+- **Hosting**: Deploying from the Deployments page asks for confirmation and names the environment.
+- **Studio**: The SMTP settings show only the fields the chosen sending server needs.
+- **Hosting**: After a hosting cutover, the deployments list marks the build the new provider serves.
+- **Hosting**: The deployments list marks the build a staged hosting serves and links its address.
+
+## [2026-10-19]
+
+### Added
+
+- **Studio**: Agencies and freelancers can register as Laioutr partners from a campaign link.
+- **Studio**: A new account accepts the terms and the privacy policy before its registration finishes.
+- **Studio**: Feed list columns fit their content; each row shows its environment and an actions menu.
+- **Studio**: Translatr starts a bring-in, translation or write the moment you press it, and brings a large shop in much faster.
+- **Studio**: Choose which kinds of content Translatr brings in and translates, and add more later.
+- **Studio**: Image alt texts are left out of Translatr by default; turn them on per project under Configuration.
+- **Studio**: A menu can be published before it has items.
+- **Studio**: The German Cockpit says "du" everywhere, with consistent terms and correct plurals.
+- **Studio**: Apps can follow their latest version, and Package Management lists only installable apps.
+- **Studio**: A new organization starts with one month of Laioutr for €1, then chooses a plan.
+
+### Fixed
+
+- **Studio**: A White Label partner's logo shows again at the top of its clients' organization menu.
+- **Studio**: German and English Cockpit texts are consistent, with correct plurals and dates.
+- **Studio**: The German Cockpit keeps Template, Preview and Secret in English.
+- **Studio**: The never-translate list can be searched and is shown a page at a time.
+- **Studio**: Translatr gets pages of its own and imports brand names to keep untranslated from a CSV.
+- **Studio**: The Markets table shows each market's flag again, with its slug below the name.
+
+## [2026-10-17]
+
+### Added
+
+- **Studio**: Choose Standard or Adaptive translation; your plan's monthly quota covers both.
+- **Studio**: Import a menu from your shop into a CMS menu, with its translations, in one step.
+
+### Fixed
+
+- **Studio**: Each language's Translate button now says why it is not available yet.
+
+## [2026-10-16]
+
+### Added
+
+- **Studio**: Choose the model that translates your content, with its cost shown.
+- **Studio**: The audit log shows the last 30 days by outcome and filters to problems with one click.
+- **Studio**: Translatr's page says what happens next, and when, at every step.
+- **Studio**: An app in Package Management can follow latest and update on every deployment.
+- **Studio**: Settings with fixed values are a list; a Google service account key can be saved.
+
+### Fixed
+
+- **Studio**: Translatr shows what it is reading while it brings content in.
+- **Studio**: Package Management shows the name and description an app has in the catalog.
+- **Studio**: Translatr says when your texts are in another language than the one it translates from.
+- **Studio**: Long names in the project sidebar end in an ellipsis, and Collections reads Content.
+- **Studio**: Buying a larger size from a licence notice closes the notice and says what is charged.
+
+## [2026-10-15]
+
+### Added
+
+- **Studio**: When a licence includes no more, the Cockpit offers the next size and buys it in place.
+- **Studio**: Translatr translates a language with one press, shows its cost first, and stays current.
+- **Studio**: The translation log shows what Translatr did; Ask Larry is now Larry Copilot.
+- **Studio**: Translatr translates with Google machine translation; its allowance counts characters.
+- **Studio**: Ask Larry's question field now takes several lines; press Shift+Enter for a new line.
+- **Studio**: Distributr comes in sizes S, M and L; Enterprise can be bought in Change plan.
+- **Studio**: Ask Larry runs several changes it proposed with one confirmation, in order.
+- **Studio**: Translatr shows live activity and a log of what was not translated, and Larry can run it.
+- **Studio**: Buy Enterprise yourself and pay services such as onboarding by invoice in Billing.
+- **Studio**: Translatr walks a new project step by step and brings its content in with one button.
+- **Studio**: Translatr links to where you add a language.
+
+### Fixed
+
+- **Studio**: Translatr tells you which languages to add when the shop offers none to translate into.
+- **Studio**: Translating a kind of content set to sync automatically writes the translations at once.
+
+## [2026-10-14]
+
+### Added
+
+- **Studio**: Translatr can deliver Studio's translation to more than one environment.
+- **Studio**: Translatr translates your CMS content, collection by collection.
+- **Studio**: The Members & Roles page shows each member's role and projects, with a new invite dialog.
+- **Studio**: Every bulk translation or sync shows what it will do before it runs.
+- **Studio**: Translating a kind of content first shows what will be translated and what it costs.
+- **Studio**: Enter your billing details and request services from Billing & Usage.
+- **Studio**: A project's Apps page shows the apps connected to it; Browse opens the full catalogue.
+- **Studio**: Translatr shows what translating will cover and cost, and starts only once you confirm.
+- **Studio**: A redirect can now apply to one language, set on the redirect page or in the CSV.
+- **Studio**: Translations connect within seconds of a project getting its license.
+- **Studio**: The Source service page lists projects whose data is kept without a licence.
+- **Studio**: Pay by bank transfer where your plan allows it, and see each invoice before it is sent.
+- **Studio**: Translatr shows the Studio translations waiting to be accepted, and accepts them.
+- **Studio**: License details show billing and renewal; a license can be canceled to its period end.
+- **Studio**: Translatr keeps one translation per project, made in the environment you choose.
+- **Studio**: Organizations have their own menu and an Overview of their projects, licenses and team.
+- **Studio**: Translatr can translate each kind of content by itself, within your plan's monthly words.
+
+### Fixed
+
+- **Studio**: Opening an organization's Licenses or Custom roles no longer takes almost a minute.
+
+## [2026-10-13]
+
+### Added
+
+- **Studio**: Platform admins can bill every new subscription on the 1st of the month.
+- **Studio**: Translatr checks each kind of content for changes on a schedule you set per kind.
+- **Studio**: Enterprise covers every project of an organization; a package can include everything.
+- **Studio**: Translatr shows its progress first, runs from one row and replaces words in translations.
+- **Studio**: Choosing a plan now shows what it includes, how it is billed and how to cancel.
+- **Studio**: An unpaid or removed license keeps its plan 7 days, then the own domain goes offline.
+- **Studio**: Choose per kind of content whether Translatr syncs your translations automatically.
+- **Studio**: Buy licenses for the organization and assign them to projects on its Licenses page.
+- **Studio**: Translatr keeps your Studio translations and syncs them into Studio when you choose.
+- **Studio**: Choose a Laioutr plan for a project and pay by card; it is active when you are back.
+- **Studio**: Translatr lists what it could not bring in from your shop, to sync again or mark handled.
+- **Studio**: A project without a license runs on the free Starter plan from its first day.
+- **Studio**: Sync a whole product type from your shop into Translatr with one press.
+- **Studio**: A project whose license is no longer paid for sees until when it keeps its own domain.
+- **Studio**: Translatr shows translations of products gone from your shop, removed when you confirm.
+
+## [2026-10-12]
+
+### Added
+
+- **Studio**: Translatr syncs translations to the shop on a schedule when you sync separately.
+- **Studio**: Choose whether Translatr writes translations to the shop as they are saved or on Sync.
+- **Studio**: A project without a license shows when its trial ends; an own domain then needs one.
+- **Studio**: The editor asks before your edit overwrites a change made in the shop meanwhile.
+- **Studio**: An app's settings appear under Configuration as soon as its version is installed.
+- **Studio**: Platform Owners can share an organization's private app with further organizations.
+- **Studio**: Translating your shop's data now continues where it stopped, even after a reload.
+- **Studio**: Translate your shop's products in the editor and save them straight to your shop.
+
+### Fixed
+
+- **Studio**: An organization's own private apps now appear in its projects' Package Management.
+- **Studio**: The partner area shows each partner type's own rates: a license discount for White Label, a license kickback for every other type, and an add-on kickback for all.
+- **Studio**: Password reset and email confirmation links work again.
+- **Studio**: The help button in Studio opens the feedback form for the page you are editing.
+
+## [2026-10-11]
+
+### Added
+
+- **Hosting**: Open any traced request as a waterfall that marks its slowest path and its errors.
+- **Hosting**: See an environment's slowest and failed requests, and open the trace of each.
+- **Hosting**: Protect a Laioutr Cloud storefront with a password, and give machines bypass secrets.
+- **Hosting**: Previews of new Laioutr Cloud environments are protected from the start.
+- **Hosting**: Logs follow new lines live, with colours, expandable JSON and links to traces.
+- **Hosting**: Metrics charts now mark deployments and open logs or slow requests for the time you pick.
+
+## [2026-10-10]
+
+### Added
+
+- **Hosting**: Make an earlier Laioutr Cloud deployment live again without a new build.
+- **Hosting**: Settings now lists what still accepts the old preview token after a rotation.
+
+### Fixed
+
+- **Hosting**: The cutover dialog now says that visitors move only once your domains point there.
+- **Hosting**: A named preview no longer changes the versions its environment's cards show.
+- **Hosting**: After a rollback, the version cards show the versions of the live build.
+- **Hosting**: The rollback message now says which Cloud deployments stay ready.
+- **Hosting**: Switch to a recent Laioutr Cloud deployment and back, without a new build.
+- **Hosting**: The rotation notice lists named previews; Laioutr deploys a staged hosting.
+- **Hosting**: Rotating the preview token ends rollbacks to earlier Laioutr Cloud deployments.
+
+## [2026-10-09]
+
+### Added
+
+- **Studio**: Translatr translates your shop's products and writes the translations back to the shop.
+- **Studio**: Translatr shows a section's page information and previews the language you translate.
+- **Studio**: Translate a language from its row in Settings, in an editor laid out as designed.
+- **Studio**: The feedback board uses the whole window, and you choose which columns it shows.
+- **Studio**: Translate Studio content with Translatr: AI suggestions you check and save.
+- **Studio**: Support can offer paid work in hours on a report, and you approve or decline it there.
+- **Studio**: Checkout asks for your billing address and company details and adds VAT to the invoice.
+- **Studio**: Partners see what blocks them, pay by card and keep their documents while paused.
+- **Studio**: Open any partner's portal from its page on the platform, joining as Owner in one click.
+- **Studio**: Platform Owners join an organization at once, with a reason, and can leave again.
+
+## [2026-10-08]
+
+### Fixed
+
+- **Studio**: Ask Larry answers questions about your own reports and feeds, such as how many are open.
+- **Studio**: Re-sending an invitation now helps someone whose first link a mail filter used up.
+- **Hosting**: Build logs now show for staging and other non-production environments.
+- **Studio**: Invitation emails keep working when a company mail filter opens their links first.
+- **Studio**: Ask Larry remembers the changes he made in a conversation and can list your reports.
+- **Studio**: The partner Earnings page shows the licence and add-on rates under your rate again.
+- **Studio**: Ask Larry checks that a product feed is ready and says what is missing before a run.
+- **Studio**: Ask Larry tells you where to ask him to act, and links what he made for you.
+- **Studio**: Opening the partners host without a partner area now says why instead of failing.
+
+## [2026-10-07]
+
+### Added
+
+- **Studio**: Ask Larry can send a problem to support for you, once you agree.
+- **Studio**: Ask Larry sets up and checks product feeds for you, showing each change first.
+- **Studio**: Members are invited and changed with one role each, chosen from the roles you hold.
+- **Studio**: Support sees whom a new report is for, and Ask Larry answers how-to reports.
+- **Studio**: Partners work on partners.laioutr.cloud, with API keys and CLI tokens for CI.
+
+### Fixed
+
+- **Studio**: Deal registration asks for the contact's first and last name separately.
+- **Studio**: Self-billing invoices for partners now look like Laioutr's other invoices.
+- **Studio**: A partner's organization is deleted only once no customer organizations are under it.
+- **Studio**: Expired invitation and password reset links now say so and tell you what to do next.
+- **Studio**: Links in mails to partners open in the partner area, so they stay signed in.
+- **Studio**: New customer organisations show at once; white-label sidebars show the brand.
+- **Studio**: Pages keep one width, and dark mode reads cleanly on Package Management.
+
+## [2026-10-06]
+
+### Added
+
+- **Studio**: Ask Larry answers greetings and follow-ups in your language, from the documentation.
+- **Studio**: White Label partners prove their own domain by DNS and get quarterly self-billing PDFs.
+- **Studio**: Ask Larry answers questions from the Laioutr documentation, in the header of every page.
+- **Studio**: Partners see their quarter’s kickback by organisation and product, and preview their brand.
+- **Studio**: White Label partners see their licence pool, partner fee and invoices under Billing.
+- **Studio**: Distributr has its own Channels and Feed health pages beside Feeds.
+- **Studio**: The organization's plan and team now sit in their own row under the service offer.
+- **Studio**: Partners register deals in their partner area and follow each through the CRM.
+- **Studio**: The project dashboard shows its licence and bookings, and the service offer below.
+- **Studio**: A partner's people can go back from a customer organisation to their partner area.
+- **Studio**: Partners see their customer organisations; a client changes or revokes partner access.
+
+### Fixed
+
+- **Studio**: Media previews keep small images at their size; selections open a floating action bar.
+
+## [2026-10-05]
+
+### Added
+
+- **Studio**: The service offer spans the dashboard, and Laioutr can move, reword or hide it.
+- **Studio**: The project menu is grouped by product, with unbooked add-ons offered beneath it.
+- **Studio**: The partner area has its own pages and look, apart from the organization's settings.
+- **Studio**: Partners complete company details, tax status, payout account and consent in Settings.
+- **Studio**: Partners see their tier, what it earns and the program's terms in the partner area.
+- **Studio**: The partner's team now lives under Settings → Team, with each member's role and status.
+- **Studio**: Partners give their team a role in a customer, and take it back, from their Team page.
+- **Studio**: Partners see their partner area's menu in the sidebar of their own organization.
+
+### Fixed
+
+- **Studio**: Typing in the middle of a text area or link URL in Studio keeps the cursor in place.
+
+## [2026-10-02]
+
+### Added
+
+- **Studio**: Package Management shows when an app's settings have not reached the Cockpit yet.
+- **Studio**: Platform pages show a loading layout instead of a blank page.
+- **Studio**: Platform configuration pages show a loading layout instead of a blank page.
+- **Studio**: Releasing your app with your own API key now shows its settings in your environments.
+- **Studio**: Organizations can now choose a professional service plan from their project dashboard.
+- **Studio**: App settings accept JSON groups, and connecting an AI client via MCP works again.
+- **Studio**: Platform Owners set up Jira, Slack and notification addresses in one Configuration area.
+
+### Fixed
+
+- **Studio**: Fixes an error that sometimes stopped a page from loading.
+- **Studio**: Package Management no longer marks apps "Not recorded" or asks you to record them.
+- **Studio**: Choosing a new version of an app marked "Not recorded" in Package Management saves again.
+- **Studio**: Professional service plans say they cover every project of the organization.
+- **Studio**: The delete dialog now names content entries by their title.
+- **Studio**: Changing a plan from Billing works again for subscriptions that include add-ons.
+
+## [2026-10-01]
+
+### Added
+
+- **Studio**: Installed apps' settings get a Configuration page per environment, with connection tests.
+- **Studio**: White-label partners can send their customers' emails from their own mail server.
+- **Studio**: Apps that declare their settings show them in a form, prefilled with stored values.
+- **Studio**: Installing an app asks, checks compatibility, then links to its settings and to deploy.
+- **Studio**: Installing an app asks first and says whether it fits the environment.
+- **Studio**: A platform Owner can join a customer's organization from the platform.
+- **Studio**: Partners can set their website, terms, privacy and docs links in the partner portal.
+- **Studio**: The Content menu entry is marked as shared by every environment, the live shop included.
+
+### Fixed
+
+- **Studio**: Someone allowed into Studio on one environment can pick media there.
+- **Studio**: An app that does not fit the environment shows a greyed add button with the reason.
+- **Studio**: Every app category on the Apps page is visible without scrolling sideways.
+- **Studio**: An organization without a logo shows its initial, as the design has it.
+- **Studio**: Package Management lists an app's unchecked risks and asks you to accept them first.
+- **Studio**: The Apps card now says when you cannot change an environment's apps, and who can.
+- **Hosting**: Hosting is available in the menu for every organization, demo organizations included.
+- **Studio**: A paused feed's Run now is greyed in the feed list; open the feed to generate it by hand.
+- **Hosting**: Production environments are marked green by default.
+- **Studio**: The dashboard's storefront tile shows the platform version and the app count on one line.
+- **Hosting**: The environment switcher no longer calls an unpublished production live.
+- **Studio**: Menu entries and pages your role cannot use are hidden or read-only.
+- **Studio**: An urgent report can be sent from an organization page by naming the project.
+- **Studio**: A white-label partner's customers reach the partner from the header's Contact button.
+
+## [2026-09-30]
+
+### Added
+
+- **Studio**: App descriptions on the Apps page are in English when the Cockpit is.
+- **Studio**: Grant a restricted key permission to delete media with the new media:delete scope.
+- **Studio**: Configure an installed app's settings in Package Management, with secrets encrypted.
+- **Studio**: The member list shows each member's own roles and where they hold them.
+- **Studio**: The "Worth knowing" count includes every note on the card, paused feeds too.
+- **Studio**: The dashboard shows how many apps a build installs and when feeds last ran.
+- **Studio**: Organization Owners can define custom roles and give them on a project or environment.
+- **Studio**: Projects open in their live environment, with a new dashboard and Package Management.
+- **Studio**: Reports shows a green dot when Laioutr answers, and each report reads as a conversation.
+- **Studio**: Reports are a searchable, sortable list with tabs for open, waiting and closed ones.
+- **Studio**: Report a problem at its support level, follow answers under Reports, and reply in place.
+- **Studio**: Partners can send Laioutr new leads from their partner portal.
+
+### Fixed
+
+- **Studio**: Pages your role does not reach say so, and license limits are named as such.
+- **Studio**: Custom roles open under the organization's tabs.
+- **Studio**: A newer app version that needs another platform version is flagged on its own row.
+- **Studio**: Settings tabs you cannot use are hidden; Studio access on one environment opens it.
+- **Studio**: A white-label partner's customers see their partner on the Billing tab, not Laioutr.
+- **Studio**: Saving versions on production shows what changes and warns before a version goes down.
+- **Studio**: The partner portal keeps the organization's tabs; manual feeds run from the list again.
+
+## [2026-09-29]
+
+### Added
+
+- **Studio**: A white-label partner uploads its own logo in the partner portal.
+- **Studio**: A white-label partner's customers see the partner's logo, colour and product name.
+- **Studio**: The Apps page follows the new design and adds an app in one click; add-ons get a page.
+- **Studio**: Partners are listed in a grid with their owners; a partner sets its own domain.
+- **Studio**: Partners find a Partner portal in their agency's organization, with customers and tier.
+- **Studio**: New apps published to the registry now appear on your project's Apps page.
+- **Studio**: Pages your role does not include now say so and tell you which Owners can help.
+- **Studio**: Ask Laioutr for help from the feedback button when you don't know how to do something.
+- **Studio**: Platform users change their password and authenticator on their account page.
+- **Studio**: App names and descriptions can be translated for each Cockpit language.
+- **Studio**: App names and descriptions can be written per language, shown on the Apps page.
+- **Studio**: A project's feedback reports open as pages; the duplicate Feedback menu entry is gone.
+- **Studio**: Platform owners can export the app catalog and import it on another platform.
+- **Studio**: Apps are grouped into categories in the project menu and can be filtered by shop system.
+- **Studio**: The Apps page groups apps into tabs arranged by Laioutr, and hides apps for other shops.
+
+### Changed
+
+- **Studio**: The Apps page shows categories as tabs, installable apps only, and your license for each.
+
+### Fixed
+
+- **Studio**: Feedback reports in a project are laid out like the project's other pages.
+- **Studio**: The platform account page uses the full width, like the other platform pages.
+- **Studio**: Opening an invitation or password link while signed in as someone else switches accounts.
+- **Studio**: Platform users are emailed when their password or authenticator changes.
+- **Studio**: Platform invitation links work from Gmail and can be re-sent to an unfinished account.
+- **Studio**: Platform invitations open the platform; a lost authenticator can be reset.
+- **Studio**: Content Managers can open Studio again; pages a role cannot use say so.
+- **Studio**: Pages fit a phone screen, and license limits explain themselves.
+
+## [2026-09-28]
+
+### Added
+
+- **Studio**: A new Feedback page shows every report you sent, its status and Laioutr's answer.
+- **Studio**: Buttons and menu entries for actions your role cannot use are no longer shown.
+
+### Fixed
+
+- **Studio**: The Apps page lists every available app again, with search and a category filter.
+- **Studio**: Distributr is available in German, and deleting a market names the market it deletes.
+- **Studio**: Feedback and Distributr pages now show the Cockpit header and the report button.
+- **Studio**: Bug reports clear the sent screenshot and explain a refused image or the hourly limit.
+- **Studio**: Adding markets and languages works again on projects without a license.
+- **Studio**: Editing a product feed no longer loses what you typed when the page reloads its data.
+- **Studio**: The "Refetching…" notice no longer stacks up and covers the top of the page.
+
+## [2026-09-27]
+
+### Added
+
+- **Studio**: Report a bug or an idea from the bug icon in the header, and read the answer there.
+
+## [2026-09-26]
+
+### Added
+
+- **Studio**: Project Managers no longer create or delete projects; Owners do.
+
+### Fixed
+
+- **Studio**: A page you have no access to now says so at once, instead of loading for a long time.
+- **Studio**: Projects no longer appear twice on the dashboard for people who hold more than one role.
+
 ## [2026-09-25]
 
 ### Fixed
