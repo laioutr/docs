@@ -6,7 +6,7 @@ seo:
   description: A page index enumerates the concrete pages behind a dynamic page type, so Studio can list them, search them, and resolve one back to the entity it renders.
 sitemap:
   loc: /frontend/orchestr/page-index
-  lastmod: 2026-07-29
+  lastmod: 2026-10-27
   changefreq: monthly
   priority: 0.9
 ---
@@ -241,15 +241,21 @@ Enumerate and search keys carry the resolved market and locale, taken from the `
 
 [`listPagesFrom`](#resuming-a-walk-across-requests) is the one exception to the table: it is cursor-addressed and touches no tier at all.
 
-Every cached chunk writes a **subject tag** for each entry that carries one. When an entity changes, drop the chunks referencing it:
+Every cached chunk writes a **subject tag** for each entry that carries one. When an entity changes, drop the chunks referencing it. The vendor's webhook arrives under `/webhooks/app-<name>/`, the prefix [Paths and routes](/apps/app-development/coding-standards#paths-and-routes) reserves for signed deliveries; here the app is named `acme`:
 
-```ts [server/routes/webhooks/product-updated.post.ts]
+```ts [server/routes/webhooks/app-acme/product-updated.post.ts]
 export default defineEventHandler(async (event) => {
-  const payload = await readBody(event);
-  const { removed } = await invalidateEntity('Product', { id: payload.id });
+  const raw = (await readRawBody(event)) ?? '';
+  // Nothing else guards this path: check the vendor's signature before reading the delivery.
+  if (!(await verifySignature(raw, getHeader(event, 'x-acme-signature')))) {
+    throw createError({ statusCode: 401 });
+  }
+  const { removed } = await invalidateEntity('Product', { id: JSON.parse(raw).id });
   return { removed };
 });
 ```
+
+`verifySignature` stands for your vendor's check, usually an HMAC of the raw body with a shared secret.
 
 Entries without a `subject` cannot be tagged, so they expire on TTL alone.
 

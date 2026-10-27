@@ -6,7 +6,7 @@ seo:
   description: Conventions and quality guidelines for developing Laioutr apps. Use these standards to keep app code consistent,…
 sitemap:
   loc: /apps/app-development/coding-standards
-  lastmod: 2026-07-28
+  lastmod: 2026-10-27
   changefreq: monthly
   priority: 1.0
 
@@ -162,18 +162,21 @@ The prefix also makes it clear in Studio and in Vue devtools whether a component
 
 An app shares one origin with the project's editor-created content pages, the platform's own routes, and every other installed app. Just as global component names must be unique ([Section and block naming](#section-and-block-naming)), **every URL path your app owns must be namespaced** so it can never collide with a content slug or another app.
 
-Your app has **two prefixes**, and the policy a path needs decides which one it takes — not who calls it, and not what it responds with.
+Your app has **three prefixes**, and the policy a path needs decides which one it takes, not who calls it and not what it responds with.
 
 | Prefix | Response | Crawlers | Unmatched path | Holds |
 | --- | --- | --- | --- | --- |
 | `/app-<name>/` | same for every visitor | allowed | rendered 404 page | public assets, custom Vue pages |
-| `/api/app-<name>/` | may be per-visitor or single-use | disallowed | static 404 page, no app boot | fetch endpoints, webhooks, redirect endpoints |
+| `/api/app-<name>/` | may be per-visitor or single-use | disallowed | static 404 page, no app boot | fetch endpoints, redirect endpoints |
+| `/webhooks/app-<name>/` | an acknowledgement to the sender | not linked | static 404 page, no app boot | webhooks: deliveries another service's server sends and signs |
 
 A path belongs under `/api/` whenever a cached hit or a crawler hit would be wrong. So a browser-facing **redirect endpoint** — an OAuth callback, a checkout handoff — goes under `/api/` too, although a browser navigates to it. Shopify's Customer Account API callback lives at `/api/app-shopify/auth/callback`.
 
-The 404 column is already real: Frontend Core answers every unmatched path under `/api/**` with a minimal static 404 page, instead of booting the app to render the project's own. Nitro prefers the deeper match, so your registered route still wins over that catch-all.
+A **webhook**, a delivery that another service's server sends and signs, goes under `/webhooks/app-<name>/<webhook>`, with the same `<name>` as your other paths. On Laioutr Cloud, [password protection](/hosting/laioutr-cloud/password-protection) lets requests under `/webhooks/` through, because the sender cannot enter a password, so your route checks the signature before it reads anything else. A callback a browser reaches, such as an OAuth redirect, stays under `/api/app-<name>/`: it carries the visitor's protection cookie and stays behind the password.
 
-**The platform sets no cache header on either prefix — your handler owns it.** Two shapes under `/api/app-<name>/` must never reach a shared cache: a redirect endpoint, because its authorization code is single-use, and a per-visitor `GET` that sets no cookie. HTTP already excludes a response carrying `Set-Cookie`, and every `POST`.
+The 404 column is already real: Frontend Core answers every unmatched path under `/api/**` and `/webhooks/**` with a minimal static 404 page, instead of booting the app to render the project's own. Nitro prefers the deeper match, so your registered route still wins over that catch-all. Frontend Core never redirects a path under `/webhooks/` either: neither the trailing-slash setting nor a project redirect applies there, so a delivery reaches your route as it was signed.
+
+**The platform sets no cache header on any of these prefixes: your handler owns it.** Two shapes under `/api/app-<name>/` must never reach a shared cache: a redirect endpoint, because its authorization code is single-use, and a per-visitor `GET` that sets no cookie. HTTP already excludes a response carrying `Set-Cookie`, and every `POST`.
 
 If you set a Nitro route rule for your own namespace, spell the prefix out. `/api/app-shopify/**` matches; `/api/app-*/**` matches nothing, because radix3 matches `*` against a whole segment and never a prefix inside one.
 
@@ -197,17 +200,19 @@ Keep the segment identical everywhere — assets, routes, pages — and identica
 - **Custom pages** — any Vue page your app adds to the router lives under `/app-<name>/…`.
 - **Fetch endpoints** your own JS calls — `/api/app-<name>/…`.
 - **Redirect endpoints** an external service or a click sends the browser to — `/api/app-<name>/…` (e.g. the Shopware checkout handoff at `/api/app-shopware/checkout`).
-- **Inbound webhooks** — `/api/app-<name>/webhooks/…`. No platform gate protects these, so verify the vendor's signature yourself.
+- **Inbound webhooks**: `/webhooks/app-<name>/<webhook>`. No password stands in front of it on Laioutr Cloud, so verify the sender's signature before you read anything else.
 
 ### Namespaces the platform reserves
 
 Never register a route under `/api/laioutr/*`, `/api/orchestr/*`, or `/api/frontend/*`.
 
+`/webhooks/` belongs to the platform as well. Your app takes only `/webhooks/app-<name>/`.
+
 `/api/laioutr/*` in particular is gated behind the project secret (`Authorization: Bearer <projectSecretKey>`). A browser navigation sends no such header, so it answers `401`. Nothing gates `/api/app-<name>/*`, which is where a browser-facing route belongs.
 
 Two hard rules:
 
-1. **Never use a bare top-level path** (`/checkout`, `/cart`, `/account`). Editors create content pages at arbitrary slugs, so an un-namespaced path can shadow — or be shadowed by — real content.
+1. **Never use a bare top-level path** (`/checkout`, `/cart`, `/account`). Editors create content pages at arbitrary slugs, so an un-namespaced path can shadow — or be shadowed by — real content. The one exception is `/webhooks/app-<name>/`, under the prefix the platform reserves for signed deliveries.
 2. **Never route a browser navigation through `/api/laioutr/*`.** It answers `401` for every link click and every redirect.
 
 ## Extension hooks
