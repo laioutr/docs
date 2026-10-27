@@ -246,7 +246,7 @@ Every cached chunk writes a **subject tag** for each entry that carries one. Whe
 ```ts [server/routes/webhooks/app-acme/product-updated.post.ts]
 export default defineEventHandler(async (event) => {
   const raw = (await readRawBody(event)) ?? '';
-  // Nothing else guards this path: check the vendor's signature before reading the delivery.
+  // Nothing else guards this path: verify the vendor's signature over the raw body before parsing it.
   if (!(await verifySignature(raw, getHeader(event, 'x-acme-signature')))) {
     throw createError({ statusCode: 401 });
   }
