@@ -88,8 +88,7 @@ Laioutr Cloud serves every storefront through Cloudflare's edge, on its assigned
 | --- | --- |
 | No cache header | Not stored. Images, fonts and PDFs from `public/` are the exception: the edge keeps them for a day. |
 | `s-maxage`, or `max-age` without `s-maxage` | Stored for that many seconds. |
-| `Cloudflare-CDN-Cache-Control` | Sets the edge lifetime on its own and wins over `Cache-Control`, even over `private` or `no-store` there. The edge removes it, so the browser sees only `Cache-Control`. |
-| `stale-while-revalidate=<seconds>` | After the lifetime ends, the edge serves the stored copy for that many seconds more and refreshes it in the background. This needs a number, and the header that sets the edge lifetime must not contain `s-maxage` or `must-revalidate`. Otherwise the next visitor waits for the refresh. |
+| `stale-while-revalidate=<seconds>` | After the lifetime ends, the edge serves the stored copy for that many seconds more and refreshes it in the background. This needs a number, and the header must not contain `s-maxage` or `must-revalidate`. Otherwise the next visitor waits for the refresh. |
 | `private` or `no-store` | Not stored. |
 | `Set-Cookie` in the response | Not stored. The cookie reaches the visitor. |
 | `Authorization` in the request | The edge neither serves a stored copy nor stores the answer. |
