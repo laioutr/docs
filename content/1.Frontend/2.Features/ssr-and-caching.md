@@ -89,6 +89,7 @@ Laioutr Cloud serves every storefront through Cloudflare's edge, on its assigned
 | No cache header | Not stored. Images, fonts and PDFs from `public/` are the exception: the edge keeps them for a day. |
 | `s-maxage`, or `max-age` without `s-maxage` | Stored for that many seconds. |
 | `stale-while-revalidate=<seconds>` | After the lifetime ends, the edge serves the stored copy for that many seconds more and refreshes it in the background. This needs a number, and the header must not contain `s-maxage` or `must-revalidate`. Otherwise the next visitor waits for the refresh. |
+| An `isr` route rule | Stored for the rule's lifetime, then refreshed in the background. See [`isr` rules on Laioutr Cloud](#isr-rules-on-laioutr-cloud). |
 | `private` or `no-store` | Not stored. |
 | `Set-Cookie` in the response | Not stored. The cookie reaches the visitor. |
 | `Authorization` in the request | The edge neither serves a stored copy nor stores the answer. |
@@ -96,6 +97,43 @@ Laioutr Cloud serves every storefront through Cloudflare's edge, on its assigned
 | `Vary` | See [Using `Vary` headers](#using-vary-headers). |
 | Query string | Part of the key, including `utm_*` parameters and click ids such as `gclid`. A link with tracking parameters fills a copy of its own, so its first request reaches your storefront. |
 | A promotion to production | Clears the edge cache of your production hostnames. |
+
+### `isr` rules on Laioutr Cloud
+
+An `isr` route rule caches the route at the edge, as it does on Vercel. Nitro does not store the page itself, so the page takes no space in the project's shared cache.
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  routeRules: {
+    '/**': { isr: 3600 },
+    '/api/**': { isr: false },
+  },
+});
+```
+
+| `isr` value | What the edge does |
+| --- | --- |
+| Seconds, such as `3600` or `{ expiration: 3600 }` | Serves the stored copy for that many seconds. For 31 days after that, it still serves the stored copy at once and refreshes it in the background. Only a request after those 31 days waits for a new render. |
+| `true`, `{}` or `{ expiration: false }` | Keeps the copy for up to a year. A promotion to production clears it on your production hostnames. |
+| `false` or `0` | Nothing. The response's own headers decide, as the table above describes. |
+
+Browsers receive `Cache-Control: public, max-age=0, must-revalidate`. They do not keep the page, so every visit gets the edge's current copy.
+
+The edge stores responses with status 200, 301, 302, 307, 308, 404 and 410, the same list as Vercel. Under `isr: true`, a 404 also stays until the next promotion, as it stays until the next deployment on Vercel. The edge does not store a response when:
+
+- the request method is not `GET` or `HEAD`, or the status is not in the list above. A server error is never stored.
+- the `Cache-Control` contains `private`, `no-store` or `no-cache`, as the response to a preview link does.
+- the handler sets its own `Cache-Control`. That header then decides, as the table above describes. A `Cache-Control` from the same route's `headers` rule is not the handler's own, and `isr` replaces it.
+- the request comes from the Studio preview frame.
+- the render calls `setResponseCachedDownstream(event, false)` to say that it answers one visitor (see [Orchestr Caching](/frontend/orchestr/caching)).
+- the response sets a cookie, or the request carries `Authorization`.
+- the handler throws an error, for example with `createError`.
+
+`allowQuery` has no effect on Laioutr Cloud, and the build logs a warning for it. The edge keeps a copy per full query string, as the table above describes. The build also warns about an `isr` value it cannot read, and the edge does not cache that route.
+
+::note
+On Laioutr Cloud, `isr` alone is enough to cache a route. An `swr` or `cache` rule on the same route still applies: Nitro keeps its own copy in the shared cache, and the edge refreshes its copy from that one. A change can then take the two lifetimes together to appear.
+::
 
 ---
 
@@ -150,6 +188,7 @@ The rules above only send headers, and a CDN does the caching. An `swr` or `cach
 - Nitro renders a cached route with **only the request headers listed in `cache.varies`**, and stores the page under its URL plus those headers. No other header reaches that render: not the cookies, not `Accept-Language`.
 - `@laioutr-core/frontend-core` adds `host` and `x-forwarded-proto` to `varies` on every caching rule. Each market domain therefore gets its own stored page, and `useRequestURL()` keeps the `https` scheme behind a proxy.
 - If your render reads another header, list it yourself. The `swr` shorthand cannot carry `varies`, so write the rule as a `cache` object.
+- A preview link's render is stored too, under its own URL. See [Content preview](/frontend/features/content-preview).
 - Send the same header in `Vary` as well. The rule's `Cache-Control` lets a CDN store the page too, and without `Vary` the CDN keeps one copy for every value. On Laioutr Cloud such a page is then not stored at the edge, and the shared cache serves it.
 
 ```ts [nuxt.config.ts]

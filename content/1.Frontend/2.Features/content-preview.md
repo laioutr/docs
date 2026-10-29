@@ -169,7 +169,7 @@ Preview content is volatile and per-editor. It is kept out of every cache, delib
 The `private, no-store` header is set for **any** presented token, granted or rejected. A rejected render still embeds the token in the hydration payload, and a CDN that ignores query strings in its cache key could otherwise hand that response to a shopper.
 
 ::caution
-`private, no-store` keeps the response out of *shared* caches — a CDN, a reverse proxy. It does **not** opt out of Nitro's own route rules. If a route is configured with `swr` or `isr` in `routeRules`, add an explicit opt-out for it, or preview responses will be stored by Nitro itself.
+`private, no-store` keeps the response out of *shared* caches — a CDN, a reverse proxy, and the Laioutr Cloud edge on a route with an `isr` rule. It does **not** stop Nitro's own route cache. On a route with an `swr` or `cache` rule, Nitro stores the preview render under its URL, token included. A rule with `maxAge` or `swr` also replaces `private, no-store` with its own `Cache-Control`, so a CDN can store the preview as well. Set `cache: false` on the routes that editors preview, or use `isr` on Laioutr Cloud. On another host, an `isr` rule follows that host's own rules, so check them before editors preview such a route.
 ::
 
 ## The verify endpoint
