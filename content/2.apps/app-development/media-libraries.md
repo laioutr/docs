@@ -159,7 +159,7 @@ it into the field value, and a value already stored on a prop does not change wh
 **`deleteFolder` deletes an empty folder only.** A folder with assets or subfolders must be refused
 with `not_empty`. Never cascade: a caller empties the folder first.
 
-**Refuse with `MediaProviderError`, not a plain `Error`.** A plain throw reaches the caller as `502`.
+**Refuse with `MediaProviderError`, not a plain `Error`.** A plain throw reaches the caller as `500`.
 A coded refusal keeps its own status and its code:
 
 | Code | Status | When |
