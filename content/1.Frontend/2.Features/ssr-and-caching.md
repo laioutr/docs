@@ -74,11 +74,29 @@ You can also define the same rules under `nitro.routeRules` if you prefer to kee
 
 ### Caching API responses
 
-API routes (`/api/orchestr/...` or your own server routes) can also be cached by the CDN. Add `routeRules` for those paths with appropriate `Cache-Control` and `Vary` headers. Do not cache mutation endpoints or routes that return user-specific data.
+API routes (`/api/orchestr/...` or your own server routes) can also be cached by the CDN. Add `routeRules` for those paths with an appropriate `Cache-Control` header. Do not cache mutation endpoints or routes that return user-specific data.
 
 ### Overriding from a module
 
 In your module's setup, extend `nuxt.options.routeRules` to add cache rules for routes your module registers. Merge with existing rules rather than overwriting the whole object so other modules' rules are preserved.
+
+### Edge caching on Laioutr Cloud
+
+Laioutr Cloud serves every storefront through Cloudflare's edge, on its assigned hostnames and on a custom domain alike. The edge stores a response only when the response's own headers allow it, and it keeps a separate copy per hostname, path and query string.
+
+| Request or response | What the edge does |
+| --- | --- |
+| No cache header | Not stored. Images, fonts and PDFs from `public/` are the exception: the edge keeps them for a day. |
+| `s-maxage`, or `max-age` without `s-maxage` | Stored for that many seconds. |
+| `Cloudflare-CDN-Cache-Control` | Sets the edge lifetime on its own and wins over `Cache-Control`, even over `private` or `no-store` there. The edge removes it, so the browser sees only `Cache-Control`. |
+| `stale-while-revalidate=<seconds>` | After the lifetime ends, the edge serves the stored copy for that many seconds more and refreshes it in the background. This needs a number, and the header that sets the edge lifetime must not contain `s-maxage` or `must-revalidate`. Otherwise the next visitor waits for the refresh. |
+| `private` or `no-store` | Not stored. |
+| `Set-Cookie` in the response | Not stored. The cookie reaches the visitor. |
+| `Authorization` in the request | The edge neither serves a stored copy nor stores the answer. |
+| A path under `/api/laioutr/` or `/api/public/` | Never stored, whatever the header says. |
+| `Vary` | See [Using `Vary` headers](#using-vary-headers). |
+| Query string | Part of the key, including `utm_*` parameters and click ids such as `gclid`. A link with tracking parameters fills a copy of its own, so its first request reaches your storefront. |
+| A promotion to production | Clears the edge cache of your production hostnames. |
 
 ---
 
@@ -86,25 +104,7 @@ In your module's setup, extend `nuxt.options.routeRules` to add cache rules for 
 
 If your frontend serves **multiple markets, languages, or domains**, the CDN must store separate cached entries for each variant. Without this, a German user could receive HTML cached from a French request.
 
-### Using `Vary` headers
-
-Add a `Vary` header so the CDN keys on the relevant request headers:
-
-```ts
-// nuxt.config.ts
-export default defineNuxtConfig({
-  routeRules: {
-    '/**': {
-      headers: {
-        'Cache-Control': 'public, max-age=0, s-maxage=30, must-revalidate',
-        'Vary': 'Accept-Language, X-Market',
-      },
-    },
-  },
-});
-```
-
-If your setup passes market or currency information through custom headers (e.g. `X-Market`, `X-Currency`), include those in `Vary`. Be aware that each unique combination of varied headers creates a separate cache entry, so avoid varying on high-cardinality headers.
+Laioutr resolves the market and the language from the request's hostname and path prefix, and from nothing else. Laioutr Cloud and Vercel include both in every cache key, so separate markets need no further setup there.
 
 ### Locale-prefixed routes
 
@@ -126,7 +126,45 @@ export default defineNuxtConfig({
 
 ### Domain-based multi-market
 
-When each market is served from a different domain (e.g. `shop.de`, `shop.fr`), most CDNs key on the `Host` header automatically. Verify this with your CDN provider. If you use a single CDN distribution across domains, add `Host` to your `Vary` header or configure CDN-level cache policies per origin domain.
+When each market is served from a different domain (e.g. `shop.de`, `shop.fr`), Laioutr Cloud and Vercel keep a separate copy per hostname. Most other CDNs do the same. Verify this with your CDN provider, in particular when one distribution serves several domains: its cache key must include the host.
+
+### Using `Vary` headers
+
+A `Vary` header makes a CDN keep a separate copy for each value of the request headers it names. Use it only for a header that your render reads, and only when that header has few distinct values. Laioutr's own market resolution reads neither `Accept-Language` nor a custom header such as `X-Market`, so a `Vary` on them only splits the cache.
+
+| `Vary` names | Laioutr Cloud | Vercel |
+| --- | --- | --- |
+| `Accept` | A copy per exact header value | Part of the cache key by default |
+| `Accept-Encoding` | Cached as usual | Part of the cache key by default |
+| `Cookie` or `*` | Not stored | Not stored |
+| Any other header, such as `Accept-Language`, `User-Agent` or `X-Market` | **Not stored.** Every request reaches your storefront. | A copy per value |
+
+A page that must differ by such a header cannot be shared at the edge of Laioutr Cloud. Put the difference into the URL, or render that part on the client as described in [Handling personalized and time-sensitive content](#handling-personalized-and-time-sensitive-content).
+
+### Server-side caching with `swr` and `cache` rules
+
+::since-version{version="0.75.1" packages="@laioutr-core/frontend-core" changelog="frontend"}
+::
+
+The rules above only send headers, and a CDN does the caching. An `swr` or `cache` route rule makes Nitro store the rendered page itself — on Laioutr Cloud in the project's shared cache — and its keys work differently:
+
+- Nitro renders a cached route with **only the request headers listed in `cache.varies`**, and stores the page under its URL plus those headers. No other header reaches that render: not the cookies, not `Accept-Language`.
+- `@laioutr-core/frontend-core` adds `host` and `x-forwarded-proto` to `varies` on every caching rule. Each market domain therefore gets its own stored page, and `useRequestURL()` keeps the `https` scheme behind a proxy.
+- If your render reads another header, list it yourself. The `swr` shorthand cannot carry `varies`, so write the rule as a `cache` object.
+- Send the same header in `Vary` as well. The rule's `Cache-Control` lets a CDN store the page too, and without `Vary` the CDN keeps one copy for every value. On Laioutr Cloud such a page is then not stored at the edge, and the shared cache serves it.
+
+```ts [nuxt.config.ts]
+export default defineNuxtConfig({
+  routeRules: {
+    '/': {
+      cache: { swr: true, maxAge: 60, varies: ['accept-language'] },
+      headers: { Vary: 'Accept-Language' },
+    },
+  },
+});
+```
+
+Every listed header becomes part of the key, so the cardinality warning above applies here as well: never list `cookie` or any other header that differs per visitor.
 
 ---
 
@@ -239,6 +277,6 @@ The config is cacheable in its own right: its URL carries a hash of the project 
 | **SSR**                     | `nuxt.config.ts` → `ssr`                          | `true` (Nuxt default)                              |
 | **HTML caching**            | `routeRules` → `headers['Cache-Control']`         | Not set                                            |
 | **API response caching**    | `routeRules` for `/api/**` or per-handler headers | Not set                                            |
-| **Multi-market cache keys** | `Vary` header or URL-based locale prefixes        | Not set                                            |
+| **Multi-market cache keys** | Hostname or URL-based locale prefix               | Built in: hostname and path                        |
 | **Orchestr data cache**     | Per-handler `strategy`, `ttl`, `buildCacheKey`    | See [Orchestr Caching](/frontend/orchestr/caching) |
 | **Client store**            | Automatic LRU                                     | Always on                                          |
