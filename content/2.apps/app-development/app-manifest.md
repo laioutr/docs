@@ -144,6 +144,96 @@ The manifest is a JSON object. Today it has one key, `configSettings`.
 
 Mark a field `required` only when your module cannot start without it. A required field blocks saving **every** other setting of the app in that environment until it has a value, including for a customer whose value still comes from somewhere else, such as an environment variable on their host.
 
+## Layout: tabs and views
+
+Without any of the keys below, the sections stack one after another and every field gets its type's standard control. An app with many settings can arrange them on tabs, and can ask for a different look at each level of the form. None of this changes what is stored or what your module receives — only how the Cockpit draws the form.
+
+::field-group{title="Tabs"}
+  :::field{name="configSettings.tabs" type="{ key: string; label: string }[]"}
+  The tabs, in this order. With `tabs`, every section names the tab it sits on; without it, there are no tabs.
+  :::
+
+  :::field{name="section.tab" type="string"}
+  The `key` of the tab the section sits on.
+  :::
+::
+
+::field-group{title="Views"}
+  :::field{name="configSettings.view" type="string"}
+  The component that draws the whole form and its Save button.
+  :::
+
+  :::field{name="configSettings.tabsView" type="string"}
+  The component that draws the row of tabs.
+  :::
+
+  :::field{name="section.view" type="string"}
+  The component that draws one section around its fields.
+  :::
+
+  :::field{name="field.view" type="string"}
+  The component that draws one field instead of its type's control.
+  :::
+::
+
+A view is named `@<owner>/<name>`. An app names the components the Cockpit's settings kit offers:
+
+| Level | View | Draws |
+| --- | --- | --- |
+| Form | `@appsettings/form` *(default)* | The sections, with Save fixed at the bottom of the page |
+| Form | `@appsettings/topSaveForm` | The sections, with Save above them on the right |
+| Tabs | `@appsettings/tabs` *(default)* | A horizontal row of tabs |
+| Section | `@appsettings/section` *(default)* | A card: heading and description on the left, the fields on the right |
+| Section | `@appsettings/stackedSection` | A card with the heading above the fields, for fields that need the full width |
+| Section | `@appsettings/gridSection` | A card with the heading above the fields in two columns, for many short choices |
+| Section | `@appsettings/bareSection` | The fields alone, without a card or heading |
+| Field | `@appsettings/switchRow` | A `checkbox` as a row: name and description on the left, a switch on the right |
+| Field | `@appsettings/timeZone` | A `select` of time zones, each shown with its current UTC offset |
+
+A view the Cockpit does not know, or one named at the wrong level, falls back to that level's default, so a manifest never breaks the form.
+
+```json [laioutr.manifest.json]
+{
+  "configSettings": {
+    "menu": { "label": "Acme Booking" },
+    "view": "@appsettings/topSaveForm",
+    "tabs": [
+      { "key": "general", "label": "General" },
+      { "key": "notifications", "label": "Notifications" }
+    ],
+    "sections": [
+      {
+        "tab": "general",
+        "label": "Opening hours",
+        "view": "@appsettings/stackedSection",
+        "fields": [
+          {
+            "name": "timeZone",
+            "type": "select",
+            "view": "@appsettings/timeZone",
+            "label": "Time zone",
+            "default": "Europe/Berlin",
+            "options": [
+              { "value": "Europe/Berlin", "label": "Europe/Berlin" },
+              { "value": "Europe/London", "label": "Europe/London" }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "notifications",
+        "label": "Emails",
+        "view": "@appsettings/gridSection",
+        "fields": [
+          { "name": "sendConfirmation", "type": "checkbox", "view": "@appsettings/switchRow", "label": "Confirmation", "description": "Sent once a booking is confirmed.", "default": true },
+          { "name": "sendReminder", "type": "checkbox", "view": "@appsettings/switchRow", "label": "Reminder", "description": "Sent a day before the appointment.", "default": true }
+        ]
+      }
+    ]
+  }
+}
+```
+
 ## Field types
 
 | `type` | The Cockpit shows | Your module receives |
