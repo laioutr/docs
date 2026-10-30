@@ -174,9 +174,9 @@ A `Vary` header makes a CDN keep a separate copy for each value of the request h
 | `Accept` | A copy per exact header value | Part of the cache key by default |
 | `Accept-Encoding` | Cached as usual | Part of the cache key by default |
 | `Cookie` or `*` | Not stored | Not stored |
-| Any other header, such as `Accept-Language`, `User-Agent` or `X-Market` | **Not stored.** Every request reaches your storefront. | A copy per value |
+| Any other header, such as `Accept-Language`, `User-Agent` or `X-Market` | A copy per exact header value. A request without the header gets its own copy, and `de` and `DE` are two copies. | A copy per value |
 
-A page that must differ by such a header cannot be shared at the edge of Laioutr Cloud. Put the difference into the URL, or render that part on the client as described in [Handling personalized and time-sensitive content](#handling-personalized-and-time-sensitive-content).
+Each new value fills a copy of its own, so its first request reaches your storefront. A header with many values, such as `User-Agent`, therefore sends most requests to your storefront. Put such a difference into the URL, or render that part on the client as described in [Handling personalized and time-sensitive content](#handling-personalized-and-time-sensitive-content).
 
 ### Server-side caching with `swr` and `cache` rules
 
@@ -189,7 +189,7 @@ The rules above only send headers, and a CDN does the caching. An `swr` or `cach
 - `@laioutr-core/frontend-core` adds `host` and `x-forwarded-proto` to `varies` on every caching rule. Each market domain therefore gets its own stored page, and `useRequestURL()` keeps the `https` scheme behind a proxy.
 - If your render reads another header, list it yourself. The `swr` shorthand cannot carry `varies`, so write the rule as a `cache` object.
 - A preview link's render is stored too, under its own URL. See [Content preview](/frontend/features/content-preview).
-- Send the same header in `Vary` as well. The rule's `Cache-Control` lets a CDN store the page too, and without `Vary` the CDN keeps one copy for every value. On Laioutr Cloud such a page is then not stored at the edge, and the shared cache serves it.
+- Send the same header in `Vary` as well. The rule's `Cache-Control` lets a CDN store the page too, and without `Vary` the CDN keeps one copy for every value.
 
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
