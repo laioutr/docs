@@ -84,6 +84,32 @@ Declares data the page needs from the current route:
 - **`alias`**: name used in page templates to reference the query result (e.g. `'product'`).
 - **`entityType`**: the entity type for Studio and Orchestr (e.g. `'Product'`).
 - **`default`**: a query template with a **token** (the query to execute) and **inputRules** that bind route params to query input. For example, `{ slug: { join: ['/', { var: 'route.params.slug' }] } }` passes the route's `:slug` param to the product query.
+- **`pageSubject`** (optional, `true`): marks the query whose not-found makes the page a 404. At most one entry per page type.
+
+#### The page subject
+
+The product of a product detail page, the category of a listing page, the post of a blog post page: when the query handler answers `notFound()`, or a component resolver reports the entity it returned as not found, the page answers **404** at the requested URL and renders the project's `core/404` page in place (the built-in 404 page when none exists). An app can change that outcome through the [`subject-not-found` hook](/frontend/features/hooks#subject-not-found).
+
+```ts
+requiredQueries: [
+  {
+    alias: 'product',
+    entityType: 'Product',
+    pageSubject: true,
+    default: { token: ProductBySlugQuery, inputRules: { slug: { join: ['/', { var: 'route.params.slug' }] } } },
+  },
+],
+```
+
+frontend-core finds the subject by the alias: Studio writes the entry's `alias` onto the page query it creates from it. The product detail, product listing (`category` only), location detail, blog post and blog collection page types carry the marker, and so do the Shopify content page and the Skill Store skill page.
+
+Known limits:
+
+- Do not mark a query whose "nothing" is a normal answer, such as a cart.
+- `pagination.total` still counts entities that a resolver reported as not found, so a list can say 24 and show 23.
+- A page whose subject query has no alias — created outside the page type's `requiredQueries` — keeps status 200.
+- A subject query that no section, block or SEO field uses is not executed, so its page keeps status 200.
+- A subject query that fails with an error keeps status 200.
 
 ### `resolveFor`
 

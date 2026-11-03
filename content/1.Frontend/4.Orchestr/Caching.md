@@ -98,6 +98,7 @@ cache: {
   includePassthrough?: boolean,       // queries only
 
   tags?: (args) => string[],          // queries only; see Invalidation
+  absentMaxAge?: '1 minute',          // queries only; how long a notFound() answer is kept
 }
 ```
 
@@ -108,6 +109,16 @@ cache: {
 | `swr`    | Cached for `ttl`, then served stale for `staleMaxAge` while the handler re-runs behind the response. A refresh that fails keeps the last good value until the stale window closes. |
 
 An entry occupies storage for `ttl` plus `staleMaxAge`, so a long stale window trades footprint for a cache that survives an upstream outage. Two concurrent readers of one stale entry schedule a single refresh.
+
+### Not-found answers
+
+A query that answers `notFound()` is stored as an **absence** under its own key, so each page, sort and filter of a multi query keeps its own. A hit answers `notFound()` again without running the handler.
+
+- `absentMaxAge` sets how long. The default is the shorter of `ttl` and one minute, so a slug that comes back as a new product is served within a minute. `0` stores nothing.
+- An absence has no stale window. The query token tag and the tags the handler declares invalidate it as they do a positive entry, but no entity tag names it, because it holds no id.
+- A stale entry whose refresh answers `notFound()` becomes an absence.
+- Component absences keep their own default, the shorter of `ttl` and five minutes.
+- When a component resolver reports the entity of a single query's answer as not found, orchestr removes that query's entry instead of keeping the dead id. Other instances keep their in-memory copy for up to 30 seconds.
 
 ### Which requests are cached
 

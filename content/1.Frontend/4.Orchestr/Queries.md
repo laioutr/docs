@@ -106,12 +106,10 @@ import { defineMyAppQuery } from '../../middleware/defineMyApp';
 
 export default defineMyAppQuery(
   StoreBySlugQuery,
-  async ({ input, context }) => {
+  async ({ input, context, notFound }) => {
     const store = await context.storeApi.getBySlug(input.slug);
 
-    if (!store) {
-      throw createError({ statusCode: 404, message: `Store not found: ${input.slug}` });
-    }
+    if (!store) return notFound();
 
     return { id: store.id };
   },
@@ -168,6 +166,7 @@ There are two syntax forms for `defineMyAppQuery`. The short form passes `(token
 | `passthrough`         | always          | Store for passing raw data to component resolvers, avoiding duplicate API calls.          |
 | `context`             | always          | Middleware-provided context (API clients, config, etc.).                                  |
 | `$entity`             | always          | Type-safe entity builder, same as in component resolvers.                                 |
+| `notFound`            | always          | Return `notFound()` when the thing the input names does not exist.                        |
 
 ### Returning results
 
@@ -190,6 +189,29 @@ return {
 ```
 
 Each `availableSortings` entry is `{ key: string, label?: string }`, where `key` is the value passed back in the `sorting` request. For the shape of the `filter` argument and the four `availableFilters` variants (list, boolean, range, intervals), see [Filters](/frontend/orchestr/filters).
+
+### When nothing exists
+
+Return `notFound()` when the thing that the input names does not exist — a slug no product has, a category that was deleted:
+
+```ts
+run: async ({ context, input, notFound }) => {
+  const response = await context.queryStorefront(ProductBySlugQuery, { handle: input.slug });
+  if (!response.product?.id) return notFound();
+  return { id: response.product.id };
+},
+```
+
+- **A single query** returns `{ id }`, `{ entity }` or `notFound()`. The `id` is required, so `{}` and `{ id: undefined }` do not typecheck.
+- **A multi query** returns `notFound()` when the thing its input names does not exist, for example the category of "products by category slug". An empty list, `{ ids: [] }`, stays a normal result.
+- `notFound()` is a normal answer, not an error. orchestr writes no error log for it, sends a `queryNotFound` chunk in place of the result, and runs no links and no component resolvers for the query.
+- Do not throw a not-found error from a query handler. A thrown error reaches the page as an error, and the page answers 200 with empty sections.
+
+On a page, a not-found answer of the page's subject query makes the page answer 404 — see [Page types](/frontend/features/pagetypes#the-page-subject). Any other query that answers `notFound()` gives its sections no data.
+
+::note
+A handler in a dist built against an older orchestr can still answer a single query with no id. orchestr treats that as before — an empty result, a page with status 200 and a cache entry with the full `ttl` — and logs a deprecation warning once per handler that names it.
+::
 
 ## Links
 
@@ -315,6 +337,8 @@ export default defineMyAppQuery({
 | `live`   | Disable caching (useful to explicitly mark a handler as uncacheable).         |
 
 The `buildCacheKey` function receives the handler arguments and must return a unique string key. Return `null` or `undefined` to skip caching for a specific request.
+
+A `notFound()` answer is cached too, as an absence, for `absentMaxAge` — by default the shorter of `ttl` and one minute.
 
 See [Caching](/frontend/orchestr/caching) for the full reference.
 

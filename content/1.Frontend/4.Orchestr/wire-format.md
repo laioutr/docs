@@ -104,7 +104,7 @@ Filter values support three shapes: a list of strings (`["red", "blue"]`), a boo
 
 The response is a turbo-stream of `QueryWireResponseChunk` objects. The server pushes chunks as data becomes available, so query results, entities, and link collections arrive incrementally.
 
-Six chunk types exist:
+Eight chunk types exist:
 
 ### `queryResult`
 
@@ -173,6 +173,28 @@ Links between entities (for example, product reviews or cross-sell products).
   ]
 }
 ```
+
+### `queryNotFound`
+
+Sent in place of `queryResult` when the query handler answers `notFound()`. `id` is the query id. No links and no component resolvers run for the query, so no `entity` or `linkCollection` chunk follows for it.
+
+```json
+{ "type": "queryNotFound", "id": "cp17r0j24ts002324tv1" }
+```
+
+### `entityNotFound`
+
+Sent once all component resolvers of one entity type in one query or link finished. `ids` names the requested entities that at least one resolver reported as not found and no resolver returned; components served from the cache do not count as returned. No chunk is sent when no id is not found.
+
+```json
+{ "type": "entityNotFound", "entityType": "Product", "ids": ["0190bad79ec2"] }
+```
+
+The client store leaves these ids out of the query's and the links' entities. A later `entity` chunk for an id clears its mark.
+
+::warning
+A client built against an older orchestr does not know these two chunks. Deploy the server and the client together.
+::
 
 ### `error`, `trace`, `executionSummary`
 

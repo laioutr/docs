@@ -137,10 +137,11 @@ Ensure **@nuxt/image** is in your Nuxt config when using the provider.
 |--------|---------|
 | **cart-id** | Adobe Commerce cart ID. Set when a new cart is created (e.g. on first add-to-cart). Used by GetCurrentCartQuery and CartAddItemsAction. |
 
-## Errors
+## Not found
 
-- **CategoryNotFoundError** – Thrown from **CategoryBySlugQuery** when no category matches the given slug. Code: `CATEGORY_NOT_FOUND`.
-- **ProductNotFoundError** – Thrown from **ProductBySlugQuery** when no product matches the given slug. Code: `PRODUCT_NOT_FOUND`.
+- **CategoryBySlugQuery** and **ProductBySlugQuery** answer `notFound()` when no category or product matches the slug, and **ProductBySlugQuery** also when the product has no SKU. The page then answers 404 and renders the project's 404 page.
+- **GetCurrentCartQuery** answers `notFound()` when no `cart-id` cookie is set.
+
 
 ## Summary checklist
 

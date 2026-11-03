@@ -186,6 +186,50 @@ export default defineNuxtPlugin((nuxtApp) => {
 ```
 ::
 
+#### Subject not found
+
+::hook-meta
+---
+name: frontend-core:page-renderer:subject-not-found
+title: Subject not found
+surface: client
+register: nuxt-plugin
+dispatch: async
+kind: override
+payload:
+  - { field: page, type: RenderPage, description: 'The page whose subject is gone.' }
+  - { field: subject, type: '{ alias, token, input, entityId?, source }', description: 'The subject query: its requiredQueries alias, its token, the resolved input (for example { slug }), and whether the query answered notFound() (source query) or a resolver reported its entity (source component, with entityId).' }
+  - { field: result, type: '{ value?: SubjectNotFoundOutcome }', description: 'Set result.value to change what the page answers. It starts empty; leave it unset for the 404 page with status 404.' }
+whenItFires: When the page subject of the rendered page does not exist, once for the original page, on the server and on client navigation.
+---
+
+Decide what a page answers when its [subject](/frontend/features/pagetypes#the-page-subject) is gone. Four outcomes:
+
+| Outcome | Value |
+| --- | --- |
+| Redirect | `{ type: 'redirect', to, status: 301 \| 302 }` — `to` is a path or an `http(s)` URL; the query string is not forwarded. |
+| The 404 page | `{ type: 'render', page: 'not-found', status: 200 \| 404 \| 410 }` |
+| Another page | `{ type: 'render', page: { id }, status }` — an unknown id or a failed load renders the 404 page and warns. |
+| The page itself | `{ type: 'render', page: 'self', status }` — its sections receive no data for the subject. |
+
+frontend-core decides in this order: in the Studio editor the page renders itself with status 200 and the hook does not run; on client navigation a Studio redirect for the path wins; then the hook; then the 404 page. A value that is not one of the four outcomes is ignored with a warning.
+
+The handlers are awaited in series, for **2 s** in total. When the limit expires, the value set until then applies. After its first `await`, a handler calls composables through `nuxtApp.runWithContext`.
+
+A status of 400 or higher also sets `noindex, nofollow`. On the server a redirect on a route without a cache route rule gets `Cache-Control: no-cache`; a route rule that caches the route keeps the redirect for its whole TTL, so a redirect that depends on stock belongs on an uncached route.
+
+#example
+```ts [app/plugins/sold-out-sibling.ts]
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.hook('frontend-core:page-renderer:subject-not-found', async ({ subject, result }) => {
+    if (result.value || subject.token !== 'ecommerce/product/by-slug') return;
+    const sibling = await $fetch<{ path?: string }>('/api/app-acme/available-sibling', { query: { slug: subject.input.slug } });
+    if (sibling.path) result.value = { type: 'redirect', to: sibling.path, status: 302 };
+  });
+});
+```
+::
+
 ### Page Head
 
 ::hook-meta

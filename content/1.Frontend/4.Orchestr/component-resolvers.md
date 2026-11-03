@@ -134,6 +134,30 @@ $entity({
 
 Prefer the lazy form when computing the value is expensive.
 
+### Entities that do not exist
+
+Return the ids from `entityIds` that do not exist upstream in `notFound`:
+
+```ts
+resolve: async ({ entityIds, $entity }) => {
+  const products = await api.getProducts(entityIds);
+  return {
+    entities: products.map((product) => $entity({ id: product.id, base: () => mapBase(product) })),
+    notFound: entityIds.filter((id) => !products.some((product) => product.id === id)),
+  };
+},
+```
+
+- Report an id only when the entity itself does not exist upstream — never when your resolver merely has no data for its component. The client hides a reported entity in every list on the page, and a page whose subject it is answers 404.
+- An entity is not found when at least one resolver reports it and no resolver returns it. Components served from the cache do not count as returned.
+- An id that no resolver reports and none returns keeps the old behaviour: no entity, and a warning in development.
+- An id the request did not ask for is ignored.
+- orchestr sends one `entityNotFound` [chunk](/frontend/orchestr/wire-format#entitynotfound) per call. The client leaves the entity out of the query's entities, so a list renders one tile fewer.
+- When the entity is the subject of a single query — a product detail page whose cached slug points at an archived product — orchestr also removes that query's cache entry, and the page answers 404.
+- A query handler with `provides: 'all'` runs no component resolver for its entities. For those, the handler alone decides, with `{ entity }` or `notFound()`.
+
+Link handlers have no `notFound`: a missing target is reported by its resolver, and a source without targets answers an empty list.
+
 ## Resolution order
 
 More than one installed app can provide the same component on the same entity type. A commerce connector and a loyalty app might both declare `provides: ['prices']`, for example. Only one of them wins: a component resolves to exactly one value, never a merge.
