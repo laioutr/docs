@@ -36,11 +36,27 @@ One CSV with one old URL per row is all the migration needs. **A URL that is not
 
 - **The old URL is the only required column.** Give it in full, as it is used today: `https://media.example.com/is/image/acme/31250100_01`.
 - **No full URL, only an asset ID?** Compose the URL from columns in the mapping step, for example `https://media.example.com/is/image/acme/{asset_id}`.
-- **Optional columns** are written onto the file in Assetr: alt text, title, tags, the old asset ID.
+- **Optional columns:** alt text and tags are written onto the file in Assetr; a title and the old asset ID are kept with the old URL's row. The file's name in Assetr is the last part of the old path.
 - **Format:** separator comma, semicolon or tab; encoding UTF-8 or Windows-1252. From Excel, save as **CSV UTF-8**; a UTF-16 file is refused.
 - **Size:** up to 200 MB and one million rows per import. A larger list is split into several imports.
 - **Duplicates do no harm:** the first row with a URL is migrated, the others are counted as duplicates.
 - **Several hosts or paths in one file are fine.** What to migrate is chosen after the check, not in the file.
+
+### The file's columns
+
+The first row names the columns. Their order does not matter, and a column with one of these names is matched by itself in the mapping step; case, spaces, hyphens and underscores are ignored, so `Asset ID`, `asset_id` and `ASSET-ID` are the same name. Any other column can be chosen by hand, and columns the import does not need are left out.
+
+| Column | Required | Names matched by themselves | What it does | Example |
+| --- | --- | --- | --- | --- |
+| Old URL | Yes | `url`, `old_url`, `link`, `asset_url`, `image_url`, `file_url`, `source_url`, `href`, `bild_url`, `datei_url` | The address that keeps working; its file is migrated | `https://media.example.com/is/image/acme/31250100_01` |
+| Alt text | No | `alt`, `alt_text`, `alternative_text`, `alt_tag`, `bildbeschreibung` | Written onto the image in Assetr | `Corner sofa in grey` |
+| Tags | No | `tags`, `tag`, `category`, `categories`, `kategorie`, `keywords`, `schlagworte` | Written onto the file in Assetr; several separated by a comma, semicolon or vertical bar, up to 50 | `sofa; living room` |
+| Title | No | `title`, `name`, `titel`, `bezeichnung` | Kept with the old URL's row | `31250100_01` |
+| Old asset ID | No | `asset_id`, `id`, `old_asset_id`, `asset`, `file_id`, `media_id` | Kept with the old URL's row; can build the old URL in the mapping step | `31250100_01` |
+
+A tags cell that holds a comma must be quoted, as CSV always requires: `"sofa, living room"`.
+
+[Download an example file](/assets/files/url-mapping-example.csv) with full URLs, alt text, tags and asset IDs, for images and files together.
 
 ### Exporting from Adobe Dynamic Media (Scene7)
 
@@ -67,13 +83,13 @@ The same address in several sources does no harm: it is migrated once.
 - A preset in the query (`?$sm$`, `?wid=280&hei=280`) may stay; only the path decides which file is migrated. Each preset the URLs use should be in the presets table before the switch.
 - With full URLs, one file can hold images and files together. With asset IDs only, export images and files as two CSVs and compose each one's URL in the mapping step with its own prefix, `/is/image/…` or `/is/content/…`.
 
-A file with full URLs and two optional columns:
+A file with full URLs, alt text and tags:
 
 ```csv
-old_url,alt,title
-https://media.example.com/is/image/acme/31250100_01,Corner sofa in grey,31250100_01
-https://media.example.com/is/image/acme/31250100_02,Corner sofa from the side,31250100_02
-https://media.example.com/is/content/acme/803313 montage,,Assembly instructions 803313
+old_url,alt,tags
+https://media.example.com/is/image/acme/31250100_01,Corner sofa in grey,sofa; living room
+https://media.example.com/is/image/acme/31250100_02,Corner sofa from the side,sofa; living room
+https://media.example.com/is/content/acme/803313 montage,,assembly instructions
 ```
 
 **Before handing it over,** open a few rows in a browser. An image that answers 403 "Unable to find image" no longer exists on Adobe; it is reported as missing, not migrated.
