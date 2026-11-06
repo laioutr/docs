@@ -14,13 +14,13 @@ sitemap:
 
 ## Overview
 
-The **@laioutr-app/battery-included** package integrates [BatteryIncluded](https://batteryincluded.io/) into a Laioutr-powered Nuxt app. It uses the **BatteryIncluded API** for full-text product search (browse), suggested search (suggest and highlights), and product recommendations. The package registers with the Laioutr orchestr (queries, links, component resolvers) and exposes canonical types for **ProductSearchQuery**, **SuggestedSearchSearchQuery**, **SuggestedSearchEntriesLink**, **SuggestedSearchEntry**, and a custom **ProductRecommendation** link and resolver.
+The **@laioutr/app-battery-included** package integrates [BatteryIncluded](https://batteryincluded.io/) into a Laioutr-powered Nuxt app. It uses the **BatteryIncluded API** for full-text product search (browse), suggested search (suggest and highlights), and product recommendations. The package registers with the Laioutr orchestr (queries, links, component resolvers) and exposes canonical types for **ProductSearchQuery**, **SuggestedSearchSearchQuery**, **SuggestedSearchEntriesLink**, **SuggestedSearchEntry**, and a custom **ProductRecommendation** link and resolver.
 
 BatteryIncluded indexes your catalog (e.g. from Shopify or another commerce app); this package does not provide cart, menu, or category. It adds search, autocomplete/suggest, and “recommended for you” style links. The module installs **@laioutr-core/frontend-core**, **@nuxt/image**, and **@laioutr-app/shopify** on prepare; use Battery Included alongside a commerce app (e.g. Shopify) so product data is available for search and recommendations.
 
 ## Configuration requirements
 
-The module expects configuration under the key **`@laioutr-app/battery-included`** in `nuxt.config.ts` (or via `runtimeConfig`). Two options are required; one is optional.
+The module expects configuration under the key **`@laioutr/app-battery-included`** in `nuxt.config.ts` (or via `runtimeConfig`). Two options are required; one is optional.
 
 ### Module options
 
@@ -35,8 +35,8 @@ The module expects configuration under the key **`@laioutr-app/battery-included`
 ```ts
 // nuxt.config.ts
 export default defineNuxtConfig({
-  modules: ['@laioutr-app/battery-included', '@laioutr-core/orchestr'],
-  '@laioutr-app/battery-included': {
+  modules: ['@laioutr/app-battery-included', '@laioutr-core/orchestr'],
+  '@laioutr/app-battery-included': {
     baseURL: process.env.BATTERY_INCLUDED_BASE_URL ?? 'https://api.batteryincluded.io',
     collection: process.env.BATTERY_INCLUDED_COLLECTION!,
     apiKey: process.env.BATTERY_INCLUDED_API_KEY!,
@@ -99,12 +99,12 @@ This package does not set or read any cookies. All calls are stateless per reque
 
 ## Summary checklist
 
-- Add **@laioutr-app/battery-included** to Nuxt modules (and a commerce app such as **@laioutr-app/shopify** for product data).
-- Set **baseURL** (optional), **collection**, and **apiKey** under `@laioutr-app/battery-included` (e.g. from env).
+- Add **@laioutr/app-battery-included** to Nuxt modules (and a commerce app such as **@laioutr-app/shopify** for product data).
+- Set **baseURL** (optional), **collection**, and **apiKey** under `@laioutr/app-battery-included` (e.g. from env).
 - Ensure your BatteryIncluded collection is populated and the API key has access to browse, suggest, highlights, and recommendations.
 - Use **ProductSearchQuery** for search results, **SuggestedSearchSearchQuery** + **SuggestedSearchEntriesLink** + **SuggestedSearchEntry** for autocomplete, and **BatteryIncludedProductRecommendations** link + **ProductRecommendation** resolver for recommendations.
 - Keep **apiKey** in private runtime config only; do not expose it to the client.
 
 ## Changelog
 
-All changelogs are managed in **`CHANGELOG.md`** in the package’s GitHub repository. This app does not currently have a [public repository under the Laioutr organization](https://github.com/orgs/laioutr/repositories?q=&type=public); when it is published there, use that repo’s **`CHANGELOG.md`** for release notes.
+Version history is maintained in [`CHANGELOG.md`](https://github.com/laioutr/app-battery-included/blob/main/CHANGELOG.md) in the public repository [**laioutr/app-battery-included**](https://github.com/laioutr/app-battery-included).
