@@ -11,7 +11,7 @@ seo:
   description: EU right-of-withdrawal (Widerruf) form with client-side validation and a submit handler you supply.
 sitemap:
   loc: /laioutr-ui/cms/withdrawal-form
-  lastmod: 2026-07-21
+  lastmod: 2026-11-06
   changefreq: monthly
   priority: 1.0
 ---
@@ -26,6 +26,20 @@ sitemap:
 Every label, placeholder, and the submit button text is overridable via props, and otherwise falls back to the `withdrawal.*` locale namespace, which ships in English and German. An optional `moreInfoHref` adds a link out to your full withdrawal policy.
 
 The component owns the form and nothing else. You supply the transport: `submitHandler` receives `{ name, orderReference, email }` and returns a `Promise<{ success, message? }>`. In Studio, the withdrawal button wires this to the `ecommerce/legal/withdrawal` action; in code you can point it at any endpoint.
+
+## Where a withdrawal goes
+
+With the [Essentials Mailer](/apps/essentials/mailer) installed, the `ecommerce/legal/withdrawal` action sends the submission through the project's [Email channel](/cockpit/features/channels) (from Essentials Mailer 0.1.4):
+
+1. The storefront posts it to Laioutr's Channels service, which stores it and answers at once. The form shows its success toast.
+2. Within seconds, at most about a minute later, the Cockpit sends the notice to your team and the withdrawal confirmation to the consumer. Who receives the notice, its subject and its reply-to are set in the Cockpit under **Channels -> Email -> Recipients**; the consumer always receives the confirmation.
+3. Both emails appear in the Cockpit's delivery log, and the submission under **Received from the website**.
+
+The storefront's own SMTP server, where one is configured in the Mailer, is only the fallback for when the Channels service cannot take the submission. A malformed submission, a refusal or too many submissions from one connection are final: the form shows its error message and nothing is sent another way.
+
+::callout{type="warning"}
+The success toast means the submission was received, not that the emails were sent. Once the project's included emails for the month are used up, both emails wait or are not sent, and the Owners are told in the Cockpit. Sending emails the law requires, such as the confirmation of a withdrawal, is your business's responsibility. See [What counts, and the monthly quota](/cockpit/features/channels#what-counts-and-the-monthly-quota).
+::
 
 ## Key Business & UX Benefits
 

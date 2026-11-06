@@ -6,7 +6,7 @@ seo:
   description: Ready-to-use legal pages and components for Laioutr projects — imprint, privacy policy, terms, and more.
 sitemap:
   loc: /apps/essentials/legal
-  lastmod: 2026-05-06
+  lastmod: 2026-11-06
   changefreq: monthly
   priority: 1.0
 
@@ -36,8 +36,8 @@ The Legal app ships a ready-to-use Widerrufsbutton implementation that satisfies
 - **Persistent placement** — a button that stays available throughout the entire revocation period, suitable for header, footer, or main navigation slots in the Laioutr layout.
 - **Compliant labelling** — unambiguous wording (e.g. "Vertrag widerrufen") with translations and labelling guidance built in. Ambiguous terms like "Stornieren" are avoided by default.
 - **Two-step revocation flow** — the directive mandates that consumers first identify the contract they want to revoke and then confirm the revocation declaration. The app provides both steps as configurable pages/blocks.
-- **Automatic confirmation of receipt** — once a revocation is submitted, the customer receives an automatic acknowledgement. Delivery is handled via the [Mailer](/apps/essentials/mailer) essentials app, so the confirmation email integrates with the project's existing transactional email setup.
-- **Audit trail** — every revocation request is recorded with timestamp and contract reference so merchants can prove compliance.
+- **Automatic confirmation of receipt** — once a revocation is submitted, the customer receives an automatic acknowledgement. Delivery is handled by the [Mailer](/apps/essentials/mailer) essentials app through the project's [Email channel](/cockpit/features/channels): the notice to your team and the confirmation to the customer are sent from the Cockpit and listed in its delivery log. Once the project's monthly emails are used up, both wait or are not sent: see [the monthly quota](/cockpit/features/channels#what-counts-and-the-monthly-quota).
+- **Record of each request**: every revocation request is listed in the Cockpit under **Channels -> Delivery log -> Received from the website**, with when it arrived and how it was processed, and the emails it made with their delivery status. The contract reference travels in the email to your team; Laioutr keeps the email text only where an Owner switched on keeping emails for resending, and only for the period the platform sets.
 
 ### Customization
 

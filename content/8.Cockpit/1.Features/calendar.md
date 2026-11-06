@@ -5,7 +5,7 @@ seo:
   title: Calendar | Cockpit
 sitemap:
   loc: /cockpit/features/calendar
-  lastmod: 2026-10-30
+  lastmod: 2026-11-06
   changefreq: monthly
   priority: 0.8
 
@@ -39,7 +39,7 @@ Everything the storefront offers is decided in the Cockpit. The Booking section 
 
 ### Adding the app
 
-Open **Apps** in the environment that should take bookings, find **Calendar** and click **Add**. You need the Developer or Owner role to add an app. Each environment has its own services, team, hours and bookings, so a test environment can be set up and tried without touching production.
+Open **Apps** in the environment that should take bookings, find **Calendar** and click **Add**. You need the Developer or Owner role to add an app. Add the **Essentials Mailer** to the same environment too: without it the calendar sends no emails (see [Emails](#emails)). Each environment has its own services, team, hours and bookings, so a test environment can be set up and tried without touching production.
 
 ### Services and categories
 
@@ -69,11 +69,19 @@ One **Save** covers every tab, and a change applies at once.
 | Tab | What it decides |
 | --- | --- |
 | General | Minimum notice, how far ahead customers can book, until when they may cancel, when an unanswered request expires, and whether the storefront shows who takes the appointment and fully booked days |
-| Notifications | Which emails the customer and the team receive — confirmation, reminder, follow-up, cancellation and more — each with a template you can change |
+| Notifications | Which emails the customer and the team receive — confirmation, reminder, follow-up, cancellation and more — each with a template you can change. See [Emails](#emails) |
 | Calendar sync | Who has connected their calendar, invitations, a read-only calendar link per person, and which calendar providers are offered |
 | Locations | The business address used for "at our location" |
 | Booking form | Which standard fields are required, and questions of your own (**Add field**); the answers are kept with each booking |
 | Privacy | The consent text and privacy link shown on the form, how long customer details are kept before they are anonymised, and **Find customer** to export or erase one customer's data |
+
+### Emails
+
+The calendar sends every email through the environment's [Email channel](/cockpit/features/channels): the customer's confirmations, requests, cancellations, reminders and follow-ups, the team's notices of new and cancelled bookings, and the invitation to connect a calendar. So they come from the same sender as your other emails, appear in the Channels delivery log, and follow its limits.
+
+- **The Essentials Mailer is needed.** The Email channel exists only where the [Essentials Mailer](/apps/essentials/mailer) app is installed. Without it the calendar sends no emails at all, and the **Notifications** tab says that emails cannot be sent from this environment, with **Add Essentials Mailer** to install it.
+- **They count.** In production, booking emails count toward the project's included emails, like forms and withdrawals. Once those are used up for the month, booking emails wait or are not sent, as the [monthly quota](/cockpit/features/channels#what-counts-and-the-monthly-quota) describes. **Send test email to me** does not count.
+- **Outside production** every calendar email goes to the Email channel's default recipients (or the Owners), not to customers, without the calendar invitation, and is not counted.
 
 ### Calendar sync
 
