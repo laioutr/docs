@@ -5,7 +5,7 @@ seo:
   title: Organization billing | Cockpit
 sitemap:
   loc: /cockpit/organisation/billing
-  lastmod: 2026-04-09
+  lastmod: 2026-11-06
   changefreq: monthly
   priority: 0.75
 
@@ -43,3 +43,11 @@ Depending on **feature flags** and whether you already have a subscription, you 
 - **Upsell cards** when the public pricing table is turned off: variants for **custom subscription**, **no plan yet**, etc., each with a **contact** action (e.g. email).
 
 Exact copy and which blocks appear depend on your environment (demo vs production, pricing enabled or not).
+
+### AI credits
+
+The **AI credits** card shows the organization's credit balance for all its projects: how much of it is plan credits, used first, and when they end, credits held by running work, what was used this month, and the latest packs, plan credits and Starter credits.
+
+**Buy credits** offers the packs on sale. The invoice is shown before it is sent, and the credits arrive once Stripe reports it paid. On Enterprise the card offers nothing to buy: Larry Copilot and the agents run on the organization's own provider keys.
+
+What a credit is, the plan credits each license brings, and what costs credits: [AI credits](/larry-ai/ai-credits).
