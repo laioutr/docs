@@ -14,6 +14,201 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-11-09]
+
+### Fixed
+
+- **Studio**: Performance and SEO agents can check a test environment on its own address.
+
+## [2026-11-07]
+
+### Fixed
+
+- **Studio**: An agent that lacks data it needs no longer starts or uses credits; it says what.
+- **Studio**: The CLI's fetch-rc now names a missing project or environment, not an unavailable API.
+
+## [2026-11-06]
+
+### Added
+
+- **Studio**: The Operations Center's Findings, Actions and History tabs now show each finding's detail, a board of proposed changes from proposal to decision, and a day-by-day record with a report export.
+- **Studio**: Move old asset URLs into the media library from a CSV; old addresses keep working.
+- **Studio**: Visibility rules can be added and edited in the Studio panels and show in the layer tree.
+
+### Fixed
+
+- **Hosting**: On Laioutr Cloud, every market can choose the project's Cloud address, also in copies.
+
+## [2026-11-05]
+
+### Added
+
+- **Studio**: Installing an app from npm warns when it needs another platform version.
+- **Studio**: Laioutr apps published on npm can follow their latest version in Package Management too.
+
+### Fixed
+
+- **Studio**: Translatr no longer flags a number written as a word or with thousands separators.
+- **Studio**: The project sidebar stays as it was left, also after a reload or a visit to Studio.
+
+## [2026-11-04]
+
+### Added
+
+- **Studio**: Notifyr sends forms and withdrawals by email and logs every message in one place.
+- **Studio**: Larry Copilot opens beside the page, and the skill library is in the organization's menu.
+- **Studio**: Rename a project straight from its card on the organization overview.
+- **Hosting**: Project pages show the serving address while a project moves to another host.
+
+### Fixed
+
+- **Studio**: Pasting formatted text into a rich text field no longer fails.
+- **Hosting**: Markets on Laioutr Cloud can now choose the project's Cloud address as their domain.
+
+## [2026-11-03]
+
+### Added
+
+- **Studio**: Larry Copilot uses skills: enable them in the library, pick one with "/", or create one.
+- **Studio**: Owners can give each member a monthly limit of AI credits on the AI Usage page.
+- **Studio**: Platform Owners switch MCP on or off for each organization on one page.
+- **Studio**: MCP access can be turned on per organization, for everyone, or stopped for everyone.
+- **Studio**: AI is counted in credits; Larry Copilot is included up to the licenses' shared quota.
+- **Studio**: AI credits can be bought on Billing & Usage.
+- **Studio**: An app's configuration can be edited as JSON when its version declares no settings.
+
+### Fixed
+
+- **Studio**: AI Usage shows the credits still held for members, never more than the balance.
+- **Studio**: Larry drafts a new skill from the first description and offers new skills at once.
+- **Studio**: An app setting that holds a list is shown and saved in the environment's Configuration.
+- **Studio**: Apps from our open-source packages can now be added from the Apps page.
+
+## [2026-11-02]
+
+### Added
+
+- **Studio**: Calendar emails show price and place, and templates follow the market languages.
+- **Studio**: Calendar emails get their own header and footer, and services can be translated.
+- **Studio**: Services can show an approximate price; email templates preview each language.
+- **Studio**: A never-translate term can be translated a chosen way per language by adding a replacement for it.
+- **Studio**: Translatr writes a translation that lost only a number and asks a person to check it.
+
+### Fixed
+
+- **Studio**: Studio no longer shows an error page when a section is added.
+- **Studio**: Booking emails show the organization's logo or name instead of the Laioutr logo.
+- **Studio**: Logging in right after the page opens no longer fails while the security check is still loading.
+- **Studio**: Translatr no longer spends characters retrying a held text more often than allowed.
+
+## [2026-10-31]
+
+### Fixed
+
+- **Hosting**: Creating a project no longer fails when Vercel returns settings the Cockpit does not recognize yet.
+
+## [2026-10-30]
+
+### Added
+
+- **Studio**: Campaign Manager shows each campaign's home page as a live preview.
+- **Studio**: Campaigns can show a picture of their storefront, and the schedule shows exact times.
+- **Studio**: Customers book appointments on the website, synced with each person's own calendar.
+
+### Fixed
+
+- **Studio**: The deployments list and other tables that read from the database load again.
+- **Studio**: Campaign Manager shows each campaign in its own colour and says where one is planned.
+- **Studio**: The Environments page shows each environment's campaign as a line of its card.
+- **Studio**: Translatr accepts decades written as '80 and stops paying for retries that cannot help.
+- **Studio**: Studio asks before turning off path translation and lists the paths it would replace.
+
+## [2026-10-29]
+
+### Added
+
+- **Studio**: Ask Larry Copilot to list, fork, schedule or roll back campaigns.
+- **Studio**: Export a campaign to a file and import it as a new campaign in any project.
+- **Studio**: New projects get Contentr with their Sites or Commerce licence; existing projects keep it.
+- **Studio**: Customers get a reminder before appointments; services and time off are set per person.
+- **Studio**: Customers and staff receive booking emails with a calendar invitation.
+- **Studio**: The calendar shows a week or a day of bookings, requests and busy times.
+- **Studio**: Calendar bookings and requests are managed in the Cockpit, with settings on six tabs.
+- **Studio**: Calendar services are managed in the Cockpit, and the calendar sits under Apps.
+
+### Fixed
+
+- **Studio**: Translatr says why translating paused near the end of the month's characters.
+- **Studio**: Translatr's quota notices are sent again.
+- **Studio**: Translatr tells each text needing attention once and keeps a brand's slug.
+
+## [2026-10-28]
+
+### Added
+
+- **Hosting**: A market's domains are chosen from the domains set up on the Domains page.
+- **Studio**: Translatr can be turned off for a whole project with one switch, keeping all data.
+
+### Fixed
+
+- **Hosting**: The domains list shows where a redirecting domain sends visitors.
+- **Hosting**: Domains set up at the hosting show their DNS records and apex redirect target.
+
+## [2026-10-27]
+
+### Added
+
+- **Hosting**: Own domains are connected on the new Domains page, which sets them up and checks them.
+- **Studio**: The login can ask for an hCaptcha check, and Contentr's menu shows icons.
+- **Studio**: An entry now shows how far each language is filled in.
+- **Studio**: Contentr has a new look: collections beside their entries and a read-only Schemas page.
+- **Studio**: Creating a project's API key now points to where organization-wide keys are made.
+- **Studio**: Collections now live under Contentr in the project menu.
+- **Studio**: Products in the project menu start folded; one opens when its pages are visited.
+- **Studio**: Translatr translates a repeated value the same way and can keep fields untranslated.
+
+### Fixed
+
+- **Studio**: The product group in the project menu lines up with the entries below it.
+
+## [2026-10-26]
+
+### Added
+
+- **Hosting**: "Check again" asks Cloudflare to check a pending Cloud domain right away.
+
+## [2026-10-24]
+
+### Added
+
+- **Studio**: Licence details name who bought a licence; the Licenses page shows its size.
+- **Studio**: Translatr's check interval can be set per content area, from every 5 minutes to weekly.
+- **Studio**: The Translatr editor can accept a translation that needs attention as it is.
+
+### Fixed
+
+- **Studio**: The language chosen on My account now stays when moving to other pages.
+
+## [2026-10-23]
+
+### Added
+
+- **Studio**: Agents can run on Laioutr's keys or the organization's own; spend limits count both.
+- **Studio**: Products are set up step by step, and API keys for deploying belong to one project.
+- **Studio**: Every product and agent in the Marketplace is added or requested from its offer.
+- **Studio**: Owners set a monthly AI spend limit; agents on the organization's own keys pause when it is reached.
+- **Studio**: Select a range of assets in Assetr with Shift+click.
+- **Studio**: Notifications can be sent by email and to a Slack channel through Laioutr's bot.
+
+### Fixed
+
+- **Studio**: Branding offers a custom color and previews it as the Cockpit shows it.
+- **Studio**: A product's offer shows its description and leads back to the Marketplace.
+- **Studio**: Invite on the organization's Overview opens Members & Roles.
+- **Studio**: The platform's licence pages name every feature in words.
+- **Studio**: A product's offer in the Marketplace shows the product's own icon.
+- **Studio**: Times in the Cockpit show in the reader's own time zone; My account can switch them to UTC.
+
 ## [2026-10-22]
 
 ### Added

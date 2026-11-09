@@ -14,6 +14,20 @@ sitemap:
 
 All notable changes to the **Laioutr CLI** (the `laioutr` command-line tool) will be documented in this file.
 
+## [0.6.1] - 2026-11-04
+
+### Patch Changes
+
+- `laioutr app release` prints what the Cockpit warns about, such as a version npmjs does not serve yet. The command still succeeds, because the version is recorded.
+
+- When the Cockpit refuses a request, `laioutr` commands say why, such as "App does not belong to your organization", instead of a generic message that could report it as failed authentication. Server errors stay generic.
+
+## [0.6.0] - 2026-11-03
+
+### Minor Changes
+
+- `laioutr app release` sends the app's `laioutr.manifest.json`, so an app published on npmjs can offer a settings form in the Cockpit. The command fails when the manifest is invalid, or when the manifest declares settings and the Cockpit did not store a form from it.
+
 ## [0.5.0] - 2026-09-30
 
 ### Minor Changes

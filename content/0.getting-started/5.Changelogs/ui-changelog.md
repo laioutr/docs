@@ -14,6 +14,70 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.37.2] - 2026-11-08
+
+### Patch Changes
+
+- The add-to-cart buttons on the product page and on product tiles no longer report success for a product the cart refused. When `CartAddItemsAction` answers with a rejected item, such as a sold-out product, they show the error toast with the connector's `reasonLabel` where it gives one, and fire no `AddToCart` event. The product page button now shows that error toast when the call fails, too, and the cart's coupon field reports a code the connector rejected.
+
+## [2.37.1] - 2026-11-08
+
+### Patch Changes
+
+- `menuTreeAtDepth` and the `startLevel` field on the menu blocks no longer present a connector's synthetic root entry as something a storefront skips. `startLevel: 0` renders the menu as the connector answers it, which is what a top-level navigation wants, and a deeper start renders one branch of it.
+
+## [2.37.0] - 2026-11-06
+
+### Minor Changes
+
+- A storefront can read subscription plans: `ProductVariantSubscription` lists the plans a variant offers, with their interval and prices, and `CartItemSubscription` names the plan of a cart line. The stock cart sheet shows that plan. On Shopify, an amount finer than its currency is now rounded and no longer fails the cart or page.
+
+  **Breaking:** on Shopify, the Storefront API token needs the scope `unauthenticated_read_selling_plans`, because every cart read asks for selling plans. A store whose token lacks it may fail its cart read. Grant the scope before upgrading.
+
+## [2.36.0] - 2026-11-04
+
+### Minor Changes
+
+- **Breaking:** `EmailInputForm` no longer simulates a submission. It shows the new `state` prop and emits `submit` and `reset`, and the caller runs the request. `NewsletterRegistration` and `PopUpNewsletter` take the same prop and emit the same events.
+
+  ```vue
+  <!-- Before: showed success after a second and sent nothing -->
+  <EmailInputForm />
+
+  <!-- After -->
+  <EmailInputForm :state="state" @submit="subscribe" @reset="state = 'initial'" />
+  ```
+
+- **Breaking:** the Newsletter Signup section and the Newsletter Pop-up block now send the email through the `newsletter/subscribe` action. They used to show success and send it nowhere. A storefront with no app implementing the action now shows the form's error message. `@laioutr/app-shopware` implements it; `@laioutr-app/shopify` and `@laioutr-app/adobe-commerce` do not.
+
+  ```ts
+  // Before: no handler, and the form showed success
+
+  // After: an app registers one
+  export default defineOrchestr.actionHandler(SubscribeAction, async ({ input }) => {
+    await addToMailingList(input.email);
+    return { status: 'success' };
+  });
+  ```
+
+## [2.35.0] - 2026-11-03
+
+### Minor Changes
+
+- The theme, the theme switcher, fonts, image delivery and the Google Maps API key can now be set per environment in the Cockpit, under the environment's Configuration, instead of in nuxt.config.
+
+## [2.34.0] - 2026-10-30
+
+### Minor Changes
+
+- The product page's variant pickers, Variant Options and Variant Picker (Step-by-Step), show axes and values in the order of the product's option groups, so a commerce app can put sizes smallest first. They request the option groups as optional: with a commerce app that doesn't provide them, the pickers keep the order of the variants.
+
+## [2.33.6] - 2026-10-27
+
+### Patch Changes
+
+- `FilterBar` with `showProductAmount` no longer makes the page wider than a phone screen when the translated button labels and product count are too long for one row. The word after the number is cut short with an ellipsis, and the count is left out when not even the number fits between the buttons.
+
 ## [2.33.0] - 2026-10-16
 
 ### Minor Changes

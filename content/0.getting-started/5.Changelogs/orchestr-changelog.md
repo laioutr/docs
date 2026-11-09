@@ -14,6 +14,86 @@ sitemap:
 
 All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data-fetching and query orchestration layer, will be documented in this file.
 
+## [0.80.0] - 2026-11-04
+
+### Minor Changes
+
+- Provider selection ("who does what"): projects can configure which installed app serves
+  each canonical query, action, link, component, and page index via `config.orchestr.providers`
+  in the laioutrrc, with per-instance overrides on query bindings and action dispatch. All
+  handler registries now keep every candidate, and existing cache entries are invalidated once
+  on upgrade. A query's stored templates follow the app elected to run it: its own are offered,
+  and another app's stand in where it registers none. Unconfigured projects behave exactly as
+  before.
+
+  **Switching a token off:** `false` in place of an app id says that no app serves that query,
+  link, component, action, or page index, and `entities.<Entity>: false` switches off a whole
+  entity. An off query or link answers with an error that names the config line, an off
+  component is left out of the response, an off action answers `501`, and an off page index
+  lists no pages. A per-instance override cannot switch an off token back on.
+
+## [0.79.0] - 2026-11-03
+
+### Minor Changes
+
+- A query handler can answer `notFound()` when the thing its input names does not exist, and a component resolver can return the ids that do not exist upstream in `notFound`. orchestr writes no error log for either, caches a `notFound()` answer as an absence for `absentMaxAge` (by default the shorter of `ttl` and one minute), and hands the client a not-found result, so a page can answer 404. A handler from an older dist that answers no id works as before and logs a deprecation warning.
+
+  **Breaking:** a single query handler returns an `id`, an `entity` or `notFound()`. `{}` and `{ id: undefined }` no longer typecheck, and a thrown not-found error becomes `return notFound()`.
+
+  ```ts
+  // Before
+  run: async ({ input }) => {
+    const product = await api.bySlug(input.slug);
+    if (!product) throw new ProductNotFoundError(input.slug);
+    return { id: product.id };
+  },
+
+  // After
+  run: async ({ input, notFound }) => {
+    const product = await api.bySlug(input.slug);
+    if (!product) return notFound();
+    return { id: product.id };
+  },
+  ```
+
+  **Breaking:** the query response carries two new chunk types, `queryNotFound` and `entityNotFound`. Deploy the server and the client from the same orchestr version.
+
+## [0.77.1] - 2026-10-30
+
+### Patch Changes
+
+- The source-entity, media-library and action routes no longer answer a connector or upstream failure with a gateway status, so the error body reaches a caller behind Cloudflare, which replaces the body of a `502` or `504` with its own page.
+
+  **Source entities and media libraries.** A source-entity error with code `failed` and a media-library connector throw answer `500` instead of `502`, with the same `data` as before. A connector's own H3 error with a gateway status answers `500` too: as `failed` for a source entity, with `library` and `message` for a media library. An adapter error that carries an upstream `statusCode`, such as an ofetch `FetchError`, answers `500` instead of forwarding that status. The storefront logs a warning with source, type and message for every `failed` source-entity error.
+
+  **Actions.** A failed action keeps the status of an H3 error or of an error built on `ebec` 2, as the canonical errors are, except a gateway status, which answers `500`. Any other error answers `500` and is logged, also one that carries an upstream `statusCode`, such as an ofetch `FetchError` or an error built on `@ebec/http` 4. Bot protection treats a verifier error that carries a status as unavailable, unless it is an H3 error.
+
+## [0.77.0] - 2026-10-29
+
+### Minor Changes
+
+- `redisClientConfig(app)`, a server auto-import next to `useRedis()`, returns `{ url, keyPrefix }` for an app that opens its own Redis client, to use a client library of its choice, or for a command that would take the shared connection over. `url` is the cache's connection URL, credentials included, and `keyPrefix` is the root the app's keys must sit below. It answers `undefined` when `useRedis()` has no connection to give.
+
+  `redisKeyPrefix(app)` is deprecated in favour of `redisClientConfig(app)?.keyPrefix`, and keeps working.
+
+## [0.75.2] - 2026-10-27
+
+### Patch Changes
+
+- `POST /api/laioutr/orchestr/clear-cache` clears a Redis-backed cache again. Since 0.57.0 every call failed with a 500 (`TypeError: key.startsWith is not a function`), and `getKeys()` on a Redis-backed cache store threw the same error.
+
+## [0.75.0] - 2026-10-24
+
+### Minor Changes
+
+- An action's input can hold files. Declare a field with `z.file()`, alone or in an array, pass the `File` from a file input to `fetchAction` or `useMutationAction`, and the handler receives a `File`. Inputs without files are sent exactly as before.
+
+  A request with files may carry at most 20 MB, set by `orchestr.actionMultipartBodyLimit`; a larger one fails with status 413. Errors thrown by `fetchAction` carry the HTTP status as `status`, so `error.status === 413` recognises a request that was too large.
+
+### Patch Changes
+
+- The action route refuses with 403 a request that a browser sends from another site, including another subdomain or another storefront on the same site. Actions keep working when called from the storefront's own origin or from a server.
+
 ## [0.74.0] - 2026-10-19
 
 ### Minor Changes

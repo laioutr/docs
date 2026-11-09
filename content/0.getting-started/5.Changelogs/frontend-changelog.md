@@ -14,6 +14,120 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.82.0] - 2026-11-09
+
+### Minor Changes
+
+- A project can split its browser JavaScript by page type: set `config.pageChunks: true` in its rc. Sections and blocks that only one page type renders then load with that page type, code that several share loads from a shared chunk, and those no page renders load only if Studio's preview asks for them. Stylesheets stay where they are, and the server build does not change. It is off by default.
+
+  **It sets `config.entryScript`.** The setting uses `{ loading: 'after-paint', hints: 'with-entry' }` in place of any other value, and the build warns when it replaces one.
+
+  **If a chunk fails to load.** During hydration or a navigation the page reloads, so a visitor does not stay on an old page or a page with sections missing. A settled page does not reload.
+
+  **For app authors.** With the setting on, each section and block is registered in the browser from its `definition` alone. A file that cannot be split safely stays in the entry chunk, and the build warns with its path, the line and the reason. `nuxi dev` lists these files when it starts, in every project: as information without the setting, and as a warning with it. If a module a definition imports leads back to its own component, or another module's manual chunk forms a cycle with a page chunk, the build stops with an error naming the chain, since that storefront would otherwise fail at startup.
+
+- Sections, global section placements and blocks can carry a `visibilityRule`, `{ effect: 'show' | 'hide', when }`, where `when` reads `market.slug` and `language.code`. The storefront removes such an element on the server for every market and language whose rule does not show it, so its content never reaches those visitors, and the Studio preview follows the chosen market and language. A rule that cannot decide, such as one that reads any other fact, removes its element, and the server log names it.
+
+- **Breaking:** `RcBlock.rules` and `RenderBlock.rules` are removed. Nothing read them, and a stored value is ignored.
+
+  ```ts
+  // before
+  const rules = block.rules;
+
+  // after: delete the read; nothing replaces it
+  ```
+
+## [0.81.1] - 2026-11-08
+
+### Patch Changes
+
+- `menuTreeAtDepth` and the `startLevel` field on the menu blocks no longer present a connector's synthetic root entry as something a storefront skips. `startLevel: 0` renders the menu as the connector answers it, which is what a top-level navigation wants, and a deeper start renders one branch of it.
+
+## [0.81.0] - 2026-11-06
+
+### Minor Changes
+
+- New `@laioutr-core/core-types/zoned-time` subpath, which turns a wall-clock time and an IANA time zone into an instant and back.
+
+## [0.80.0] - 2026-11-04
+
+### Minor Changes
+
+- Provider selection ("who does what"): projects can configure which installed app serves
+  each canonical query, action, link, component, and page index via `config.orchestr.providers`
+  in the laioutrrc, with per-instance overrides on query bindings and action dispatch. All
+  handler registries now keep every candidate, and existing cache entries are invalidated once
+  on upgrade. A query's stored templates follow the app elected to run it: its own are offered,
+  and another app's stand in where it registers none. Unconfigured projects behave exactly as
+  before.
+
+  **Switching a token off:** `false` in place of an app id says that no app serves that query,
+  link, component, action, or page index, and `entities.<Entity>: false` switches off a whole
+  entity. An off query or link answers with an error that names the config line, an off
+  component is left out of the response, an off action answers `501`, and an off page index
+  lists no pages. A per-instance override cannot switch an off token back on.
+
+## [0.79.0] - 2026-11-03
+
+### Minor Changes
+
+- A page whose subject is gone (the product of a product detail page, the category of a listing page, the post of a blog post page) answers 404 at the requested URL and renders the project's `core/404` page in place, with `noindex`. A page type marks its subject with `pageSubject: true` on one `requiredQueries` entry. The product detail, product listing, location detail, blog post and blog collection page types carry it.
+
+  An app changes that outcome through the awaited `frontend-core:page-renderer:subject-not-found` hook (a redirect, another page, the page itself, or another status):
+
+  ```ts
+  nuxtApp.hook('frontend-core:page-renderer:subject-not-found', async ({ subject, result }) => {
+    const sibling = await findAvailableSibling(subject.input.slug);
+    if (sibling) result.value = { type: 'redirect', to: sibling.path, status: 302 };
+  });
+  ```
+
+### Patch Changes
+
+- `/api/frontend/redirect-resolve` answers 204 No Content when no redirect matches, instead of 404. Client navigation to a path without a redirect no longer shows a failed request in the browser console.
+
+- A section text that references a query with no result (a failed query or a not-found one) shows an empty string for the reference, as SEO texts already do, instead of the raw `{{queries.…}}` template.
+
+## [0.78.0] - 2026-11-01
+
+### Minor Changes
+
+- A storefront can answer requests for paths that no route knows from a 404 page it rendered earlier, instead of rendering the 404 page again for every such request. Turn it on with `cachedNotFoundPage: true` in the project environment's config (`config.cachedNotFoundPage` in the rc); `NUXT_LAIOUTR_CACHED_NOT_FOUND_PAGE` overrides it. It is off by default, and a request that carries cookies or credentials still gets the 404 page rendered for it.
+
+## [0.77.1] - 2026-10-30
+
+### Patch Changes
+
+- The source-entity, media-library and action routes no longer answer a connector or upstream failure with a gateway status, so the error body reaches a caller behind Cloudflare, which replaces the body of a `502` or `504` with its own page.
+
+  **Source entities and media libraries.** A source-entity error with code `failed` and a media-library connector throw answer `500` instead of `502`, with the same `data` as before. A connector's own H3 error with a gateway status answers `500` too: as `failed` for a source entity, with `library` and `message` for a media library. An adapter error that carries an upstream `statusCode`, such as an ofetch `FetchError`, answers `500` instead of forwarding that status. The storefront logs a warning with source, type and message for every `failed` source-entity error.
+
+  **Actions.** A failed action keeps the status of an H3 error or of an error built on `ebec` 2, as the canonical errors are, except a gateway status, which answers `500`. Any other error answers `500` and is logged, also one that carries an upstream `statusCode`, such as an ofetch `FetchError` or an error built on `@ebec/http` 4. Bot protection treats a verifier error that carries a status as unavailable, unless it is an H3 error.
+
+## [0.76.0] - 2026-10-27
+
+### Minor Changes
+
+- **Breaking:** `/webhooks/` is reserved for deliveries another service sends and signs; an app takes `/webhooks/app-<name>/`. A path under it that no route claims, and `/webhooks` itself, answers the plain 404 page without starting the app, a Studio page there is no longer served, and neither the trailing-slash setting nor a project redirect applies, so a delivery reaches its route as it was sent.
+
+## [0.75.3] - 2026-10-27
+
+### Patch Changes
+
+- A storefront built with the node-server preset and tracing on no longer starts several seconds slower when it resolves `@scayle/nuxt-opentelemetry` 1.0.6, and its build no longer warns that the module loader hook stays registered: the hook stays off, as with 1.0.4. A Vercel build with tracing on no longer shows that warning; the hook was never registered there.
+
+## [0.75.1] - 2026-10-26
+
+### Patch Changes
+
+- A route cached with an `swr` or `cache` route rule now renders and stores one page per host, so each market domain is served its own market instead of the default one. In such a page, `useRequestURL()` keeps the `https` scheme behind a proxy that terminates TLS. Headers listed in `cache.varies` are kept.
+
+## [0.75.0] - 2026-10-24
+
+### Patch Changes
+
+- An entity page requested under a slug that is not the entity's own in the current language (a Shopify product opened by its base handle on a domain whose language has a translated handle) now answers a 301 redirect to the own slug, keeping the query string, and its canonical names the own slug. Before, both addresses answered 200, each with a canonical pointing at itself. The page is served as requested, as before, whenever the page index does not answer in time, knows no slug for the language, or does not answer the own slug as the same entity's; previews are never redirected.
+
 ## [0.74.0] - 2026-10-19
 
 ### Minor Changes
