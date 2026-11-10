@@ -241,6 +241,34 @@ On Laioutr Cloud, Nitro stores nothing for these rules and the render sees every
 
 ---
 
+## Stored 404 page
+
+::since-version{version="0.78.0" packages="@laioutr-core/frontend-core" changelog="frontend"}
+::
+
+A scanner or a crawler can request hundreds of paths that no route knows, and each one costs a full render of the 404 page. The storefront therefore keeps the 404 page that it rendered for such a path, and answers the next unknown paths from that copy. From `@laioutr-core/frontend-core` 0.83.0 this is on by default. Before 0.83.0, a project turns it on with `"cachedNotFoundPage": true`.
+
+- Each server instance keeps its own copy in memory, one per domain and language of the project, for 10 minutes. After that, the next unknown path renders the 404 page again.
+- Only a path that matches no route takes part. A product or a category that no longer exists still renders its 404 page at its own URL.
+- Only a `GET` or `HEAD` request that accepts HTML and carries no `Cookie` and no `Authorization` header takes part. A preview link never does.
+- A request with a query string gets the stored copy, but its own render is never stored.
+- A render is not stored when it sets a cookie, sends `Cache-Control` with `private` or `no-store`, or calls `setResponseCachedDownstream(event, false)` (see [Orchestr Caching](/frontend/orchestr/caching)).
+- The response header `x-laioutr-404` is `hit` when the answer came from the copy, and `miss` when the render fills a copy.
+
+Turn it off when your 404 page differs per request: a page variant chosen per visitor through the [`select-page-variant` hook](/frontend/features/hooks#page-renderer), or content chosen by request headers. With the stored page, every visitor gets the version that one request rendered, for up to 10 minutes. A change to the 404 page that you publish in Studio also shows only after that time.
+
+```json [laioutrrc.json]
+{
+  "config": {
+    "cachedNotFoundPage": false
+  }
+}
+```
+
+The storefront reads the project file at build time, so the change applies with the next deployment. The environment variable `NUXT_LAIOUTR_CACHED_NOT_FOUND_PAGE` (`true` or `false`) overrides the file for one deployment. Under `nuxt dev` the stored page is off unless the project file sets it to `true`, so an edit to the 404 page shows at once.
+
+---
+
 ## Handling personalized and time-sensitive content
 
 For CDN caching to work, the SSR HTML for a given URL (and locale/market) must be the same for every user. Move personalized or session-specific content to the client:
@@ -352,4 +380,5 @@ The config is cacheable in its own right: its URL carries a hash of the project 
 | **API response caching**    | `routeRules` for `/api/**` or per-handler headers | Not set                                            |
 | **Multi-market cache keys** | Hostname or URL-based locale prefix               | Built in: hostname and path                        |
 | **Orchestr data cache**     | Per-handler `strategy`, `ttl`, `buildCacheKey`    | See [Orchestr Caching](/frontend/orchestr/caching) |
+| **Stored 404 page**         | `laioutrrc.json` → `config.cachedNotFoundPage`    | On from frontend-core 0.83.0, off under `nuxt dev` |
 | **Client store**            | Automatic LRU                                     | Always on                                          |
