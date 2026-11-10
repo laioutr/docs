@@ -16,9 +16,15 @@ All notable changes to **Cockpit (Studio)** — the visual editor and project ma
 
 ## [2026-11-09]
 
+### Added
+
+- **Studio**: Assetr metadata can be exported as a CSV, chosen by fields and date range.
+
 ### Fixed
 
 - **Studio**: Performance and SEO agents can check a test environment on its own address.
+- **Studio**: At a safety limit the message now says how long to wait, not to ask for a bigger license.
+- **Studio**: When an own mailbox refuses the login, the message now names the app-specific password and the usual username.
 
 ## [2026-11-07]
 
