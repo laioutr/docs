@@ -14,6 +14,31 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-11-10]
+
+### Added
+
+- **Studio**: Agents' values can be measured for free, and the SEO agent can fix missing page titles.
+- **Studio**: The Performance agent can measure any public https address entered when starting a run.
+
+### Changed
+
+- **Studio**: Inside an organization the breadcrumb starts with the organization; the home icon is gone.
+
+### Fixed
+
+- **Studio**: An empty signal card's text is no longer cut off.
+- **Studio**: History and Measure say when a measurement read nothing.
+- **Studio**: Repeated agent findings are now one finding, and findings that are gone close.
+- **Studio**: Values agents do not measure yet are shown as grey examples, with a way to ask for them.
+- **Hosting**: The Laioutr Cloud settings no longer show the secret that Studio uses.
+- **Studio**: Studio's query menu stays inside the window.
+- **Hosting**: Each hosting page names the environment it configures and links back to its Hosting page.
+- **Studio**: The calendar's forms end with Save.
+- **Hosting**: Laioutr Cloud domains show their ownership record, and each DNS record is checked right.
+- **Studio**: Measuring an environment's own address fills the Performance cards; agents list a problem once.
+- **Studio**: Calendar hours stay as typed instead of closing the week.
+
 ## [2026-11-09]
 
 ### Added
