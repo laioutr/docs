@@ -149,7 +149,9 @@ resolve: async ({ entityIds, $entity }) => {
 ```
 
 - Report an id only when the entity itself does not exist upstream — never when your resolver merely has no data for its component. The client hides a reported entity in every list on the page, and a page whose subject it is answers 404.
-- An entity is not found when at least one resolver reports it and no resolver returns it. Components served from the cache do not count as returned.
+- An entity is not found when a resolver of the app that produced its id — the app whose query or link returned it — reports it, whatever any other resolver returns. An add-on that looks data up by id alone can return an id that is gone.
+- A resolver belongs to the app of the `define…` helpers it is built with, not to the package that holds it. An add-on built with a connector's helpers counts as that connector, so its report is final for the ids the connector produced.
+- An id that a resolver of another app reports is not found only when no resolver returns it. Components served from the cache do not count as returned. When a storefront's own query or another app's link returns a connector's ids, the connector's report counts like any other app's.
 - An id that no resolver reports and none returns keeps the old behaviour: no entity, and a warning in development.
 - An id the request did not ask for is ignored.
 - orchestr sends one `entityNotFound` [chunk](/frontend/orchestr/wire-format#entitynotfound) per call. The client leaves the entity out of the query's entities, so a list renders one tile fewer.
