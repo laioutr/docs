@@ -6,7 +6,7 @@ seo:
   description: Understanding the basics of Orchestr actions
 sitemap:
   loc: /frontend/orchestr/actions
-  lastmod: 2026-04-08
+  lastmod: 2026-11-12
   changefreq: monthly
   priority: 1.0
 
@@ -244,6 +244,48 @@ const { data, error } = await useFetchAction(SubscribeAction, {
   email: 'test@example.com'
 });
 ```
+
+## Action Availability
+
+::since-version{version="0.84.0" packages="@laioutr-core/orchestr" changelog="orchestr"}
+::
+
+A deployment serves an action when an app implements it with an [Action Handler](#action-handler), the project's provider configuration does not switch it off, and the handler can run with the deployment's configuration. A call to an action the deployment does not serve fails with status 501.
+
+`isActionAvailable` tells a component whether the deployment serves an action, so the component can leave out a control whose action would fail. It is auto-imported and makes no request: every page the server renders carries the list of served actions.
+
+```vue [app/components/newsletter-teaser.vue]
+<script setup lang="ts">
+import { SubscribeAction } from '@laioutr-core/canonical-types/newsletter';
+
+const canSubscribe = isActionAvailable(SubscribeAction);
+</script>
+
+<template>
+  <NewsletterForm v-if="canSubscribe" />
+</template>
+```
+
+The answer is the same for every visitor. Whether one visitor may call the action, for example a customer who is not logged in, is for the action's errors to say. On a page the server did not render, `isActionAvailable` answers `true` for every action, and a call to an action the deployment does not serve still fails with 501.
+
+### Handlers that need configuration
+
+A handler that cannot work without configuration a deployment may lack, such as an API credential, declares `isAvailable` in its options. Orchestr reads it once per process, so it must read configuration only, never the request.
+
+```ts [server/orchestr/newsletter/subscribe.ts]
+import { SubscribeAction } from '@laioutr-core/canonical-types/newsletter';
+
+export default defineOrchestr.actionHandler(
+  SubscribeAction,
+  async ({ input }) => {
+    // …
+    return { status: 'success' as const };
+  },
+  { isAvailable: () => Boolean(useRuntimeConfig().myNewsletter.apiKey) }
+);
+```
+
+While `isAvailable` answers `false`, `isActionAvailable` answers `false` for the action, and a call fails with 501 and `data.reason: 'handler-unavailable'`. Orchestr does not fall back to another app's handler for the same action. An `isAvailable` that throws counts as `false`.
 
 ## Files in Action Input
 
