@@ -46,7 +46,7 @@ Not supported yet: Content Fragments, pages, asset renditions and metadata beyon
 ## Install and configure
 
 1. In the Cockpit, open the project's environment → **Package Management**, add **Adobe Experience Manager** and save.
-2. Open its settings (**Configure**) and fill in the sections below. Each sign-in section has a **Test** button that checks the values before you save.
+2. Open the environment's **Configuration** in the menu, choose the app, and fill in the sections below. Each sign-in section has a **Test connection** button that checks the values before you save. (Package Management → **Configure** shows the same fields, without the tests.)
 3. Deploy the environment. Until the app has an author host and a deploy has run, URL mapping does not offer AEM for it.
 
 ### Connection
@@ -67,7 +67,7 @@ Where to get it: in Cloud Manager, open the environment's **Developer Console**,
 - It is valid for **24 hours**. The app stops reading once it expires, and says so.
 - It reads everything **its user** may read — the person who generated it. Adobe recommends it for development only, so switch to OAuth keys before a real migration.
 
-**Test** lists one asset with the token and passes when AEM answers with it.
+**Test connection** lists one asset with the token and passes when AEM answers with it.
 
 ### OAuth Server-to-Server
 
@@ -82,12 +82,12 @@ Setting it up in Adobe:
 
 1. In the [Adobe Developer Console](https://developer.adobe.com/console), add an **OAuth Server-to-Server** credential to a project that has AEM.
 2. Copy its client ID, client secret and scopes into the settings above.
-3. Make one call — press **Test**. AEM creates the credential's technical account at that moment, in the read-only Contributors group.
+3. Make one call — press **Test connection**. AEM creates the credential's technical account at that moment, in the read-only Contributors group.
 4. In AEM, under **Tools → Security**, give that technical account **read access** to the DAM folders the migration needs: the DAM folder below, `/content/dam/dynamic-media` where Dynamic Media keeps logos and similar assets, and any folder the [access report](#what-the-credential-may-read) shows as empty. Read only.
 
 The app asks Adobe for a new token by itself, five minutes before the current one expires.
 
-**Test** asks Adobe IMS for a token with the keys and passes when one is returned. It checks the keys, not what the technical account may read — the [access report](#what-the-credential-may-read) does that.
+**Test connection** asks Adobe IMS for a token with the keys and passes when one is returned. It checks the keys, not what the technical account may read — the [access report](#what-the-credential-may-read) does that.
 
 ### Assets
 
@@ -126,8 +126,8 @@ Assets AEM never published to Dynamic Media have no old URL to keep, and are not
 | What you see | What to do |
 |--------------|------------|
 | URL mapping says no storefront of the project offers AEM's assets | Fill in the author host and the sign-in, save, and deploy the environment again. |
-| **Test** of the access token fails | The token expired (after 24 hours) or was copied with `Bearer`. Get a new one and paste only its value. |
-| **Test** of the OAuth keys fails | Check the client ID, secret and scopes against the credential's page, and the IMS host if the credential names one. |
+| **Test connection** of the access token fails | The token expired (after 24 hours) or was copied with `Bearer`. Get a new one and paste only its value. |
+| **Test connection** of the OAuth keys fails | Check the client ID, secret and scopes against the credential's page, and the IMS host if the credential names one. |
 | The import reads fewer assets than AEM holds | The credential may not read some folders. Give it read access there and import again; what was moved is not moved twice. |
 | The import stops because AEM refused the credential | The token expired or the keys were revoked. Set a new token or keys, deploy, and start the import again. |
 | The import stops because the storefront is unreachable | The storefront is behind a password, or not deployed. Remove the password for the time of the import, or choose another environment. |
