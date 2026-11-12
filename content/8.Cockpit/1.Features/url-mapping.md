@@ -107,7 +107,20 @@ Nothing is fetched until you press **Start**, and once started the import runs b
 
 While it runs, **Overview** shows the share migrated, the chunks and the time left. **Old URLs** lists every row with its state and new file, and **Export** downloads the list as filtered. A passing failure, such as a busy old DAM or a timeout, is tried again by itself before the row is marked failed.
 
-A file migrated once is never moved again. Importing the same or a larger list later only adds what is new and retries what failed.
+A file migrated once is never moved again, except by an [AEM import](#from-adobe-experience-manager), which replaces it with the original. Importing the same or a larger list later only adds what is new and retries what failed.
+
+### From Adobe Experience Manager
+
+If your old DAM is AEM with Dynamic Media (Scene7), Laioutr reads the assets from AEM itself — no CSV.
+
+1. Install the [Adobe Experience Manager](/apps/app-docs/aem) app on an environment of the project, fill in its settings (an access token, or OAuth Server-to-Server keys) and deploy it.
+2. In URL mapping, open **New import**, choose **AEM** under From, pick the environment and press **Read assets from AEM**.
+3. Laioutr reads every asset AEM published to Dynamic Media, in pages, in the background; the page shows how many it has read. The old URL of each asset is the one Dynamic Media answered on (`/is/image/…` for images, `/is/content/…` for PDFs and SVGs), on the Dynamic Media host set in the app.
+4. Once all are read, the import opens at **Check** — there is no mapping to do — and runs like any other.
+
+The storefront you pick must answer from the internet without a password while the import runs: each original is fetched through it.
+
+Each original is taken from AEM itself, never the smaller copy Dynamic Media served. An old URL that an earlier import moved already (from a Dynamic Media CSV, say) is moved again with the AEM original: it keeps answering with the earlier file until the original is stored, and the earlier file stays in your Assetr library, for you to delete when you no longer need it.
 
 ### Problems, and what to do about each
 
