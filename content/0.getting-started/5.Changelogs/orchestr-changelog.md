@@ -14,6 +14,21 @@ sitemap:
 
 All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data-fetching and query orchestration layer, will be documented in this file.
 
+## [0.83.0] - 2026-11-11
+
+### Minor Changes
+
+- A typed error an action handler throws reaches the browser with its `code`. The auto-imported `actionErrorOf(error, ErrorClass)` tells a rejected `fetchAction` or `useMutationAction` apart by that code and returns the error's `data`:
+
+  ```ts
+  const invalid = actionErrorOf(error, InvalidFieldError);
+  if (invalid) showFieldError(invalid.data.field);
+  ```
+
+### Patch Changes
+
+- A component resolver's `notFound` report stands when it comes from the app whose query or link produced the id, even if another resolver returns that id, such as an add-on that looks data up by id alone. Before, a detail page for an entity deleted upstream answered 200 with an empty page. A resolver built with a connector's `define…` helpers counts as that connector, so it reports an id only when the entity itself is gone.
+
 ## [0.80.0] - 2026-11-04
 
 ### Minor Changes

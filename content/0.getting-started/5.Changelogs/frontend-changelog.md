@@ -14,6 +14,16 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.83.0] - 2026-11-11
+
+### Minor Changes
+
+- A storefront answers requests for unknown paths from a 404 page it rendered earlier by default; before, a project had to turn this on. A project whose 404 page differs per request, such as a page variant chosen per visitor, turns it off with `cachedNotFoundPage: false` in the project environment's config. `nuxt dev` leaves it off unless the config sets it to `true`.
+
+### Patch Changes
+
+- The Studio preview and the CORS check of `/api/laioutr/*` accept a Cockpit origin only when it matches exactly, so a page on an origin that merely contains one, such as `https://cockpit.laioutr.cloud.example.com`, cannot connect to a storefront's preview and send it content.
+
 ## [0.82.0] - 2026-11-09
 
 ### Minor Changes

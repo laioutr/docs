@@ -14,6 +14,21 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.38.0] - 2026-11-11
+
+### Minor Changes
+
+- The product review dialog tells the visitor what went wrong and keeps their text. `SectionProductReviews` shows a refusal under the field it concerns (a text below the shop's minimum length, a missing rating) or above the form for a second review of the same product, disabled reviews or an expired session. The success toast appears only once the review is saved, and the dialog cannot be dismissed while it is being saved.
+
+  **`ReviewForm` and `Review`:** both take a `submitHandler` that resolves to `{ success, message?, fieldErrors? }`, and the dialog stays open until it succeeds. Without one they emit `submit` as before, once a rating is chosen and neither text is blank. The `review.errors.*` strings are new in every locale.
+
+  **Breaking:** the section trusts the action's `success`. A connector that resolves `success: false` for a saved review, as `@laioutr/app-shopware` before 0.21.0 does, makes every review read as failed. Upgrade the connector first:
+
+  ```diff
+  - "@laioutr/app-shopware": "^0.20.0"
+  + "@laioutr/app-shopware": "^0.21.0"
+  ```
+
 ## [2.37.2] - 2026-11-08
 
 ### Patch Changes

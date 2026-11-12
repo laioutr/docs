@@ -14,6 +14,29 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-11-11]
+
+### Added
+
+- **Studio**: An applied agent change can be reverted from its card in the Operations Center.
+- **Studio**: An agent's proposed change shows what it changes, and a rejection can say why.
+- **Studio**: Larry reads and changes agents, runs and credit settings, and previews purchases.
+- **Studio**: Dismissed findings can be reopened, and "Run all analyses" says it is paid.
+- **Studio**: URL mapping's Configuration has "Old paths for new files", with a live preview per host, and a Reindex card.
+- **Studio**: A URL mapping host can add a query to every old URL a move fetches, and can pad presets to their box in white.
+
+### Changed
+
+- **Studio**: URL mapping answers old URLs by redirect; rewrite is offered only as a request to the Laioutr team.
+- **Studio**: Requests to the Laioutr team are confirmed before they are sent.
+- **Studio**: The SEO agent does not start, and costs nothing, where the storefront has no sitemap.
+
+### Fixed
+
+- **Studio**: Larry's confirmation cards name the agent again instead of its id.
+- **Studio**: The Marketplace's note on adopting agents shows only while one can be adopted.
+- **Studio**: Default agents are named in the reader's language everywhere in the Operations Center.
+
 ## [2026-11-10]
 
 ### Added
