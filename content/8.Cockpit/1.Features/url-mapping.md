@@ -1,18 +1,18 @@
 ---
 title: URL mapping
-description: Move the images and files of an old DAM such as Adobe Dynamic Media (Scene7) into Assetr from a CSV of old URLs, and keep every old address working after the old DAM is switched off.
+description: Move the images and files of an old DAM such as Adobe Dynamic Media (Scene7) into Assetr from a CSV of old URLs, keep every old address working after the old DAM is switched off, and give new uploads old-style addresses too.
 seo:
   title: URL mapping | Cockpit
 sitemap:
   loc: /cockpit/features/url-mapping
-  lastmod: 2026-11-06
+  lastmod: 2026-11-12
   changefreq: monthly
   priority: 0.8
 ---
 
 ## URL mapping
 
-**URL mapping** moves the images and files of an old DAM, such as Adobe Dynamic Media (Scene7), into the project's Assetr library, and keeps every old URL working on its old address once the old DAM is switched off. Links in old emails, marketplaces, PDFs and search results keep working. Open it from the project sidebar under **Assetr → URL mapping**.
+**URL mapping** moves the images and files of an old DAM, such as Adobe Dynamic Media (Scene7), into the project's Assetr library, and keeps every old URL working on its old address once the old DAM is switched off. Links in old emails, marketplaces, PDFs and search results keep working. Images uploaded to Assetr afterwards can answer on old-style addresses too. Open it from the project sidebar under **Assetr → URL mapping**, or go to [URL mapping](https://cockpit.laioutr.cloud/o/_/p/_/urlmapping).
 
 The old DAM keeps serving visitors until the DNS switch at the end, so nothing changes for the shop while the files move. The storefront, the shop and their stored URLs need no change.
 
@@ -24,7 +24,7 @@ The old DAM keeps serving visitors until the DNS switch at the end, so nothing c
 | 2 | Export every old asset URL into one CSV | Migration team | Before the start |
 | 3 | Upload the CSV, map its columns, review the check, start | Migration team | Any time; it runs in the background |
 | 4 | Work through the Problems tab until nothing needed is left | Migration team | While and after it runs |
-| 5 | Choose how old URLs answer (308 or rewrite) and check the presets | Project Manager or Owner | Before the switch |
+| 5 | Check the presets and, for new uploads, the old-path pattern | Project Manager or Owner | Before the switch |
 | 6 | Add the TXT record for the old host | Customer's DNS admin | A few days before the switch |
 | 7 | Point the old host's CNAME to Laioutr | Customer's DNS admin | Once the migration is complete, before the old DAM is switched off |
 
@@ -92,6 +92,8 @@ https://media.example.com/is/image/acme/31250100_02,Corner sofa from the side,so
 https://media.example.com/is/content/acme/803313 montage,,assembly instructions
 ```
 
+**Fetch the originals at full size.** Scene7 hands out a smaller copy (1280 px) of an image unless the URL asks for the original with `?scl=1`. Set Configuration → Moving files → **Fetch originals with** to `scl=1` before you start an import, and every file is fetched with it. Files moved before keep the copy they were moved with.
+
 **Before handing it over,** open a few rows in a browser. An image that answers 403 "Unable to find image" no longer exists on Adobe; it is reported as missing, not migrated.
 
 ### Run the import
@@ -129,24 +131,44 @@ Some old DAMs answer a missing image with 403 and a text instead of 404. Configu
 
 ### How old URLs answer
 
-On the **Configuration** tab, per old host:
+On the **Configuration** tab, for every old host of the project:
 
-| Setting | 308 redirect (default) | Rewrite |
+| Setting | 308 redirect (default) | Rewrite (on request) |
 | --- | --- | --- |
 | What the browser gets | A permanent redirect to the new file in Assetr | The file itself, on the old address |
 | Requests per image | Two | One |
 | Format | As stored | AVIF or WebP where the browser takes them, else JPEG |
 | Best for | Few images per page, or when the new address should become the known one | Pages with many images, such as category pages |
 
-SVG files, files that are no image and originals over 20 MB are always answered with a 308. **Browsers keep the answer for** 1 hour, 1 day (default) or 7 days; choose a short time while you test.
+Rewrite resizes every image on each call, which is charged per call, so it is switched on by Laioutr on request: press **Request rewrite** on its card, and the team gets back to you with what it would cost. Until then every old URL is answered with a 308. In rewrite mode, SVG files, files that are no image and originals over 20 MB are still answered with a 308. **Browsers keep the answer for** 1 hour, 1 day (default) or 7 days; choose a short time while you test.
 
 **Presets.** Scene7 sizes an image by a named preset in the query, wrapped in dollar signs: `?$sm$`, also written `?%24sm%24`, sometimes followed by other parameters (`?$sm$&cb=1`). The table comes filled with the common set, square at quality 85:
 
-| Preset | `$4xs$` | `$3xs$` | `$2xs$` | `$xs$` | `$sm$` | `$md$` | `$lg$` |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Size (px) | 36 | 72 | 100 | 140 | 280 | 480 | 780 |
+| Preset | `$4xs$` | `$3xs$` | `$2xs$` | `$xs$` | `$sm$` | `$md$` | `$lg$` | `$xl$` | `$2xl$` | `$3xl$` | `$4xl$` |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Size (px) | 36 | 72 | 100 | 140 | 280 | 480 | 780 | 1080 | 1420 | 1640 | 2160 |
 
 Presets found in your imports are listed with the size the old DAM gave them, and **Add** puts one into the table. Size parameters such as `?wid=280&hei=280` work too, in any order, once a preset of that name is added. A preset that is not configured answers the original image, and the **Log** lists every preset that was asked for and not configured.
+
+**Square images with white bars.** An image is fitted inside its preset: a 425 × 850 image asked as `$md$` (480 × 480) answers as 240 × 480. Old DAMs often padded it to the preset's full size instead. With **Pad images to the preset's full size in white** on, it answers as 480 × 480 with white bars, as Scene7 did; a transparent image is filled with white too. A padded preset enlarges a smaller file to fill the box, so fetch the originals at full size (above).
+
+### Old addresses for new uploads
+
+After the move, new images go straight into Assetr. With an **old-path pattern**, each new image also answers on an address in the old DAM's style, so a system that still builds old Scene7 links keeps finding new images. Set it up under Configuration → **Old paths for new files**:
+
+| Field | What it does | Example |
+| --- | --- | --- |
+| Pattern | The old path a file gets. `{name}` is the file name without its extension, `{ext}` the extension, `{folder}` the file's folders in Assetr. Empty: new files get no old address | `/is/image/acme/{name}` |
+| Library folder | `{folder}` counts from this Assetr folder, and only files inside it get an old address | `image` |
+| Write the path in lowercase | For an old DAM whose paths were all lowercase | `Photo.JPG` → `photo` |
+
+With `/is/image/acme/{name}`, an image `35029302_01.jpg` uploaded to Assetr answers on `https://media.example.com/is/image/acme/35029302_01`, with every preset (`?$md$` …) and the same answer as the migrated images. While you type, the files of your library show the old address each would get, and every old host says whether the pattern reaches its paths.
+
+- **New uploads get their address within ten minutes**, by themselves. **Test a URL** shows it as soon as it is there.
+- **Same name, newer file wins.** An address that failed or was marked gone takes the uploaded file; a migrated one is taken over only by a file uploaded later.
+- **Imports follow the pattern too.** Saved before an import starts, a pattern with `{folder}` stores each moved file in the Assetr folder its old path names (`/is/image/acme/x` → `image/acme`) instead of `Migrated/<file name> <date>`.
+
+**Reindex** (at the bottom of the Configuration tab) gives every file already in the library the address of the saved pattern, and takes down the address of a file deleted from the library. It reads the whole library, so it asks before it runs and is meant for mass changes only: once after the pattern is first saved, after changing it, or after deleting many files. New uploads never need it. An address the pattern no longer gives keeps answering, so a link that works never breaks. The addresses of uploaded files are listed as an import of their own, **Uploaded in Assetr**.
 
 ### Switch the DNS
 
@@ -166,7 +188,8 @@ Browsers and CDNs may keep images from the old DAM for as long as its cache head
 - [ ] Every source of old URLs is in an import: DAM export, shop product data, CMS pages, emails and PDFs.
 - [ ] Overview shows the migration complete; Problems holds nothing that is still needed.
 - [ ] The presets the old URLs ask for are in the table, at the right sizes.
-- [ ] The answer mode is chosen: 308 or rewrite.
+- [ ] The answer mode is settled: 308, or rewrite after a request to Laioutr.
+- [ ] If new uploads should keep old-style addresses: the pattern is saved, the preview shows the right addresses, and Reindex ran once.
 - [ ] The TXT record is added and the host shows **TXT verified**.
 - [ ] **Test a URL** (in the page's header) answers as expected for one URL per preset: right file, right size, right type.
 
