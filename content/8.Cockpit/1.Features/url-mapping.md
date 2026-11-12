@@ -113,7 +113,7 @@ A file migrated once is never moved again, except by an [AEM import](#from-adobe
 
 If your old DAM is AEM with Dynamic Media (Scene7), Laioutr reads the assets from AEM itself — no CSV.
 
-1. Install the [Adobe Experience Manager](/apps/app-docs/aem) app on an environment of the project, fill in its settings (an access token, or OAuth Server-to-Server keys) and deploy it.
+1. Install the [Adobe Experience Manager](/apps/app-docs/aem) app on an environment of the project, fill in its settings under the environment's **Configuration** (an access token, or OAuth Server-to-Server keys; **Test connection** checks them) and deploy it.
 2. In URL mapping, open **New import**, choose **AEM** under From, pick the environment and press **Read assets from AEM**.
 3. Laioutr reads every asset AEM published to Dynamic Media, in pages, in the background; the page shows how many it has read. The old URL of each asset is the one Dynamic Media answered on (`/is/image/…` for images, `/is/content/…` for PDFs and SVGs), on the Dynamic Media host set in the app.
 4. Once all are read, the import opens at **Check** — there is no mapping to do — and runs like any other.
