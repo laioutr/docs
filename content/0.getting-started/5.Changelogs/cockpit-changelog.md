@@ -14,6 +14,18 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-11-12]
+
+### Added
+
+- **Studio**: Customers cancel a calendar booking themselves from the link in their emails.
+- **Studio**: URL mapping can import from AEM through the AEM connector app on the project's storefront, with no CSV.
+- **Studio**: A URL mapping host can fit images asked without a preset to a default size, give files that are no resizable image (PDFs, SVGs) their own pattern for old paths, and clean file names as Adobe Scene7 named assets.
+
+### Fixed
+
+- **Studio**: A feed's Fallback values and its SKU-based ids are now kept when its mapping is saved.
+
 ## [2026-11-11]
 
 ### Added

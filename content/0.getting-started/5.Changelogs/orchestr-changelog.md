@@ -14,6 +14,14 @@ sitemap:
 
 All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data-fetching and query orchestration layer, will be documented in this file.
 
+## [0.84.0] - 2026-11-12
+
+### Minor Changes
+
+- `isActionAvailable(token)` tells a component, without a request, whether this deployment serves an action: a handler implements it, the project's provider config leaves it on, and the handler can run with its configuration. Use it to hide a control whose action would only answer 501. On a page the server did not render, every action counts as available.
+
+  **`isAvailable` on an action handler:** the options of `actionHandler`, beside `order`, take `isAvailable: () => boolean`, for a handler that needs configuration a deployment may lack, such as a credential. It reads configuration only, never the request. While it answers `false`, `isActionAvailable` answers `false` and a call answers 501 with `data.reason: 'handler-unavailable'`. No other app's handler takes over unless the request names that app.
+
 ## [0.83.0] - 2026-11-11
 
 ### Minor Changes

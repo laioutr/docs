@@ -14,6 +14,14 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.39.0] - 2026-11-12
+
+### Minor Changes
+
+- `SectionProductReviews` shows the logged-in customer's own review of the product under "Your review", marked while it waits for approval, and edits it in the review dialog. It reads the review where the connector serves `GetOwnReviewAction`, and edits it where the connector serves `UpdateOwnReviewAction`. Without them the section works as before. When a new review is refused as a second one, the section shows the first, and where it can be edited, the next submit of the open form replaces it.
+
+  **`Review`, `ReviewForm` and `ReviewItem`:** `Review` takes an `ownReview` and an `updateHandler` that saves it, as `submitHandler` saves a new one. With an `ownReview` and no `updateHandler`, it shows the review and withholds the write button. `ReviewForm` starts from a `summary` and a `quote`, and takes a `submitLabel`. `ReviewItem` can leave out `author` and `date`. Seven `review.*` strings are new in every locale.
+
 ## [2.38.0] - 2026-11-11
 
 ### Minor Changes
