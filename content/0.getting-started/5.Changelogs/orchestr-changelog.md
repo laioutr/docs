@@ -14,6 +14,31 @@ sitemap:
 
 All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data-fetching and query orchestration layer, will be documented in this file.
 
+## [0.86.0] - 2026-11-14
+
+### Minor Changes
+
+- A query result is plain data again: it passes through the payload, `structuredClone` and `JSON.stringify` unchanged. Its metadata is a record on the entity set, and the auto-imported `queryMetaOf(entitySet, Token)` reads one value with its token's type.
+
+  **Breaking:** `entitySet.meta(Token)` is gone. As a function on every result, it made a page that put a result into its payload answer 500.
+
+  ```ts
+  // before
+  const resultId = products.meta(QueryResultId);
+  // after
+  const resultId = queryMetaOf(products, QueryResultId);
+  ```
+
+### Patch Changes
+
+- A value read from the orchestr cache keeps its `Date`s. A cache hit gave an ISO string where a miss gave a `Date` (for example `createdAt` of `ReviewBase`), so code that called a `Date` method on it failed only once the value was cached. This holds for every cached value, `useCache` included. Entries an earlier version wrote (before the upgrade, or during a rolling deploy) keep their strings until they are next refreshed.
+
+## [0.85.0] - 2026-11-13
+
+### Minor Changes
+
+- A query handler can return typed metadata with its answer. Define a token with `defineQueryMetaToken` and its `audience`, return `meta: { [Token]: value }` beside the ids, and read it in a component with `entitySet.meta(Token)`. In development, orchestr checks each value against the token's schema and leaves out a value the schema refuses. Production skips the check, and the page gets each value as the handler returned it. A value of an `audience: 'visitor'` token never reaches a shared cache: orchestr's query cache, and a page rendered for a shared cache, get the answer without it. An `audience: 'shared'` value is the same for everyone, and caches keep it.
+
 ## [0.84.0] - 2026-11-12
 
 ### Minor Changes

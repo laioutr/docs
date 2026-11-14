@@ -14,6 +14,18 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.86.0] - 2026-11-14
+
+### Patch Changes
+
+- A page whose subject is gone renders its replacement page again when one of that page's sections reads a query, such as a 404 page with a product slider. Since 0.85.0 such a request answered 500 with `DevalueError: Cannot stringify a function`.
+
+## [0.85.0] - 2026-11-13
+
+### Minor Changes
+
+- A query handler can return typed metadata with its answer. Define a token with `defineQueryMetaToken` and its `audience`, return `meta: { [Token]: value }` beside the ids, and read it in a component with `entitySet.meta(Token)`. In development, orchestr checks each value against the token's schema and leaves out a value the schema refuses. Production skips the check, and the page gets each value as the handler returned it. A value of an `audience: 'visitor'` token never reaches a shared cache: orchestr's query cache, and a page rendered for a shared cache, get the answer without it. An `audience: 'shared'` value is the same for everyone, and caches keep it.
+
 ## [0.83.0] - 2026-11-11
 
 ### Minor Changes

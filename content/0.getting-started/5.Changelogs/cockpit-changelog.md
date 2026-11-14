@@ -14,6 +14,28 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-11-13]
+
+### Added
+
+- **Studio**: Where an environment runs Instant Publish, Studio edits go live on its storefront without a deployment.
+- **Studio**: Where an environment runs Instant Publish, Studio's top bar shows which version its storefront serves now and offers Publish now, which shows what the storefront answered.
+- **Studio**: URL mapping's Problems offers "Take originals from AEM", which looks up each failed old URL's file in AEM and opens an import of the originals found.
+- **Studio**: URL mapping's Log shows each AEM reading's start, failures, missing originals, end and stop.
+- **Studio**: With more than one import, URL mapping's Overview shows all of the project's old URLs and a table of every import with what its own run moved and failed.
+
+### Changed
+
+- **Studio**: URL mapping asks for confirmation before Read assets from AEM, Start migration, Retry, Mark as gone and requests to the Laioutr team.
+
+### Fixed
+
+- **Studio**: The Studio preview keeps one size instead of switching between two.
+- **Studio**: An AEM import that is still reading shows on URL mapping's Overview and Import.
+- **Studio**: A finished AEM import no longer shows "Checking" with nothing read.
+- **Studio**: The environment's Configuration page names apps by their catalog titles, as Package Management and the Apps page do.
+- **Studio**: Studio MCP tools no longer suggest the image provider `raw`, which no storefront registers.
+
 ## [2026-11-12]
 
 ### Added
