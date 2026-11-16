@@ -14,6 +14,18 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-11-16]
+
+### Added
+
+- **Studio**: URL mapping's Configuration offers "Assets not published on Dynamic Media": skip them (the default) or bring their originals. The Check says how many were skipped and links to the setting.
+- **Studio**: URL mapping's AEM card offers "Only replace the originals of the files already migrated", ticked once the project has migrated files.
+- **Studio**: Where the platform allows it, URL mapping's Overview lists originals the library does not take with what they risk, copies them into the project's archive on request, and lets each copy be downloaded or deleted.
+
+### Changed
+
+- **Studio**: Where an environment's storefront runs Instant Publish, saving in Studio no longer sends content to the storefront; Studio's Publish puts the content live in seconds and shows the storefront's answer. Everywhere else, Publish deploys. Publishing this way needs the role a deployment needs.
+
 ## [2026-11-13]
 
 ### Added
