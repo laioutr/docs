@@ -112,7 +112,7 @@ In URL mapping, **New import → From: AEM** reads the assets through the app, i
 - **The file** is the original stored in AEM, never the smaller copy Dynamic Media served.
 - An old URL that an earlier import moved already (from a Dynamic Media CSV, say) is moved again with the AEM original. It keeps answering with the earlier file until the original is stored; the earlier file stays in your Assetr library.
 
-Assets AEM never published to Dynamic Media have no old URL to keep, and are not imported.
+Assets AEM never published to Dynamic Media have no old URL to keep, and are not imported. Assets published once and taken off Dynamic Media later keep their Dynamic Media file name; URL mapping skips them unless its Configuration says to bring their originals too ([details](/cockpit/features/url-mapping#from-adobe-experience-manager)).
 
 ## Security
 
@@ -176,6 +176,7 @@ The app offers AEM's assets as source entities of type **`Asset`** through front
 | `size` | The original's size in bytes. |
 | `modifiedAt` | When the asset last changed. |
 | `scene7File` | The Dynamic Media file it was published as (`dam:scene7File`). |
+| `published` | Whether Dynamic Media publishes it now: `true` while `dam:scene7FileStatus` is `PublishComplete`, `false` for an asset taken off it — or with no status — which keeps its file name. Absent for an asset never published there. |
 | `oldUrl` | Its Dynamic Media URL on `mediaHost`. |
 | `originalUrl` | The signed link its original is served on (`/api/aem/original/<token>`). |
 | `title`, `description`, `tags` | Its metadata in AEM. |

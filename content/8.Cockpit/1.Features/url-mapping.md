@@ -114,9 +114,16 @@ A file migrated once is never moved again, except by an [AEM import](#from-adobe
 If your old DAM is AEM with Dynamic Media (Scene7), Laioutr reads the assets from AEM itself — no CSV.
 
 1. Install the [Adobe Experience Manager](/apps/app-docs/aem) app on an environment of the project, fill in its settings under the environment's **Configuration** (an access token, or OAuth Server-to-Server keys; **Test connection** checks them) and deploy it.
-2. In URL mapping, open **New import**, choose **AEM** under From, pick the environment and press **Read assets from AEM**.
+2. In URL mapping, open **New import**, choose **AEM** under From, pick the environment and press **Read assets from AEM**. When the project has migrated files already (from a CSV, say), **Only replace the originals of the files already migrated** is ticked: the import then brings only the originals of those old URLs and leaves every other asset AEM has out.
 3. Laioutr reads every asset AEM published to Dynamic Media, in pages, in the background; the page shows how many it has read. The old URL of each asset is the one Dynamic Media answered on (`/is/image/…` for images, `/is/content/…` for PDFs and SVGs), on the Dynamic Media host set in the app.
 4. Once all are read, the import opens at **Check** — there is no mapping to do — and runs like any other.
+
+**Assets taken off Dynamic Media.** AEM keeps assets that were published to Dynamic Media once and taken off it later, and they keep their Dynamic Media file name — often tens of thousands of them. Configuration → **Assets not published on Dynamic Media** decides what happens to them:
+
+- **Skip them** (the default): they are not imported or moved. The Check says how many were skipped and why.
+- **Bring their originals into the library**: their originals are moved into Assetr too, but their old URLs keep answering 404, as they did on Dynamic Media — nothing taken off becomes public again.
+
+Read AEM again after changing it: the next import follows the new choice.
 
 The storefront you pick must answer from the internet without a password while the import runs: each original is fetched through it.
 
@@ -136,7 +143,10 @@ The **Problems** tab groups failed files by reason. **Retry all that can be retr
 | Old URL redirected | Redirects are never followed. | Put the final URL into the CSV and import it again. |
 | Too large | Over Assetr's 100 MB per file. | Upload a smaller version by hand, or import the URL of a smaller rendition. |
 | Type not accepted | Assetr does not take this type of file. | Import the URL of an accepted rendition. |
+| Not published on the old host any more | The old host refused the old URL (403, 404 or 410), so the file was taken off there. Shown as gone. | Nothing; import it by hand if it is needed after all. |
 | Assetr refused the file, or the new URL did not answer | Storing or its check failed on Laioutr's side. | Retry; if it stays, report it to Laioutr. |
+
+**Originals the library does not take.** When an AEM import meets an original Assetr does not take (TIFF, InDesign, or one over 100 MB), the old URL keeps answering with the web image moved before, and the original is listed on the Overview with what it risks: it exists only in AEM, and is gone once AEM is switched off. Where Laioutr has enabled it for your organization, **Copy these originals** copies them in the background into your project's archive in Laioutr's EU storage — outside the library — where each can be downloaded or deleted again.
 
 **Gone** means the file does not exist any more and is not needed. A gone URL answers 404 on purpose, and the migration counts as complete without it. If the file turns up later, import its URL again.
 
