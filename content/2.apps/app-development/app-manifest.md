@@ -98,7 +98,7 @@ The manifest is a JSON object. Today it has one key, `configSettings`.
 
 ::field-group{title="A field"}
   :::field{name="name" type="string" :required="true"}
-  The module option the value is stored under. Unique across **all** sections of the manifest, because your module receives one flat options object.
+  The module option the value is stored under. A top-level field's name is unique across **all** sections of the manifest, because your module receives one options object; a field inside an `object` has a name unique across that object's fieldsets. A name holds no `.` and does not start with `$`.
   :::
 
   :::field{name="type" type="string" :required="true"}
@@ -129,6 +129,10 @@ The manifest is a JSON object. Today it has one key, `configSettings`.
   The choices of a `select`, `radio` or `toggle_button`. At least one for `select` and `radio`.
   :::
 
+  :::field{name="schema" type="{ label?: string; description?: string; fields: Field[] }[]"}
+  The fieldsets of an `object`, as in a section definition. Their fields are the keys of the object; the fieldsets only group them on screen. At least one fieldset with at least one field. See [Grouped options](#grouped-options).
+  :::
+
   :::field{name="minLength / maxLength" type="number"}
   Length limits for text values.
   :::
@@ -156,52 +160,70 @@ Mark a field `required` only when your module cannot start without it. A require
 | `checkbox` | A checkbox | `boolean` |
 | `secret` | A password input. Stored encrypted; afterwards shown as bullets plus its last four characters (only for values of 20 characters or more), never in full | `string` |
 | `info` | A notice with `label` and `description`, no input | nothing |
+| `toggle_button` | A dropdown of `options` | the chosen option's `value` |
+| `object` | Its fields under its label, each shown for its type; only its `secret` fields are stored encrypted | an object of its fields' values |
 | `json` | A JSON text area, shown again as formatted JSON | the object |
 | `json` with `"secret": true` | A JSON text area. Stored encrypted as one value; afterwards shown only as set | the object |
-| `richtext`, `array`, `object` | A note that the Cockpit cannot edit this type yet. A stored value is kept as it is | whatever is stored |
-
-The validator also accepts `toggle_button`. Do not use it for app settings yet: use `checkbox` for an on/off value and `select` or `radio` for a choice.
+| `richtext`, `array` | A note that the Cockpit cannot edit this type yet. A stored value is kept as it is | whatever is stored |
 
 An empty optional field is removed from the stored settings, so your module sees the option as not set and applies its own default.
 
-## JSON groups
+## Grouped options
 
 Some modules read a group of options as one object:
 
 ```ts [src/module.ts]
 export interface ModuleOptions {
-  search?: { appId: string; adminApiKey: string };
+  kioskApi?: { url: string; token: string };
 }
 ```
 
-Declare such a group as one `json` field. The customer types the whole object as JSON, and your module receives the same object it always read.
+Declare such a group as an `object` field, as a section or block definition declares one: its `schema` holds fieldsets, and their fields are the keys of the object. An object may hold another object, to any depth.
 
 ```json [laioutr.manifest.json]
 {
-  "name": "search",
-  "type": "json",
-  "secret": true,
-  "label": "Search credentials",
-  "placeholder": "{ \"appId\": \"...\", \"adminApiKey\": \"...\" }"
+  "name": "kioskApi",
+  "type": "object",
+  "label": "Kiosk API",
+  "schema": [
+    {
+      "fields": [
+        { "name": "url", "type": "text", "label": "URL", "placeholder": "https://kiosk.example.com" },
+        { "name": "token", "type": "secret", "label": "Token" }
+      ]
+    }
+  ]
 }
 ```
 
-A group comes in two kinds:
+Each field inside the object is shown, checked and stored as it would be at the top level. The customer sees and edits the URL; only the token is stored encrypted and shown as bullets plus its last four characters. Your module receives `kioskApi: { url, token }`, the same object it always read. When every field of an object is empty, your module receives no `kioskApi` at all.
 
-- **Open** (`"type": "json"`): stored as it was typed and shown again as formatted JSON. Use it for settings that hold no credential.
-- **Sealed** (`"type": "json"`, `"secret": true`): stored encrypted as one value and shown only as set, never any part of it, not even its last characters. To change one value inside it, the customer pastes the whole group again. Declare any group that holds a credential as sealed.
+- Mark the secret fields **inside** the object `secret`. An object itself cannot be `secret`.
+- `required` counts on the fields inside an object, not on the object.
+- A connection test fills placeholders from top-level text and number fields only, so a field inside an object cannot be one.
+- Read without secrets — `laioutr rc fetch` for a local run — the object arrives without its secret fields, as a top-level secret is left out too. A module that checks for `kioskApi` and then uses its token gets no token there.
 
-Prefer **flat fields** when you can choose. A flat field gets its own label, validation and help text, a `secret` shows its last four characters so a customer can tell which token is stored, and a connection test can use it as a placeholder. A JSON group gets none of that: the Cockpit only checks that the text is a JSON object, and a test never sees a value inside a group. Reach for a group only when your module already reads its options that way and changing the module is not an option.
+### JSON groups
+
+A group can also be one `json` field, which the customer types as a whole, as JSON text:
+
+- **Open** (`"type": "json"`): stored as it was typed and shown again as formatted JSON.
+- **Sealed** (`"type": "json"`, `"secret": true`): stored encrypted as one value and shown only as set, never any part of it, not even its last characters. To change one value inside it, the customer pastes the whole group again.
+
+Prefer an `object` when you can choose. Each of its fields gets its own label, validation and help text, and a customer can still read the values that are no secret. A JSON group gets none of that: the Cockpit only checks that the text is JSON.
+
+An app that declared a sealed JSON group can declare it as an `object` in its next version. The Cockpit then shows the stored group field by field, and its next save stores each field on its own, so nobody types a value again. A key of the stored group that the object does not declare stays encrypted. An environment that moves back to a version with the sealed group keeps working with what is stored.
 
 ## Validation rules
 
 A manifest that breaks a rule gives the app no settings form; publishing still succeeds. The rules:
 
 - `configSettings.sections` has at least one section, and each section has at least one field.
-- Every field has a `name`, unique across all sections. `__proto__`, `constructor` and `prototype` are not allowed.
+- Every field has a `name`, unique across all sections, or for a field inside an `object` across that object's fieldsets. `__proto__`, `constructor` and `prototype` are not allowed, a name holds no `.`, and it does not start with `$`, which the Cockpit keeps for stored secrets.
 - Every `type` is one of the field types above.
 - A `secret` field has no `default`.
 - A `select` or `radio` field has at least one option.
+- An `object` has a `schema` with at least one fieldset that has fields, and is not `secret`. Every field inside it follows these rules too, at any depth.
 - `placement`, wherever it appears, is one of `environment`, `project`, `organization`, `studio`.
 - A section with a `test` has a `label`, and no other section with a test has the same label.
 - A test follows the rules in [Connection tests](#connection-tests).
