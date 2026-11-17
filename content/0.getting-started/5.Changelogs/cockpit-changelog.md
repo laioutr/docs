@@ -26,6 +26,11 @@ All notable changes to **Cockpit (Studio)** — the visual editor and project ma
 
 - **Studio**: Where an environment's storefront runs Instant Publish, saving in Studio no longer sends content to the storefront; Studio's Publish puts the content live in seconds and shows the storefront's answer. Everywhere else, Publish deploys. Publishing this way needs the role a deployment needs.
 
+### Fixed
+
+- **Hosting**: After an Instant Publish that changed content, the storefront's pages kept at the edge are cleared, so they no longer stay old until the cache expires or a deployment purges it. If the hosting refuses, Studio shows a warning.
+- **Hosting**: Instant Publish keeps the published version in a publish service, so a storefront that loses its cached copy reads it from there instead of silently falling back to the build.
+
 ## [2026-11-13]
 
 ### Added
