@@ -996,7 +996,7 @@ The style object is passed as a separate prop. Apply it in your template:
 ::since-version{version="0.30.0" packages="@laioutr-core/frontend-core" changelog="frontend"}
 ::
 
-Both fieldsets and individual fields accept an optional `if` property: a JSON expression that controls whether the fieldset or field is shown in the Studio sidebar. When the expression evaluates to a falsy value, Studio hides the control. The configured value is **not** removed from storage and the prop is still passed to your component at render time. Only the sidebar control disappears.
+Both fieldsets and individual fields accept an optional `if` property: a JSON expression that controls whether the fieldset or field is shown in the Studio sidebar. Studio shows the control when the expression's value is true: present and not `false`. `0` and `''` are true, while `false` and an absent value hide the control. The configured value is **not** removed from storage and the prop is still passed to your component at render time. Only the sidebar control disappears.
 
 ```ts
 {
@@ -1028,10 +1028,10 @@ The expression evaluates against an **unwrapped** view of the section or block v
 - `text`, `textarea`, `richtext`: the active locale's string.
 - `checkbox`: a boolean.
 - `select`, `radio`, `toggle_button`: the option's string value.
-- `number`: a number, or `undefined` when unset.
-- `icon`: the icon name string, or `undefined`.
-- `color`, `link`, `media`: the same plain object your component receives (`ColorFieldValue`, `Link`, `MediaImage | MediaVideo`).
-- `json`: the parsed JSON value or `null`.
+- `number`: a number, or absent when unset.
+- `icon`: the icon name string, or absent when unset.
+- `color`, `link`, `media`: the same plain object your component receives (`ColorFieldValue`, `Link`, `MediaImage | MediaVideo`), or absent when unset.
+- `json`: the parsed JSON value. `null` reads as absent.
 - `object`: a plain object whose keys are the nested field names, unwrapped recursively.
 - `array`: an array of unwrapped item objects (without the `id` property the component receives).
 
@@ -1039,7 +1039,7 @@ One case is different from the prop value:
 
 - `query`: the expression sees the **query reference**, not the resolved data. The shape is `{ type: 'entity-set', queryId, link?, limit? }`. At render time, your component instead receives the [Orchestr](/frontend/orchestr/queries)-resolved `ClientEntitySet` or `ClientEntity`. `if` expressions on `query` fields can therefore test whether a query is configured, but cannot inspect entity data.
 
-Missing entries fall back to the per-type runtime fallback documented in [Default values and runtime fallbacks](#default-values-and-runtime-fallbacks). You can rely on stable values in `if` expressions even when a field was added to the schema after the section was placed on a page. The expression language has no `undefined` literal; for the field types whose fallback is `undefined` (`number`, `icon`, `media`, `link`, `query`, `color`), test "is unset" with `['!', ['get', 'x']]` (`!` is JS truthy coercion) or compare against the fallback documented for the field's type.
+Missing entries fall back to the per-type runtime fallback documented in [Default values and runtime fallbacks](#default-values-and-runtime-fallbacks). You can rely on stable values in `if` expressions even when a field was added to the schema after the section was placed on a page. A fallback of `undefined` or `null` reads as absent. Reading a field without a value gives absent, never an error, and a comparison with an absent value is `false`. To test whether a field is set, use `exists` or `empty`, as shown in [Canonical "unset" checks per field type](#canonical-unset-checks-per-field-type).
 
 ### Path syntax
 
@@ -1066,12 +1066,17 @@ if: ['get', 'showProductAmount']
 // Negation
 if: ['!=', ['get', 'background'], 'none']
 
-// Truthy check; meaningful "is set" only for fields whose unset fallback is falsy
-if: ['bool', ['get', 'icon']]
+// A text that is not empty
+if: ['!', ['empty', ['get', 'heading']]]
+
+// An optional field that has a value
+if: ['exists', 'icon']
 
 // Set membership; `[[…]]` is the literal-array escape
 if: ['in', [['basic', 'compact']], ['get', 'variant']]
 ```
+
+A bare `get` of a text field is true even when the text is empty, because `''` is present. Test text with `empty`.
 
 ### Canonical "unset" checks per field type
 
@@ -1079,39 +1084,46 @@ The expression engine always sees the per-type fallback when a field has no conf
 
 | Field type                                          | Fallback     | Canonical "unset" check                  |
 | --------------------------------------------------- | ------------ | ---------------------------------------- |
-| `text`, `textarea`, `richtext`                      | `''`         | `['!', ['get', 'x']]`                    |
+| `text`, `textarea`, `richtext`                      | `''`         | `['empty', ['get', 'x']]`                |
 | `checkbox`                                          | `false`      | `['!', ['get', 'x']]`                    |
 | `select`, `radio`, `toggle_button`                  | First option | `['==', ['get', 'x'], '<first option>']` |
-| `array`                                             | `[]`         | `['==', ['get', 'x'], [[]]]`             |
-| `json`                                              | `null`       | `['==', ['get', 'x'], null]`             |
-| `number`, `icon`, `media`, `link`, `query`, `color` | `undefined`  | `['!', ['get', 'x']]`                    |
+| `array`                                             | `[]`         | `['empty', ['get', 'x']]`                |
+| `json`                                              | `null`       | `['!', ['exists', 'x']]`                 |
+| `number`, `icon`, `media`, `link`, `query`, `color` | `undefined`  | `['!', ['exists', 'x']]`                 |
 
-`['bool', ['get', 'x']]` is the explicit form of "is `x` truthy". At `if`-toplevel it's equivalent to the bare `['get', 'x']` because the engine coerces the result to a boolean either way; the explicit form is useful when you need a true `true`/`false` value inside a larger expression. As a truthy-based "is set" check it answers correctly for every field type except `select`/`radio`/`toggle_button` and `array`, whose fallbacks are truthy.
+`exists` takes a path and is true when the value there is present; `0`, `false` and `''` are present. `empty` takes a value and is true for absent, `''` and `[]`. `!` is true for absent and `false`, so it is an "unset" check for a checkbox, but not for text or an array: `''` and `[]` are present.
 
 ### Available operators
 
-Studio registers `defaultOperators` plus the `array` and `type` operator bundles from [`@laioutr/expression`](https://www.npmjs.com/package/@laioutr/expression). See the package's [Operators section](https://www.npmjs.com/package/@laioutr/expression#operators) for each operator's aliases, operand counts, and semantics, and the [Evaluation rules](https://www.npmjs.com/package/@laioutr/expression#evaluation-rules) section for how the engine interprets array and literal forms.
+Studio evaluates `if` with the `core` operator bundle of [`@laioutr/expression`](https://www.npmjs.com/package/@laioutr/expression) (`@laioutr/expression/operators/core`). `@laioutr-core/core-types` types `if` as `SchemaCondition` against the same bundle, so TypeScript refuses an operator outside it. See the package's [Operators section](https://www.npmjs.com/package/@laioutr/expression#operators) for each operator's aliases, operand counts, and semantics, and the [Evaluation rules](https://www.npmjs.com/package/@laioutr/expression#evaluation-rules) section for how the engine interprets array and literal forms.
 
 Aliases in parentheses.
 
-| Category   | Operators                                                                  |
-| ---------- | -------------------------------------------------------------------------- |
-| Input      | `get` (`$`), `get?` (`$?`), `?get` (`?$`)                                  |
-| Logical    | `and` (`&&`), `or` (`\|\|`), `not` (`!`), `coalesce` (`??`)                |
-| Comparison | `eq` (`==`), `ne` (`!=`), `gt` (`>`), `ge` (`>=`), `lt` (`<`), `le` (`<=`) |
-| Branching  | `if` (`?`), `cond`                                                         |
-| Container  | `len`, `member` (`[]`)                                                     |
-| Array      | `in`, `arr-of`, `slice`, `join`, `map`                                     |
-| Type       | `bool`, `num`, `str`, `type`                                               |
+| Category    | Operators                                                                                                                                 |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Input       | `get` (`$`)                                                                                                                               |
+| Presence    | `exists`, `empty`                                                                                                                         |
+| Logical     | `and` (`&&`), `or` (`\|\|`), `not` (`!`), `coalesce` (`??`)                                                                               |
+| Comparison  | `eq` (`==`), `ne` (`!=`), `gt` (`>`), `ge` (`>=`), `lt` (`<`), `le` (`<=`)                                                                |
+| Branching   | `if` (`?`), `cond`                                                                                                                        |
+| Container   | `len`                                                                                                                                     |
+| Arithmetic  | `add` (`+`), `subtract` (`-`), `multiply` (`*`), `divide` (`/`), `mod` (`%`), `least`, `greatest`, `round`, `floor`, `ceil`, `trunc`       |
+| Text        | `contains`, `starts`, `ends`, `eq-ci`, `contains-ci`, `starts-ci`, `ends-ci`, `in-ci`, `lower`, `upper`                                   |
+| Array       | `in`                                                                                                                                      |
+| Collections | `any`, `all`, `none`, `count`, `sum`, `min`, `max`                                                                                        |
+| Time        | `now`, `ago`, `since`, `duration`, `within`                                                                                               |
+| Conversion  | `to-number`, `to-text`, `to-instant`                                                                                                      |
 
-`bool` (`!!x`) is plain JavaScript truthy coercion. See the note above the per-type fallbacks table for which fields it gives a meaningful "is set" answer for.
+`==` never converts between types: `['==', ['get', 'count'], '1']` is `false` for the number `1`. Test an array with `empty`, `len` or `in` rather than comparing it with `==`.
+
+Studio passes no clock to `if`: `now` is absent in the sidebar, so a condition that reads the current time hides the control.
 
 ::warning
-A raw array inside an expression is interpreted by the engine, not used as data: `[]` resolves to `undefined`, `[x]` resolves to `x` (the literal escape), `[op, …]` is an operator call. There is no `undefined` literal. To pass a literal array as data, wrap it in an extra `[…]` (e.g. `[[1, 2, 3]]`) or build it with `arr-of`.
+A raw array inside an expression is interpreted by the engine, not used as data: `[]` is absent, `[x]` is the literal `x`, and `[op, …]` is an operator call. To pass a literal array as data, wrap it in an extra `[…]` (e.g. `[[1, 2, 3]]`).
 ::
 
 ::tip
-The `if` expression is **fail-open**: any thrown error (typo, missing path, malformed shape) returns `true` and logs a warning to the Studio browser console. A shown-but-broken control is loud, but a silently-hidden control would be invisible. Don't rely on `if` for security since it's a sidebar UX optimization, not a render-time guard.
+The `if` expression is **fail-open**: an expression that cannot run (an unknown operator, a wrong number of operands) shows the control and logs a warning to the Studio browser console. A shown-but-broken control is loud, but a silently-hidden control would be invisible. A missing path is not an error: it reads as absent. Don't rely on `if` for security since it's a sidebar UX optimization, not a render-time guard.
 ::
 
 ### Relationship to visibility decorators
