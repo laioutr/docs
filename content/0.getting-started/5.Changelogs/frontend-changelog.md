@@ -14,6 +14,12 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.86.1] - 2026-11-17
+
+### Patch Changes
+
+- The trailing-slash and project redirects send a `Location` a header can carry. Since h3 1.15.8 `event.path` arrives decoded: `/kolekcje/łyżwy/` answered 500 instead of 301, `/collections/café/` redirected to a garbled path, and an encoded `#` or `?` ended the path early. The trailing-slash redirect now builds its target from `getRequestURL`, the URL as the request sent it. A project redirect's target goes through the URL parser, so a target such as `/wyprzedaż`, which answered 500 on every h3 version, is sent percent-encoded.
+
 ## [0.86.0] - 2026-11-14
 
 ### Patch Changes

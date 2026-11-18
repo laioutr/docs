@@ -14,6 +14,25 @@ sitemap:
 
 All notable changes to **Cockpit (Studio)** — the visual editor and project management UI — will be documented in this file.
 
+## [2026-11-17]
+
+### Added
+
+- **Studio**: A project holding a size of a product can buy any of that product's sizes once as extra volume for the month, at its monthly price, by card through Checkout or by the invoice shown first. Owners are told when the paid volume is added.
+- **Studio**: Translatr statistics and Image CDN traffic offer Add volume once 80 % of a monthly limit is used; it opens the sizes on sale once for this month.
+- **Studio**: URL mapping imports that move files can be stopped and resumed, each behind a confirmation; a stopped import shows its progress and offers Retry.
+
+### Changed
+
+- **Studio**: Grouped app settings show each value as its own field; only secrets stay hidden.
+- **Studio**: A replacing URL mapping import says on its Check step and in its Start confirmation that each original takes the old file's folder and name, and that the old file stays in the library next to it.
+- **Studio**: The bookings CSV adds the customer's address, their message and one column per field of the booking form, headed by the field's label. The nine existing columns keep their order.
+- **Studio**: A reply sent from the platform inbox to a feedback report can be corrected by its author; the project sees the corrected reply.
+
+### Fixed
+
+- **Studio**: Google Shopping feeds name each variant in its title and link straight to it.
+
 ## [2026-11-16]
 
 ### Added

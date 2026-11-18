@@ -14,6 +14,28 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.40.1] - 2026-11-14
+
+### Patch Changes
+
+- The product slider and the product listing read their answer's result id with `queryMetaOf`, so this version needs `@laioutr-core/orchestr` 0.86.0 or later.
+
+## [2.40.0] - 2026-11-13
+
+### Minor Changes
+
+- `ViewSearchResults`, `ViewItemList` and `SelectItem` carry an optional `resultId`: the provider's own id for the answer that showed the products, read from the new query meta token `QueryResultId`. The product listing and the product slider fill it when their query's answer has one, so an analytics destination can send it back to the provider that answered.
+
+### Patch Changes
+
+- `MediaImage` no longer renders an image without a `src` when its source names an image provider the storefront does not register, such as `raw`. It loads that source with the default provider and logs one warning per provider name.
+
+## [2.39.2] - 2026-11-13
+
+### Patch Changes
+
+- Product images without their own alt text use the product name instead: in `ProductTileBasic`, so the tile's link to the product page always has an accessible name, and in the product detail gallery and its lightbox. `ProductImageGallery` and `MediaGallery` take the text through a new optional `fallbackAlt` prop, which `BlockProductMediaGallery` fills with the product name. The gallery's slides no longer share one key when their images carry no alt text.
+
 ## [2.39.0] - 2026-11-12
 
 ### Minor Changes
