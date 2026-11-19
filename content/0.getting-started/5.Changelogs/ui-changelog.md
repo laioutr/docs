@@ -14,6 +14,12 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.40.3] - 2026-11-18
+
+### Patch Changes
+
+- The coupon box block shows its Icon field in the Studio again after its discount text is cleared. A cleared text is stored as `""`, which `@laioutr/expression` 2.0 counts as a value, so the field's condition now tests the text with `empty`.
+
 ## [2.40.1] - 2026-11-14
 
 ### Patch Changes

@@ -14,6 +14,36 @@ sitemap:
 
 All notable changes to the **Laioutr frontend** (Nuxt based storefront, Frontend Core integration, and built in frontend features) will be documented in this file.
 
+## [0.87.0] - 2026-11-18
+
+### Minor Changes
+
+- Section and block visibility rules run on `@laioutr/expression` 2.0.
+
+  **Breaking:** a rule decides with the 2.0 truth rule. Any present value other than `false` counts as true, so a rule whose result is `0`, `""` or a text now shows or hides its section instead of staying undecided. A rule that uses `?get` or `get?` no longer runs: read with `get`, and test for a value with `exists`.
+
+  ```js
+  // before
+  ['in', [['germany']], ['?get', 'market.slug']][
+    // after
+    ('in', [['germany']], ['get', 'market.slug'])
+  ];
+  ```
+
+- An app manifest can declare a grouped module option as an `object` field with fieldsets, as a section does, nested to any depth, and `validateAppManifest` now checks every field inside it as it checks a top-level one. It refuses an object without fields, a name used twice inside one object, a field name that holds a dot or starts with `# @laioutr-core/core-types, and `secret: true` on an object: mark the secret fields inside it instead.
+
+- Schema conditions (`if` on a Studio field or fieldset) are typed against the `core` operators of `@laioutr/expression` 2.0. The helpers of `@laioutr-core/core-types/zoned-time` now come from `@laioutr/expression/values`: the years 0001 to 0099 are calendar days and are no longer read as 1901 to 1999.
+
+  **Breaking:** the operator at the root of a condition must be a `core` operator. `?get`, `get?`, `bool`, `num`, `str` and the operators that only a JS target runs (`map`, `cat`, `member` and the like) no longer type-check there. Read with `get`, and test for a value with `exists`. A cleared text field holds `""`, which `exists` counts as a value: use `['!', ['empty', ['get', 'discountText']]]` when a cleared text must count as no value.
+
+  ```ts
+  // before
+  if: ['get?', 'discountText']
+
+  // after
+  if: ['exists', 'discountText']
+  ```
+
 ## [0.86.1] - 2026-11-17
 
 ### Patch Changes
