@@ -14,6 +14,14 @@ sitemap:
 
 All notable changes to **Laioutr UI** (`@laioutr-core/ui`, the commerce-specific organism components built on UI Kit) are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.41.0] - 2026-11-19
+
+### Minor Changes
+
+- `SearchAutoSuggest` emits `select(suggestion, index)` for a click and for Enter, and Enter opens the highlighted suggestion's link, as a click does. `HeaderShop` forwards `select`. A `SearchSuggestion` may carry a `type`. The dropdown's loading and empty states start at 3 characters (`SEARCH_SUGGESTIONS_MIN_LENGTH`). (LAI-MVZBX1)
+
+- The header asks for search suggestions from 3 characters and after a short pause in typing, so a word typed asks once, not once per key. A suggestion picked in the dropdown, by click or by Enter, is reported as `select_search_suggestion`, with its position and the answer's result id. (LAI-MVZBX1)
+
 ## [2.40.3] - 2026-11-18
 
 ### Patch Changes

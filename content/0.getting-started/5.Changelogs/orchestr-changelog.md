@@ -14,6 +14,12 @@ sitemap:
 
 All notable changes to **Orchestr** (`@laioutr-core/orchestr`), the Laioutr data-fetching and query orchestration layer, will be documented in this file.
 
+## [0.87.1] - 2026-11-19
+
+### Patch Changes
+
+- An app whose `extendRequest` throws no longer fails every request of the storefront. Its context is left out and a warning names the app; queries, actions and admin routes of the other apps (the media library, source entities) run as before. A connector whose backend is unreachable used to answer every orchestr request with a 500, CMS content and media included.
+
 ## [0.86.0] - 2026-11-14
 
 ### Minor Changes
