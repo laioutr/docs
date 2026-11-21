@@ -6,7 +6,7 @@ seo:
   description: Changelog for Cockpit, following Keep a Changelog.
 sitemap:
   loc: /getting-started/changelogs/cockpit-changelog
-  lastmod: 2026-11-17
+  lastmod: 2026-11-20
   changefreq: weekly
   priority: 1.0
 
@@ -15,6 +15,14 @@ sitemap:
 All notable changes to **Cockpit** are documented here, following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 Studio and Hosting changes are on the [Laioutr changelog](/getting-started/changelogs/laioutr-changelog).
+
+## [2026-11-20]
+
+### Changed
+
+- **Operations Center**: Approving or rejecting an agent's change, discarding or reopening a finding, and letting a run go on or stopping it now ask you to confirm first, so a misclick has no effect.
+- The AI Developer no longer appears in every project's menu, and a project no longer gives it written instructions.
+- **Operations Center**: The AI Developer's settings are now in the Operations Center under Manage agents, and the branch a task starts from is chosen from the repository's branches.
 
 ## [2026-11-17]
 
